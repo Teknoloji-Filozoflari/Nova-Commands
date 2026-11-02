@@ -1,0 +1,56 @@
+id: df
+name: df
+summary:
+  tr: Dosya sistemi disk kullanımı.
+  en: Report file system disk space usage.
+description:
+  tr: Bağlı dosya sistemlerinin doluluk bilgisini basar.
+  en: Shows space usage on mounted filesystems.
+tags:
+- disk
+risk: safe
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+packages:
+  arch: coreutils
+  debian: coreutils
+  ubuntu: coreutils
+  fedora: coreutils
+flags:
+- flag: -h
+  long: --human-readable
+  meaning:
+    tr: İnsan okunur birimler.
+    en: Human-readable sizes.
+  verified: true
+  platforms:
+  - gnu
+examples:
+- title:
+    tr: Özet
+    en: Summary
+  command: df -h
+  explanation:
+    tr: Disk doluluğu.
+    en: Disk usage summary.
+  risk: safe
+related:
+- du
+- lsblk
+intent:
+  tr:
+  - disk dolu mu
+  - boş alan
+  en:
+  - disk space
+  - free space
+verification:
+  status: reviewed
+  sources:
+  - man 1 df
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-bootstrap
+category: disks

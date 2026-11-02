@@ -1,0 +1,59 @@
+id: lspci
+name: lspci
+summary:
+  tr: PCI aygıtlarını listeler.
+  en: List PCI devices.
+description:
+  tr: Ekran kartı, ağ kartı gibi PCI cihazları gösterir.
+  en: Shows PCI devices such as GPUs and NICs.
+tags:
+- hardware
+risk: safe
+requires_elevated: false
+platforms:
+- linux
+packages:
+  arch: pciutils
+  debian: pciutils
+  ubuntu: pciutils
+  fedora: pciutils
+install_notes:
+  tr: 'Arch: pacman -S pciutils'
+  en: 'Arch: pacman -S pciutils'
+flags:
+- flag: -k
+  meaning:
+    tr: Çekirdek sürücülerini göster.
+    en: Show kernel drivers.
+  verified: true
+- flag: -nn
+  meaning:
+    tr: Sayısal ID’ler.
+    en: Numeric IDs.
+  verified: true
+examples:
+- title:
+    tr: PCI listesi
+    en: PCI list
+  command: lspci -nn
+  explanation:
+    tr: Aygıt + ID.
+    en: Devices + IDs.
+  risk: safe
+related:
+- lsusb
+- lscpu
+intent:
+  tr:
+  - pci aygıtlar
+  - ekran kartı mi
+  en:
+  - list pci devices
+  - gpu pci
+verification:
+  status: reviewed
+  sources:
+  - man 8 lspci
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-bootstrap
+category: hardware

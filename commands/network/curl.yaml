@@ -1,0 +1,96 @@
+id: curl
+name: curl
+summary:
+  tr: URL ile veri transferi yapar.
+  en: Transfer data from or to a server.
+description:
+  tr: HTTP(S) başta olmak üzere birçok protokolde istemci.
+  en: Client for many protocols, especially HTTP(S).
+tags:
+- network
+- http
+risk: caution
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+packages:
+  arch: curl
+  debian: curl
+  ubuntu: curl
+  fedora: curl
+install_notes:
+  tr: 'Arch: pacman -S curl
+
+    Debian/Ubuntu: apt install curl
+
+    Fedora: dnf install curl'
+  en: 'Arch: pacman -S curl
+
+    Debian/Ubuntu: apt install curl
+
+    Fedora: dnf install curl'
+flags:
+- flag: -I
+  long: --head
+  meaning:
+    tr: Yalnızca başlıklar.
+    en: Fetch headers only.
+  verified: true
+- flag: -L
+  long: --location
+  meaning:
+    tr: Yönlendirmeleri izle.
+    en: Follow redirects.
+  verified: true
+- flag: -O
+  long: --remote-name
+  meaning:
+    tr: Uzak dosya adıyla kaydet.
+    en: Write to remote file name.
+  verified: true
+- flag: -f
+  long: --fail
+  meaning:
+    tr: HTTP hatalarında sessizce fail.
+    en: Fail silently on HTTP errors.
+  verified: true
+examples:
+- title:
+    tr: GET gövde
+    en: GET body
+  command: curl -fsSL https://example.com/
+  explanation:
+    tr: HTTPS gövdesini indirir (örnek alan).
+    en: Fetches HTTPS body (example domain).
+  risk: caution
+- title:
+    tr: Başlıklar
+    en: Headers
+  command: curl -I https://example.com/
+  explanation:
+    tr: Yanıt başlıklarını basar.
+    en: Prints response headers.
+  risk: safe
+related:
+- wget
+- http
+intent:
+  tr:
+  - http isteği
+  - dosya indir curl
+  en:
+  - http request
+  - download with curl
+verification:
+  status: reviewed
+  sources:
+  - man 1 curl
+  - https://curl.se/docs/manual.html
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-bootstrap
+nova:
+  favorite_eligible: true
+  ui_priority: 88
+category: network

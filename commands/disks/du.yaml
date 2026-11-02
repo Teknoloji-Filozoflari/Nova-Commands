@@ -1,0 +1,74 @@
+id: du
+name: du
+summary:
+  tr: Dizin disk kullanımını tahmin eder.
+  en: Estimate file space usage.
+description:
+  tr: Dosya/dizinlerin kapladığı alanı özetler.
+  en: Summarizes space used by files/directories.
+tags:
+- disk
+risk: safe
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+packages:
+  arch: coreutils
+  debian: coreutils
+  ubuntu: coreutils
+  fedora: coreutils
+flags:
+- flag: -h
+  long: --human-readable
+  meaning:
+    tr: İnsan okunur.
+    en: Human readable.
+  verified: true
+  platforms:
+  - gnu
+- flag: -s
+  long: --summarize
+  meaning:
+    tr: Yalnız toplam.
+    en: Total only.
+  verified: true
+  platforms:
+  - gnu
+- flag: -d
+  long: --max-depth
+  takes_value: true
+  value_name: N
+  meaning:
+    tr: Derinlik sınırı (GNU).
+    en: Max depth (GNU).
+  verified: true
+  platforms:
+  - gnu
+examples:
+- title:
+    tr: Dizin toplamı
+    en: Dir total
+  command: du -sh ~/Downloads
+  explanation:
+    tr: Downloads boyutunu özetler.
+    en: Summarizes Downloads size.
+  risk: safe
+related:
+- df
+- ncdu
+intent:
+  tr:
+  - klasör boyutu
+  - ne kadar yer
+  en:
+  - folder size
+  - disk usage directory
+verification:
+  status: reviewed
+  sources:
+  - man 1 du
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-bootstrap
+category: disks

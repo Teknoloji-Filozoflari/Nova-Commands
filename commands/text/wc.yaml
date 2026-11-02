@@ -1,0 +1,73 @@
+packages:
+  arch: coreutils
+  debian: coreutils
+  ubuntu: coreutils
+  fedora: coreutils
+platforms:
+- linux
+- macos
+- bsd
+requires_elevated: false
+verification:
+  status: reviewed
+  sources:
+  - man 1 wc
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-bootstrap
+id: wc
+name: wc
+summary:
+  tr: Satır, kelime ve bayt sayar.
+  en: Count lines, words, and bytes.
+description:
+  tr: Girdi veya dosyalar için sayım üretir.
+  en: Produces counts for inputs or files.
+tags:
+- text
+- count
+risk: safe
+flags:
+- flag: -l
+  long: --lines
+  meaning:
+    tr: Satır sayısı.
+    en: Line count.
+  verified: true
+  platforms:
+  - gnu
+- flag: -w
+  long: --words
+  meaning:
+    tr: Kelime sayısı.
+    en: Word count.
+  verified: true
+  platforms:
+  - gnu
+- flag: -c
+  long: --bytes
+  meaning:
+    tr: Bayt sayısı.
+    en: Byte count.
+  verified: true
+  platforms:
+  - gnu
+examples:
+- title:
+    tr: Satır say
+    en: Count lines
+  command: wc -l file.txt
+  explanation:
+    tr: Satır sayısını basar.
+    en: Prints line count.
+  risk: safe
+related:
+- cat
+- sort
+intent:
+  tr:
+  - satır sayısı
+  - kelime say
+  en:
+  - count lines
+  - word count
+category: text

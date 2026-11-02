@@ -1,0 +1,71 @@
+id: tree
+name: tree
+summary:
+  tr: Dizin ağacını görsel listeler.
+  en: List contents of directories in a tree-like format.
+description:
+  tr: Hiyerarşiyi girintili ağaç olarak basar. Her taban sistemde olmayabilir.
+  en: Prints an indented tree of a hierarchy. May not be installed by default.
+tags:
+- files
+- directory
+risk: safe
+requires_elevated: false
+platforms:
+- linux
+- macos
+packages:
+  arch: tree
+  debian: tree
+  ubuntu: tree
+  fedora: tree
+install_notes:
+  tr: 'Arch: pacman -S tree
+
+    Debian/Ubuntu: apt install tree
+
+    Fedora: dnf install tree'
+  en: 'Arch: pacman -S tree
+
+    Debian/Ubuntu: apt install tree
+
+    Fedora: dnf install tree'
+flags:
+- flag: -L
+  takes_value: true
+  value_name: depth
+  meaning:
+    tr: Maksimum derinlik.
+    en: Max display depth.
+  verified: true
+- flag: -a
+  meaning:
+    tr: Gizli dosyalar.
+    en: All files.
+  verified: true
+examples:
+- title:
+    tr: 2 seviye
+    en: Depth 2
+  command: tree -L 2
+  explanation:
+    tr: İki seviye ağaç.
+    en: Two-level tree.
+  risk: safe
+related:
+- ls
+- find
+intent:
+  tr:
+  - dizin ağacı
+  - klasör yapısı gör
+  en:
+  - directory tree
+  - show folder tree
+verification:
+  status: reviewed
+  sources:
+  - man 1 tree
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-bootstrap
+category: filesystem

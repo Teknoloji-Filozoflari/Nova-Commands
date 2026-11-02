@@ -1,0 +1,75 @@
+id: dnf
+name: dnf
+summary:
+  tr: Fedora/RHEL paket yöneticisi.
+  en: Fedora/RHEL package manager.
+description:
+  tr: DNF ile kurulum, yükseltme ve sorgu.
+  en: Install, upgrade, and query with DNF.
+tags:
+- packages
+- fedora
+risk: dangerous
+requires_elevated: true
+platforms:
+- linux
+packages:
+  fedora: dnf
+  rhel: dnf
+install_notes:
+  tr: Fedora/RHEL’de taban. Arch için pacman.
+  en: Base on Fedora/RHEL. On Arch use pacman.
+flags:
+- flag: install
+  meaning:
+    tr: Kur (alt komut).
+    en: Install (subcommand).
+  verified: true
+- flag: upgrade
+  meaning:
+    tr: Yükselt (alt komut).
+    en: Upgrade (subcommand).
+  verified: true
+- flag: search
+  meaning:
+    tr: Ara (alt komut).
+    en: Search (subcommand).
+  verified: true
+examples:
+- title:
+    tr: Kur
+    en: Install
+  command: sudo dnf install curl
+  explanation:
+    tr: curl kurar.
+    en: Installs curl.
+  risk: caution
+  requires_elevated: true
+- title:
+    tr: Yükselt
+    en: Upgrade
+  command: sudo dnf upgrade
+  explanation:
+    tr: Sistem paketlerini yükseltir.
+    en: Upgrades system packages.
+  risk: dangerous
+  requires_elevated: true
+related:
+- yum
+- rpm
+- pacman
+- apt
+intent:
+  tr:
+  - fedora paket kur
+  - dnf güncelle
+  en:
+  - dnf install
+  - fedora upgrade
+verification:
+  status: reviewed
+  sources:
+  - man 8 dnf
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-bootstrap
+category: packages

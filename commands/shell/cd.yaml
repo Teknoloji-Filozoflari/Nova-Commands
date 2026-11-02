@@ -1,0 +1,60 @@
+id: cd
+name: cd
+summary:
+  tr: Çalışma dizinini değiştirir (kabuk yerleşiği).
+  en: Change the shell working directory (builtin).
+description:
+  tr: Harici ikili değil; bash/zsh yerleşiği. PATH keşfinde görünmeyebilir.
+  en: Not an external binary; a shell builtin. May be absent from PATH discovery.
+tags:
+- shell
+risk: safe
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+shells:
+- bash
+- zsh
+- sh
+- fish
+examples:
+- title:
+    tr: Eve dön
+    en: Go home
+  command: cd
+  explanation:
+    tr: Ev dizinine gider.
+    en: Changes to home.
+  risk: safe
+- title:
+    tr: Üst dizin
+    en: Parent
+  command: cd ..
+  explanation:
+    tr: Bir üst dizine çıkar.
+    en: Goes up one level.
+  risk: safe
+related:
+- pwd
+- pushd
+intent:
+  tr:
+  - dizine gir
+  - klasör değiştir
+  en:
+  - change directory
+  - go to folder
+verification:
+  status: reviewed
+  sources:
+  - bash help cd
+  - man bash
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-bootstrap
+  notes: Builtin — local discovery may not see a path.
+nova:
+  concepts:
+  - shell-builtin
+category: shell

@@ -1,0 +1,65 @@
+id: chmod
+name: chmod
+summary:
+  tr: Dosya kipini (izinlerini) değiştirir.
+  en: Change file mode bits.
+description:
+  tr: Sembolik veya oktal notasyonla izinleri ayarlar. Yanlış kullanım erişimi kırabilir.
+  en: Sets permissions symbolically or in octal. Mistakes can break access.
+tags:
+- users
+- permissions
+risk: dangerous
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+packages:
+  arch: coreutils
+  debian: coreutils
+  ubuntu: coreutils
+  fedora: coreutils
+flags:
+- flag: -R
+  long: --recursive
+  meaning:
+    tr: Özyinelemeli uygula.
+    en: Apply recursively.
+  verified: true
+  platforms:
+  - gnu
+examples:
+- title:
+    tr: Çalıştırılabilir
+    en: Make executable
+  command: chmod u+x script.sh
+  explanation:
+    tr: Sahibine çalıştırma izni ekler.
+    en: Adds execute for the owner.
+  risk: caution
+- title:
+    tr: Oktal
+    en: Octal
+  command: chmod 600 id_rsa
+  explanation:
+    tr: Yalnızca sahip okur/yazar (SSH anahtarı için tipik).
+    en: Owner read/write only (typical for SSH keys).
+  risk: caution
+related:
+- chown
+- ls
+intent:
+  tr:
+  - izin değiştir
+  - chmod 755
+  en:
+  - change permissions
+  - chmod file
+verification:
+  status: reviewed
+  sources:
+  - man 1 chmod
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-bootstrap
+category: users

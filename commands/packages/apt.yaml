@@ -1,0 +1,80 @@
+id: apt
+name: apt
+summary:
+  tr: Debian/Ubuntu yüksek seviye paket aracı.
+  en: Debian/Ubuntu high-level package tool.
+description:
+  tr: Kurulum ve güncelleme için kullanıcı dostu apt arayüzü.
+  en: User-friendly apt interface for install and upgrades.
+tags:
+- packages
+- debian
+risk: dangerous
+requires_elevated: true
+platforms:
+- linux
+packages:
+  debian: apt
+  ubuntu: apt
+install_notes:
+  tr: Debian/Ubuntu tabanında gelir. Arch için pacman kullanın.
+  en: On Debian/Ubuntu base. On Arch use pacman instead.
+flags:
+- flag: update
+  meaning:
+    tr: Paket listelerini yenile (alt komut).
+    en: Refresh package lists (subcommand).
+  verified: true
+- flag: upgrade
+  meaning:
+    tr: Paketleri yükselt (alt komut).
+    en: Upgrade packages (subcommand).
+  verified: true
+- flag: install
+  meaning:
+    tr: Paket kur (alt komut).
+    en: Install packages (subcommand).
+  verified: true
+- flag: search
+  meaning:
+    tr: Ara (alt komut).
+    en: Search (subcommand).
+  verified: true
+examples:
+- title:
+    tr: Güncelle + yükselt
+    en: Update + upgrade
+  command: sudo apt update && sudo apt upgrade
+  explanation:
+    tr: İndeksleri yeniler ve yükseltir.
+    en: Refreshes indexes and upgrades.
+  risk: dangerous
+  requires_elevated: true
+- title:
+    tr: Kur
+    en: Install
+  command: sudo apt install curl
+  explanation:
+    tr: curl kurar.
+    en: Installs curl.
+  risk: caution
+  requires_elevated: true
+related:
+- apt-get
+- dpkg
+- pacman
+- dnf
+intent:
+  tr:
+  - ubuntu paket kur
+  - apt güncelle
+  en:
+  - apt install
+  - ubuntu upgrade
+verification:
+  status: reviewed
+  sources:
+  - man 8 apt
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-bootstrap
+category: packages

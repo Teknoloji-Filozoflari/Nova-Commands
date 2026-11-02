@@ -1,0 +1,49 @@
+id: zip
+name: zip
+summary:
+  tr: ZIP arşivi oluşturur.
+  en: Package and compress files into a ZIP archive.
+description:
+  tr: Windows ile yaygın paylaşılan ZIP formatında arşivler.
+  en: Creates ZIP archives commonly shared with Windows.
+tags:
+- archive
+risk: caution
+requires_elevated: false
+platforms:
+- linux
+- macos
+packages:
+  arch: zip
+  debian: zip
+  ubuntu: zip
+  fedora: zip
+install_notes:
+  tr: 'Arch: pacman -S zip unzip'
+  en: 'Arch: pacman -S zip unzip'
+examples:
+- title:
+    tr: Klasörü zipley
+    en: Zip a folder
+  command: zip -r project.zip project/
+  explanation:
+    tr: project dizinini zip’ler.
+    en: Zips the project directory.
+  risk: caution
+related:
+- unzip
+- tar
+intent:
+  tr:
+  - zip oluştur
+  - klasörü sıkıştır
+  en:
+  - create zip
+  - zip folder
+verification:
+  status: reviewed
+  sources:
+  - man 1 zip
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-bootstrap
+category: archives

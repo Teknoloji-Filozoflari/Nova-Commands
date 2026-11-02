@@ -1,0 +1,111 @@
+id: pacman
+name: pacman
+summary:
+  tr: Arch Linux paket yöneticisi.
+  en: Arch Linux package manager.
+description:
+  tr: Pacman ile kurulum, güncelleme, kaldırma ve sorgu. Nova tercihinde Arch birincil
+    hedeftir.
+  en: Install, upgrade, remove, and query with pacman. Arch is Nova’s preferred host
+    target.
+tags:
+- packages
+- arch
+risk: dangerous
+requires_elevated: true
+platforms:
+- linux
+packages:
+  arch: pacman
+install_notes:
+  tr: 'Arch taban sistemde gelir. Resmî wiki: https://wiki.archlinux.org/title/Pacman'
+  en: 'Ships with Arch base. Wiki: https://wiki.archlinux.org/title/Pacman'
+flags:
+- flag: -S
+  meaning:
+    tr: Depodan kur / senkron.
+    en: Sync/install from repos.
+  verified: true
+- flag: -Syu
+  meaning:
+    tr: DB yenile ve sistemi yükselt.
+    en: Refresh DB and upgrade system.
+  verified: true
+- flag: -Rns
+  meaning:
+    tr: Paketi bağımlılıklar/config ile kaldır (sık kullanılan birleşim).
+    en: Remove package with deps/config (common combo).
+  verified: true
+- flag: -Q
+  meaning:
+    tr: Yerel paket sorgusu.
+    en: Query local package DB.
+  verified: true
+- flag: -Ss
+  meaning:
+    tr: Depolarda ara.
+    en: Search sync database.
+  verified: true
+examples:
+- title:
+    tr: Sistem güncelle
+    en: Upgrade system
+  command: sudo pacman -Syu
+  explanation:
+    tr: Tüm paketleri yükseltir.
+    en: Upgrades all packages.
+  risk: dangerous
+  requires_elevated: true
+- title:
+    tr: Kur
+    en: Install
+  command: sudo pacman -S curl
+  explanation:
+    tr: curl paketini kurar.
+    en: Installs curl.
+  risk: caution
+  requires_elevated: true
+- title:
+    tr: Ara
+    en: Search
+  command: pacman -Ss ripgrep
+  explanation:
+    tr: Depoda ripgrep arar.
+    en: Searches repos for ripgrep.
+  risk: safe
+  requires_elevated: false
+- title:
+    tr: Dosya sahibi
+    en: File owner
+  command: pacman -Qo /usr/bin/ls
+  explanation:
+    tr: Dosyayı hangi paket sağlıyor.
+    en: Which package owns a file.
+  risk: safe
+  requires_elevated: false
+related:
+- paru
+- yay
+- apt
+- dnf
+intent:
+  tr:
+  - arch paket kur
+  - pacman güncelle
+  en:
+  - arch install package
+  - pacman upgrade
+verification:
+  status: reviewed
+  sources:
+  - man 8 pacman
+  - https://wiki.archlinux.org/title/Pacman
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-bootstrap
+nova:
+  favorite_eligible: true
+  ui_priority: 95
+  concepts:
+  - packages
+  - arch
+category: packages

@@ -1,0 +1,95 @@
+id: tar
+name: tar
+summary:
+  tr: Tar arşivlerini oluşturur veya çıkarır.
+  en: Create or extract tape archives.
+description:
+  tr: Dosya ağaçlarını arşivler; sık sık gzip/xz ile birlikte.
+  en: Archives file trees; often combined with gzip/xz.
+tags:
+- archive
+risk: caution
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+packages:
+  arch: tar
+  debian: tar
+  ubuntu: tar
+  fedora: tar
+flags:
+- flag: -x
+  long: --extract
+  meaning:
+    tr: Çıkar.
+    en: Extract.
+  verified: true
+- flag: -c
+  long: --create
+  meaning:
+    tr: Oluştur.
+    en: Create.
+  verified: true
+- flag: -f
+  long: --file
+  takes_value: true
+  value_name: ARCHIVE
+  meaning:
+    tr: Arşiv dosyası.
+    en: Archive file.
+  verified: true
+- flag: -z
+  long: --gzip
+  meaning:
+    tr: gzip ile süz.
+    en: Filter through gzip.
+  verified: true
+- flag: -J
+  long: --xz
+  meaning:
+    tr: xz ile süz.
+    en: Filter through xz.
+  verified: true
+- flag: -v
+  long: --verbose
+  meaning:
+    tr: Ayrıntılı liste.
+    en: Verbose listing.
+  verified: true
+examples:
+- title:
+    tr: Çıkar gzip
+    en: Extract gzip
+  command: tar -xzf project.tar.gz
+  explanation:
+    tr: tar.gz arşivini çıkarır.
+    en: Extracts a tar.gz archive.
+  risk: caution
+- title:
+    tr: Oluştur
+    en: Create
+  command: tar -czf backup.tar.gz notes/
+  explanation:
+    tr: notes/ dizininden sıkıştırılmış arşiv.
+    en: Creates compressed archive from notes/.
+  risk: caution
+related:
+- gzip
+- xz
+- zip
+intent:
+  tr:
+  - tar aç
+  - arşiv oluştur
+  en:
+  - extract tar
+  - create archive
+verification:
+  status: reviewed
+  sources:
+  - man 1 tar
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-bootstrap
+category: archives

@@ -1,0 +1,58 @@
+packages:
+  arch: coreutils
+  debian: coreutils
+  ubuntu: coreutils
+  fedora: coreutils
+platforms:
+- linux
+- macos
+- bsd
+requires_elevated: false
+verification:
+  status: reviewed
+  sources:
+  - man 1 cat
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-bootstrap
+id: cat
+name: cat
+summary:
+  tr: Dosyaları birleştirip yazar.
+  en: Concatenate and print files.
+description:
+  tr: Dosya içeriklerini standart çıktıya basar.
+  en: Writes file contents to standard output.
+tags:
+- text
+- view
+risk: safe
+flags:
+- flag: -n
+  long: --number
+  meaning:
+    tr: Satır numaraları.
+    en: Number output lines.
+  verified: true
+  platforms:
+  - gnu
+examples:
+- title:
+    tr: Dosya göster
+    en: Show file
+  command: cat /etc/os-release
+  explanation:
+    tr: os-release içeriğini basar.
+    en: Prints os-release.
+  risk: safe
+related:
+- less
+- head
+- tail
+intent:
+  tr:
+  - dosya içeriği göster
+  - cat ile oku
+  en:
+  - show file contents
+  - print file
+category: text

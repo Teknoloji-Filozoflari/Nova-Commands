@@ -1,0 +1,53 @@
+id: dmesg
+name: dmesg
+summary:
+  tr: Çekirdek mesaj halkasını yazdırır.
+  en: Print or control the kernel ring buffer.
+description:
+  tr: Boot ve sürücü mesajlarını gösterir; bazı sistemlerde izin gerekir.
+  en: Shows boot/driver messages; may need privileges on some systems.
+tags:
+- monitoring
+- kernel
+risk: safe
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+packages:
+  arch: util-linux
+  debian: util-linux
+  ubuntu: util-linux
+  fedora: util-linux
+flags:
+- flag: -T
+  meaning:
+    tr: İnsan okunur zaman damgaları.
+    en: Human-readable timestamps.
+  verified: true
+examples:
+- title:
+    tr: Son mesajlar
+    en: Recent messages
+  command: dmesg -T | tail -n 30
+  explanation:
+    tr: Son çekirdek mesajları.
+    en: Recent kernel messages.
+  risk: safe
+related:
+- journalctl
+intent:
+  tr:
+  - çekirdek log
+  - dmesg
+  en:
+  - kernel log
+  - dmesg
+verification:
+  status: reviewed
+  sources:
+  - man 1 dmesg
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-bootstrap
+category: monitoring

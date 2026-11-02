@@ -1,0 +1,47 @@
+id: whoami
+name: whoami
+summary:
+  tr: Geçerli etkili kullanıcı adını basar.
+  en: Print effective user name.
+description:
+  tr: Etkili kullanıcı kimliğini kısa şekilde gösterir.
+  en: Shows the effective username.
+tags:
+- users
+risk: safe
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+packages:
+  arch: coreutils
+  debian: coreutils
+  ubuntu: coreutils
+  fedora: coreutils
+examples:
+- title:
+    tr: Kimim?
+    en: Who am I?
+  command: whoami
+  explanation:
+    tr: Kullanıcı adınız.
+    en: Your username.
+  risk: safe
+related:
+- id
+- groups
+intent:
+  tr:
+  - kullanıcı adım
+  - whoami
+  en:
+  - who am i
+  - current user
+verification:
+  status: reviewed
+  sources:
+  - man 1 whoami
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-bootstrap
+category: users

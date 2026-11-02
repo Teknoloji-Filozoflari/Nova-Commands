@@ -1,0 +1,56 @@
+id: date
+name: date
+summary:
+  tr: Tarih ve saati yazdırır veya ayarlar.
+  en: Print or set the system date.
+description:
+  tr: Biçimli tarih/saat çıktısı üretir; ayarlamak root ister.
+  en: Formats date/time output; setting requires root.
+tags:
+- system
+- time
+risk: safe
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+packages:
+  arch: coreutils
+  debian: coreutils
+  ubuntu: coreutils
+  fedora: coreutils
+flags:
+- flag: -u
+  long: --utc
+  meaning:
+    tr: UTC olarak yazdır.
+    en: Print Coordinated Universal Time.
+  verified: true
+  platforms:
+  - gnu
+examples:
+- title:
+    tr: ISO benzeri
+    en: ISO-like
+  command: date -Iseconds
+  explanation:
+    tr: ISO-8601 saniyeli çıktı (GNU).
+    en: ISO-8601 output with seconds (GNU).
+  risk: safe
+related:
+- timedatectl
+intent:
+  tr:
+  - tarih saat
+  - bugünün tarihi
+  en:
+  - show date
+  - current time
+verification:
+  status: reviewed
+  sources:
+  - man 1 date
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-bootstrap
+category: system

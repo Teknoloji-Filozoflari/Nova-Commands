@@ -1,0 +1,55 @@
+packages:
+  arch: coreutils
+  debian: coreutils
+  ubuntu: coreutils
+  fedora: coreutils
+platforms:
+- linux
+- macos
+- bsd
+requires_elevated: false
+verification:
+  status: reviewed
+  sources:
+  - man 1 uniq
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-bootstrap
+id: uniq
+name: uniq
+summary:
+  tr: Ardışık yinelenen satırları bildirir veya süzgeçler.
+  en: Report or omit repeated adjacent lines.
+description:
+  tr: Genelde sort ile birlikte kullanılır; yalnızca ardışık tekrarları görür.
+  en: Usually paired with sort; only detects adjacent duplicates.
+tags:
+- text
+risk: safe
+flags:
+- flag: -c
+  long: --count
+  meaning:
+    tr: Önek olarak tekrar sayısı.
+    en: Prefix lines by count.
+  verified: true
+  platforms:
+  - gnu
+examples:
+- title:
+    tr: Benzersiz satırlar
+    en: Unique lines
+  command: sort names.txt | uniq
+  explanation:
+    tr: Sıralayıp yinelenenleri atar.
+    en: Sorts then drops adjacent duplicates.
+  risk: safe
+related:
+- sort
+intent:
+  tr:
+  - tekrarlayan satır
+  - benzersiz liste
+  en:
+  - unique lines
+  - remove duplicates
+category: text

@@ -1,0 +1,91 @@
+id: rm
+name: rm
+summary:
+  tr: Dosya veya dizinleri siler.
+  en: Remove files or directories.
+description:
+  tr: Dosyaları siler. Dizinler için -r gerekir. Geri dönüşüm kutusu yoktur; dikkat.
+  en: Deletes files. Directories need -r. There is no trash — be careful.
+tags:
+- files
+- delete
+risk: destructive
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+packages:
+  arch: coreutils
+  debian: coreutils
+  ubuntu: coreutils
+  fedora: coreutils
+flags:
+- flag: -r
+  long: --recursive
+  meaning:
+    tr: Dizinleri ve içeriğini sil.
+    en: Remove directories and their contents.
+  verified: true
+  platforms:
+  - gnu
+- flag: -f
+  long: --force
+  meaning:
+    tr: Onaylama; yokluk hatalarını yoksay.
+    en: Never prompt; ignore missing files.
+  verified: true
+  platforms:
+  - gnu
+- flag: -i
+  meaning:
+    tr: Her silmeden önce sor.
+    en: Prompt before every removal.
+  verified: true
+  platforms:
+  - gnu
+- flag: -I
+  meaning:
+    tr: Çok sayıda silmede bir kez sor.
+    en: Prompt once before removing many files.
+  verified: true
+  platforms:
+  - gnu
+examples:
+- title:
+    tr: Dosya sil
+    en: Remove file
+  command: rm unused.log
+  explanation:
+    tr: Tek bir dosyayı siler.
+    en: Removes a single file.
+  risk: destructive
+- title:
+    tr: Dizin sil (dikkat)
+    en: Remove directory (careful)
+  command: rm -ri old-project/
+  explanation:
+    tr: Onaylayarak dizini siler. -rf kullanmadan önce iki kez düşünün.
+    en: Recursively removes with prompts. Think twice before -rf.
+  risk: destructive
+related:
+- mv
+- trash-put
+intent:
+  tr:
+  - dosya sil
+  - klasör sil
+  en:
+  - delete file
+  - remove directory
+verification:
+  status: reviewed
+  sources:
+  - man 1 rm (GNU coreutils)
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-bootstrap
+  notes: Document danger prominently in UI.
+nova:
+  favorite_eligible: false
+  ui_priority: 40
+category: filesystem

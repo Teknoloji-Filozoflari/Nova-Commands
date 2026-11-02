@@ -1,0 +1,132 @@
+# Nova-Commands category taxonomy (master prompt §8.x)
+# Slug must match commands/<slug>/ and schema enum.
+schema_version: 1
+categories:
+  - id: filesystem
+    section: "8.1"
+    label:
+      tr: Dosya ve dizin
+      en: Files and directories
+    description:
+      tr: Listeleme, kopyalama, taşıma, silme, izinler dışı dosya işlemleri.
+      en: Listing, copying, moving, deleting, and other file operations.
+  - id: text
+    section: "8.2"
+    label:
+      tr: Metin işleme
+      en: Text processing
+    description:
+      tr: cat, less, sort, cut, awk, sed ve benzeri metin araçları.
+      en: cat, less, sort, cut, awk, sed, and related text tools.
+  - id: search
+    section: "8.3"
+    label:
+      tr: Arama
+      en: Search
+    description:
+      tr: find, grep, locate ve içerik/yol arama.
+      en: find, grep, locate, and path/content search.
+  - id: processes
+    section: "8.4"
+    label:
+      tr: Süreçler
+      en: Processes
+    description:
+      tr: ps, top, kill, nice — çalışan süreç yönetimi.
+      en: ps, top, kill, nice — process management.
+  - id: system
+    section: "8.5"
+    label:
+      tr: Sistem
+      en: System
+    description:
+      tr: uname, hostnamectl, timedatectl, sistem bilgisi ve servisler.
+      en: uname, hostnamectl, timedatectl, system info and services.
+  - id: network
+    section: "8.6"
+    label:
+      tr: Ağ
+      en: Network
+    description:
+      tr: ip, ss, ping, curl, DNS ve bağlantı araçları.
+      en: ip, ss, ping, curl, DNS, and connectivity tools.
+  - id: users
+    section: "8.7"
+    label:
+      tr: Kullanıcılar ve izinler
+      en: Users and permissions
+    description:
+      tr: id, whoami, chmod, chown, sudo, kullanıcı hesapları.
+      en: id, whoami, chmod, chown, sudo, and accounts.
+  - id: packages
+    section: "8.8"
+    label:
+      tr: Paket yönetimi
+      en: Package management
+    description:
+      tr: pacman, apt, dnf ve paket sorgu/kurulum komutları.
+      en: pacman, apt, dnf, and package query/install commands.
+  - id: archives
+    section: "8.9"
+    label:
+      tr: Arşiv ve sıkıştırma
+      en: Archives and compression
+    description:
+      tr: tar, gzip, xz, zip.
+      en: tar, gzip, xz, zip.
+  - id: disks
+    section: "8.10"
+    label:
+      tr: Disk ve depolama
+      en: Disks and storage
+    description:
+      tr: df, du, lsblk, mount, fdisk.
+      en: df, du, lsblk, mount, fdisk.
+  - id: shell
+    section: "8.11"
+    label:
+      tr: Kabuk ve oturum
+      en: Shell and session
+    description:
+      tr: cd, export, history, alias, job control.
+      en: cd, export, history, alias, job control.
+  - id: development
+    section: "8.12"
+    label:
+      tr: Geliştirme
+      en: Development
+    description:
+      tr: git, make, compilers, dil araçları (komut odaklı).
+      en: git, make, compilers, language CLIs (command-focused).
+  - id: containers
+    section: "8.13"
+    label:
+      tr: Konteynerler
+      en: Containers
+    description:
+      tr: podman, docker, nerdctl temel komutları.
+      en: podman, docker, nerdctl basics.
+  - id: security
+    section: "8.14"
+    label:
+      tr: Güvenlik
+      en: Security
+    description:
+      tr: gpg, ssh-keygen, firewall-cmd, güvenlik taraması.
+      en: gpg, ssh-keygen, firewall-cmd, security scanning.
+  - id: monitoring
+    section: "8.15"
+    label:
+      tr: İzleme
+      en: Monitoring
+    description:
+      tr: journalctl, dmesg, free, vmstat.
+      en: journalctl, dmesg, free, vmstat.
+  - id: hardware
+    section: "8.16"
+    label:
+      tr: Donanım
+      en: Hardware
+    description:
+      tr: lscpu, lspci, lsusb, sensörler.
+      en: lscpu, lspci, lsusb, sensors.

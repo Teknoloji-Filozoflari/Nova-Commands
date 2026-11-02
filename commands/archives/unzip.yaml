@@ -1,0 +1,49 @@
+id: unzip
+name: unzip
+summary:
+  tr: ZIP arşivlerini çıkarır.
+  en: Extract ZIP archives.
+description:
+  tr: ZIP içeriğini listeler veya çıkarır.
+  en: Lists or extracts ZIP contents.
+tags:
+- archive
+risk: caution
+requires_elevated: false
+platforms:
+- linux
+- macos
+packages:
+  arch: unzip
+  debian: unzip
+  ubuntu: unzip
+  fedora: unzip
+install_notes:
+  tr: 'Arch: pacman -S unzip'
+  en: 'Arch: pacman -S unzip'
+examples:
+- title:
+    tr: Çıkar
+    en: Extract
+  command: unzip project.zip
+  explanation:
+    tr: Arşivi çalışma dizinine çıkarır.
+    en: Extracts into the working directory.
+  risk: caution
+related:
+- zip
+- tar
+intent:
+  tr:
+  - zip aç
+  - unzip
+  en:
+  - unzip file
+  - extract zip
+verification:
+  status: reviewed
+  sources:
+  - man 1 unzip
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-bootstrap
+category: archives

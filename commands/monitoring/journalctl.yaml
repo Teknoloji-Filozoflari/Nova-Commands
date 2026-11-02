@@ -1,0 +1,76 @@
+id: journalctl
+name: journalctl
+summary:
+  tr: systemd günlüğünü sorgular.
+  en: Query the systemd journal.
+description:
+  tr: Servis ve sistem loglarını journal’dan okur.
+  en: Reads service and system logs from the journal.
+tags:
+- monitoring
+- logs
+- systemd
+risk: safe
+requires_elevated: false
+platforms:
+- linux
+packages:
+  arch: systemd
+  debian: systemd
+  ubuntu: systemd
+  fedora: systemd
+flags:
+- flag: -u
+  long: --unit
+  takes_value: true
+  value_name: UNIT
+  meaning:
+    tr: Birim süzgeci.
+    en: Unit filter.
+  verified: true
+- flag: -f
+  long: --follow
+  meaning:
+    tr: Canlı takip.
+    en: Follow new entries.
+  verified: true
+- flag: -n
+  long: --lines
+  takes_value: true
+  value_name: N
+  meaning:
+    tr: Son N satır.
+    en: Last N lines.
+  verified: true
+- flag: -b
+  long: --boot
+  meaning:
+    tr: Geçerli boot logları.
+    en: Current boot logs.
+  verified: true
+examples:
+- title:
+    tr: Servis log
+    en: Unit log
+  command: journalctl -u nginx -n 50
+  explanation:
+    tr: nginx biriminin son 50 satırı.
+    en: Last 50 lines for nginx unit.
+  risk: safe
+related:
+- systemctl
+- dmesg
+intent:
+  tr:
+  - servis logları
+  - journal oku
+  en:
+  - service logs
+  - read journal
+verification:
+  status: reviewed
+  sources:
+  - man 1 journalctl
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-bootstrap
+category: monitoring

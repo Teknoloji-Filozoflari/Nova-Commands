@@ -1,0 +1,55 @@
+id: pgrep
+name: pgrep
+summary:
+  tr: Ada göre süreç PID’lerini bulur.
+  en: Find process IDs by name.
+description:
+  tr: Desene uyan süreçlerin PID listesini basar.
+  en: Lists PIDs matching a pattern.
+tags:
+- process
+- search
+risk: safe
+requires_elevated: false
+platforms:
+- linux
+packages:
+  arch: procps-ng
+  debian: procps
+  ubuntu: procps
+  fedora: procps-ng
+flags:
+- flag: -a
+  long: --list-full
+  meaning:
+    tr: PID ile birlikte komut satırı.
+    en: List PID and full command line.
+  verified: true
+  platforms:
+  - gnu
+examples:
+- title:
+    tr: nginx PID
+    en: nginx PIDs
+  command: pgrep -a nginx
+  explanation:
+    tr: nginx süreçlerini listeler.
+    en: Lists nginx processes.
+  risk: safe
+related:
+- pkill
+- ps
+intent:
+  tr:
+  - pid bul
+  - isme göre süreç
+  en:
+  - find pid by name
+  - pgrep
+verification:
+  status: reviewed
+  sources:
+  - man 1 pgrep
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-bootstrap
+category: processes

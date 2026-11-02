@@ -1,0 +1,81 @@
+id: systemctl
+name: systemctl
+summary:
+  tr: systemd birimlerini denetler.
+  en: Control the systemd system and service manager.
+description:
+  tr: Servis başlatma/durdurma, durum ve boot birimleri için birincil araç.
+  en: Primary tool to start/stop services, check status, and manage boot units.
+tags:
+- system
+- systemd
+- service
+risk: dangerous
+requires_elevated: true
+platforms:
+- linux
+packages:
+  arch: systemd
+  debian: systemd
+  ubuntu: systemd
+  fedora: systemd
+install_notes:
+  tr: 'Arch: pacman -S systemd (taban).'
+  en: 'Arch: pacman -S systemd (base).'
+flags:
+- flag: status
+  meaning:
+    tr: Birim durumunu göster (alt komut).
+    en: Show unit status (subcommand).
+  verified: true
+- flag: start
+  meaning:
+    tr: Birimi başlat (alt komut).
+    en: Start unit (subcommand).
+  verified: true
+- flag: stop
+  meaning:
+    tr: Birimi durdur (alt komut).
+    en: Stop unit (subcommand).
+  verified: true
+- flag: --user
+  meaning:
+    tr: Kullanıcı oturumu yöneticisi.
+    en: Talk to user service manager.
+  verified: true
+examples:
+- title:
+    tr: Durum
+    en: Status
+  command: systemctl status sshd
+  explanation:
+    tr: sshd birim durumunu gösterir (izinler dağıtıma göre).
+    en: Shows sshd unit status (unit name varies).
+  risk: safe
+  requires_elevated: false
+- title:
+    tr: Yeniden başlat
+    en: Restart
+  command: sudo systemctl restart nginx
+  explanation:
+    tr: nginx servisini yeniden başlatır.
+    en: Restarts the nginx service.
+  risk: dangerous
+  requires_elevated: true
+related:
+- journalctl
+- service
+intent:
+  tr:
+  - servis başlat
+  - systemd durum
+  en:
+  - start service
+  - systemd status
+verification:
+  status: reviewed
+  sources:
+  - man 1 systemctl
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-bootstrap
+category: system

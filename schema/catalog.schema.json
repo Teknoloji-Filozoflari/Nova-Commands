@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/Teknoloji-Filozoflari/Nova-Commands/main/schema/catalog.schema.json",
+  "title": "Nova-Commands aggregate catalog",
+  "description": "Built JSON index of curated commands (Komut Bilgi Bankası). Not the local PATH discovery list.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "kind", "generated_at", "commands"],
+  "properties": {
+    "schema_version": {
+      "type": "integer",
+      "const": 1
+    },
+    "kind": {
+      "type": "string",
+      "const": "nova-commands-bank"
+    },
+    "generated_at": {
+      "type": "string",
+      "minLength": 1
+    },
+    "command_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "commands": {
+      "type": "array",
+      "items": {
+        "$ref": "command.schema.json"
+      }
+    }
+  }
+}

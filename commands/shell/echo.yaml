@@ -1,0 +1,52 @@
+id: echo
+name: echo
+summary:
+  tr: Argümanları yazar.
+  en: Display a line of text.
+description:
+  tr: Metni standart çıktıya basar; kabuk yerleşiği veya /bin/echo olabilir.
+  en: Prints text to stdout; may be builtin or /bin/echo.
+tags:
+- shell
+risk: safe
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+packages:
+  arch: coreutils
+  debian: coreutils
+  ubuntu: coreutils
+  fedora: coreutils
+flags:
+- flag: -n
+  meaning:
+    tr: Sondaki yeni satırı yazma.
+    en: Do not output trailing newline.
+  verified: true
+examples:
+- title:
+    tr: Yazdır
+    en: Print
+  command: echo "hello"
+  explanation:
+    tr: hello yazar.
+    en: Prints hello.
+  risk: safe
+related:
+- printf
+intent:
+  tr:
+  - ekrana yaz
+  - echo
+  en:
+  - print text
+  - echo string
+verification:
+  status: reviewed
+  sources:
+  - man 1 echo
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-bootstrap
+category: shell

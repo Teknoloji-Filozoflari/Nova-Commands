@@ -1,0 +1,51 @@
+id: make
+name: make
+summary:
+  tr: Makefile’dan derleme hedefleri çalıştırır.
+  en: GNU make utility to maintain groups of programs.
+description:
+  tr: Bağımlılık grafiklerine göre hedefleri üretir.
+  en: Builds targets according to dependency graphs.
+tags:
+- development
+- build
+risk: caution
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+packages:
+  arch: make
+  debian: make
+  ubuntu: make
+  fedora: make
+install_notes:
+  tr: 'Arch: pacman -S make'
+  en: 'Arch: pacman -S make'
+examples:
+- title:
+    tr: Varsayılan hedef
+    en: Default target
+  command: make
+  explanation:
+    tr: İlk/varsayılan hedefi derler.
+    en: Builds the default target.
+  risk: caution
+related:
+- cmake
+- git
+intent:
+  tr:
+  - make derle
+  - makefile çalıştır
+  en:
+  - run make
+  - build with makefile
+verification:
+  status: reviewed
+  sources:
+  - man 1 make
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-bootstrap
+category: development

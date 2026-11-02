@@ -1,0 +1,47 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate-catalog:
+    name: Validate command bank
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install validator dependencies
+        run: python3 -m pip install -r requirements-dev.txt
+
+      - name: Schema + id + category + verification rules
+        run: python3 scripts/validate_catalog.py
+
+      - name: Build aggregate catalog.json
+        run: python3 scripts/build_catalog.py
+
+      - name: Unit tests
+        run: python3 -m pytest tests/ -q
+
+      - name: Ensure catalog build is coherent
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          cat = json.loads(Path("metadata/catalog.json").read_text())
+          assert cat["schema_version"] == 1
+          assert cat["kind"] == "nova-commands-bank"
+          assert cat["commands"], "catalog must contain commands"
+          ids = [c["id"] for c in cat["commands"]]
+          assert len(ids) == len(set(ids))
+          assert cat["command_count"] == len(ids)
+          print(f"catalog ok: {len(ids)} commands")
+          PY

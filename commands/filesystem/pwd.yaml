@@ -1,0 +1,52 @@
+id: pwd
+name: pwd
+summary:
+  tr: Çalışma dizinini yazdırır.
+  en: Print working directory.
+description:
+  tr: Geçerli çalışma dizininin mutlak yolunu gösterir.
+  en: Prints the absolute path of the current working directory.
+tags:
+- files
+- directory
+- shell
+risk: safe
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+packages:
+  arch: coreutils
+  debian: coreutils
+  ubuntu: coreutils
+  fedora: coreutils
+examples:
+- title:
+    tr: Neredeyim?
+    en: Where am I?
+  command: pwd
+  explanation:
+    tr: Bulunduğunuz dizini yazdırır.
+    en: Prints your current directory.
+  risk: safe
+related:
+- cd
+- ls
+intent:
+  tr:
+  - hangi dizindeyim
+  - çalışma dizini
+  en:
+  - where am I
+  - print working directory
+verification:
+  status: reviewed
+  sources:
+  - man 1 pwd
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-bootstrap
+nova:
+  favorite_eligible: true
+  ui_priority: 70
+category: filesystem

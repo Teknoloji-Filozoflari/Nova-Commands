@@ -1,0 +1,56 @@
+packages:
+  arch: coreutils
+  debian: coreutils
+  ubuntu: coreutils
+  fedora: coreutils
+platforms:
+- linux
+- macos
+- bsd
+requires_elevated: false
+verification:
+  status: reviewed
+  sources:
+  - man 1 tee
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-bootstrap
+id: tee
+name: tee
+summary:
+  tr: Çıktıyı hem dosyaya hem stdout’a yazar.
+  en: Write output to files and stdout.
+description:
+  tr: Boru hattında çıktıyı kaydederek iletir.
+  en: Duplicates stdin to files while passing it through.
+tags:
+- text
+- pipe
+risk: caution
+flags:
+- flag: -a
+  long: --append
+  meaning:
+    tr: Dosyaya ekle, üzerine yazma.
+    en: Append to files rather than overwrite.
+  verified: true
+  platforms:
+  - gnu
+examples:
+- title:
+    tr: Hem kaydet hem göster
+    en: Save and show
+  command: journalctl -u nginx | tee nginx.log
+  explanation:
+    tr: Çıktıyı dosyaya yazıp ekranda da gösterir.
+    en: Saves output while still displaying it.
+  risk: caution
+related:
+- cat
+intent:
+  tr:
+  - çıktıyı dosyaya yaz
+  - tee ile kaydet
+  en:
+  - tee to file
+  - save pipeline output
+category: text

@@ -1,0 +1,48 @@
+id: history
+name: history
+summary:
+  tr: Komut geçmişini listeler (yerleşik).
+  en: Display command history (builtin).
+description:
+  tr: Kabuk geçmişini gösterir; davranış kabuğa göre değişir.
+  en: Shows shell history; behavior depends on the shell.
+tags:
+- shell
+risk: safe
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+shells:
+- bash
+- zsh
+examples:
+- title:
+    tr: Geçmiş
+    en: History
+  command: history | tail -n 20
+  explanation:
+    tr: Son 20 komut.
+    en: Last 20 commands.
+  risk: safe
+related:
+- alias
+intent:
+  tr:
+  - komut geçmişi
+  - önceki komutlar
+  en:
+  - command history
+  - previous commands
+verification:
+  status: reviewed
+  sources:
+  - bash help history
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-bootstrap
+  notes: Builtin
+nova:
+  concepts:
+  - shell-builtin
+category: shell

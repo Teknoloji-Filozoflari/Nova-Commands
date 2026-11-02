@@ -1,0 +1,96 @@
+id: cp
+name: cp
+summary:
+  tr: Dosya ve dizinleri kopyalar.
+  en: Copy files and directories.
+description:
+  tr: Kaynakları hedefe kopyalar. Dizin için genellikle -r/-R gerekir.
+  en: Copies sources to a destination. Directories usually need -r/-R.
+tags:
+- files
+- copy
+risk: caution
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+packages:
+  arch: coreutils
+  debian: coreutils
+  ubuntu: coreutils
+  fedora: coreutils
+install_notes:
+  tr: 'Arch: pacman -S coreutils'
+  en: 'Arch: pacman -S coreutils'
+flags:
+- flag: -r
+  long: --recursive
+  meaning:
+    tr: Dizinleri özyinelemeli kopyala.
+    en: Copy directories recursively.
+  verified: true
+  platforms:
+  - gnu
+- flag: -i
+  long: --interactive
+  meaning:
+    tr: Üzerine yazmadan önce sor.
+    en: Prompt before overwrite.
+  verified: true
+  platforms:
+  - gnu
+- flag: -a
+  long: --archive
+  meaning:
+    tr: Arşiv modu (özellikleri koru, özyinelemeli).
+    en: Archive mode (preserve attributes, recursive).
+  verified: true
+  platforms:
+  - gnu
+- flag: -v
+  long: --verbose
+  meaning:
+    tr: Ne kopyalandığını yaz.
+    en: Explain what is being done.
+  verified: true
+  platforms:
+  - gnu
+examples:
+- title:
+    tr: Dosya kopyala
+    en: Copy a file
+  command: cp notes.txt notes.bak
+  explanation:
+    tr: notes.txt dosyasını notes.bak olarak kopyalar.
+    en: Copies notes.txt to notes.bak.
+  risk: caution
+- title:
+    tr: Dizin kopyala
+    en: Copy directory
+  command: cp -a project project-backup
+  explanation:
+    tr: Özellikleri koruyarak dizini kopyalar.
+    en: Copies a directory preserving attributes.
+  risk: caution
+related:
+- mv
+- rsync
+- install
+intent:
+  tr:
+  - dosya kopyala
+  - klasör kopyala
+  en:
+  - copy file
+  - copy directory
+verification:
+  status: reviewed
+  sources:
+  - man 1 cp (GNU coreutils)
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-bootstrap
+nova:
+  favorite_eligible: true
+  ui_priority: 80
+category: filesystem

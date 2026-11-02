@@ -1,0 +1,117 @@
+id: ls
+name: ls
+summary:
+  tr: Dizin içeriğini listeler.
+  en: List directory contents.
+description:
+  tr: Belirtilen dizinlerdeki dosya ve alt dizinleri listeler. GNU coreutils sürümünde
+    uzun biçim, insan okunur boyut ve renk gibi yaygın bayraklar vardır.
+  en: Lists files and directories. The GNU coreutils version supports long format,
+    human-readable sizes, and color.
+tags:
+- files
+- directory
+- list
+risk: safe
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+shells:
+- any
+packages:
+  arch: coreutils
+  debian: coreutils
+  ubuntu: coreutils
+  fedora: coreutils
+  rhel: coreutils
+install_notes:
+  tr: 'Arch: pacman -S coreutils (genelde taban sistemde vardır).
+
+    Debian/Ubuntu: apt install coreutils
+
+    Fedora: dnf install coreutils'
+  en: 'Arch: pacman -S coreutils (usually in base).
+
+    Debian/Ubuntu: apt install coreutils
+
+    Fedora: dnf install coreutils'
+flags:
+- flag: -a
+  long: --all
+  meaning:
+    tr: Gizli dosyalar dahil hepsini göster.
+    en: Show all entries including hidden.
+  verified: true
+  platforms:
+  - gnu
+- flag: -l
+  meaning:
+    tr: Uzun (ayrıntılı) liste biçimi.
+    en: Long listing format.
+  verified: true
+  platforms:
+  - gnu
+- flag: -h
+  long: --human-readable
+  meaning:
+    tr: Boyutları K/M/G ile göster (-l ile).
+    en: Human-readable sizes with -l.
+  verified: true
+  platforms:
+  - gnu
+- flag: -R
+  long: --recursive
+  meaning:
+    tr: Alt dizinlere inerek listele.
+    en: List subdirectories recursively.
+  verified: true
+  platforms:
+  - gnu
+examples:
+- title:
+    tr: Ayrıntılı liste
+    en: Detailed list
+  command: ls -lah
+  explanation:
+    tr: Gizli dosyalar, insan okunur boyutlar, uzun biçim.
+    en: Hidden files, human sizes, long format.
+  risk: safe
+- title:
+    tr: Tek dizin
+    en: One directory
+  command: ls /var/log
+  explanation:
+    tr: Belirtilen yolun içeriğini listeler.
+    en: Lists the given path.
+  risk: safe
+related:
+- tree
+- find
+- stat
+see_also:
+- man 1 ls
+- info coreutils ls
+intent:
+  tr:
+  - dosya listele
+  - klasör içeriği
+  - dizin listele
+  en:
+  - list files
+  - list directory
+  - show folder contents
+verification:
+  status: reviewed
+  sources:
+  - man 1 ls (GNU coreutils)
+  - https://www.gnu.org/software/coreutils/manual/
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-bootstrap
+nova:
+  favorite_eligible: true
+  ui_priority: 90
+  concepts:
+  - files
+category: filesystem

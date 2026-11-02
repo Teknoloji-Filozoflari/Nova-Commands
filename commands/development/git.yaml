@@ -1,0 +1,80 @@
+id: git
+name: git
+summary:
+  tr: Dağıtık sürüm kontrol sistemi.
+  en: Distributed version control system.
+description:
+  tr: Kaynak kod geçmişi, dallar ve uzaktan eşitleme.
+  en: Source history, branches, and remote synchronization.
+tags:
+- git
+- vcs
+risk: caution
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+packages:
+  arch: git
+  debian: git
+  ubuntu: git
+  fedora: git
+install_notes:
+  tr: 'Arch: pacman -S git
+
+    Debian/Ubuntu: apt install git
+
+    Fedora: dnf install git'
+  en: 'Arch: pacman -S git
+
+    Debian/Ubuntu: apt install git
+
+    Fedora: dnf install git'
+flags: []
+examples:
+- title:
+    tr: Durum
+    en: Status
+  command: git status
+  explanation:
+    tr: Çalışma ağacı durumu.
+    en: Working tree status.
+  risk: safe
+- title:
+    tr: Kısa log
+    en: Oneline log
+  command: git log --oneline -n 10
+  explanation:
+    tr: Son 10 commit.
+    en: Last 10 commits.
+  risk: safe
+- title:
+    tr: Klon
+    en: Clone
+  command: git clone https://github.com/Teknoloji-Filozoflari/Nova-Commands.git
+  explanation:
+    tr: Depoyu klonlar.
+    en: Clones the repository.
+  risk: caution
+related:
+- diff
+- make
+intent:
+  tr:
+  - git durum
+  - commit geçmişi
+  en:
+  - git status
+  - commit history
+verification:
+  status: reviewed
+  sources:
+  - man 1 git
+  - https://git-scm.com/docs
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-bootstrap
+nova:
+  favorite_eligible: true
+  ui_priority: 92
+category: development

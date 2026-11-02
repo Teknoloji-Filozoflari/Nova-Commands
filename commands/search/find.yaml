@@ -1,0 +1,77 @@
+id: find
+name: find
+summary:
+  tr: Dizin ağacında dosya arar.
+  en: Search for files in a directory hierarchy.
+description:
+  tr: İsim, tip, zaman ve başka ölçütlerle dosya bulur; aksiyonlar çalıştırabilir.
+  en: Finds files by name, type, time, and more; can run actions.
+tags:
+- search
+- files
+risk: caution
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+packages:
+  arch: findutils
+  debian: findutils
+  ubuntu: findutils
+  fedora: findutils
+flags:
+- flag: -name
+  takes_value: true
+  value_name: PATTERN
+  meaning:
+    tr: Baz ada göre eşle.
+    en: Match basename pattern.
+  verified: true
+- flag: -type
+  takes_value: true
+  value_name: t
+  meaning:
+    tr: 'Tür: f dosya, d dizin.'
+    en: 'Type: f file, d directory.'
+  verified: true
+- flag: -delete
+  meaning:
+    tr: Eşleşenleri sil (dikkat).
+    en: Delete matched files (careful).
+  verified: true
+examples:
+- title:
+    tr: İsme göre ara
+    en: Search by name
+  command: find ~ -name "*.pdf"
+  explanation:
+    tr: Ev dizininde PDF arar.
+    en: Finds PDFs under home.
+  risk: safe
+- title:
+    tr: Boş dizinler
+    en: Empty dirs
+  command: find . -type d -empty
+  explanation:
+    tr: Boş dizinleri listeler.
+    en: Lists empty directories.
+  risk: safe
+related:
+- grep
+- fd
+- locate
+intent:
+  tr:
+  - dosya bul
+  - isme göre ara
+  en:
+  - find files
+  - search by name
+verification:
+  status: reviewed
+  sources:
+  - man 1 find
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-bootstrap
+category: search
