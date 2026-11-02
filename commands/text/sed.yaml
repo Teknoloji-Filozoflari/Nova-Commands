@@ -70,3 +70,7 @@ verification:
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-coverage
 category: text
+nova:
+  concepts:
+  - files
+  - shell-pipes-redirection

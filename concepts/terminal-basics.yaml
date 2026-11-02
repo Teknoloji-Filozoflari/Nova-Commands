@@ -1,0 +1,75 @@
+id: terminal-basics
+kind: nova-commands-concept
+title:
+  tr: Terminal temelleri
+  en: Terminal basics
+summary:
+  tr: Kabuk, istem (prompt), komut satırı ve çıkış kodları.
+  en: Shell, prompt, command line, and exit statuses.
+difficulty: beginner
+tags:
+  - shell
+  - beginner
+  - cli
+related_commands:
+  - pwd
+  - ls
+  - cd
+  - echo
+  - history
+related_concepts:
+  - path
+  - shell-pipes-redirection
+  - shell-builtin
+see_also:
+  - "POSIX shell overview"
+  - "man bash / man zsh (interactive shells)"
+body:
+  tr: |
+    Terminal, metin tabanlı bir arayüzdür; yazdığınız satırı bir *kabuk* (bash, zsh, fish, …)
+    yorumlar. Tipik bir satır: `komut [bayraklar…] [argümanlar…]`.
+
+    **İstem (prompt):** Kabuk hazır olduğunu gösterir; satırı Enter ile gönderirsiniz.
+    Çoğu Linux sisteminde varsayılan etkileşimli kabuk bash veya zsh’dir; betikler için
+    `#!/bin/sh` sıkça POSIX uyumlu bir kabuğu hedefler.
+
+    **Argümanlar ve tırnak:** Boşluk içeren yolları tırnak içine alın
+    (`cd "My Documents"`). Tek tırnak çoğu kabukta genişletmeyi kapatır; çift tırnak
+    değişkenleri genişletebilir.
+
+    **Çıkış kodu:** Başarılı komutlar genelde `0` döner; sıfır dışı hata demektir.
+    Son komutun kodunu `echo $?` ile görebilirsiniz. Betiklerde `set -e` hataları
+    erken durdurmak için kullanılır (kabuğa göre nüansları vardır).
+
+    **Yardım:** `man komut`, `komut --help` (GNU araçlarında yaygındır), `info` (bazı
+    GNU paketleri). Bu bankadaki komut kayıtları man/`--help` ile çapraz kontrol
+    edilmeden `verified` yapılmamalıdır.
+
+    **Nova ayrımı:** Bilgi bankası (kürate YAML) ile “sistemimde bulunan komutlar”
+    (PATH keşfi) farklıdır; PATH’te olmak doğrulanmış içerik anlamına gelmez.
+  en: |
+    A terminal is a text interface; a *shell* (bash, zsh, fish, …) interprets each line.
+    Typical form: `command [flags…] [arguments…]`.
+
+    **Prompt:** Shows the shell is ready; press Enter to run the line. Interactive
+    defaults are often bash or zsh; scripts frequently use `#!/bin/sh` for a
+    POSIX-oriented shell.
+
+    **Arguments and quoting:** Quote paths with spaces (`cd "My Documents"`). Single
+    quotes usually disable expansion; double quotes may expand variables.
+
+    **Exit status:** Success is usually `0`; non-zero means failure. Inspect the last
+    status with `echo $?`. Scripts may use `set -e` to stop early on errors (shell-specific
+    nuances apply).
+
+    **Help:** `man command`, `command --help` (common on GNU tools), and sometimes `info`.
+    Catalog entries must not be marked `verified` without checking man/`--help`.
+
+    **Nova dual concept:** The curated bank is not the same as “commands found on PATH”;
+    presence on PATH does not verify bank content.
+verification:
+  status: reviewed
+  sources:
+    - "POSIX.1 shell command language (overview)"
+    - "man bash (INVOCATION, SHELL GRAMMAR)"
+  notes: "Agent-authored teaching article; needs maintainer spot-check before verified."

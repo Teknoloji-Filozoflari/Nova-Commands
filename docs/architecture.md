@@ -12,13 +12,16 @@
 
 ```
 commands/<category>/<id>.yaml   # curated entries
+concepts/<id>.yaml              # learnable concept articles (TR/EN)
 schema/*.json                   # JSON Schema (Draft 2020-12)
 metadata/categories.yaml        # §8.x taxonomy
-metadata/concepts.yaml          # cross-cutting labels
-metadata/catalog.json           # built aggregate (kind: nova-commands-bank)
-scripts/validate_catalog.py     # CI gate
-scripts/build_catalog.py        # aggregator
-docs/                           # contracts + safety + Nova consumption
+metadata/concepts.yaml          # concept registry (+ optional article:)
+metadata/catalog.json           # aggregate (kind: nova-commands-bank)
+metadata/search-index.json      # flattened search fields
+metadata/manifest.json          # counts + deterministic content_sha256
+scripts/validate_catalog.py     # CI gate (schema, i18n, concepts)
+scripts/build_catalog.py        # catalog + index + manifest
+docs/                           # contracts + safety + NOVA_INTEGRATION
 tests/                          # pytest
 ```
 
@@ -29,6 +32,7 @@ PR → validate_catalog.py → build_catalog.py → pytest → merge
 ```
 
 `verification.status` is never auto-promoted to `verified` by CI.
+`content_sha256` hashes commands+concepts only (excludes `generated_at`).
 
 ## Phases (implementation track)
 
@@ -41,7 +45,9 @@ PR → validate_catalog.py → build_catalog.py → pytest → merge
 | 5 | Nova consumption + Arch-first package notes |
 | 6 | Safety rules + draft/verified enforcement |
 | 7 | Concepts metadata + CONTRIBUTING |
-| 8+ | Grow coverage category-by-category (human review) |
+| 8 | Concept articles (`concepts/`) + i18n gates |
+| 9 | Search index + manifest SHA + NOVA_INTEGRATION |
+| 10+ | Grow coverage; human `verified` promotions |
 
 ## Non-goals (this repo)
 

@@ -1,8 +1,10 @@
 {
   "schema_version": 1,
   "kind": "nova-commands-bank",
-  "generated_at": "2026-11-02T18:24:08Z",
+  "generated_at": "2026-11-02T18:33:47Z",
+  "content_sha256": "c27a056fd818c23e1c23870e97ecabbdf151ccd330c851e99f29f93dedb1be4e",
   "command_count": 117,
+  "concept_count": 7,
   "commands": [
     {
       "id": "apt",
@@ -118,7 +120,13 @@
         "last_reviewed": "2026-11-02",
         "reviewer": "nova-commands-bootstrap"
       },
-      "category": "packages"
+      "category": "packages",
+      "nova": {
+        "concepts": [
+          "packages",
+          "package-managers"
+        ]
+      }
     },
     {
       "id": "awk",
@@ -222,7 +230,14 @@
         "last_reviewed": "2026-11-02",
         "reviewer": "nova-commands-coverage"
       },
-      "category": "text"
+      "category": "text",
+      "nova": {
+        "concepts": [
+          "files",
+          "shell-pipes-redirection"
+        ],
+        "favorite_eligible": true
+      }
     },
     {
       "id": "blkid",
@@ -433,7 +448,8 @@
       },
       "nova": {
         "concepts": [
-          "systemd"
+          "systemd",
+          "terminal-basics"
         ]
       },
       "category": "system"
@@ -517,7 +533,14 @@
           "print file"
         ]
       },
-      "category": "text"
+      "category": "text",
+      "nova": {
+        "concepts": [
+          "files",
+          "shell-pipes-redirection"
+        ],
+        "favorite_eligible": true
+      }
     },
     {
       "id": "cd",
@@ -598,7 +621,9 @@
       },
       "nova": {
         "concepts": [
-          "shell-builtin"
+          "shell-builtin",
+          "terminal-basics",
+          "path"
         ]
       },
       "category": "shell"
@@ -789,7 +814,12 @@
         "last_reviewed": "2026-11-02",
         "reviewer": "nova-commands-bootstrap"
       },
-      "category": "users"
+      "category": "users",
+      "nova": {
+        "concepts": [
+          "permissions"
+        ]
+      }
     },
     {
       "id": "chown",
@@ -869,7 +899,12 @@
         "last_reviewed": "2026-11-02",
         "reviewer": "nova-commands-bootstrap"
       },
-      "category": "users"
+      "category": "users",
+      "nova": {
+        "concepts": [
+          "permissions"
+        ]
+      }
     },
     {
       "id": "cp",
@@ -1004,7 +1039,11 @@
       },
       "nova": {
         "favorite_eligible": true,
-        "ui_priority": 80
+        "ui_priority": 80,
+        "concepts": [
+          "files",
+          "terminal-basics"
+        ]
       },
       "category": "filesystem"
     },
@@ -1129,7 +1168,11 @@
       },
       "nova": {
         "favorite_eligible": true,
-        "ui_priority": 88
+        "ui_priority": 88,
+        "concepts": [
+          "networking",
+          "networking-basics"
+        ]
       },
       "category": "network"
     },
@@ -1227,7 +1270,14 @@
           "select field"
         ]
       },
-      "category": "text"
+      "category": "text",
+      "nova": {
+        "concepts": [
+          "files",
+          "shell-pipes-redirection"
+        ],
+        "favorite_eligible": true
+      }
     },
     {
       "id": "date",
@@ -1306,7 +1356,14 @@
         "last_reviewed": "2026-11-02",
         "reviewer": "nova-commands-bootstrap"
       },
-      "category": "system"
+      "category": "system",
+      "nova": {
+        "concepts": [
+          "systemd",
+          "terminal-basics"
+        ],
+        "favorite_eligible": true
+      }
     },
     {
       "id": "dd",
@@ -1515,7 +1572,13 @@
         "last_reviewed": "2026-11-02",
         "reviewer": "nova-commands-bootstrap"
       },
-      "category": "disks"
+      "category": "disks",
+      "nova": {
+        "concepts": [
+          "storage"
+        ],
+        "favorite_eligible": true
+      }
     },
     {
       "id": "diff",
@@ -1595,7 +1658,13 @@
         "last_reviewed": "2026-11-02",
         "reviewer": "nova-commands-bootstrap"
       },
-      "category": "development"
+      "category": "development",
+      "nova": {
+        "concepts": [
+          "terminal-basics"
+        ],
+        "favorite_eligible": true
+      }
     },
     {
       "id": "dig",
@@ -1717,7 +1786,8 @@
       "nova": {
         "concepts": [
           "networking",
-          "dns"
+          "dns",
+          "networking-basics"
         ],
         "ui_priority": 70
       },
@@ -1796,7 +1866,13 @@
         "last_reviewed": "2026-11-02",
         "reviewer": "nova-commands-bootstrap"
       },
-      "category": "monitoring"
+      "category": "monitoring",
+      "nova": {
+        "concepts": [
+          "terminal-basics"
+        ],
+        "favorite_eligible": true
+      }
     },
     {
       "id": "dnf",
@@ -1806,8 +1882,8 @@
         "en": "Fedora/RHEL package manager."
       },
       "description": {
-        "tr": "DNF ile kurulum, yükseltme ve sorgu.",
-        "en": "Install, upgrade, and query with DNF."
+        "tr": "Fedora/RHEL aile paket yöneticisi; kurulum, güncelleme ve depo işlemlerini yönetir.",
+        "en": "Package manager for Fedora/RHEL families; installs, upgrades, and queries repositories."
       },
       "tags": [
         "packages",
@@ -1904,7 +1980,13 @@
         "last_reviewed": "2026-11-02",
         "reviewer": "nova-commands-bootstrap"
       },
-      "category": "packages"
+      "category": "packages",
+      "nova": {
+        "concepts": [
+          "packages",
+          "package-managers"
+        ]
+      }
     },
     {
       "id": "docker",
@@ -2290,7 +2372,8 @@
       },
       "nova": {
         "concepts": [
-          "packages"
+          "packages",
+          "package-managers"
         ]
       },
       "category": "packages"
@@ -2398,7 +2481,13 @@
         "last_reviewed": "2026-11-02",
         "reviewer": "nova-commands-bootstrap"
       },
-      "category": "disks"
+      "category": "disks",
+      "nova": {
+        "concepts": [
+          "storage"
+        ],
+        "favorite_eligible": true
+      }
     },
     {
       "id": "echo",
@@ -2472,7 +2561,15 @@
         "last_reviewed": "2026-11-02",
         "reviewer": "nova-commands-bootstrap"
       },
-      "category": "shell"
+      "category": "shell",
+      "nova": {
+        "concepts": [
+          "shell-builtin",
+          "terminal-basics",
+          "path"
+        ],
+        "favorite_eligible": true
+      }
     },
     {
       "id": "env",
@@ -2538,7 +2635,15 @@
         "last_reviewed": "2026-11-02",
         "reviewer": "nova-commands-bootstrap"
       },
-      "category": "shell"
+      "category": "shell",
+      "nova": {
+        "concepts": [
+          "shell-builtin",
+          "terminal-basics",
+          "path"
+        ],
+        "favorite_eligible": true
+      }
     },
     {
       "id": "export",
@@ -2606,7 +2711,9 @@
       },
       "nova": {
         "concepts": [
-          "shell-builtin"
+          "shell-builtin",
+          "terminal-basics",
+          "path"
         ]
       },
       "category": "shell"
@@ -2815,7 +2922,13 @@
         "last_reviewed": "2026-11-02",
         "reviewer": "nova-commands-bootstrap"
       },
-      "category": "search"
+      "category": "search",
+      "nova": {
+        "concepts": [
+          "files",
+          "shell-pipes-redirection"
+        ]
+      }
     },
     {
       "id": "findmnt",
@@ -3078,7 +3191,8 @@
       "nova": {
         "concepts": [
           "networking",
-          "ssh"
+          "ssh",
+          "permissions"
         ]
       },
       "category": "security"
@@ -3212,7 +3326,8 @@
       },
       "nova": {
         "concepts": [
-          "packages"
+          "packages",
+          "package-managers"
         ]
       },
       "category": "packages"
@@ -3225,8 +3340,8 @@
         "en": "Display amount of free and used memory."
       },
       "description": {
-        "tr": "RAM ve swap özetini basar.",
-        "en": "Prints RAM and swap summary."
+        "tr": "Sistem bellek ve takas kullanımını özetler; -h insan okunur birimleri basar.",
+        "en": "Summarizes RAM and swap usage; -h prints human-readable units."
       },
       "tags": [
         "monitoring",
@@ -3290,7 +3405,13 @@
         "last_reviewed": "2026-11-02",
         "reviewer": "nova-commands-bootstrap"
       },
-      "category": "monitoring"
+      "category": "monitoring",
+      "nova": {
+        "concepts": [
+          "terminal-basics"
+        ],
+        "favorite_eligible": true
+      }
     },
     {
       "id": "getent",
@@ -3487,7 +3608,10 @@
       },
       "nova": {
         "favorite_eligible": true,
-        "ui_priority": 92
+        "ui_priority": 92,
+        "concepts": [
+          "terminal-basics"
+        ]
       },
       "category": "development"
     },
@@ -3500,7 +3624,7 @@
       },
       "description": {
         "tr": "Anahtar yönetimi, şifreleme, imzalama (GnuPG).",
-        "en": "Key management, encrypt, sign (GnuPG)."
+        "en": "GNU Privacy Guard for encrypting, signing, and verifying data and keys."
       },
       "tags": [
         "security",
@@ -3557,7 +3681,12 @@
         ],
         "notes": "Minimal seed; expand subcommands later."
       },
-      "category": "security"
+      "category": "security",
+      "nova": {
+        "concepts": [
+          "permissions"
+        ]
+      }
     },
     {
       "id": "grep",
@@ -3688,7 +3817,11 @@
       },
       "nova": {
         "favorite_eligible": true,
-        "ui_priority": 85
+        "ui_priority": 85,
+        "concepts": [
+          "files",
+          "shell-pipes-redirection"
+        ]
       },
       "category": "search"
     },
@@ -3863,7 +3996,12 @@
         "last_reviewed": "2026-11-02",
         "reviewer": "nova-commands-bootstrap"
       },
-      "category": "archives"
+      "category": "archives",
+      "nova": {
+        "concepts": [
+          "files"
+        ]
+      }
     },
     {
       "packages": {
@@ -3893,8 +4031,8 @@
         "en": "Show the start of files."
       },
       "description": {
-        "tr": "Varsayılan olarak ilk 10 satırı basar.",
-        "en": "Prints the first 10 lines by default."
+        "tr": "Dosya veya stdin girdinin ilk satırlarını yazar; varsayılan çoğu sürümde 10 satırdır.",
+        "en": "Prints the first lines of files or stdin; many implementations default to 10 lines."
       },
       "tags": [
         "text"
@@ -3944,7 +4082,14 @@
           "head of file"
         ]
       },
-      "category": "text"
+      "category": "text",
+      "nova": {
+        "concepts": [
+          "files",
+          "shell-pipes-redirection"
+        ],
+        "favorite_eligible": true
+      }
     },
     {
       "id": "history",
@@ -4009,7 +4154,9 @@
       },
       "nova": {
         "concepts": [
-          "shell-builtin"
+          "shell-builtin",
+          "terminal-basics",
+          "path"
         ]
       },
       "category": "shell"
@@ -4118,7 +4265,8 @@
       "nova": {
         "concepts": [
           "networking",
-          "dns"
+          "dns",
+          "networking-basics"
         ]
       },
       "category": "network"
@@ -4190,7 +4338,13 @@
         "last_reviewed": "2026-11-02",
         "reviewer": "nova-commands-bootstrap"
       },
-      "category": "system"
+      "category": "system",
+      "nova": {
+        "concepts": [
+          "systemd",
+          "terminal-basics"
+        ]
+      }
     },
     {
       "id": "hostnamectl",
@@ -4267,7 +4421,13 @@
         "last_reviewed": "2026-11-02",
         "reviewer": "nova-commands-bootstrap"
       },
-      "category": "system"
+      "category": "system",
+      "nova": {
+        "concepts": [
+          "systemd",
+          "terminal-basics"
+        ]
+      }
     },
     {
       "id": "htop",
@@ -4339,7 +4499,12 @@
         "last_reviewed": "2026-11-02",
         "reviewer": "nova-commands-coverage"
       },
-      "category": "processes"
+      "category": "processes",
+      "nova": {
+        "concepts": [
+          "terminal-basics"
+        ]
+      }
     },
     {
       "id": "id",
@@ -4349,8 +4514,8 @@
         "en": "Print user and group IDs."
       },
       "description": {
-        "tr": "UID/GID ve grup üyeliklerini gösterir.",
-        "en": "Shows UID/GID and group memberships."
+        "tr": "Geçerli kullanıcı ve grup kimliklerini (uid/gid) ve ek grupları gösterir.",
+        "en": "Prints real/effective user and group IDs and supplementary groups."
       },
       "tags": [
         "users"
@@ -4404,7 +4569,13 @@
         "last_reviewed": "2026-11-02",
         "reviewer": "nova-commands-bootstrap"
       },
-      "category": "users"
+      "category": "users",
+      "nova": {
+        "concepts": [
+          "permissions"
+        ],
+        "favorite_eligible": true
+      }
     },
     {
       "id": "ip",
@@ -4499,7 +4670,13 @@
         "last_reviewed": "2026-11-02",
         "reviewer": "nova-commands-bootstrap"
       },
-      "category": "network"
+      "category": "network",
+      "nova": {
+        "concepts": [
+          "networking",
+          "networking-basics"
+        ]
+      }
     },
     {
       "id": "journalctl",
@@ -4606,7 +4783,14 @@
         "last_reviewed": "2026-11-02",
         "reviewer": "nova-commands-bootstrap"
       },
-      "category": "monitoring"
+      "category": "monitoring",
+      "nova": {
+        "concepts": [
+          "terminal-basics",
+          "systemd"
+        ],
+        "favorite_eligible": true
+      }
     },
     {
       "id": "kill",
@@ -4710,7 +4894,12 @@
         "last_reviewed": "2026-11-02",
         "reviewer": "nova-commands-bootstrap"
       },
-      "category": "processes"
+      "category": "processes",
+      "nova": {
+        "concepts": [
+          "terminal-basics"
+        ]
+      }
     },
     {
       "packages": {
@@ -4786,7 +4975,14 @@
           "view log"
         ]
       },
-      "category": "text"
+      "category": "text",
+      "nova": {
+        "concepts": [
+          "files",
+          "shell-pipes-redirection"
+        ],
+        "favorite_eligible": true
+      }
     },
     {
       "id": "ln",
@@ -4890,7 +5086,13 @@
         "last_reviewed": "2026-11-02",
         "reviewer": "nova-commands-bootstrap"
       },
-      "category": "filesystem"
+      "category": "filesystem",
+      "nova": {
+        "concepts": [
+          "files",
+          "terminal-basics"
+        ]
+      }
     },
     {
       "id": "locate",
@@ -4980,7 +5182,14 @@
         ],
         "notes": "mlocate vs plocate package/CLI differs by distro."
       },
-      "category": "search"
+      "category": "search",
+      "nova": {
+        "concepts": [
+          "files",
+          "shell-pipes-redirection"
+        ],
+        "favorite_eligible": true
+      }
     },
     {
       "id": "loginctl",
@@ -5100,7 +5309,8 @@
       },
       "nova": {
         "concepts": [
-          "systemd"
+          "systemd",
+          "terminal-basics"
         ]
       },
       "category": "system"
@@ -5251,7 +5461,8 @@
         "favorite_eligible": true,
         "ui_priority": 90,
         "concepts": [
-          "files"
+          "files",
+          "terminal-basics"
         ]
       },
       "category": "filesystem"
@@ -5265,7 +5476,7 @@
       },
       "description": {
         "tr": "Disk ve bölümleri okunabilir ağaçta gösterir.",
-        "en": "Shows disks and partitions as a tree."
+        "en": "Lists block devices as a tree, including mount points and filesystem types with -f."
       },
       "tags": [
         "disk"
@@ -5328,7 +5539,13 @@
         "last_reviewed": "2026-11-02",
         "reviewer": "nova-commands-bootstrap"
       },
-      "category": "disks"
+      "category": "disks",
+      "nova": {
+        "concepts": [
+          "storage"
+        ],
+        "favorite_eligible": true
+      }
     },
     {
       "id": "lscpu",
@@ -5392,7 +5609,13 @@
         "last_reviewed": "2026-11-02",
         "reviewer": "nova-commands-bootstrap"
       },
-      "category": "hardware"
+      "category": "hardware",
+      "nova": {
+        "concepts": [
+          "terminal-basics"
+        ],
+        "favorite_eligible": true
+      }
     },
     {
       "id": "lsof",
@@ -5516,7 +5739,8 @@
       },
       "nova": {
         "concepts": [
-          "networking"
+          "networking",
+          "terminal-basics"
         ]
       },
       "category": "processes"
@@ -5604,7 +5828,13 @@
         "last_reviewed": "2026-11-02",
         "reviewer": "nova-commands-bootstrap"
       },
-      "category": "hardware"
+      "category": "hardware",
+      "nova": {
+        "concepts": [
+          "terminal-basics"
+        ],
+        "favorite_eligible": true
+      }
     },
     {
       "id": "lsusb",
@@ -5614,8 +5844,8 @@
         "en": "List USB devices."
       },
       "description": {
-        "tr": "Bağlı USB cihazları basar.",
-        "en": "Prints connected USB devices."
+        "tr": "USB aygıt ağacını listeler; hata ayıklama ve donanım envanteri için kullanılır.",
+        "en": "Lists the USB device tree; useful for hardware inventory and debugging."
       },
       "tags": [
         "hardware"
@@ -5670,7 +5900,13 @@
         "last_reviewed": "2026-11-02",
         "reviewer": "nova-commands-bootstrap"
       },
-      "category": "hardware"
+      "category": "hardware",
+      "nova": {
+        "concepts": [
+          "terminal-basics"
+        ],
+        "favorite_eligible": true
+      }
     },
     {
       "id": "make",
@@ -5740,7 +5976,12 @@
         "last_reviewed": "2026-11-02",
         "reviewer": "nova-commands-bootstrap"
       },
-      "category": "development"
+      "category": "development",
+      "nova": {
+        "concepts": [
+          "terminal-basics"
+        ]
+      }
     },
     {
       "id": "mkdir",
@@ -5846,7 +6087,14 @@
         "last_reviewed": "2026-11-02",
         "reviewer": "nova-commands-bootstrap"
       },
-      "category": "filesystem"
+      "category": "filesystem",
+      "nova": {
+        "concepts": [
+          "files",
+          "terminal-basics"
+        ],
+        "favorite_eligible": true
+      }
     },
     {
       "id": "mount",
@@ -5925,7 +6173,12 @@
         "last_reviewed": "2026-11-02",
         "reviewer": "nova-commands-bootstrap"
       },
-      "category": "disks"
+      "category": "disks",
+      "nova": {
+        "concepts": [
+          "storage"
+        ]
+      }
     },
     {
       "id": "mv",
@@ -6042,7 +6295,13 @@
         "last_reviewed": "2026-11-02",
         "reviewer": "nova-commands-bootstrap"
       },
-      "category": "filesystem"
+      "category": "filesystem",
+      "nova": {
+        "concepts": [
+          "files",
+          "terminal-basics"
+        ]
+      }
     },
     {
       "id": "nc",
@@ -6162,7 +6421,8 @@
       },
       "nova": {
         "concepts": [
-          "networking"
+          "networking",
+          "networking-basics"
         ]
       },
       "category": "network"
@@ -6256,7 +6516,12 @@
         "last_reviewed": "2026-11-02",
         "reviewer": "nova-commands-coverage"
       },
-      "category": "processes"
+      "category": "processes",
+      "nova": {
+        "concepts": [
+          "terminal-basics"
+        ]
+      }
     },
     {
       "id": "nmcli",
@@ -6396,7 +6661,8 @@
       },
       "nova": {
         "concepts": [
-          "networking"
+          "networking",
+          "networking-basics"
         ],
         "ui_priority": 65
       },
@@ -6555,7 +6821,8 @@
         "ui_priority": 95,
         "concepts": [
           "packages",
-          "arch"
+          "arch",
+          "package-managers"
         ]
       },
       "category": "packages"
@@ -6656,7 +6923,8 @@
       "nova": {
         "concepts": [
           "packages",
-          "arch"
+          "arch",
+          "package-managers"
         ]
       },
       "category": "packages"
@@ -6801,7 +7069,7 @@
       },
       "description": {
         "tr": "Desene uyan süreçlerin PID listesini basar.",
-        "en": "Lists PIDs matching a pattern."
+        "en": "Finds process IDs matching a name or pattern; companion to pkill in procps."
       },
       "tags": [
         "process",
@@ -6868,7 +7136,13 @@
         "last_reviewed": "2026-11-02",
         "reviewer": "nova-commands-bootstrap"
       },
-      "category": "processes"
+      "category": "processes",
+      "nova": {
+        "concepts": [
+          "terminal-basics"
+        ],
+        "favorite_eligible": true
+      }
     },
     {
       "id": "ping",
@@ -6950,7 +7224,14 @@
         "last_reviewed": "2026-11-02",
         "reviewer": "nova-commands-bootstrap"
       },
-      "category": "network"
+      "category": "network",
+      "nova": {
+        "concepts": [
+          "networking",
+          "networking-basics"
+        ],
+        "favorite_eligible": true
+      }
     },
     {
       "id": "podman",
@@ -7136,7 +7417,13 @@
         "last_reviewed": "2026-11-02",
         "reviewer": "nova-commands-bootstrap"
       },
-      "category": "processes"
+      "category": "processes",
+      "nova": {
+        "concepts": [
+          "terminal-basics"
+        ],
+        "favorite_eligible": true
+      }
     },
     {
       "id": "pwd",
@@ -7205,7 +7492,11 @@
       },
       "nova": {
         "favorite_eligible": true,
-        "ui_priority": 70
+        "ui_priority": 70,
+        "concepts": [
+          "files",
+          "terminal-basics"
+        ]
       },
       "category": "filesystem"
     },
@@ -7332,7 +7623,8 @@
         "concepts": [
           "networking",
           "dns",
-          "systemd"
+          "systemd",
+          "networking-basics"
         ]
       },
       "category": "network"
@@ -7464,7 +7756,11 @@
       },
       "nova": {
         "favorite_eligible": false,
-        "ui_priority": 40
+        "ui_priority": 40,
+        "concepts": [
+          "files",
+          "terminal-basics"
+        ]
       },
       "category": "filesystem"
     },
@@ -7598,7 +7894,8 @@
       },
       "nova": {
         "concepts": [
-          "packages"
+          "packages",
+          "package-managers"
         ]
       },
       "category": "packages"
@@ -7747,7 +8044,8 @@
       "nova": {
         "concepts": [
           "networking",
-          "storage"
+          "storage",
+          "networking-basics"
         ],
         "ui_priority": 75
       },
@@ -7877,7 +8175,8 @@
       "nova": {
         "concepts": [
           "ssh",
-          "networking"
+          "networking",
+          "permissions"
         ]
       },
       "category": "security"
@@ -7984,7 +8283,13 @@
         "last_reviewed": "2026-11-02",
         "reviewer": "nova-commands-coverage"
       },
-      "category": "text"
+      "category": "text",
+      "nova": {
+        "concepts": [
+          "files",
+          "shell-pipes-redirection"
+        ]
+      }
     },
     {
       "id": "sftp",
@@ -8102,7 +8407,8 @@
       },
       "nova": {
         "concepts": [
-          "ssh"
+          "ssh",
+          "permissions"
         ]
       },
       "category": "security"
@@ -8136,7 +8442,7 @@
       },
       "description": {
         "tr": "Standart girdi veya dosya satırlarını sıralar.",
-        "en": "Sorts lines from files or stdin."
+        "en": "Sorts lines of text files or stdin; supports unique, numeric, and key-based ordering."
       },
       "tags": [
         "text"
@@ -8208,7 +8514,14 @@
           "sort file"
         ]
       },
-      "category": "text"
+      "category": "text",
+      "nova": {
+        "concepts": [
+          "files",
+          "shell-pipes-redirection"
+        ],
+        "favorite_eligible": true
+      }
     },
     {
       "id": "ss",
@@ -8319,7 +8632,14 @@
         "last_reviewed": "2026-11-02",
         "reviewer": "nova-commands-bootstrap"
       },
-      "category": "network"
+      "category": "network",
+      "nova": {
+        "concepts": [
+          "networking",
+          "networking-basics"
+        ],
+        "favorite_eligible": true
+      }
     },
     {
       "id": "ssh",
@@ -8399,7 +8719,9 @@
       "nova": {
         "concepts": [
           "ssh",
-          "networking"
+          "networking",
+          "permissions",
+          "networking-basics"
         ]
       },
       "intent": {
@@ -8533,7 +8855,8 @@
       },
       "nova": {
         "concepts": [
-          "ssh"
+          "ssh",
+          "permissions"
         ]
       },
       "category": "security"
@@ -8643,7 +8966,8 @@
       },
       "nova": {
         "concepts": [
-          "ssh"
+          "ssh",
+          "permissions"
         ]
       },
       "category": "security"
@@ -8743,7 +9067,13 @@
         "last_reviewed": "2026-11-02",
         "reviewer": "nova-commands-bootstrap"
       },
-      "category": "security"
+      "category": "security",
+      "nova": {
+        "concepts": [
+          "permissions",
+          "ssh"
+        ]
+      }
     },
     {
       "id": "stat",
@@ -8837,7 +9167,14 @@
         "last_reviewed": "2026-11-02",
         "reviewer": "nova-commands-bootstrap"
       },
-      "category": "filesystem"
+      "category": "filesystem",
+      "nova": {
+        "concepts": [
+          "files",
+          "terminal-basics"
+        ],
+        "favorite_eligible": true
+      }
     },
     {
       "id": "sudo",
@@ -8948,7 +9285,10 @@
       },
       "nova": {
         "favorite_eligible": true,
-        "ui_priority": 75
+        "ui_priority": 75,
+        "concepts": [
+          "permissions"
+        ]
       },
       "category": "users"
     },
@@ -9126,7 +9466,8 @@
       ],
       "nova": {
         "concepts": [
-          "systemd"
+          "systemd",
+          "terminal-basics"
         ]
       },
       "intent": {
@@ -9265,7 +9606,8 @@
       },
       "nova": {
         "concepts": [
-          "systemd"
+          "systemd",
+          "terminal-basics"
         ]
       },
       "category": "system"
@@ -9363,7 +9705,14 @@
           "tail file"
         ]
       },
-      "category": "text"
+      "category": "text",
+      "nova": {
+        "concepts": [
+          "files",
+          "shell-pipes-redirection"
+        ],
+        "favorite_eligible": true
+      }
     },
     {
       "id": "tar",
@@ -9499,7 +9848,12 @@
         "last_reviewed": "2026-11-02",
         "reviewer": "nova-commands-bootstrap"
       },
-      "category": "archives"
+      "category": "archives",
+      "nova": {
+        "concepts": [
+          "files"
+        ]
+      }
     },
     {
       "packages": {
@@ -9578,7 +9932,13 @@
           "save pipeline output"
         ]
       },
-      "category": "text"
+      "category": "text",
+      "nova": {
+        "concepts": [
+          "files",
+          "shell-pipes-redirection"
+        ]
+      }
     },
     {
       "id": "timedatectl",
@@ -9707,7 +10067,8 @@
       },
       "nova": {
         "concepts": [
-          "systemd"
+          "systemd",
+          "terminal-basics"
         ]
       },
       "category": "system"
@@ -9777,7 +10138,13 @@
         "last_reviewed": "2026-11-02",
         "reviewer": "nova-commands-bootstrap"
       },
-      "category": "processes"
+      "category": "processes",
+      "nova": {
+        "concepts": [
+          "terminal-basics"
+        ],
+        "favorite_eligible": true
+      }
     },
     {
       "id": "touch",
@@ -9878,7 +10245,14 @@
         "last_reviewed": "2026-11-02",
         "reviewer": "nova-commands-bootstrap"
       },
-      "category": "filesystem"
+      "category": "filesystem",
+      "nova": {
+        "concepts": [
+          "files",
+          "terminal-basics"
+        ],
+        "favorite_eligible": true
+      }
     },
     {
       "id": "traceroute",
@@ -9992,7 +10366,8 @@
       },
       "nova": {
         "concepts": [
-          "networking"
+          "networking",
+          "networking-basics"
         ]
       },
       "category": "network"
@@ -10084,7 +10459,14 @@
         "last_reviewed": "2026-11-02",
         "reviewer": "nova-commands-bootstrap"
       },
-      "category": "filesystem"
+      "category": "filesystem",
+      "nova": {
+        "concepts": [
+          "files",
+          "terminal-basics"
+        ],
+        "favorite_eligible": true
+      }
     },
     {
       "id": "umount",
@@ -10271,7 +10653,14 @@
         "last_reviewed": "2026-11-02",
         "reviewer": "nova-commands-bootstrap"
       },
-      "category": "system"
+      "category": "system",
+      "nova": {
+        "concepts": [
+          "systemd",
+          "terminal-basics"
+        ],
+        "favorite_eligible": true
+      }
     },
     {
       "packages": {
@@ -10349,7 +10738,14 @@
           "remove duplicates"
         ]
       },
-      "category": "text"
+      "category": "text",
+      "nova": {
+        "concepts": [
+          "files",
+          "shell-pipes-redirection"
+        ],
+        "favorite_eligible": true
+      }
     },
     {
       "id": "unzip",
@@ -10359,8 +10755,8 @@
         "en": "Extract ZIP archives."
       },
       "description": {
-        "tr": "ZIP içeriğini listeler veya çıkarır.",
-        "en": "Lists or extracts ZIP contents."
+        "tr": "ZIP arşivlerini listeler veya çıkarır; zip ile birlikte arşiv iş akışlarında kullanılır.",
+        "en": "Lists or extracts ZIP archives; commonly paired with zip in archive workflows."
       },
       "tags": [
         "archive"
@@ -10417,7 +10813,12 @@
         "last_reviewed": "2026-11-02",
         "reviewer": "nova-commands-bootstrap"
       },
-      "category": "archives"
+      "category": "archives",
+      "nova": {
+        "concepts": [
+          "files"
+        ]
+      }
     },
     {
       "id": "uptime",
@@ -10482,7 +10883,14 @@
         "last_reviewed": "2026-11-02",
         "reviewer": "nova-commands-bootstrap"
       },
-      "category": "system"
+      "category": "system",
+      "nova": {
+        "concepts": [
+          "systemd",
+          "terminal-basics"
+        ],
+        "favorite_eligible": true
+      }
     },
     {
       "id": "useradd",
@@ -10915,7 +11323,13 @@
         "last_reviewed": "2026-11-02",
         "reviewer": "nova-commands-coverage"
       },
-      "category": "monitoring"
+      "category": "monitoring",
+      "nova": {
+        "concepts": [
+          "terminal-basics"
+        ],
+        "favorite_eligible": true
+      }
     },
     {
       "id": "watch",
@@ -11011,7 +11425,12 @@
         "last_reviewed": "2026-11-02",
         "reviewer": "nova-commands-coverage"
       },
-      "category": "monitoring"
+      "category": "monitoring",
+      "nova": {
+        "concepts": [
+          "terminal-basics"
+        ]
+      }
     },
     {
       "packages": {
@@ -11041,8 +11460,8 @@
         "en": "Count lines, words, and bytes."
       },
       "description": {
-        "tr": "Girdi veya dosyalar için sayım üretir.",
-        "en": "Produces counts for inputs or files."
+        "tr": "Satır, sözcük ve bayt/karakter sayılarını raporlar; boru hatlarında sık kullanılır.",
+        "en": "Reports newline, word, and byte/character counts; common in shell pipelines."
       },
       "tags": [
         "text",
@@ -11115,7 +11534,14 @@
           "word count"
         ]
       },
-      "category": "text"
+      "category": "text",
+      "nova": {
+        "concepts": [
+          "files",
+          "shell-pipes-redirection"
+        ],
+        "favorite_eligible": true
+      }
     },
     {
       "id": "wget",
@@ -11193,7 +11619,13 @@
         "last_reviewed": "2026-11-02",
         "reviewer": "nova-commands-bootstrap"
       },
-      "category": "network"
+      "category": "network",
+      "nova": {
+        "concepts": [
+          "networking",
+          "networking-basics"
+        ]
+      }
     },
     {
       "id": "whereis",
@@ -11255,7 +11687,15 @@
         "last_reviewed": "2026-11-02",
         "reviewer": "nova-commands-bootstrap"
       },
-      "category": "search"
+      "category": "search",
+      "nova": {
+        "concepts": [
+          "files",
+          "shell-pipes-redirection",
+          "path"
+        ],
+        "favorite_eligible": true
+      }
     },
     {
       "id": "which",
@@ -11326,7 +11766,15 @@
         "last_reviewed": "2026-11-02",
         "reviewer": "nova-commands-bootstrap"
       },
-      "category": "search"
+      "category": "search",
+      "nova": {
+        "concepts": [
+          "files",
+          "shell-pipes-redirection",
+          "path"
+        ],
+        "favorite_eligible": true
+      }
     },
     {
       "id": "whoami",
@@ -11337,7 +11785,7 @@
       },
       "description": {
         "tr": "Etkili kullanıcı kimliğini kısa şekilde gösterir.",
-        "en": "Shows the effective username."
+        "en": "Prints the effective username of the current user (often equivalent to id -un)."
       },
       "tags": [
         "users"
@@ -11391,7 +11839,13 @@
         "last_reviewed": "2026-11-02",
         "reviewer": "nova-commands-bootstrap"
       },
-      "category": "users"
+      "category": "users",
+      "nova": {
+        "concepts": [
+          "permissions"
+        ],
+        "favorite_eligible": true
+      }
     },
     {
       "id": "xargs",
@@ -11499,7 +11953,13 @@
         "last_reviewed": "2026-11-02",
         "reviewer": "nova-commands-coverage"
       },
-      "category": "text"
+      "category": "text",
+      "nova": {
+        "concepts": [
+          "files",
+          "shell-pipes-redirection"
+        ]
+      }
     },
     {
       "id": "xz",
@@ -11611,7 +12071,12 @@
         "last_reviewed": "2026-11-02",
         "reviewer": "nova-commands-coverage"
       },
-      "category": "archives"
+      "category": "archives",
+      "nova": {
+        "concepts": [
+          "files"
+        ]
+      }
     },
     {
       "id": "zip",
@@ -11679,7 +12144,358 @@
         "last_reviewed": "2026-11-02",
         "reviewer": "nova-commands-bootstrap"
       },
-      "category": "archives"
+      "category": "archives",
+      "nova": {
+        "concepts": [
+          "files"
+        ]
+      }
+    }
+  ],
+  "concepts": [
+    {
+      "id": "networking-basics",
+      "kind": "nova-commands-concept",
+      "title": {
+        "tr": "Ağ temelleri",
+        "en": "Networking basics"
+      },
+      "summary": {
+        "tr": "Arayüzler, IP, DNS, bağlantı testi ve sık Linux ağ araçları.",
+        "en": "Interfaces, IP, DNS, connectivity checks, and common Linux network tools."
+      },
+      "difficulty": "beginner",
+      "tags": [
+        "network",
+        "dns",
+        "ip"
+      ],
+      "related_commands": [
+        "ip",
+        "ss",
+        "ping",
+        "curl",
+        "wget",
+        "dig",
+        "host",
+        "resolvectl",
+        "nmcli",
+        "traceroute",
+        "nc"
+      ],
+      "related_concepts": [
+        "dns",
+        "ssh",
+        "networking",
+        "terminal-basics"
+      ],
+      "see_also": [
+        "man ip",
+        "man systemd-resolved",
+        "Arch Wiki: Network configuration"
+      ],
+      "body": {
+        "tr": "Linux’ta modern arayüz/adres yönetimi çoğunlukla **iproute2** (`ip`) ile yapılır;\ndinleyen soketler için `ss` (eski `netstat` yerine) tercih edilir.\n\n**Katmanlar (pratik bakış):**\n- Arayüz: `ip link` / `ip addr` — bağlantı ve adresler.\n- Yol: `ip route` — varsayılan ağ geçidi ve rotalar.\n- Taşıma: `ss -tulpn` — dinleyen TCP/UDP portlar (root ile süreç adları daha dolu).\n\n**Bağlantı testi:** `ping` ICMP kullanır (engellenebilir). HTTP için `curl -I`\nveya `wget`. Yol izi: `traceroute` / `tracepath` (paket kurulumuna bağlı).\n\n**DNS:** İsim → IP çözümü. `dig` / `host` sorgular; systemd-resolved kullanan\nsistemlerde `resolvectl status` / `resolvectl query` yararlıdır. NetworkManager\nile masaüstü/laptop’ta `nmcli` bağlantı profillerini yönetir.\n\n**Güvenlik notu:** `nc` (netcat) teşhis için güçlüdür ama yanlış kullanımda\nistenmeyen dinleyici açabilir — bankada `draft`/`caution` olabilir.\nFirewall araçları (`firewall-cmd`, nftables/iptables) ayrı dikkat ister;\nkuralları uydurmadan belgeleyin.\n",
+        "en": "On modern Linux, interface/address management is mostly **iproute2** (`ip`);\nuse `ss` for sockets (prefer over legacy `netstat`).\n\n**Practical layers:**\n- Link/addr: `ip link` / `ip addr`.\n- Routing: `ip route` — default gateway and routes.\n- Transport: `ss -tulpn` — listening TCP/UDP (process names often need root).\n\n**Connectivity:** `ping` uses ICMP (may be blocked). For HTTP, `curl -I` or `wget`.\nPath tracing: `traceroute` / `tracepath` (package-dependent).\n\n**DNS:** Name → address. `dig` / `host` query resolvers; on systemd-resolved hosts,\n`resolvectl status` / `resolvectl query` help. Desktops often use NetworkManager\nvia `nmcli`.\n\n**Safety:** `nc` (netcat) is powerful for diagnostics but can open unwanted\nlisteners — catalog may mark it `draft`/`caution`. Firewall tooling needs care;\nnever invent rules or flags.\n"
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man ip-address / man ss",
+          "man systemd-resolved / resolvectl",
+          "https://wiki.archlinux.org/title/Network_configuration"
+        ],
+        "notes": "Agent-authored teaching article; needs maintainer spot-check before verified."
+      }
+    },
+    {
+      "id": "package-managers",
+      "kind": "nova-commands-concept",
+      "title": {
+        "tr": "Paket yöneticileri",
+        "en": "Package managers"
+      },
+      "summary": {
+        "tr": "pacman, apt, dnf ve paket ↔ komut ilişkisi (Arch öncelikli notlar).",
+        "en": "pacman, apt, dnf, and package ↔ command mapping (Arch-first notes)."
+      },
+      "difficulty": "beginner",
+      "tags": [
+        "packages",
+        "pacman",
+        "apt",
+        "dnf"
+      ],
+      "related_commands": [
+        "pacman",
+        "apt",
+        "dnf",
+        "dpkg",
+        "rpm",
+        "flatpak",
+        "paru"
+      ],
+      "related_concepts": [
+        "packages",
+        "arch",
+        "path"
+      ],
+      "see_also": [
+        "Arch Wiki: pacman",
+        "man apt / man dnf"
+      ],
+      "body": {
+        "tr": "Dağıtımlar yazılıımı *paket* olarak kurar. Aynı komut farklı paket adında olabilir;\nbilinmeyen ad **uydurulmaz** (omit / `draft`).\n\n**Birinci sınıf yöneticiler (bu banka):**\n- **Arch — pacman:** `pacman -Syu` sistem güncellemesi; `pacman -S paket` kurulum;\n  `pacman -Ss anahtar` arama; `pacman -Ql paket` dosya listesi.\n  AUR yardımcıları (ör. `paru`) resmi depoda olmayabilir — ayrı not/draft.\n- **Debian/Ubuntu — apt (+ dpkg):** `apt update` / `apt install`; düşük seviye\n  `dpkg -i` / `dpkg -l`.\n- **Fedora/RHEL — dnf (+ rpm):** `dnf install` / `dnf upgrade`; `rpm -q` sorguları.\n\n**Flatpak:** Dağıtımdan bağımsız uygulama sandboxes; `flatpak install` / `flatpak run`.\n\n**Nova tercihi:** Arch host’ta kurulum ipuçlarında **pacman / `packages.arch` önce**.\n`install_notes` içinde Arch satırı üstte tutulur.\n\n**Komut ≠ paket:** `which` ile bulunan ikili, paket adını kanıtlamaz; doğrulama için\ndistro paket veritabanı / man sayfası kullanılır. CI yıkıcı kurulum çalıştırmaz.\n",
+        "en": "Distros install software as *packages*. The same command may live in differently\nnamed packages; unknown names are **not invented** (omit / `draft`).\n\n**First-class managers in this bank:**\n- **Arch — pacman:** `pacman -Syu` full upgrade; `pacman -S pkg` install;\n  `pacman -Ss keyword` search; `pacman -Ql pkg` file list.\n  AUR helpers (e.g. `paru`) may be unofficial — document carefully / draft.\n- **Debian/Ubuntu — apt (+ dpkg):** `apt update` / `apt install`; lower-level\n  `dpkg -i` / `dpkg -l`.\n- **Fedora/RHEL — dnf (+ rpm):** `dnf install` / `dnf upgrade`; `rpm -q` queries.\n\n**Flatpak:** Distro-agnostic sandboxed apps; `flatpak install` / `flatpak run`.\n\n**Nova preference:** On Arch hosts, prefer **pacman / `packages.arch` first** in\ninstall hints; keep Arch lines at the top of `install_notes`.\n\n**Command ≠ package:** A PATH hit does not prove the package name; confirm via\ndistro package DB / man pages. CI does not run destructive installs to “test”.\n"
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "https://wiki.archlinux.org/title/Pacman",
+          "man pacman / man apt / man dnf"
+        ],
+        "notes": "Agent-authored teaching article; Arch-first per project preferences."
+      }
+    },
+    {
+      "id": "path",
+      "kind": "nova-commands-concept",
+      "title": {
+        "tr": "PATH ve komut bulma",
+        "en": "PATH and command lookup"
+      },
+      "summary": {
+        "tr": "Kabuğun komutları nerede aradığı; `which`, `type`, `command -v`.",
+        "en": "Where shells look for commands; `which`, `type`, `command -v`."
+      },
+      "difficulty": "beginner",
+      "tags": [
+        "shell",
+        "path",
+        "environment"
+      ],
+      "related_commands": [
+        "which",
+        "whereis",
+        "env",
+        "export",
+        "echo"
+      ],
+      "related_concepts": [
+        "terminal-basics",
+        "package-managers",
+        "shell-builtin"
+      ],
+      "see_also": [
+        "man environ / PATH",
+        "docs/local-discovery-contract.md (Nova local discovery)"
+      ],
+      "body": {
+        "tr": "**`PATH`**, kabuğun harici programları aradığı dizinlerin `:` ile ayrılmış\nlistesidir (ör. `/usr/local/bin:/usr/bin:/bin`). Bir komut adı yazdığınızda\nkabuk önce yerleşik mi diye bakar; değilse `PATH` sırasıyla eşleşen çalıştırılabilir\ndosyayı arar.\n\n**Görme / denetleme:**\n- `echo \"$PATH\"` — arama yolları.\n- `type ls` / `command -v ls` — kabuğun ne bulduğunu gösterir (yerleşik, alias, yol).\n- `which ls` — sıkça ilk eşleşen yolu basar (kabuk/yerleşik farkları için `type` daha nettir).\n\n**Güncelleme:** `export PATH=\"$HOME/.local/bin:$PATH\"` oturuma ekler; kalıcılık için\nkabuk başlangıç dosyalarına (`~/.bashrc`, `~/.zshrc`, …) yazılır. Yanlış `PATH`\n“command not found” üretir veya istenmeyen ikiliyi seçtirir.\n\n**Nova:** “Sistemimde bulunan komutlar” istemci tarafında PATH/keşif ile üretilir\n(`kind: nova-local-commands`). Bu, kürate bankanın `verified` durumunu miras almaz.\nAyrıntı: `docs/local-discovery-contract.md`.\n",
+        "en": "**`PATH`** is a colon-separated list of directories where the shell searches for\nexternal programs (e.g. `/usr/local/bin:/usr/bin:/bin`). On a bare name, the shell\nchecks builtins/aliases/functions first, then walks `PATH` for an executable.\n\n**Inspect:**\n- `echo \"$PATH\"` — search directories.\n- `type ls` / `command -v ls` — what the shell would run (builtin vs path).\n- `which ls` — often prints the first matching path (`type` is clearer for builtins).\n\n**Update:** `export PATH=\"$HOME/.local/bin:$PATH\"` for the session; persist via shell\nstartup files (`~/.bashrc`, `~/.zshrc`, …). A broken `PATH` causes “command not found”\nor picks the wrong binary.\n\n**Nova:** Local “commands on this system” come from client-side PATH discovery\n(`kind: nova-local-commands`) and must not inherit bank `verified` status.\nSee `docs/local-discovery-contract.md`.\n"
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man environ / POSIX PATH",
+          "man bash (COMMAND EXECUTION)"
+        ],
+        "notes": "Agent-authored teaching article; needs maintainer spot-check before verified."
+      }
+    },
+    {
+      "id": "shell-pipes-redirection",
+      "kind": "nova-commands-concept",
+      "title": {
+        "tr": "Borular ve yönlendirme",
+        "en": "Pipes and redirection"
+      },
+      "summary": {
+        "tr": "stdin/stdout/stderr, `>`, `>>`, `<` ve `|` ile komut zincirleri.",
+        "en": "stdin/stdout/stderr, `>`, `>>`, `<`, and `|` pipelines."
+      },
+      "difficulty": "beginner",
+      "tags": [
+        "shell",
+        "pipes",
+        "io"
+      ],
+      "related_commands": [
+        "cat",
+        "tee",
+        "grep",
+        "sort",
+        "head",
+        "tail",
+        "cut",
+        "xargs"
+      ],
+      "related_concepts": [
+        "terminal-basics",
+        "shell-builtin"
+      ],
+      "see_also": [
+        "man bash (REDIRECTION)",
+        "POSIX pipelines"
+      ],
+      "body": {
+        "tr": "Her süreç üç standart akışla başlar: **stdin** (0), **stdout** (1), **stderr** (2).\nKabuk bunları dosyalara veya başka süreçlere bağlayabilir.\n\n**Yönlendirme:**\n- `komut > dosya` — stdout’u dosyaya yazar (üzerine yazar).\n- `komut >> dosya` — stdout’u dosyanın sonuna ekler.\n- `komut < dosya` — stdin’i dosyadan okur.\n- `komut 2> hata.log` — stderr’i ayırır; `2>&1` stderr’i stdout’a birleştirir.\n\n**Boru (`|`):** Sol komutun stdout’u sağ komutun stdin’ine bağlanır.\nÖrnek: `ps aux | grep ssh | head`. Boru hattında ara dosya gerekmez; bellek/buffer\nile akar. Hata mesajları (stderr) varsayılan olarak boruya girmez.\n\n**`tee`:** stdout’u hem dosyaya hem sonraki boruya kopyalar (`… | tee out.txt | …`).\n\n**`xargs`:** stdin’deki satır/sözcükleri sonraki komutun argümanına çevirir\n(`find … -print0 | xargs -0 …` boşluk/newline güvenliği için).\n\n**Dikkat:** `>` mevcut dosyayı sessizce bozar. Yanlışlıkla `>` yerine `>>`\nveya önce yedek düşünün. Bu bankada yıkıcı örnekler `destructive` /\n`dangerous` riskiyle işaretlenir; doğrulama için yıkıcı komutlar çalıştırılmaz.\n",
+        "en": "Processes start with three standard streams: **stdin** (0), **stdout** (1),\n**stderr** (2). The shell can attach them to files or other processes.\n\n**Redirection:**\n- `cmd > file` — write stdout (truncate/overwrite).\n- `cmd >> file` — append stdout.\n- `cmd < file` — read stdin from a file.\n- `cmd 2> err.log` — capture stderr; `2>&1` merges stderr into stdout.\n\n**Pipe (`|`):** Connects the left command’s stdout to the right command’s stdin.\nExample: `ps aux | grep ssh | head`. Data flows without intermediate files.\nstderr does not enter the pipe by default.\n\n**`tee`:** Copies stdout both to a file and further down the pipeline.\n\n**`xargs`:** Turns stdin tokens into arguments for another command\n(`find … -print0 | xargs -0 …` for whitespace-safe lists).\n\n**Caution:** `>` silently overwrites files. Prefer `>>` or backups when unsure.\nDestructive examples in this bank are labeled `dangerous`/`destructive`; do not\nrun destructive commands just to validate catalog entries.\n"
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man bash (REDIRECTION, PIPES)",
+          "POSIX shell redirection"
+        ],
+        "notes": "Agent-authored teaching article; needs maintainer spot-check before verified."
+      }
+    },
+    {
+      "id": "storage",
+      "kind": "nova-commands-concept",
+      "title": {
+        "tr": "Depolama ve disk",
+        "en": "Storage and disks"
+      },
+      "summary": {
+        "tr": "Blok aygıtlar, bağlama, kullanım ve dikkat edilmesi gereken disk araçları.",
+        "en": "Block devices, mounts, usage, and high-care disk tools."
+      },
+      "difficulty": "intermediate",
+      "tags": [
+        "disks",
+        "storage",
+        "filesystem"
+      ],
+      "related_commands": [
+        "lsblk",
+        "df",
+        "du",
+        "mount",
+        "umount",
+        "findmnt",
+        "blkid",
+        "fdisk",
+        "dd",
+        "sync"
+      ],
+      "related_concepts": [
+        "files",
+        "permissions",
+        "terminal-basics"
+      ],
+      "see_also": [
+        "man lsblk / man mount",
+        "Arch Wiki: File systems / fstab"
+      ],
+      "body": {
+        "tr": "Disk ve dosya sistemi işleri **yanlış aygıt adıyla yıkıcı** olabilir. Önce okuma\naraçlarıyla haritayı çıkarın.\n\n**Keşif (genelde güvenli):**\n- `lsblk -f` — ağaç, dosya sistemi, UUID/LABEL.\n- `df -h` — bağlı dosya sistemlerinde boş alan.\n- `du -sh yol` — dizin boyutu.\n- `findmnt` / `mount` — ne nereye bağlı.\n- `blkid` — UUID ve tür (çoğu zaman root ile daha dolu).\n\n**Bağlama:** `mount` / `umount` (veya fstab / systemd `.mount`). Yanlış `umount`\naçık dosyaları bozabilir; meşgulse `lsof` / `fuser` ile bakın.\n\n**Yüksek risk:**\n- `fdisk` / bölüm tablosu düzenleme — veri kaybı riski.\n- `dd` — ham kopya; yanlış `of=` diski siler (`destructive` örnekler).\n- `mkfs.*` — dosya sistemi oluşturur (bu fazda derinleştirme dikkatli olmalı).\n\n**`sync`:** Bellekteki yazıları diske iter; kapatma/çıkarma öncesi kullanılır.\nDoğrulama için asla rastgele disklere `dd`/`mkfs` çalıştırmayın; banka girdileri\nman ve belgelere dayanmalı, `verified` yalnız insan incelemesi sonrası.\n",
+        "en": "Disk and filesystem operations are **destructive on the wrong device**. Start with\nread-only discovery.\n\n**Discovery (usually safe):**\n- `lsblk -f` — tree, filesystem, UUID/LABEL.\n- `df -h` — free space on mounted filesystems.\n- `du -sh path` — directory size.\n- `findmnt` / `mount` — what is mounted where.\n- `blkid` — UUID/type (often richer as root).\n\n**Mounting:** `mount` / `umount` (or fstab / systemd `.mount`). A busy `umount` can\nfail; inspect with `lsof` / `fuser`.\n\n**High risk:**\n- `fdisk` / partition edits — data loss risk.\n- `dd` — raw copy; wrong `of=` wipes a disk (`destructive` examples).\n- `mkfs.*` — creates filesystems (deepen carefully in later work).\n\n**`sync`:** Flushes buffered writes; used before unmount/shutdown.\nNever run `dd`/`mkfs` against arbitrary disks to “validate” catalog entries;\nkeep `verified` for human review only.\n"
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man lsblk / man mount / man dd",
+          "https://wiki.archlinux.org/title/File_systems"
+        ],
+        "notes": "Agent-authored teaching article; no destructive verification runs."
+      }
+    },
+    {
+      "id": "systemd",
+      "kind": "nova-commands-concept",
+      "title": {
+        "tr": "systemd temelleri",
+        "en": "systemd basics"
+      },
+      "summary": {
+        "tr": "Birimler, hedefler, systemctl ve journalctl ile servis yönetimi.",
+        "en": "Units, targets, and service control with systemctl and journalctl."
+      },
+      "difficulty": "intermediate",
+      "tags": [
+        "systemd",
+        "services",
+        "boot"
+      ],
+      "related_commands": [
+        "systemctl",
+        "journalctl",
+        "hostnamectl",
+        "timedatectl",
+        "loginctl",
+        "systemd-analyze",
+        "bootctl"
+      ],
+      "related_concepts": [
+        "terminal-basics",
+        "permissions"
+      ],
+      "see_also": [
+        "man systemd",
+        "man systemctl",
+        "Arch Wiki: systemd"
+      ],
+      "body": {
+        "tr": "**systemd**, birçok Linux dağıtımında init/PID 1 ve servis yöneticisidir. Yapılandırma\nbirimleri (unit) `.service`, `.timer`, `.socket`, `.mount`, `.target` gibi türlerdedir.\n\n**Sık birim türleri:**\n- `.service` — uzun yaşayan süreç / oneshot görev.\n- `.target` — bir grup birimi senkronlamak (ör. `multi-user.target`).\n- `.timer` — cron benzeri zamanlama (systemd zamanlayıcıları).\n\n**systemctl (yaygın okuma/yazma):**\n- `systemctl status birim` — durum (çoğu zaman sudo gerekmez).\n- `systemctl start|stop|restart birim` — çalışma anı (genelde root).\n- `systemctl enable|disable birim` — boot’ta etkinleştirme.\n- `systemctl daemon-reload` — unit dosyası değişince.\n\n**Günlükler:** `journalctl -u birim -e` son logları gösterir; `-f` takip eder.\nKalıcı journal dağıtıma göre `/var/log/journal` altında olabilir.\n\n**İlgili ctl araçları:** `hostnamectl`, `timedatectl`, `loginctl`,\n`systemd-analyze blame` (boot süresi analizi), `bootctl` (systemd-boot; her\nkurulumda yok).\n\n**Risk:** Yanlış `stop`/`disable` uzaktan erişimi veya ağı kesebilir; bankada\nbirçok systemd işlemi `dangerous` / `requires_elevated: true` işaretlidir.\nUnit dosyası yolları ve distro varsayılanları değişebilir — uydurma bayrak yok.\n",
+        "en": "**systemd** is init/PID 1 and the service manager on many Linux distributions.\nConfiguration lives in units: `.service`, `.timer`, `.socket`, `.mount`, `.target`, …\n\n**Common unit types:**\n- `.service` — long-running process or oneshot job.\n- `.target` — synchronization point (e.g. `multi-user.target`).\n- `.timer` — calendar/monotonic scheduling (systemd timers).\n\n**systemctl (common):**\n- `systemctl status unit` — status (often without sudo).\n- `systemctl start|stop|restart unit` — runtime control (usually root).\n- `systemctl enable|disable unit` — boot enablement.\n- `systemctl daemon-reload` — after editing unit files.\n\n**Logs:** `journalctl -u unit -e` shows recent logs; `-f` follows.\nPersistent journals may live under `/var/log/journal` depending on distro config.\n\n**Related ctl tools:** `hostnamectl`, `timedatectl`, `loginctl`,\n`systemd-analyze blame` (boot timing), `bootctl` (systemd-boot; not everywhere).\n\n**Risk:** Mistaken `stop`/`disable` can cut remote access or networking; many\nentries are `dangerous` / `requires_elevated`. Unit paths and defaults vary —\nnever invent flags or package names.\n"
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man systemd",
+          "man systemctl",
+          "https://wiki.archlinux.org/title/Systemd"
+        ],
+        "notes": "Agent-authored teaching article; needs maintainer spot-check before verified."
+      }
+    },
+    {
+      "id": "terminal-basics",
+      "kind": "nova-commands-concept",
+      "title": {
+        "tr": "Terminal temelleri",
+        "en": "Terminal basics"
+      },
+      "summary": {
+        "tr": "Kabuk, istem (prompt), komut satırı ve çıkış kodları.",
+        "en": "Shell, prompt, command line, and exit statuses."
+      },
+      "difficulty": "beginner",
+      "tags": [
+        "shell",
+        "beginner",
+        "cli"
+      ],
+      "related_commands": [
+        "pwd",
+        "ls",
+        "cd",
+        "echo",
+        "history"
+      ],
+      "related_concepts": [
+        "path",
+        "shell-pipes-redirection",
+        "shell-builtin"
+      ],
+      "see_also": [
+        "POSIX shell overview",
+        "man bash / man zsh (interactive shells)"
+      ],
+      "body": {
+        "tr": "Terminal, metin tabanlı bir arayüzdür; yazdığınız satırı bir *kabuk* (bash, zsh, fish, …)\nyorumlar. Tipik bir satır: `komut [bayraklar…] [argümanlar…]`.\n\n**İstem (prompt):** Kabuk hazır olduğunu gösterir; satırı Enter ile gönderirsiniz.\nÇoğu Linux sisteminde varsayılan etkileşimli kabuk bash veya zsh’dir; betikler için\n`#!/bin/sh` sıkça POSIX uyumlu bir kabuğu hedefler.\n\n**Argümanlar ve tırnak:** Boşluk içeren yolları tırnak içine alın\n(`cd \"My Documents\"`). Tek tırnak çoğu kabukta genişletmeyi kapatır; çift tırnak\ndeğişkenleri genişletebilir.\n\n**Çıkış kodu:** Başarılı komutlar genelde `0` döner; sıfır dışı hata demektir.\nSon komutun kodunu `echo $?` ile görebilirsiniz. Betiklerde `set -e` hataları\nerken durdurmak için kullanılır (kabuğa göre nüansları vardır).\n\n**Yardım:** `man komut`, `komut --help` (GNU araçlarında yaygındır), `info` (bazı\nGNU paketleri). Bu bankadaki komut kayıtları man/`--help` ile çapraz kontrol\nedilmeden `verified` yapılmamalıdır.\n\n**Nova ayrımı:** Bilgi bankası (kürate YAML) ile “sistemimde bulunan komutlar”\n(PATH keşfi) farklıdır; PATH’te olmak doğrulanmış içerik anlamına gelmez.\n",
+        "en": "A terminal is a text interface; a *shell* (bash, zsh, fish, …) interprets each line.\nTypical form: `command [flags…] [arguments…]`.\n\n**Prompt:** Shows the shell is ready; press Enter to run the line. Interactive\ndefaults are often bash or zsh; scripts frequently use `#!/bin/sh` for a\nPOSIX-oriented shell.\n\n**Arguments and quoting:** Quote paths with spaces (`cd \"My Documents\"`). Single\nquotes usually disable expansion; double quotes may expand variables.\n\n**Exit status:** Success is usually `0`; non-zero means failure. Inspect the last\nstatus with `echo $?`. Scripts may use `set -e` to stop early on errors (shell-specific\nnuances apply).\n\n**Help:** `man command`, `command --help` (common on GNU tools), and sometimes `info`.\nCatalog entries must not be marked `verified` without checking man/`--help`.\n\n**Nova dual concept:** The curated bank is not the same as “commands found on PATH”;\npresence on PATH does not verify bank content.\n"
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "POSIX.1 shell command language (overview)",
+          "man bash (INVOCATION, SHELL GRAMMAR)"
+        ],
+        "notes": "Agent-authored teaching article; needs maintainer spot-check before verified."
+      }
     }
   ]
 }

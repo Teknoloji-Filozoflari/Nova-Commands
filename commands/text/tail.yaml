@@ -66,3 +66,8 @@ intent:
   - follow log
   - tail file
 category: text
+nova:
+  concepts:
+  - files
+  - shell-pipes-redirection
+  favorite_eligible: true

@@ -20,8 +20,8 @@ summary:
   tr: Dosyanın başını gösterir.
   en: Show the start of files.
 description:
-  tr: Varsayılan olarak ilk 10 satırı basar.
-  en: Prints the first 10 lines by default.
+  tr: Dosya veya stdin girdinin ilk satırlarını yazar; varsayılan çoğu sürümde 10 satırdır.
+  en: Prints the first lines of files or stdin; many implementations default to 10 lines.
 tags:
 - text
 risk: safe
@@ -56,3 +56,8 @@ intent:
   - first lines
   - head of file
 category: text
+nova:
+  concepts:
+  - files
+  - shell-pipes-redirection
+  favorite_eligible: true

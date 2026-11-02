@@ -86,4 +86,5 @@ nova:
   - networking
   - dns
   - systemd
+  - networking-basics
 category: network

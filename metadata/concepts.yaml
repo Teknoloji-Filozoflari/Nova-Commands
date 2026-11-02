@@ -1,5 +1,5 @@
-# Named concepts that span multiple commands (Nova UI grouping hooks).
-# Not a substitute for categories; optional cross-cutting labels.
+# Named concepts: short labels for UI grouping + ids used by concepts/*.yaml articles.
+# Articles under concepts/ are the learnable bodies; this file is the registry.
 schema_version: 1
 concepts:
   - id: files
@@ -22,6 +22,7 @@ concepts:
     label:
       tr: systemd
       en: systemd
+    article: systemd
   - id: networking
     label:
       tr: Ağ ve bağlantı
@@ -38,6 +39,7 @@ concepts:
     label:
       tr: Depolama ve disk
       en: Storage and disks
+    article: storage
   - id: permissions
     label:
       tr: Kullanıcılar ve izinler
@@ -46,3 +48,28 @@ concepts:
     label:
       tr: Konteynerler
       en: Containers
+  - id: terminal-basics
+    label:
+      tr: Terminal temelleri
+      en: Terminal basics
+    article: terminal-basics
+  - id: shell-pipes-redirection
+    label:
+      tr: Borular ve yönlendirme
+      en: Pipes and redirection
+    article: shell-pipes-redirection
+  - id: path
+    label:
+      tr: PATH
+      en: PATH
+    article: path
+  - id: networking-basics
+    label:
+      tr: Ağ temelleri
+      en: Networking basics
+    article: networking-basics
+  - id: package-managers
+    label:
+      tr: Paket yöneticileri
+      en: Package managers
+    article: package-managers

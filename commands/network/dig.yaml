@@ -21,14 +21,16 @@ packages:
   ubuntu: dnsutils
   fedora: bind-utils
 install_notes:
-  tr: |-
-    Arch: pacman -S bind — dig paketi bind ile gelir.
+  tr: 'Arch: pacman -S bind — dig paketi bind ile gelir.
+
     Debian/Ubuntu: apt install dnsutils
-    Fedora: dnf install bind-utils
-  en: |-
-    Arch: pacman -S bind — dig ships with bind.
+
+    Fedora: dnf install bind-utils'
+  en: 'Arch: pacman -S bind — dig ships with bind.
+
     Debian/Ubuntu: apt install dnsutils
-    Fedora: dnf install bind-utils
+
+    Fedora: dnf install bind-utils'
 flags:
 - flag: +short
   meaning:
@@ -92,5 +94,6 @@ nova:
   concepts:
   - networking
   - dns
+  - networking-basics
   ui_priority: 70
 category: network

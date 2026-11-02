@@ -93,4 +93,5 @@ verification:
 nova:
   concepts:
   - packages
+  - package-managers
 category: packages

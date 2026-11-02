@@ -55,3 +55,8 @@ verification:
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-bootstrap
 category: system
+nova:
+  concepts:
+  - systemd
+  - terminal-basics
+  favorite_eligible: true

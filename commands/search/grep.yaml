@@ -90,4 +90,7 @@ verification:
 nova:
   favorite_eligible: true
   ui_priority: 85
+  concepts:
+  - files
+  - shell-pipes-redirection
 category: search

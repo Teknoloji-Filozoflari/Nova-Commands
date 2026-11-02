@@ -2,10 +2,16 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://raw.githubusercontent.com/Teknoloji-Filozoflari/Nova-Commands/main/schema/catalog.schema.json",
   "title": "Nova-Commands aggregate catalog",
-  "description": "Built JSON index of curated commands (Komut Bilgi Bankası). Not the local PATH discovery list.",
+  "description": "Built JSON index of curated commands + concepts (Komut Bilgi Bankası). Not the local PATH discovery list. content_sha256 hashes commands+concepts only (deterministic).",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schema_version", "kind", "generated_at", "commands"],
+  "required": [
+    "schema_version",
+    "kind",
+    "generated_at",
+    "content_sha256",
+    "commands"
+  ],
   "properties": {
     "schema_version": {
       "type": "integer",
@@ -19,7 +25,16 @@
       "type": "string",
       "minLength": 1
     },
+    "content_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$",
+      "description": "SHA-256 of canonical JSON {schema_version, kind, commands, concepts} with sorted keys — excludes generated_at."
+    },
     "command_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "concept_count": {
       "type": "integer",
       "minimum": 0
     },
@@ -27,6 +42,12 @@
       "type": "array",
       "items": {
         "$ref": "command.schema.json"
+      }
+    },
+    "concepts": {
+      "type": "array",
+      "items": {
+        "$ref": "concept.schema.json"
       }
     }
   }

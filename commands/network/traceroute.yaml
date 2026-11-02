@@ -22,14 +22,16 @@ packages:
   ubuntu: traceroute
   fedora: traceroute
 install_notes:
-  tr: |-
-    Arch: pacman -S traceroute
+  tr: 'Arch: pacman -S traceroute
+
     Debian/Ubuntu: apt install traceroute
-    Fedora: dnf install traceroute
-  en: |-
-    Arch: pacman -S traceroute
+
+    Fedora: dnf install traceroute'
+  en: 'Arch: pacman -S traceroute
+
     Debian/Ubuntu: apt install traceroute
-    Fedora: dnf install traceroute
+
+    Fedora: dnf install traceroute'
 flags:
 - flag: -n
   meaning:
@@ -86,4 +88,5 @@ verification:
 nova:
   concepts:
   - networking
+  - networking-basics
 category: network

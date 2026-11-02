@@ -77,4 +77,6 @@ verification:
 nova:
   favorite_eligible: true
   ui_priority: 92
+  concepts:
+  - terminal-basics
 category: development

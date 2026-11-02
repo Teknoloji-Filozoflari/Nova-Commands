@@ -20,12 +20,16 @@ Ayrıntı: [docs/dual-concept.md](docs/dual-concept.md)
 
 ```
 commands/<category>/<id>.yaml   # kaynak gerçeği (bir komut = bir dosya)
-schema/command.schema.json      # giriş şeması
+concepts/<id>.yaml              # öğrenilebilir konsept makaleleri (TR/EN)
+schema/{command,concept,catalog}.schema.json
 metadata/categories.yaml        # §8.x kategori taksonomisi
-metadata/catalog.json           # üretilen toplu indeks
-scripts/validate_catalog.py     # CI kapısı
-scripts/build_catalog.py        # katalog üretimi
-docs/                           # tüketim, keşif sözleşmesi, güvenlik
+metadata/concepts.yaml          # konsept kayıt defteri
+metadata/catalog.json           # üretilen banka (commands + concepts)
+metadata/search-index.json      # arama indeksi
+metadata/manifest.json          # sayılar + deterministik content_sha256
+scripts/validate_catalog.py     # CI kapısı (i18n + concepts)
+scripts/build_catalog.py        # katalog / indeks / manifest
+docs/NOVA_INTEGRATION.md        # Nova tüketim sözleşmesi
 ```
 
 ## Geliştirici
@@ -37,7 +41,7 @@ python3 scripts/build_catalog.py
 python3 -m pytest tests/
 ```
 
-Yeni komut ekleme: [CONTRIBUTING.md](CONTRIBUTING.md)
+Yeni komut / konsept: [CONTRIBUTING.md](CONTRIBUTING.md) · Nova: [docs/NOVA_INTEGRATION.md](docs/NOVA_INTEGRATION.md)
 
 ## Çok dağıtım
 

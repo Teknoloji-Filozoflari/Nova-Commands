@@ -5,7 +5,7 @@ summary:
   en: List block devices.
 description:
   tr: Disk ve bölümleri okunabilir ağaçta gösterir.
-  en: Shows disks and partitions as a tree.
+  en: Lists block devices as a tree, including mount points and filesystem types with -f.
 tags:
 - disk
 risk: safe
@@ -50,3 +50,7 @@ verification:
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-bootstrap
 category: disks
+nova:
+  concepts:
+  - storage
+  favorite_eligible: true

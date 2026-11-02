@@ -20,8 +20,8 @@ summary:
   tr: Satır, kelime ve bayt sayar.
   en: Count lines, words, and bytes.
 description:
-  tr: Girdi veya dosyalar için sayım üretir.
-  en: Produces counts for inputs or files.
+  tr: Satır, sözcük ve bayt/karakter sayılarını raporlar; boru hatlarında sık kullanılır.
+  en: Reports newline, word, and byte/character counts; common in shell pipelines.
 tags:
 - text
 - count
@@ -71,3 +71,8 @@ intent:
   - count lines
   - word count
 category: text
+nova:
+  concepts:
+  - files
+  - shell-pipes-redirection
+  favorite_eligible: true

@@ -1,15 +1,16 @@
 #!/usr/bin/env python3
-"""Validate Nova-Commands curated bank.
+"""Validate Nova-Commands curated bank + concept articles.
 
 Checks (CI gate):
-  - JSON Schema conformance (command.schema.json)
-  - Unique ids; filename stem == id; directory == category
+  - JSON Schema conformance (command.schema.json, concept.schema.json)
+  - Unique command ids; filename stem == id; directory == category
   - Category ∈ metadata/categories.yaml
   - verification.status rules (verified requires sources + last_reviewed)
   - Flag verified=true only allowed when command verification is reviewed|verified
-  - Example risk severity ≥ command risk when example requires_elevated and command does not
-  - Risk rank consistency helpers
-  - No shell metacharacters inventing pipelines as the sole "command" name
+  - Risk consistency helpers; related must not self-ref
+  - i18n consistency: every localized object has non-empty tr and en
+  - nova.concepts / concept related_* reference known registry or article ids
+  - Concept articles under concepts/; id == filename; related_commands exist
 """
 
 from __future__ import annotations
@@ -18,6 +19,7 @@ import argparse
 import json
 import sys
 from pathlib import Path
+from typing import Any
 
 import yaml
 from jsonschema import Draft202012Validator
@@ -25,29 +27,83 @@ from referencing import Registry, Resource
 
 ROOT = Path(__file__).resolve().parents[1]
 COMMANDS_DIR = ROOT / "commands"
+CONCEPTS_DIR = ROOT / "concepts"
 SCHEMA_PATH = ROOT / "schema" / "command.schema.json"
+CONCEPT_SCHEMA_PATH = ROOT / "schema" / "concept.schema.json"
 CATEGORIES_PATH = ROOT / "metadata" / "categories.yaml"
+CONCEPTS_META_PATH = ROOT / "metadata" / "concepts.yaml"
 
 RISK_RANK = {"safe": 0, "caution": 1, "dangerous": 2, "destructive": 3}
 
 
 def load_categories() -> set[str]:
     data = yaml.safe_load(CATEGORIES_PATH.read_text(encoding="utf-8"))
-    cats = {c["id"] for c in data["categories"]}
-    return cats
+    return {c["id"] for c in data["categories"]}
 
 
-def load_schema_validator() -> Draft202012Validator:
-    schema = json.loads(SCHEMA_PATH.read_text(encoding="utf-8"))
+def load_concept_registry() -> dict[str, dict]:
+    data = yaml.safe_load(CONCEPTS_META_PATH.read_text(encoding="utf-8"))
+    return {c["id"]: c for c in data.get("concepts") or []}
+
+
+def load_schema_validator(path: Path) -> Draft202012Validator:
+    schema = json.loads(path.read_text(encoding="utf-8"))
     resource = Resource.from_contents(schema)
     registry = Registry().with_resource(schema["$id"], resource)
     return Draft202012Validator(schema, registry=registry)
 
 
-def iter_command_files() -> list[Path]:
-    if not COMMANDS_DIR.is_dir():
-        return []
-    return sorted(COMMANDS_DIR.glob("*/*.yaml"))
+def check_localized(
+    errors: list[str],
+    rel: Path | str,
+    prefix: str,
+    obj: Any,
+    *,
+    required: bool = True,
+) -> None:
+    """Ensure mapping has non-empty tr and en strings."""
+    if obj is None:
+        if required:
+            errors.append(f"{rel}: {prefix} missing")
+        return
+    if not isinstance(obj, dict):
+        errors.append(f"{rel}: {prefix} must be a mapping with tr/en")
+        return
+    for lang in ("tr", "en"):
+        val = obj.get(lang)
+        if not isinstance(val, str) or not val.strip():
+            errors.append(f"{rel}: {prefix}.{lang} missing or empty")
+
+
+def check_i18n_command(errors: list[str], rel: Path, raw: dict) -> None:
+    check_localized(errors, rel, "summary", raw.get("summary"))
+    check_localized(errors, rel, "description", raw.get("description"))
+    if "install_notes" in raw and raw["install_notes"] is not None:
+        check_localized(errors, rel, "install_notes", raw.get("install_notes"))
+
+    intent = raw.get("intent")
+    if not isinstance(intent, dict):
+        errors.append(f"{rel}: intent must be mapping with tr/en arrays")
+    else:
+        for lang in ("tr", "en"):
+            arr = intent.get(lang)
+            if not isinstance(arr, list) or not arr:
+                errors.append(f"{rel}: intent.{lang} must be a non-empty array")
+            elif any(not isinstance(x, str) or not x.strip() for x in arr):
+                errors.append(f"{rel}: intent.{lang} contains empty phrase")
+
+    for i, flag in enumerate(raw.get("flags") or []):
+        if not isinstance(flag, dict):
+            continue
+        check_localized(errors, rel, f"flags[{i}].meaning", flag.get("meaning"))
+
+    for i, ex in enumerate(raw.get("examples") or []):
+        if not isinstance(ex, dict):
+            continue
+        check_localized(errors, rel, f"examples[{i}].title", ex.get("title"))
+        check_localized(
+            errors, rel, f"examples[{i}].explanation", ex.get("explanation")
+        )
 
 
 def main() -> int:
@@ -58,12 +114,22 @@ def main() -> int:
         default=COMMANDS_DIR,
         help="Override commands directory",
     )
+    parser.add_argument(
+        "--concepts-dir",
+        type=Path,
+        default=CONCEPTS_DIR,
+        help="Override concepts directory",
+    )
     args = parser.parse_args()
     commands_dir: Path = args.commands_dir
+    concepts_dir: Path = args.concepts_dir
 
     errors: list[str] = []
     categories = load_categories()
-    validator = load_schema_validator()
+    concept_registry = load_concept_registry()
+    known_concept_ids = set(concept_registry)
+    validator = load_schema_validator(SCHEMA_PATH)
+    concept_validator = load_schema_validator(CONCEPT_SCHEMA_PATH)
     seen_ids: dict[str, Path] = {}
 
     files = sorted(commands_dir.glob("*/*.yaml")) if commands_dir.is_dir() else []
@@ -85,6 +151,8 @@ def main() -> int:
         for err in sorted(validator.iter_errors(raw), key=lambda e: list(e.path)):
             loc = "/".join(str(p) for p in err.absolute_path) or "(root)"
             errors.append(f"{rel}: schema {loc}: {err.message}")
+
+        check_i18n_command(errors, rel, raw)
 
         cid = raw.get("id")
         category = raw.get("category")
@@ -132,21 +200,94 @@ def main() -> int:
         for i, ex in enumerate(raw.get("examples") or []):
             ex_risk = ex.get("risk")
             ex_rank = RISK_RANK.get(ex_risk, 0)
-            if ex_rank < cmd_rank and ex_rank == 0 and cmd_rank >= 2:
-                # Allow documenting a safe read-only example on a dangerous tool
-                # (e.g. dd with status=progress of /dev/zero to /dev/null) — OK.
-                pass
-            # Destructive examples on a safe command are suspicious
             if cmd_rank == 0 and ex_rank >= 3:
                 errors.append(
                     f"{rel}: examples[{i}].risk is destructive but command risk is safe "
                     "(raise command.risk or lower example risk)"
                 )
 
-        # related ids are soft references; warn-level collected as errors only if self-ref
         for rid in raw.get("related") or []:
             if rid == cid:
                 errors.append(f"{rel}: related must not include self")
+
+        nova = raw.get("nova") or {}
+        for concept in nova.get("concepts") or []:
+            if concept not in known_concept_ids:
+                errors.append(
+                    f"{rel}: nova.concepts unknown id {concept!r} "
+                    "(add to metadata/concepts.yaml)"
+                )
+
+    # --- concepts articles ---
+    concept_files = (
+        sorted(concepts_dir.glob("*.yaml")) if concepts_dir.is_dir() else []
+    )
+    if not concept_files:
+        errors.append(f"no concept YAML files under {concepts_dir}")
+
+    seen_concept_articles: dict[str, Path] = {}
+    for path in concept_files:
+        rel = path.relative_to(ROOT) if path.is_relative_to(ROOT) else path
+        try:
+            raw = yaml.safe_load(path.read_text(encoding="utf-8"))
+        except yaml.YAMLError as exc:
+            errors.append(f"{rel}: YAML parse error: {exc}")
+            continue
+        if not isinstance(raw, dict):
+            errors.append(f"{rel}: root must be a mapping")
+            continue
+
+        for err in sorted(
+            concept_validator.iter_errors(raw), key=lambda e: list(e.path)
+        ):
+            loc = "/".join(str(p) for p in err.absolute_path) or "(root)"
+            errors.append(f"{rel}: schema {loc}: {err.message}")
+
+        check_localized(errors, rel, "title", raw.get("title"))
+        check_localized(errors, rel, "summary", raw.get("summary"))
+        check_localized(errors, rel, "body", raw.get("body"))
+
+        cid = raw.get("id")
+        if cid != path.stem:
+            errors.append(f"{rel}: id {cid!r} must equal filename stem {path.stem!r}")
+        if isinstance(cid, str):
+            if cid in seen_concept_articles:
+                errors.append(f"{rel}: duplicate concept id {cid!r}")
+            else:
+                seen_concept_articles[cid] = rel
+            if cid not in known_concept_ids:
+                errors.append(
+                    f"{rel}: concept id {cid!r} missing from metadata/concepts.yaml"
+                )
+
+        ver = raw.get("verification") or {}
+        if ver.get("status") == "verified":
+            if not (ver.get("sources") or []):
+                errors.append(f"{rel}: verified concepts require sources")
+            if not ver.get("last_reviewed"):
+                errors.append(f"{rel}: verified concepts require last_reviewed")
+
+        for rid in raw.get("related_commands") or []:
+            if rid not in seen_ids:
+                errors.append(
+                    f"{rel}: related_commands unknown command id {rid!r}"
+                )
+        for xid in raw.get("related_concepts") or []:
+            if xid not in known_concept_ids and xid not in seen_concept_articles:
+                # allow forward refs within articles after loop — check registry only
+                if xid not in known_concept_ids:
+                    errors.append(
+                        f"{rel}: related_concepts unknown id {xid!r}"
+                    )
+
+    # Registry articles field must point at existing files when set
+    for cid, meta in concept_registry.items():
+        article = meta.get("article")
+        if article and article not in seen_concept_articles:
+            errors.append(
+                f"metadata/concepts.yaml: concept {cid!r} article {article!r} "
+                "has no concepts/<id>.yaml"
+            )
 
     if errors:
         print(f"FAIL: {len(errors)} issue(s)", file=sys.stderr)
@@ -154,7 +295,9 @@ def main() -> int:
             print(f"  - {e}", file=sys.stderr)
         return 1
 
-    print(f"OK: {len(seen_ids)} commands validated")
+    print(
+        f"OK: {len(seen_ids)} commands, {len(seen_concept_articles)} concepts validated"
+    )
     return 0
 
 

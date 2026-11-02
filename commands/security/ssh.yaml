@@ -57,6 +57,8 @@ nova:
   concepts:
   - ssh
   - networking
+  - permissions
+  - networking-basics
 intent:
   tr:
   - ssh ile bağlan

@@ -19,12 +19,12 @@ packages:
   rhel: rpm
   arch: rpm-tools
 install_notes:
-  tr: |-
-    Fedora/RHEL: rpm tabanda gelir; günlük için dnf.
-    Arch: pacman -S rpm-tools (yabancı .rpm incelemek için; sistem paketi değil).
-  en: |-
-    Fedora/RHEL: rpm is base; use dnf daily.
-    Arch: pacman -S rpm-tools (inspect foreign .rpm; not system pkgs).
+  tr: 'Fedora/RHEL: rpm tabanda gelir; günlük için dnf.
+
+    Arch: pacman -S rpm-tools (yabancı .rpm incelemek için; sistem paketi değil).'
+  en: 'Fedora/RHEL: rpm is base; use dnf daily.
+
+    Arch: pacman -S rpm-tools (inspect foreign .rpm; not system pkgs).'
 flags:
 - flag: -q
   meaning:
@@ -94,4 +94,5 @@ verification:
 nova:
   concepts:
   - packages
+  - package-managers
 category: packages

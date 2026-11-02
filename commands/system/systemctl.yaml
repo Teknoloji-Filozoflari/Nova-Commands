@@ -71,6 +71,7 @@ related:
 nova:
   concepts:
   - systemd
+  - terminal-basics
 intent:
   tr:
   - servis başlat

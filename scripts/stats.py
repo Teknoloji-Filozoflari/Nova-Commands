@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Print bank statistics (category counts, verification mix, risk mix)."""
+"""Print bank statistics (category counts, verification mix, risk mix, concepts)."""
 
 from __future__ import annotations
 
@@ -16,12 +16,21 @@ def main() -> None:
     cats: Counter[str] = Counter()
     ver: Counter[str] = Counter()
     risk: Counter[str] = Counter()
+    with_concepts = 0
     for path in files:
         data = yaml.safe_load(path.read_text(encoding="utf-8"))
         cats[data["category"]] += 1
         ver[data["verification"]["status"]] += 1
         risk[data["risk"]] += 1
+        if (data.get("nova") or {}).get("concepts"):
+            with_concepts += 1
+    concept_files = sorted((ROOT / "concepts").glob("*.yaml"))
     print(f"commands: {len(files)}")
+    print(f"commands with nova.concepts: {with_concepts}")
+    print(f"concept articles: {len(concept_files)}")
+    for path in concept_files:
+        data = yaml.safe_load(path.read_text(encoding="utf-8"))
+        print(f"  - {data['id']} [{data['verification']['status']}/{data['difficulty']}]")
     print("by category:")
     for k, v in sorted(cats.items()):
         print(f"  {k}: {v}")

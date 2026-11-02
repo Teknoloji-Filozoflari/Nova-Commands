@@ -70,4 +70,5 @@ nova:
   concepts:
   - packages
   - arch
+  - package-managers
 category: packages

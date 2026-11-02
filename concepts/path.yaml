@@ -1,0 +1,68 @@
+id: path
+kind: nova-commands-concept
+title:
+  tr: PATH ve komut bulma
+  en: PATH and command lookup
+summary:
+  tr: Kabuğun komutları nerede aradığı; `which`, `type`, `command -v`.
+  en: Where shells look for commands; `which`, `type`, `command -v`.
+difficulty: beginner
+tags:
+  - shell
+  - path
+  - environment
+related_commands:
+  - which
+  - whereis
+  - env
+  - export
+  - echo
+related_concepts:
+  - terminal-basics
+  - package-managers
+  - shell-builtin
+see_also:
+  - "man environ / PATH"
+  - "docs/local-discovery-contract.md (Nova local discovery)"
+body:
+  tr: |
+    **`PATH`**, kabuğun harici programları aradığı dizinlerin `:` ile ayrılmış
+    listesidir (ör. `/usr/local/bin:/usr/bin:/bin`). Bir komut adı yazdığınızda
+    kabuk önce yerleşik mi diye bakar; değilse `PATH` sırasıyla eşleşen çalıştırılabilir
+    dosyayı arar.
+
+    **Görme / denetleme:**
+    - `echo "$PATH"` — arama yolları.
+    - `type ls` / `command -v ls` — kabuğun ne bulduğunu gösterir (yerleşik, alias, yol).
+    - `which ls` — sıkça ilk eşleşen yolu basar (kabuk/yerleşik farkları için `type` daha nettir).
+
+    **Güncelleme:** `export PATH="$HOME/.local/bin:$PATH"` oturuma ekler; kalıcılık için
+    kabuk başlangıç dosyalarına (`~/.bashrc`, `~/.zshrc`, …) yazılır. Yanlış `PATH`
+    “command not found” üretir veya istenmeyen ikiliyi seçtirir.
+
+    **Nova:** “Sistemimde bulunan komutlar” istemci tarafında PATH/keşif ile üretilir
+    (`kind: nova-local-commands`). Bu, kürate bankanın `verified` durumunu miras almaz.
+    Ayrıntı: `docs/local-discovery-contract.md`.
+  en: |
+    **`PATH`** is a colon-separated list of directories where the shell searches for
+    external programs (e.g. `/usr/local/bin:/usr/bin:/bin`). On a bare name, the shell
+    checks builtins/aliases/functions first, then walks `PATH` for an executable.
+
+    **Inspect:**
+    - `echo "$PATH"` — search directories.
+    - `type ls` / `command -v ls` — what the shell would run (builtin vs path).
+    - `which ls` — often prints the first matching path (`type` is clearer for builtins).
+
+    **Update:** `export PATH="$HOME/.local/bin:$PATH"` for the session; persist via shell
+    startup files (`~/.bashrc`, `~/.zshrc`, …). A broken `PATH` causes “command not found”
+    or picks the wrong binary.
+
+    **Nova:** Local “commands on this system” come from client-side PATH discovery
+    (`kind: nova-local-commands`) and must not inherit bank `verified` status.
+    See `docs/local-discovery-contract.md`.
+verification:
+  status: reviewed
+  sources:
+    - "man environ / POSIX PATH"
+    - "man bash (COMMAND EXECUTION)"
+  notes: "Agent-authored teaching article; needs maintainer spot-check before verified."

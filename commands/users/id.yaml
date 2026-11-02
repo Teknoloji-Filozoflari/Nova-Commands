@@ -4,8 +4,8 @@ summary:
   tr: Kullanıcı ve grup kimliklerini basar.
   en: Print user and group IDs.
 description:
-  tr: UID/GID ve grup üyeliklerini gösterir.
-  en: Shows UID/GID and group memberships.
+  tr: Geçerli kullanıcı ve grup kimliklerini (uid/gid) ve ek grupları gösterir.
+  en: Prints real/effective user and group IDs and supplementary groups.
 tags:
 - users
 risk: safe
@@ -45,3 +45,7 @@ verification:
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-bootstrap
 category: users
+nova:
+  concepts:
+  - permissions
+  favorite_eligible: true

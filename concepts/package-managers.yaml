@@ -1,0 +1,74 @@
+id: package-managers
+kind: nova-commands-concept
+title:
+  tr: Paket yöneticileri
+  en: Package managers
+summary:
+  tr: pacman, apt, dnf ve paket ↔ komut ilişkisi (Arch öncelikli notlar).
+  en: pacman, apt, dnf, and package ↔ command mapping (Arch-first notes).
+difficulty: beginner
+tags:
+  - packages
+  - pacman
+  - apt
+  - dnf
+related_commands:
+  - pacman
+  - apt
+  - dnf
+  - dpkg
+  - rpm
+  - flatpak
+  - paru
+related_concepts:
+  - packages
+  - arch
+  - path
+see_also:
+  - "Arch Wiki: pacman"
+  - "man apt / man dnf"
+body:
+  tr: |
+    Dağıtımlar yazılıımı *paket* olarak kurar. Aynı komut farklı paket adında olabilir;
+    bilinmeyen ad **uydurulmaz** (omit / `draft`).
+
+    **Birinci sınıf yöneticiler (bu banka):**
+    - **Arch — pacman:** `pacman -Syu` sistem güncellemesi; `pacman -S paket` kurulum;
+      `pacman -Ss anahtar` arama; `pacman -Ql paket` dosya listesi.
+      AUR yardımcıları (ör. `paru`) resmi depoda olmayabilir — ayrı not/draft.
+    - **Debian/Ubuntu — apt (+ dpkg):** `apt update` / `apt install`; düşük seviye
+      `dpkg -i` / `dpkg -l`.
+    - **Fedora/RHEL — dnf (+ rpm):** `dnf install` / `dnf upgrade`; `rpm -q` sorguları.
+
+    **Flatpak:** Dağıtımdan bağımsız uygulama sandboxes; `flatpak install` / `flatpak run`.
+
+    **Nova tercihi:** Arch host’ta kurulum ipuçlarında **pacman / `packages.arch` önce**.
+    `install_notes` içinde Arch satırı üstte tutulur.
+
+    **Komut ≠ paket:** `which` ile bulunan ikili, paket adını kanıtlamaz; doğrulama için
+    distro paket veritabanı / man sayfası kullanılır. CI yıkıcı kurulum çalıştırmaz.
+  en: |
+    Distros install software as *packages*. The same command may live in differently
+    named packages; unknown names are **not invented** (omit / `draft`).
+
+    **First-class managers in this bank:**
+    - **Arch — pacman:** `pacman -Syu` full upgrade; `pacman -S pkg` install;
+      `pacman -Ss keyword` search; `pacman -Ql pkg` file list.
+      AUR helpers (e.g. `paru`) may be unofficial — document carefully / draft.
+    - **Debian/Ubuntu — apt (+ dpkg):** `apt update` / `apt install`; lower-level
+      `dpkg -i` / `dpkg -l`.
+    - **Fedora/RHEL — dnf (+ rpm):** `dnf install` / `dnf upgrade`; `rpm -q` queries.
+
+    **Flatpak:** Distro-agnostic sandboxed apps; `flatpak install` / `flatpak run`.
+
+    **Nova preference:** On Arch hosts, prefer **pacman / `packages.arch` first** in
+    install hints; keep Arch lines at the top of `install_notes`.
+
+    **Command ≠ package:** A PATH hit does not prove the package name; confirm via
+    distro package DB / man pages. CI does not run destructive installs to “test”.
+verification:
+  status: reviewed
+  sources:
+    - "https://wiki.archlinux.org/title/Pacman"
+    - "man pacman / man apt / man dnf"
+  notes: "Agent-authored teaching article; Arch-first per project preferences."

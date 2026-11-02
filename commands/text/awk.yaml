@@ -20,12 +20,12 @@ packages:
   ubuntu: gawk
   fedora: gawk
 install_notes:
-  tr: |-
-    Arch: pacman -S gawk (awk → gawk)
-    Debian/Ubuntu/Fedora: gawk
-  en: |-
-    Arch: pacman -S gawk (awk → gawk)
-    Debian/Ubuntu/Fedora: gawk
+  tr: 'Arch: pacman -S gawk (awk → gawk)
+
+    Debian/Ubuntu/Fedora: gawk'
+  en: 'Arch: pacman -S gawk (awk → gawk)
+
+    Debian/Ubuntu/Fedora: gawk'
 flags:
 - flag: -F
   meaning:
@@ -76,3 +76,8 @@ verification:
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-coverage
 category: text
+nova:
+  concepts:
+  - files
+  - shell-pipes-redirection
+  favorite_eligible: true

@@ -21,12 +21,12 @@ packages:
   ubuntu: firewalld
   fedora: firewalld
 install_notes:
-  tr: |-
-    Arch: pacman -S firewalld — systemctl enable --now firewalld
-    Fedora’da sık varsayılan; Debian/Ubuntu’da isteğe bağlı.
-  en: |-
-    Arch: pacman -S firewalld — systemctl enable --now firewalld
-    Often default on Fedora; optional on Debian/Ubuntu.
+  tr: 'Arch: pacman -S firewalld — systemctl enable --now firewalld
+
+    Fedora’da sık varsayılan; Debian/Ubuntu’da isteğe bağlı.'
+  en: 'Arch: pacman -S firewalld — systemctl enable --now firewalld
+
+    Often default on Fedora; optional on Debian/Ubuntu.'
 flags:
 - flag: --state
   meaning:
@@ -99,4 +99,5 @@ nova:
   concepts:
   - networking
   - ssh
+  - permissions
 category: security

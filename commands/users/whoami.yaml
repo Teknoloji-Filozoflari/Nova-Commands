@@ -5,7 +5,7 @@ summary:
   en: Print effective user name.
 description:
   tr: Etkili kullanıcı kimliğini kısa şekilde gösterir.
-  en: Shows the effective username.
+  en: Prints the effective username of the current user (often equivalent to id -un).
 tags:
 - users
 risk: safe
@@ -45,3 +45,7 @@ verification:
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-bootstrap
 category: users
+nova:
+  concepts:
+  - permissions
+  favorite_eligible: true

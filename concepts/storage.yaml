@@ -1,0 +1,82 @@
+id: storage
+kind: nova-commands-concept
+title:
+  tr: Depolama ve disk
+  en: Storage and disks
+summary:
+  tr: Blok aygıtlar, bağlama, kullanım ve dikkat edilmesi gereken disk araçları.
+  en: Block devices, mounts, usage, and high-care disk tools.
+difficulty: intermediate
+tags:
+  - disks
+  - storage
+  - filesystem
+related_commands:
+  - lsblk
+  - df
+  - du
+  - mount
+  - umount
+  - findmnt
+  - blkid
+  - fdisk
+  - dd
+  - sync
+related_concepts:
+  - files
+  - permissions
+  - terminal-basics
+see_also:
+  - "man lsblk / man mount"
+  - "Arch Wiki: File systems / fstab"
+body:
+  tr: |
+    Disk ve dosya sistemi işleri **yanlış aygıt adıyla yıkıcı** olabilir. Önce okuma
+    araçlarıyla haritayı çıkarın.
+
+    **Keşif (genelde güvenli):**
+    - `lsblk -f` — ağaç, dosya sistemi, UUID/LABEL.
+    - `df -h` — bağlı dosya sistemlerinde boş alan.
+    - `du -sh yol` — dizin boyutu.
+    - `findmnt` / `mount` — ne nereye bağlı.
+    - `blkid` — UUID ve tür (çoğu zaman root ile daha dolu).
+
+    **Bağlama:** `mount` / `umount` (veya fstab / systemd `.mount`). Yanlış `umount`
+    açık dosyaları bozabilir; meşgulse `lsof` / `fuser` ile bakın.
+
+    **Yüksek risk:**
+    - `fdisk` / bölüm tablosu düzenleme — veri kaybı riski.
+    - `dd` — ham kopya; yanlış `of=` diski siler (`destructive` örnekler).
+    - `mkfs.*` — dosya sistemi oluşturur (bu fazda derinleştirme dikkatli olmalı).
+
+    **`sync`:** Bellekteki yazıları diske iter; kapatma/çıkarma öncesi kullanılır.
+    Doğrulama için asla rastgele disklere `dd`/`mkfs` çalıştırmayın; banka girdileri
+    man ve belgelere dayanmalı, `verified` yalnız insan incelemesi sonrası.
+  en: |
+    Disk and filesystem operations are **destructive on the wrong device**. Start with
+    read-only discovery.
+
+    **Discovery (usually safe):**
+    - `lsblk -f` — tree, filesystem, UUID/LABEL.
+    - `df -h` — free space on mounted filesystems.
+    - `du -sh path` — directory size.
+    - `findmnt` / `mount` — what is mounted where.
+    - `blkid` — UUID/type (often richer as root).
+
+    **Mounting:** `mount` / `umount` (or fstab / systemd `.mount`). A busy `umount` can
+    fail; inspect with `lsof` / `fuser`.
+
+    **High risk:**
+    - `fdisk` / partition edits — data loss risk.
+    - `dd` — raw copy; wrong `of=` wipes a disk (`destructive` examples).
+    - `mkfs.*` — creates filesystems (deepen carefully in later work).
+
+    **`sync`:** Flushes buffered writes; used before unmount/shutdown.
+    Never run `dd`/`mkfs` against arbitrary disks to “validate” catalog entries;
+    keep `verified` for human review only.
+verification:
+  status: reviewed
+  sources:
+    - "man lsblk / man mount / man dd"
+    - "https://wiki.archlinux.org/title/File_systems"
+  notes: "Agent-authored teaching article; no destructive verification runs."

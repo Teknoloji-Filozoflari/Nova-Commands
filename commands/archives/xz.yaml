@@ -21,14 +21,16 @@ packages:
   ubuntu: xz-utils
   fedora: xz
 install_notes:
-  tr: |-
-    Arch: pacman -S xz
+  tr: 'Arch: pacman -S xz
+
     Debian/Ubuntu: xz-utils
-    Fedora: xz
-  en: |-
-    Arch: pacman -S xz
+
+    Fedora: xz'
+  en: 'Arch: pacman -S xz
+
     Debian/Ubuntu: xz-utils
-    Fedora: xz
+
+    Fedora: xz'
 flags:
 - flag: -d
   meaning:
@@ -83,3 +85,6 @@ verification:
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-coverage
 category: archives
+nova:
+  concepts:
+  - files

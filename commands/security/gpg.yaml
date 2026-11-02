@@ -5,7 +5,7 @@ summary:
   en: OpenPGP encryption and signing tool.
 description:
   tr: Anahtar yönetimi, şifreleme, imzalama (GnuPG).
-  en: Key management, encrypt, sign (GnuPG).
+  en: GNU Privacy Guard for encrypting, signing, and verifying data and keys.
 tags:
 - security
 - crypto
@@ -47,3 +47,6 @@ verification:
   - man 1 gpg
   notes: Minimal seed; expand subcommands later.
 category: security
+nova:
+  concepts:
+  - permissions

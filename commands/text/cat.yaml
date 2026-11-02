@@ -56,3 +56,8 @@ intent:
   - show file contents
   - print file
 category: text
+nova:
+  concepts:
+  - files
+  - shell-pipes-redirection
+  favorite_eligible: true

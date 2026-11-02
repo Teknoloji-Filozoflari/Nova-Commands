@@ -1,0 +1,79 @@
+id: shell-pipes-redirection
+kind: nova-commands-concept
+title:
+  tr: Borular ve yönlendirme
+  en: Pipes and redirection
+summary:
+  tr: stdin/stdout/stderr, `>`, `>>`, `<` ve `|` ile komut zincirleri.
+  en: stdin/stdout/stderr, `>`, `>>`, `<`, and `|` pipelines.
+difficulty: beginner
+tags:
+  - shell
+  - pipes
+  - io
+related_commands:
+  - cat
+  - tee
+  - grep
+  - sort
+  - head
+  - tail
+  - cut
+  - xargs
+related_concepts:
+  - terminal-basics
+  - shell-builtin
+see_also:
+  - "man bash (REDIRECTION)"
+  - "POSIX pipelines"
+body:
+  tr: |
+    Her süreç üç standart akışla başlar: **stdin** (0), **stdout** (1), **stderr** (2).
+    Kabuk bunları dosyalara veya başka süreçlere bağlayabilir.
+
+    **Yönlendirme:**
+    - `komut > dosya` — stdout’u dosyaya yazar (üzerine yazar).
+    - `komut >> dosya` — stdout’u dosyanın sonuna ekler.
+    - `komut < dosya` — stdin’i dosyadan okur.
+    - `komut 2> hata.log` — stderr’i ayırır; `2>&1` stderr’i stdout’a birleştirir.
+
+    **Boru (`|`):** Sol komutun stdout’u sağ komutun stdin’ine bağlanır.
+    Örnek: `ps aux | grep ssh | head`. Boru hattında ara dosya gerekmez; bellek/buffer
+    ile akar. Hata mesajları (stderr) varsayılan olarak boruya girmez.
+
+    **`tee`:** stdout’u hem dosyaya hem sonraki boruya kopyalar (`… | tee out.txt | …`).
+
+    **`xargs`:** stdin’deki satır/sözcükleri sonraki komutun argümanına çevirir
+    (`find … -print0 | xargs -0 …` boşluk/newline güvenliği için).
+
+    **Dikkat:** `>` mevcut dosyayı sessizce bozar. Yanlışlıkla `>` yerine `>>`
+    veya önce yedek düşünün. Bu bankada yıkıcı örnekler `destructive` /
+    `dangerous` riskiyle işaretlenir; doğrulama için yıkıcı komutlar çalıştırılmaz.
+  en: |
+    Processes start with three standard streams: **stdin** (0), **stdout** (1),
+    **stderr** (2). The shell can attach them to files or other processes.
+
+    **Redirection:**
+    - `cmd > file` — write stdout (truncate/overwrite).
+    - `cmd >> file` — append stdout.
+    - `cmd < file` — read stdin from a file.
+    - `cmd 2> err.log` — capture stderr; `2>&1` merges stderr into stdout.
+
+    **Pipe (`|`):** Connects the left command’s stdout to the right command’s stdin.
+    Example: `ps aux | grep ssh | head`. Data flows without intermediate files.
+    stderr does not enter the pipe by default.
+
+    **`tee`:** Copies stdout both to a file and further down the pipeline.
+
+    **`xargs`:** Turns stdin tokens into arguments for another command
+    (`find … -print0 | xargs -0 …` for whitespace-safe lists).
+
+    **Caution:** `>` silently overwrites files. Prefer `>>` or backups when unsure.
+    Destructive examples in this bank are labeled `dangerous`/`destructive`; do not
+    run destructive commands just to validate catalog entries.
+verification:
+  status: reviewed
+  sources:
+    - "man bash (REDIRECTION, PIPES)"
+    - "POSIX shell redirection"
+  notes: "Agent-authored teaching article; needs maintainer spot-check before verified."

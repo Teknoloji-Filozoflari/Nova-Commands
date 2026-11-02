@@ -4,8 +4,8 @@ summary:
   tr: ZIP arşivlerini çıkarır.
   en: Extract ZIP archives.
 description:
-  tr: ZIP içeriğini listeler veya çıkarır.
-  en: Lists or extracts ZIP contents.
+  tr: ZIP arşivlerini listeler veya çıkarır; zip ile birlikte arşiv iş akışlarında kullanılır.
+  en: Lists or extracts ZIP archives; commonly paired with zip in archive workflows.
 tags:
 - archive
 risk: caution
@@ -47,3 +47,6 @@ verification:
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-bootstrap
 category: archives
+nova:
+  concepts:
+  - files

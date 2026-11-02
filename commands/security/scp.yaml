@@ -89,4 +89,5 @@ nova:
   concepts:
   - ssh
   - networking
+  - permissions
 category: security
