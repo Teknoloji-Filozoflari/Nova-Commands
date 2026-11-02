@@ -1,0 +1,55 @@
+id: wget
+name: wget
+summary:
+  tr: Ağ üzerinden dosya indirir (tekrar denemeli).
+  en: Non-interactive network downloader.
+description:
+  tr: HTTP/HTTPS/FTP indirme; site aynalama özellikleri.
+  en: HTTP/HTTPS/FTP downloads with retry and mirroring features.
+tags:
+- network
+- download
+risk: caution
+requires_elevated: false
+platforms:
+- linux
+packages:
+  arch: wget
+  debian: wget
+  ubuntu: wget
+  fedora: wget
+install_notes:
+  tr: 'Arch: pacman -S wget'
+  en: 'Arch: pacman -S wget'
+flags:
+- flag: -c
+  long: --continue
+  meaning:
+    tr: Kısmi indirmeye devam.
+    en: Continue partial download.
+  verified: true
+examples:
+- title:
+    tr: İndir
+    en: Download
+  command: wget https://example.com/file.tar.gz
+  explanation:
+    tr: Dosyayı çalışma dizinine indirir.
+    en: Downloads into the working directory.
+  risk: caution
+related:
+- curl
+intent:
+  tr:
+  - wget ile indir
+  - dosya indir
+  en:
+  - download file wget
+  - wget url
+verification:
+  status: reviewed
+  sources:
+  - man 1 wget
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-bootstrap
+category: network

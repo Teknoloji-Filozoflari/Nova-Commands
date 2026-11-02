@@ -1,0 +1,60 @@
+id: which
+name: which
+summary:
+  tr: Komutun PATH üzerindeki konumunu gösterir.
+  en: Locate a command on PATH.
+description:
+  tr: Kabuğun bulacağı yürütülebilir dosyanın yolunu basar.
+  en: Prints the path of the executable that would be run.
+tags:
+- search
+- path
+risk: safe
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+packages:
+  arch: which
+  debian: debianutils
+  ubuntu: debianutils
+  fedora: which
+install_notes:
+  tr: 'Arch: pacman -S which
+
+    Debian/Ubuntu: generally in debianutils
+
+    Fedora: dnf install which'
+  en: 'Arch: pacman -S which
+
+    Debian/Ubuntu: typically debianutils
+
+    Fedora: dnf install which'
+examples:
+- title:
+    tr: Nerede?
+    en: Where is it?
+  command: which python3
+  explanation:
+    tr: python3 ikilisinin yolunu basar.
+    en: Prints the python3 binary path.
+  risk: safe
+related:
+- whereis
+- type
+- command
+intent:
+  tr:
+  - komut yolu
+  - where which
+  en:
+  - which binary
+  - find command path
+verification:
+  status: reviewed
+  sources:
+  - man 1 which
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-bootstrap
+category: search

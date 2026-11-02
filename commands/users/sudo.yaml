@@ -1,0 +1,79 @@
+id: sudo
+name: sudo
+summary:
+  tr: Komutu başka kullanıcı olarak çalıştırır (genelde root).
+  en: Execute a command as another user (usually root).
+description:
+  tr: Politika (sudoers) ile yetkili komut çalıştırma. Dikkatli kullanın.
+  en: Runs privileged commands per sudoers policy. Use carefully.
+tags:
+- users
+- privilege
+risk: dangerous
+requires_elevated: false
+platforms:
+- linux
+- macos
+packages:
+  arch: sudo
+  debian: sudo
+  ubuntu: sudo
+  fedora: sudo
+install_notes:
+  tr: 'Arch: pacman -S sudo — kullanıcınızı wheel grubuna ekleyin.'
+  en: 'Arch: pacman -S sudo — add your user to the wheel group.'
+flags:
+- flag: -u
+  takes_value: true
+  value_name: user
+  meaning:
+    tr: Hedef kullanıcı.
+    en: Run as target user.
+  verified: true
+- flag: -i
+  meaning:
+    tr: Login shell gibi.
+    en: Simulate initial login.
+  verified: true
+- flag: -l
+  meaning:
+    tr: İzinleri listele.
+    en: List allowed commands.
+  verified: true
+examples:
+- title:
+    tr: Root komut
+    en: Root command
+  command: sudo pacman -Syu
+  explanation:
+    tr: Arch’ta sistem güncellemesi.
+    en: System upgrade on Arch.
+  risk: dangerous
+- title:
+    tr: İzinlerim
+    en: My privileges
+  command: sudo -l
+  explanation:
+    tr: sudo ile neler yapılabileceğini listeler.
+    en: Lists what sudo allows.
+  risk: safe
+related:
+- su
+- doas
+intent:
+  tr:
+  - yönetici olarak çalıştır
+  - root yetkisi
+  en:
+  - run as root
+  - admin command
+verification:
+  status: reviewed
+  sources:
+  - man 8 sudo
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-bootstrap
+nova:
+  favorite_eligible: true
+  ui_priority: 75
+category: users

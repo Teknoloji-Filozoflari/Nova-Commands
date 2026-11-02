@@ -1,0 +1,67 @@
+id: ssh
+name: ssh
+summary:
+  tr: Uzaktan güvenli kabuk oturumu.
+  en: OpenSSH remote login client.
+description:
+  tr: SSH protokolü ile uzak makinede oturum açar.
+  en: Logs into a remote machine using the SSH protocol.
+tags:
+- security
+- network
+risk: caution
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+packages:
+  arch: openssh
+  debian: openssh-client
+  ubuntu: openssh-client
+  fedora: openssh-clients
+install_notes:
+  tr: 'Arch: pacman -S openssh'
+  en: 'Arch: pacman -S openssh'
+flags:
+- flag: -p
+  takes_value: true
+  value_name: port
+  meaning:
+    tr: Uzak port.
+    en: Remote port.
+  verified: true
+- flag: -i
+  takes_value: true
+  value_name: identity
+  meaning:
+    tr: Kimlik dosyası (özel anahtar).
+    en: Identity file (private key).
+  verified: true
+examples:
+- title:
+    tr: Bağlan
+    en: Connect
+  command: ssh user@host.example
+  explanation:
+    tr: Uzak oturum açar.
+    en: Opens a remote session.
+  risk: caution
+related:
+- ssh-keygen
+- scp
+- sftp
+intent:
+  tr:
+  - ssh ile bağlan
+  - uzak sunucu
+  en:
+  - ssh connect
+  - remote shell
+verification:
+  status: reviewed
+  sources:
+  - man 1 ssh
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-bootstrap
+category: security

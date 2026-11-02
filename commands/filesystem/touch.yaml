@@ -1,0 +1,71 @@
+id: touch
+name: touch
+summary:
+  tr: Dosya zaman damgasını günceller veya boş dosya oluşturur.
+  en: Update timestamps or create empty files.
+description:
+  tr: Var olmayan dosyaları boş oluşturur; var olanların erişim/değişiklik zamanını
+    günceller.
+  en: Creates empty files or updates access/modification times.
+tags:
+- files
+risk: safe
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+packages:
+  arch: coreutils
+  debian: coreutils
+  ubuntu: coreutils
+  fedora: coreutils
+flags:
+- flag: -c
+  long: --no-create
+  meaning:
+    tr: Dosya yoksa oluşturma.
+    en: Do not create any files.
+  verified: true
+  platforms:
+  - gnu
+- flag: -a
+  meaning:
+    tr: Yalnızca erişim zamanını değiştir.
+    en: Change only the access time.
+  verified: true
+  platforms:
+  - gnu
+- flag: -m
+  meaning:
+    tr: Yalnızca değiştirme zamanını değiştir.
+    en: Change only the modification time.
+  verified: true
+  platforms:
+  - gnu
+examples:
+- title:
+    tr: Boş dosya
+    en: Empty file
+  command: touch README.md
+  explanation:
+    tr: Yoksa boş README.md oluşturur.
+    en: Creates empty README.md if missing.
+  risk: safe
+related:
+- mkdir
+- stat
+intent:
+  tr:
+  - boş dosya oluştur
+  - zaman damgası güncelle
+  en:
+  - create empty file
+  - update timestamp
+verification:
+  status: reviewed
+  sources:
+  - man 1 touch
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-bootstrap
+category: filesystem

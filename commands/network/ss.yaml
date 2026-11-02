@@ -1,0 +1,77 @@
+id: ss
+name: ss
+summary:
+  tr: Soket istatistiklerini gösterir.
+  en: Investigate sockets.
+description:
+  tr: netstat yerine geçen, dinleyen portları ve bağlantıları listeler.
+  en: Successor-style replacement for many netstat uses; lists sockets.
+tags:
+- network
+- ports
+risk: safe
+requires_elevated: false
+platforms:
+- linux
+packages:
+  arch: iproute2
+  debian: iproute2
+  ubuntu: iproute2
+  fedora: iproute
+flags:
+- flag: -t
+  long: --tcp
+  meaning:
+    tr: TCP soketleri.
+    en: Display TCP sockets.
+  verified: true
+- flag: -u
+  long: --udp
+  meaning:
+    tr: UDP soketleri.
+    en: Display UDP sockets.
+  verified: true
+- flag: -l
+  long: --listening
+  meaning:
+    tr: Dinleyen soketler.
+    en: Display listening sockets.
+  verified: true
+- flag: -n
+  long: --numeric
+  meaning:
+    tr: Servis adlarını çözümleme.
+    en: Do not resolve service names.
+  verified: true
+- flag: -p
+  long: --processes
+  meaning:
+    tr: Süreci göster.
+    en: Show process using socket.
+  verified: true
+examples:
+- title:
+    tr: Dinleyen TCP
+    en: Listening TCP
+  command: ss -tulpn
+  explanation:
+    tr: Dinleyen TCP/UDP portlar ve süreçler.
+    en: Listening TCP/UDP ports and processes.
+  risk: safe
+related:
+- ip
+- netstat
+intent:
+  tr:
+  - açık portlar
+  - kim dinliyor
+  en:
+  - listening ports
+  - what is listening
+verification:
+  status: reviewed
+  sources:
+  - man 8 ss
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-bootstrap
+category: network

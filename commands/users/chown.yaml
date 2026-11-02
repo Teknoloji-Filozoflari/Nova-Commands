@@ -1,0 +1,57 @@
+id: chown
+name: chown
+summary:
+  tr: Dosya sahibini değiştirir.
+  en: Change file owner and group.
+description:
+  tr: Sahip ve/veya grubu ayarlar; genelde root gerekir.
+  en: Sets owner and/or group; usually needs root.
+tags:
+- users
+- permissions
+risk: dangerous
+requires_elevated: true
+platforms:
+- linux
+- macos
+- bsd
+packages:
+  arch: coreutils
+  debian: coreutils
+  ubuntu: coreutils
+  fedora: coreutils
+flags:
+- flag: -R
+  long: --recursive
+  meaning:
+    tr: Özyinelemeli.
+    en: Operate recursively.
+  verified: true
+  platforms:
+  - gnu
+examples:
+- title:
+    tr: Sahip değiştir
+    en: Change owner
+  command: sudo chown -R user:user /var/www/app
+  explanation:
+    tr: Ağacı user’a verir.
+    en: Gives the tree to user.
+  risk: dangerous
+  requires_elevated: true
+related:
+- chmod
+intent:
+  tr:
+  - dosya sahibi değiştir
+  - chown
+  en:
+  - change owner
+  - chown file
+verification:
+  status: reviewed
+  sources:
+  - man 1 chown
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-bootstrap
+category: users

@@ -1,0 +1,68 @@
+packages:
+  arch: coreutils
+  debian: coreutils
+  ubuntu: coreutils
+  fedora: coreutils
+platforms:
+- linux
+- macos
+- bsd
+requires_elevated: false
+verification:
+  status: reviewed
+  sources:
+  - man 1 tail
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-bootstrap
+id: tail
+name: tail
+summary:
+  tr: Dosyanın sonunu gösterir.
+  en: Show the end of files.
+description:
+  tr: Varsayılan son 10 satır. -f ile canlı takip.
+  en: Last 10 lines by default. -f follows appended data.
+tags:
+- text
+- log
+risk: safe
+flags:
+- flag: -n
+  long: --lines
+  takes_value: true
+  value_name: N
+  meaning:
+    tr: Son N satır.
+    en: Last N lines.
+  verified: true
+  platforms:
+  - gnu
+- flag: -f
+  long: --follow
+  meaning:
+    tr: Eklenen çıktıyı canlı izle.
+    en: Follow appended output.
+  verified: true
+  platforms:
+  - gnu
+examples:
+- title:
+    tr: Log takip
+    en: Follow log
+  command: tail -f /var/log/nginx/access.log
+  explanation:
+    tr: Yeni satırları canlı gösterir.
+    en: Streams new lines as they appear.
+  risk: safe
+related:
+- head
+- less
+- journalctl
+intent:
+  tr:
+  - log takip
+  - dosyanın sonu
+  en:
+  - follow log
+  - tail file
+category: text

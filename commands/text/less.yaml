@@ -1,0 +1,54 @@
+packages:
+  arch: less
+  debian: less
+  ubuntu: less
+  fedora: less
+platforms:
+- linux
+- macos
+- bsd
+requires_elevated: false
+verification:
+  status: reviewed
+  sources:
+  - man 1 less
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-bootstrap
+id: less
+name: less
+summary:
+  tr: Metni sayfa sayfa görüntüler.
+  en: Page through text interactively.
+description:
+  tr: Büyük çıktıları kaydırılabilir biçimde okur. q ile çıkılır.
+  en: Reads large output in a scrollable view. Press q to quit.
+tags:
+- text
+- pager
+risk: safe
+flags:
+- flag: -N
+  meaning:
+    tr: Satır numarası göster.
+    en: Show line numbers.
+  verified: true
+examples:
+- title:
+    tr: Log oku
+    en: Read a log
+  command: less /var/log/syslog
+  explanation:
+    tr: syslog dosyasını sayfalar.
+    en: Pages through syslog.
+  risk: safe
+related:
+- more
+- cat
+intent:
+  tr:
+  - sayfa sayfa oku
+  - log incele
+  en:
+  - page through file
+  - view log
+category: text

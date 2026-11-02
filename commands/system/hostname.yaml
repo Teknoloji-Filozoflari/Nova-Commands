@@ -1,0 +1,54 @@
+id: hostname
+name: hostname
+summary:
+  tr: Sistem ana bilgisayar adını gösterir veya ayarlar.
+  en: Show or set the system hostname.
+description:
+  tr: Ada bakmak için argümansız çalıştırın; ayarlamak genelde root ister.
+  en: Run with no args to print; setting usually needs root.
+tags:
+- system
+risk: caution
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+packages:
+  arch: inetutils
+  debian: hostname
+  ubuntu: hostname
+  fedora: hostname
+install_notes:
+  tr: 'Arch: pacman -S inetutils (hostname).
+
+    Kalıcı ad için hostnamectl tercih edin.'
+  en: 'Arch: pacman -S inetutils.
+
+    Prefer hostnamectl for persistent names.'
+examples:
+- title:
+    tr: Adı gör
+    en: Show name
+  command: hostname
+  explanation:
+    tr: Geçerli hostname.
+    en: Current hostname.
+  risk: safe
+related:
+- hostnamectl
+- uname
+intent:
+  tr:
+  - bilgisayar adı
+  - hostname gör
+  en:
+  - show hostname
+  - computer name
+verification:
+  status: reviewed
+  sources:
+  - man 1 hostname
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-bootstrap
+category: system

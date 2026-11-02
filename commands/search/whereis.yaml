@@ -1,0 +1,44 @@
+id: whereis
+name: whereis
+summary:
+  tr: Komutun ikili, kaynak ve man konumlarını arar.
+  en: Locate binary, source, and man pages.
+description:
+  tr: Standart hiyerarşilerde ikili/kaynak/manuel yollarını gösterir.
+  en: Shows binary/source/manual paths in standard hierarchies.
+tags:
+- search
+risk: safe
+requires_elevated: false
+platforms:
+- linux
+packages:
+  arch: util-linux
+  debian: util-linux
+  ubuntu: util-linux
+  fedora: util-linux
+examples:
+- title:
+    tr: ls konumları
+    en: ls locations
+  command: whereis ls
+  explanation:
+    tr: ls için bilinen yolları listeler.
+    en: Lists known paths for ls.
+  risk: safe
+related:
+- which
+intent:
+  tr:
+  - man sayfası yolu
+  - ikili nerede
+  en:
+  - whereis command
+  - find man page path
+verification:
+  status: reviewed
+  sources:
+  - man 1 whereis
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-bootstrap
+category: search

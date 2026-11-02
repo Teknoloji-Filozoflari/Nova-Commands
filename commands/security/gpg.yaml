@@ -1,0 +1,49 @@
+id: gpg
+name: gpg
+summary:
+  tr: OpenPGP şifreleme ve imza aracı.
+  en: OpenPGP encryption and signing tool.
+description:
+  tr: Anahtar yönetimi, şifreleme, imzalama (GnuPG).
+  en: Key management, encrypt, sign (GnuPG).
+tags:
+- security
+- crypto
+risk: caution
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+packages:
+  arch: gnupg
+  debian: gnupg
+  ubuntu: gnupg
+  fedora: gnupg2
+install_notes:
+  tr: 'Arch: pacman -S gnupg'
+  en: 'Arch: pacman -S gnupg'
+examples:
+- title:
+    tr: Anahtarlar
+    en: List keys
+  command: gpg --list-keys
+  explanation:
+    tr: Genel anahtarları listeler.
+    en: Lists public keys.
+  risk: safe
+related:
+- ssh-keygen
+intent:
+  tr:
+  - gpg anahtar
+  - şifrele
+  en:
+  - gpg keys
+  - encrypt file
+verification:
+  status: draft
+  sources:
+  - man 1 gpg
+  notes: Minimal seed; expand subcommands later.
+category: security

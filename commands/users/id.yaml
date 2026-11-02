@@ -1,0 +1,47 @@
+id: id
+name: id
+summary:
+  tr: Kullanıcı ve grup kimliklerini basar.
+  en: Print user and group IDs.
+description:
+  tr: UID/GID ve grup üyeliklerini gösterir.
+  en: Shows UID/GID and group memberships.
+tags:
+- users
+risk: safe
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+packages:
+  arch: coreutils
+  debian: coreutils
+  ubuntu: coreutils
+  fedora: coreutils
+examples:
+- title:
+    tr: Kimliklerim
+    en: My ids
+  command: id
+  explanation:
+    tr: UID/GID ve gruplar.
+    en: UID/GID and groups.
+  risk: safe
+related:
+- whoami
+- groups
+intent:
+  tr:
+  - uid gör
+  - gruplarım
+  en:
+  - show uid
+  - my groups
+verification:
+  status: reviewed
+  sources:
+  - man 1 id
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-bootstrap
+category: users

@@ -1,0 +1,54 @@
+id: docker
+name: docker
+summary:
+  tr: Docker konteyner CLI.
+  en: Docker container CLI.
+description:
+  tr: Docker Engine ile konteyner ve imaj yönetimi. Paket adı dağıtıma göre değişir.
+  en: Manage containers/images with Docker Engine. Package names vary by distro.
+tags:
+- containers
+risk: dangerous
+requires_elevated: false
+platforms:
+- linux
+packages:
+  arch: docker
+  fedora: docker-ce
+install_notes:
+  tr: 'Arch: pacman -S docker — sonra systemctl enable --now docker; kullanıcıyı docker
+    grubuna ekleyin.
+
+    Debian/Ubuntu paket adları dağıtıma göre değişir (unknown — dokümantasyona bakın).
+
+    Fedora sıkça docker-ce (docker.com repo).'
+  en: 'Arch: pacman -S docker — then systemctl enable --now docker; add user to docker
+    group.
+
+    Debian/Ubuntu package names vary (unknown — see distro docs).
+
+    Fedora often docker-ce from docker.com.'
+examples:
+- title:
+    tr: ps
+    en: ps
+  command: docker ps
+  explanation:
+    tr: Çalışan konteynerler.
+    en: Running containers.
+  risk: safe
+related:
+- podman
+intent:
+  tr:
+  - docker konteyner
+  - docker ps
+  en:
+  - docker containers
+  - docker ps
+verification:
+  status: draft
+  sources:
+  - https://docs.docker.com/engine/reference/commandline/cli/
+  notes: debian/ubuntu package intentionally omitted as unknown.
+category: containers

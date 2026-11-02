@@ -1,0 +1,52 @@
+id: lsblk
+name: lsblk
+summary:
+  tr: Blok aygıtları ağaç olarak listeler.
+  en: List block devices.
+description:
+  tr: Disk ve bölümleri okunabilir ağaçta gösterir.
+  en: Shows disks and partitions as a tree.
+tags:
+- disk
+risk: safe
+requires_elevated: false
+platforms:
+- linux
+packages:
+  arch: util-linux
+  debian: util-linux
+  ubuntu: util-linux
+  fedora: util-linux
+flags:
+- flag: -f
+  meaning:
+    tr: Dosya sistemi bilgisi ekle.
+    en: Include filesystem info.
+  verified: true
+examples:
+- title:
+    tr: Ağaç
+    en: Tree
+  command: lsblk -f
+  explanation:
+    tr: Aygıtlar + FS.
+    en: Devices + filesystems.
+  risk: safe
+related:
+- df
+- mount
+- fdisk
+intent:
+  tr:
+  - diskleri listele
+  - bölümler
+  en:
+  - list disks
+  - show partitions
+verification:
+  status: reviewed
+  sources:
+  - man 8 lsblk
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-bootstrap
+category: disks

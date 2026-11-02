@@ -1,0 +1,82 @@
+id: mv
+name: mv
+summary:
+  tr: Dosya/dizin taşır veya yeniden adlandırır.
+  en: Move or rename files and directories.
+description:
+  tr: Kaynağı hedefe taşır. Aynı dosya sisteminde yeniden adlandırma gibidir.
+  en: Moves a source to a destination; on the same filesystem this is a rename.
+tags:
+- files
+- move
+- rename
+risk: caution
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+packages:
+  arch: coreutils
+  debian: coreutils
+  ubuntu: coreutils
+  fedora: coreutils
+flags:
+- flag: -i
+  long: --interactive
+  meaning:
+    tr: Üzerine yazmadan önce sor.
+    en: Prompt before overwrite.
+  verified: true
+  platforms:
+  - gnu
+- flag: -v
+  long: --verbose
+  meaning:
+    tr: İşlemleri göster.
+    en: Explain what is being done.
+  verified: true
+  platforms:
+  - gnu
+- flag: -n
+  long: --no-clobber
+  meaning:
+    tr: Var olan dosyanın üzerine yazma.
+    en: Do not overwrite an existing file.
+  verified: true
+  platforms:
+  - gnu
+examples:
+- title:
+    tr: Yeniden adlandır
+    en: Rename
+  command: mv old.txt new.txt
+  explanation:
+    tr: old.txt adını new.txt yapar.
+    en: Renames old.txt to new.txt.
+  risk: caution
+- title:
+    tr: Taşı
+    en: Move into directory
+  command: mv report.pdf ~/Documents/
+  explanation:
+    tr: Dosyayı Documents altına taşır.
+    en: Moves the file into Documents.
+  risk: caution
+related:
+- cp
+- rename
+intent:
+  tr:
+  - dosya taşı
+  - yeniden adlandır
+  en:
+  - move file
+  - rename file
+verification:
+  status: reviewed
+  sources:
+  - man 1 mv (GNU coreutils)
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-bootstrap
+category: filesystem

@@ -1,0 +1,67 @@
+id: stat
+name: stat
+summary:
+  tr: Dosya durumu ve inode bilgisi gösterir.
+  en: Display file status and inode data.
+description:
+  tr: Boyut, izinler, zaman damgaları ve dosya türü gibi meta verileri basar.
+  en: Prints metadata such as size, permissions, timestamps, and file type.
+tags:
+- files
+- metadata
+risk: safe
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+packages:
+  arch: coreutils
+  debian: coreutils
+  ubuntu: coreutils
+  fedora: coreutils
+flags:
+- flag: -c
+  long: --format
+  takes_value: true
+  value_name: FORMAT
+  meaning:
+    tr: Özel biçim dizesi kullan (GNU).
+    en: Use a custom format string (GNU).
+  verified: true
+  platforms:
+  - gnu
+- flag: -L
+  long: --dereference
+  meaning:
+    tr: Sembolik bağları takip et.
+    en: Follow links.
+  verified: true
+  platforms:
+  - gnu
+examples:
+- title:
+    tr: Dosya bilgisi
+    en: File info
+  command: stat /etc/passwd
+  explanation:
+    tr: passwd dosyasının meta verisini gösterir.
+    en: Shows metadata for /etc/passwd.
+  risk: safe
+related:
+- ls
+- file
+intent:
+  tr:
+  - dosya bilgisi
+  - inode gör
+  en:
+  - file metadata
+  - show inode
+verification:
+  status: reviewed
+  sources:
+  - man 1 stat
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-bootstrap
+category: filesystem

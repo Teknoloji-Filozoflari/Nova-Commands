@@ -1,0 +1,66 @@
+id: podman
+name: podman
+summary:
+  tr: Demonssuz konteyner motoru.
+  en: Daemonless container engine.
+description:
+  tr: OCI konteynerleri yönetir; Docker CLI’ye benzer komutlar.
+  en: Manages OCI containers; Docker-like CLI.
+tags:
+- containers
+risk: dangerous
+requires_elevated: false
+platforms:
+- linux
+packages:
+  arch: podman
+  debian: podman
+  ubuntu: podman
+  fedora: podman
+install_notes:
+  tr: 'Arch: pacman -S podman
+
+    Fedora: dnf install podman
+
+    Debian/Ubuntu: apt install podman'
+  en: 'Arch: pacman -S podman
+
+    Fedora: dnf install podman
+
+    Debian/Ubuntu: apt install podman'
+examples:
+- title:
+    tr: Çalışanlar
+    en: Running
+  command: podman ps
+  explanation:
+    tr: Çalışan konteynerler.
+    en: Running containers.
+  risk: safe
+- title:
+    tr: İmajlar
+    en: Images
+  command: podman images
+  explanation:
+    tr: Yerel imajlar.
+    en: Local images.
+  risk: safe
+related:
+- docker
+- nerdctl
+intent:
+  tr:
+  - konteyner listele
+  - podman ps
+  en:
+  - list containers
+  - podman ps
+verification:
+  status: draft
+  sources:
+  - https://docs.podman.io/
+  notes: Seed draft — expand flags after human pass.
+nova:
+  favorite_eligible: true
+  ui_priority: 70
+category: containers

@@ -1,0 +1,72 @@
+packages:
+  arch: coreutils
+  debian: coreutils
+  ubuntu: coreutils
+  fedora: coreutils
+platforms:
+- linux
+- macos
+- bsd
+requires_elevated: false
+verification:
+  status: reviewed
+  sources:
+  - man 1 sort
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-bootstrap
+id: sort
+name: sort
+summary:
+  tr: Satırları sıralar.
+  en: Sort lines of text.
+description:
+  tr: Standart girdi veya dosya satırlarını sıralar.
+  en: Sorts lines from files or stdin.
+tags:
+- text
+risk: safe
+flags:
+- flag: -n
+  long: --numeric-sort
+  meaning:
+    tr: Sayısal sıralama.
+    en: Compare according to string numerical value.
+  verified: true
+  platforms:
+  - gnu
+- flag: -r
+  long: --reverse
+  meaning:
+    tr: Ters sıra.
+    en: Reverse the result.
+  verified: true
+  platforms:
+  - gnu
+- flag: -u
+  long: --unique
+  meaning:
+    tr: Benzersiz satırlar.
+    en: Unique lines.
+  verified: true
+  platforms:
+  - gnu
+examples:
+- title:
+    tr: Sayısal sırala
+    en: Numeric sort
+  command: sort -n numbers.txt
+  explanation:
+    tr: Sayı değerine göre sıralar.
+    en: Sorts by numeric value.
+  risk: safe
+related:
+- uniq
+- wc
+intent:
+  tr:
+  - satır sırala
+  - listeyi sırala
+  en:
+  - sort lines
+  - sort file
+category: text

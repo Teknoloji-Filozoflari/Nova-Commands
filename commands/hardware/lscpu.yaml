@@ -1,0 +1,46 @@
+id: lscpu
+name: lscpu
+summary:
+  tr: CPU mimarisi bilgisini gösterir.
+  en: Display CPU architecture information.
+description:
+  tr: Çekirdek, iş parçacığı ve bayrak özetini basar.
+  en: Prints cores, threads, and CPU flags summary.
+tags:
+- hardware
+- cpu
+risk: safe
+requires_elevated: false
+platforms:
+- linux
+packages:
+  arch: util-linux
+  debian: util-linux
+  ubuntu: util-linux
+  fedora: util-linux
+examples:
+- title:
+    tr: CPU bilgisi
+    en: CPU info
+  command: lscpu
+  explanation:
+    tr: İşlemci özeti.
+    en: CPU summary.
+  risk: safe
+related:
+- lspci
+- lshw
+intent:
+  tr:
+  - işlemci bilgisi
+  - kaç çekirdek
+  en:
+  - cpu info
+  - how many cores
+verification:
+  status: reviewed
+  sources:
+  - man 1 lscpu
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-bootstrap
+category: hardware

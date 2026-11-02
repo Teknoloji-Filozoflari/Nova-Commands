@@ -1,0 +1,57 @@
+id: uname
+name: uname
+summary:
+  tr: Sistem bilgisini yazdırır.
+  en: Print system information.
+description:
+  tr: Çekirdek adı, sürüm ve makine mimarisi gibi bilgileri gösterir.
+  en: Shows kernel name, release, machine architecture, and more.
+tags:
+- system
+- info
+risk: safe
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+packages:
+  arch: coreutils
+  debian: coreutils
+  ubuntu: coreutils
+  fedora: coreutils
+flags:
+- flag: -a
+  long: --all
+  meaning:
+    tr: Tüm bilinen bilgi.
+    en: Print all information.
+  verified: true
+  platforms:
+  - gnu
+examples:
+- title:
+    tr: Tümü
+    en: All
+  command: uname -a
+  explanation:
+    tr: Özet sistem kimliği.
+    en: Summary system identity.
+  risk: safe
+related:
+- hostnamectl
+- hostname
+intent:
+  tr:
+  - çekirdek sürümü
+  - mimari nedir
+  en:
+  - kernel version
+  - machine arch
+verification:
+  status: reviewed
+  sources:
+  - man 1 uname
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-bootstrap
+category: system

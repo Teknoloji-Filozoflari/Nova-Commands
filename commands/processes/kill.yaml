@@ -1,0 +1,72 @@
+id: kill
+name: kill
+summary:
+  tr: Sürece sinyal gönderir.
+  en: Send a signal to a process.
+description:
+  tr: PID’ye sinyal yollar. Varsayılan SIGTERM; -9 SIGKILL zorla sonlandırır.
+  en: Sends a signal to a PID. Default SIGTERM; -9 is SIGKILL.
+tags:
+- process
+risk: dangerous
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+packages:
+  arch: util-linux
+  debian: procps
+  ubuntu: procps
+  fedora: util-linux
+flags:
+- flag: -l
+  meaning:
+    tr: Sinyal adlarını listele.
+    en: List signal names.
+  verified: true
+- flag: '-9'
+  meaning:
+    tr: SIGKILL — zorla öldür.
+    en: SIGKILL — force kill.
+  verified: true
+- flag: '-15'
+  meaning:
+    tr: SIGTERM — nazik sonlandırma (varsayılan).
+    en: SIGTERM — graceful (default).
+  verified: true
+examples:
+- title:
+    tr: Nazikçe sonlandır
+    en: Graceful stop
+  command: kill 1234
+  explanation:
+    tr: PID 1234’e SIGTERM gönderir.
+    en: Sends SIGTERM to PID 1234.
+  risk: caution
+- title:
+    tr: Zorla
+    en: Force
+  command: kill -9 1234
+  explanation:
+    tr: SIGKILL; veri kaybı riski.
+    en: SIGKILL; risk of data loss.
+  risk: dangerous
+related:
+- pkill
+- killall
+- ps
+intent:
+  tr:
+  - süreci öldür
+  - process sonlandır
+  en:
+  - kill process
+  - stop pid
+verification:
+  status: reviewed
+  sources:
+  - man 1 kill
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-bootstrap
+category: processes

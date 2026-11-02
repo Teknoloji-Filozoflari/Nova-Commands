@@ -1,0 +1,47 @@
+id: uptime
+name: uptime
+summary:
+  tr: Çalışma süresi ve yük ortalaması.
+  en: Tell how long the system has been running.
+description:
+  tr: Boot’tan beri süre, kullanıcı sayısı ve load average basar.
+  en: Prints uptime, user count, and load averages.
+tags:
+- system
+risk: safe
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+packages:
+  arch: procps-ng
+  debian: procps
+  ubuntu: procps
+  fedora: procps-ng
+examples:
+- title:
+    tr: Uptime
+    en: Uptime
+  command: uptime
+  explanation:
+    tr: Sistem ne zamandır açık.
+    en: How long the system has been up.
+  risk: safe
+related:
+- top
+- w
+intent:
+  tr:
+  - ne zamandır açık
+  - load average
+  en:
+  - system uptime
+  - load average
+verification:
+  status: reviewed
+  sources:
+  - man 1 uptime
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-bootstrap
+category: system

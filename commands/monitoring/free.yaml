@@ -1,0 +1,53 @@
+id: free
+name: free
+summary:
+  tr: Bellek kullanımını gösterir.
+  en: Display amount of free and used memory.
+description:
+  tr: RAM ve swap özetini basar.
+  en: Prints RAM and swap summary.
+tags:
+- monitoring
+- memory
+risk: safe
+requires_elevated: false
+platforms:
+- linux
+packages:
+  arch: procps-ng
+  debian: procps
+  ubuntu: procps
+  fedora: procps-ng
+flags:
+- flag: -h
+  long: --human
+  meaning:
+    tr: İnsan okunur.
+    en: Human readable.
+  verified: true
+examples:
+- title:
+    tr: Bellek
+    en: Memory
+  command: free -h
+  explanation:
+    tr: RAM/swap özeti.
+    en: RAM/swap summary.
+  risk: safe
+related:
+- top
+- vmstat
+intent:
+  tr:
+  - ram kullanımı
+  - bellek boş mu
+  en:
+  - memory usage
+  - free ram
+verification:
+  status: reviewed
+  sources:
+  - man 1 free
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-bootstrap
+category: monitoring

@@ -1,0 +1,24 @@
+# Named concepts that span multiple commands (Nova UI grouping hooks).
+# Not a substitute for categories; optional cross-cutting labels.
+schema_version: 1
+concepts:
+  - id: files
+    label:
+      tr: Dosya işlemleri
+      en: File operations
+  - id: packages
+    label:
+      tr: Paketler
+      en: Packages
+  - id: arch
+    label:
+      tr: Arch Linux
+      en: Arch Linux
+  - id: shell-builtin
+    label:
+      tr: Kabuk yerleşikleri
+      en: Shell builtins
+  - id: systemd
+    label:
+      tr: systemd
+      en: systemd

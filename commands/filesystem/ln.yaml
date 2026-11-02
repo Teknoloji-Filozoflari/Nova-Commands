@@ -1,0 +1,73 @@
+id: ln
+name: ln
+summary:
+  tr: Sabit veya sembolik bağ oluşturur.
+  en: Make hard or symbolic links.
+description:
+  tr: Varsayılanı sabit bağdır; sembolik bağ için -s kullanılır.
+  en: Default is a hard link; use -s for a symbolic link.
+tags:
+- files
+- symlink
+risk: caution
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+packages:
+  arch: coreutils
+  debian: coreutils
+  ubuntu: coreutils
+  fedora: coreutils
+flags:
+- flag: -s
+  long: --symbolic
+  meaning:
+    tr: Sembolik bağ yap.
+    en: Make symbolic links instead of hard links.
+  verified: true
+  platforms:
+  - gnu
+- flag: -f
+  long: --force
+  meaning:
+    tr: Var olan hedefi kaldırarak zorla.
+    en: Remove existing destination files.
+  verified: true
+  platforms:
+  - gnu
+- flag: -v
+  long: --verbose
+  meaning:
+    tr: Bağları yazdır.
+    en: Print name of each linked file.
+  verified: true
+  platforms:
+  - gnu
+examples:
+- title:
+    tr: Sembolik bağ
+    en: Symbolic link
+  command: ln -s /usr/bin/python3 ~/bin/python
+  explanation:
+    tr: python adında bir symlink oluşturur.
+    en: Creates a symlink named python.
+  risk: caution
+related:
+- cp
+- readlink
+intent:
+  tr:
+  - sembolik bağ
+  - symlink oluştur
+  en:
+  - create symlink
+  - make symbolic link
+verification:
+  status: reviewed
+  sources:
+  - man 1 ln
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-bootstrap
+category: filesystem

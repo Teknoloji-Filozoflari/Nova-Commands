@@ -1,0 +1,57 @@
+id: mount
+name: mount
+summary:
+  tr: Dosya sistemi bağlar.
+  en: Mount a filesystem.
+description:
+  tr: Aygıt veya imajı dizin ağacına bağlar. Yanlış kullanım riskli.
+  en: Attaches a device or image into the directory tree. Misuse is risky.
+tags:
+- disk
+risk: dangerous
+requires_elevated: true
+platforms:
+- linux
+- macos
+- bsd
+packages:
+  arch: util-linux
+  debian: mount
+  ubuntu: mount
+  fedora: util-linux
+examples:
+- title:
+    tr: Bağlı olanlar
+    en: What is mounted
+  command: mount
+  explanation:
+    tr: Mevcut mount tablosu (okuma).
+    en: Current mount table (read).
+  risk: safe
+  requires_elevated: false
+- title:
+    tr: ISO bağla
+    en: Mount ISO
+  command: sudo mount -o loop image.iso /mnt/iso
+  explanation:
+    tr: ISO’yu loop ile bağlar.
+    en: Loop-mounts an ISO.
+  risk: caution
+  requires_elevated: true
+related:
+- umount
+- lsblk
+intent:
+  tr:
+  - disk bağla
+  - mount nedir
+  en:
+  - mount disk
+  - what is mounted
+verification:
+  status: reviewed
+  sources:
+  - man 8 mount
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-bootstrap
+category: disks

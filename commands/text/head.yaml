@@ -1,0 +1,58 @@
+packages:
+  arch: coreutils
+  debian: coreutils
+  ubuntu: coreutils
+  fedora: coreutils
+platforms:
+- linux
+- macos
+- bsd
+requires_elevated: false
+verification:
+  status: reviewed
+  sources:
+  - man 1 head
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-bootstrap
+id: head
+name: head
+summary:
+  tr: Dosyanın başını gösterir.
+  en: Show the start of files.
+description:
+  tr: Varsayılan olarak ilk 10 satırı basar.
+  en: Prints the first 10 lines by default.
+tags:
+- text
+risk: safe
+flags:
+- flag: -n
+  long: --lines
+  takes_value: true
+  value_name: N
+  meaning:
+    tr: İlk N satır.
+    en: First N lines.
+  verified: true
+  platforms:
+  - gnu
+examples:
+- title:
+    tr: İlk 20 satır
+    en: First 20 lines
+  command: head -n 20 app.log
+  explanation:
+    tr: Logun başını alır.
+    en: Shows the beginning of a log.
+  risk: safe
+related:
+- tail
+- cat
+intent:
+  tr:
+  - dosyanın başı
+  - ilk satırlar
+  en:
+  - first lines
+  - head of file
+category: text

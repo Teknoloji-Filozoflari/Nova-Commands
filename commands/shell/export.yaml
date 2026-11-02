@@ -1,0 +1,51 @@
+id: export
+name: export
+summary:
+  tr: Değişkeni ortamda dışa aktarır (yerleşik).
+  en: Set export attribute for shell variables (builtin).
+description:
+  tr: Alt süreçlerin göreceği ortam değişkeni tanımlar.
+  en: Defines environment variables visible to child processes.
+tags:
+- shell
+- environment
+risk: caution
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+shells:
+- bash
+- zsh
+- sh
+examples:
+- title:
+    tr: PATH ekle
+    en: Extend PATH
+  command: export PATH="$HOME/.local/bin:$PATH"
+  explanation:
+    tr: Kullanıcı bin yolunu PATH başına ekler.
+    en: Prepends user bin to PATH.
+  risk: caution
+related:
+- env
+- set
+intent:
+  tr:
+  - ortam değişkeni ayarla
+  - export path
+  en:
+  - export variable
+  - set path
+verification:
+  status: reviewed
+  sources:
+  - bash help export
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-bootstrap
+  notes: Builtin
+nova:
+  concepts:
+  - shell-builtin
+category: shell

@@ -1,0 +1,49 @@
+id: top
+name: top
+summary:
+  tr: Canlı süreç izleyici.
+  en: Dynamic real-time process viewer.
+description:
+  tr: CPU/bellek kullanımını etkileşimli günceller. q ile çık.
+  en: Interactively updates CPU/memory usage. Press q to quit.
+tags:
+- process
+- monitor
+risk: safe
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+packages:
+  arch: procps-ng
+  debian: procps
+  ubuntu: procps
+  fedora: procps-ng
+examples:
+- title:
+    tr: İzle
+    en: Watch
+  command: top
+  explanation:
+    tr: Canlı süreç görünümü açar.
+    en: Opens the live process view.
+  risk: safe
+related:
+- htop
+- ps
+- btop
+intent:
+  tr:
+  - cpu kullanımı
+  - canlı süreç
+  en:
+  - cpu usage
+  - live processes
+verification:
+  status: reviewed
+  sources:
+  - man 1 top
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-bootstrap
+category: processes

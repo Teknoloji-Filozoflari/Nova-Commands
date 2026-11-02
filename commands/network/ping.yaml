@@ -1,0 +1,59 @@
+id: ping
+name: ping
+summary:
+  tr: ICMP ile host erişimini dener.
+  en: Send ICMP ECHO_REQUEST to network hosts.
+description:
+  tr: Hedefin yanıt verip vermediğini ve gecikmeyi ölçer.
+  en: Checks reachability and round-trip time.
+tags:
+- network
+risk: safe
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+packages:
+  arch: iputils
+  debian: iputils-ping
+  ubuntu: iputils-ping
+  fedora: iputils
+install_notes:
+  tr: 'Arch: pacman -S iputils'
+  en: 'Arch: pacman -S iputils'
+flags:
+- flag: -c
+  takes_value: true
+  value_name: COUNT
+  meaning:
+    tr: Paket sayısı.
+    en: Stop after count replies.
+  verified: true
+examples:
+- title:
+    tr: 4 paket
+    en: Four packets
+  command: ping -c 4 1.1.1.1
+  explanation:
+    tr: Cloudflare DNS’e 4 ping.
+    en: Four pings to Cloudflare DNS.
+  risk: safe
+related:
+- ip
+- traceroute
+- curl
+intent:
+  tr:
+  - ağ testi
+  - ping at
+  en:
+  - ping host
+  - check connectivity
+verification:
+  status: reviewed
+  sources:
+  - man 8 ping
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-bootstrap
+category: network

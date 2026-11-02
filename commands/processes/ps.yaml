@@ -1,0 +1,70 @@
+id: ps
+name: ps
+summary:
+  tr: Anlık süreç listesi.
+  en: Report a snapshot of processes.
+description:
+  tr: Çalışan süreçleri seçilen biçimde listeler.
+  en: Lists running processes in a chosen format.
+tags:
+- process
+risk: safe
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+packages:
+  arch: procps-ng
+  debian: procps
+  ubuntu: procps
+  fedora: procps-ng
+install_notes:
+  tr: 'Arch: pacman -S procps-ng'
+  en: 'Arch: pacman -S procps-ng'
+flags:
+- flag: aux
+  meaning:
+    tr: BSD biçiminde geniş liste (sık kullanılır).
+    en: BSD-style broad listing (common).
+  verified: true
+- flag: -ef
+  meaning:
+    tr: Standart tam liste.
+    en: Full listing (System V style).
+  verified: true
+examples:
+- title:
+    tr: Tüm süreçler
+    en: All processes
+  command: ps aux
+  explanation:
+    tr: Geniş süreç tablosu.
+    en: Wide process table.
+  risk: safe
+- title:
+    tr: İsme filtre
+    en: Filter by name
+  command: ps aux | grep nginx
+  explanation:
+    tr: nginx geçen satırları gösterir (grep de eşleşebilir).
+    en: Shows lines containing nginx (may match grep itself).
+  risk: safe
+related:
+- top
+- pgrep
+- kill
+intent:
+  tr:
+  - süreç listele
+  - çalışan programlar
+  en:
+  - list processes
+  - show running programs
+verification:
+  status: reviewed
+  sources:
+  - man 1 ps
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-bootstrap
+category: processes

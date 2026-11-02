@@ -1,0 +1,69 @@
+packages:
+  arch: coreutils
+  debian: coreutils
+  ubuntu: coreutils
+  fedora: coreutils
+platforms:
+- linux
+- macos
+- bsd
+requires_elevated: false
+verification:
+  status: reviewed
+  sources:
+  - man 1 cut
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-bootstrap
+id: cut
+name: cut
+summary:
+  tr: Satırlardan alan veya bayt keser.
+  en: Remove sections from each line.
+description:
+  tr: Ayraçlı alanlar veya karakter aralıklarını seçer.
+  en: Selects delimited fields or character ranges.
+tags:
+- text
+- fields
+risk: safe
+flags:
+- flag: -d
+  long: --delimiter
+  takes_value: true
+  value_name: DELIM
+  meaning:
+    tr: Alan ayracını ayarla.
+    en: Set field delimiter.
+  verified: true
+  platforms:
+  - gnu
+- flag: -f
+  long: --fields
+  takes_value: true
+  value_name: LIST
+  meaning:
+    tr: Seçilecek alanlar.
+    en: Select only these fields.
+  verified: true
+  platforms:
+  - gnu
+examples:
+- title:
+    tr: CSV ilk sütun
+    en: First CSV column
+  command: cut -d ',' -f 1 data.csv
+  explanation:
+    tr: Virgülle ayrılmış ilk alanı alır.
+    en: Takes the first comma-separated field.
+  risk: safe
+related:
+- awk
+- sort
+intent:
+  tr:
+  - sütun kes
+  - alan seç
+  en:
+  - cut column
+  - select field
+category: text

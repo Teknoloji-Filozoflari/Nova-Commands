@@ -1,0 +1,63 @@
+id: gzip
+name: gzip
+summary:
+  tr: Dosyaları gzip ile sıkıştırır veya açar.
+  en: Compress or expand files with gzip.
+description:
+  tr: Tek dosya sıkıştırma; arşiv ağaçları için tar -z tercih edilir.
+  en: Single-file compression; prefer tar -z for trees.
+tags:
+- archive
+- compress
+risk: caution
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+packages:
+  arch: gzip
+  debian: gzip
+  ubuntu: gzip
+  fedora: gzip
+flags:
+- flag: -d
+  long: --decompress
+  meaning:
+    tr: Aç.
+    en: Decompress.
+  verified: true
+- flag: -k
+  long: --keep
+  meaning:
+    tr: Girdiyi silme (GNU).
+    en: Keep input files (GNU).
+  verified: true
+  platforms:
+  - gnu
+examples:
+- title:
+    tr: Sıkıştır
+    en: Compress
+  command: gzip -k big.log
+  explanation:
+    tr: big.log.gz üretir, kaynağı tutar.
+    en: Makes big.log.gz and keeps source.
+  risk: caution
+related:
+- tar
+- xz
+intent:
+  tr:
+  - gzip sıkıştır
+  - gz aç
+  en:
+  - gzip compress
+  - decompress gz
+verification:
+  status: reviewed
+  sources:
+  - man 1 gzip
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-bootstrap
+category: archives

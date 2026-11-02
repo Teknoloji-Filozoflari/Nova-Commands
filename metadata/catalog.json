@@ -1,0 +1,6587 @@
+{
+  "schema_version": 1,
+  "kind": "nova-commands-bank",
+  "generated_at": "2026-11-02T18:13:02Z",
+  "command_count": 73,
+  "commands": [
+    {
+      "id": "apt",
+      "name": "apt",
+      "summary": {
+        "tr": "Debian/Ubuntu yüksek seviye paket aracı.",
+        "en": "Debian/Ubuntu high-level package tool."
+      },
+      "description": {
+        "tr": "Kurulum ve güncelleme için kullanıcı dostu apt arayüzü.",
+        "en": "User-friendly apt interface for install and upgrades."
+      },
+      "tags": [
+        "packages",
+        "debian"
+      ],
+      "risk": "dangerous",
+      "requires_elevated": true,
+      "platforms": [
+        "linux"
+      ],
+      "packages": {
+        "debian": "apt",
+        "ubuntu": "apt"
+      },
+      "install_notes": {
+        "tr": "Debian/Ubuntu tabanında gelir. Arch için pacman kullanın.",
+        "en": "On Debian/Ubuntu base. On Arch use pacman instead."
+      },
+      "flags": [
+        {
+          "flag": "update",
+          "meaning": {
+            "tr": "Paket listelerini yenile (alt komut).",
+            "en": "Refresh package lists (subcommand)."
+          },
+          "verified": true
+        },
+        {
+          "flag": "upgrade",
+          "meaning": {
+            "tr": "Paketleri yükselt (alt komut).",
+            "en": "Upgrade packages (subcommand)."
+          },
+          "verified": true
+        },
+        {
+          "flag": "install",
+          "meaning": {
+            "tr": "Paket kur (alt komut).",
+            "en": "Install packages (subcommand)."
+          },
+          "verified": true
+        },
+        {
+          "flag": "search",
+          "meaning": {
+            "tr": "Ara (alt komut).",
+            "en": "Search (subcommand)."
+          },
+          "verified": true
+        }
+      ],
+      "examples": [
+        {
+          "title": {
+            "tr": "Güncelle + yükselt",
+            "en": "Update + upgrade"
+          },
+          "command": "sudo apt update && sudo apt upgrade",
+          "explanation": {
+            "tr": "İndeksleri yeniler ve yükseltir.",
+            "en": "Refreshes indexes and upgrades."
+          },
+          "risk": "dangerous",
+          "requires_elevated": true
+        },
+        {
+          "title": {
+            "tr": "Kur",
+            "en": "Install"
+          },
+          "command": "sudo apt install curl",
+          "explanation": {
+            "tr": "curl kurar.",
+            "en": "Installs curl."
+          },
+          "risk": "caution",
+          "requires_elevated": true
+        }
+      ],
+      "related": [
+        "apt-get",
+        "dpkg",
+        "pacman",
+        "dnf"
+      ],
+      "intent": {
+        "tr": [
+          "ubuntu paket kur",
+          "apt güncelle"
+        ],
+        "en": [
+          "apt install",
+          "ubuntu upgrade"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 8 apt"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-bootstrap"
+      },
+      "category": "packages"
+    },
+    {
+      "packages": {
+        "arch": "coreutils",
+        "debian": "coreutils",
+        "ubuntu": "coreutils",
+        "fedora": "coreutils"
+      },
+      "platforms": [
+        "linux",
+        "macos",
+        "bsd"
+      ],
+      "requires_elevated": false,
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 1 cat"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-bootstrap"
+      },
+      "id": "cat",
+      "name": "cat",
+      "summary": {
+        "tr": "Dosyaları birleştirip yazar.",
+        "en": "Concatenate and print files."
+      },
+      "description": {
+        "tr": "Dosya içeriklerini standart çıktıya basar.",
+        "en": "Writes file contents to standard output."
+      },
+      "tags": [
+        "text",
+        "view"
+      ],
+      "risk": "safe",
+      "flags": [
+        {
+          "flag": "-n",
+          "long": "--number",
+          "meaning": {
+            "tr": "Satır numaraları.",
+            "en": "Number output lines."
+          },
+          "verified": true,
+          "platforms": [
+            "gnu"
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "title": {
+            "tr": "Dosya göster",
+            "en": "Show file"
+          },
+          "command": "cat /etc/os-release",
+          "explanation": {
+            "tr": "os-release içeriğini basar.",
+            "en": "Prints os-release."
+          },
+          "risk": "safe"
+        }
+      ],
+      "related": [
+        "less",
+        "head",
+        "tail"
+      ],
+      "intent": {
+        "tr": [
+          "dosya içeriği göster",
+          "cat ile oku"
+        ],
+        "en": [
+          "show file contents",
+          "print file"
+        ]
+      },
+      "category": "text"
+    },
+    {
+      "id": "cd",
+      "name": "cd",
+      "summary": {
+        "tr": "Çalışma dizinini değiştirir (kabuk yerleşiği).",
+        "en": "Change the shell working directory (builtin)."
+      },
+      "description": {
+        "tr": "Harici ikili değil; bash/zsh yerleşiği. PATH keşfinde görünmeyebilir.",
+        "en": "Not an external binary; a shell builtin. May be absent from PATH discovery."
+      },
+      "tags": [
+        "shell"
+      ],
+      "risk": "safe",
+      "requires_elevated": false,
+      "platforms": [
+        "linux",
+        "macos",
+        "bsd"
+      ],
+      "shells": [
+        "bash",
+        "zsh",
+        "sh",
+        "fish"
+      ],
+      "examples": [
+        {
+          "title": {
+            "tr": "Eve dön",
+            "en": "Go home"
+          },
+          "command": "cd",
+          "explanation": {
+            "tr": "Ev dizinine gider.",
+            "en": "Changes to home."
+          },
+          "risk": "safe"
+        },
+        {
+          "title": {
+            "tr": "Üst dizin",
+            "en": "Parent"
+          },
+          "command": "cd ..",
+          "explanation": {
+            "tr": "Bir üst dizine çıkar.",
+            "en": "Goes up one level."
+          },
+          "risk": "safe"
+        }
+      ],
+      "related": [
+        "pwd",
+        "pushd"
+      ],
+      "intent": {
+        "tr": [
+          "dizine gir",
+          "klasör değiştir"
+        ],
+        "en": [
+          "change directory",
+          "go to folder"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "bash help cd",
+          "man bash"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-bootstrap",
+        "notes": "Builtin — local discovery may not see a path."
+      },
+      "nova": {
+        "concepts": [
+          "shell-builtin"
+        ]
+      },
+      "category": "shell"
+    },
+    {
+      "id": "chmod",
+      "name": "chmod",
+      "summary": {
+        "tr": "Dosya kipini (izinlerini) değiştirir.",
+        "en": "Change file mode bits."
+      },
+      "description": {
+        "tr": "Sembolik veya oktal notasyonla izinleri ayarlar. Yanlış kullanım erişimi kırabilir.",
+        "en": "Sets permissions symbolically or in octal. Mistakes can break access."
+      },
+      "tags": [
+        "users",
+        "permissions"
+      ],
+      "risk": "dangerous",
+      "requires_elevated": false,
+      "platforms": [
+        "linux",
+        "macos",
+        "bsd"
+      ],
+      "packages": {
+        "arch": "coreutils",
+        "debian": "coreutils",
+        "ubuntu": "coreutils",
+        "fedora": "coreutils"
+      },
+      "flags": [
+        {
+          "flag": "-R",
+          "long": "--recursive",
+          "meaning": {
+            "tr": "Özyinelemeli uygula.",
+            "en": "Apply recursively."
+          },
+          "verified": true,
+          "platforms": [
+            "gnu"
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "title": {
+            "tr": "Çalıştırılabilir",
+            "en": "Make executable"
+          },
+          "command": "chmod u+x script.sh",
+          "explanation": {
+            "tr": "Sahibine çalıştırma izni ekler.",
+            "en": "Adds execute for the owner."
+          },
+          "risk": "caution"
+        },
+        {
+          "title": {
+            "tr": "Oktal",
+            "en": "Octal"
+          },
+          "command": "chmod 600 id_rsa",
+          "explanation": {
+            "tr": "Yalnızca sahip okur/yazar (SSH anahtarı için tipik).",
+            "en": "Owner read/write only (typical for SSH keys)."
+          },
+          "risk": "caution"
+        }
+      ],
+      "related": [
+        "chown",
+        "ls"
+      ],
+      "intent": {
+        "tr": [
+          "izin değiştir",
+          "chmod 755"
+        ],
+        "en": [
+          "change permissions",
+          "chmod file"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 1 chmod"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-bootstrap"
+      },
+      "category": "users"
+    },
+    {
+      "id": "chown",
+      "name": "chown",
+      "summary": {
+        "tr": "Dosya sahibini değiştirir.",
+        "en": "Change file owner and group."
+      },
+      "description": {
+        "tr": "Sahip ve/veya grubu ayarlar; genelde root gerekir.",
+        "en": "Sets owner and/or group; usually needs root."
+      },
+      "tags": [
+        "users",
+        "permissions"
+      ],
+      "risk": "dangerous",
+      "requires_elevated": true,
+      "platforms": [
+        "linux",
+        "macos",
+        "bsd"
+      ],
+      "packages": {
+        "arch": "coreutils",
+        "debian": "coreutils",
+        "ubuntu": "coreutils",
+        "fedora": "coreutils"
+      },
+      "flags": [
+        {
+          "flag": "-R",
+          "long": "--recursive",
+          "meaning": {
+            "tr": "Özyinelemeli.",
+            "en": "Operate recursively."
+          },
+          "verified": true,
+          "platforms": [
+            "gnu"
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "title": {
+            "tr": "Sahip değiştir",
+            "en": "Change owner"
+          },
+          "command": "sudo chown -R user:user /var/www/app",
+          "explanation": {
+            "tr": "Ağacı user’a verir.",
+            "en": "Gives the tree to user."
+          },
+          "risk": "dangerous",
+          "requires_elevated": true
+        }
+      ],
+      "related": [
+        "chmod"
+      ],
+      "intent": {
+        "tr": [
+          "dosya sahibi değiştir",
+          "chown"
+        ],
+        "en": [
+          "change owner",
+          "chown file"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 1 chown"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-bootstrap"
+      },
+      "category": "users"
+    },
+    {
+      "id": "cp",
+      "name": "cp",
+      "summary": {
+        "tr": "Dosya ve dizinleri kopyalar.",
+        "en": "Copy files and directories."
+      },
+      "description": {
+        "tr": "Kaynakları hedefe kopyalar. Dizin için genellikle -r/-R gerekir.",
+        "en": "Copies sources to a destination. Directories usually need -r/-R."
+      },
+      "tags": [
+        "files",
+        "copy"
+      ],
+      "risk": "caution",
+      "requires_elevated": false,
+      "platforms": [
+        "linux",
+        "macos",
+        "bsd"
+      ],
+      "packages": {
+        "arch": "coreutils",
+        "debian": "coreutils",
+        "ubuntu": "coreutils",
+        "fedora": "coreutils"
+      },
+      "install_notes": {
+        "tr": "Arch: pacman -S coreutils",
+        "en": "Arch: pacman -S coreutils"
+      },
+      "flags": [
+        {
+          "flag": "-r",
+          "long": "--recursive",
+          "meaning": {
+            "tr": "Dizinleri özyinelemeli kopyala.",
+            "en": "Copy directories recursively."
+          },
+          "verified": true,
+          "platforms": [
+            "gnu"
+          ]
+        },
+        {
+          "flag": "-i",
+          "long": "--interactive",
+          "meaning": {
+            "tr": "Üzerine yazmadan önce sor.",
+            "en": "Prompt before overwrite."
+          },
+          "verified": true,
+          "platforms": [
+            "gnu"
+          ]
+        },
+        {
+          "flag": "-a",
+          "long": "--archive",
+          "meaning": {
+            "tr": "Arşiv modu (özellikleri koru, özyinelemeli).",
+            "en": "Archive mode (preserve attributes, recursive)."
+          },
+          "verified": true,
+          "platforms": [
+            "gnu"
+          ]
+        },
+        {
+          "flag": "-v",
+          "long": "--verbose",
+          "meaning": {
+            "tr": "Ne kopyalandığını yaz.",
+            "en": "Explain what is being done."
+          },
+          "verified": true,
+          "platforms": [
+            "gnu"
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "title": {
+            "tr": "Dosya kopyala",
+            "en": "Copy a file"
+          },
+          "command": "cp notes.txt notes.bak",
+          "explanation": {
+            "tr": "notes.txt dosyasını notes.bak olarak kopyalar.",
+            "en": "Copies notes.txt to notes.bak."
+          },
+          "risk": "caution"
+        },
+        {
+          "title": {
+            "tr": "Dizin kopyala",
+            "en": "Copy directory"
+          },
+          "command": "cp -a project project-backup",
+          "explanation": {
+            "tr": "Özellikleri koruyarak dizini kopyalar.",
+            "en": "Copies a directory preserving attributes."
+          },
+          "risk": "caution"
+        }
+      ],
+      "related": [
+        "mv",
+        "rsync",
+        "install"
+      ],
+      "intent": {
+        "tr": [
+          "dosya kopyala",
+          "klasör kopyala"
+        ],
+        "en": [
+          "copy file",
+          "copy directory"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 1 cp (GNU coreutils)"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-bootstrap"
+      },
+      "nova": {
+        "favorite_eligible": true,
+        "ui_priority": 80
+      },
+      "category": "filesystem"
+    },
+    {
+      "id": "curl",
+      "name": "curl",
+      "summary": {
+        "tr": "URL ile veri transferi yapar.",
+        "en": "Transfer data from or to a server."
+      },
+      "description": {
+        "tr": "HTTP(S) başta olmak üzere birçok protokolde istemci.",
+        "en": "Client for many protocols, especially HTTP(S)."
+      },
+      "tags": [
+        "network",
+        "http"
+      ],
+      "risk": "caution",
+      "requires_elevated": false,
+      "platforms": [
+        "linux",
+        "macos",
+        "bsd"
+      ],
+      "packages": {
+        "arch": "curl",
+        "debian": "curl",
+        "ubuntu": "curl",
+        "fedora": "curl"
+      },
+      "install_notes": {
+        "tr": "Arch: pacman -S curl\nDebian/Ubuntu: apt install curl\nFedora: dnf install curl",
+        "en": "Arch: pacman -S curl\nDebian/Ubuntu: apt install curl\nFedora: dnf install curl"
+      },
+      "flags": [
+        {
+          "flag": "-I",
+          "long": "--head",
+          "meaning": {
+            "tr": "Yalnızca başlıklar.",
+            "en": "Fetch headers only."
+          },
+          "verified": true
+        },
+        {
+          "flag": "-L",
+          "long": "--location",
+          "meaning": {
+            "tr": "Yönlendirmeleri izle.",
+            "en": "Follow redirects."
+          },
+          "verified": true
+        },
+        {
+          "flag": "-O",
+          "long": "--remote-name",
+          "meaning": {
+            "tr": "Uzak dosya adıyla kaydet.",
+            "en": "Write to remote file name."
+          },
+          "verified": true
+        },
+        {
+          "flag": "-f",
+          "long": "--fail",
+          "meaning": {
+            "tr": "HTTP hatalarında sessizce fail.",
+            "en": "Fail silently on HTTP errors."
+          },
+          "verified": true
+        }
+      ],
+      "examples": [
+        {
+          "title": {
+            "tr": "GET gövde",
+            "en": "GET body"
+          },
+          "command": "curl -fsSL https://example.com/",
+          "explanation": {
+            "tr": "HTTPS gövdesini indirir (örnek alan).",
+            "en": "Fetches HTTPS body (example domain)."
+          },
+          "risk": "caution"
+        },
+        {
+          "title": {
+            "tr": "Başlıklar",
+            "en": "Headers"
+          },
+          "command": "curl -I https://example.com/",
+          "explanation": {
+            "tr": "Yanıt başlıklarını basar.",
+            "en": "Prints response headers."
+          },
+          "risk": "safe"
+        }
+      ],
+      "related": [
+        "wget",
+        "http"
+      ],
+      "intent": {
+        "tr": [
+          "http isteği",
+          "dosya indir curl"
+        ],
+        "en": [
+          "http request",
+          "download with curl"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 1 curl",
+          "https://curl.se/docs/manual.html"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-bootstrap"
+      },
+      "nova": {
+        "favorite_eligible": true,
+        "ui_priority": 88
+      },
+      "category": "network"
+    },
+    {
+      "packages": {
+        "arch": "coreutils",
+        "debian": "coreutils",
+        "ubuntu": "coreutils",
+        "fedora": "coreutils"
+      },
+      "platforms": [
+        "linux",
+        "macos",
+        "bsd"
+      ],
+      "requires_elevated": false,
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 1 cut"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-bootstrap"
+      },
+      "id": "cut",
+      "name": "cut",
+      "summary": {
+        "tr": "Satırlardan alan veya bayt keser.",
+        "en": "Remove sections from each line."
+      },
+      "description": {
+        "tr": "Ayraçlı alanlar veya karakter aralıklarını seçer.",
+        "en": "Selects delimited fields or character ranges."
+      },
+      "tags": [
+        "text",
+        "fields"
+      ],
+      "risk": "safe",
+      "flags": [
+        {
+          "flag": "-d",
+          "long": "--delimiter",
+          "takes_value": true,
+          "value_name": "DELIM",
+          "meaning": {
+            "tr": "Alan ayracını ayarla.",
+            "en": "Set field delimiter."
+          },
+          "verified": true,
+          "platforms": [
+            "gnu"
+          ]
+        },
+        {
+          "flag": "-f",
+          "long": "--fields",
+          "takes_value": true,
+          "value_name": "LIST",
+          "meaning": {
+            "tr": "Seçilecek alanlar.",
+            "en": "Select only these fields."
+          },
+          "verified": true,
+          "platforms": [
+            "gnu"
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "title": {
+            "tr": "CSV ilk sütun",
+            "en": "First CSV column"
+          },
+          "command": "cut -d ',' -f 1 data.csv",
+          "explanation": {
+            "tr": "Virgülle ayrılmış ilk alanı alır.",
+            "en": "Takes the first comma-separated field."
+          },
+          "risk": "safe"
+        }
+      ],
+      "related": [
+        "awk",
+        "sort"
+      ],
+      "intent": {
+        "tr": [
+          "sütun kes",
+          "alan seç"
+        ],
+        "en": [
+          "cut column",
+          "select field"
+        ]
+      },
+      "category": "text"
+    },
+    {
+      "id": "date",
+      "name": "date",
+      "summary": {
+        "tr": "Tarih ve saati yazdırır veya ayarlar.",
+        "en": "Print or set the system date."
+      },
+      "description": {
+        "tr": "Biçimli tarih/saat çıktısı üretir; ayarlamak root ister.",
+        "en": "Formats date/time output; setting requires root."
+      },
+      "tags": [
+        "system",
+        "time"
+      ],
+      "risk": "safe",
+      "requires_elevated": false,
+      "platforms": [
+        "linux",
+        "macos",
+        "bsd"
+      ],
+      "packages": {
+        "arch": "coreutils",
+        "debian": "coreutils",
+        "ubuntu": "coreutils",
+        "fedora": "coreutils"
+      },
+      "flags": [
+        {
+          "flag": "-u",
+          "long": "--utc",
+          "meaning": {
+            "tr": "UTC olarak yazdır.",
+            "en": "Print Coordinated Universal Time."
+          },
+          "verified": true,
+          "platforms": [
+            "gnu"
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "title": {
+            "tr": "ISO benzeri",
+            "en": "ISO-like"
+          },
+          "command": "date -Iseconds",
+          "explanation": {
+            "tr": "ISO-8601 saniyeli çıktı (GNU).",
+            "en": "ISO-8601 output with seconds (GNU)."
+          },
+          "risk": "safe"
+        }
+      ],
+      "related": [
+        "timedatectl"
+      ],
+      "intent": {
+        "tr": [
+          "tarih saat",
+          "bugünün tarihi"
+        ],
+        "en": [
+          "show date",
+          "current time"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 1 date"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-bootstrap"
+      },
+      "category": "system"
+    },
+    {
+      "id": "df",
+      "name": "df",
+      "summary": {
+        "tr": "Dosya sistemi disk kullanımı.",
+        "en": "Report file system disk space usage."
+      },
+      "description": {
+        "tr": "Bağlı dosya sistemlerinin doluluk bilgisini basar.",
+        "en": "Shows space usage on mounted filesystems."
+      },
+      "tags": [
+        "disk"
+      ],
+      "risk": "safe",
+      "requires_elevated": false,
+      "platforms": [
+        "linux",
+        "macos",
+        "bsd"
+      ],
+      "packages": {
+        "arch": "coreutils",
+        "debian": "coreutils",
+        "ubuntu": "coreutils",
+        "fedora": "coreutils"
+      },
+      "flags": [
+        {
+          "flag": "-h",
+          "long": "--human-readable",
+          "meaning": {
+            "tr": "İnsan okunur birimler.",
+            "en": "Human-readable sizes."
+          },
+          "verified": true,
+          "platforms": [
+            "gnu"
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "title": {
+            "tr": "Özet",
+            "en": "Summary"
+          },
+          "command": "df -h",
+          "explanation": {
+            "tr": "Disk doluluğu.",
+            "en": "Disk usage summary."
+          },
+          "risk": "safe"
+        }
+      ],
+      "related": [
+        "du",
+        "lsblk"
+      ],
+      "intent": {
+        "tr": [
+          "disk dolu mu",
+          "boş alan"
+        ],
+        "en": [
+          "disk space",
+          "free space"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 1 df"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-bootstrap"
+      },
+      "category": "disks"
+    },
+    {
+      "id": "diff",
+      "name": "diff",
+      "summary": {
+        "tr": "Dosyaları satır satır karşılaştırır.",
+        "en": "Compare files line by line."
+      },
+      "description": {
+        "tr": "İki dosya veya dizin arasındaki farkları gösterir.",
+        "en": "Shows differences between files or directories."
+      },
+      "tags": [
+        "development",
+        "text"
+      ],
+      "risk": "safe",
+      "requires_elevated": false,
+      "platforms": [
+        "linux",
+        "macos",
+        "bsd"
+      ],
+      "packages": {
+        "arch": "diffutils",
+        "debian": "diffutils",
+        "ubuntu": "diffutils",
+        "fedora": "diffutils"
+      },
+      "flags": [
+        {
+          "flag": "-u",
+          "long": "--unified",
+          "meaning": {
+            "tr": "Birleşik diff biçimi.",
+            "en": "Unified diff format."
+          },
+          "verified": true,
+          "platforms": [
+            "gnu"
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "title": {
+            "tr": "Birleşik diff",
+            "en": "Unified diff"
+          },
+          "command": "diff -u a.txt b.txt",
+          "explanation": {
+            "tr": "a ile b farkı.",
+            "en": "Diff of a vs b."
+          },
+          "risk": "safe"
+        }
+      ],
+      "related": [
+        "git",
+        "patch"
+      ],
+      "intent": {
+        "tr": [
+          "dosya farkı",
+          "karşılaştır"
+        ],
+        "en": [
+          "diff files",
+          "compare files"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 1 diff"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-bootstrap"
+      },
+      "category": "development"
+    },
+    {
+      "id": "dmesg",
+      "name": "dmesg",
+      "summary": {
+        "tr": "Çekirdek mesaj halkasını yazdırır.",
+        "en": "Print or control the kernel ring buffer."
+      },
+      "description": {
+        "tr": "Boot ve sürücü mesajlarını gösterir; bazı sistemlerde izin gerekir.",
+        "en": "Shows boot/driver messages; may need privileges on some systems."
+      },
+      "tags": [
+        "monitoring",
+        "kernel"
+      ],
+      "risk": "safe",
+      "requires_elevated": false,
+      "platforms": [
+        "linux",
+        "macos",
+        "bsd"
+      ],
+      "packages": {
+        "arch": "util-linux",
+        "debian": "util-linux",
+        "ubuntu": "util-linux",
+        "fedora": "util-linux"
+      },
+      "flags": [
+        {
+          "flag": "-T",
+          "meaning": {
+            "tr": "İnsan okunur zaman damgaları.",
+            "en": "Human-readable timestamps."
+          },
+          "verified": true
+        }
+      ],
+      "examples": [
+        {
+          "title": {
+            "tr": "Son mesajlar",
+            "en": "Recent messages"
+          },
+          "command": "dmesg -T | tail -n 30",
+          "explanation": {
+            "tr": "Son çekirdek mesajları.",
+            "en": "Recent kernel messages."
+          },
+          "risk": "safe"
+        }
+      ],
+      "related": [
+        "journalctl"
+      ],
+      "intent": {
+        "tr": [
+          "çekirdek log",
+          "dmesg"
+        ],
+        "en": [
+          "kernel log",
+          "dmesg"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 1 dmesg"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-bootstrap"
+      },
+      "category": "monitoring"
+    },
+    {
+      "id": "dnf",
+      "name": "dnf",
+      "summary": {
+        "tr": "Fedora/RHEL paket yöneticisi.",
+        "en": "Fedora/RHEL package manager."
+      },
+      "description": {
+        "tr": "DNF ile kurulum, yükseltme ve sorgu.",
+        "en": "Install, upgrade, and query with DNF."
+      },
+      "tags": [
+        "packages",
+        "fedora"
+      ],
+      "risk": "dangerous",
+      "requires_elevated": true,
+      "platforms": [
+        "linux"
+      ],
+      "packages": {
+        "fedora": "dnf",
+        "rhel": "dnf"
+      },
+      "install_notes": {
+        "tr": "Fedora/RHEL’de taban. Arch için pacman.",
+        "en": "Base on Fedora/RHEL. On Arch use pacman."
+      },
+      "flags": [
+        {
+          "flag": "install",
+          "meaning": {
+            "tr": "Kur (alt komut).",
+            "en": "Install (subcommand)."
+          },
+          "verified": true
+        },
+        {
+          "flag": "upgrade",
+          "meaning": {
+            "tr": "Yükselt (alt komut).",
+            "en": "Upgrade (subcommand)."
+          },
+          "verified": true
+        },
+        {
+          "flag": "search",
+          "meaning": {
+            "tr": "Ara (alt komut).",
+            "en": "Search (subcommand)."
+          },
+          "verified": true
+        }
+      ],
+      "examples": [
+        {
+          "title": {
+            "tr": "Kur",
+            "en": "Install"
+          },
+          "command": "sudo dnf install curl",
+          "explanation": {
+            "tr": "curl kurar.",
+            "en": "Installs curl."
+          },
+          "risk": "caution",
+          "requires_elevated": true
+        },
+        {
+          "title": {
+            "tr": "Yükselt",
+            "en": "Upgrade"
+          },
+          "command": "sudo dnf upgrade",
+          "explanation": {
+            "tr": "Sistem paketlerini yükseltir.",
+            "en": "Upgrades system packages."
+          },
+          "risk": "dangerous",
+          "requires_elevated": true
+        }
+      ],
+      "related": [
+        "yum",
+        "rpm",
+        "pacman",
+        "apt"
+      ],
+      "intent": {
+        "tr": [
+          "fedora paket kur",
+          "dnf güncelle"
+        ],
+        "en": [
+          "dnf install",
+          "fedora upgrade"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 8 dnf"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-bootstrap"
+      },
+      "category": "packages"
+    },
+    {
+      "id": "docker",
+      "name": "docker",
+      "summary": {
+        "tr": "Docker konteyner CLI.",
+        "en": "Docker container CLI."
+      },
+      "description": {
+        "tr": "Docker Engine ile konteyner ve imaj yönetimi. Paket adı dağıtıma göre değişir.",
+        "en": "Manage containers/images with Docker Engine. Package names vary by distro."
+      },
+      "tags": [
+        "containers"
+      ],
+      "risk": "dangerous",
+      "requires_elevated": false,
+      "platforms": [
+        "linux"
+      ],
+      "packages": {
+        "arch": "docker",
+        "fedora": "docker-ce"
+      },
+      "install_notes": {
+        "tr": "Arch: pacman -S docker — sonra systemctl enable --now docker; kullanıcıyı docker grubuna ekleyin.\nDebian/Ubuntu paket adları dağıtıma göre değişir (unknown — dokümantasyona bakın).\nFedora sıkça docker-ce (docker.com repo).",
+        "en": "Arch: pacman -S docker — then systemctl enable --now docker; add user to docker group.\nDebian/Ubuntu package names vary (unknown — see distro docs).\nFedora often docker-ce from docker.com."
+      },
+      "examples": [
+        {
+          "title": {
+            "tr": "ps",
+            "en": "ps"
+          },
+          "command": "docker ps",
+          "explanation": {
+            "tr": "Çalışan konteynerler.",
+            "en": "Running containers."
+          },
+          "risk": "safe"
+        }
+      ],
+      "related": [
+        "podman"
+      ],
+      "intent": {
+        "tr": [
+          "docker konteyner",
+          "docker ps"
+        ],
+        "en": [
+          "docker containers",
+          "docker ps"
+        ]
+      },
+      "verification": {
+        "status": "draft",
+        "sources": [
+          "https://docs.docker.com/engine/reference/commandline/cli/"
+        ],
+        "notes": "debian/ubuntu package intentionally omitted as unknown."
+      },
+      "category": "containers"
+    },
+    {
+      "id": "du",
+      "name": "du",
+      "summary": {
+        "tr": "Dizin disk kullanımını tahmin eder.",
+        "en": "Estimate file space usage."
+      },
+      "description": {
+        "tr": "Dosya/dizinlerin kapladığı alanı özetler.",
+        "en": "Summarizes space used by files/directories."
+      },
+      "tags": [
+        "disk"
+      ],
+      "risk": "safe",
+      "requires_elevated": false,
+      "platforms": [
+        "linux",
+        "macos",
+        "bsd"
+      ],
+      "packages": {
+        "arch": "coreutils",
+        "debian": "coreutils",
+        "ubuntu": "coreutils",
+        "fedora": "coreutils"
+      },
+      "flags": [
+        {
+          "flag": "-h",
+          "long": "--human-readable",
+          "meaning": {
+            "tr": "İnsan okunur.",
+            "en": "Human readable."
+          },
+          "verified": true,
+          "platforms": [
+            "gnu"
+          ]
+        },
+        {
+          "flag": "-s",
+          "long": "--summarize",
+          "meaning": {
+            "tr": "Yalnız toplam.",
+            "en": "Total only."
+          },
+          "verified": true,
+          "platforms": [
+            "gnu"
+          ]
+        },
+        {
+          "flag": "-d",
+          "long": "--max-depth",
+          "takes_value": true,
+          "value_name": "N",
+          "meaning": {
+            "tr": "Derinlik sınırı (GNU).",
+            "en": "Max depth (GNU)."
+          },
+          "verified": true,
+          "platforms": [
+            "gnu"
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "title": {
+            "tr": "Dizin toplamı",
+            "en": "Dir total"
+          },
+          "command": "du -sh ~/Downloads",
+          "explanation": {
+            "tr": "Downloads boyutunu özetler.",
+            "en": "Summarizes Downloads size."
+          },
+          "risk": "safe"
+        }
+      ],
+      "related": [
+        "df",
+        "ncdu"
+      ],
+      "intent": {
+        "tr": [
+          "klasör boyutu",
+          "ne kadar yer"
+        ],
+        "en": [
+          "folder size",
+          "disk usage directory"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 1 du"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-bootstrap"
+      },
+      "category": "disks"
+    },
+    {
+      "id": "echo",
+      "name": "echo",
+      "summary": {
+        "tr": "Argümanları yazar.",
+        "en": "Display a line of text."
+      },
+      "description": {
+        "tr": "Metni standart çıktıya basar; kabuk yerleşiği veya /bin/echo olabilir.",
+        "en": "Prints text to stdout; may be builtin or /bin/echo."
+      },
+      "tags": [
+        "shell"
+      ],
+      "risk": "safe",
+      "requires_elevated": false,
+      "platforms": [
+        "linux",
+        "macos",
+        "bsd"
+      ],
+      "packages": {
+        "arch": "coreutils",
+        "debian": "coreutils",
+        "ubuntu": "coreutils",
+        "fedora": "coreutils"
+      },
+      "flags": [
+        {
+          "flag": "-n",
+          "meaning": {
+            "tr": "Sondaki yeni satırı yazma.",
+            "en": "Do not output trailing newline."
+          },
+          "verified": true
+        }
+      ],
+      "examples": [
+        {
+          "title": {
+            "tr": "Yazdır",
+            "en": "Print"
+          },
+          "command": "echo \"hello\"",
+          "explanation": {
+            "tr": "hello yazar.",
+            "en": "Prints hello."
+          },
+          "risk": "safe"
+        }
+      ],
+      "related": [
+        "printf"
+      ],
+      "intent": {
+        "tr": [
+          "ekrana yaz",
+          "echo"
+        ],
+        "en": [
+          "print text",
+          "echo string"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 1 echo"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-bootstrap"
+      },
+      "category": "shell"
+    },
+    {
+      "id": "env",
+      "name": "env",
+      "summary": {
+        "tr": "Ortamı gösterir veya değiştirerek komut çalıştırır.",
+        "en": "Show environment or run a command in a modified environment."
+      },
+      "description": {
+        "tr": "Argümansız ortam değişkenlerini listeler.",
+        "en": "With no args, lists environment variables."
+      },
+      "tags": [
+        "shell",
+        "environment"
+      ],
+      "risk": "safe",
+      "requires_elevated": false,
+      "platforms": [
+        "linux",
+        "macos",
+        "bsd"
+      ],
+      "packages": {
+        "arch": "coreutils",
+        "debian": "coreutils",
+        "ubuntu": "coreutils",
+        "fedora": "coreutils"
+      },
+      "examples": [
+        {
+          "title": {
+            "tr": "Ortamı listele",
+            "en": "List env"
+          },
+          "command": "env",
+          "explanation": {
+            "tr": "Değişkenleri basar.",
+            "en": "Prints variables."
+          },
+          "risk": "safe"
+        }
+      ],
+      "related": [
+        "export",
+        "printenv"
+      ],
+      "intent": {
+        "tr": [
+          "ortam değişkenleri",
+          "env listele"
+        ],
+        "en": [
+          "list environment",
+          "env vars"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 1 env"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-bootstrap"
+      },
+      "category": "shell"
+    },
+    {
+      "id": "export",
+      "name": "export",
+      "summary": {
+        "tr": "Değişkeni ortamda dışa aktarır (yerleşik).",
+        "en": "Set export attribute for shell variables (builtin)."
+      },
+      "description": {
+        "tr": "Alt süreçlerin göreceği ortam değişkeni tanımlar.",
+        "en": "Defines environment variables visible to child processes."
+      },
+      "tags": [
+        "shell",
+        "environment"
+      ],
+      "risk": "caution",
+      "requires_elevated": false,
+      "platforms": [
+        "linux",
+        "macos",
+        "bsd"
+      ],
+      "shells": [
+        "bash",
+        "zsh",
+        "sh"
+      ],
+      "examples": [
+        {
+          "title": {
+            "tr": "PATH ekle",
+            "en": "Extend PATH"
+          },
+          "command": "export PATH=\"$HOME/.local/bin:$PATH\"",
+          "explanation": {
+            "tr": "Kullanıcı bin yolunu PATH başına ekler.",
+            "en": "Prepends user bin to PATH."
+          },
+          "risk": "caution"
+        }
+      ],
+      "related": [
+        "env",
+        "set"
+      ],
+      "intent": {
+        "tr": [
+          "ortam değişkeni ayarla",
+          "export path"
+        ],
+        "en": [
+          "export variable",
+          "set path"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "bash help export"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-bootstrap",
+        "notes": "Builtin"
+      },
+      "nova": {
+        "concepts": [
+          "shell-builtin"
+        ]
+      },
+      "category": "shell"
+    },
+    {
+      "id": "find",
+      "name": "find",
+      "summary": {
+        "tr": "Dizin ağacında dosya arar.",
+        "en": "Search for files in a directory hierarchy."
+      },
+      "description": {
+        "tr": "İsim, tip, zaman ve başka ölçütlerle dosya bulur; aksiyonlar çalıştırabilir.",
+        "en": "Finds files by name, type, time, and more; can run actions."
+      },
+      "tags": [
+        "search",
+        "files"
+      ],
+      "risk": "caution",
+      "requires_elevated": false,
+      "platforms": [
+        "linux",
+        "macos",
+        "bsd"
+      ],
+      "packages": {
+        "arch": "findutils",
+        "debian": "findutils",
+        "ubuntu": "findutils",
+        "fedora": "findutils"
+      },
+      "flags": [
+        {
+          "flag": "-name",
+          "takes_value": true,
+          "value_name": "PATTERN",
+          "meaning": {
+            "tr": "Baz ada göre eşle.",
+            "en": "Match basename pattern."
+          },
+          "verified": true
+        },
+        {
+          "flag": "-type",
+          "takes_value": true,
+          "value_name": "t",
+          "meaning": {
+            "tr": "Tür: f dosya, d dizin.",
+            "en": "Type: f file, d directory."
+          },
+          "verified": true
+        },
+        {
+          "flag": "-delete",
+          "meaning": {
+            "tr": "Eşleşenleri sil (dikkat).",
+            "en": "Delete matched files (careful)."
+          },
+          "verified": true
+        }
+      ],
+      "examples": [
+        {
+          "title": {
+            "tr": "İsme göre ara",
+            "en": "Search by name"
+          },
+          "command": "find ~ -name \"*.pdf\"",
+          "explanation": {
+            "tr": "Ev dizininde PDF arar.",
+            "en": "Finds PDFs under home."
+          },
+          "risk": "safe"
+        },
+        {
+          "title": {
+            "tr": "Boş dizinler",
+            "en": "Empty dirs"
+          },
+          "command": "find . -type d -empty",
+          "explanation": {
+            "tr": "Boş dizinleri listeler.",
+            "en": "Lists empty directories."
+          },
+          "risk": "safe"
+        }
+      ],
+      "related": [
+        "grep",
+        "fd",
+        "locate"
+      ],
+      "intent": {
+        "tr": [
+          "dosya bul",
+          "isme göre ara"
+        ],
+        "en": [
+          "find files",
+          "search by name"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 1 find"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-bootstrap"
+      },
+      "category": "search"
+    },
+    {
+      "id": "free",
+      "name": "free",
+      "summary": {
+        "tr": "Bellek kullanımını gösterir.",
+        "en": "Display amount of free and used memory."
+      },
+      "description": {
+        "tr": "RAM ve swap özetini basar.",
+        "en": "Prints RAM and swap summary."
+      },
+      "tags": [
+        "monitoring",
+        "memory"
+      ],
+      "risk": "safe",
+      "requires_elevated": false,
+      "platforms": [
+        "linux"
+      ],
+      "packages": {
+        "arch": "procps-ng",
+        "debian": "procps",
+        "ubuntu": "procps",
+        "fedora": "procps-ng"
+      },
+      "flags": [
+        {
+          "flag": "-h",
+          "long": "--human",
+          "meaning": {
+            "tr": "İnsan okunur.",
+            "en": "Human readable."
+          },
+          "verified": true
+        }
+      ],
+      "examples": [
+        {
+          "title": {
+            "tr": "Bellek",
+            "en": "Memory"
+          },
+          "command": "free -h",
+          "explanation": {
+            "tr": "RAM/swap özeti.",
+            "en": "RAM/swap summary."
+          },
+          "risk": "safe"
+        }
+      ],
+      "related": [
+        "top",
+        "vmstat"
+      ],
+      "intent": {
+        "tr": [
+          "ram kullanımı",
+          "bellek boş mu"
+        ],
+        "en": [
+          "memory usage",
+          "free ram"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 1 free"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-bootstrap"
+      },
+      "category": "monitoring"
+    },
+    {
+      "id": "git",
+      "name": "git",
+      "summary": {
+        "tr": "Dağıtık sürüm kontrol sistemi.",
+        "en": "Distributed version control system."
+      },
+      "description": {
+        "tr": "Kaynak kod geçmişi, dallar ve uzaktan eşitleme.",
+        "en": "Source history, branches, and remote synchronization."
+      },
+      "tags": [
+        "git",
+        "vcs"
+      ],
+      "risk": "caution",
+      "requires_elevated": false,
+      "platforms": [
+        "linux",
+        "macos",
+        "bsd"
+      ],
+      "packages": {
+        "arch": "git",
+        "debian": "git",
+        "ubuntu": "git",
+        "fedora": "git"
+      },
+      "install_notes": {
+        "tr": "Arch: pacman -S git\nDebian/Ubuntu: apt install git\nFedora: dnf install git",
+        "en": "Arch: pacman -S git\nDebian/Ubuntu: apt install git\nFedora: dnf install git"
+      },
+      "flags": [],
+      "examples": [
+        {
+          "title": {
+            "tr": "Durum",
+            "en": "Status"
+          },
+          "command": "git status",
+          "explanation": {
+            "tr": "Çalışma ağacı durumu.",
+            "en": "Working tree status."
+          },
+          "risk": "safe"
+        },
+        {
+          "title": {
+            "tr": "Kısa log",
+            "en": "Oneline log"
+          },
+          "command": "git log --oneline -n 10",
+          "explanation": {
+            "tr": "Son 10 commit.",
+            "en": "Last 10 commits."
+          },
+          "risk": "safe"
+        },
+        {
+          "title": {
+            "tr": "Klon",
+            "en": "Clone"
+          },
+          "command": "git clone https://github.com/Teknoloji-Filozoflari/Nova-Commands.git",
+          "explanation": {
+            "tr": "Depoyu klonlar.",
+            "en": "Clones the repository."
+          },
+          "risk": "caution"
+        }
+      ],
+      "related": [
+        "diff",
+        "make"
+      ],
+      "intent": {
+        "tr": [
+          "git durum",
+          "commit geçmişi"
+        ],
+        "en": [
+          "git status",
+          "commit history"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 1 git",
+          "https://git-scm.com/docs"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-bootstrap"
+      },
+      "nova": {
+        "favorite_eligible": true,
+        "ui_priority": 92
+      },
+      "category": "development"
+    },
+    {
+      "id": "gpg",
+      "name": "gpg",
+      "summary": {
+        "tr": "OpenPGP şifreleme ve imza aracı.",
+        "en": "OpenPGP encryption and signing tool."
+      },
+      "description": {
+        "tr": "Anahtar yönetimi, şifreleme, imzalama (GnuPG).",
+        "en": "Key management, encrypt, sign (GnuPG)."
+      },
+      "tags": [
+        "security",
+        "crypto"
+      ],
+      "risk": "caution",
+      "requires_elevated": false,
+      "platforms": [
+        "linux",
+        "macos",
+        "bsd"
+      ],
+      "packages": {
+        "arch": "gnupg",
+        "debian": "gnupg",
+        "ubuntu": "gnupg",
+        "fedora": "gnupg2"
+      },
+      "install_notes": {
+        "tr": "Arch: pacman -S gnupg",
+        "en": "Arch: pacman -S gnupg"
+      },
+      "examples": [
+        {
+          "title": {
+            "tr": "Anahtarlar",
+            "en": "List keys"
+          },
+          "command": "gpg --list-keys",
+          "explanation": {
+            "tr": "Genel anahtarları listeler.",
+            "en": "Lists public keys."
+          },
+          "risk": "safe"
+        }
+      ],
+      "related": [
+        "ssh-keygen"
+      ],
+      "intent": {
+        "tr": [
+          "gpg anahtar",
+          "şifrele"
+        ],
+        "en": [
+          "gpg keys",
+          "encrypt file"
+        ]
+      },
+      "verification": {
+        "status": "draft",
+        "sources": [
+          "man 1 gpg"
+        ],
+        "notes": "Minimal seed; expand subcommands later."
+      },
+      "category": "security"
+    },
+    {
+      "id": "grep",
+      "name": "grep",
+      "summary": {
+        "tr": "Metinde desen arar.",
+        "en": "Print lines matching a pattern."
+      },
+      "description": {
+        "tr": "Dosya veya stdin içinde düzenli ifade / sabit dizgi arar.",
+        "en": "Searches files or stdin for regex or fixed strings."
+      },
+      "tags": [
+        "search",
+        "text"
+      ],
+      "risk": "safe",
+      "requires_elevated": false,
+      "platforms": [
+        "linux",
+        "macos",
+        "bsd"
+      ],
+      "packages": {
+        "arch": "grep",
+        "debian": "grep",
+        "ubuntu": "grep",
+        "fedora": "grep"
+      },
+      "flags": [
+        {
+          "flag": "-i",
+          "long": "--ignore-case",
+          "meaning": {
+            "tr": "Büyük/küçük harf duyarsız.",
+            "en": "Ignore case."
+          },
+          "verified": true,
+          "platforms": [
+            "gnu"
+          ]
+        },
+        {
+          "flag": "-r",
+          "long": "--recursive",
+          "meaning": {
+            "tr": "Dizinlerde özyinelemeli ara.",
+            "en": "Read all files under directories."
+          },
+          "verified": true,
+          "platforms": [
+            "gnu"
+          ]
+        },
+        {
+          "flag": "-n",
+          "long": "--line-number",
+          "meaning": {
+            "tr": "Satır numarası yaz.",
+            "en": "Print line numbers."
+          },
+          "verified": true,
+          "platforms": [
+            "gnu"
+          ]
+        },
+        {
+          "flag": "-E",
+          "long": "--extended-regexp",
+          "meaning": {
+            "tr": "Genişletilmiş regex.",
+            "en": "Extended regular expressions."
+          },
+          "verified": true,
+          "platforms": [
+            "gnu"
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "title": {
+            "tr": "Dosyada ara",
+            "en": "Search in file"
+          },
+          "command": "grep -n TODO main.rs",
+          "explanation": {
+            "tr": "TODO geçen satırları numarayla gösterir.",
+            "en": "Shows TODO lines with numbers."
+          },
+          "risk": "safe"
+        },
+        {
+          "title": {
+            "tr": "Ağaçta ara",
+            "en": "Search tree"
+          },
+          "command": "grep -rn \"TODO\" src/",
+          "explanation": {
+            "tr": "src altında özyinelemeli arar.",
+            "en": "Recursively searches under src/."
+          },
+          "risk": "safe"
+        }
+      ],
+      "related": [
+        "find",
+        "rg",
+        "ag"
+      ],
+      "intent": {
+        "tr": [
+          "metin ara",
+          "dosyada kelime bul"
+        ],
+        "en": [
+          "search text",
+          "find string in files"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 1 grep"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-bootstrap"
+      },
+      "nova": {
+        "favorite_eligible": true,
+        "ui_priority": 85
+      },
+      "category": "search"
+    },
+    {
+      "id": "gzip",
+      "name": "gzip",
+      "summary": {
+        "tr": "Dosyaları gzip ile sıkıştırır veya açar.",
+        "en": "Compress or expand files with gzip."
+      },
+      "description": {
+        "tr": "Tek dosya sıkıştırma; arşiv ağaçları için tar -z tercih edilir.",
+        "en": "Single-file compression; prefer tar -z for trees."
+      },
+      "tags": [
+        "archive",
+        "compress"
+      ],
+      "risk": "caution",
+      "requires_elevated": false,
+      "platforms": [
+        "linux",
+        "macos",
+        "bsd"
+      ],
+      "packages": {
+        "arch": "gzip",
+        "debian": "gzip",
+        "ubuntu": "gzip",
+        "fedora": "gzip"
+      },
+      "flags": [
+        {
+          "flag": "-d",
+          "long": "--decompress",
+          "meaning": {
+            "tr": "Aç.",
+            "en": "Decompress."
+          },
+          "verified": true
+        },
+        {
+          "flag": "-k",
+          "long": "--keep",
+          "meaning": {
+            "tr": "Girdiyi silme (GNU).",
+            "en": "Keep input files (GNU)."
+          },
+          "verified": true,
+          "platforms": [
+            "gnu"
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "title": {
+            "tr": "Sıkıştır",
+            "en": "Compress"
+          },
+          "command": "gzip -k big.log",
+          "explanation": {
+            "tr": "big.log.gz üretir, kaynağı tutar.",
+            "en": "Makes big.log.gz and keeps source."
+          },
+          "risk": "caution"
+        }
+      ],
+      "related": [
+        "tar",
+        "xz"
+      ],
+      "intent": {
+        "tr": [
+          "gzip sıkıştır",
+          "gz aç"
+        ],
+        "en": [
+          "gzip compress",
+          "decompress gz"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 1 gzip"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-bootstrap"
+      },
+      "category": "archives"
+    },
+    {
+      "packages": {
+        "arch": "coreutils",
+        "debian": "coreutils",
+        "ubuntu": "coreutils",
+        "fedora": "coreutils"
+      },
+      "platforms": [
+        "linux",
+        "macos",
+        "bsd"
+      ],
+      "requires_elevated": false,
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 1 head"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-bootstrap"
+      },
+      "id": "head",
+      "name": "head",
+      "summary": {
+        "tr": "Dosyanın başını gösterir.",
+        "en": "Show the start of files."
+      },
+      "description": {
+        "tr": "Varsayılan olarak ilk 10 satırı basar.",
+        "en": "Prints the first 10 lines by default."
+      },
+      "tags": [
+        "text"
+      ],
+      "risk": "safe",
+      "flags": [
+        {
+          "flag": "-n",
+          "long": "--lines",
+          "takes_value": true,
+          "value_name": "N",
+          "meaning": {
+            "tr": "İlk N satır.",
+            "en": "First N lines."
+          },
+          "verified": true,
+          "platforms": [
+            "gnu"
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "title": {
+            "tr": "İlk 20 satır",
+            "en": "First 20 lines"
+          },
+          "command": "head -n 20 app.log",
+          "explanation": {
+            "tr": "Logun başını alır.",
+            "en": "Shows the beginning of a log."
+          },
+          "risk": "safe"
+        }
+      ],
+      "related": [
+        "tail",
+        "cat"
+      ],
+      "intent": {
+        "tr": [
+          "dosyanın başı",
+          "ilk satırlar"
+        ],
+        "en": [
+          "first lines",
+          "head of file"
+        ]
+      },
+      "category": "text"
+    },
+    {
+      "id": "history",
+      "name": "history",
+      "summary": {
+        "tr": "Komut geçmişini listeler (yerleşik).",
+        "en": "Display command history (builtin)."
+      },
+      "description": {
+        "tr": "Kabuk geçmişini gösterir; davranış kabuğa göre değişir.",
+        "en": "Shows shell history; behavior depends on the shell."
+      },
+      "tags": [
+        "shell"
+      ],
+      "risk": "safe",
+      "requires_elevated": false,
+      "platforms": [
+        "linux",
+        "macos",
+        "bsd"
+      ],
+      "shells": [
+        "bash",
+        "zsh"
+      ],
+      "examples": [
+        {
+          "title": {
+            "tr": "Geçmiş",
+            "en": "History"
+          },
+          "command": "history | tail -n 20",
+          "explanation": {
+            "tr": "Son 20 komut.",
+            "en": "Last 20 commands."
+          },
+          "risk": "safe"
+        }
+      ],
+      "related": [
+        "alias"
+      ],
+      "intent": {
+        "tr": [
+          "komut geçmişi",
+          "önceki komutlar"
+        ],
+        "en": [
+          "command history",
+          "previous commands"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "bash help history"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-bootstrap",
+        "notes": "Builtin"
+      },
+      "nova": {
+        "concepts": [
+          "shell-builtin"
+        ]
+      },
+      "category": "shell"
+    },
+    {
+      "id": "hostname",
+      "name": "hostname",
+      "summary": {
+        "tr": "Sistem ana bilgisayar adını gösterir veya ayarlar.",
+        "en": "Show or set the system hostname."
+      },
+      "description": {
+        "tr": "Ada bakmak için argümansız çalıştırın; ayarlamak genelde root ister.",
+        "en": "Run with no args to print; setting usually needs root."
+      },
+      "tags": [
+        "system"
+      ],
+      "risk": "caution",
+      "requires_elevated": false,
+      "platforms": [
+        "linux",
+        "macos",
+        "bsd"
+      ],
+      "packages": {
+        "arch": "inetutils",
+        "debian": "hostname",
+        "ubuntu": "hostname",
+        "fedora": "hostname"
+      },
+      "install_notes": {
+        "tr": "Arch: pacman -S inetutils (hostname).\nKalıcı ad için hostnamectl tercih edin.",
+        "en": "Arch: pacman -S inetutils.\nPrefer hostnamectl for persistent names."
+      },
+      "examples": [
+        {
+          "title": {
+            "tr": "Adı gör",
+            "en": "Show name"
+          },
+          "command": "hostname",
+          "explanation": {
+            "tr": "Geçerli hostname.",
+            "en": "Current hostname."
+          },
+          "risk": "safe"
+        }
+      ],
+      "related": [
+        "hostnamectl",
+        "uname"
+      ],
+      "intent": {
+        "tr": [
+          "bilgisayar adı",
+          "hostname gör"
+        ],
+        "en": [
+          "show hostname",
+          "computer name"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 1 hostname"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-bootstrap"
+      },
+      "category": "system"
+    },
+    {
+      "id": "hostnamectl",
+      "name": "hostnamectl",
+      "summary": {
+        "tr": "Hostname ve ilgili ayarları yönetir.",
+        "en": "Query or change system hostname settings."
+      },
+      "description": {
+        "tr": "systemd hostnamed üzerinden kalıcı hostname ve chassis bilgisi.",
+        "en": "Persistent hostname and chassis info via systemd-hostnamed."
+      },
+      "tags": [
+        "system",
+        "systemd"
+      ],
+      "risk": "caution",
+      "requires_elevated": true,
+      "platforms": [
+        "linux"
+      ],
+      "packages": {
+        "arch": "systemd",
+        "debian": "systemd",
+        "ubuntu": "systemd",
+        "fedora": "systemd"
+      },
+      "examples": [
+        {
+          "title": {
+            "tr": "Bilgi",
+            "en": "Show"
+          },
+          "command": "hostnamectl",
+          "explanation": {
+            "tr": "Hostname ve OS özeti.",
+            "en": "Hostname and OS summary."
+          },
+          "risk": "safe",
+          "requires_elevated": false
+        },
+        {
+          "title": {
+            "tr": "Ad ayarla",
+            "en": "Set name"
+          },
+          "command": "sudo hostnamectl set-hostname nova-box",
+          "explanation": {
+            "tr": "Kalıcı hostname ayarlar.",
+            "en": "Sets persistent hostname."
+          },
+          "risk": "caution",
+          "requires_elevated": true
+        }
+      ],
+      "related": [
+        "hostname"
+      ],
+      "intent": {
+        "tr": [
+          "hostname değiştir",
+          "makine adı ayarla"
+        ],
+        "en": [
+          "set hostname",
+          "change computer name"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 1 hostnamectl"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-bootstrap"
+      },
+      "category": "system"
+    },
+    {
+      "id": "id",
+      "name": "id",
+      "summary": {
+        "tr": "Kullanıcı ve grup kimliklerini basar.",
+        "en": "Print user and group IDs."
+      },
+      "description": {
+        "tr": "UID/GID ve grup üyeliklerini gösterir.",
+        "en": "Shows UID/GID and group memberships."
+      },
+      "tags": [
+        "users"
+      ],
+      "risk": "safe",
+      "requires_elevated": false,
+      "platforms": [
+        "linux",
+        "macos",
+        "bsd"
+      ],
+      "packages": {
+        "arch": "coreutils",
+        "debian": "coreutils",
+        "ubuntu": "coreutils",
+        "fedora": "coreutils"
+      },
+      "examples": [
+        {
+          "title": {
+            "tr": "Kimliklerim",
+            "en": "My ids"
+          },
+          "command": "id",
+          "explanation": {
+            "tr": "UID/GID ve gruplar.",
+            "en": "UID/GID and groups."
+          },
+          "risk": "safe"
+        }
+      ],
+      "related": [
+        "whoami",
+        "groups"
+      ],
+      "intent": {
+        "tr": [
+          "uid gör",
+          "gruplarım"
+        ],
+        "en": [
+          "show uid",
+          "my groups"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 1 id"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-bootstrap"
+      },
+      "category": "users"
+    },
+    {
+      "id": "ip",
+      "name": "ip",
+      "summary": {
+        "tr": "Ağ aygıtları, adresler ve rotaları yönetir.",
+        "en": "Show and manipulate routing, devices, and tunnels."
+      },
+      "description": {
+        "tr": "Eski ifconfig yerine modern iproute2 aracı.",
+        "en": "Modern iproute2 tool replacing much of ifconfig."
+      },
+      "tags": [
+        "network"
+      ],
+      "risk": "dangerous",
+      "requires_elevated": true,
+      "platforms": [
+        "linux"
+      ],
+      "packages": {
+        "arch": "iproute2",
+        "debian": "iproute2",
+        "ubuntu": "iproute2",
+        "fedora": "iproute"
+      },
+      "install_notes": {
+        "tr": "Arch: pacman -S iproute2",
+        "en": "Arch: pacman -S iproute2"
+      },
+      "flags": [],
+      "examples": [
+        {
+          "title": {
+            "tr": "Adresler",
+            "en": "Addresses"
+          },
+          "command": "ip addr",
+          "explanation": {
+            "tr": "Arayüz adreslerini listeler.",
+            "en": "Lists interface addresses."
+          },
+          "risk": "safe",
+          "requires_elevated": false
+        },
+        {
+          "title": {
+            "tr": "Rota",
+            "en": "Route"
+          },
+          "command": "ip route",
+          "explanation": {
+            "tr": "Yönlendirme tablosu.",
+            "en": "Routing table."
+          },
+          "risk": "safe",
+          "requires_elevated": false
+        },
+        {
+          "title": {
+            "tr": "Link durumu",
+            "en": "Link state"
+          },
+          "command": "ip link",
+          "explanation": {
+            "tr": "Ağ arayüzlerini listeler.",
+            "en": "Lists network interfaces."
+          },
+          "risk": "safe",
+          "requires_elevated": false
+        }
+      ],
+      "related": [
+        "ss",
+        "ping"
+      ],
+      "intent": {
+        "tr": [
+          "ip adresi gör",
+          "ağ arayüzü"
+        ],
+        "en": [
+          "show ip address",
+          "list interfaces"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 8 ip"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-bootstrap"
+      },
+      "category": "network"
+    },
+    {
+      "id": "journalctl",
+      "name": "journalctl",
+      "summary": {
+        "tr": "systemd günlüğünü sorgular.",
+        "en": "Query the systemd journal."
+      },
+      "description": {
+        "tr": "Servis ve sistem loglarını journal’dan okur.",
+        "en": "Reads service and system logs from the journal."
+      },
+      "tags": [
+        "monitoring",
+        "logs",
+        "systemd"
+      ],
+      "risk": "safe",
+      "requires_elevated": false,
+      "platforms": [
+        "linux"
+      ],
+      "packages": {
+        "arch": "systemd",
+        "debian": "systemd",
+        "ubuntu": "systemd",
+        "fedora": "systemd"
+      },
+      "flags": [
+        {
+          "flag": "-u",
+          "long": "--unit",
+          "takes_value": true,
+          "value_name": "UNIT",
+          "meaning": {
+            "tr": "Birim süzgeci.",
+            "en": "Unit filter."
+          },
+          "verified": true
+        },
+        {
+          "flag": "-f",
+          "long": "--follow",
+          "meaning": {
+            "tr": "Canlı takip.",
+            "en": "Follow new entries."
+          },
+          "verified": true
+        },
+        {
+          "flag": "-n",
+          "long": "--lines",
+          "takes_value": true,
+          "value_name": "N",
+          "meaning": {
+            "tr": "Son N satır.",
+            "en": "Last N lines."
+          },
+          "verified": true
+        },
+        {
+          "flag": "-b",
+          "long": "--boot",
+          "meaning": {
+            "tr": "Geçerli boot logları.",
+            "en": "Current boot logs."
+          },
+          "verified": true
+        }
+      ],
+      "examples": [
+        {
+          "title": {
+            "tr": "Servis log",
+            "en": "Unit log"
+          },
+          "command": "journalctl -u nginx -n 50",
+          "explanation": {
+            "tr": "nginx biriminin son 50 satırı.",
+            "en": "Last 50 lines for nginx unit."
+          },
+          "risk": "safe"
+        }
+      ],
+      "related": [
+        "systemctl",
+        "dmesg"
+      ],
+      "intent": {
+        "tr": [
+          "servis logları",
+          "journal oku"
+        ],
+        "en": [
+          "service logs",
+          "read journal"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 1 journalctl"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-bootstrap"
+      },
+      "category": "monitoring"
+    },
+    {
+      "id": "kill",
+      "name": "kill",
+      "summary": {
+        "tr": "Sürece sinyal gönderir.",
+        "en": "Send a signal to a process."
+      },
+      "description": {
+        "tr": "PID’ye sinyal yollar. Varsayılan SIGTERM; -9 SIGKILL zorla sonlandırır.",
+        "en": "Sends a signal to a PID. Default SIGTERM; -9 is SIGKILL."
+      },
+      "tags": [
+        "process"
+      ],
+      "risk": "dangerous",
+      "requires_elevated": false,
+      "platforms": [
+        "linux",
+        "macos",
+        "bsd"
+      ],
+      "packages": {
+        "arch": "util-linux",
+        "debian": "procps",
+        "ubuntu": "procps",
+        "fedora": "util-linux"
+      },
+      "flags": [
+        {
+          "flag": "-l",
+          "meaning": {
+            "tr": "Sinyal adlarını listele.",
+            "en": "List signal names."
+          },
+          "verified": true
+        },
+        {
+          "flag": "-9",
+          "meaning": {
+            "tr": "SIGKILL — zorla öldür.",
+            "en": "SIGKILL — force kill."
+          },
+          "verified": true
+        },
+        {
+          "flag": "-15",
+          "meaning": {
+            "tr": "SIGTERM — nazik sonlandırma (varsayılan).",
+            "en": "SIGTERM — graceful (default)."
+          },
+          "verified": true
+        }
+      ],
+      "examples": [
+        {
+          "title": {
+            "tr": "Nazikçe sonlandır",
+            "en": "Graceful stop"
+          },
+          "command": "kill 1234",
+          "explanation": {
+            "tr": "PID 1234’e SIGTERM gönderir.",
+            "en": "Sends SIGTERM to PID 1234."
+          },
+          "risk": "caution"
+        },
+        {
+          "title": {
+            "tr": "Zorla",
+            "en": "Force"
+          },
+          "command": "kill -9 1234",
+          "explanation": {
+            "tr": "SIGKILL; veri kaybı riski.",
+            "en": "SIGKILL; risk of data loss."
+          },
+          "risk": "dangerous"
+        }
+      ],
+      "related": [
+        "pkill",
+        "killall",
+        "ps"
+      ],
+      "intent": {
+        "tr": [
+          "süreci öldür",
+          "process sonlandır"
+        ],
+        "en": [
+          "kill process",
+          "stop pid"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 1 kill"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-bootstrap"
+      },
+      "category": "processes"
+    },
+    {
+      "packages": {
+        "arch": "less",
+        "debian": "less",
+        "ubuntu": "less",
+        "fedora": "less"
+      },
+      "platforms": [
+        "linux",
+        "macos",
+        "bsd"
+      ],
+      "requires_elevated": false,
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 1 less"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-bootstrap"
+      },
+      "id": "less",
+      "name": "less",
+      "summary": {
+        "tr": "Metni sayfa sayfa görüntüler.",
+        "en": "Page through text interactively."
+      },
+      "description": {
+        "tr": "Büyük çıktıları kaydırılabilir biçimde okur. q ile çıkılır.",
+        "en": "Reads large output in a scrollable view. Press q to quit."
+      },
+      "tags": [
+        "text",
+        "pager"
+      ],
+      "risk": "safe",
+      "flags": [
+        {
+          "flag": "-N",
+          "meaning": {
+            "tr": "Satır numarası göster.",
+            "en": "Show line numbers."
+          },
+          "verified": true
+        }
+      ],
+      "examples": [
+        {
+          "title": {
+            "tr": "Log oku",
+            "en": "Read a log"
+          },
+          "command": "less /var/log/syslog",
+          "explanation": {
+            "tr": "syslog dosyasını sayfalar.",
+            "en": "Pages through syslog."
+          },
+          "risk": "safe"
+        }
+      ],
+      "related": [
+        "more",
+        "cat"
+      ],
+      "intent": {
+        "tr": [
+          "sayfa sayfa oku",
+          "log incele"
+        ],
+        "en": [
+          "page through file",
+          "view log"
+        ]
+      },
+      "category": "text"
+    },
+    {
+      "id": "ln",
+      "name": "ln",
+      "summary": {
+        "tr": "Sabit veya sembolik bağ oluşturur.",
+        "en": "Make hard or symbolic links."
+      },
+      "description": {
+        "tr": "Varsayılanı sabit bağdır; sembolik bağ için -s kullanılır.",
+        "en": "Default is a hard link; use -s for a symbolic link."
+      },
+      "tags": [
+        "files",
+        "symlink"
+      ],
+      "risk": "caution",
+      "requires_elevated": false,
+      "platforms": [
+        "linux",
+        "macos",
+        "bsd"
+      ],
+      "packages": {
+        "arch": "coreutils",
+        "debian": "coreutils",
+        "ubuntu": "coreutils",
+        "fedora": "coreutils"
+      },
+      "flags": [
+        {
+          "flag": "-s",
+          "long": "--symbolic",
+          "meaning": {
+            "tr": "Sembolik bağ yap.",
+            "en": "Make symbolic links instead of hard links."
+          },
+          "verified": true,
+          "platforms": [
+            "gnu"
+          ]
+        },
+        {
+          "flag": "-f",
+          "long": "--force",
+          "meaning": {
+            "tr": "Var olan hedefi kaldırarak zorla.",
+            "en": "Remove existing destination files."
+          },
+          "verified": true,
+          "platforms": [
+            "gnu"
+          ]
+        },
+        {
+          "flag": "-v",
+          "long": "--verbose",
+          "meaning": {
+            "tr": "Bağları yazdır.",
+            "en": "Print name of each linked file."
+          },
+          "verified": true,
+          "platforms": [
+            "gnu"
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "title": {
+            "tr": "Sembolik bağ",
+            "en": "Symbolic link"
+          },
+          "command": "ln -s /usr/bin/python3 ~/bin/python",
+          "explanation": {
+            "tr": "python adında bir symlink oluşturur.",
+            "en": "Creates a symlink named python."
+          },
+          "risk": "caution"
+        }
+      ],
+      "related": [
+        "cp",
+        "readlink"
+      ],
+      "intent": {
+        "tr": [
+          "sembolik bağ",
+          "symlink oluştur"
+        ],
+        "en": [
+          "create symlink",
+          "make symbolic link"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 1 ln"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-bootstrap"
+      },
+      "category": "filesystem"
+    },
+    {
+      "id": "ls",
+      "name": "ls",
+      "summary": {
+        "tr": "Dizin içeriğini listeler.",
+        "en": "List directory contents."
+      },
+      "description": {
+        "tr": "Belirtilen dizinlerdeki dosya ve alt dizinleri listeler. GNU coreutils sürümünde uzun biçim, insan okunur boyut ve renk gibi yaygın bayraklar vardır.",
+        "en": "Lists files and directories. The GNU coreutils version supports long format, human-readable sizes, and color."
+      },
+      "tags": [
+        "files",
+        "directory",
+        "list"
+      ],
+      "risk": "safe",
+      "requires_elevated": false,
+      "platforms": [
+        "linux",
+        "macos",
+        "bsd"
+      ],
+      "shells": [
+        "any"
+      ],
+      "packages": {
+        "arch": "coreutils",
+        "debian": "coreutils",
+        "ubuntu": "coreutils",
+        "fedora": "coreutils",
+        "rhel": "coreutils"
+      },
+      "install_notes": {
+        "tr": "Arch: pacman -S coreutils (genelde taban sistemde vardır).\nDebian/Ubuntu: apt install coreutils\nFedora: dnf install coreutils",
+        "en": "Arch: pacman -S coreutils (usually in base).\nDebian/Ubuntu: apt install coreutils\nFedora: dnf install coreutils"
+      },
+      "flags": [
+        {
+          "flag": "-a",
+          "long": "--all",
+          "meaning": {
+            "tr": "Gizli dosyalar dahil hepsini göster.",
+            "en": "Show all entries including hidden."
+          },
+          "verified": true,
+          "platforms": [
+            "gnu"
+          ]
+        },
+        {
+          "flag": "-l",
+          "meaning": {
+            "tr": "Uzun (ayrıntılı) liste biçimi.",
+            "en": "Long listing format."
+          },
+          "verified": true,
+          "platforms": [
+            "gnu"
+          ]
+        },
+        {
+          "flag": "-h",
+          "long": "--human-readable",
+          "meaning": {
+            "tr": "Boyutları K/M/G ile göster (-l ile).",
+            "en": "Human-readable sizes with -l."
+          },
+          "verified": true,
+          "platforms": [
+            "gnu"
+          ]
+        },
+        {
+          "flag": "-R",
+          "long": "--recursive",
+          "meaning": {
+            "tr": "Alt dizinlere inerek listele.",
+            "en": "List subdirectories recursively."
+          },
+          "verified": true,
+          "platforms": [
+            "gnu"
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "title": {
+            "tr": "Ayrıntılı liste",
+            "en": "Detailed list"
+          },
+          "command": "ls -lah",
+          "explanation": {
+            "tr": "Gizli dosyalar, insan okunur boyutlar, uzun biçim.",
+            "en": "Hidden files, human sizes, long format."
+          },
+          "risk": "safe"
+        },
+        {
+          "title": {
+            "tr": "Tek dizin",
+            "en": "One directory"
+          },
+          "command": "ls /var/log",
+          "explanation": {
+            "tr": "Belirtilen yolun içeriğini listeler.",
+            "en": "Lists the given path."
+          },
+          "risk": "safe"
+        }
+      ],
+      "related": [
+        "tree",
+        "find",
+        "stat"
+      ],
+      "see_also": [
+        "man 1 ls",
+        "info coreutils ls"
+      ],
+      "intent": {
+        "tr": [
+          "dosya listele",
+          "klasör içeriği",
+          "dizin listele"
+        ],
+        "en": [
+          "list files",
+          "list directory",
+          "show folder contents"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 1 ls (GNU coreutils)",
+          "https://www.gnu.org/software/coreutils/manual/"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-bootstrap"
+      },
+      "nova": {
+        "favorite_eligible": true,
+        "ui_priority": 90,
+        "concepts": [
+          "files"
+        ]
+      },
+      "category": "filesystem"
+    },
+    {
+      "id": "lsblk",
+      "name": "lsblk",
+      "summary": {
+        "tr": "Blok aygıtları ağaç olarak listeler.",
+        "en": "List block devices."
+      },
+      "description": {
+        "tr": "Disk ve bölümleri okunabilir ağaçta gösterir.",
+        "en": "Shows disks and partitions as a tree."
+      },
+      "tags": [
+        "disk"
+      ],
+      "risk": "safe",
+      "requires_elevated": false,
+      "platforms": [
+        "linux"
+      ],
+      "packages": {
+        "arch": "util-linux",
+        "debian": "util-linux",
+        "ubuntu": "util-linux",
+        "fedora": "util-linux"
+      },
+      "flags": [
+        {
+          "flag": "-f",
+          "meaning": {
+            "tr": "Dosya sistemi bilgisi ekle.",
+            "en": "Include filesystem info."
+          },
+          "verified": true
+        }
+      ],
+      "examples": [
+        {
+          "title": {
+            "tr": "Ağaç",
+            "en": "Tree"
+          },
+          "command": "lsblk -f",
+          "explanation": {
+            "tr": "Aygıtlar + FS.",
+            "en": "Devices + filesystems."
+          },
+          "risk": "safe"
+        }
+      ],
+      "related": [
+        "df",
+        "mount",
+        "fdisk"
+      ],
+      "intent": {
+        "tr": [
+          "diskleri listele",
+          "bölümler"
+        ],
+        "en": [
+          "list disks",
+          "show partitions"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 8 lsblk"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-bootstrap"
+      },
+      "category": "disks"
+    },
+    {
+      "id": "lscpu",
+      "name": "lscpu",
+      "summary": {
+        "tr": "CPU mimarisi bilgisini gösterir.",
+        "en": "Display CPU architecture information."
+      },
+      "description": {
+        "tr": "Çekirdek, iş parçacığı ve bayrak özetini basar.",
+        "en": "Prints cores, threads, and CPU flags summary."
+      },
+      "tags": [
+        "hardware",
+        "cpu"
+      ],
+      "risk": "safe",
+      "requires_elevated": false,
+      "platforms": [
+        "linux"
+      ],
+      "packages": {
+        "arch": "util-linux",
+        "debian": "util-linux",
+        "ubuntu": "util-linux",
+        "fedora": "util-linux"
+      },
+      "examples": [
+        {
+          "title": {
+            "tr": "CPU bilgisi",
+            "en": "CPU info"
+          },
+          "command": "lscpu",
+          "explanation": {
+            "tr": "İşlemci özeti.",
+            "en": "CPU summary."
+          },
+          "risk": "safe"
+        }
+      ],
+      "related": [
+        "lspci",
+        "lshw"
+      ],
+      "intent": {
+        "tr": [
+          "işlemci bilgisi",
+          "kaç çekirdek"
+        ],
+        "en": [
+          "cpu info",
+          "how many cores"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 1 lscpu"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-bootstrap"
+      },
+      "category": "hardware"
+    },
+    {
+      "id": "lspci",
+      "name": "lspci",
+      "summary": {
+        "tr": "PCI aygıtlarını listeler.",
+        "en": "List PCI devices."
+      },
+      "description": {
+        "tr": "Ekran kartı, ağ kartı gibi PCI cihazları gösterir.",
+        "en": "Shows PCI devices such as GPUs and NICs."
+      },
+      "tags": [
+        "hardware"
+      ],
+      "risk": "safe",
+      "requires_elevated": false,
+      "platforms": [
+        "linux"
+      ],
+      "packages": {
+        "arch": "pciutils",
+        "debian": "pciutils",
+        "ubuntu": "pciutils",
+        "fedora": "pciutils"
+      },
+      "install_notes": {
+        "tr": "Arch: pacman -S pciutils",
+        "en": "Arch: pacman -S pciutils"
+      },
+      "flags": [
+        {
+          "flag": "-k",
+          "meaning": {
+            "tr": "Çekirdek sürücülerini göster.",
+            "en": "Show kernel drivers."
+          },
+          "verified": true
+        },
+        {
+          "flag": "-nn",
+          "meaning": {
+            "tr": "Sayısal ID’ler.",
+            "en": "Numeric IDs."
+          },
+          "verified": true
+        }
+      ],
+      "examples": [
+        {
+          "title": {
+            "tr": "PCI listesi",
+            "en": "PCI list"
+          },
+          "command": "lspci -nn",
+          "explanation": {
+            "tr": "Aygıt + ID.",
+            "en": "Devices + IDs."
+          },
+          "risk": "safe"
+        }
+      ],
+      "related": [
+        "lsusb",
+        "lscpu"
+      ],
+      "intent": {
+        "tr": [
+          "pci aygıtlar",
+          "ekran kartı mi"
+        ],
+        "en": [
+          "list pci devices",
+          "gpu pci"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 8 lspci"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-bootstrap"
+      },
+      "category": "hardware"
+    },
+    {
+      "id": "lsusb",
+      "name": "lsusb",
+      "summary": {
+        "tr": "USB aygıtlarını listeler.",
+        "en": "List USB devices."
+      },
+      "description": {
+        "tr": "Bağlı USB cihazları basar.",
+        "en": "Prints connected USB devices."
+      },
+      "tags": [
+        "hardware"
+      ],
+      "risk": "safe",
+      "requires_elevated": false,
+      "platforms": [
+        "linux"
+      ],
+      "packages": {
+        "arch": "usbutils",
+        "debian": "usbutils",
+        "ubuntu": "usbutils",
+        "fedora": "usbutils"
+      },
+      "install_notes": {
+        "tr": "Arch: pacman -S usbutils",
+        "en": "Arch: pacman -S usbutils"
+      },
+      "examples": [
+        {
+          "title": {
+            "tr": "USB listesi",
+            "en": "USB list"
+          },
+          "command": "lsusb",
+          "explanation": {
+            "tr": "Bağlı USB aygıtlar.",
+            "en": "Connected USB devices."
+          },
+          "risk": "safe"
+        }
+      ],
+      "related": [
+        "lspci"
+      ],
+      "intent": {
+        "tr": [
+          "usb aygıtlar",
+          "takılı usb"
+        ],
+        "en": [
+          "list usb devices",
+          "usb what is connected"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 8 lsusb"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-bootstrap"
+      },
+      "category": "hardware"
+    },
+    {
+      "id": "make",
+      "name": "make",
+      "summary": {
+        "tr": "Makefile’dan derleme hedefleri çalıştırır.",
+        "en": "GNU make utility to maintain groups of programs."
+      },
+      "description": {
+        "tr": "Bağımlılık grafiklerine göre hedefleri üretir.",
+        "en": "Builds targets according to dependency graphs."
+      },
+      "tags": [
+        "development",
+        "build"
+      ],
+      "risk": "caution",
+      "requires_elevated": false,
+      "platforms": [
+        "linux",
+        "macos",
+        "bsd"
+      ],
+      "packages": {
+        "arch": "make",
+        "debian": "make",
+        "ubuntu": "make",
+        "fedora": "make"
+      },
+      "install_notes": {
+        "tr": "Arch: pacman -S make",
+        "en": "Arch: pacman -S make"
+      },
+      "examples": [
+        {
+          "title": {
+            "tr": "Varsayılan hedef",
+            "en": "Default target"
+          },
+          "command": "make",
+          "explanation": {
+            "tr": "İlk/varsayılan hedefi derler.",
+            "en": "Builds the default target."
+          },
+          "risk": "caution"
+        }
+      ],
+      "related": [
+        "cmake",
+        "git"
+      ],
+      "intent": {
+        "tr": [
+          "make derle",
+          "makefile çalıştır"
+        ],
+        "en": [
+          "run make",
+          "build with makefile"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 1 make"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-bootstrap"
+      },
+      "category": "development"
+    },
+    {
+      "id": "mkdir",
+      "name": "mkdir",
+      "summary": {
+        "tr": "Dizin oluşturur.",
+        "en": "Create directories."
+      },
+      "description": {
+        "tr": "Yeni dizinler oluşturur. -p üst dizinleri de oluşturur.",
+        "en": "Creates directories. -p creates parent paths as needed."
+      },
+      "tags": [
+        "files",
+        "directory"
+      ],
+      "risk": "safe",
+      "requires_elevated": false,
+      "platforms": [
+        "linux",
+        "macos",
+        "bsd"
+      ],
+      "packages": {
+        "arch": "coreutils",
+        "debian": "coreutils",
+        "ubuntu": "coreutils",
+        "fedora": "coreutils"
+      },
+      "flags": [
+        {
+          "flag": "-p",
+          "long": "--parents",
+          "meaning": {
+            "tr": "Üst dizinleri de oluştur; varsa hata verme.",
+            "en": "Make parents; no error if existing."
+          },
+          "verified": true,
+          "platforms": [
+            "gnu"
+          ]
+        },
+        {
+          "flag": "-m",
+          "long": "--mode",
+          "takes_value": true,
+          "value_name": "MODE",
+          "meaning": {
+            "tr": "İzin kipini ayarla.",
+            "en": "Set file mode (as in chmod)."
+          },
+          "verified": true,
+          "platforms": [
+            "gnu"
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "title": {
+            "tr": "Tek dizin",
+            "en": "One directory"
+          },
+          "command": "mkdir projects",
+          "explanation": {
+            "tr": "projects dizinini oluşturur.",
+            "en": "Creates projects/."
+          },
+          "risk": "safe"
+        },
+        {
+          "title": {
+            "tr": "İç içe",
+            "en": "Nested path"
+          },
+          "command": "mkdir -p ~/src/nova/notes",
+          "explanation": {
+            "tr": "Eksik üst dizinlerle birlikte yolu oluşturur.",
+            "en": "Creates the full path including parents."
+          },
+          "risk": "safe"
+        }
+      ],
+      "related": [
+        "rmdir",
+        "touch"
+      ],
+      "intent": {
+        "tr": [
+          "klasör oluştur",
+          "dizin yap"
+        ],
+        "en": [
+          "make directory",
+          "create folder"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 1 mkdir"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-bootstrap"
+      },
+      "category": "filesystem"
+    },
+    {
+      "id": "mount",
+      "name": "mount",
+      "summary": {
+        "tr": "Dosya sistemi bağlar.",
+        "en": "Mount a filesystem."
+      },
+      "description": {
+        "tr": "Aygıt veya imajı dizin ağacına bağlar. Yanlış kullanım riskli.",
+        "en": "Attaches a device or image into the directory tree. Misuse is risky."
+      },
+      "tags": [
+        "disk"
+      ],
+      "risk": "dangerous",
+      "requires_elevated": true,
+      "platforms": [
+        "linux",
+        "macos",
+        "bsd"
+      ],
+      "packages": {
+        "arch": "util-linux",
+        "debian": "mount",
+        "ubuntu": "mount",
+        "fedora": "util-linux"
+      },
+      "examples": [
+        {
+          "title": {
+            "tr": "Bağlı olanlar",
+            "en": "What is mounted"
+          },
+          "command": "mount",
+          "explanation": {
+            "tr": "Mevcut mount tablosu (okuma).",
+            "en": "Current mount table (read)."
+          },
+          "risk": "safe",
+          "requires_elevated": false
+        },
+        {
+          "title": {
+            "tr": "ISO bağla",
+            "en": "Mount ISO"
+          },
+          "command": "sudo mount -o loop image.iso /mnt/iso",
+          "explanation": {
+            "tr": "ISO’yu loop ile bağlar.",
+            "en": "Loop-mounts an ISO."
+          },
+          "risk": "caution",
+          "requires_elevated": true
+        }
+      ],
+      "related": [
+        "umount",
+        "lsblk"
+      ],
+      "intent": {
+        "tr": [
+          "disk bağla",
+          "mount nedir"
+        ],
+        "en": [
+          "mount disk",
+          "what is mounted"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 8 mount"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-bootstrap"
+      },
+      "category": "disks"
+    },
+    {
+      "id": "mv",
+      "name": "mv",
+      "summary": {
+        "tr": "Dosya/dizin taşır veya yeniden adlandırır.",
+        "en": "Move or rename files and directories."
+      },
+      "description": {
+        "tr": "Kaynağı hedefe taşır. Aynı dosya sisteminde yeniden adlandırma gibidir.",
+        "en": "Moves a source to a destination; on the same filesystem this is a rename."
+      },
+      "tags": [
+        "files",
+        "move",
+        "rename"
+      ],
+      "risk": "caution",
+      "requires_elevated": false,
+      "platforms": [
+        "linux",
+        "macos",
+        "bsd"
+      ],
+      "packages": {
+        "arch": "coreutils",
+        "debian": "coreutils",
+        "ubuntu": "coreutils",
+        "fedora": "coreutils"
+      },
+      "flags": [
+        {
+          "flag": "-i",
+          "long": "--interactive",
+          "meaning": {
+            "tr": "Üzerine yazmadan önce sor.",
+            "en": "Prompt before overwrite."
+          },
+          "verified": true,
+          "platforms": [
+            "gnu"
+          ]
+        },
+        {
+          "flag": "-v",
+          "long": "--verbose",
+          "meaning": {
+            "tr": "İşlemleri göster.",
+            "en": "Explain what is being done."
+          },
+          "verified": true,
+          "platforms": [
+            "gnu"
+          ]
+        },
+        {
+          "flag": "-n",
+          "long": "--no-clobber",
+          "meaning": {
+            "tr": "Var olan dosyanın üzerine yazma.",
+            "en": "Do not overwrite an existing file."
+          },
+          "verified": true,
+          "platforms": [
+            "gnu"
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "title": {
+            "tr": "Yeniden adlandır",
+            "en": "Rename"
+          },
+          "command": "mv old.txt new.txt",
+          "explanation": {
+            "tr": "old.txt adını new.txt yapar.",
+            "en": "Renames old.txt to new.txt."
+          },
+          "risk": "caution"
+        },
+        {
+          "title": {
+            "tr": "Taşı",
+            "en": "Move into directory"
+          },
+          "command": "mv report.pdf ~/Documents/",
+          "explanation": {
+            "tr": "Dosyayı Documents altına taşır.",
+            "en": "Moves the file into Documents."
+          },
+          "risk": "caution"
+        }
+      ],
+      "related": [
+        "cp",
+        "rename"
+      ],
+      "intent": {
+        "tr": [
+          "dosya taşı",
+          "yeniden adlandır"
+        ],
+        "en": [
+          "move file",
+          "rename file"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 1 mv (GNU coreutils)"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-bootstrap"
+      },
+      "category": "filesystem"
+    },
+    {
+      "id": "pacman",
+      "name": "pacman",
+      "summary": {
+        "tr": "Arch Linux paket yöneticisi.",
+        "en": "Arch Linux package manager."
+      },
+      "description": {
+        "tr": "Pacman ile kurulum, güncelleme, kaldırma ve sorgu. Nova tercihinde Arch birincil hedeftir.",
+        "en": "Install, upgrade, remove, and query with pacman. Arch is Nova’s preferred host target."
+      },
+      "tags": [
+        "packages",
+        "arch"
+      ],
+      "risk": "dangerous",
+      "requires_elevated": true,
+      "platforms": [
+        "linux"
+      ],
+      "packages": {
+        "arch": "pacman"
+      },
+      "install_notes": {
+        "tr": "Arch taban sistemde gelir. Resmî wiki: https://wiki.archlinux.org/title/Pacman",
+        "en": "Ships with Arch base. Wiki: https://wiki.archlinux.org/title/Pacman"
+      },
+      "flags": [
+        {
+          "flag": "-S",
+          "meaning": {
+            "tr": "Depodan kur / senkron.",
+            "en": "Sync/install from repos."
+          },
+          "verified": true
+        },
+        {
+          "flag": "-Syu",
+          "meaning": {
+            "tr": "DB yenile ve sistemi yükselt.",
+            "en": "Refresh DB and upgrade system."
+          },
+          "verified": true
+        },
+        {
+          "flag": "-Rns",
+          "meaning": {
+            "tr": "Paketi bağımlılıklar/config ile kaldır (sık kullanılan birleşim).",
+            "en": "Remove package with deps/config (common combo)."
+          },
+          "verified": true
+        },
+        {
+          "flag": "-Q",
+          "meaning": {
+            "tr": "Yerel paket sorgusu.",
+            "en": "Query local package DB."
+          },
+          "verified": true
+        },
+        {
+          "flag": "-Ss",
+          "meaning": {
+            "tr": "Depolarda ara.",
+            "en": "Search sync database."
+          },
+          "verified": true
+        }
+      ],
+      "examples": [
+        {
+          "title": {
+            "tr": "Sistem güncelle",
+            "en": "Upgrade system"
+          },
+          "command": "sudo pacman -Syu",
+          "explanation": {
+            "tr": "Tüm paketleri yükseltir.",
+            "en": "Upgrades all packages."
+          },
+          "risk": "dangerous",
+          "requires_elevated": true
+        },
+        {
+          "title": {
+            "tr": "Kur",
+            "en": "Install"
+          },
+          "command": "sudo pacman -S curl",
+          "explanation": {
+            "tr": "curl paketini kurar.",
+            "en": "Installs curl."
+          },
+          "risk": "caution",
+          "requires_elevated": true
+        },
+        {
+          "title": {
+            "tr": "Ara",
+            "en": "Search"
+          },
+          "command": "pacman -Ss ripgrep",
+          "explanation": {
+            "tr": "Depoda ripgrep arar.",
+            "en": "Searches repos for ripgrep."
+          },
+          "risk": "safe",
+          "requires_elevated": false
+        },
+        {
+          "title": {
+            "tr": "Dosya sahibi",
+            "en": "File owner"
+          },
+          "command": "pacman -Qo /usr/bin/ls",
+          "explanation": {
+            "tr": "Dosyayı hangi paket sağlıyor.",
+            "en": "Which package owns a file."
+          },
+          "risk": "safe",
+          "requires_elevated": false
+        }
+      ],
+      "related": [
+        "paru",
+        "yay",
+        "apt",
+        "dnf"
+      ],
+      "intent": {
+        "tr": [
+          "arch paket kur",
+          "pacman güncelle"
+        ],
+        "en": [
+          "arch install package",
+          "pacman upgrade"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 8 pacman",
+          "https://wiki.archlinux.org/title/Pacman"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-bootstrap"
+      },
+      "nova": {
+        "favorite_eligible": true,
+        "ui_priority": 95,
+        "concepts": [
+          "packages",
+          "arch"
+        ]
+      },
+      "category": "packages"
+    },
+    {
+      "id": "pgrep",
+      "name": "pgrep",
+      "summary": {
+        "tr": "Ada göre süreç PID’lerini bulur.",
+        "en": "Find process IDs by name."
+      },
+      "description": {
+        "tr": "Desene uyan süreçlerin PID listesini basar.",
+        "en": "Lists PIDs matching a pattern."
+      },
+      "tags": [
+        "process",
+        "search"
+      ],
+      "risk": "safe",
+      "requires_elevated": false,
+      "platforms": [
+        "linux"
+      ],
+      "packages": {
+        "arch": "procps-ng",
+        "debian": "procps",
+        "ubuntu": "procps",
+        "fedora": "procps-ng"
+      },
+      "flags": [
+        {
+          "flag": "-a",
+          "long": "--list-full",
+          "meaning": {
+            "tr": "PID ile birlikte komut satırı.",
+            "en": "List PID and full command line."
+          },
+          "verified": true,
+          "platforms": [
+            "gnu"
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "title": {
+            "tr": "nginx PID",
+            "en": "nginx PIDs"
+          },
+          "command": "pgrep -a nginx",
+          "explanation": {
+            "tr": "nginx süreçlerini listeler.",
+            "en": "Lists nginx processes."
+          },
+          "risk": "safe"
+        }
+      ],
+      "related": [
+        "pkill",
+        "ps"
+      ],
+      "intent": {
+        "tr": [
+          "pid bul",
+          "isme göre süreç"
+        ],
+        "en": [
+          "find pid by name",
+          "pgrep"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 1 pgrep"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-bootstrap"
+      },
+      "category": "processes"
+    },
+    {
+      "id": "ping",
+      "name": "ping",
+      "summary": {
+        "tr": "ICMP ile host erişimini dener.",
+        "en": "Send ICMP ECHO_REQUEST to network hosts."
+      },
+      "description": {
+        "tr": "Hedefin yanıt verip vermediğini ve gecikmeyi ölçer.",
+        "en": "Checks reachability and round-trip time."
+      },
+      "tags": [
+        "network"
+      ],
+      "risk": "safe",
+      "requires_elevated": false,
+      "platforms": [
+        "linux",
+        "macos",
+        "bsd"
+      ],
+      "packages": {
+        "arch": "iputils",
+        "debian": "iputils-ping",
+        "ubuntu": "iputils-ping",
+        "fedora": "iputils"
+      },
+      "install_notes": {
+        "tr": "Arch: pacman -S iputils",
+        "en": "Arch: pacman -S iputils"
+      },
+      "flags": [
+        {
+          "flag": "-c",
+          "takes_value": true,
+          "value_name": "COUNT",
+          "meaning": {
+            "tr": "Paket sayısı.",
+            "en": "Stop after count replies."
+          },
+          "verified": true
+        }
+      ],
+      "examples": [
+        {
+          "title": {
+            "tr": "4 paket",
+            "en": "Four packets"
+          },
+          "command": "ping -c 4 1.1.1.1",
+          "explanation": {
+            "tr": "Cloudflare DNS’e 4 ping.",
+            "en": "Four pings to Cloudflare DNS."
+          },
+          "risk": "safe"
+        }
+      ],
+      "related": [
+        "ip",
+        "traceroute",
+        "curl"
+      ],
+      "intent": {
+        "tr": [
+          "ağ testi",
+          "ping at"
+        ],
+        "en": [
+          "ping host",
+          "check connectivity"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 8 ping"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-bootstrap"
+      },
+      "category": "network"
+    },
+    {
+      "id": "podman",
+      "name": "podman",
+      "summary": {
+        "tr": "Demonssuz konteyner motoru.",
+        "en": "Daemonless container engine."
+      },
+      "description": {
+        "tr": "OCI konteynerleri yönetir; Docker CLI’ye benzer komutlar.",
+        "en": "Manages OCI containers; Docker-like CLI."
+      },
+      "tags": [
+        "containers"
+      ],
+      "risk": "dangerous",
+      "requires_elevated": false,
+      "platforms": [
+        "linux"
+      ],
+      "packages": {
+        "arch": "podman",
+        "debian": "podman",
+        "ubuntu": "podman",
+        "fedora": "podman"
+      },
+      "install_notes": {
+        "tr": "Arch: pacman -S podman\nFedora: dnf install podman\nDebian/Ubuntu: apt install podman",
+        "en": "Arch: pacman -S podman\nFedora: dnf install podman\nDebian/Ubuntu: apt install podman"
+      },
+      "examples": [
+        {
+          "title": {
+            "tr": "Çalışanlar",
+            "en": "Running"
+          },
+          "command": "podman ps",
+          "explanation": {
+            "tr": "Çalışan konteynerler.",
+            "en": "Running containers."
+          },
+          "risk": "safe"
+        },
+        {
+          "title": {
+            "tr": "İmajlar",
+            "en": "Images"
+          },
+          "command": "podman images",
+          "explanation": {
+            "tr": "Yerel imajlar.",
+            "en": "Local images."
+          },
+          "risk": "safe"
+        }
+      ],
+      "related": [
+        "docker",
+        "nerdctl"
+      ],
+      "intent": {
+        "tr": [
+          "konteyner listele",
+          "podman ps"
+        ],
+        "en": [
+          "list containers",
+          "podman ps"
+        ]
+      },
+      "verification": {
+        "status": "draft",
+        "sources": [
+          "https://docs.podman.io/"
+        ],
+        "notes": "Seed draft — expand flags after human pass."
+      },
+      "nova": {
+        "favorite_eligible": true,
+        "ui_priority": 70
+      },
+      "category": "containers"
+    },
+    {
+      "id": "ps",
+      "name": "ps",
+      "summary": {
+        "tr": "Anlık süreç listesi.",
+        "en": "Report a snapshot of processes."
+      },
+      "description": {
+        "tr": "Çalışan süreçleri seçilen biçimde listeler.",
+        "en": "Lists running processes in a chosen format."
+      },
+      "tags": [
+        "process"
+      ],
+      "risk": "safe",
+      "requires_elevated": false,
+      "platforms": [
+        "linux",
+        "macos",
+        "bsd"
+      ],
+      "packages": {
+        "arch": "procps-ng",
+        "debian": "procps",
+        "ubuntu": "procps",
+        "fedora": "procps-ng"
+      },
+      "install_notes": {
+        "tr": "Arch: pacman -S procps-ng",
+        "en": "Arch: pacman -S procps-ng"
+      },
+      "flags": [
+        {
+          "flag": "aux",
+          "meaning": {
+            "tr": "BSD biçiminde geniş liste (sık kullanılır).",
+            "en": "BSD-style broad listing (common)."
+          },
+          "verified": true
+        },
+        {
+          "flag": "-ef",
+          "meaning": {
+            "tr": "Standart tam liste.",
+            "en": "Full listing (System V style)."
+          },
+          "verified": true
+        }
+      ],
+      "examples": [
+        {
+          "title": {
+            "tr": "Tüm süreçler",
+            "en": "All processes"
+          },
+          "command": "ps aux",
+          "explanation": {
+            "tr": "Geniş süreç tablosu.",
+            "en": "Wide process table."
+          },
+          "risk": "safe"
+        },
+        {
+          "title": {
+            "tr": "İsme filtre",
+            "en": "Filter by name"
+          },
+          "command": "ps aux | grep nginx",
+          "explanation": {
+            "tr": "nginx geçen satırları gösterir (grep de eşleşebilir).",
+            "en": "Shows lines containing nginx (may match grep itself)."
+          },
+          "risk": "safe"
+        }
+      ],
+      "related": [
+        "top",
+        "pgrep",
+        "kill"
+      ],
+      "intent": {
+        "tr": [
+          "süreç listele",
+          "çalışan programlar"
+        ],
+        "en": [
+          "list processes",
+          "show running programs"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 1 ps"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-bootstrap"
+      },
+      "category": "processes"
+    },
+    {
+      "id": "pwd",
+      "name": "pwd",
+      "summary": {
+        "tr": "Çalışma dizinini yazdırır.",
+        "en": "Print working directory."
+      },
+      "description": {
+        "tr": "Geçerli çalışma dizininin mutlak yolunu gösterir.",
+        "en": "Prints the absolute path of the current working directory."
+      },
+      "tags": [
+        "files",
+        "directory",
+        "shell"
+      ],
+      "risk": "safe",
+      "requires_elevated": false,
+      "platforms": [
+        "linux",
+        "macos",
+        "bsd"
+      ],
+      "packages": {
+        "arch": "coreutils",
+        "debian": "coreutils",
+        "ubuntu": "coreutils",
+        "fedora": "coreutils"
+      },
+      "examples": [
+        {
+          "title": {
+            "tr": "Neredeyim?",
+            "en": "Where am I?"
+          },
+          "command": "pwd",
+          "explanation": {
+            "tr": "Bulunduğunuz dizini yazdırır.",
+            "en": "Prints your current directory."
+          },
+          "risk": "safe"
+        }
+      ],
+      "related": [
+        "cd",
+        "ls"
+      ],
+      "intent": {
+        "tr": [
+          "hangi dizindeyim",
+          "çalışma dizini"
+        ],
+        "en": [
+          "where am I",
+          "print working directory"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 1 pwd"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-bootstrap"
+      },
+      "nova": {
+        "favorite_eligible": true,
+        "ui_priority": 70
+      },
+      "category": "filesystem"
+    },
+    {
+      "id": "rm",
+      "name": "rm",
+      "summary": {
+        "tr": "Dosya veya dizinleri siler.",
+        "en": "Remove files or directories."
+      },
+      "description": {
+        "tr": "Dosyaları siler. Dizinler için -r gerekir. Geri dönüşüm kutusu yoktur; dikkat.",
+        "en": "Deletes files. Directories need -r. There is no trash — be careful."
+      },
+      "tags": [
+        "files",
+        "delete"
+      ],
+      "risk": "destructive",
+      "requires_elevated": false,
+      "platforms": [
+        "linux",
+        "macos",
+        "bsd"
+      ],
+      "packages": {
+        "arch": "coreutils",
+        "debian": "coreutils",
+        "ubuntu": "coreutils",
+        "fedora": "coreutils"
+      },
+      "flags": [
+        {
+          "flag": "-r",
+          "long": "--recursive",
+          "meaning": {
+            "tr": "Dizinleri ve içeriğini sil.",
+            "en": "Remove directories and their contents."
+          },
+          "verified": true,
+          "platforms": [
+            "gnu"
+          ]
+        },
+        {
+          "flag": "-f",
+          "long": "--force",
+          "meaning": {
+            "tr": "Onaylama; yokluk hatalarını yoksay.",
+            "en": "Never prompt; ignore missing files."
+          },
+          "verified": true,
+          "platforms": [
+            "gnu"
+          ]
+        },
+        {
+          "flag": "-i",
+          "meaning": {
+            "tr": "Her silmeden önce sor.",
+            "en": "Prompt before every removal."
+          },
+          "verified": true,
+          "platforms": [
+            "gnu"
+          ]
+        },
+        {
+          "flag": "-I",
+          "meaning": {
+            "tr": "Çok sayıda silmede bir kez sor.",
+            "en": "Prompt once before removing many files."
+          },
+          "verified": true,
+          "platforms": [
+            "gnu"
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "title": {
+            "tr": "Dosya sil",
+            "en": "Remove file"
+          },
+          "command": "rm unused.log",
+          "explanation": {
+            "tr": "Tek bir dosyayı siler.",
+            "en": "Removes a single file."
+          },
+          "risk": "destructive"
+        },
+        {
+          "title": {
+            "tr": "Dizin sil (dikkat)",
+            "en": "Remove directory (careful)"
+          },
+          "command": "rm -ri old-project/",
+          "explanation": {
+            "tr": "Onaylayarak dizini siler. -rf kullanmadan önce iki kez düşünün.",
+            "en": "Recursively removes with prompts. Think twice before -rf."
+          },
+          "risk": "destructive"
+        }
+      ],
+      "related": [
+        "mv",
+        "trash-put"
+      ],
+      "intent": {
+        "tr": [
+          "dosya sil",
+          "klasör sil"
+        ],
+        "en": [
+          "delete file",
+          "remove directory"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 1 rm (GNU coreutils)"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-bootstrap",
+        "notes": "Document danger prominently in UI."
+      },
+      "nova": {
+        "favorite_eligible": false,
+        "ui_priority": 40
+      },
+      "category": "filesystem"
+    },
+    {
+      "packages": {
+        "arch": "coreutils",
+        "debian": "coreutils",
+        "ubuntu": "coreutils",
+        "fedora": "coreutils"
+      },
+      "platforms": [
+        "linux",
+        "macos",
+        "bsd"
+      ],
+      "requires_elevated": false,
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 1 sort"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-bootstrap"
+      },
+      "id": "sort",
+      "name": "sort",
+      "summary": {
+        "tr": "Satırları sıralar.",
+        "en": "Sort lines of text."
+      },
+      "description": {
+        "tr": "Standart girdi veya dosya satırlarını sıralar.",
+        "en": "Sorts lines from files or stdin."
+      },
+      "tags": [
+        "text"
+      ],
+      "risk": "safe",
+      "flags": [
+        {
+          "flag": "-n",
+          "long": "--numeric-sort",
+          "meaning": {
+            "tr": "Sayısal sıralama.",
+            "en": "Compare according to string numerical value."
+          },
+          "verified": true,
+          "platforms": [
+            "gnu"
+          ]
+        },
+        {
+          "flag": "-r",
+          "long": "--reverse",
+          "meaning": {
+            "tr": "Ters sıra.",
+            "en": "Reverse the result."
+          },
+          "verified": true,
+          "platforms": [
+            "gnu"
+          ]
+        },
+        {
+          "flag": "-u",
+          "long": "--unique",
+          "meaning": {
+            "tr": "Benzersiz satırlar.",
+            "en": "Unique lines."
+          },
+          "verified": true,
+          "platforms": [
+            "gnu"
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "title": {
+            "tr": "Sayısal sırala",
+            "en": "Numeric sort"
+          },
+          "command": "sort -n numbers.txt",
+          "explanation": {
+            "tr": "Sayı değerine göre sıralar.",
+            "en": "Sorts by numeric value."
+          },
+          "risk": "safe"
+        }
+      ],
+      "related": [
+        "uniq",
+        "wc"
+      ],
+      "intent": {
+        "tr": [
+          "satır sırala",
+          "listeyi sırala"
+        ],
+        "en": [
+          "sort lines",
+          "sort file"
+        ]
+      },
+      "category": "text"
+    },
+    {
+      "id": "ss",
+      "name": "ss",
+      "summary": {
+        "tr": "Soket istatistiklerini gösterir.",
+        "en": "Investigate sockets."
+      },
+      "description": {
+        "tr": "netstat yerine geçen, dinleyen portları ve bağlantıları listeler.",
+        "en": "Successor-style replacement for many netstat uses; lists sockets."
+      },
+      "tags": [
+        "network",
+        "ports"
+      ],
+      "risk": "safe",
+      "requires_elevated": false,
+      "platforms": [
+        "linux"
+      ],
+      "packages": {
+        "arch": "iproute2",
+        "debian": "iproute2",
+        "ubuntu": "iproute2",
+        "fedora": "iproute"
+      },
+      "flags": [
+        {
+          "flag": "-t",
+          "long": "--tcp",
+          "meaning": {
+            "tr": "TCP soketleri.",
+            "en": "Display TCP sockets."
+          },
+          "verified": true
+        },
+        {
+          "flag": "-u",
+          "long": "--udp",
+          "meaning": {
+            "tr": "UDP soketleri.",
+            "en": "Display UDP sockets."
+          },
+          "verified": true
+        },
+        {
+          "flag": "-l",
+          "long": "--listening",
+          "meaning": {
+            "tr": "Dinleyen soketler.",
+            "en": "Display listening sockets."
+          },
+          "verified": true
+        },
+        {
+          "flag": "-n",
+          "long": "--numeric",
+          "meaning": {
+            "tr": "Servis adlarını çözümleme.",
+            "en": "Do not resolve service names."
+          },
+          "verified": true
+        },
+        {
+          "flag": "-p",
+          "long": "--processes",
+          "meaning": {
+            "tr": "Süreci göster.",
+            "en": "Show process using socket."
+          },
+          "verified": true
+        }
+      ],
+      "examples": [
+        {
+          "title": {
+            "tr": "Dinleyen TCP",
+            "en": "Listening TCP"
+          },
+          "command": "ss -tulpn",
+          "explanation": {
+            "tr": "Dinleyen TCP/UDP portlar ve süreçler.",
+            "en": "Listening TCP/UDP ports and processes."
+          },
+          "risk": "safe"
+        }
+      ],
+      "related": [
+        "ip",
+        "netstat"
+      ],
+      "intent": {
+        "tr": [
+          "açık portlar",
+          "kim dinliyor"
+        ],
+        "en": [
+          "listening ports",
+          "what is listening"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 8 ss"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-bootstrap"
+      },
+      "category": "network"
+    },
+    {
+      "id": "ssh",
+      "name": "ssh",
+      "summary": {
+        "tr": "Uzaktan güvenli kabuk oturumu.",
+        "en": "OpenSSH remote login client."
+      },
+      "description": {
+        "tr": "SSH protokolü ile uzak makinede oturum açar.",
+        "en": "Logs into a remote machine using the SSH protocol."
+      },
+      "tags": [
+        "security",
+        "network"
+      ],
+      "risk": "caution",
+      "requires_elevated": false,
+      "platforms": [
+        "linux",
+        "macos",
+        "bsd"
+      ],
+      "packages": {
+        "arch": "openssh",
+        "debian": "openssh-client",
+        "ubuntu": "openssh-client",
+        "fedora": "openssh-clients"
+      },
+      "install_notes": {
+        "tr": "Arch: pacman -S openssh",
+        "en": "Arch: pacman -S openssh"
+      },
+      "flags": [
+        {
+          "flag": "-p",
+          "takes_value": true,
+          "value_name": "port",
+          "meaning": {
+            "tr": "Uzak port.",
+            "en": "Remote port."
+          },
+          "verified": true
+        },
+        {
+          "flag": "-i",
+          "takes_value": true,
+          "value_name": "identity",
+          "meaning": {
+            "tr": "Kimlik dosyası (özel anahtar).",
+            "en": "Identity file (private key)."
+          },
+          "verified": true
+        }
+      ],
+      "examples": [
+        {
+          "title": {
+            "tr": "Bağlan",
+            "en": "Connect"
+          },
+          "command": "ssh user@host.example",
+          "explanation": {
+            "tr": "Uzak oturum açar.",
+            "en": "Opens a remote session."
+          },
+          "risk": "caution"
+        }
+      ],
+      "related": [
+        "ssh-keygen",
+        "scp",
+        "sftp"
+      ],
+      "intent": {
+        "tr": [
+          "ssh ile bağlan",
+          "uzak sunucu"
+        ],
+        "en": [
+          "ssh connect",
+          "remote shell"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 1 ssh"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-bootstrap"
+      },
+      "category": "security"
+    },
+    {
+      "id": "ssh-keygen",
+      "name": "ssh-keygen",
+      "summary": {
+        "tr": "SSH kimlik doğrulama anahtarları üretir.",
+        "en": "Generate authentication keys for SSH."
+      },
+      "description": {
+        "tr": "Açık/özel anahtar çifti oluşturur veya yönetir.",
+        "en": "Creates or manages public/private key pairs."
+      },
+      "tags": [
+        "security",
+        "ssh"
+      ],
+      "risk": "caution",
+      "requires_elevated": false,
+      "platforms": [
+        "linux",
+        "macos",
+        "bsd"
+      ],
+      "packages": {
+        "arch": "openssh",
+        "debian": "openssh-client",
+        "ubuntu": "openssh-client",
+        "fedora": "openssh-clients"
+      },
+      "flags": [
+        {
+          "flag": "-t",
+          "takes_value": true,
+          "value_name": "type",
+          "meaning": {
+            "tr": "Anahtar türü (ör. ed25519).",
+            "en": "Key type (e.g. ed25519)."
+          },
+          "verified": true
+        },
+        {
+          "flag": "-C",
+          "takes_value": true,
+          "value_name": "comment",
+          "meaning": {
+            "tr": "Yorum.",
+            "en": "Comment."
+          },
+          "verified": true
+        },
+        {
+          "flag": "-f",
+          "takes_value": true,
+          "value_name": "filename",
+          "meaning": {
+            "tr": "Çıktı dosya adı.",
+            "en": "Output key file."
+          },
+          "verified": true
+        }
+      ],
+      "examples": [
+        {
+          "title": {
+            "tr": "ed25519 anahtar",
+            "en": "ed25519 key"
+          },
+          "command": "ssh-keygen -t ed25519 -C \"me@example\"",
+          "explanation": {
+            "tr": "Modern varsayılan önerilen tür.",
+            "en": "Modern recommended key type."
+          },
+          "risk": "caution"
+        }
+      ],
+      "related": [
+        "ssh"
+      ],
+      "intent": {
+        "tr": [
+          "ssh anahtar oluştur",
+          "ed25519"
+        ],
+        "en": [
+          "generate ssh key",
+          "ssh-keygen ed25519"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 1 ssh-keygen"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-bootstrap"
+      },
+      "category": "security"
+    },
+    {
+      "id": "stat",
+      "name": "stat",
+      "summary": {
+        "tr": "Dosya durumu ve inode bilgisi gösterir.",
+        "en": "Display file status and inode data."
+      },
+      "description": {
+        "tr": "Boyut, izinler, zaman damgaları ve dosya türü gibi meta verileri basar.",
+        "en": "Prints metadata such as size, permissions, timestamps, and file type."
+      },
+      "tags": [
+        "files",
+        "metadata"
+      ],
+      "risk": "safe",
+      "requires_elevated": false,
+      "platforms": [
+        "linux",
+        "macos",
+        "bsd"
+      ],
+      "packages": {
+        "arch": "coreutils",
+        "debian": "coreutils",
+        "ubuntu": "coreutils",
+        "fedora": "coreutils"
+      },
+      "flags": [
+        {
+          "flag": "-c",
+          "long": "--format",
+          "takes_value": true,
+          "value_name": "FORMAT",
+          "meaning": {
+            "tr": "Özel biçim dizesi kullan (GNU).",
+            "en": "Use a custom format string (GNU)."
+          },
+          "verified": true,
+          "platforms": [
+            "gnu"
+          ]
+        },
+        {
+          "flag": "-L",
+          "long": "--dereference",
+          "meaning": {
+            "tr": "Sembolik bağları takip et.",
+            "en": "Follow links."
+          },
+          "verified": true,
+          "platforms": [
+            "gnu"
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "title": {
+            "tr": "Dosya bilgisi",
+            "en": "File info"
+          },
+          "command": "stat /etc/passwd",
+          "explanation": {
+            "tr": "passwd dosyasının meta verisini gösterir.",
+            "en": "Shows metadata for /etc/passwd."
+          },
+          "risk": "safe"
+        }
+      ],
+      "related": [
+        "ls",
+        "file"
+      ],
+      "intent": {
+        "tr": [
+          "dosya bilgisi",
+          "inode gör"
+        ],
+        "en": [
+          "file metadata",
+          "show inode"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 1 stat"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-bootstrap"
+      },
+      "category": "filesystem"
+    },
+    {
+      "id": "sudo",
+      "name": "sudo",
+      "summary": {
+        "tr": "Komutu başka kullanıcı olarak çalıştırır (genelde root).",
+        "en": "Execute a command as another user (usually root)."
+      },
+      "description": {
+        "tr": "Politika (sudoers) ile yetkili komut çalıştırma. Dikkatli kullanın.",
+        "en": "Runs privileged commands per sudoers policy. Use carefully."
+      },
+      "tags": [
+        "users",
+        "privilege"
+      ],
+      "risk": "dangerous",
+      "requires_elevated": false,
+      "platforms": [
+        "linux",
+        "macos"
+      ],
+      "packages": {
+        "arch": "sudo",
+        "debian": "sudo",
+        "ubuntu": "sudo",
+        "fedora": "sudo"
+      },
+      "install_notes": {
+        "tr": "Arch: pacman -S sudo — kullanıcınızı wheel grubuna ekleyin.",
+        "en": "Arch: pacman -S sudo — add your user to the wheel group."
+      },
+      "flags": [
+        {
+          "flag": "-u",
+          "takes_value": true,
+          "value_name": "user",
+          "meaning": {
+            "tr": "Hedef kullanıcı.",
+            "en": "Run as target user."
+          },
+          "verified": true
+        },
+        {
+          "flag": "-i",
+          "meaning": {
+            "tr": "Login shell gibi.",
+            "en": "Simulate initial login."
+          },
+          "verified": true
+        },
+        {
+          "flag": "-l",
+          "meaning": {
+            "tr": "İzinleri listele.",
+            "en": "List allowed commands."
+          },
+          "verified": true
+        }
+      ],
+      "examples": [
+        {
+          "title": {
+            "tr": "Root komut",
+            "en": "Root command"
+          },
+          "command": "sudo pacman -Syu",
+          "explanation": {
+            "tr": "Arch’ta sistem güncellemesi.",
+            "en": "System upgrade on Arch."
+          },
+          "risk": "dangerous"
+        },
+        {
+          "title": {
+            "tr": "İzinlerim",
+            "en": "My privileges"
+          },
+          "command": "sudo -l",
+          "explanation": {
+            "tr": "sudo ile neler yapılabileceğini listeler.",
+            "en": "Lists what sudo allows."
+          },
+          "risk": "safe"
+        }
+      ],
+      "related": [
+        "su",
+        "doas"
+      ],
+      "intent": {
+        "tr": [
+          "yönetici olarak çalıştır",
+          "root yetkisi"
+        ],
+        "en": [
+          "run as root",
+          "admin command"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 8 sudo"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-bootstrap"
+      },
+      "nova": {
+        "favorite_eligible": true,
+        "ui_priority": 75
+      },
+      "category": "users"
+    },
+    {
+      "id": "systemctl",
+      "name": "systemctl",
+      "summary": {
+        "tr": "systemd birimlerini denetler.",
+        "en": "Control the systemd system and service manager."
+      },
+      "description": {
+        "tr": "Servis başlatma/durdurma, durum ve boot birimleri için birincil araç.",
+        "en": "Primary tool to start/stop services, check status, and manage boot units."
+      },
+      "tags": [
+        "system",
+        "systemd",
+        "service"
+      ],
+      "risk": "dangerous",
+      "requires_elevated": true,
+      "platforms": [
+        "linux"
+      ],
+      "packages": {
+        "arch": "systemd",
+        "debian": "systemd",
+        "ubuntu": "systemd",
+        "fedora": "systemd"
+      },
+      "install_notes": {
+        "tr": "Arch: pacman -S systemd (taban).",
+        "en": "Arch: pacman -S systemd (base)."
+      },
+      "flags": [
+        {
+          "flag": "status",
+          "meaning": {
+            "tr": "Birim durumunu göster (alt komut).",
+            "en": "Show unit status (subcommand)."
+          },
+          "verified": true
+        },
+        {
+          "flag": "start",
+          "meaning": {
+            "tr": "Birimi başlat (alt komut).",
+            "en": "Start unit (subcommand)."
+          },
+          "verified": true
+        },
+        {
+          "flag": "stop",
+          "meaning": {
+            "tr": "Birimi durdur (alt komut).",
+            "en": "Stop unit (subcommand)."
+          },
+          "verified": true
+        },
+        {
+          "flag": "--user",
+          "meaning": {
+            "tr": "Kullanıcı oturumu yöneticisi.",
+            "en": "Talk to user service manager."
+          },
+          "verified": true
+        }
+      ],
+      "examples": [
+        {
+          "title": {
+            "tr": "Durum",
+            "en": "Status"
+          },
+          "command": "systemctl status sshd",
+          "explanation": {
+            "tr": "sshd birim durumunu gösterir (izinler dağıtıma göre).",
+            "en": "Shows sshd unit status (unit name varies)."
+          },
+          "risk": "safe",
+          "requires_elevated": false
+        },
+        {
+          "title": {
+            "tr": "Yeniden başlat",
+            "en": "Restart"
+          },
+          "command": "sudo systemctl restart nginx",
+          "explanation": {
+            "tr": "nginx servisini yeniden başlatır.",
+            "en": "Restarts the nginx service."
+          },
+          "risk": "dangerous",
+          "requires_elevated": true
+        }
+      ],
+      "related": [
+        "journalctl",
+        "service"
+      ],
+      "intent": {
+        "tr": [
+          "servis başlat",
+          "systemd durum"
+        ],
+        "en": [
+          "start service",
+          "systemd status"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 1 systemctl"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-bootstrap"
+      },
+      "category": "system"
+    },
+    {
+      "packages": {
+        "arch": "coreutils",
+        "debian": "coreutils",
+        "ubuntu": "coreutils",
+        "fedora": "coreutils"
+      },
+      "platforms": [
+        "linux",
+        "macos",
+        "bsd"
+      ],
+      "requires_elevated": false,
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 1 tail"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-bootstrap"
+      },
+      "id": "tail",
+      "name": "tail",
+      "summary": {
+        "tr": "Dosyanın sonunu gösterir.",
+        "en": "Show the end of files."
+      },
+      "description": {
+        "tr": "Varsayılan son 10 satır. -f ile canlı takip.",
+        "en": "Last 10 lines by default. -f follows appended data."
+      },
+      "tags": [
+        "text",
+        "log"
+      ],
+      "risk": "safe",
+      "flags": [
+        {
+          "flag": "-n",
+          "long": "--lines",
+          "takes_value": true,
+          "value_name": "N",
+          "meaning": {
+            "tr": "Son N satır.",
+            "en": "Last N lines."
+          },
+          "verified": true,
+          "platforms": [
+            "gnu"
+          ]
+        },
+        {
+          "flag": "-f",
+          "long": "--follow",
+          "meaning": {
+            "tr": "Eklenen çıktıyı canlı izle.",
+            "en": "Follow appended output."
+          },
+          "verified": true,
+          "platforms": [
+            "gnu"
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "title": {
+            "tr": "Log takip",
+            "en": "Follow log"
+          },
+          "command": "tail -f /var/log/nginx/access.log",
+          "explanation": {
+            "tr": "Yeni satırları canlı gösterir.",
+            "en": "Streams new lines as they appear."
+          },
+          "risk": "safe"
+        }
+      ],
+      "related": [
+        "head",
+        "less",
+        "journalctl"
+      ],
+      "intent": {
+        "tr": [
+          "log takip",
+          "dosyanın sonu"
+        ],
+        "en": [
+          "follow log",
+          "tail file"
+        ]
+      },
+      "category": "text"
+    },
+    {
+      "id": "tar",
+      "name": "tar",
+      "summary": {
+        "tr": "Tar arşivlerini oluşturur veya çıkarır.",
+        "en": "Create or extract tape archives."
+      },
+      "description": {
+        "tr": "Dosya ağaçlarını arşivler; sık sık gzip/xz ile birlikte.",
+        "en": "Archives file trees; often combined with gzip/xz."
+      },
+      "tags": [
+        "archive"
+      ],
+      "risk": "caution",
+      "requires_elevated": false,
+      "platforms": [
+        "linux",
+        "macos",
+        "bsd"
+      ],
+      "packages": {
+        "arch": "tar",
+        "debian": "tar",
+        "ubuntu": "tar",
+        "fedora": "tar"
+      },
+      "flags": [
+        {
+          "flag": "-x",
+          "long": "--extract",
+          "meaning": {
+            "tr": "Çıkar.",
+            "en": "Extract."
+          },
+          "verified": true
+        },
+        {
+          "flag": "-c",
+          "long": "--create",
+          "meaning": {
+            "tr": "Oluştur.",
+            "en": "Create."
+          },
+          "verified": true
+        },
+        {
+          "flag": "-f",
+          "long": "--file",
+          "takes_value": true,
+          "value_name": "ARCHIVE",
+          "meaning": {
+            "tr": "Arşiv dosyası.",
+            "en": "Archive file."
+          },
+          "verified": true
+        },
+        {
+          "flag": "-z",
+          "long": "--gzip",
+          "meaning": {
+            "tr": "gzip ile süz.",
+            "en": "Filter through gzip."
+          },
+          "verified": true
+        },
+        {
+          "flag": "-J",
+          "long": "--xz",
+          "meaning": {
+            "tr": "xz ile süz.",
+            "en": "Filter through xz."
+          },
+          "verified": true
+        },
+        {
+          "flag": "-v",
+          "long": "--verbose",
+          "meaning": {
+            "tr": "Ayrıntılı liste.",
+            "en": "Verbose listing."
+          },
+          "verified": true
+        }
+      ],
+      "examples": [
+        {
+          "title": {
+            "tr": "Çıkar gzip",
+            "en": "Extract gzip"
+          },
+          "command": "tar -xzf project.tar.gz",
+          "explanation": {
+            "tr": "tar.gz arşivini çıkarır.",
+            "en": "Extracts a tar.gz archive."
+          },
+          "risk": "caution"
+        },
+        {
+          "title": {
+            "tr": "Oluştur",
+            "en": "Create"
+          },
+          "command": "tar -czf backup.tar.gz notes/",
+          "explanation": {
+            "tr": "notes/ dizininden sıkıştırılmış arşiv.",
+            "en": "Creates compressed archive from notes/."
+          },
+          "risk": "caution"
+        }
+      ],
+      "related": [
+        "gzip",
+        "xz",
+        "zip"
+      ],
+      "intent": {
+        "tr": [
+          "tar aç",
+          "arşiv oluştur"
+        ],
+        "en": [
+          "extract tar",
+          "create archive"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 1 tar"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-bootstrap"
+      },
+      "category": "archives"
+    },
+    {
+      "packages": {
+        "arch": "coreutils",
+        "debian": "coreutils",
+        "ubuntu": "coreutils",
+        "fedora": "coreutils"
+      },
+      "platforms": [
+        "linux",
+        "macos",
+        "bsd"
+      ],
+      "requires_elevated": false,
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 1 tee"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-bootstrap"
+      },
+      "id": "tee",
+      "name": "tee",
+      "summary": {
+        "tr": "Çıktıyı hem dosyaya hem stdout’a yazar.",
+        "en": "Write output to files and stdout."
+      },
+      "description": {
+        "tr": "Boru hattında çıktıyı kaydederek iletir.",
+        "en": "Duplicates stdin to files while passing it through."
+      },
+      "tags": [
+        "text",
+        "pipe"
+      ],
+      "risk": "caution",
+      "flags": [
+        {
+          "flag": "-a",
+          "long": "--append",
+          "meaning": {
+            "tr": "Dosyaya ekle, üzerine yazma.",
+            "en": "Append to files rather than overwrite."
+          },
+          "verified": true,
+          "platforms": [
+            "gnu"
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "title": {
+            "tr": "Hem kaydet hem göster",
+            "en": "Save and show"
+          },
+          "command": "journalctl -u nginx | tee nginx.log",
+          "explanation": {
+            "tr": "Çıktıyı dosyaya yazıp ekranda da gösterir.",
+            "en": "Saves output while still displaying it."
+          },
+          "risk": "caution"
+        }
+      ],
+      "related": [
+        "cat"
+      ],
+      "intent": {
+        "tr": [
+          "çıktıyı dosyaya yaz",
+          "tee ile kaydet"
+        ],
+        "en": [
+          "tee to file",
+          "save pipeline output"
+        ]
+      },
+      "category": "text"
+    },
+    {
+      "id": "top",
+      "name": "top",
+      "summary": {
+        "tr": "Canlı süreç izleyici.",
+        "en": "Dynamic real-time process viewer."
+      },
+      "description": {
+        "tr": "CPU/bellek kullanımını etkileşimli günceller. q ile çık.",
+        "en": "Interactively updates CPU/memory usage. Press q to quit."
+      },
+      "tags": [
+        "process",
+        "monitor"
+      ],
+      "risk": "safe",
+      "requires_elevated": false,
+      "platforms": [
+        "linux",
+        "macos",
+        "bsd"
+      ],
+      "packages": {
+        "arch": "procps-ng",
+        "debian": "procps",
+        "ubuntu": "procps",
+        "fedora": "procps-ng"
+      },
+      "examples": [
+        {
+          "title": {
+            "tr": "İzle",
+            "en": "Watch"
+          },
+          "command": "top",
+          "explanation": {
+            "tr": "Canlı süreç görünümü açar.",
+            "en": "Opens the live process view."
+          },
+          "risk": "safe"
+        }
+      ],
+      "related": [
+        "htop",
+        "ps",
+        "btop"
+      ],
+      "intent": {
+        "tr": [
+          "cpu kullanımı",
+          "canlı süreç"
+        ],
+        "en": [
+          "cpu usage",
+          "live processes"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 1 top"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-bootstrap"
+      },
+      "category": "processes"
+    },
+    {
+      "id": "touch",
+      "name": "touch",
+      "summary": {
+        "tr": "Dosya zaman damgasını günceller veya boş dosya oluşturur.",
+        "en": "Update timestamps or create empty files."
+      },
+      "description": {
+        "tr": "Var olmayan dosyaları boş oluşturur; var olanların erişim/değişiklik zamanını günceller.",
+        "en": "Creates empty files or updates access/modification times."
+      },
+      "tags": [
+        "files"
+      ],
+      "risk": "safe",
+      "requires_elevated": false,
+      "platforms": [
+        "linux",
+        "macos",
+        "bsd"
+      ],
+      "packages": {
+        "arch": "coreutils",
+        "debian": "coreutils",
+        "ubuntu": "coreutils",
+        "fedora": "coreutils"
+      },
+      "flags": [
+        {
+          "flag": "-c",
+          "long": "--no-create",
+          "meaning": {
+            "tr": "Dosya yoksa oluşturma.",
+            "en": "Do not create any files."
+          },
+          "verified": true,
+          "platforms": [
+            "gnu"
+          ]
+        },
+        {
+          "flag": "-a",
+          "meaning": {
+            "tr": "Yalnızca erişim zamanını değiştir.",
+            "en": "Change only the access time."
+          },
+          "verified": true,
+          "platforms": [
+            "gnu"
+          ]
+        },
+        {
+          "flag": "-m",
+          "meaning": {
+            "tr": "Yalnızca değiştirme zamanını değiştir.",
+            "en": "Change only the modification time."
+          },
+          "verified": true,
+          "platforms": [
+            "gnu"
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "title": {
+            "tr": "Boş dosya",
+            "en": "Empty file"
+          },
+          "command": "touch README.md",
+          "explanation": {
+            "tr": "Yoksa boş README.md oluşturur.",
+            "en": "Creates empty README.md if missing."
+          },
+          "risk": "safe"
+        }
+      ],
+      "related": [
+        "mkdir",
+        "stat"
+      ],
+      "intent": {
+        "tr": [
+          "boş dosya oluştur",
+          "zaman damgası güncelle"
+        ],
+        "en": [
+          "create empty file",
+          "update timestamp"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 1 touch"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-bootstrap"
+      },
+      "category": "filesystem"
+    },
+    {
+      "id": "tree",
+      "name": "tree",
+      "summary": {
+        "tr": "Dizin ağacını görsel listeler.",
+        "en": "List contents of directories in a tree-like format."
+      },
+      "description": {
+        "tr": "Hiyerarşiyi girintili ağaç olarak basar. Her taban sistemde olmayabilir.",
+        "en": "Prints an indented tree of a hierarchy. May not be installed by default."
+      },
+      "tags": [
+        "files",
+        "directory"
+      ],
+      "risk": "safe",
+      "requires_elevated": false,
+      "platforms": [
+        "linux",
+        "macos"
+      ],
+      "packages": {
+        "arch": "tree",
+        "debian": "tree",
+        "ubuntu": "tree",
+        "fedora": "tree"
+      },
+      "install_notes": {
+        "tr": "Arch: pacman -S tree\nDebian/Ubuntu: apt install tree\nFedora: dnf install tree",
+        "en": "Arch: pacman -S tree\nDebian/Ubuntu: apt install tree\nFedora: dnf install tree"
+      },
+      "flags": [
+        {
+          "flag": "-L",
+          "takes_value": true,
+          "value_name": "depth",
+          "meaning": {
+            "tr": "Maksimum derinlik.",
+            "en": "Max display depth."
+          },
+          "verified": true
+        },
+        {
+          "flag": "-a",
+          "meaning": {
+            "tr": "Gizli dosyalar.",
+            "en": "All files."
+          },
+          "verified": true
+        }
+      ],
+      "examples": [
+        {
+          "title": {
+            "tr": "2 seviye",
+            "en": "Depth 2"
+          },
+          "command": "tree -L 2",
+          "explanation": {
+            "tr": "İki seviye ağaç.",
+            "en": "Two-level tree."
+          },
+          "risk": "safe"
+        }
+      ],
+      "related": [
+        "ls",
+        "find"
+      ],
+      "intent": {
+        "tr": [
+          "dizin ağacı",
+          "klasör yapısı gör"
+        ],
+        "en": [
+          "directory tree",
+          "show folder tree"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 1 tree"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-bootstrap"
+      },
+      "category": "filesystem"
+    },
+    {
+      "id": "uname",
+      "name": "uname",
+      "summary": {
+        "tr": "Sistem bilgisini yazdırır.",
+        "en": "Print system information."
+      },
+      "description": {
+        "tr": "Çekirdek adı, sürüm ve makine mimarisi gibi bilgileri gösterir.",
+        "en": "Shows kernel name, release, machine architecture, and more."
+      },
+      "tags": [
+        "system",
+        "info"
+      ],
+      "risk": "safe",
+      "requires_elevated": false,
+      "platforms": [
+        "linux",
+        "macos",
+        "bsd"
+      ],
+      "packages": {
+        "arch": "coreutils",
+        "debian": "coreutils",
+        "ubuntu": "coreutils",
+        "fedora": "coreutils"
+      },
+      "flags": [
+        {
+          "flag": "-a",
+          "long": "--all",
+          "meaning": {
+            "tr": "Tüm bilinen bilgi.",
+            "en": "Print all information."
+          },
+          "verified": true,
+          "platforms": [
+            "gnu"
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "title": {
+            "tr": "Tümü",
+            "en": "All"
+          },
+          "command": "uname -a",
+          "explanation": {
+            "tr": "Özet sistem kimliği.",
+            "en": "Summary system identity."
+          },
+          "risk": "safe"
+        }
+      ],
+      "related": [
+        "hostnamectl",
+        "hostname"
+      ],
+      "intent": {
+        "tr": [
+          "çekirdek sürümü",
+          "mimari nedir"
+        ],
+        "en": [
+          "kernel version",
+          "machine arch"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 1 uname"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-bootstrap"
+      },
+      "category": "system"
+    },
+    {
+      "packages": {
+        "arch": "coreutils",
+        "debian": "coreutils",
+        "ubuntu": "coreutils",
+        "fedora": "coreutils"
+      },
+      "platforms": [
+        "linux",
+        "macos",
+        "bsd"
+      ],
+      "requires_elevated": false,
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 1 uniq"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-bootstrap"
+      },
+      "id": "uniq",
+      "name": "uniq",
+      "summary": {
+        "tr": "Ardışık yinelenen satırları bildirir veya süzgeçler.",
+        "en": "Report or omit repeated adjacent lines."
+      },
+      "description": {
+        "tr": "Genelde sort ile birlikte kullanılır; yalnızca ardışık tekrarları görür.",
+        "en": "Usually paired with sort; only detects adjacent duplicates."
+      },
+      "tags": [
+        "text"
+      ],
+      "risk": "safe",
+      "flags": [
+        {
+          "flag": "-c",
+          "long": "--count",
+          "meaning": {
+            "tr": "Önek olarak tekrar sayısı.",
+            "en": "Prefix lines by count."
+          },
+          "verified": true,
+          "platforms": [
+            "gnu"
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "title": {
+            "tr": "Benzersiz satırlar",
+            "en": "Unique lines"
+          },
+          "command": "sort names.txt | uniq",
+          "explanation": {
+            "tr": "Sıralayıp yinelenenleri atar.",
+            "en": "Sorts then drops adjacent duplicates."
+          },
+          "risk": "safe"
+        }
+      ],
+      "related": [
+        "sort"
+      ],
+      "intent": {
+        "tr": [
+          "tekrarlayan satır",
+          "benzersiz liste"
+        ],
+        "en": [
+          "unique lines",
+          "remove duplicates"
+        ]
+      },
+      "category": "text"
+    },
+    {
+      "id": "unzip",
+      "name": "unzip",
+      "summary": {
+        "tr": "ZIP arşivlerini çıkarır.",
+        "en": "Extract ZIP archives."
+      },
+      "description": {
+        "tr": "ZIP içeriğini listeler veya çıkarır.",
+        "en": "Lists or extracts ZIP contents."
+      },
+      "tags": [
+        "archive"
+      ],
+      "risk": "caution",
+      "requires_elevated": false,
+      "platforms": [
+        "linux",
+        "macos"
+      ],
+      "packages": {
+        "arch": "unzip",
+        "debian": "unzip",
+        "ubuntu": "unzip",
+        "fedora": "unzip"
+      },
+      "install_notes": {
+        "tr": "Arch: pacman -S unzip",
+        "en": "Arch: pacman -S unzip"
+      },
+      "examples": [
+        {
+          "title": {
+            "tr": "Çıkar",
+            "en": "Extract"
+          },
+          "command": "unzip project.zip",
+          "explanation": {
+            "tr": "Arşivi çalışma dizinine çıkarır.",
+            "en": "Extracts into the working directory."
+          },
+          "risk": "caution"
+        }
+      ],
+      "related": [
+        "zip",
+        "tar"
+      ],
+      "intent": {
+        "tr": [
+          "zip aç",
+          "unzip"
+        ],
+        "en": [
+          "unzip file",
+          "extract zip"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 1 unzip"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-bootstrap"
+      },
+      "category": "archives"
+    },
+    {
+      "id": "uptime",
+      "name": "uptime",
+      "summary": {
+        "tr": "Çalışma süresi ve yük ortalaması.",
+        "en": "Tell how long the system has been running."
+      },
+      "description": {
+        "tr": "Boot’tan beri süre, kullanıcı sayısı ve load average basar.",
+        "en": "Prints uptime, user count, and load averages."
+      },
+      "tags": [
+        "system"
+      ],
+      "risk": "safe",
+      "requires_elevated": false,
+      "platforms": [
+        "linux",
+        "macos",
+        "bsd"
+      ],
+      "packages": {
+        "arch": "procps-ng",
+        "debian": "procps",
+        "ubuntu": "procps",
+        "fedora": "procps-ng"
+      },
+      "examples": [
+        {
+          "title": {
+            "tr": "Uptime",
+            "en": "Uptime"
+          },
+          "command": "uptime",
+          "explanation": {
+            "tr": "Sistem ne zamandır açık.",
+            "en": "How long the system has been up."
+          },
+          "risk": "safe"
+        }
+      ],
+      "related": [
+        "top",
+        "w"
+      ],
+      "intent": {
+        "tr": [
+          "ne zamandır açık",
+          "load average"
+        ],
+        "en": [
+          "system uptime",
+          "load average"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 1 uptime"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-bootstrap"
+      },
+      "category": "system"
+    },
+    {
+      "packages": {
+        "arch": "coreutils",
+        "debian": "coreutils",
+        "ubuntu": "coreutils",
+        "fedora": "coreutils"
+      },
+      "platforms": [
+        "linux",
+        "macos",
+        "bsd"
+      ],
+      "requires_elevated": false,
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 1 wc"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-bootstrap"
+      },
+      "id": "wc",
+      "name": "wc",
+      "summary": {
+        "tr": "Satır, kelime ve bayt sayar.",
+        "en": "Count lines, words, and bytes."
+      },
+      "description": {
+        "tr": "Girdi veya dosyalar için sayım üretir.",
+        "en": "Produces counts for inputs or files."
+      },
+      "tags": [
+        "text",
+        "count"
+      ],
+      "risk": "safe",
+      "flags": [
+        {
+          "flag": "-l",
+          "long": "--lines",
+          "meaning": {
+            "tr": "Satır sayısı.",
+            "en": "Line count."
+          },
+          "verified": true,
+          "platforms": [
+            "gnu"
+          ]
+        },
+        {
+          "flag": "-w",
+          "long": "--words",
+          "meaning": {
+            "tr": "Kelime sayısı.",
+            "en": "Word count."
+          },
+          "verified": true,
+          "platforms": [
+            "gnu"
+          ]
+        },
+        {
+          "flag": "-c",
+          "long": "--bytes",
+          "meaning": {
+            "tr": "Bayt sayısı.",
+            "en": "Byte count."
+          },
+          "verified": true,
+          "platforms": [
+            "gnu"
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "title": {
+            "tr": "Satır say",
+            "en": "Count lines"
+          },
+          "command": "wc -l file.txt",
+          "explanation": {
+            "tr": "Satır sayısını basar.",
+            "en": "Prints line count."
+          },
+          "risk": "safe"
+        }
+      ],
+      "related": [
+        "cat",
+        "sort"
+      ],
+      "intent": {
+        "tr": [
+          "satır sayısı",
+          "kelime say"
+        ],
+        "en": [
+          "count lines",
+          "word count"
+        ]
+      },
+      "category": "text"
+    },
+    {
+      "id": "wget",
+      "name": "wget",
+      "summary": {
+        "tr": "Ağ üzerinden dosya indirir (tekrar denemeli).",
+        "en": "Non-interactive network downloader."
+      },
+      "description": {
+        "tr": "HTTP/HTTPS/FTP indirme; site aynalama özellikleri.",
+        "en": "HTTP/HTTPS/FTP downloads with retry and mirroring features."
+      },
+      "tags": [
+        "network",
+        "download"
+      ],
+      "risk": "caution",
+      "requires_elevated": false,
+      "platforms": [
+        "linux"
+      ],
+      "packages": {
+        "arch": "wget",
+        "debian": "wget",
+        "ubuntu": "wget",
+        "fedora": "wget"
+      },
+      "install_notes": {
+        "tr": "Arch: pacman -S wget",
+        "en": "Arch: pacman -S wget"
+      },
+      "flags": [
+        {
+          "flag": "-c",
+          "long": "--continue",
+          "meaning": {
+            "tr": "Kısmi indirmeye devam.",
+            "en": "Continue partial download."
+          },
+          "verified": true
+        }
+      ],
+      "examples": [
+        {
+          "title": {
+            "tr": "İndir",
+            "en": "Download"
+          },
+          "command": "wget https://example.com/file.tar.gz",
+          "explanation": {
+            "tr": "Dosyayı çalışma dizinine indirir.",
+            "en": "Downloads into the working directory."
+          },
+          "risk": "caution"
+        }
+      ],
+      "related": [
+        "curl"
+      ],
+      "intent": {
+        "tr": [
+          "wget ile indir",
+          "dosya indir"
+        ],
+        "en": [
+          "download file wget",
+          "wget url"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 1 wget"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-bootstrap"
+      },
+      "category": "network"
+    },
+    {
+      "id": "whereis",
+      "name": "whereis",
+      "summary": {
+        "tr": "Komutun ikili, kaynak ve man konumlarını arar.",
+        "en": "Locate binary, source, and man pages."
+      },
+      "description": {
+        "tr": "Standart hiyerarşilerde ikili/kaynak/manuel yollarını gösterir.",
+        "en": "Shows binary/source/manual paths in standard hierarchies."
+      },
+      "tags": [
+        "search"
+      ],
+      "risk": "safe",
+      "requires_elevated": false,
+      "platforms": [
+        "linux"
+      ],
+      "packages": {
+        "arch": "util-linux",
+        "debian": "util-linux",
+        "ubuntu": "util-linux",
+        "fedora": "util-linux"
+      },
+      "examples": [
+        {
+          "title": {
+            "tr": "ls konumları",
+            "en": "ls locations"
+          },
+          "command": "whereis ls",
+          "explanation": {
+            "tr": "ls için bilinen yolları listeler.",
+            "en": "Lists known paths for ls."
+          },
+          "risk": "safe"
+        }
+      ],
+      "related": [
+        "which"
+      ],
+      "intent": {
+        "tr": [
+          "man sayfası yolu",
+          "ikili nerede"
+        ],
+        "en": [
+          "whereis command",
+          "find man page path"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 1 whereis"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-bootstrap"
+      },
+      "category": "search"
+    },
+    {
+      "id": "which",
+      "name": "which",
+      "summary": {
+        "tr": "Komutun PATH üzerindeki konumunu gösterir.",
+        "en": "Locate a command on PATH."
+      },
+      "description": {
+        "tr": "Kabuğun bulacağı yürütülebilir dosyanın yolunu basar.",
+        "en": "Prints the path of the executable that would be run."
+      },
+      "tags": [
+        "search",
+        "path"
+      ],
+      "risk": "safe",
+      "requires_elevated": false,
+      "platforms": [
+        "linux",
+        "macos",
+        "bsd"
+      ],
+      "packages": {
+        "arch": "which",
+        "debian": "debianutils",
+        "ubuntu": "debianutils",
+        "fedora": "which"
+      },
+      "install_notes": {
+        "tr": "Arch: pacman -S which\nDebian/Ubuntu: generally in debianutils\nFedora: dnf install which",
+        "en": "Arch: pacman -S which\nDebian/Ubuntu: typically debianutils\nFedora: dnf install which"
+      },
+      "examples": [
+        {
+          "title": {
+            "tr": "Nerede?",
+            "en": "Where is it?"
+          },
+          "command": "which python3",
+          "explanation": {
+            "tr": "python3 ikilisinin yolunu basar.",
+            "en": "Prints the python3 binary path."
+          },
+          "risk": "safe"
+        }
+      ],
+      "related": [
+        "whereis",
+        "type",
+        "command"
+      ],
+      "intent": {
+        "tr": [
+          "komut yolu",
+          "where which"
+        ],
+        "en": [
+          "which binary",
+          "find command path"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 1 which"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-bootstrap"
+      },
+      "category": "search"
+    },
+    {
+      "id": "whoami",
+      "name": "whoami",
+      "summary": {
+        "tr": "Geçerli etkili kullanıcı adını basar.",
+        "en": "Print effective user name."
+      },
+      "description": {
+        "tr": "Etkili kullanıcı kimliğini kısa şekilde gösterir.",
+        "en": "Shows the effective username."
+      },
+      "tags": [
+        "users"
+      ],
+      "risk": "safe",
+      "requires_elevated": false,
+      "platforms": [
+        "linux",
+        "macos",
+        "bsd"
+      ],
+      "packages": {
+        "arch": "coreutils",
+        "debian": "coreutils",
+        "ubuntu": "coreutils",
+        "fedora": "coreutils"
+      },
+      "examples": [
+        {
+          "title": {
+            "tr": "Kimim?",
+            "en": "Who am I?"
+          },
+          "command": "whoami",
+          "explanation": {
+            "tr": "Kullanıcı adınız.",
+            "en": "Your username."
+          },
+          "risk": "safe"
+        }
+      ],
+      "related": [
+        "id",
+        "groups"
+      ],
+      "intent": {
+        "tr": [
+          "kullanıcı adım",
+          "whoami"
+        ],
+        "en": [
+          "who am i",
+          "current user"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 1 whoami"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-bootstrap"
+      },
+      "category": "users"
+    },
+    {
+      "id": "zip",
+      "name": "zip",
+      "summary": {
+        "tr": "ZIP arşivi oluşturur.",
+        "en": "Package and compress files into a ZIP archive."
+      },
+      "description": {
+        "tr": "Windows ile yaygın paylaşılan ZIP formatında arşivler.",
+        "en": "Creates ZIP archives commonly shared with Windows."
+      },
+      "tags": [
+        "archive"
+      ],
+      "risk": "caution",
+      "requires_elevated": false,
+      "platforms": [
+        "linux",
+        "macos"
+      ],
+      "packages": {
+        "arch": "zip",
+        "debian": "zip",
+        "ubuntu": "zip",
+        "fedora": "zip"
+      },
+      "install_notes": {
+        "tr": "Arch: pacman -S zip unzip",
+        "en": "Arch: pacman -S zip unzip"
+      },
+      "examples": [
+        {
+          "title": {
+            "tr": "Klasörü zipley",
+            "en": "Zip a folder"
+          },
+          "command": "zip -r project.zip project/",
+          "explanation": {
+            "tr": "project dizinini zip’ler.",
+            "en": "Zips the project directory."
+          },
+          "risk": "caution"
+        }
+      ],
+      "related": [
+        "unzip",
+        "tar"
+      ],
+      "intent": {
+        "tr": [
+          "zip oluştur",
+          "klasörü sıkıştır"
+        ],
+        "en": [
+          "create zip",
+          "zip folder"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 1 zip"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-bootstrap"
+      },
+      "category": "archives"
+    }
+  ]
+}

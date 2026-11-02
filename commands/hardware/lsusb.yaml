@@ -1,0 +1,47 @@
+id: lsusb
+name: lsusb
+summary:
+  tr: USB aygıtlarını listeler.
+  en: List USB devices.
+description:
+  tr: Bağlı USB cihazları basar.
+  en: Prints connected USB devices.
+tags:
+- hardware
+risk: safe
+requires_elevated: false
+platforms:
+- linux
+packages:
+  arch: usbutils
+  debian: usbutils
+  ubuntu: usbutils
+  fedora: usbutils
+install_notes:
+  tr: 'Arch: pacman -S usbutils'
+  en: 'Arch: pacman -S usbutils'
+examples:
+- title:
+    tr: USB listesi
+    en: USB list
+  command: lsusb
+  explanation:
+    tr: Bağlı USB aygıtlar.
+    en: Connected USB devices.
+  risk: safe
+related:
+- lspci
+intent:
+  tr:
+  - usb aygıtlar
+  - takılı usb
+  en:
+  - list usb devices
+  - usb what is connected
+verification:
+  status: reviewed
+  sources:
+  - man 8 lsusb
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-bootstrap
+category: hardware

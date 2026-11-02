@@ -1,0 +1,75 @@
+id: mkdir
+name: mkdir
+summary:
+  tr: Dizin oluşturur.
+  en: Create directories.
+description:
+  tr: Yeni dizinler oluşturur. -p üst dizinleri de oluşturur.
+  en: Creates directories. -p creates parent paths as needed.
+tags:
+- files
+- directory
+risk: safe
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+packages:
+  arch: coreutils
+  debian: coreutils
+  ubuntu: coreutils
+  fedora: coreutils
+flags:
+- flag: -p
+  long: --parents
+  meaning:
+    tr: Üst dizinleri de oluştur; varsa hata verme.
+    en: Make parents; no error if existing.
+  verified: true
+  platforms:
+  - gnu
+- flag: -m
+  long: --mode
+  takes_value: true
+  value_name: MODE
+  meaning:
+    tr: İzin kipini ayarla.
+    en: Set file mode (as in chmod).
+  verified: true
+  platforms:
+  - gnu
+examples:
+- title:
+    tr: Tek dizin
+    en: One directory
+  command: mkdir projects
+  explanation:
+    tr: projects dizinini oluşturur.
+    en: Creates projects/.
+  risk: safe
+- title:
+    tr: İç içe
+    en: Nested path
+  command: mkdir -p ~/src/nova/notes
+  explanation:
+    tr: Eksik üst dizinlerle birlikte yolu oluşturur.
+    en: Creates the full path including parents.
+  risk: safe
+related:
+- rmdir
+- touch
+intent:
+  tr:
+  - klasör oluştur
+  - dizin yap
+  en:
+  - make directory
+  - create folder
+verification:
+  status: reviewed
+  sources:
+  - man 1 mkdir
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-bootstrap
+category: filesystem

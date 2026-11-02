@@ -1,0 +1,68 @@
+id: ip
+name: ip
+summary:
+  tr: Ağ aygıtları, adresler ve rotaları yönetir.
+  en: Show and manipulate routing, devices, and tunnels.
+description:
+  tr: Eski ifconfig yerine modern iproute2 aracı.
+  en: Modern iproute2 tool replacing much of ifconfig.
+tags:
+- network
+risk: dangerous
+requires_elevated: true
+platforms:
+- linux
+packages:
+  arch: iproute2
+  debian: iproute2
+  ubuntu: iproute2
+  fedora: iproute
+install_notes:
+  tr: 'Arch: pacman -S iproute2'
+  en: 'Arch: pacman -S iproute2'
+flags: []
+examples:
+- title:
+    tr: Adresler
+    en: Addresses
+  command: ip addr
+  explanation:
+    tr: Arayüz adreslerini listeler.
+    en: Lists interface addresses.
+  risk: safe
+  requires_elevated: false
+- title:
+    tr: Rota
+    en: Route
+  command: ip route
+  explanation:
+    tr: Yönlendirme tablosu.
+    en: Routing table.
+  risk: safe
+  requires_elevated: false
+- title:
+    tr: Link durumu
+    en: Link state
+  command: ip link
+  explanation:
+    tr: Ağ arayüzlerini listeler.
+    en: Lists network interfaces.
+  risk: safe
+  requires_elevated: false
+related:
+- ss
+- ping
+intent:
+  tr:
+  - ip adresi gör
+  - ağ arayüzü
+  en:
+  - show ip address
+  - list interfaces
+verification:
+  status: reviewed
+  sources:
+  - man 8 ip
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-bootstrap
+category: network

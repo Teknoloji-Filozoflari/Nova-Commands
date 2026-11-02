@@ -1,0 +1,69 @@
+id: ssh-keygen
+name: ssh-keygen
+summary:
+  tr: SSH kimlik doğrulama anahtarları üretir.
+  en: Generate authentication keys for SSH.
+description:
+  tr: Açık/özel anahtar çifti oluşturur veya yönetir.
+  en: Creates or manages public/private key pairs.
+tags:
+- security
+- ssh
+risk: caution
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+packages:
+  arch: openssh
+  debian: openssh-client
+  ubuntu: openssh-client
+  fedora: openssh-clients
+flags:
+- flag: -t
+  takes_value: true
+  value_name: type
+  meaning:
+    tr: Anahtar türü (ör. ed25519).
+    en: Key type (e.g. ed25519).
+  verified: true
+- flag: -C
+  takes_value: true
+  value_name: comment
+  meaning:
+    tr: Yorum.
+    en: Comment.
+  verified: true
+- flag: -f
+  takes_value: true
+  value_name: filename
+  meaning:
+    tr: Çıktı dosya adı.
+    en: Output key file.
+  verified: true
+examples:
+- title:
+    tr: ed25519 anahtar
+    en: ed25519 key
+  command: ssh-keygen -t ed25519 -C "me@example"
+  explanation:
+    tr: Modern varsayılan önerilen tür.
+    en: Modern recommended key type.
+  risk: caution
+related:
+- ssh
+intent:
+  tr:
+  - ssh anahtar oluştur
+  - ed25519
+  en:
+  - generate ssh key
+  - ssh-keygen ed25519
+verification:
+  status: reviewed
+  sources:
+  - man 1 ssh-keygen
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-bootstrap
+category: security

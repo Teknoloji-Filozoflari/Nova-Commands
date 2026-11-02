@@ -1,0 +1,57 @@
+id: diff
+name: diff
+summary:
+  tr: Dosyaları satır satır karşılaştırır.
+  en: Compare files line by line.
+description:
+  tr: İki dosya veya dizin arasındaki farkları gösterir.
+  en: Shows differences between files or directories.
+tags:
+- development
+- text
+risk: safe
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+packages:
+  arch: diffutils
+  debian: diffutils
+  ubuntu: diffutils
+  fedora: diffutils
+flags:
+- flag: -u
+  long: --unified
+  meaning:
+    tr: Birleşik diff biçimi.
+    en: Unified diff format.
+  verified: true
+  platforms:
+  - gnu
+examples:
+- title:
+    tr: Birleşik diff
+    en: Unified diff
+  command: diff -u a.txt b.txt
+  explanation:
+    tr: a ile b farkı.
+    en: Diff of a vs b.
+  risk: safe
+related:
+- git
+- patch
+intent:
+  tr:
+  - dosya farkı
+  - karşılaştır
+  en:
+  - diff files
+  - compare files
+verification:
+  status: reviewed
+  sources:
+  - man 1 diff
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-bootstrap
+category: development

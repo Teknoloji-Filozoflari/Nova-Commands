@@ -1,0 +1,93 @@
+id: grep
+name: grep
+summary:
+  tr: Metinde desen arar.
+  en: Print lines matching a pattern.
+description:
+  tr: Dosya veya stdin içinde düzenli ifade / sabit dizgi arar.
+  en: Searches files or stdin for regex or fixed strings.
+tags:
+- search
+- text
+risk: safe
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+packages:
+  arch: grep
+  debian: grep
+  ubuntu: grep
+  fedora: grep
+flags:
+- flag: -i
+  long: --ignore-case
+  meaning:
+    tr: Büyük/küçük harf duyarsız.
+    en: Ignore case.
+  verified: true
+  platforms:
+  - gnu
+- flag: -r
+  long: --recursive
+  meaning:
+    tr: Dizinlerde özyinelemeli ara.
+    en: Read all files under directories.
+  verified: true
+  platforms:
+  - gnu
+- flag: -n
+  long: --line-number
+  meaning:
+    tr: Satır numarası yaz.
+    en: Print line numbers.
+  verified: true
+  platforms:
+  - gnu
+- flag: -E
+  long: --extended-regexp
+  meaning:
+    tr: Genişletilmiş regex.
+    en: Extended regular expressions.
+  verified: true
+  platforms:
+  - gnu
+examples:
+- title:
+    tr: Dosyada ara
+    en: Search in file
+  command: grep -n TODO main.rs
+  explanation:
+    tr: TODO geçen satırları numarayla gösterir.
+    en: Shows TODO lines with numbers.
+  risk: safe
+- title:
+    tr: Ağaçta ara
+    en: Search tree
+  command: grep -rn "TODO" src/
+  explanation:
+    tr: src altında özyinelemeli arar.
+    en: Recursively searches under src/.
+  risk: safe
+related:
+- find
+- rg
+- ag
+intent:
+  tr:
+  - metin ara
+  - dosyada kelime bul
+  en:
+  - search text
+  - find string in files
+verification:
+  status: reviewed
+  sources:
+  - man 1 grep
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-bootstrap
+nova:
+  favorite_eligible: true
+  ui_priority: 85
+category: search
