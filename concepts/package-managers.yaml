@@ -24,9 +24,12 @@ related_concepts:
   - packages
   - arch
   - path
+  - package-managers-comparison
 see_also:
   - "Arch Wiki: pacman"
   - "man apt / man dnf"
+  - "docs/package-managers-comparison.md"
+  - "concepts/package-managers-comparison.yaml"
 body:
   tr: |
     Dağıtımlar yazılıımı *paket* olarak kurar. Aynı komut farklı paket adında olabilir;

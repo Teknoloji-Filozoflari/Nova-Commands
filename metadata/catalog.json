@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
   "kind": "nova-commands-bank",
-  "generated_at": "2026-11-02T18:33:47Z",
-  "content_sha256": "c27a056fd818c23e1c23870e97ecabbdf151ccd330c851e99f29f93dedb1be4e",
-  "command_count": 117,
-  "concept_count": 7,
+  "generated_at": "2026-11-02T18:55:46Z",
+  "content_sha256": "c0f3ab0a0f06248f5091c8c3d482ccaa37d325584852b5e90b23f9cc1a2693e8",
+  "command_count": 135,
+  "concept_count": 12,
   "commands": [
     {
       "id": "apt",
@@ -453,6 +453,111 @@
         ]
       },
       "category": "system"
+    },
+    {
+      "id": "cargo",
+      "name": "cargo",
+      "category": "development",
+      "summary": {
+        "tr": "Rust paket ve derleme aracı.",
+        "en": "Rust package manager and build tool."
+      },
+      "description": {
+        "tr": "Rust projelerini oluşturur, derler, test eder ve bağımlılıkları yönetir. crates.io ile çalışır.",
+        "en": "Creates, builds, and tests Rust projects and manages dependencies via crates.io."
+      },
+      "tags": [
+        "rust",
+        "build",
+        "packages"
+      ],
+      "risk": "caution",
+      "requires_elevated": false,
+      "platforms": [
+        "linux",
+        "macos",
+        "bsd"
+      ],
+      "packages": {
+        "arch": "rust",
+        "debian": "cargo",
+        "ubuntu": "cargo",
+        "fedora": "cargo"
+      },
+      "install_notes": {
+        "tr": "Arch: pacman -S rust  (cargo + rustc)\nDebian/Ubuntu: apt install cargo\nFedora: dnf install cargo\nAlternatif: rustup (resmi toolchain; distro paketinden ayrı).",
+        "en": "Arch: pacman -S rust  (cargo + rustc)\nDebian/Ubuntu: apt install cargo\nFedora: dnf install cargo\nAlternative: rustup (official toolchain; separate from distro packages)."
+      },
+      "flags": [],
+      "examples": [
+        {
+          "title": {
+            "tr": "Derle",
+            "en": "Build"
+          },
+          "command": "cargo build",
+          "explanation": {
+            "tr": "Debug profilinde derler.",
+            "en": "Builds with the debug profile."
+          },
+          "risk": "caution"
+        },
+        {
+          "title": {
+            "tr": "Test",
+            "en": "Test"
+          },
+          "command": "cargo test",
+          "explanation": {
+            "tr": "Proje testlerini çalıştırır.",
+            "en": "Runs project tests."
+          },
+          "risk": "caution"
+        },
+        {
+          "title": {
+            "tr": "Yeni proje",
+            "en": "New project"
+          },
+          "command": "cargo new hello",
+          "explanation": {
+            "tr": "hello dizininde yeni kutu oluşturur.",
+            "en": "Creates a new crate in hello/."
+          },
+          "risk": "caution"
+        }
+      ],
+      "related": [
+        "git",
+        "make",
+        "cmake"
+      ],
+      "intent": {
+        "tr": [
+          "rust derle",
+          "cargo test"
+        ],
+        "en": [
+          "build rust",
+          "cargo test"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "https://doc.rust-lang.org/cargo/",
+          "cargo --help"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-deeper"
+      },
+      "nova": {
+        "concepts": [
+          "package-managers",
+          "terminal-basics"
+        ],
+        "ui_priority": 72
+      }
     },
     {
       "packages": {
@@ -904,6 +1009,139 @@
         "concepts": [
           "permissions"
         ]
+      }
+    },
+    {
+      "id": "cmake",
+      "name": "cmake",
+      "category": "development",
+      "summary": {
+        "tr": "Çapraz platform derleme yapılandırıcı.",
+        "en": "Cross-platform build configurator."
+      },
+      "description": {
+        "tr": "Kaynak ağaçtan native build dosyaları üretir (Ninja/Make). Yapılandırma ve üretim aşamaları ayrıdır.",
+        "en": "Generates native build files (Ninja/Make) from a source tree. Configure and build are separate stages."
+      },
+      "tags": [
+        "build",
+        "cmake",
+        "c"
+      ],
+      "risk": "caution",
+      "requires_elevated": false,
+      "platforms": [
+        "linux",
+        "macos",
+        "bsd"
+      ],
+      "packages": {
+        "arch": "cmake",
+        "debian": "cmake",
+        "ubuntu": "cmake",
+        "fedora": "cmake"
+      },
+      "install_notes": {
+        "tr": "Arch: pacman -S cmake\nDebian/Ubuntu: apt install cmake\nFedora: dnf install cmake",
+        "en": "Arch: pacman -S cmake\nDebian/Ubuntu: apt install cmake\nFedora: dnf install cmake"
+      },
+      "flags": [
+        {
+          "flag": "-S",
+          "takes_value": true,
+          "value_name": "PATH",
+          "meaning": {
+            "tr": "Kaynak dizin.",
+            "en": "Source directory."
+          },
+          "verified": true
+        },
+        {
+          "flag": "-B",
+          "takes_value": true,
+          "value_name": "PATH",
+          "meaning": {
+            "tr": "Build dizin.",
+            "en": "Build directory."
+          },
+          "verified": true
+        },
+        {
+          "flag": "--build",
+          "takes_value": true,
+          "value_name": "DIR",
+          "meaning": {
+            "tr": "Yapılandırılmış dizini derle.",
+            "en": "Build a configured directory."
+          },
+          "verified": true
+        },
+        {
+          "flag": "-G",
+          "takes_value": true,
+          "value_name": "GENERATOR",
+          "meaning": {
+            "tr": "Üretici (Ninja, Unix Makefiles…).",
+            "en": "Generator (Ninja, Unix Makefiles…)."
+          },
+          "verified": true
+        }
+      ],
+      "examples": [
+        {
+          "title": {
+            "tr": "Yapılandır",
+            "en": "Configure"
+          },
+          "command": "cmake -S . -B build -G Ninja",
+          "explanation": {
+            "tr": "Kaynağı build/ altına Ninja ile yapılandırır.",
+            "en": "Configures source into build/ with Ninja."
+          },
+          "risk": "caution"
+        },
+        {
+          "title": {
+            "tr": "Derle",
+            "en": "Build"
+          },
+          "command": "cmake --build build -j",
+          "explanation": {
+            "tr": "Yapılandırılmış dizini paralel derler.",
+            "en": "Builds the configured tree in parallel."
+          },
+          "risk": "caution"
+        }
+      ],
+      "related": [
+        "make",
+        "gcc",
+        "git"
+      ],
+      "intent": {
+        "tr": [
+          "cmake yapılandır",
+          "projeyi derle"
+        ],
+        "en": [
+          "cmake configure",
+          "build project"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "https://cmake.org/cmake/help/latest/manual/cmake.1.html",
+          "cmake --help"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-deeper"
+      },
+      "nova": {
+        "concepts": [
+          "terminal-basics"
+        ],
+        "ui_priority": 70
       }
     },
     {
@@ -3192,7 +3430,8 @@
         "concepts": [
           "networking",
           "ssh",
-          "permissions"
+          "permissions",
+          "firewalls"
         ]
       },
       "category": "security"
@@ -3411,6 +3650,133 @@
           "terminal-basics"
         ],
         "favorite_eligible": true
+      }
+    },
+    {
+      "id": "gcc",
+      "name": "gcc",
+      "category": "development",
+      "summary": {
+        "tr": "GNU C/C++ derleyici sürücüsü.",
+        "en": "GNU C/C++ compiler driver."
+      },
+      "description": {
+        "tr": "C/C++ kaynaklarını nesne dosyasına veya çalıştırılabilir ikiliye derler. Bayraklar hedef ABI ve uyarı seviyesini etkiler.",
+        "en": "Compiles C/C++ sources to objects or binaries. Flags affect ABI and warning levels."
+      },
+      "tags": [
+        "compiler",
+        "c",
+        "build"
+      ],
+      "risk": "caution",
+      "requires_elevated": false,
+      "platforms": [
+        "linux",
+        "macos",
+        "bsd"
+      ],
+      "packages": {
+        "arch": "gcc",
+        "debian": "gcc",
+        "ubuntu": "gcc",
+        "fedora": "gcc"
+      },
+      "install_notes": {
+        "tr": "Arch: pacman -S gcc\nDebian/Ubuntu: apt install gcc\nFedora: dnf install gcc\nC++ için g++ / gcc-c++ ayrı paket olabilir.",
+        "en": "Arch: pacman -S gcc\nDebian/Ubuntu: apt install gcc\nFedora: dnf install gcc\nC++ may need g++ / gcc-c++ as a separate package."
+      },
+      "flags": [
+        {
+          "flag": "-o",
+          "takes_value": true,
+          "value_name": "FILE",
+          "meaning": {
+            "tr": "Çıktı dosya adı.",
+            "en": "Output file name."
+          },
+          "verified": true
+        },
+        {
+          "flag": "-Wall",
+          "meaning": {
+            "tr": "Yaygın uyarılar.",
+            "en": "Enable common warnings."
+          },
+          "verified": true
+        },
+        {
+          "flag": "-O2",
+          "meaning": {
+            "tr": "Optimizasyon seviyesi 2.",
+            "en": "Optimization level 2."
+          },
+          "verified": true
+        },
+        {
+          "flag": "-c",
+          "meaning": {
+            "tr": "Yalnızca derle; bağlama.",
+            "en": "Compile only; do not link."
+          },
+          "verified": true
+        }
+      ],
+      "examples": [
+        {
+          "title": {
+            "tr": "Basit derle",
+            "en": "Simple compile"
+          },
+          "command": "gcc -Wall -O2 -o hello hello.c",
+          "explanation": {
+            "tr": "hello.c → hello ikilisi.",
+            "en": "hello.c → hello binary."
+          },
+          "risk": "caution"
+        },
+        {
+          "title": {
+            "tr": "Nesne dosyası",
+            "en": "Object file"
+          },
+          "command": "gcc -c util.c -o util.o",
+          "explanation": {
+            "tr": "Bağlamadan nesne üretir.",
+            "en": "Produces an object without linking."
+          },
+          "risk": "safe"
+        }
+      ],
+      "related": [
+        "make",
+        "cmake",
+        "diff"
+      ],
+      "intent": {
+        "tr": [
+          "c derle",
+          "gcc ile derle"
+        ],
+        "en": [
+          "compile c",
+          "gcc compile"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 1 gcc",
+          "gcc --help"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-deeper"
+      },
+      "nova": {
+        "concepts": [
+          "terminal-basics"
+        ],
+        "ui_priority": 75
       }
     },
     {
@@ -4578,6 +4944,240 @@
       }
     },
     {
+      "id": "iostat",
+      "name": "iostat",
+      "category": "monitoring",
+      "summary": {
+        "tr": "CPU ve disk I/O istatistikleri.",
+        "en": "CPU and disk I/O statistics."
+      },
+      "description": {
+        "tr": "sysstat paketinden; aygıt başına okuma/yazma ve CPU kullanım özetleri verir.",
+        "en": "From the sysstat package; per-device read/write and CPU utilization summaries."
+      },
+      "tags": [
+        "io",
+        "disk",
+        "sysstat"
+      ],
+      "risk": "safe",
+      "requires_elevated": false,
+      "platforms": [
+        "linux"
+      ],
+      "packages": {
+        "arch": "sysstat",
+        "debian": "sysstat",
+        "ubuntu": "sysstat",
+        "fedora": "sysstat"
+      },
+      "install_notes": {
+        "tr": "Arch: pacman -S sysstat\nDebian/Ubuntu: apt install sysstat\nFedora: dnf install sysstat",
+        "en": "Arch: pacman -S sysstat\nDebian/Ubuntu: apt install sysstat\nFedora: dnf install sysstat"
+      },
+      "flags": [
+        {
+          "flag": "-x",
+          "meaning": {
+            "tr": "Genişletilmiş aygıt istatistikleri.",
+            "en": "Extended device statistics."
+          },
+          "verified": true
+        },
+        {
+          "flag": "-d",
+          "meaning": {
+            "tr": "Yalnız cihaz raporu.",
+            "en": "Device utilization only."
+          },
+          "verified": true
+        },
+        {
+          "flag": "-y",
+          "meaning": {
+            "tr": "İlk (boot’tan beri) raporu atla.",
+            "en": "Omit first report since boot."
+          },
+          "verified": true
+        }
+      ],
+      "examples": [
+        {
+          "title": {
+            "tr": "Anlık I/O",
+            "en": "Snapshot I/O"
+          },
+          "command": "iostat -xz 1 3",
+          "explanation": {
+            "tr": "1 sn aralıkla 3 örnek; genişletilmiş.",
+            "en": "Three samples at 1s; extended stats."
+          },
+          "risk": "safe"
+        },
+        {
+          "title": {
+            "tr": "Cihazlar",
+            "en": "Devices"
+          },
+          "command": "iostat -d",
+          "explanation": {
+            "tr": "Disk aygıt özeti.",
+            "en": "Disk device summary."
+          },
+          "risk": "safe"
+        }
+      ],
+      "related": [
+        "vmstat",
+        "iotop",
+        "df"
+      ],
+      "intent": {
+        "tr": [
+          "disk io izle",
+          "iostat"
+        ],
+        "en": [
+          "monitor disk io",
+          "iostat"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 1 iostat"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-deeper"
+      },
+      "nova": {
+        "concepts": [
+          "storage",
+          "terminal-basics"
+        ]
+      }
+    },
+    {
+      "id": "iotop",
+      "name": "iotop",
+      "category": "monitoring",
+      "summary": {
+        "tr": "Süreç başına I/O top görünümü.",
+        "en": "Per-process I/O top view."
+      },
+      "description": {
+        "tr": "Hangi sürecin diski meşgul ettiğini gösterir. Genelde root ister; bazı kernel ayarları gerekir.",
+        "en": "Shows which processes are busy with disk I/O. Often needs root; some kernel options required."
+      },
+      "tags": [
+        "io",
+        "processes",
+        "top"
+      ],
+      "risk": "caution",
+      "requires_elevated": true,
+      "platforms": [
+        "linux"
+      ],
+      "packages": {
+        "arch": "iotop",
+        "debian": "iotop",
+        "ubuntu": "iotop",
+        "fedora": "iotop"
+      },
+      "install_notes": {
+        "tr": "Arch: pacman -S iotop\nDebian/Ubuntu: apt install iotop\nFedora: dnf install iotop\nÇoğu kurulumda sudo ile çalıştırılır.",
+        "en": "Arch: pacman -S iotop\nDebian/Ubuntu: apt install iotop\nFedora: dnf install iotop\nUsually run with sudo."
+      },
+      "flags": [
+        {
+          "flag": "-o",
+          "long": "--only",
+          "meaning": {
+            "tr": "Yalnız I/O yapanları göster.",
+            "en": "Only processes doing I/O."
+          },
+          "verified": true
+        },
+        {
+          "flag": "-a",
+          "long": "--accumulated",
+          "meaning": {
+            "tr": "Birikmiş I/O.",
+            "en": "Accumulated I/O."
+          },
+          "verified": true
+        },
+        {
+          "flag": "-b",
+          "long": "--batch",
+          "meaning": {
+            "tr": "Etkileşimsiz / log için.",
+            "en": "Non-interactive / batch logging."
+          },
+          "verified": true
+        }
+      ],
+      "examples": [
+        {
+          "title": {
+            "tr": "Canlı I/O",
+            "en": "Live I/O"
+          },
+          "command": "sudo iotop -o",
+          "explanation": {
+            "tr": "Aktif I/O süreçlerini listeler.",
+            "en": "Lists processes with active I/O."
+          },
+          "risk": "caution",
+          "requires_elevated": true
+        },
+        {
+          "title": {
+            "tr": "Batch örnek",
+            "en": "Batch sample"
+          },
+          "command": "sudo iotop -bo -n 3",
+          "explanation": {
+            "tr": "3 yenileme, batch çıktı.",
+            "en": "Three refreshes, batch output."
+          },
+          "risk": "caution",
+          "requires_elevated": true
+        }
+      ],
+      "related": [
+        "iostat",
+        "top",
+        "htop",
+        "ps"
+      ],
+      "intent": {
+        "tr": [
+          "disk kim kullanıyor",
+          "iotop"
+        ],
+        "en": [
+          "who uses disk",
+          "iotop"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 8 iotop"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-deeper"
+      },
+      "nova": {
+        "concepts": [
+          "storage",
+          "permissions"
+        ]
+      }
+    },
+    {
       "id": "ip",
       "name": "ip",
       "summary": {
@@ -4675,6 +5275,124 @@
         "concepts": [
           "networking",
           "networking-basics"
+        ]
+      }
+    },
+    {
+      "id": "iptables",
+      "name": "iptables",
+      "category": "security",
+      "summary": {
+        "tr": "Eski nesil IPv4 netfilter aracı.",
+        "en": "Legacy IPv4 netfilter administration."
+      },
+      "description": {
+        "tr": "Birçok sistemde hâlâ mevcut; yeni kurulumlarda nft/firewalld tercih edilir. Zincir flush SSH’yi kesebilir.",
+        "en": "Still present on many systems; prefer nft/firewalld on new setups. Flushing chains can cut SSH."
+      },
+      "tags": [
+        "firewall",
+        "netfilter",
+        "legacy"
+      ],
+      "risk": "destructive",
+      "requires_elevated": true,
+      "platforms": [
+        "linux"
+      ],
+      "packages": {
+        "arch": "iptables",
+        "debian": "iptables",
+        "ubuntu": "iptables",
+        "fedora": "iptables"
+      },
+      "install_notes": {
+        "tr": "Arch: pacman -S iptables\nDebian/Ubuntu: apt install iptables\nFedora: dnf install iptables\nBazı distrolarda iptables-nft uyumluluk katmanı vardır.",
+        "en": "Arch: pacman -S iptables\nDebian/Ubuntu: apt install iptables\nFedora: dnf install iptables\nSome distros ship an iptables-nft compatibility layer."
+      },
+      "flags": [
+        {
+          "flag": "-L",
+          "long": "--list",
+          "meaning": {
+            "tr": "Kuralları listele.",
+            "en": "List rules."
+          },
+          "verified": false
+        },
+        {
+          "flag": "-n",
+          "long": "--numeric",
+          "meaning": {
+            "tr": "Sayısal adres/port.",
+            "en": "Numeric addresses/ports."
+          },
+          "verified": false
+        },
+        {
+          "flag": "-v",
+          "long": "--verbose",
+          "meaning": {
+            "tr": "Ayrıntılı liste.",
+            "en": "Verbose listing."
+          },
+          "verified": false
+        }
+      ],
+      "examples": [
+        {
+          "title": {
+            "tr": "Listele",
+            "en": "List"
+          },
+          "command": "sudo iptables -L -n -v",
+          "explanation": {
+            "tr": "Filter tablosunu sayısal/ayrıntılı basar.",
+            "en": "Lists filter table numerically/verbosely."
+          },
+          "risk": "safe",
+          "requires_elevated": true
+        },
+        {
+          "title": {
+            "tr": "Politikalar",
+            "en": "Policies"
+          },
+          "command": "sudo iptables -S",
+          "explanation": {
+            "tr": "Kuralları komut biçiminde döker.",
+            "en": "Dumps rules in command form."
+          },
+          "risk": "safe",
+          "requires_elevated": true
+        }
+      ],
+      "related": [
+        "nft",
+        "firewall-cmd",
+        "ufw"
+      ],
+      "intent": {
+        "tr": [
+          "iptables listele",
+          "eski firewall"
+        ],
+        "en": [
+          "list iptables",
+          "legacy firewall"
+        ]
+      },
+      "verification": {
+        "status": "draft",
+        "sources": [
+          "man 8 iptables"
+        ],
+        "notes": "List-only examples; no -F/-A recipes that risk lockout."
+      },
+      "nova": {
+        "concepts": [
+          "firewalls",
+          "networking"
         ]
       }
     },
@@ -4790,6 +5508,149 @@
           "systemd"
         ],
         "favorite_eligible": true
+      }
+    },
+    {
+      "id": "jq",
+      "name": "jq",
+      "category": "text",
+      "summary": {
+        "tr": "JSON süzgeç ve dönüştürücü.",
+        "en": "JSON filter and transformer."
+      },
+      "description": {
+        "tr": "JSON belgelerini filtreler, biçimlendirir ve dönüştürür. Boru hatlarında yapılandırılmış veri için temel araç.",
+        "en": "Filters, formats, and transforms JSON. A staple for structured data in pipelines."
+      },
+      "tags": [
+        "json",
+        "text",
+        "data"
+      ],
+      "risk": "safe",
+      "requires_elevated": false,
+      "platforms": [
+        "linux",
+        "macos",
+        "bsd"
+      ],
+      "packages": {
+        "arch": "jq",
+        "debian": "jq",
+        "ubuntu": "jq",
+        "fedora": "jq"
+      },
+      "install_notes": {
+        "tr": "Arch: pacman -S jq\nDebian/Ubuntu: apt install jq\nFedora: dnf install jq",
+        "en": "Arch: pacman -S jq\nDebian/Ubuntu: apt install jq\nFedora: dnf install jq"
+      },
+      "flags": [
+        {
+          "flag": "-r",
+          "long": "--raw-output",
+          "meaning": {
+            "tr": "Dize çıktısını tırnaksız bas.",
+            "en": "Print strings without JSON quotes."
+          },
+          "verified": true
+        },
+        {
+          "flag": "-c",
+          "long": "--compact-output",
+          "meaning": {
+            "tr": "Tek satır / sıkışık JSON.",
+            "en": "Compact single-line JSON."
+          },
+          "verified": true
+        },
+        {
+          "flag": "-n",
+          "long": "--null-input",
+          "meaning": {
+            "tr": "Giriş yok; filtre tek başına.",
+            "en": "No input; run filter alone."
+          },
+          "verified": true
+        },
+        {
+          "flag": "-s",
+          "long": "--slurp",
+          "meaning": {
+            "tr": "Tüm girdileri dizi yap.",
+            "en": "Slurp all inputs into an array."
+          },
+          "verified": true
+        }
+      ],
+      "examples": [
+        {
+          "title": {
+            "tr": "Güzelleştir",
+            "en": "Pretty-print"
+          },
+          "command": "echo '{\"a\":1}' | jq .",
+          "explanation": {
+            "tr": "Girişi biçimlendirilmiş JSON olarak basar.",
+            "en": "Pretty-prints the input JSON."
+          },
+          "risk": "safe"
+        },
+        {
+          "title": {
+            "tr": "Alan seç",
+            "en": "Select field"
+          },
+          "command": "jq -r '.name' user.json",
+          "explanation": {
+            "tr": "name alanını ham metin basar.",
+            "en": "Prints the name field as raw text."
+          },
+          "risk": "safe"
+        },
+        {
+          "title": {
+            "tr": "Dizi uzunluğu",
+            "en": "Array length"
+          },
+          "command": "jq 'length' list.json",
+          "explanation": {
+            "tr": "Üst düzey dizi/nesne uzunluğu.",
+            "en": "Length of the top-level array/object."
+          },
+          "risk": "safe"
+        }
+      ],
+      "related": [
+        "curl",
+        "awk",
+        "sqlite3"
+      ],
+      "intent": {
+        "tr": [
+          "json süz",
+          "jq ile alan"
+        ],
+        "en": [
+          "filter json",
+          "jq select field"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "https://jqlang.github.io/jq/manual/",
+          "jq --help"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-deeper"
+      },
+      "nova": {
+        "favorite_eligible": true,
+        "ui_priority": 88,
+        "concepts": [
+          "shell-pipes-redirection",
+          "json-data"
+        ]
       }
     },
     {
@@ -5956,7 +6817,9 @@
       ],
       "related": [
         "cmake",
-        "git"
+        "gcc",
+        "git",
+        "patch"
       ],
       "intent": {
         "tr": [
@@ -6428,6 +7291,126 @@
       "category": "network"
     },
     {
+      "id": "nft",
+      "name": "nft",
+      "category": "security",
+      "summary": {
+        "tr": "nftables kural yönetimi.",
+        "en": "nftables ruleset management."
+      },
+      "description": {
+        "tr": "Modern Linux paket süzgeci. Yanlış flush/add uzaktan erişimi kesebilir; önce list, yedek al.",
+        "en": "Modern Linux packet filter. A bad flush/add can cut remote access; list and back up first."
+      },
+      "tags": [
+        "firewall",
+        "nftables",
+        "network"
+      ],
+      "risk": "destructive",
+      "requires_elevated": true,
+      "platforms": [
+        "linux"
+      ],
+      "packages": {
+        "arch": "nftables",
+        "debian": "nftables",
+        "ubuntu": "nftables",
+        "fedora": "nftables"
+      },
+      "install_notes": {
+        "tr": "Arch: pacman -S nftables\nDebian/Ubuntu: apt install nftables\nFedora: dnf install nftables\nsystemctl ile nftables servisi distroya göre değişir.",
+        "en": "Arch: pacman -S nftables\nDebian/Ubuntu: apt install nftables\nFedora: dnf install nftables\nnftables systemd unit varies by distro."
+      },
+      "flags": [
+        {
+          "flag": "list",
+          "meaning": {
+            "tr": "Kuralları listele (alt komut).",
+            "en": "List rules (subcommand)."
+          },
+          "verified": false
+        },
+        {
+          "flag": "-a",
+          "long": "--handle",
+          "meaning": {
+            "tr": "Handle numaralarını göster.",
+            "en": "Show rule handles."
+          },
+          "verified": false
+        },
+        {
+          "flag": "-j",
+          "long": "--json",
+          "meaning": {
+            "tr": "JSON çıktı.",
+            "en": "JSON output."
+          },
+          "verified": false
+        }
+      ],
+      "examples": [
+        {
+          "title": {
+            "tr": "Kuralları listele",
+            "en": "List ruleset"
+          },
+          "command": "sudo nft list ruleset",
+          "explanation": {
+            "tr": "Geçerli tüm kuralları basar (salt okuma).",
+            "en": "Prints the current ruleset (read-only)."
+          },
+          "risk": "safe",
+          "requires_elevated": true
+        },
+        {
+          "title": {
+            "tr": "Tablolar",
+            "en": "Tables"
+          },
+          "command": "sudo nft list tables",
+          "explanation": {
+            "tr": "Tablo adlarını listeler.",
+            "en": "Lists table names."
+          },
+          "risk": "safe",
+          "requires_elevated": true
+        }
+      ],
+      "related": [
+        "iptables",
+        "firewall-cmd",
+        "ufw",
+        "ss"
+      ],
+      "intent": {
+        "tr": [
+          "nftables listele",
+          "firewall kuralları"
+        ],
+        "en": [
+          "list nftables",
+          "firewall rules"
+        ]
+      },
+      "verification": {
+        "status": "draft",
+        "sources": [
+          "man 8 nft",
+          "https://wiki.nftables.org/"
+        ],
+        "notes": "Only safe list examples included; no flush/add recipes. Needs human review before verified."
+      },
+      "nova": {
+        "concepts": [
+          "firewalls",
+          "networking",
+          "permissions"
+        ]
+      }
+    },
+    {
       "id": "nice",
       "name": "nice",
       "summary": {
@@ -6667,6 +7650,124 @@
         "ui_priority": 65
       },
       "category": "network"
+    },
+    {
+      "id": "openssl",
+      "name": "openssl",
+      "category": "security",
+      "summary": {
+        "tr": "TLS/SSL ve kriptografi araç kutusu.",
+        "en": "TLS/SSL and cryptography toolkit."
+      },
+      "description": {
+        "tr": "Sertifika inceleme, özet (hash), anahtar üretimi ve TLS istemci denemeleri. Yanlış enc kullanımı veriyi kilitleyebilir.",
+        "en": "Certificate inspection, digests, key generation, and TLS client tests. Misused enc can lock you out of data."
+      },
+      "tags": [
+        "tls",
+        "crypto",
+        "certificates"
+      ],
+      "risk": "caution",
+      "requires_elevated": false,
+      "platforms": [
+        "linux",
+        "macos",
+        "bsd"
+      ],
+      "packages": {
+        "arch": "openssl",
+        "debian": "openssl",
+        "ubuntu": "openssl",
+        "fedora": "openssl"
+      },
+      "install_notes": {
+        "tr": "Arch: pacman -S openssl\nDebian/Ubuntu: apt install openssl\nFedora: dnf install openssl",
+        "en": "Arch: pacman -S openssl\nDebian/Ubuntu: apt install openssl\nFedora: dnf install openssl"
+      },
+      "flags": [],
+      "examples": [
+        {
+          "title": {
+            "tr": "Sürüm",
+            "en": "Version"
+          },
+          "command": "openssl version",
+          "explanation": {
+            "tr": "Kurulu OpenSSL sürümü.",
+            "en": "Installed OpenSSL version."
+          },
+          "risk": "safe"
+        },
+        {
+          "title": {
+            "tr": "Sertifika gör",
+            "en": "Show cert"
+          },
+          "command": "openssl x509 -in cert.pem -noout -subject -dates",
+          "explanation": {
+            "tr": "PEM sertifikadan konu ve tarihler.",
+            "en": "Subject and dates from a PEM cert."
+          },
+          "risk": "safe"
+        },
+        {
+          "title": {
+            "tr": "SHA-256 özet",
+            "en": "SHA-256 digest"
+          },
+          "command": "openssl dgst -sha256 file.bin",
+          "explanation": {
+            "tr": "Dosya özetini hesaplar.",
+            "en": "Computes a file digest."
+          },
+          "risk": "safe"
+        },
+        {
+          "title": {
+            "tr": "TLS el sıkışma",
+            "en": "TLS handshake"
+          },
+          "command": "openssl s_client -connect example.com:443 -servername example.com </dev/null",
+          "explanation": {
+            "tr": "Uzak TLS zincirini gösterir (ağ).",
+            "en": "Shows remote TLS chain (network)."
+          },
+          "risk": "caution"
+        }
+      ],
+      "related": [
+        "ssh-keygen",
+        "gpg",
+        "curl"
+      ],
+      "intent": {
+        "tr": [
+          "sertifika incele",
+          "openssl hash"
+        ],
+        "en": [
+          "inspect certificate",
+          "openssl hash"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 1 openssl",
+          "openssl help"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-deeper"
+      },
+      "nova": {
+        "favorite_eligible": true,
+        "ui_priority": 78,
+        "concepts": [
+          "ssh",
+          "permissions"
+        ]
+      }
     },
     {
       "id": "pacman",
@@ -7061,6 +8162,133 @@
       "category": "users"
     },
     {
+      "id": "patch",
+      "name": "patch",
+      "category": "development",
+      "summary": {
+        "tr": "diff çıktısını dosyalara uygular.",
+        "en": "Applies diff output to files."
+      },
+      "description": {
+        "tr": "Birleşik/bağlam diff’lerini kaynak ağaca işler. Yanlış dizin veya ters uygulama dosyaları bozabilir.",
+        "en": "Applies unified/context diffs onto a source tree. Wrong directory or reverse apply can damage files."
+      },
+      "tags": [
+        "diff",
+        "patch",
+        "vcs"
+      ],
+      "risk": "dangerous",
+      "requires_elevated": false,
+      "platforms": [
+        "linux",
+        "macos",
+        "bsd"
+      ],
+      "packages": {
+        "arch": "patch",
+        "debian": "patch",
+        "ubuntu": "patch",
+        "fedora": "patch"
+      },
+      "install_notes": {
+        "tr": "Arch: pacman -S patch\nDebian/Ubuntu: apt install patch\nFedora: dnf install patch",
+        "en": "Arch: pacman -S patch\nDebian/Ubuntu: apt install patch\nFedora: dnf install patch"
+      },
+      "flags": [
+        {
+          "flag": "-p1",
+          "meaning": {
+            "tr": "Yolun ilk bileşenini at.",
+            "en": "Strip first path component."
+          },
+          "verified": true
+        },
+        {
+          "flag": "-R",
+          "long": "--reverse",
+          "meaning": {
+            "tr": "Yamayı ters uygula.",
+            "en": "Apply patch in reverse."
+          },
+          "verified": true
+        },
+        {
+          "flag": "-i",
+          "long": "--input",
+          "takes_value": true,
+          "value_name": "FILE",
+          "meaning": {
+            "tr": "Yama dosyası.",
+            "en": "Read patch from FILE."
+          },
+          "verified": true
+        },
+        {
+          "flag": "--dry-run",
+          "meaning": {
+            "tr": "Yazmadan dene.",
+            "en": "Trial run without writing."
+          },
+          "verified": true
+        }
+      ],
+      "examples": [
+        {
+          "title": {
+            "tr": "Kuru deneme",
+            "en": "Dry run"
+          },
+          "command": "patch -p1 --dry-run < fix.patch",
+          "explanation": {
+            "tr": "Dosyaları değiştirmeden uygular gibi kontrol eder.",
+            "en": "Checks applicability without modifying files."
+          },
+          "risk": "safe"
+        },
+        {
+          "title": {
+            "tr": "Uygula",
+            "en": "Apply"
+          },
+          "command": "patch -p1 < fix.patch",
+          "explanation": {
+            "tr": "Yama ağaca işlenir — önce yedek/commit.",
+            "en": "Writes the patch into the tree — commit/backup first."
+          },
+          "risk": "dangerous"
+        }
+      ],
+      "related": [
+        "diff",
+        "git"
+      ],
+      "intent": {
+        "tr": [
+          "yama uygula",
+          "patch dry-run"
+        ],
+        "en": [
+          "apply patch",
+          "patch dry-run"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 1 patch"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-deeper"
+      },
+      "nova": {
+        "concepts": [
+          "files",
+          "terminal-basics"
+        ]
+      }
+    },
+    {
       "id": "pgrep",
       "name": "pgrep",
       "summary": {
@@ -7231,6 +8459,135 @@
           "networking-basics"
         ],
         "favorite_eligible": true
+      }
+    },
+    {
+      "id": "pkill",
+      "name": "pkill",
+      "category": "processes",
+      "summary": {
+        "tr": "Ada göre süreçlere sinyal gönderir.",
+        "en": "Signals processes by name pattern."
+      },
+      "description": {
+        "tr": "pgrep ile aynı seçiciler; eşleşen PID’lere sinyal yollar. Yanlış desen birçok süreci öldürebilir.",
+        "en": "Same selectors as pgrep; sends a signal to matching PIDs. A bad pattern can kill many processes."
+      },
+      "tags": [
+        "signal",
+        "process"
+      ],
+      "risk": "dangerous",
+      "requires_elevated": false,
+      "platforms": [
+        "linux",
+        "macos",
+        "bsd"
+      ],
+      "packages": {
+        "arch": "procps-ng",
+        "debian": "procps",
+        "ubuntu": "procps",
+        "fedora": "procps-ng"
+      },
+      "install_notes": {
+        "tr": "Arch: pacman -S procps-ng\nDebian/Ubuntu: apt install procps\nFedora: dnf install procps-ng",
+        "en": "Arch: pacman -S procps-ng\nDebian/Ubuntu: apt install procps\nFedora: dnf install procps-ng"
+      },
+      "flags": [
+        {
+          "flag": "-l",
+          "long": "--list-name",
+          "meaning": {
+            "tr": "Sinyal adlarını listele.",
+            "en": "List signal names."
+          },
+          "verified": true
+        },
+        {
+          "flag": "-x",
+          "long": "--exact",
+          "meaning": {
+            "tr": "Tam komut adı eşleşmesi.",
+            "en": "Exact name match."
+          },
+          "verified": true
+        },
+        {
+          "flag": "-u",
+          "long": "--uid",
+          "takes_value": true,
+          "value_name": "UID",
+          "meaning": {
+            "tr": "Kullanıcı süzgeci.",
+            "en": "Match only this user."
+          },
+          "verified": true
+        },
+        {
+          "flag": "-n",
+          "long": "--newest",
+          "meaning": {
+            "tr": "En yeni eşleşme.",
+            "en": "Newest matching process only."
+          },
+          "verified": true
+        }
+      ],
+      "examples": [
+        {
+          "title": {
+            "tr": "TERM gönder",
+            "en": "Send TERM"
+          },
+          "command": "pkill -x mydaemon",
+          "explanation": {
+            "tr": "Tam adı mydaemon olanlara SIGTERM.",
+            "en": "SIGTERM to exact name mydaemon."
+          },
+          "risk": "dangerous"
+        },
+        {
+          "title": {
+            "tr": "Sinyal listesi",
+            "en": "List signals"
+          },
+          "command": "pkill -l",
+          "explanation": {
+            "tr": "Bilinen sinyal adları.",
+            "en": "Known signal names."
+          },
+          "risk": "safe"
+        }
+      ],
+      "related": [
+        "pgrep",
+        "kill",
+        "killall"
+      ],
+      "intent": {
+        "tr": [
+          "süreci ada göre öldür",
+          "pkill"
+        ],
+        "en": [
+          "kill by name",
+          "pkill"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 1 pkill"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-deeper"
+      },
+      "nova": {
+        "concepts": [
+          "permissions",
+          "terminal-basics"
+        ]
       }
     },
     {
@@ -7426,6 +8783,140 @@
       }
     },
     {
+      "id": "psql",
+      "name": "psql",
+      "category": "development",
+      "summary": {
+        "tr": "PostgreSQL etkileşimli terminal.",
+        "en": "PostgreSQL interactive terminal."
+      },
+      "description": {
+        "tr": "PostgreSQL sunucusuna bağlanır; SQL ve meta-komutlar (.\\dt) çalıştırır. İstemci paketi distroya göre değişir.",
+        "en": "Connects to a PostgreSQL server; runs SQL and meta-commands (.\\dt). Client package names vary by distro."
+      },
+      "tags": [
+        "sql",
+        "database",
+        "postgresql"
+      ],
+      "risk": "caution",
+      "requires_elevated": false,
+      "platforms": [
+        "linux",
+        "macos",
+        "bsd"
+      ],
+      "packages": {
+        "arch": "postgresql",
+        "debian": "postgresql-client",
+        "ubuntu": "postgresql-client",
+        "fedora": "postgresql"
+      },
+      "install_notes": {
+        "tr": "Arch: pacman -S postgresql  (istemci+sunucu bileşenleri; yalnızca istemci için paket seti sürüme bağlı)\nDebian/Ubuntu: apt install postgresql-client\nFedora: dnf install postgresql\nSunucu ayrı kurulur; bu girdi istemci odaklıdır.",
+        "en": "Arch: pacman -S postgresql  (client+server bits; pure-client packaging is version-dependent)\nDebian/Ubuntu: apt install postgresql-client\nFedora: dnf install postgresql\nServer is separate; this entry is client-focused."
+      },
+      "flags": [
+        {
+          "flag": "-h",
+          "long": "--host",
+          "takes_value": true,
+          "value_name": "HOST",
+          "meaning": {
+            "tr": "Sunucu host.",
+            "en": "Server host."
+          },
+          "verified": false
+        },
+        {
+          "flag": "-U",
+          "long": "--username",
+          "takes_value": true,
+          "value_name": "USER",
+          "meaning": {
+            "tr": "Veritabanı kullanıcısı.",
+            "en": "Database user."
+          },
+          "verified": false
+        },
+        {
+          "flag": "-d",
+          "long": "--dbname",
+          "takes_value": true,
+          "value_name": "DBNAME",
+          "meaning": {
+            "tr": "Veritabanı adı.",
+            "en": "Database name."
+          },
+          "verified": false
+        },
+        {
+          "flag": "-c",
+          "long": "--command",
+          "takes_value": true,
+          "value_name": "CMD",
+          "meaning": {
+            "tr": "Tek komut çalıştırıp çık.",
+            "en": "Run one command and exit."
+          },
+          "verified": false
+        }
+      ],
+      "examples": [
+        {
+          "title": {
+            "tr": "Yerel bağlan",
+            "en": "Local connect"
+          },
+          "command": "psql -d mydb",
+          "explanation": {
+            "tr": "Yerel soket/peer ile mydb açar (kuruluma bağlı).",
+            "en": "Opens mydb via local socket/peer (setup-dependent)."
+          },
+          "risk": "caution"
+        },
+        {
+          "title": {
+            "tr": "Tek sorgu",
+            "en": "One query"
+          },
+          "command": "psql -d mydb -c 'SELECT version();'",
+          "explanation": {
+            "tr": "Sürümü basıp çıkar.",
+            "en": "Prints version and exits."
+          },
+          "risk": "safe"
+        }
+      ],
+      "related": [
+        "sqlite3",
+        "jq"
+      ],
+      "intent": {
+        "tr": [
+          "postgres bağlan",
+          "psql sorgu"
+        ],
+        "en": [
+          "connect postgres",
+          "psql query"
+        ]
+      },
+      "verification": {
+        "status": "draft",
+        "sources": [
+          "https://www.postgresql.org/docs/current/app-psql.html"
+        ],
+        "notes": "Client package names vary; flag details need maintainer spot-check."
+      },
+      "nova": {
+        "concepts": [
+          "json-data",
+          "permissions"
+        ]
+      }
+    },
+    {
       "id": "pwd",
       "name": "pwd",
       "summary": {
@@ -7499,6 +8990,267 @@
         ]
       },
       "category": "filesystem"
+    },
+    {
+      "id": "python3",
+      "name": "python3",
+      "category": "development",
+      "summary": {
+        "tr": "Python 3 yorumlayıcısı.",
+        "en": "Python 3 interpreter."
+      },
+      "description": {
+        "tr": "Betik çalıştırır, REPL açar ve modül araçlarına giriş noktasıdır. Paket adı Arch’ta python olabilir.",
+        "en": "Runs scripts, opens a REPL, and is the entry point for module tools. Arch package name is often python."
+      },
+      "tags": [
+        "python",
+        "scripting",
+        "language"
+      ],
+      "risk": "caution",
+      "requires_elevated": false,
+      "platforms": [
+        "linux",
+        "macos",
+        "bsd"
+      ],
+      "packages": {
+        "arch": "python",
+        "debian": "python3",
+        "ubuntu": "python3",
+        "fedora": "python3"
+      },
+      "install_notes": {
+        "tr": "Arch: pacman -S python\nDebian/Ubuntu: apt install python3\nFedora: dnf install python3\nvenv/pip ayrı paket olabilir (python-venv / python3-venv).",
+        "en": "Arch: pacman -S python\nDebian/Ubuntu: apt install python3\nFedora: dnf install python3\nvenv/pip may be separate packages (python-venv / python3-venv)."
+      },
+      "flags": [
+        {
+          "flag": "-m",
+          "takes_value": true,
+          "value_name": "MODULE",
+          "meaning": {
+            "tr": "Modülü betik gibi çalıştır.",
+            "en": "Run library module as a script."
+          },
+          "verified": true
+        },
+        {
+          "flag": "-c",
+          "takes_value": true,
+          "value_name": "CMD",
+          "meaning": {
+            "tr": "Komutu dize olarak çalıştır.",
+            "en": "Execute program passed as string."
+          },
+          "verified": true
+        },
+        {
+          "flag": "-V",
+          "long": "--version",
+          "meaning": {
+            "tr": "Sürüm yaz.",
+            "en": "Print version."
+          },
+          "verified": true
+        }
+      ],
+      "examples": [
+        {
+          "title": {
+            "tr": "Sürüm",
+            "en": "Version"
+          },
+          "command": "python3 -V",
+          "explanation": {
+            "tr": "Kurulu Python sürümü.",
+            "en": "Installed Python version."
+          },
+          "risk": "safe"
+        },
+        {
+          "title": {
+            "tr": "Modül çalıştır",
+            "en": "Run module"
+          },
+          "command": "python3 -m http.server 8000",
+          "explanation": {
+            "tr": "Basit HTTP dosya sunucusu (ağ açar).",
+            "en": "Simple HTTP file server (opens a network port)."
+          },
+          "risk": "caution"
+        },
+        {
+          "title": {
+            "tr": "Tek satır",
+            "en": "One-liner"
+          },
+          "command": "python3 -c 'print(2+2)'",
+          "explanation": {
+            "tr": "Kısa ifade çalıştırır.",
+            "en": "Runs a short expression."
+          },
+          "risk": "safe"
+        }
+      ],
+      "related": [
+        "jq",
+        "make",
+        "git"
+      ],
+      "intent": {
+        "tr": [
+          "python çalıştır",
+          "python sürüm"
+        ],
+        "en": [
+          "run python",
+          "python version"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "https://docs.python.org/3/using/cmdline.html",
+          "python3 --help"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-deeper"
+      },
+      "nova": {
+        "concepts": [
+          "path",
+          "terminal-basics"
+        ],
+        "ui_priority": 85,
+        "favorite_eligible": true
+      }
+    },
+    {
+      "id": "renice",
+      "name": "renice",
+      "category": "processes",
+      "summary": {
+        "tr": "Çalışan sürecin nice değerini değiştirir.",
+        "en": "Alters the nice value of running processes."
+      },
+      "description": {
+        "tr": "Önceliği ayarlar; daha yüksek nice → daha düşük CPU önceliği. Başkasının süreçleri için genelde root gerekir.",
+        "en": "Adjusts priority; higher nice means lower CPU priority. Changing others’ processes usually needs root."
+      },
+      "tags": [
+        "priority",
+        "nice",
+        "process"
+      ],
+      "risk": "caution",
+      "requires_elevated": false,
+      "platforms": [
+        "linux",
+        "macos",
+        "bsd"
+      ],
+      "packages": {
+        "arch": "util-linux",
+        "debian": "bsdutils",
+        "ubuntu": "bsdutils",
+        "fedora": "util-linux"
+      },
+      "install_notes": {
+        "tr": "Arch: util-linux (temel)\nDebian/Ubuntu: bsdutils (temel)\nFedora: util-linux",
+        "en": "Arch: util-linux (base)\nDebian/Ubuntu: bsdutils (base)\nFedora: util-linux"
+      },
+      "flags": [
+        {
+          "flag": "-n",
+          "long": "--priority",
+          "takes_value": true,
+          "value_name": "NICE",
+          "meaning": {
+            "tr": "Nice artışı / mutlak (sürüme göre).",
+            "en": "Nice increment / absolute (version-dependent)."
+          },
+          "verified": true
+        },
+        {
+          "flag": "-p",
+          "long": "--pid",
+          "takes_value": true,
+          "value_name": "PID",
+          "meaning": {
+            "tr": "Hedef PID.",
+            "en": "Target PID."
+          },
+          "verified": true
+        },
+        {
+          "flag": "-u",
+          "long": "--user",
+          "takes_value": true,
+          "value_name": "USER",
+          "meaning": {
+            "tr": "Kullanıcının süreçleri.",
+            "en": "Processes of USER."
+          },
+          "verified": true
+        }
+      ],
+      "examples": [
+        {
+          "title": {
+            "tr": "PID yumuşat",
+            "en": "Lower priority"
+          },
+          "command": "renice -n 10 -p 1234",
+          "explanation": {
+            "tr": "1234 nicer (daha az öncelikli) olur.",
+            "en": "PID 1234 becomes nicer (lower priority)."
+          },
+          "risk": "caution"
+        },
+        {
+          "title": {
+            "tr": "Kendi işi",
+            "en": "Own job"
+          },
+          "command": "renice -n 5 $$",
+          "explanation": {
+            "tr": "Geçerli kabuğu yumuşatır.",
+            "en": "Nices the current shell."
+          },
+          "risk": "caution"
+        }
+      ],
+      "related": [
+        "nice",
+        "ps",
+        "top"
+      ],
+      "intent": {
+        "tr": [
+          "öncelik değiştir",
+          "renice"
+        ],
+        "en": [
+          "change priority",
+          "renice"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 1 renice"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-deeper",
+        "notes": "Debian package for renice is bsdutils; absolute vs relative -n semantics differ slightly across Unixes."
+      },
+      "nova": {
+        "concepts": [
+          "permissions"
+        ]
+      }
     },
     {
       "id": "resolvectl",
@@ -7628,6 +9380,160 @@
         ]
       },
       "category": "network"
+    },
+    {
+      "id": "rg",
+      "name": "rg",
+      "category": "search",
+      "summary": {
+        "tr": "Hızlı özyinelemeli regex arama (ripgrep).",
+        "en": "Fast recursive regex search (ripgrep)."
+      },
+      "description": {
+        "tr": "gitignore bilincinde, çok hızlı içerik araması. Klasik grep+find birleşimine modern alternatif.",
+        "en": "gitignore-aware, very fast content search. Modern alternative to classic grep+find combos."
+      },
+      "tags": [
+        "search",
+        "regex",
+        "ripgrep"
+      ],
+      "risk": "safe",
+      "requires_elevated": false,
+      "platforms": [
+        "linux",
+        "macos",
+        "bsd"
+      ],
+      "packages": {
+        "arch": "ripgrep",
+        "debian": "ripgrep",
+        "ubuntu": "ripgrep",
+        "fedora": "ripgrep"
+      },
+      "install_notes": {
+        "tr": "Arch: pacman -S ripgrep\nDebian/Ubuntu: apt install ripgrep\nFedora: dnf install ripgrep\nİkili adı: rg",
+        "en": "Arch: pacman -S ripgrep\nDebian/Ubuntu: apt install ripgrep\nFedora: dnf install ripgrep\nBinary name: rg"
+      },
+      "flags": [
+        {
+          "flag": "-i",
+          "long": "--ignore-case",
+          "meaning": {
+            "tr": "Büyük/küçük harf yok say.",
+            "en": "Case-insensitive."
+          },
+          "verified": true
+        },
+        {
+          "flag": "-n",
+          "long": "--line-number",
+          "meaning": {
+            "tr": "Satır numarası göster.",
+            "en": "Show line numbers."
+          },
+          "verified": true
+        },
+        {
+          "flag": "-l",
+          "long": "--files-with-matches",
+          "meaning": {
+            "tr": "Yalnız eşleşen dosya yolları.",
+            "en": "Only paths with matches."
+          },
+          "verified": true
+        },
+        {
+          "flag": "-g",
+          "long": "--glob",
+          "takes_value": true,
+          "value_name": "GLOB",
+          "meaning": {
+            "tr": "Dosya glob süzgeci.",
+            "en": "Include/exclude via glob."
+          },
+          "verified": true
+        },
+        {
+          "flag": "-S",
+          "long": "--smart-case",
+          "meaning": {
+            "tr": "Akıllı büyük/küçük harf.",
+            "en": "Smart-case matching."
+          },
+          "verified": true
+        }
+      ],
+      "examples": [
+        {
+          "title": {
+            "tr": "Desen ara",
+            "en": "Search pattern"
+          },
+          "command": "rg TODO src/",
+          "explanation": {
+            "tr": "src altında TODO ara.",
+            "en": "Search TODO under src/."
+          },
+          "risk": "safe"
+        },
+        {
+          "title": {
+            "tr": "YAML dosyaları",
+            "en": "YAML files"
+          },
+          "command": "rg -g '*.yaml' 'verification:' commands/",
+          "explanation": {
+            "tr": "Yalnız .yaml içinde ara.",
+            "en": "Search only in .yaml files."
+          },
+          "risk": "safe"
+        },
+        {
+          "title": {
+            "tr": "Dosya listesi",
+            "en": "File list"
+          },
+          "command": "rg -l \"nova-commands\" .",
+          "explanation": {
+            "tr": "Eşleşen dosya yollarını listeler.",
+            "en": "Lists matching file paths."
+          },
+          "risk": "safe"
+        }
+      ],
+      "related": [
+        "grep",
+        "find",
+        "git"
+      ],
+      "intent": {
+        "tr": [
+          "ripgrep ara",
+          "kodda ara"
+        ],
+        "en": [
+          "ripgrep search",
+          "search in code"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "https://github.com/BurntSushi/ripgrep",
+          "rg --help"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-deeper"
+      },
+      "nova": {
+        "favorite_eligible": true,
+        "ui_priority": 90,
+        "concepts": [
+          "files",
+          "terminal-basics"
+        ]
+      }
     },
     {
       "id": "rm",
@@ -8524,6 +10430,144 @@
       }
     },
     {
+      "id": "sqlite3",
+      "name": "sqlite3",
+      "category": "development",
+      "summary": {
+        "tr": "SQLite komut satırı kabuğu.",
+        "en": "SQLite command-line shell."
+      },
+      "description": {
+        "tr": "Dosya tabanlı SQL veritabanlarını sorgular ve yönetir. Sunucu süreci yok; tek dosya DB.",
+        "en": "Queries and manages file-based SQL databases. No server process; one-file DB."
+      },
+      "tags": [
+        "sql",
+        "database",
+        "data"
+      ],
+      "risk": "caution",
+      "requires_elevated": false,
+      "platforms": [
+        "linux",
+        "macos",
+        "bsd"
+      ],
+      "packages": {
+        "arch": "sqlite",
+        "debian": "sqlite3",
+        "ubuntu": "sqlite3",
+        "fedora": "sqlite"
+      },
+      "install_notes": {
+        "tr": "Arch: pacman -S sqlite\nDebian/Ubuntu: apt install sqlite3\nFedora: dnf install sqlite\nİkili adı genelde sqlite3.",
+        "en": "Arch: pacman -S sqlite\nDebian/Ubuntu: apt install sqlite3\nFedora: dnf install sqlite\nBinary is usually sqlite3."
+      },
+      "flags": [
+        {
+          "flag": "-header",
+          "meaning": {
+            "tr": "Sütun başlıklarını göster.",
+            "en": "Show column headers."
+          },
+          "verified": true
+        },
+        {
+          "flag": "-csv",
+          "meaning": {
+            "tr": "CSV çıktı kipi.",
+            "en": "CSV output mode."
+          },
+          "verified": true
+        },
+        {
+          "flag": "-json",
+          "meaning": {
+            "tr": "JSON çıktı kipi.",
+            "en": "JSON output mode."
+          },
+          "verified": true
+        },
+        {
+          "flag": "-readonly",
+          "meaning": {
+            "tr": "Salt okunur aç.",
+            "en": "Open database read-only."
+          },
+          "verified": true
+        }
+      ],
+      "examples": [
+        {
+          "title": {
+            "tr": "Sorgula",
+            "en": "Query"
+          },
+          "command": "sqlite3 app.db \"SELECT count(*) FROM users;\"",
+          "explanation": {
+            "tr": "Tek SQL ifadesi çalıştırır.",
+            "en": "Runs a single SQL statement."
+          },
+          "risk": "caution"
+        },
+        {
+          "title": {
+            "tr": "JSON çıktı",
+            "en": "JSON output"
+          },
+          "command": "sqlite3 -json app.db 'SELECT id,name FROM users LIMIT 5;'",
+          "explanation": {
+            "tr": "Satırları JSON olarak basar.",
+            "en": "Prints rows as JSON."
+          },
+          "risk": "caution"
+        },
+        {
+          "title": {
+            "tr": "Salt okunur",
+            "en": "Read-only"
+          },
+          "command": "sqlite3 -readonly app.db \".tables\"",
+          "explanation": {
+            "tr": "Yazmadan tablo listeler.",
+            "en": "Lists tables without write access."
+          },
+          "risk": "safe"
+        }
+      ],
+      "related": [
+        "jq",
+        "python3"
+      ],
+      "intent": {
+        "tr": [
+          "sqlite sorgula",
+          "sql çalıştır"
+        ],
+        "en": [
+          "query sqlite",
+          "run sql"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "https://www.sqlite.org/cli.html",
+          "sqlite3 -help"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-deeper"
+      },
+      "nova": {
+        "favorite_eligible": true,
+        "ui_priority": 80,
+        "concepts": [
+          "json-data",
+          "terminal-basics"
+        ]
+      }
+    },
+    {
       "id": "ss",
       "name": "ss",
       "summary": {
@@ -9174,6 +11218,134 @@
           "terminal-basics"
         ],
         "favorite_eligible": true
+      }
+    },
+    {
+      "id": "strace",
+      "name": "strace",
+      "category": "development",
+      "summary": {
+        "tr": "Sistem çağrılarını izler.",
+        "en": "Traces system calls."
+      },
+      "description": {
+        "tr": "Bir sürecin kernel ile konuşmasını (open, read, connect…) gösterir. Hata ayıklama ve “neden başarısız?” soruları için.",
+        "en": "Shows a process talking to the kernel (open, read, connect…). Useful for debugging “why did it fail?”."
+      },
+      "tags": [
+        "debug",
+        "syscall",
+        "trace"
+      ],
+      "risk": "caution",
+      "requires_elevated": false,
+      "platforms": [
+        "linux"
+      ],
+      "packages": {
+        "arch": "strace",
+        "debian": "strace",
+        "ubuntu": "strace",
+        "fedora": "strace"
+      },
+      "install_notes": {
+        "tr": "Arch: pacman -S strace\nDebian/Ubuntu: apt install strace\nFedora: dnf install strace\nBazı süreçler için ptrace izinleri / sudo gerekebilir.",
+        "en": "Arch: pacman -S strace\nDebian/Ubuntu: apt install strace\nFedora: dnf install strace\nSome targets need ptrace permissions or sudo."
+      },
+      "flags": [
+        {
+          "flag": "-e",
+          "takes_value": true,
+          "value_name": "EXPR",
+          "meaning": {
+            "tr": "Çağrı süzgeci (ör. open,network).",
+            "en": "Syscall filter (e.g. open,network)."
+          },
+          "verified": true
+        },
+        {
+          "flag": "-f",
+          "meaning": {
+            "tr": "Çocuk süreçleri takip et.",
+            "en": "Follow child processes."
+          },
+          "verified": true
+        },
+        {
+          "flag": "-o",
+          "takes_value": true,
+          "value_name": "FILE",
+          "meaning": {
+            "tr": "Çıktıyı dosyaya yaz.",
+            "en": "Write trace to FILE."
+          },
+          "verified": true
+        },
+        {
+          "flag": "-p",
+          "takes_value": true,
+          "value_name": "PID",
+          "meaning": {
+            "tr": "Çalışan PID’ye bağlan.",
+            "en": "Attach to a running PID."
+          },
+          "verified": true
+        }
+      ],
+      "examples": [
+        {
+          "title": {
+            "tr": "Komutu izle",
+            "en": "Trace command"
+          },
+          "command": "strace -e openat ls /tmp",
+          "explanation": {
+            "tr": "ls’in openat çağrılarını gösterir.",
+            "en": "Shows openat calls made by ls."
+          },
+          "risk": "safe"
+        },
+        {
+          "title": {
+            "tr": "Ağ çağrıları",
+            "en": "Network calls"
+          },
+          "command": "strace -e network curl -I https://example.com",
+          "explanation": {
+            "tr": "Ağ ile ilgili syscall’lar.",
+            "en": "Network-related syscalls."
+          },
+          "risk": "caution"
+        }
+      ],
+      "related": [
+        "lsof",
+        "ps",
+        "journalctl"
+      ],
+      "intent": {
+        "tr": [
+          "sistem çağrısı izle",
+          "strace debug"
+        ],
+        "en": [
+          "trace syscalls",
+          "strace debug"
+        ]
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 1 strace"
+        ],
+        "last_reviewed": "2026-11-02",
+        "reviewer": "nova-commands-deeper"
+      },
+      "nova": {
+        "concepts": [
+          "debugging",
+          "permissions"
+        ]
       }
     },
     {
@@ -10469,6 +12641,130 @@
       }
     },
     {
+      "id": "ufw",
+      "name": "ufw",
+      "category": "security",
+      "summary": {
+        "tr": "Uncomplicated Firewall (iptables/nft ön yüz).",
+        "en": "Uncomplicated Firewall (iptables/nft frontend)."
+      },
+      "description": {
+        "tr": "Ubuntu’da yaygın basit firewall arayüzü. enable/default yanlışlıkla kilitleyebilir; önce status.",
+        "en": "Simple firewall UI common on Ubuntu. Mis-set enable/default can lock you out; check status first."
+      },
+      "tags": [
+        "firewall",
+        "ubuntu",
+        "security"
+      ],
+      "risk": "dangerous",
+      "requires_elevated": true,
+      "platforms": [
+        "linux"
+      ],
+      "packages": {
+        "arch": "ufw",
+        "debian": "ufw",
+        "ubuntu": "ufw"
+      },
+      "install_notes": {
+        "tr": "Arch: pacman -S ufw\nDebian/Ubuntu: apt install ufw\nFedora: paket her depoda yok — uydurma; nft/firewalld tercih edilebilir.\nUbuntu sunucularda sık varsayılan araç.",
+        "en": "Arch: pacman -S ufw\nDebian/Ubuntu: apt install ufw\nFedora: not always packaged — do not invent; prefer nft/firewalld.\nCommon default tool on Ubuntu servers."
+      },
+      "flags": [
+        {
+          "flag": "status",
+          "meaning": {
+            "tr": "Durum (alt komut).",
+            "en": "Status (subcommand)."
+          },
+          "verified": false
+        },
+        {
+          "flag": "enable",
+          "meaning": {
+            "tr": "Güvenlik duvarını aç.",
+            "en": "Enable the firewall."
+          },
+          "verified": false
+        },
+        {
+          "flag": "deny",
+          "meaning": {
+            "tr": "Reddet kuralı.",
+            "en": "Deny rule."
+          },
+          "verified": false
+        },
+        {
+          "flag": "allow",
+          "meaning": {
+            "tr": "İzin ver kuralı.",
+            "en": "Allow rule."
+          },
+          "verified": false
+        }
+      ],
+      "examples": [
+        {
+          "title": {
+            "tr": "Durum",
+            "en": "Status"
+          },
+          "command": "sudo ufw status verbose",
+          "explanation": {
+            "tr": "Aktif kuralları ve varsayılanları gösterir.",
+            "en": "Shows active rules and defaults."
+          },
+          "risk": "safe",
+          "requires_elevated": true
+        },
+        {
+          "title": {
+            "tr": "Uygulama profilleri",
+            "en": "App profiles"
+          },
+          "command": "sudo ufw app list",
+          "explanation": {
+            "tr": "Bilinen uygulama profilleri.",
+            "en": "Known application profiles."
+          },
+          "risk": "safe",
+          "requires_elevated": true
+        }
+      ],
+      "related": [
+        "nft",
+        "iptables",
+        "firewall-cmd"
+      ],
+      "intent": {
+        "tr": [
+          "ufw durum",
+          "ubuntu firewall"
+        ],
+        "en": [
+          "ufw status",
+          "ubuntu firewall"
+        ]
+      },
+      "verification": {
+        "status": "draft",
+        "sources": [
+          "man 8 ufw",
+          "https://help.ubuntu.com/community/UFW"
+        ],
+        "notes": "Status/list only; no enable/deny recipes that risk SSH lockout."
+      },
+      "nova": {
+        "concepts": [
+          "firewalls",
+          "networking",
+          "permissions"
+        ]
+      }
+    },
+    {
       "id": "umount",
       "name": "umount",
       "summary": {
@@ -11301,8 +13597,9 @@
         }
       ],
       "related": [
-        "free",
         "iostat",
+        "iotop",
+        "free",
         "top"
       ],
       "intent": {
@@ -12154,6 +14451,156 @@
   ],
   "concepts": [
     {
+      "id": "debugging",
+      "kind": "nova-commands-concept",
+      "title": {
+        "tr": "Çalışma anı hata ayıklama",
+        "en": "Runtime debugging"
+      },
+      "summary": {
+        "tr": "strace, lsof, loglar ve süreç araçlarıyla “neden başarısız?” sorusuna yaklaşım.",
+        "en": "Approaching “why did it fail?” with strace, lsof, logs, and process tools."
+      },
+      "difficulty": "intermediate",
+      "tags": [
+        "debug",
+        "strace",
+        "processes",
+        "logs"
+      ],
+      "related_commands": [
+        "strace",
+        "lsof",
+        "ps",
+        "pgrep",
+        "journalctl",
+        "dmesg",
+        "top"
+      ],
+      "related_concepts": [
+        "systemd",
+        "permissions",
+        "terminal-basics",
+        "path"
+      ],
+      "see_also": [
+        "man 1 strace",
+        "man 8 lsof",
+        "man 1 journalctl"
+      ],
+      "body": {
+        "tr": "Bir komut “çalışmıyor” dediğinde katmanları ayırın: **bulunamıyor mu** (PATH),\n**izin mi**, **bağımlılık/kütüphane mi**, **ağ mı**, **yapılandırma mı**?\n\n**Hızlı sıra:**\n1. `command -v` / `type` — ikili var mı?\n2. `ls -l` / `id` — izin ve kullanıcı.\n3. `journalctl -u … -e` veya uygulama logu.\n4. `lsof -i` / `ss` — port ve dosya tutamaçları.\n5. `strace -e openat,network …` — kernel sınırında ne reddediliyor?\n\n**strace:** `openat`/`connect` hataları (`ENOENT`, `EACCES`, `ECONNREFUSED`)\nsık ipucu verir. `-f` çocuk süreçleri takip eder; gürültülüdür — `-e` ile süzün.\nptrace kısıtları (Yama/container) yüzünden sudo gerekebilir.\n\n**lsof / ss:** “kim dinliyor?” ve “dosya kilitli mi?”.\n**ps/pgrep/pkill:** süreç seçimi; `pkill` yanlış desende tehlikeli.\n\nBanka CI’si bu araçları “kanıt için” çalıştırmaz; girdiler man/`--help` ve\ndikkatli örneklerle doğrulanır. Gizli veri içeren izleri paylaşmayın.\n",
+        "en": "When a command “doesn’t work”, separate layers: **not found** (PATH),\n**permissions**, **library/deps**, **network**, or **config**?\n\n**Quick order:**\n1. `command -v` / `type` — is the binary there?\n2. `ls -l` / `id` — permissions and user.\n3. `journalctl -u … -e` or app logs.\n4. `lsof -i` / `ss` — ports and file handles.\n5. `strace -e openat,network …` — what does the kernel refuse?\n\n**strace:** `openat`/`connect` failures (`ENOENT`, `EACCES`, `ECONNREFUSED`)\nare strong hints. `-f` follows children; it is noisy — filter with `-e`.\nptrace restrictions (hardening/containers) may require sudo.\n\n**lsof / ss:** “who is listening?” and “is the file busy?”.\n**ps/pgrep/pkill:** process selection; `pkill` is dangerous with a bad pattern.\n\nCatalog CI does not run these tools “to prove” entries; content is checked\nagainst man/`--help` and careful examples. Do not share traces that contain secrets.\n"
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 1 strace",
+          "man 8 lsof",
+          "man 1 journalctl"
+        ],
+        "notes": "Agent-authored teaching article; not verified."
+      }
+    },
+    {
+      "id": "firewalls",
+      "kind": "nova-commands-concept",
+      "title": {
+        "tr": "Güvenlik duvarı araçları",
+        "en": "Firewall tools"
+      },
+      "summary": {
+        "tr": "nftables, iptables, firewalld ve ufw — ne zaman hangisi, güvenli okuma alışkanlığı.",
+        "en": "nftables, iptables, firewalld, and ufw — when to use which, safe read habits."
+      },
+      "difficulty": "intermediate",
+      "tags": [
+        "firewall",
+        "nftables",
+        "security",
+        "network"
+      ],
+      "related_commands": [
+        "nft",
+        "iptables",
+        "firewall-cmd",
+        "ufw",
+        "ss",
+        "ip"
+      ],
+      "related_concepts": [
+        "networking",
+        "networking-basics",
+        "permissions",
+        "ssh"
+      ],
+      "see_also": [
+        "man nft",
+        "man firewall-cmd",
+        "Arch Wiki: Firewalls"
+      ],
+      "body": {
+        "tr": "Linux’ta paket süzme çoğunlukla **netfilter** üzerinde durur. Kullanıcı alanı araçları\nfarklı kuşaklardadır; hepsi aynı kernel kancalarına yazabilir.\n\n**Araç haritası (kısa):**\n- **nft** (`nftables`) — modern birincil arayüz; tablolar/zincirler/kurallar.\n- **iptables** — eski IPv4 aracı; birçok sistemde `iptables-nft` uyumluluk katmanı.\n- **firewall-cmd** (`firewalld`) — bölge/servis modeli (Fedora’da sık varsayılan).\n- **ufw** — Ubuntu’da yaygın “basit” ön yüz.\n\n**Güvenli alışkanlık:** Uzaktan oturumdayken önce **listele** (`nft list ruleset`,\n`iptables -L -n`, `firewall-cmd --list-all`, `ufw status`). Bu bankadaki örnekler\nbilerek yıkıcı `flush` / kör `deny` tarifleri vermez — yanlış kural SSH’yi keser.\n\n**Nova bankası:** `nft` / `iptables` / `ufw` girdileri `draft` veya dikkatli\n`reviewed` olabilir; `verification.status: verified` insan onayı ister.\nRisk etiketleri `dangerous` / `destructive` abartı değil — erişim kaybı gerçektir.\n\n**Seçim ipucu:** Yeni otomasyon için distro varsayılanını izleyin (Arch/nft veya\nfirewalld; Ubuntu/ufw; Fedora/firewalld). İki yöneticinin aynı anda yazması\nçakışma yaratır.\n",
+        "en": "Linux packet filtering mostly sits on **netfilter**. Userland tools are different\ngenerations; they can all write the same kernel hooks.\n\n**Short map:**\n- **nft** (`nftables`) — modern primary interface; tables/chains/rules.\n- **iptables** — legacy IPv4 tool; many systems use an `iptables-nft` compat layer.\n- **firewall-cmd** (`firewalld`) — zone/service model (often default on Fedora).\n- **ufw** — “simple” frontend common on Ubuntu.\n\n**Safe habit:** On remote sessions, **list first** (`nft list ruleset`,\n`iptables -L -n`, `firewall-cmd --list-all`, `ufw status`). Catalog examples\ndeliberately omit destructive flush / blind deny recipes — a bad rule cuts SSH.\n\n**Nova bank:** `nft` / `iptables` / `ufw` may be `draft` or carefully `reviewed`;\n`verification.status: verified` needs a human. `dangerous` / `destructive` labels\nare not theatrical — lockouts are real.\n\n**Choosing:** Follow the distro default for new automation (Arch/nft or firewalld;\nUbuntu/ufw; Fedora/firewalld). Two managers writing at once causes fights.\n"
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 8 nft",
+          "man 1 firewall-cmd",
+          "https://wiki.archlinux.org/title/Firewalls"
+        ],
+        "notes": "Teaching overview; firewall CLIs stay draft/list-only in commands/."
+      }
+    },
+    {
+      "id": "json-data",
+      "kind": "nova-commands-concept",
+      "title": {
+        "tr": "JSON ve yapılandırılmış veri",
+        "en": "JSON and structured data"
+      },
+      "summary": {
+        "tr": "jq, sqlite3 ve boru hatlarında yapılandırılmış çıktı ile çalışma.",
+        "en": "Working with structured output via jq, sqlite3, and pipelines."
+      },
+      "difficulty": "beginner",
+      "tags": [
+        "json",
+        "sql",
+        "data",
+        "jq"
+      ],
+      "related_commands": [
+        "jq",
+        "sqlite3",
+        "curl",
+        "python3",
+        "psql"
+      ],
+      "related_concepts": [
+        "shell-pipes-redirection",
+        "terminal-basics",
+        "path"
+      ],
+      "see_also": [
+        "https://jqlang.github.io/jq/manual/",
+        "https://www.sqlite.org/cli.html"
+      ],
+      "body": {
+        "tr": "Modern CLI’ler sıkça **JSON** veya satır-tabanlı tablolar üretir. Ham metni\n`grep` ile parçalamak yerine yapıya saygı duyan araçlar tercih edilir.\n\n**jq:** JSON süzgeç dilidir. `curl … | jq -r '.field'` API yanıtlarından alan\nseçmek için yaygındır. `-c` sıkışık, `-s` birden fazla belgeyi dizi yapar.\nGeçersiz JSON’da jq hata verir — önce kaynağı doğrulayın.\n\n**sqlite3:** Sunucusuz SQL. Uygulama ayarları, tarayıcı profilleri, gömülü DB\ndosyaları. Yazmadan bakmak için `-readonly`; makineye aktarım için `-json` / `-csv`.\nYanlış `DELETE`/`DROP` yıkıcıdır — bankada salt okuma örnekleri öne çıkar.\n\n**psql:** İstemci; gerçek sunucu ve kimlik bilgisi ister. Kurulum/paket adları\ndistroya göre değişir → birçok girdi `draft` kalabilir.\n\n**python3 -m json.tool** / kısa `python3 -c` yedek biçimlendirici olabilir; jq\nfiltreleri genelde daha kısa ve kompozisyoneldir.\n\n**Boru alışkanlığı:** üretici → süzgeç → tüketici. `tee` ile ara çıktı saklayın;\ngizli anahtarları log’a düşürmeyin.\n",
+        "en": "Modern CLIs often emit **JSON** or row-oriented tables. Prefer structure-aware\ntools over brittle `grep` on raw blobs.\n\n**jq:** a JSON filter language. `curl … | jq -r '.field'` is the common API\npattern. `-c` is compact; `-s` slurps documents into an array. Invalid JSON\nmakes jq fail — validate the source first.\n\n**sqlite3:** serverless SQL for app settings, browser profiles, embedded DB\nfiles. Use `-readonly` to inspect; `-json` / `-csv` to export. Mistaken\n`DELETE`/`DROP` is destructive — catalog examples emphasize read paths.\n\n**psql:** a client that needs a live server and credentials. Package names vary\nby distro → many entries stay `draft`.\n\n**python3 -m json.tool** / short `python3 -c` can pretty-print as a fallback;\njq filters are usually shorter and more compositional.\n\n**Pipeline habit:** producer → filter → consumer. Keep intermediates with `tee`;\ndo not leak secrets into logs.\n"
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "https://jqlang.github.io/jq/manual/",
+          "https://www.sqlite.org/cli.html"
+        ],
+        "notes": "Agent-authored; spot-check before verified."
+      }
+    },
+    {
       "id": "networking-basics",
       "kind": "nova-commands-concept",
       "title": {
@@ -12238,11 +14685,14 @@
       "related_concepts": [
         "packages",
         "arch",
-        "path"
+        "path",
+        "package-managers-comparison"
       ],
       "see_also": [
         "Arch Wiki: pacman",
-        "man apt / man dnf"
+        "man apt / man dnf",
+        "docs/package-managers-comparison.md",
+        "concepts/package-managers-comparison.yaml"
       ],
       "body": {
         "tr": "Dağıtımlar yazılıımı *paket* olarak kurar. Aynı komut farklı paket adında olabilir;\nbilinmeyen ad **uydurulmaz** (omit / `draft`).\n\n**Birinci sınıf yöneticiler (bu banka):**\n- **Arch — pacman:** `pacman -Syu` sistem güncellemesi; `pacman -S paket` kurulum;\n  `pacman -Ss anahtar` arama; `pacman -Ql paket` dosya listesi.\n  AUR yardımcıları (ör. `paru`) resmi depoda olmayabilir — ayrı not/draft.\n- **Debian/Ubuntu — apt (+ dpkg):** `apt update` / `apt install`; düşük seviye\n  `dpkg -i` / `dpkg -l`.\n- **Fedora/RHEL — dnf (+ rpm):** `dnf install` / `dnf upgrade`; `rpm -q` sorguları.\n\n**Flatpak:** Dağıtımdan bağımsız uygulama sandboxes; `flatpak install` / `flatpak run`.\n\n**Nova tercihi:** Arch host’ta kurulum ipuçlarında **pacman / `packages.arch` önce**.\n`install_notes` içinde Arch satırı üstte tutulur.\n\n**Komut ≠ paket:** `which` ile bulunan ikili, paket adını kanıtlamaz; doğrulama için\ndistro paket veritabanı / man sayfası kullanılır. CI yıkıcı kurulum çalıştırmaz.\n",
@@ -12255,6 +14705,58 @@
           "man pacman / man apt / man dnf"
         ],
         "notes": "Agent-authored teaching article; Arch-first per project preferences."
+      }
+    },
+    {
+      "id": "package-managers-comparison",
+      "kind": "nova-commands-concept",
+      "title": {
+        "tr": "Paket yöneticisi karşılaştırma tabloları",
+        "en": "Package manager comparison tables"
+      },
+      "summary": {
+        "tr": "pacman / apt / dnf / rpm-dpkg / flatpak için yan yana sık işlemler.",
+        "en": "Side-by-side common operations for pacman / apt / dnf / rpm-dpkg / flatpak."
+      },
+      "difficulty": "beginner",
+      "tags": [
+        "packages",
+        "pacman",
+        "apt",
+        "dnf",
+        "comparison"
+      ],
+      "related_commands": [
+        "pacman",
+        "apt",
+        "dnf",
+        "dpkg",
+        "rpm",
+        "flatpak",
+        "paru"
+      ],
+      "related_concepts": [
+        "package-managers",
+        "packages",
+        "arch",
+        "path"
+      ],
+      "see_also": [
+        "docs/package-managers-comparison.md",
+        "Arch Wiki: pacman/Rosetta",
+        "https://wiki.archlinux.org/title/Pacman/Rosetta"
+      ],
+      "body": {
+        "tr": "Aynı iş farklı dağıtımlarda farklı komutlarla yapılır. Aşağıdaki tablolar **sık\nokuma/kurulum** yollarını özetler; bayrak uydurma yok. Ayrıntılı Markdown:\n`docs/package-managers-comparison.md`. Arch satırları Nova tercihine göre önde.\n\n### Sistem güncelle / senkron\n\n| Amaç | Arch (pacman) | Debian/Ubuntu (apt) | Fedora/RHEL (dnf) |\n|------|---------------|---------------------|-------------------|\n| DB yenile + yükselt | `pacman -Syu` | `apt update && apt upgrade` | `dnf upgrade` |\n| Yalnız indeks | (Syu içinde) | `apt update` | `dnf check-update` |\n| Paket kur | `pacman -S ad` | `apt install ad` | `dnf install ad` |\n| Kaldır (+deps sık) | `pacman -Rns ad` | `apt purge ad` | `dnf remove ad` |\n| Ara | `pacman -Ss q` | `apt search q` | `dnf search q` |\n\n### Sorgulama (yerel)\n\n| Amaç | pacman | dpkg/apt | rpm/dnf |\n|------|--------|----------|---------|\n| Kurulu mu? | `pacman -Q ad` | `dpkg -l ad` | `rpm -q ad` |\n| Dosya → paket | `pacman -Qo yol` | `dpkg -S yol` | `rpm -qf yol` |\n| Paket → dosyalar | `pacman -Ql ad` | `dpkg -L ad` | `rpm -ql ad` |\n\n### Katmanlar\n\n- **pacman** — Arch resmi depolar; AUR ayrı (`paru` vb., draft/dikkat).\n- **apt + dpkg** — yüksek seviye apt, düşük seviye dpkg.\n- **dnf + rpm** — yüksek seviye dnf, düşük seviye rpm.\n- **flatpak** — dağıtımdan bağımsız sandbox uygulamalar (`flatpak install` / `run`).\n\n**Kural:** Bilinmeyen paket adı **uydurulmaz**; `packages.*` alanı omit/`draft`.\nCI yıkıcı kurulum çalıştırmaz. Nova Arch host’ta `packages.arch` / pacman notunu önce tutar.\n",
+        "en": "The same job uses different commands per distro. Tables below summarize **common\nupdate/install/query** paths — no invented flags. Longer Markdown:\n`docs/package-managers-comparison.md`. Arch rows first per Nova preference.\n\n### System update / sync\n\n| Goal | Arch (pacman) | Debian/Ubuntu (apt) | Fedora/RHEL (dnf) |\n|------|---------------|---------------------|-------------------|\n| Refresh + upgrade | `pacman -Syu` | `apt update && apt upgrade` | `dnf upgrade` |\n| Index only | (inside Syu) | `apt update` | `dnf check-update` |\n| Install | `pacman -S name` | `apt install name` | `dnf install name` |\n| Remove (+deps common) | `pacman -Rns name` | `apt purge name` | `dnf remove name` |\n| Search | `pacman -Ss q` | `apt search q` | `dnf search q` |\n\n### Local queries\n\n| Goal | pacman | dpkg/apt | rpm/dnf |\n|------|--------|----------|---------|\n| Installed? | `pacman -Q name` | `dpkg -l name` | `rpm -q name` |\n| File → package | `pacman -Qo path` | `dpkg -S path` | `rpm -qf path` |\n| Package → files | `pacman -Ql name` | `dpkg -L name` | `rpm -ql name` |\n\n### Layers\n\n- **pacman** — official Arch repos; AUR is separate (`paru`, etc., draft/care).\n- **apt + dpkg** — high-level apt, low-level dpkg.\n- **dnf + rpm** — high-level dnf, low-level rpm.\n- **flatpak** — distro-agnostic sandboxed apps (`flatpak install` / `run`).\n\n**Rule:** unknown package names are **not invented**; omit `packages.*` or use\n`draft`. CI does not run destructive installs. On Arch hosts Nova keeps\n`packages.arch` / pacman notes first.\n"
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "https://wiki.archlinux.org/title/Pacman/Rosetta",
+          "man pacman / man apt / man dnf"
+        ],
+        "notes": "Comparison tables agent-authored from Rosetta + man; not verified."
       }
     },
     {
@@ -12301,6 +14803,60 @@
           "man bash (COMMAND EXECUTION)"
         ],
         "notes": "Agent-authored teaching article; needs maintainer spot-check before verified."
+      }
+    },
+    {
+      "id": "permissions",
+      "kind": "nova-commands-concept",
+      "title": {
+        "tr": "Kullanıcılar, gruplar ve izinler",
+        "en": "Users, groups, and permissions"
+      },
+      "summary": {
+        "tr": "id/chmod/chown/sudo ile kim neyi yapabilir — temel model.",
+        "en": "Who can do what with id/chmod/chown/sudo — the basic model."
+      },
+      "difficulty": "beginner",
+      "tags": [
+        "permissions",
+        "users",
+        "sudo",
+        "chmod"
+      ],
+      "related_commands": [
+        "id",
+        "whoami",
+        "chmod",
+        "chown",
+        "chgrp",
+        "sudo",
+        "passwd",
+        "useradd",
+        "usermod",
+        "getent"
+      ],
+      "related_concepts": [
+        "terminal-basics",
+        "path",
+        "files"
+      ],
+      "see_also": [
+        "man 1 chmod",
+        "man 8 sudo",
+        "Arch Wiki: Users and groups"
+      ],
+      "body": {
+        "tr": "Linux erişim modeli kabaca **kullanıcı + grup + diğerleri** ve her biri için\nokuma/yazma/çalıştırma bitleridir. Modern sistemlerde ACL’ler de olabilir; bu\nyazı klasik `chmod`/`chown` odaklıdır.\n\n**Kimsin?** `id`, `whoami`, `groups` — sayısal uid/gid ve üyelikler.\n**Dosya izni:** `ls -l`, `stat`, `chmod` (sembolik `u+x` veya sekizlik `755`).\n**Sahiplik:** `chown kullanıcı:grup`; genelde root ister.\n**Yükseltme:** `sudo` — yapılandırma `/etc/sudoers` (+ drop-in’ler); yanlışlıkla\ngeniş sudo tehlikelidir.\n\n**Dizin vs dosya:** Dizinde `x` “içine girebilme”; dosyada `x` “çalıştırma”.\nPaylaşılan dizinlerde `chmod`/sticky bit (`/tmp`) incelenir.\n\nBankada birçok kullanıcı/izin komutu `caution` veya `dangerous` işaretlidir;\nörnekleri körü körüne kopyalamayın. `verified` durumu insan onayına bağlıdır.\n",
+        "en": "Linux access is roughly **user + group + other** with read/write/execute bits.\nACLs exist on modern systems; this article focuses on classic `chmod`/`chown`.\n\n**Who am I?** `id`, `whoami`, `groups` — numeric uid/gid and memberships.\n**File mode:** `ls -l`, `stat`, `chmod` (symbolic `u+x` or octal `755`).\n**Ownership:** `chown user:group`; usually needs root.\n**Elevation:** `sudo` — config in `/etc/sudoers` (+ drop-ins); overly broad sudo\nis dangerous.\n\n**Directory vs file:** directory `x` means “traverse”; file `x` means “execute”.\nShared dirs involve sticky bits (e.g. `/tmp`).\n\nMany user/permission entries in the bank are `caution` or `dangerous`; do not\ncopy examples blindly. `verified` still requires a human.\n"
+      },
+      "verification": {
+        "status": "reviewed",
+        "sources": [
+          "man 1 chmod",
+          "man 8 sudo",
+          "https://wiki.archlinux.org/title/Users_and_groups"
+        ],
+        "notes": "Agent-authored; registry id already existed — article added this phase."
       }
     },
     {

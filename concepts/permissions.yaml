@@ -1,0 +1,72 @@
+id: permissions
+kind: nova-commands-concept
+title:
+  tr: Kullanıcılar, gruplar ve izinler
+  en: Users, groups, and permissions
+summary:
+  tr: id/chmod/chown/sudo ile kim neyi yapabilir — temel model.
+  en: Who can do what with id/chmod/chown/sudo — the basic model.
+difficulty: beginner
+tags:
+  - permissions
+  - users
+  - sudo
+  - chmod
+related_commands:
+  - id
+  - whoami
+  - chmod
+  - chown
+  - chgrp
+  - sudo
+  - passwd
+  - useradd
+  - usermod
+  - getent
+related_concepts:
+  - terminal-basics
+  - path
+  - files
+see_also:
+  - "man 1 chmod"
+  - "man 8 sudo"
+  - "Arch Wiki: Users and groups"
+body:
+  tr: |
+    Linux erişim modeli kabaca **kullanıcı + grup + diğerleri** ve her biri için
+    okuma/yazma/çalıştırma bitleridir. Modern sistemlerde ACL’ler de olabilir; bu
+    yazı klasik `chmod`/`chown` odaklıdır.
+
+    **Kimsin?** `id`, `whoami`, `groups` — sayısal uid/gid ve üyelikler.
+    **Dosya izni:** `ls -l`, `stat`, `chmod` (sembolik `u+x` veya sekizlik `755`).
+    **Sahiplik:** `chown kullanıcı:grup`; genelde root ister.
+    **Yükseltme:** `sudo` — yapılandırma `/etc/sudoers` (+ drop-in’ler); yanlışlıkla
+    geniş sudo tehlikelidir.
+
+    **Dizin vs dosya:** Dizinde `x` “içine girebilme”; dosyada `x` “çalıştırma”.
+    Paylaşılan dizinlerde `chmod`/sticky bit (`/tmp`) incelenir.
+
+    Bankada birçok kullanıcı/izin komutu `caution` veya `dangerous` işaretlidir;
+    örnekleri körü körüne kopyalamayın. `verified` durumu insan onayına bağlıdır.
+  en: |
+    Linux access is roughly **user + group + other** with read/write/execute bits.
+    ACLs exist on modern systems; this article focuses on classic `chmod`/`chown`.
+
+    **Who am I?** `id`, `whoami`, `groups` — numeric uid/gid and memberships.
+    **File mode:** `ls -l`, `stat`, `chmod` (symbolic `u+x` or octal `755`).
+    **Ownership:** `chown user:group`; usually needs root.
+    **Elevation:** `sudo` — config in `/etc/sudoers` (+ drop-ins); overly broad sudo
+    is dangerous.
+
+    **Directory vs file:** directory `x` means “traverse”; file `x` means “execute”.
+    Shared dirs involve sticky bits (e.g. `/tmp`).
+
+    Many user/permission entries in the bank are `caution` or `dangerous`; do not
+    copy examples blindly. `verified` still requires a human.
+verification:
+  status: reviewed
+  sources:
+    - "man 1 chmod"
+    - "man 8 sudo"
+    - "https://wiki.archlinux.org/title/Users_and_groups"
+  notes: "Agent-authored; registry id already existed — article added this phase."

@@ -1,0 +1,97 @@
+id: iotop
+name: iotop
+category: monitoring
+summary:
+  tr: Süreç başına I/O top görünümü.
+  en: Per-process I/O top view.
+description:
+  tr: Hangi sürecin diski meşgul ettiğini gösterir. Genelde root ister; bazı kernel ayarları gerekir.
+  en: Shows which processes are busy with disk I/O. Often needs root; some kernel options required.
+tags:
+- io
+- processes
+- top
+risk: caution
+requires_elevated: true
+platforms:
+- linux
+packages:
+  arch: iotop
+  debian: iotop
+  ubuntu: iotop
+  fedora: iotop
+install_notes:
+  tr: 'Arch: pacman -S iotop
+
+    Debian/Ubuntu: apt install iotop
+
+    Fedora: dnf install iotop
+
+    Çoğu kurulumda sudo ile çalıştırılır.'
+  en: 'Arch: pacman -S iotop
+
+    Debian/Ubuntu: apt install iotop
+
+    Fedora: dnf install iotop
+
+    Usually run with sudo.'
+flags:
+- flag: -o
+  long: --only
+  meaning:
+    tr: Yalnız I/O yapanları göster.
+    en: Only processes doing I/O.
+  verified: true
+- flag: -a
+  long: --accumulated
+  meaning:
+    tr: Birikmiş I/O.
+    en: Accumulated I/O.
+  verified: true
+- flag: -b
+  long: --batch
+  meaning:
+    tr: Etkileşimsiz / log için.
+    en: Non-interactive / batch logging.
+  verified: true
+examples:
+- title:
+    tr: Canlı I/O
+    en: Live I/O
+  command: sudo iotop -o
+  explanation:
+    tr: Aktif I/O süreçlerini listeler.
+    en: Lists processes with active I/O.
+  risk: caution
+  requires_elevated: true
+- title:
+    tr: Batch örnek
+    en: Batch sample
+  command: sudo iotop -bo -n 3
+  explanation:
+    tr: 3 yenileme, batch çıktı.
+    en: Three refreshes, batch output.
+  risk: caution
+  requires_elevated: true
+related:
+- iostat
+- top
+- htop
+- ps
+intent:
+  tr:
+  - disk kim kullanıyor
+  - iotop
+  en:
+  - who uses disk
+  - iotop
+verification:
+  status: reviewed
+  sources:
+  - man 8 iotop
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-deeper
+nova:
+  concepts:
+  - storage
+  - permissions

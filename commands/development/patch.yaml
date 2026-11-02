@@ -1,0 +1,97 @@
+id: patch
+name: patch
+category: development
+summary:
+  tr: diff çıktısını dosyalara uygular.
+  en: Applies diff output to files.
+description:
+  tr: Birleşik/bağlam diff’lerini kaynak ağaca işler. Yanlış dizin veya ters uygulama dosyaları bozabilir.
+  en: Applies unified/context diffs onto a source tree. Wrong directory or reverse apply can damage files.
+tags:
+- diff
+- patch
+- vcs
+risk: dangerous
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+packages:
+  arch: patch
+  debian: patch
+  ubuntu: patch
+  fedora: patch
+install_notes:
+  tr: 'Arch: pacman -S patch
+
+    Debian/Ubuntu: apt install patch
+
+    Fedora: dnf install patch'
+  en: 'Arch: pacman -S patch
+
+    Debian/Ubuntu: apt install patch
+
+    Fedora: dnf install patch'
+flags:
+- flag: -p1
+  meaning:
+    tr: Yolun ilk bileşenini at.
+    en: Strip first path component.
+  verified: true
+- flag: -R
+  long: --reverse
+  meaning:
+    tr: Yamayı ters uygula.
+    en: Apply patch in reverse.
+  verified: true
+- flag: -i
+  long: --input
+  takes_value: true
+  value_name: FILE
+  meaning:
+    tr: Yama dosyası.
+    en: Read patch from FILE.
+  verified: true
+- flag: --dry-run
+  meaning:
+    tr: Yazmadan dene.
+    en: Trial run without writing.
+  verified: true
+examples:
+- title:
+    tr: Kuru deneme
+    en: Dry run
+  command: patch -p1 --dry-run < fix.patch
+  explanation:
+    tr: Dosyaları değiştirmeden uygular gibi kontrol eder.
+    en: Checks applicability without modifying files.
+  risk: safe
+- title:
+    tr: Uygula
+    en: Apply
+  command: patch -p1 < fix.patch
+  explanation:
+    tr: Yama ağaca işlenir — önce yedek/commit.
+    en: Writes the patch into the tree — commit/backup first.
+  risk: dangerous
+related:
+- diff
+- git
+intent:
+  tr:
+  - yama uygula
+  - patch dry-run
+  en:
+  - apply patch
+  - patch dry-run
+verification:
+  status: reviewed
+  sources:
+  - man 1 patch
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-deeper
+nova:
+  concepts:
+  - files
+  - terminal-basics

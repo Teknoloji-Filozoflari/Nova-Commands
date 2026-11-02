@@ -1,0 +1,99 @@
+id: pkill
+name: pkill
+category: processes
+summary:
+  tr: Ada göre süreçlere sinyal gönderir.
+  en: Signals processes by name pattern.
+description:
+  tr: pgrep ile aynı seçiciler; eşleşen PID’lere sinyal yollar. Yanlış desen birçok süreci öldürebilir.
+  en: Same selectors as pgrep; sends a signal to matching PIDs. A bad pattern can kill many processes.
+tags:
+- signal
+- process
+risk: dangerous
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+packages:
+  arch: procps-ng
+  debian: procps
+  ubuntu: procps
+  fedora: procps-ng
+install_notes:
+  tr: 'Arch: pacman -S procps-ng
+
+    Debian/Ubuntu: apt install procps
+
+    Fedora: dnf install procps-ng'
+  en: 'Arch: pacman -S procps-ng
+
+    Debian/Ubuntu: apt install procps
+
+    Fedora: dnf install procps-ng'
+flags:
+- flag: -l
+  long: --list-name
+  meaning:
+    tr: Sinyal adlarını listele.
+    en: List signal names.
+  verified: true
+- flag: -x
+  long: --exact
+  meaning:
+    tr: Tam komut adı eşleşmesi.
+    en: Exact name match.
+  verified: true
+- flag: -u
+  long: --uid
+  takes_value: true
+  value_name: UID
+  meaning:
+    tr: Kullanıcı süzgeci.
+    en: Match only this user.
+  verified: true
+- flag: -n
+  long: --newest
+  meaning:
+    tr: En yeni eşleşme.
+    en: Newest matching process only.
+  verified: true
+examples:
+- title:
+    tr: TERM gönder
+    en: Send TERM
+  command: pkill -x mydaemon
+  explanation:
+    tr: Tam adı mydaemon olanlara SIGTERM.
+    en: SIGTERM to exact name mydaemon.
+  risk: dangerous
+- title:
+    tr: Sinyal listesi
+    en: List signals
+  command: pkill -l
+  explanation:
+    tr: Bilinen sinyal adları.
+    en: Known signal names.
+  risk: safe
+related:
+- pgrep
+- kill
+- killall
+intent:
+  tr:
+  - süreci ada göre öldür
+  - pkill
+  en:
+  - kill by name
+  - pkill
+verification:
+  status: reviewed
+  sources:
+  - man 1 pkill
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-deeper
+nova:
+  concepts:
+  - permissions
+  - terminal-basics

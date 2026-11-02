@@ -1,0 +1,95 @@
+id: openssl
+name: openssl
+category: security
+summary:
+  tr: TLS/SSL ve kriptografi araç kutusu.
+  en: TLS/SSL and cryptography toolkit.
+description:
+  tr: Sertifika inceleme, özet (hash), anahtar üretimi ve TLS istemci denemeleri. Yanlış enc kullanımı
+    veriyi kilitleyebilir.
+  en: Certificate inspection, digests, key generation, and TLS client tests. Misused enc can lock you
+    out of data.
+tags:
+- tls
+- crypto
+- certificates
+risk: caution
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+packages:
+  arch: openssl
+  debian: openssl
+  ubuntu: openssl
+  fedora: openssl
+install_notes:
+  tr: 'Arch: pacman -S openssl
+
+    Debian/Ubuntu: apt install openssl
+
+    Fedora: dnf install openssl'
+  en: 'Arch: pacman -S openssl
+
+    Debian/Ubuntu: apt install openssl
+
+    Fedora: dnf install openssl'
+flags: []
+examples:
+- title:
+    tr: Sürüm
+    en: Version
+  command: openssl version
+  explanation:
+    tr: Kurulu OpenSSL sürümü.
+    en: Installed OpenSSL version.
+  risk: safe
+- title:
+    tr: Sertifika gör
+    en: Show cert
+  command: openssl x509 -in cert.pem -noout -subject -dates
+  explanation:
+    tr: PEM sertifikadan konu ve tarihler.
+    en: Subject and dates from a PEM cert.
+  risk: safe
+- title:
+    tr: SHA-256 özet
+    en: SHA-256 digest
+  command: openssl dgst -sha256 file.bin
+  explanation:
+    tr: Dosya özetini hesaplar.
+    en: Computes a file digest.
+  risk: safe
+- title:
+    tr: TLS el sıkışma
+    en: TLS handshake
+  command: openssl s_client -connect example.com:443 -servername example.com </dev/null
+  explanation:
+    tr: Uzak TLS zincirini gösterir (ağ).
+    en: Shows remote TLS chain (network).
+  risk: caution
+related:
+- ssh-keygen
+- gpg
+- curl
+intent:
+  tr:
+  - sertifika incele
+  - openssl hash
+  en:
+  - inspect certificate
+  - openssl hash
+verification:
+  status: reviewed
+  sources:
+  - man 1 openssl
+  - openssl help
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-deeper
+nova:
+  favorite_eligible: true
+  ui_priority: 78
+  concepts:
+  - ssh
+  - permissions

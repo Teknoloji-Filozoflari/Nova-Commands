@@ -1,0 +1,102 @@
+id: gcc
+name: gcc
+category: development
+summary:
+  tr: GNU C/C++ derleyici sürücüsü.
+  en: GNU C/C++ compiler driver.
+description:
+  tr: C/C++ kaynaklarını nesne dosyasına veya çalıştırılabilir ikiliye derler. Bayraklar hedef ABI ve
+    uyarı seviyesini etkiler.
+  en: Compiles C/C++ sources to objects or binaries. Flags affect ABI and warning levels.
+tags:
+- compiler
+- c
+- build
+risk: caution
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+packages:
+  arch: gcc
+  debian: gcc
+  ubuntu: gcc
+  fedora: gcc
+install_notes:
+  tr: 'Arch: pacman -S gcc
+
+    Debian/Ubuntu: apt install gcc
+
+    Fedora: dnf install gcc
+
+    C++ için g++ / gcc-c++ ayrı paket olabilir.'
+  en: 'Arch: pacman -S gcc
+
+    Debian/Ubuntu: apt install gcc
+
+    Fedora: dnf install gcc
+
+    C++ may need g++ / gcc-c++ as a separate package.'
+flags:
+- flag: -o
+  takes_value: true
+  value_name: FILE
+  meaning:
+    tr: Çıktı dosya adı.
+    en: Output file name.
+  verified: true
+- flag: -Wall
+  meaning:
+    tr: Yaygın uyarılar.
+    en: Enable common warnings.
+  verified: true
+- flag: -O2
+  meaning:
+    tr: Optimizasyon seviyesi 2.
+    en: Optimization level 2.
+  verified: true
+- flag: -c
+  meaning:
+    tr: Yalnızca derle; bağlama.
+    en: Compile only; do not link.
+  verified: true
+examples:
+- title:
+    tr: Basit derle
+    en: Simple compile
+  command: gcc -Wall -O2 -o hello hello.c
+  explanation:
+    tr: hello.c → hello ikilisi.
+    en: hello.c → hello binary.
+  risk: caution
+- title:
+    tr: Nesne dosyası
+    en: Object file
+  command: gcc -c util.c -o util.o
+  explanation:
+    tr: Bağlamadan nesne üretir.
+    en: Produces an object without linking.
+  risk: safe
+related:
+- make
+- cmake
+- diff
+intent:
+  tr:
+  - c derle
+  - gcc ile derle
+  en:
+  - compile c
+  - gcc compile
+verification:
+  status: reviewed
+  sources:
+  - man 1 gcc
+  - gcc --help
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-deeper
+nova:
+  concepts:
+  - terminal-basics
+  ui_priority: 75

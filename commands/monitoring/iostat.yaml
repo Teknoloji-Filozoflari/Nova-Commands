@@ -1,0 +1,87 @@
+id: iostat
+name: iostat
+category: monitoring
+summary:
+  tr: CPU ve disk I/O istatistikleri.
+  en: CPU and disk I/O statistics.
+description:
+  tr: sysstat paketinden; aygıt başına okuma/yazma ve CPU kullanım özetleri verir.
+  en: From the sysstat package; per-device read/write and CPU utilization summaries.
+tags:
+- io
+- disk
+- sysstat
+risk: safe
+requires_elevated: false
+platforms:
+- linux
+packages:
+  arch: sysstat
+  debian: sysstat
+  ubuntu: sysstat
+  fedora: sysstat
+install_notes:
+  tr: 'Arch: pacman -S sysstat
+
+    Debian/Ubuntu: apt install sysstat
+
+    Fedora: dnf install sysstat'
+  en: 'Arch: pacman -S sysstat
+
+    Debian/Ubuntu: apt install sysstat
+
+    Fedora: dnf install sysstat'
+flags:
+- flag: -x
+  meaning:
+    tr: Genişletilmiş aygıt istatistikleri.
+    en: Extended device statistics.
+  verified: true
+- flag: -d
+  meaning:
+    tr: Yalnız cihaz raporu.
+    en: Device utilization only.
+  verified: true
+- flag: -y
+  meaning:
+    tr: İlk (boot’tan beri) raporu atla.
+    en: Omit first report since boot.
+  verified: true
+examples:
+- title:
+    tr: Anlık I/O
+    en: Snapshot I/O
+  command: iostat -xz 1 3
+  explanation:
+    tr: 1 sn aralıkla 3 örnek; genişletilmiş.
+    en: Three samples at 1s; extended stats.
+  risk: safe
+- title:
+    tr: Cihazlar
+    en: Devices
+  command: iostat -d
+  explanation:
+    tr: Disk aygıt özeti.
+    en: Disk device summary.
+  risk: safe
+related:
+- vmstat
+- iotop
+- df
+intent:
+  tr:
+  - disk io izle
+  - iostat
+  en:
+  - monitor disk io
+  - iostat
+verification:
+  status: reviewed
+  sources:
+  - man 1 iostat
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-deeper
+nova:
+  concepts:
+  - storage
+  - terminal-basics

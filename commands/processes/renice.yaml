@@ -1,0 +1,101 @@
+id: renice
+name: renice
+category: processes
+summary:
+  tr: Çalışan sürecin nice değerini değiştirir.
+  en: Alters the nice value of running processes.
+description:
+  tr: Önceliği ayarlar; daha yüksek nice → daha düşük CPU önceliği. Başkasının süreçleri için genelde
+    root gerekir.
+  en: Adjusts priority; higher nice means lower CPU priority. Changing others’ processes usually needs
+    root.
+tags:
+- priority
+- nice
+- process
+risk: caution
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+packages:
+  arch: util-linux
+  debian: bsdutils
+  ubuntu: bsdutils
+  fedora: util-linux
+install_notes:
+  tr: 'Arch: util-linux (temel)
+
+    Debian/Ubuntu: bsdutils (temel)
+
+    Fedora: util-linux'
+  en: 'Arch: util-linux (base)
+
+    Debian/Ubuntu: bsdutils (base)
+
+    Fedora: util-linux'
+flags:
+- flag: -n
+  long: --priority
+  takes_value: true
+  value_name: NICE
+  meaning:
+    tr: Nice artışı / mutlak (sürüme göre).
+    en: Nice increment / absolute (version-dependent).
+  verified: true
+- flag: -p
+  long: --pid
+  takes_value: true
+  value_name: PID
+  meaning:
+    tr: Hedef PID.
+    en: Target PID.
+  verified: true
+- flag: -u
+  long: --user
+  takes_value: true
+  value_name: USER
+  meaning:
+    tr: Kullanıcının süreçleri.
+    en: Processes of USER.
+  verified: true
+examples:
+- title:
+    tr: PID yumuşat
+    en: Lower priority
+  command: renice -n 10 -p 1234
+  explanation:
+    tr: 1234 nicer (daha az öncelikli) olur.
+    en: PID 1234 becomes nicer (lower priority).
+  risk: caution
+- title:
+    tr: Kendi işi
+    en: Own job
+  command: renice -n 5 $$
+  explanation:
+    tr: Geçerli kabuğu yumuşatır.
+    en: Nices the current shell.
+  risk: caution
+related:
+- nice
+- ps
+- top
+intent:
+  tr:
+  - öncelik değiştir
+  - renice
+  en:
+  - change priority
+  - renice
+verification:
+  status: reviewed
+  sources:
+  - man 1 renice
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-deeper
+  notes: Debian package for renice is bsdutils; absolute vs relative -n semantics differ slightly across
+    Unixes.
+nova:
+  concepts:
+  - permissions

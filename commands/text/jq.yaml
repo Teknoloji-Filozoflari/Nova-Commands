@@ -1,0 +1,110 @@
+id: jq
+name: jq
+category: text
+summary:
+  tr: JSON süzgeç ve dönüştürücü.
+  en: JSON filter and transformer.
+description:
+  tr: JSON belgelerini filtreler, biçimlendirir ve dönüştürür. Boru hatlarında yapılandırılmış veri için
+    temel araç.
+  en: Filters, formats, and transforms JSON. A staple for structured data in pipelines.
+tags:
+- json
+- text
+- data
+risk: safe
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+packages:
+  arch: jq
+  debian: jq
+  ubuntu: jq
+  fedora: jq
+install_notes:
+  tr: 'Arch: pacman -S jq
+
+    Debian/Ubuntu: apt install jq
+
+    Fedora: dnf install jq'
+  en: 'Arch: pacman -S jq
+
+    Debian/Ubuntu: apt install jq
+
+    Fedora: dnf install jq'
+flags:
+- flag: -r
+  long: --raw-output
+  meaning:
+    tr: Dize çıktısını tırnaksız bas.
+    en: Print strings without JSON quotes.
+  verified: true
+- flag: -c
+  long: --compact-output
+  meaning:
+    tr: Tek satır / sıkışık JSON.
+    en: Compact single-line JSON.
+  verified: true
+- flag: -n
+  long: --null-input
+  meaning:
+    tr: Giriş yok; filtre tek başına.
+    en: No input; run filter alone.
+  verified: true
+- flag: -s
+  long: --slurp
+  meaning:
+    tr: Tüm girdileri dizi yap.
+    en: Slurp all inputs into an array.
+  verified: true
+examples:
+- title:
+    tr: Güzelleştir
+    en: Pretty-print
+  command: echo '{"a":1}' | jq .
+  explanation:
+    tr: Girişi biçimlendirilmiş JSON olarak basar.
+    en: Pretty-prints the input JSON.
+  risk: safe
+- title:
+    tr: Alan seç
+    en: Select field
+  command: jq -r '.name' user.json
+  explanation:
+    tr: name alanını ham metin basar.
+    en: Prints the name field as raw text.
+  risk: safe
+- title:
+    tr: Dizi uzunluğu
+    en: Array length
+  command: jq 'length' list.json
+  explanation:
+    tr: Üst düzey dizi/nesne uzunluğu.
+    en: Length of the top-level array/object.
+  risk: safe
+related:
+- curl
+- awk
+- sqlite3
+intent:
+  tr:
+  - json süz
+  - jq ile alan
+  en:
+  - filter json
+  - jq select field
+verification:
+  status: reviewed
+  sources:
+  - https://jqlang.github.io/jq/manual/
+  - jq --help
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-deeper
+nova:
+  favorite_eligible: true
+  ui_priority: 88
+  concepts:
+  - shell-pipes-redirection
+  - json-data

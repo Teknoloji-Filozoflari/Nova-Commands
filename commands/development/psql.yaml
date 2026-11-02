@@ -1,0 +1,111 @@
+id: psql
+name: psql
+category: development
+summary:
+  tr: PostgreSQL etkileşimli terminal.
+  en: PostgreSQL interactive terminal.
+description:
+  tr: PostgreSQL sunucusuna bağlanır; SQL ve meta-komutlar (.\dt) çalıştırır. İstemci paketi distroya
+    göre değişir.
+  en: Connects to a PostgreSQL server; runs SQL and meta-commands (.\dt). Client package names vary by
+    distro.
+tags:
+- sql
+- database
+- postgresql
+risk: caution
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+packages:
+  arch: postgresql
+  debian: postgresql-client
+  ubuntu: postgresql-client
+  fedora: postgresql
+install_notes:
+  tr: 'Arch: pacman -S postgresql  (istemci+sunucu bileşenleri; yalnızca istemci için paket seti sürüme
+    bağlı)
+
+    Debian/Ubuntu: apt install postgresql-client
+
+    Fedora: dnf install postgresql
+
+    Sunucu ayrı kurulur; bu girdi istemci odaklıdır.'
+  en: 'Arch: pacman -S postgresql  (client+server bits; pure-client packaging is version-dependent)
+
+    Debian/Ubuntu: apt install postgresql-client
+
+    Fedora: dnf install postgresql
+
+    Server is separate; this entry is client-focused.'
+flags:
+- flag: -h
+  long: --host
+  takes_value: true
+  value_name: HOST
+  meaning:
+    tr: Sunucu host.
+    en: Server host.
+  verified: false
+- flag: -U
+  long: --username
+  takes_value: true
+  value_name: USER
+  meaning:
+    tr: Veritabanı kullanıcısı.
+    en: Database user.
+  verified: false
+- flag: -d
+  long: --dbname
+  takes_value: true
+  value_name: DBNAME
+  meaning:
+    tr: Veritabanı adı.
+    en: Database name.
+  verified: false
+- flag: -c
+  long: --command
+  takes_value: true
+  value_name: CMD
+  meaning:
+    tr: Tek komut çalıştırıp çık.
+    en: Run one command and exit.
+  verified: false
+examples:
+- title:
+    tr: Yerel bağlan
+    en: Local connect
+  command: psql -d mydb
+  explanation:
+    tr: Yerel soket/peer ile mydb açar (kuruluma bağlı).
+    en: Opens mydb via local socket/peer (setup-dependent).
+  risk: caution
+- title:
+    tr: Tek sorgu
+    en: One query
+  command: psql -d mydb -c 'SELECT version();'
+  explanation:
+    tr: Sürümü basıp çıkar.
+    en: Prints version and exits.
+  risk: safe
+related:
+- sqlite3
+- jq
+intent:
+  tr:
+  - postgres bağlan
+  - psql sorgu
+  en:
+  - connect postgres
+  - psql query
+verification:
+  status: draft
+  sources:
+  - https://www.postgresql.org/docs/current/app-psql.html
+  notes: Client package names vary; flag details need maintainer spot-check.
+nova:
+  concepts:
+  - json-data
+  - permissions

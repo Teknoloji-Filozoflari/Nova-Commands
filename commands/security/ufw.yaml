@@ -1,0 +1,98 @@
+id: ufw
+name: ufw
+category: security
+summary:
+  tr: Uncomplicated Firewall (iptables/nft ön yüz).
+  en: Uncomplicated Firewall (iptables/nft frontend).
+description:
+  tr: Ubuntu’da yaygın basit firewall arayüzü. enable/default yanlışlıkla kilitleyebilir; önce status.
+  en: Simple firewall UI common on Ubuntu. Mis-set enable/default can lock you out; check status first.
+tags:
+- firewall
+- ubuntu
+- security
+risk: dangerous
+requires_elevated: true
+platforms:
+- linux
+packages:
+  arch: ufw
+  debian: ufw
+  ubuntu: ufw
+install_notes:
+  tr: 'Arch: pacman -S ufw
+
+    Debian/Ubuntu: apt install ufw
+
+    Fedora: paket her depoda yok — uydurma; nft/firewalld tercih edilebilir.
+
+    Ubuntu sunucularda sık varsayılan araç.'
+  en: 'Arch: pacman -S ufw
+
+    Debian/Ubuntu: apt install ufw
+
+    Fedora: not always packaged — do not invent; prefer nft/firewalld.
+
+    Common default tool on Ubuntu servers.'
+flags:
+- flag: status
+  meaning:
+    tr: Durum (alt komut).
+    en: Status (subcommand).
+  verified: false
+- flag: enable
+  meaning:
+    tr: Güvenlik duvarını aç.
+    en: Enable the firewall.
+  verified: false
+- flag: deny
+  meaning:
+    tr: Reddet kuralı.
+    en: Deny rule.
+  verified: false
+- flag: allow
+  meaning:
+    tr: İzin ver kuralı.
+    en: Allow rule.
+  verified: false
+examples:
+- title:
+    tr: Durum
+    en: Status
+  command: sudo ufw status verbose
+  explanation:
+    tr: Aktif kuralları ve varsayılanları gösterir.
+    en: Shows active rules and defaults.
+  risk: safe
+  requires_elevated: true
+- title:
+    tr: Uygulama profilleri
+    en: App profiles
+  command: sudo ufw app list
+  explanation:
+    tr: Bilinen uygulama profilleri.
+    en: Known application profiles.
+  risk: safe
+  requires_elevated: true
+related:
+- nft
+- iptables
+- firewall-cmd
+intent:
+  tr:
+  - ufw durum
+  - ubuntu firewall
+  en:
+  - ufw status
+  - ubuntu firewall
+verification:
+  status: draft
+  sources:
+  - man 8 ufw
+  - https://help.ubuntu.com/community/UFW
+  notes: Status/list only; no enable/deny recipes that risk SSH lockout.
+nova:
+  concepts:
+  - firewalls
+  - networking
+  - permissions

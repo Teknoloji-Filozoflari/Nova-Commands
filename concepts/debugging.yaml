@@ -1,0 +1,79 @@
+id: debugging
+kind: nova-commands-concept
+title:
+  tr: Çalışma anı hata ayıklama
+  en: Runtime debugging
+summary:
+  tr: strace, lsof, loglar ve süreç araçlarıyla “neden başarısız?” sorusuna yaklaşım.
+  en: Approaching “why did it fail?” with strace, lsof, logs, and process tools.
+difficulty: intermediate
+tags:
+  - debug
+  - strace
+  - processes
+  - logs
+related_commands:
+  - strace
+  - lsof
+  - ps
+  - pgrep
+  - journalctl
+  - dmesg
+  - top
+related_concepts:
+  - systemd
+  - permissions
+  - terminal-basics
+  - path
+see_also:
+  - "man 1 strace"
+  - "man 8 lsof"
+  - "man 1 journalctl"
+body:
+  tr: |
+    Bir komut “çalışmıyor” dediğinde katmanları ayırın: **bulunamıyor mu** (PATH),
+    **izin mi**, **bağımlılık/kütüphane mi**, **ağ mı**, **yapılandırma mı**?
+
+    **Hızlı sıra:**
+    1. `command -v` / `type` — ikili var mı?
+    2. `ls -l` / `id` — izin ve kullanıcı.
+    3. `journalctl -u … -e` veya uygulama logu.
+    4. `lsof -i` / `ss` — port ve dosya tutamaçları.
+    5. `strace -e openat,network …` — kernel sınırında ne reddediliyor?
+
+    **strace:** `openat`/`connect` hataları (`ENOENT`, `EACCES`, `ECONNREFUSED`)
+    sık ipucu verir. `-f` çocuk süreçleri takip eder; gürültülüdür — `-e` ile süzün.
+    ptrace kısıtları (Yama/container) yüzünden sudo gerekebilir.
+
+    **lsof / ss:** “kim dinliyor?” ve “dosya kilitli mi?”.
+    **ps/pgrep/pkill:** süreç seçimi; `pkill` yanlış desende tehlikeli.
+
+    Banka CI’si bu araçları “kanıt için” çalıştırmaz; girdiler man/`--help` ve
+    dikkatli örneklerle doğrulanır. Gizli veri içeren izleri paylaşmayın.
+  en: |
+    When a command “doesn’t work”, separate layers: **not found** (PATH),
+    **permissions**, **library/deps**, **network**, or **config**?
+
+    **Quick order:**
+    1. `command -v` / `type` — is the binary there?
+    2. `ls -l` / `id` — permissions and user.
+    3. `journalctl -u … -e` or app logs.
+    4. `lsof -i` / `ss` — ports and file handles.
+    5. `strace -e openat,network …` — what does the kernel refuse?
+
+    **strace:** `openat`/`connect` failures (`ENOENT`, `EACCES`, `ECONNREFUSED`)
+    are strong hints. `-f` follows children; it is noisy — filter with `-e`.
+    ptrace restrictions (hardening/containers) may require sudo.
+
+    **lsof / ss:** “who is listening?” and “is the file busy?”.
+    **ps/pgrep/pkill:** process selection; `pkill` is dangerous with a bad pattern.
+
+    Catalog CI does not run these tools “to prove” entries; content is checked
+    against man/`--help` and careful examples. Do not share traces that contain secrets.
+verification:
+  status: reviewed
+  sources:
+    - "man 1 strace"
+    - "man 8 lsof"
+    - "man 1 journalctl"
+  notes: "Agent-authored teaching article; not verified."

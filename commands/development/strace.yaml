@@ -1,0 +1,103 @@
+id: strace
+name: strace
+category: development
+summary:
+  tr: Sistem çağrılarını izler.
+  en: Traces system calls.
+description:
+  tr: Bir sürecin kernel ile konuşmasını (open, read, connect…) gösterir. Hata ayıklama ve “neden başarısız?”
+    soruları için.
+  en: Shows a process talking to the kernel (open, read, connect…). Useful for debugging “why did it fail?”.
+tags:
+- debug
+- syscall
+- trace
+risk: caution
+requires_elevated: false
+platforms:
+- linux
+packages:
+  arch: strace
+  debian: strace
+  ubuntu: strace
+  fedora: strace
+install_notes:
+  tr: 'Arch: pacman -S strace
+
+    Debian/Ubuntu: apt install strace
+
+    Fedora: dnf install strace
+
+    Bazı süreçler için ptrace izinleri / sudo gerekebilir.'
+  en: 'Arch: pacman -S strace
+
+    Debian/Ubuntu: apt install strace
+
+    Fedora: dnf install strace
+
+    Some targets need ptrace permissions or sudo.'
+flags:
+- flag: -e
+  takes_value: true
+  value_name: EXPR
+  meaning:
+    tr: Çağrı süzgeci (ör. open,network).
+    en: Syscall filter (e.g. open,network).
+  verified: true
+- flag: -f
+  meaning:
+    tr: Çocuk süreçleri takip et.
+    en: Follow child processes.
+  verified: true
+- flag: -o
+  takes_value: true
+  value_name: FILE
+  meaning:
+    tr: Çıktıyı dosyaya yaz.
+    en: Write trace to FILE.
+  verified: true
+- flag: -p
+  takes_value: true
+  value_name: PID
+  meaning:
+    tr: Çalışan PID’ye bağlan.
+    en: Attach to a running PID.
+  verified: true
+examples:
+- title:
+    tr: Komutu izle
+    en: Trace command
+  command: strace -e openat ls /tmp
+  explanation:
+    tr: ls’in openat çağrılarını gösterir.
+    en: Shows openat calls made by ls.
+  risk: safe
+- title:
+    tr: Ağ çağrıları
+    en: Network calls
+  command: strace -e network curl -I https://example.com
+  explanation:
+    tr: Ağ ile ilgili syscall’lar.
+    en: Network-related syscalls.
+  risk: caution
+related:
+- lsof
+- ps
+- journalctl
+intent:
+  tr:
+  - sistem çağrısı izle
+  - strace debug
+  en:
+  - trace syscalls
+  - strace debug
+verification:
+  status: reviewed
+  sources:
+  - man 1 strace
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-deeper
+nova:
+  concepts:
+  - debugging
+  - permissions
