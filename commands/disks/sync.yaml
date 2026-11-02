@@ -1,0 +1,52 @@
+id: sync
+name: sync
+summary:
+  tr: Önbellekteki yazıları diske boşaltır.
+  en: Flush filesystem write caches to disk.
+description:
+  tr: Bekleyen blok yazılarını tamamlar; çıkarılabilir medya ve dd sonrası sık kullanılır.
+  en: Completes pending block writes; common after dd or before removing media.
+tags:
+- disk
+- storage
+risk: safe
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+packages:
+  arch: coreutils
+  debian: coreutils
+  ubuntu: coreutils
+  fedora: coreutils
+examples:
+- title:
+    tr: Tümünü senkronla
+    en: Sync all
+  command: sync
+  explanation:
+    tr: Kirli sayfaları diske yazar.
+    en: Writes dirty pages to disk.
+  risk: safe
+related:
+- dd
+- umount
+- mount
+intent:
+  tr:
+  - diske yaz
+  - sync
+  en:
+  - flush to disk
+  - sync
+verification:
+  status: reviewed
+  sources:
+  - man 1 sync
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-coverage
+nova:
+  concepts:
+  - storage
+category: disks

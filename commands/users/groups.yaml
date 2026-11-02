@@ -1,0 +1,60 @@
+id: groups
+name: groups
+summary:
+  tr: Kullanıcının gruplarını basar.
+  en: Print groups a user is in.
+description:
+  tr: Belirtilen (veya mevcut) kullanıcının üye olduğu grup adlarını listeler.
+  en: Lists group names for the given (or current) user.
+tags:
+- users
+- permissions
+risk: safe
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+packages:
+  arch: coreutils
+  debian: coreutils
+  ubuntu: coreutils
+  fedora: coreutils
+examples:
+- title:
+    tr: Benim gruplarım
+    en: My groups
+  command: groups
+  explanation:
+    tr: Mevcut kullanıcının grupları.
+    en: Current user's groups.
+  risk: safe
+- title:
+    tr: Başka kullanıcı
+    en: Other user
+  command: groups alice
+  explanation:
+    tr: alice’in grupları.
+    en: alice's groups.
+  risk: safe
+related:
+- id
+- getent
+- usermod
+intent:
+  tr:
+  - gruplarım neler
+  - groups
+  en:
+  - what groups am i in
+  - groups
+verification:
+  status: reviewed
+  sources:
+  - man 1 groups
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-coverage
+nova:
+  concepts:
+  - permissions
+category: users

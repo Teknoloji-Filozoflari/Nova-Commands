@@ -1,0 +1,53 @@
+id: htop
+name: htop
+summary:
+  tr: Etkileşimli süreç görüntüleyici.
+  en: Interactive process viewer.
+description:
+  tr: top’a göre daha kullanışlı TUI; süreçleri öldürme/nice ayarı yapılabilir.
+  en: Friendlier TUI than classic top; can kill/renice processes.
+tags:
+- processes
+- monitoring
+risk: caution
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+packages:
+  arch: htop
+  debian: htop
+  ubuntu: htop
+  fedora: htop
+install_notes:
+  tr: 'Arch: pacman -S htop'
+  en: 'Arch: pacman -S htop'
+examples:
+- title:
+    tr: Aç
+    en: Open
+  command: htop
+  explanation:
+    tr: Etkileşimli süreç listesi.
+    en: Interactive process list.
+  risk: safe
+related:
+- top
+- ps
+- kill
+intent:
+  tr:
+  - htop süreç
+  - cpu izle
+  en:
+  - htop processes
+  - monitor cpu
+verification:
+  status: reviewed
+  sources:
+  - man 1 htop
+  - https://htop.dev/
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-coverage
+category: processes

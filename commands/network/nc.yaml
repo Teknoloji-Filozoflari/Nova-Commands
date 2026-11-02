@@ -1,0 +1,93 @@
+id: nc
+name: nc
+summary:
+  tr: Netcat — ham TCP/UDP istemci/sunucu.
+  en: Netcat — arbitrary TCP/UDP client/server.
+description:
+  tr: Port dinleme, basit bağlantı testi ve veri aktarımı. Uygulama (openbsd-netcat, gnu-netcat, nmap-ncat)
+    dağıtıma göre değişir; bayraklar farklı olabilir.
+  en: Listen, probe ports, and shuttle data. Implementation (openbsd-netcat, gnu-netcat, nmap-ncat) varies;
+    flags differ.
+tags:
+- network
+- debug
+risk: caution
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+packages:
+  arch: openbsd-netcat
+  debian: netcat-openbsd
+  ubuntu: netcat-openbsd
+  fedora: nmap-ncat
+install_notes:
+  tr: |-
+    Arch: pacman -S openbsd-netcat (alternatif: gnu-netcat)
+    Debian/Ubuntu: apt install netcat-openbsd
+    Fedora: dnf install nmap-ncat (komut sıkça ncat)
+  en: |-
+    Arch: pacman -S openbsd-netcat (alt: gnu-netcat)
+    Debian/Ubuntu: apt install netcat-openbsd
+    Fedora: dnf install nmap-ncat (binary often ncat)
+flags:
+- flag: -l
+  meaning:
+    tr: Dinleme modu.
+    en: Listen mode.
+  verified: false
+- flag: -u
+  meaning:
+    tr: UDP kullan.
+    en: Use UDP.
+  verified: false
+- flag: -z
+  meaning:
+    tr: Sıfır-I/O tarama (OpenBSD/ncat).
+    en: Zero-I/O scan (OpenBSD/ncat).
+  verified: false
+- flag: -v
+  meaning:
+    tr: Ayrıntılı.
+    en: Verbose.
+  verified: false
+examples:
+- title:
+    tr: Port açık mı
+    en: Port open?
+  command: nc -vz example.com 443
+  explanation:
+    tr: TCP 443’e bağlanmayı dener (uygulamaya göre bayraklar).
+    en: Tries TCP 443 (flags vary by netcat).
+  risk: caution
+- title:
+    tr: Basit dinleyici
+    en: Simple listener
+  command: nc -l 9999
+  explanation:
+    tr: Yerel 9999 dinler; güvenlik duvarı/yetki gerekebilir.
+    en: Listens on 9999; firewall/privs may apply.
+  risk: caution
+related:
+- ss
+- nmap
+- curl
+- telnet
+intent:
+  tr:
+  - port test et
+  - netcat dinle
+  en:
+  - test port
+  - netcat listen
+verification:
+  status: draft
+  sources:
+  - man 1 nc
+  - man 1 ncat
+  notes: Flags differ across openbsd/gnu/ncat; keep draft until human confirms per distro.
+nova:
+  concepts:
+  - networking
+category: network

@@ -1,0 +1,85 @@
+id: xz
+name: xz
+summary:
+  tr: XZ sıkıştırma aracı.
+  en: Compress or decompress .xz files.
+description:
+  tr: LZMA2 ile yüksek oranlı sıkıştırma; tar ile birlikte .tar.xz üretiminde kullanılır.
+  en: High-ratio LZMA2 compression; often paired with tar for .tar.xz.
+tags:
+- archives
+- compression
+risk: caution
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+packages:
+  arch: xz
+  debian: xz-utils
+  ubuntu: xz-utils
+  fedora: xz
+install_notes:
+  tr: |-
+    Arch: pacman -S xz
+    Debian/Ubuntu: xz-utils
+    Fedora: xz
+  en: |-
+    Arch: pacman -S xz
+    Debian/Ubuntu: xz-utils
+    Fedora: xz
+flags:
+- flag: -d
+  meaning:
+    tr: Aç.
+    en: Decompress.
+  verified: true
+  long: --decompress
+- flag: -k
+  meaning:
+    tr: Girdiyi sakla.
+    en: Keep input.
+  verified: true
+  long: --keep
+- flag: -t
+  meaning:
+    tr: Test et.
+    en: Test integrity.
+  verified: true
+  long: --test
+examples:
+- title:
+    tr: Sıkıştır
+    en: Compress
+  command: xz -k file.tar
+  explanation:
+    tr: file.tar.xz üretir; -k ile kaynak kalır.
+    en: Makes file.tar.xz; -k keeps source.
+  risk: caution
+- title:
+    tr: Aç
+    en: Decompress
+  command: xz -dk file.tar.xz
+  explanation:
+    tr: Açar ve .xz’i tutar.
+    en: Decompresses and keeps .xz.
+  risk: safe
+related:
+- tar
+- gzip
+- zstd
+intent:
+  tr:
+  - xz sıkıştır
+  - tar xz
+  en:
+  - xz compress
+  - tar xz
+verification:
+  status: reviewed
+  sources:
+  - man 1 xz
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-coverage
+category: archives

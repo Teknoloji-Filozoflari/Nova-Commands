@@ -1,0 +1,73 @@
+id: paru
+name: paru
+summary:
+  tr: AUR yardımcı pacman sarmalayıcı.
+  en: AUR helper wrapping pacman.
+description:
+  tr: Arch User Repository paketlerini derleyip kurar. Resmî pacman deposunda değildir; üçüncü parti araç
+    — dikkatli kullanın.
+  en: Builds/installs AUR packages. Not in official pacman repos; third-party — use carefully.
+tags:
+- packages
+- arch
+- aur
+risk: dangerous
+requires_elevated: true
+platforms:
+- linux
+install_notes:
+  tr: Resmî Arch deposunda yok (unknown official package). Genelde AUR’dan kurulur; PKGBUILD’i okuyun.
+    Sistem paketleri için pacman tercih edin.
+  en: Not in official Arch repos (unknown as official package). Usually installed from the AUR; read PKGBUILDs.
+    Prefer pacman for system packages.
+flags:
+- flag: -S
+  meaning:
+    tr: Kur/senkron (pacman benzeri).
+    en: Install/sync (pacman-like).
+  verified: false
+- flag: -Syu
+  meaning:
+    tr: Sistem + AUR yükselt.
+    en: Upgrade system + AUR.
+  verified: false
+examples:
+- title:
+    tr: Ara
+    en: Search
+  command: paru -Ss ripgrep
+  explanation:
+    tr: Repo + AUR araması (kuruluysa).
+    en: Repo + AUR search (if installed).
+  risk: safe
+  requires_elevated: false
+- title:
+    tr: AUR kur
+    en: Install AUR
+  command: paru -S package-name
+  explanation:
+    tr: PKGBUILD çalıştırır — kaynağı inceleyin.
+    en: Runs PKGBUILD — audit the source.
+  risk: dangerous
+  requires_elevated: true
+related:
+- pacman
+- yay
+- makepkg
+intent:
+  tr:
+  - aur kur
+  - paru
+  en:
+  - install aur
+  - paru
+verification:
+  status: draft
+  sources:
+  - https://github.com/Morganamilo/paru
+  notes: Third-party AUR helper; no official distro package name recorded.
+nova:
+  concepts:
+  - packages
+  - arch
+category: packages

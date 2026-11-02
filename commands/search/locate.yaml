@@ -1,0 +1,70 @@
+id: locate
+name: locate
+summary:
+  tr: Önceden indekslenmiş dosya adı araması.
+  en: Find files by name via a prebuilt database.
+description:
+  tr: updatedb veritabanında hızlı ad arar; taze olmayan sonuçlar verebilir.
+  en: Fast name search via updatedb database; results can be stale.
+tags:
+- search
+risk: safe
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+packages:
+  arch: mlocate
+  debian: plocate
+  ubuntu: plocate
+  fedora: mlocate
+install_notes:
+  tr: |-
+    Arch: pacman -S mlocate (veya plocate)
+    Debian/Ubuntu: plocate yaygın
+    Fedora: mlocate — updatedb root ile çalışır
+  en: |-
+    Arch: pacman -S mlocate (or plocate)
+    Debian/Ubuntu: often plocate
+    Fedora: mlocate — updatedb runs as root
+flags:
+- flag: -i
+  meaning:
+    tr: Büyük/küçük harf duyarsız.
+    en: Case-insensitive.
+  verified: false
+- flag: -n
+  meaning:
+    tr: Sonuç limiti.
+    en: Limit results.
+  verified: false
+  takes_value: true
+  value_name: limit
+examples:
+- title:
+    tr: Ad ara
+    en: Search name
+  command: locate passwd
+  explanation:
+    tr: Yollarda passwd geçen girdiler.
+    en: Paths containing passwd.
+  risk: safe
+related:
+- find
+- which
+- whereis
+intent:
+  tr:
+  - dosya adı bul
+  - locate
+  en:
+  - find filename
+  - locate
+verification:
+  status: draft
+  sources:
+  - man 1 locate
+  - man 1 plocate
+  notes: mlocate vs plocate package/CLI differs by distro.
+category: search

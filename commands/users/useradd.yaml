@@ -1,0 +1,99 @@
+id: useradd
+name: useradd
+summary:
+  tr: Yeni kullanıcı hesabı oluşturur.
+  en: Create a new user account.
+description:
+  tr: Sisteme düşük seviye kullanıcı ekler. Debian/Ubuntu’da sıkça adduser tercih edilir.
+  en: Low-level account creation. On Debian/Ubuntu, adduser is often preferred.
+tags:
+- users
+- accounts
+risk: dangerous
+requires_elevated: true
+platforms:
+- linux
+packages:
+  arch: shadow
+  debian: passwd
+  ubuntu: passwd
+  fedora: shadow-utils
+install_notes:
+  tr: |-
+    Arch: pacman -S shadow (taban)
+    Fedora: shadow-utils
+    Debian/Ubuntu: passwd paketi sağlar
+  en: |-
+    Arch: pacman -S shadow (base)
+    Fedora: shadow-utils
+    Debian/Ubuntu: provided by passwd package
+flags:
+- flag: -m
+  meaning:
+    tr: Ev dizini oluştur.
+    en: Create home directory.
+  verified: true
+  long: --create-home
+- flag: -s
+  meaning:
+    tr: Kabuk.
+    en: Login shell.
+  verified: true
+  long: --shell
+  takes_value: true
+  value_name: shell
+- flag: -G
+  meaning:
+    tr: Ek gruplar.
+    en: Supplementary groups.
+  verified: true
+  long: --groups
+  takes_value: true
+  value_name: groups
+- flag: -r
+  meaning:
+    tr: Sistem kullanıcısı.
+    en: System account.
+  verified: true
+  long: --system
+examples:
+- title:
+    tr: Ev ile kullanıcı
+    en: User with home
+  command: sudo useradd -m -s /bin/bash alice
+  explanation:
+    tr: alice kullanıcısı ve evi.
+    en: Creates alice with home.
+  risk: dangerous
+  requires_elevated: true
+- title:
+    tr: Gruplara ekle
+    en: With groups
+  command: sudo useradd -m -G wheel alice
+  explanation:
+    tr: wheel/sudo grubuna aday (dağıtıma göre).
+    en: Candidate for wheel/sudo (distro-specific).
+  risk: dangerous
+  requires_elevated: true
+related:
+- userdel
+- usermod
+- passwd
+- id
+intent:
+  tr:
+  - kullanıcı ekle
+  - useradd
+  en:
+  - add user
+  - useradd
+verification:
+  status: reviewed
+  sources:
+  - man 8 useradd
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-coverage
+nova:
+  concepts:
+  - permissions
+category: users

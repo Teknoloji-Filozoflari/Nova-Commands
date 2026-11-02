@@ -1,0 +1,83 @@
+id: systemd-analyze
+name: systemd-analyze
+summary:
+  tr: systemd önyükleme ve birim çözümlemesi.
+  en: Analyze systemd boot and unit structure.
+description:
+  tr: Boot süresini, kritik zinciri ve birim dosyası hatalarını inceler.
+  en: Inspects boot timing, critical chain, and unit-file issues.
+tags:
+- system
+- systemd
+- boot
+risk: safe
+requires_elevated: false
+platforms:
+- linux
+packages:
+  arch: systemd
+  debian: systemd
+  ubuntu: systemd
+  fedora: systemd
+flags:
+- flag: blame
+  meaning:
+    tr: Birim süreleri.
+    en: Per-unit boot time.
+  verified: true
+- flag: critical-chain
+  meaning:
+    tr: Kritik zincir.
+    en: Critical chain.
+  verified: true
+- flag: verify
+  meaning:
+    tr: Birim dosyasını doğrula.
+    en: Verify unit file.
+  verified: true
+examples:
+- title:
+    tr: Boot süresi
+    en: Boot time
+  command: systemd-analyze
+  explanation:
+    tr: Toplam/firmware/kernel/userspace süreleri.
+    en: Overall firmware/kernel/userspace timings.
+  risk: safe
+- title:
+    tr: Blame
+    en: Blame
+  command: systemd-analyze blame
+  explanation:
+    tr: En çok süren birimler.
+    en: Slowest units at boot.
+  risk: safe
+- title:
+    tr: Kritik zincir
+    en: Critical chain
+  command: systemd-analyze critical-chain
+  explanation:
+    tr: Boot’u engelleyen bağımlılık zinciri.
+    en: Dependency chain delaying boot.
+  risk: safe
+related:
+- systemctl
+- journalctl
+- bootctl
+intent:
+  tr:
+  - açılış süresi
+  - systemd blame
+  en:
+  - boot time
+  - systemd blame
+verification:
+  status: reviewed
+  sources:
+  - man 1 systemd-analyze
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-coverage
+nova:
+  concepts:
+  - systemd
+category: system

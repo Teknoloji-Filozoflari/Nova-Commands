@@ -1,0 +1,78 @@
+id: ssh-copy-id
+name: ssh-copy-id
+summary:
+  tr: Genel anahtarı uzak authorized_keys’e ekler.
+  en: Install public key on a remote authorized_keys.
+description:
+  tr: Yerel SSH genel anahtarını uzak hesaba kopyalar; parola yerine anahtar girişine geçişi kolaylaştırır.
+  en: Copies your public key to a remote account to enable key-based login.
+tags:
+- security
+- ssh
+risk: caution
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+packages:
+  arch: openssh
+  debian: openssh-client
+  ubuntu: openssh-client
+  fedora: openssh-clients
+install_notes:
+  tr: 'Arch: pacman -S openssh'
+  en: 'Arch: pacman -S openssh'
+flags:
+- flag: -i
+  meaning:
+    tr: Genel anahtar dosyası.
+    en: Public key file.
+  verified: true
+  takes_value: true
+  value_name: identity
+- flag: -p
+  meaning:
+    tr: Uzak port.
+    en: Remote port.
+  verified: true
+  takes_value: true
+  value_name: port
+examples:
+- title:
+    tr: Varsayılan anahtar
+    en: Default key
+  command: ssh-copy-id user@host
+  explanation:
+    tr: Varsayılan kimliği uzak authorized_keys’e ekler.
+    en: Adds default identity to remote authorized_keys.
+  risk: caution
+- title:
+    tr: Belirli anahtar
+    en: Specific key
+  command: ssh-copy-id -i ~/.ssh/id_ed25519.pub user@host
+  explanation:
+    tr: Ed25519 genel anahtarını yükler.
+    en: Installs an Ed25519 public key.
+  risk: caution
+related:
+- ssh
+- ssh-keygen
+- ssh-add
+intent:
+  tr:
+  - ssh anahtar kopyala
+  - şifresiz giriş
+  en:
+  - copy ssh key
+  - passwordless login
+verification:
+  status: reviewed
+  sources:
+  - man 1 ssh-copy-id
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-coverage
+nova:
+  concepts:
+  - ssh
+category: security

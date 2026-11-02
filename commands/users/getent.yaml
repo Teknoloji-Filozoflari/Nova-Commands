@@ -1,0 +1,76 @@
+id: getent
+name: getent
+summary:
+  tr: Name Service Switch veritabanlarını sorgular.
+  en: Query Name Service Switch databases.
+description:
+  tr: passwd, group, hosts gibi NSS veritabanlarından girdi çeker; LDAP/SSSD ortamlarında da çalışır.
+  en: Fetches NSS entries (passwd, group, hosts, …); works with LDAP/SSSD too.
+tags:
+- users
+- nss
+risk: safe
+requires_elevated: false
+platforms:
+- linux
+packages:
+  arch: glibc
+  debian: libc-bin
+  ubuntu: libc-bin
+  fedora: glibc-common
+install_notes:
+  tr: |-
+    Arch: glibc ile gelir
+    Debian/Ubuntu: libc-bin
+    Fedora: glibc-common
+  en: |-
+    Arch: from glibc
+    Debian/Ubuntu: libc-bin
+    Fedora: glibc-common
+examples:
+- title:
+    tr: Kullanıcı
+    en: User
+  command: getent passwd alice
+  explanation:
+    tr: alice passwd satırı (yerel veya uzaktan).
+    en: alice passwd line (local or remote NSS).
+  risk: safe
+- title:
+    tr: Grup
+    en: Group
+  command: getent group wheel
+  explanation:
+    tr: wheel grubu üyeleri.
+    en: wheel group members.
+  risk: safe
+- title:
+    tr: Hosts
+    en: Hosts
+  command: getent hosts example.com
+  explanation:
+    tr: Ad çözümleme (NSS sırası).
+    en: Name lookup via NSS order.
+  risk: safe
+related:
+- id
+- groups
+- dig
+intent:
+  tr:
+  - getent passwd
+  - grup üyeleri
+  en:
+  - getent passwd
+  - group members
+verification:
+  status: reviewed
+  sources:
+  - man 1 getent
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-coverage
+nova:
+  concepts:
+  - permissions
+  - dns
+category: users

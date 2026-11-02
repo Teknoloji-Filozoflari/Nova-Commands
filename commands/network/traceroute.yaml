@@ -1,0 +1,89 @@
+id: traceroute
+name: traceroute
+summary:
+  tr: Paketlerin rota hop’larını izler.
+  en: Print the route packets take to a host.
+description:
+  tr: Hedefe giden yol üzerindeki yönlendiricileri TTL artırarak listeler. Ağ gecikmesi ve kopukluk tespiti
+    için kullanılır.
+  en: Lists routers on the path by increasing TTL. Used to spot latency and path breaks.
+tags:
+- network
+- diagnostics
+risk: caution
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+packages:
+  arch: traceroute
+  debian: traceroute
+  ubuntu: traceroute
+  fedora: traceroute
+install_notes:
+  tr: |-
+    Arch: pacman -S traceroute
+    Debian/Ubuntu: apt install traceroute
+    Fedora: dnf install traceroute
+  en: |-
+    Arch: pacman -S traceroute
+    Debian/Ubuntu: apt install traceroute
+    Fedora: dnf install traceroute
+flags:
+- flag: -n
+  meaning:
+    tr: Ad çözümleme yapma.
+    en: Do not resolve addresses.
+  verified: true
+- flag: -I
+  meaning:
+    tr: ICMP ECHO kullan.
+    en: Use ICMP ECHO.
+  verified: true
+- flag: -m
+  meaning:
+    tr: Maksimum hop.
+    en: Max hop TTL.
+  verified: true
+  takes_value: true
+  value_name: max_ttl
+examples:
+- title:
+    tr: Rota
+    en: Trace path
+  command: traceroute example.com
+  explanation:
+    tr: Hop listesini gösterir; bazı ağlar ICMP’yi filtreler.
+    en: Shows hops; some networks filter probes.
+  risk: caution
+- title:
+    tr: Sayısal
+    en: Numeric
+  command: traceroute -n 1.1.1.1
+  explanation:
+    tr: DNS çözümlemeden IP hop’ları.
+    en: IP hops without DNS.
+  risk: caution
+related:
+- ping
+- tracepath
+- mtr
+- ip
+intent:
+  tr:
+  - rota izle
+  - traceroute hop
+  en:
+  - trace route
+  - network hops
+verification:
+  status: reviewed
+  sources:
+  - man 8 traceroute
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-coverage
+nova:
+  concepts:
+  - networking
+category: network

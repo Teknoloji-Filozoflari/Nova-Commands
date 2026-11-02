@@ -1,0 +1,89 @@
+id: findmnt
+name: findmnt
+summary:
+  tr: Bağlı dosya sistemlerini listeler.
+  en: List mounted filesystems (libmount).
+description:
+  tr: mount çıktısına göre daha düzenli ağaç/JSON görünümü; hedef veya kaynak süzebilir.
+  en: Clearer tree/JSON view than raw mount; can filter by target or source.
+tags:
+- disk
+- storage
+- mount
+risk: safe
+requires_elevated: false
+platforms:
+- linux
+packages:
+  arch: util-linux
+  debian: util-linux
+  ubuntu: util-linux
+  fedora: util-linux
+flags:
+- flag: -t
+  meaning:
+    tr: FS türü süz.
+    en: Filter by FS type.
+  verified: true
+  long: --types
+  takes_value: true
+  value_name: types
+- flag: -J
+  meaning:
+    tr: JSON çıktı.
+    en: JSON output.
+  verified: true
+  long: --json
+- flag: -s
+  meaning:
+    tr: fstab’dan.
+    en: From fstab.
+  verified: true
+  long: --fstab
+examples:
+- title:
+    tr: Ağaç
+    en: Tree
+  command: findmnt
+  explanation:
+    tr: Bağlı FS ağacı.
+    en: Mounted FS tree.
+  risk: safe
+- title:
+    tr: Hedef
+    en: Target
+  command: findmnt /
+  explanation:
+    tr: Kök FS ayrıntıları.
+    en: Root FS details.
+  risk: safe
+- title:
+    tr: fstab
+    en: fstab
+  command: findmnt --fstab
+  explanation:
+    tr: fstab girdileri.
+    en: fstab entries.
+  risk: safe
+related:
+- mount
+- umount
+- lsblk
+- df
+intent:
+  tr:
+  - ne bağlı
+  - findmnt
+  en:
+  - what is mounted
+  - findmnt
+verification:
+  status: reviewed
+  sources:
+  - man 8 findmnt
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-coverage
+nova:
+  concepts:
+  - storage
+category: disks

@@ -64,7 +64,13 @@ examples:
   requires_elevated: true
 related:
 - journalctl
-- service
+- systemd-analyze
+- timedatectl
+- loginctl
+- bootctl
+nova:
+  concepts:
+  - systemd
 intent:
   tr:
   - servis başlat

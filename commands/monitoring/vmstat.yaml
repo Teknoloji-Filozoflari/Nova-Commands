@@ -1,0 +1,55 @@
+id: vmstat
+name: vmstat
+summary:
+  tr: Sanal bellek ve CPU istatistikleri.
+  en: Report virtual memory and CPU statistics.
+description:
+  tr: Procs, memory, swap, io ve cpu sütunlarıyla sistem sağlığını özetler.
+  en: Summarizes system health via procs, memory, swap, io, and cpu columns.
+tags:
+- monitoring
+- memory
+risk: safe
+requires_elevated: false
+platforms:
+- linux
+packages:
+  arch: procps-ng
+  debian: procps
+  ubuntu: procps
+  fedora: procps-ng
+examples:
+- title:
+    tr: Anlık
+    en: Snapshot
+  command: vmstat
+  explanation:
+    tr: Tek satır özet (ilk satır ortalamadır).
+    en: One-line summary (first line is averages).
+  risk: safe
+- title:
+    tr: 2 sn aralık
+    en: 2s interval
+  command: vmstat 2 5
+  explanation:
+    tr: 2 sn arayla 5 örnek.
+    en: 5 samples every 2s.
+  risk: safe
+related:
+- free
+- iostat
+- top
+intent:
+  tr:
+  - bellek istatistik
+  - vmstat
+  en:
+  - memory stats
+  - vmstat
+verification:
+  status: reviewed
+  sources:
+  - man 8 vmstat
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-coverage
+category: monitoring

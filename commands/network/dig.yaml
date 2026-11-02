@@ -1,0 +1,96 @@
+id: dig
+name: dig
+summary:
+  tr: DNS sorgu aracı (BIND).
+  en: DNS lookup utility (BIND).
+description:
+  tr: Alan adı kayıtlarını (A, AAAA, MX, TXT vb.) sorgular. Ağ sorun gidermede temel araçtır.
+  en: Queries DNS records (A, AAAA, MX, TXT, etc.). Core tool for network troubleshooting.
+tags:
+- network
+- dns
+risk: safe
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+packages:
+  arch: bind
+  debian: dnsutils
+  ubuntu: dnsutils
+  fedora: bind-utils
+install_notes:
+  tr: |-
+    Arch: pacman -S bind — dig paketi bind ile gelir.
+    Debian/Ubuntu: apt install dnsutils
+    Fedora: dnf install bind-utils
+  en: |-
+    Arch: pacman -S bind — dig ships with bind.
+    Debian/Ubuntu: apt install dnsutils
+    Fedora: dnf install bind-utils
+flags:
+- flag: +short
+  meaning:
+    tr: Kısa çıktı.
+    en: Short form answers.
+  verified: true
+- flag: -t
+  meaning:
+    tr: Kayıt türü.
+    en: Query type.
+  verified: true
+  takes_value: true
+  value_name: type
+examples:
+- title:
+    tr: A kaydı
+    en: A record
+  command: dig example.com +short
+  explanation:
+    tr: Yalnızca A cevaplarını kısa gösterir.
+    en: Shows A answers briefly.
+  risk: safe
+- title:
+    tr: MX
+    en: MX
+  command: dig example.com MX
+  explanation:
+    tr: Mail exchanger kayıtları.
+    en: Mail exchanger records.
+  risk: safe
+- title:
+    tr: Belirli resolver
+    en: Custom resolver
+  command: dig @1.1.1.1 example.com
+  explanation:
+    tr: Cloudflare DNS üzerinden sorgu.
+    en: Query via Cloudflare DNS.
+  risk: safe
+related:
+- host
+- nslookup
+- resolvectl
+- ping
+intent:
+  tr:
+  - dns sorgula
+  - dig a kaydı
+  - alan adı çözümle
+  en:
+  - dns lookup
+  - dig record
+  - resolve domain
+verification:
+  status: reviewed
+  sources:
+  - man 1 dig
+  - https://wiki.archlinux.org/title/Domain_name_resolution
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-coverage
+nova:
+  concepts:
+  - networking
+  - dns
+  ui_priority: 70
+category: network

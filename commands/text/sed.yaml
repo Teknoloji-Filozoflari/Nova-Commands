@@ -1,0 +1,72 @@
+id: sed
+name: sed
+summary:
+  tr: Akış düzenleyici.
+  en: Stream editor.
+description:
+  tr: Metni satır satır süzüp dönüştürür; yerinde düzenleme (-i) dikkat ister.
+  en: Filters/transforms text line by line; in-place (-i) edits need care.
+tags:
+- text
+risk: caution
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+packages:
+  arch: sed
+  debian: sed
+  ubuntu: sed
+  fedora: sed
+flags:
+- flag: -n
+  meaning:
+    tr: Varsayılan basımı kapat.
+    en: Suppress automatic printing.
+  verified: true
+- flag: -i
+  meaning:
+    tr: Dosyayı yerinde düzenle.
+    en: Edit files in place.
+  verified: true
+- flag: -E
+  meaning:
+    tr: Genişletilmiş regex.
+    en: Extended regex.
+  verified: true
+examples:
+- title:
+    tr: Değiştir ve bas
+    en: Replace print
+  command: sed 's/foo/bar/' file.txt
+  explanation:
+    tr: İlk foo→bar; dosyayı yazmaz.
+    en: First foo→bar; stdout only.
+  risk: safe
+- title:
+    tr: Yerinde
+    en: In place
+  command: sed -i 's/foo/bar/g' file.txt
+  explanation:
+    tr: Dosyayı değiştirir — yedek alın.
+    en: Modifies file — keep a backup.
+  risk: caution
+related:
+- awk
+- grep
+- cut
+intent:
+  tr:
+  - sed değiştir
+  - metin değiştir
+  en:
+  - sed replace
+  - stream edit
+verification:
+  status: reviewed
+  sources:
+  - man 1 sed
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-coverage
+category: text

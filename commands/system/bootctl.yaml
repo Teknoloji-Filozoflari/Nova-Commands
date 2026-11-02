@@ -1,0 +1,80 @@
+id: bootctl
+name: bootctl
+summary:
+  tr: systemd-boot ve EFI önyükleme denetimi.
+  en: Control firmware and systemd-boot entries.
+description:
+  tr: EFI sistem bölümü, boot yükleyici durumu ve systemd-boot girdilerini yönetir. GRUB kullanan sistemlerde
+    işlev sınırlı olabilir.
+  en: Manages ESP, bootloader status, and systemd-boot entries. Limited on GRUB-centric systems.
+tags:
+- system
+- systemd
+- boot
+- efi
+risk: dangerous
+requires_elevated: true
+platforms:
+- linux
+packages:
+  arch: systemd
+  debian: systemd-boot
+  ubuntu: systemd-boot
+  fedora: systemd-boot-unsigned
+install_notes:
+  tr: |-
+    Arch: pacman -S systemd (systemd-boot kullanımı ayrı kurulum)
+    Debian/Ubuntu paket adı systemd-boot; Fedora’da systemd-boot-unsigned — doğrulayın.
+  en: |-
+    Arch: pacman -S systemd (systemd-boot setup is separate)
+    Debian/Ubuntu: systemd-boot; Fedora often systemd-boot-unsigned — verify on target.
+flags:
+- flag: status
+  meaning:
+    tr: Bootloader durumu.
+    en: Bootloader status.
+  verified: false
+- flag: list
+  meaning:
+    tr: Boot girdileri.
+    en: List boot entries.
+  verified: false
+examples:
+- title:
+    tr: Durum
+    en: Status
+  command: bootctl status
+  explanation:
+    tr: ESP ve yükleyici özeti (yetki gerekebilir).
+    en: ESP/bootloader summary (may need rights).
+  risk: safe
+  requires_elevated: false
+- title:
+    tr: Girdiler
+    en: Entries
+  command: bootctl list
+  explanation:
+    tr: Boot menü girdileri.
+    en: Boot menu entries.
+  risk: safe
+  requires_elevated: false
+related:
+- systemctl
+- systemd-analyze
+- efibootmgr
+intent:
+  tr:
+  - efi boot durum
+  - systemd-boot
+  en:
+  - efi boot status
+  - systemd-boot
+verification:
+  status: draft
+  sources:
+  - man 1 bootctl
+  notes: Fedora/Debian package names vary with bootloader choice; left draft.
+nova:
+  concepts:
+  - systemd
+category: system

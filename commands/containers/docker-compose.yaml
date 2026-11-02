@@ -1,0 +1,91 @@
+id: docker-compose
+name: docker-compose
+summary:
+  tr: Çok konteynerli Compose aracı.
+  en: Multi-container Compose tool.
+description:
+  tr: compose.yaml ile servis yığınını yönetir. Eski bağımsız ikili veya `docker compose` eklentisi olabilir
+    — dağıtıma göre değişir.
+  en: Manages service stacks from compose.yaml. May be standalone binary or `docker compose` plugin —
+    varies by distro.
+tags:
+- containers
+- docker
+risk: dangerous
+requires_elevated: false
+platforms:
+- linux
+packages:
+  arch: docker-compose
+install_notes:
+  tr: |-
+    Arch: pacman -S docker-compose
+    Debian/Ubuntu: paket adı dağıtıma göre değişir (unknown — docker-compose-plugin / docker-compose v1)
+    Fedora: sıkça docker-compose-plugin (docker.com) — doğrulayın.
+    Modern kullanım: docker compose (boşluklu eklenti).
+  en: |-
+    Arch: pacman -S docker-compose
+    Debian/Ubuntu: package name varies (unknown — docker-compose-plugin / v1)
+    Fedora: often docker-compose-plugin from docker.com — verify.
+    Modern usage: docker compose (space) plugin.
+flags:
+- flag: up
+  meaning:
+    tr: Servisleri başlat (alt komut).
+    en: Create/start services.
+  verified: false
+- flag: down
+  meaning:
+    tr: Servisleri durdur/kaldır.
+    en: Stop/remove services.
+  verified: false
+- flag: ps
+  meaning:
+    tr: Durum.
+    en: List containers.
+  verified: false
+examples:
+- title:
+    tr: Ayağa kaldır
+    en: Bring up
+  command: docker compose up -d
+  explanation:
+    tr: Eklenti sözdizimi; dizininde compose.yaml olmalı.
+    en: Plugin syntax; needs compose.yaml in cwd.
+  risk: dangerous
+- title:
+    tr: Durum
+    en: Status
+  command: docker compose ps
+  explanation:
+    tr: Proje konteynerleri.
+    en: Project containers.
+  risk: safe
+- title:
+    tr: Yık
+    en: Tear down
+  command: docker compose down
+  explanation:
+    tr: Kapsayıcıları durdurur; volume politikasına dikkat.
+    en: Stops containers; mind volume policy.
+  risk: dangerous
+related:
+- docker
+- podman
+intent:
+  tr:
+  - docker compose
+  - çoklu konteyner
+  en:
+  - docker compose
+  - multi container
+verification:
+  status: draft
+  sources:
+  - https://docs.docker.com/compose/
+  - https://archlinux.org/packages/extra/x86_64/docker-compose/
+  notes: debian/ubuntu/fedora package names intentionally incomplete; plugin vs v1 differs.
+nova:
+  concepts:
+  - containers
+category: containers

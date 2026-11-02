@@ -37,18 +37,64 @@ examples:
     tr: Çalışan konteynerler.
     en: Running containers.
   risk: safe
+- title:
+    tr: Tüm konteynerler
+    en: All containers
+  command: docker ps -a
+  explanation:
+    tr: Durmuş olanlar dahil listeler.
+    en: Lists containers including stopped.
+  risk: safe
+- title:
+    tr: İmajlar
+    en: Images
+  command: docker images
+  explanation:
+    tr: Yerel imaj listesi.
+    en: Local image list.
+  risk: safe
+- title:
+    tr: Loglar
+    en: Logs
+  command: docker logs -f mycontainer
+  explanation:
+    tr: Konteyner günlüklerini takip eder.
+    en: Follows container logs.
+  risk: safe
+- title:
+    tr: Çalıştır
+    en: Run
+  command: docker run --rm -it alpine:latest sh
+  explanation:
+    tr: Geçici Alpine kabuğu; --rm çıkınca siler. İmaj çeker (ağ).
+    en: Ephemeral Alpine shell; --rm removes on exit. May pull (network).
+  risk: caution
+- title:
+    tr: Durdur
+    en: Stop
+  command: docker stop mycontainer
+  explanation:
+    tr: Çalışan konteyneri durdurur.
+    en: Stops a running container.
+  risk: caution
 related:
 - podman
+- docker-compose
 intent:
   tr:
   - docker konteyner
   - docker ps
+  - docker imaj
   en:
   - docker containers
   - docker ps
+  - docker images
 verification:
   status: draft
   sources:
   - https://docs.docker.com/engine/reference/commandline/cli/
   notes: debian/ubuntu package intentionally omitted as unknown.
+nova:
+  concepts:
+  - containers
 category: containers

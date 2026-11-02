@@ -1,0 +1,97 @@
+id: rpm
+name: rpm
+summary:
+  tr: RPM paket yöneticisi (düşük seviye).
+  en: RPM package manager (low-level).
+description:
+  tr: Fedora/RHEL ailesinde .rpm sorgu ve kurulum. Günlük işlemlerde dnf tercih edilir.
+  en: Query/install .rpm on Fedora/RHEL family. Prefer dnf for daily work.
+tags:
+- packages
+- fedora
+- rhel
+risk: dangerous
+requires_elevated: true
+platforms:
+- linux
+packages:
+  fedora: rpm
+  rhel: rpm
+  arch: rpm-tools
+install_notes:
+  tr: |-
+    Fedora/RHEL: rpm tabanda gelir; günlük için dnf.
+    Arch: pacman -S rpm-tools (yabancı .rpm incelemek için; sistem paketi değil).
+  en: |-
+    Fedora/RHEL: rpm is base; use dnf daily.
+    Arch: pacman -S rpm-tools (inspect foreign .rpm; not system pkgs).
+flags:
+- flag: -q
+  meaning:
+    tr: Sorgu.
+    en: Query.
+  verified: true
+- flag: -i
+  meaning:
+    tr: Kur / sorgu bilgisi (bağlama göre).
+    en: Install / query info (context).
+  verified: true
+- flag: -ql
+  meaning:
+    tr: Paket dosya listesi.
+    en: List files in package.
+  verified: true
+- flag: -qf
+  meaning:
+    tr: Dosya sahibi paket.
+    en: Package owning file.
+  verified: true
+examples:
+- title:
+    tr: Kurulu mu
+    en: Is installed
+  command: rpm -q bash
+  explanation:
+    tr: Paket sürümü veya not installed.
+    en: Version or not installed.
+  risk: safe
+  requires_elevated: false
+- title:
+    tr: Dosya sahibi
+    en: File owner
+  command: rpm -qf /usr/bin/ls
+  explanation:
+    tr: Dosyayı sağlayan RPM.
+    en: RPM that owns a file.
+  risk: safe
+  requires_elevated: false
+- title:
+    tr: rpm kur
+    en: Install rpm
+  command: sudo rpm -i package.rpm
+  explanation:
+    tr: Bağımlılıklar için dnf kullanın.
+    en: Prefer dnf for dependencies.
+  risk: dangerous
+  requires_elevated: true
+related:
+- dnf
+- dpkg
+- pacman
+intent:
+  tr:
+  - rpm sorgu
+  - rpm paket
+  en:
+  - rpm query
+  - rpm package
+verification:
+  status: reviewed
+  sources:
+  - man 8 rpm
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-coverage
+nova:
+  concepts:
+  - packages
+category: packages

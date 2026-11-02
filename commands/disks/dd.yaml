@@ -1,0 +1,93 @@
+id: dd
+name: dd
+summary:
+  tr: Blok düzeyinde kopyalama/dönüştürme.
+  en: Convert and copy files at block level.
+description:
+  tr: Disk imajı yazma, sıfırlama ve ham kopyalama. if/of yanlış seçilirse veri yok olur — destructive.
+  en: Image writing, zeroing, raw copy. Wrong if/of destroys data — destructive.
+tags:
+- disk
+- storage
+- image
+risk: destructive
+requires_elevated: true
+platforms:
+- linux
+- macos
+- bsd
+packages:
+  arch: coreutils
+  debian: coreutils
+  ubuntu: coreutils
+  fedora: coreutils
+flags:
+- flag: if=
+  meaning:
+    tr: Girdi dosyası/aygıt.
+    en: Input file/device.
+  verified: true
+  takes_value: true
+  value_name: file
+- flag: of=
+  meaning:
+    tr: Çıktı dosyası/aygıt.
+    en: Output file/device.
+  verified: true
+  takes_value: true
+  value_name: file
+- flag: bs=
+  meaning:
+    tr: Blok boyutu.
+    en: Block size.
+  verified: true
+  takes_value: true
+  value_name: bytes
+- flag: status=
+  meaning:
+    tr: İlerleme.
+    en: Progress level.
+  verified: true
+  takes_value: true
+  value_name: level
+examples:
+- title:
+    tr: İlerleme ile dosya
+    en: File with progress
+  command: dd if=/dev/zero of=/tmp/zero.bin bs=1M count=10 status=progress
+  explanation:
+    tr: 10 MiB sıfır dosyası; /tmp güvenli hedef.
+    en: 10 MiB zero file; safe /tmp target.
+  risk: caution
+  requires_elevated: false
+- title:
+    tr: ISO yaz (UYARI)
+    en: Write ISO (DANGER)
+  command: sudo dd if=image.iso of=/dev/sdX bs=4M status=progress oflag=sync
+  explanation:
+    tr: Yanlış of= tüm diski siler; önce lsblk.
+    en: Wrong of= wipes a disk; verify with lsblk.
+  risk: destructive
+  requires_elevated: true
+related:
+- lsblk
+- fdisk
+- sync
+- cp
+intent:
+  tr:
+  - iso yaz
+  - dd imaj
+  en:
+  - write iso
+  - dd image
+verification:
+  status: reviewed
+  sources:
+  - man 1 dd
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-coverage
+nova:
+  concepts:
+  - storage
+category: disks

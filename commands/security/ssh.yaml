@@ -51,6 +51,12 @@ related:
 - ssh-keygen
 - scp
 - sftp
+- ssh-copy-id
+- ssh-add
+nova:
+  concepts:
+  - ssh
+  - networking
 intent:
   tr:
   - ssh ile bağlan

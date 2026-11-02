@@ -1,0 +1,76 @@
+id: blkid
+name: blkid
+summary:
+  tr: Blok aygıt özniteliklerini basar.
+  en: Print block device attributes.
+description:
+  tr: UUID, LABEL, TYPE gibi bilgileri gösterir; fstab ve şifreli disk kurulumunda kritik.
+  en: Shows UUID, LABEL, TYPE; critical for fstab and encrypted-disk setups.
+tags:
+- disk
+- storage
+risk: safe
+requires_elevated: false
+platforms:
+- linux
+packages:
+  arch: util-linux
+  debian: util-linux
+  ubuntu: util-linux
+  fedora: util-linux
+flags:
+- flag: -o
+  meaning:
+    tr: Çıktı formatı.
+    en: Output format.
+  verified: true
+  long: --output
+  takes_value: true
+  value_name: format
+- flag: -s
+  meaning:
+    tr: Belirli etiket.
+    en: Show specified tag.
+  verified: true
+  takes_value: true
+  value_name: tag
+examples:
+- title:
+    tr: Tümü
+    en: All
+  command: blkid
+  explanation:
+    tr: Bilinen blok aygıt etiketleri (yetki gerekebilir).
+    en: Known block tags (may need rights).
+  risk: safe
+- title:
+    tr: UUID
+    en: UUID
+  command: sudo blkid -s UUID -o value /dev/sda1
+  explanation:
+    tr: Tek aygıt UUID değeri.
+    en: UUID value for one device.
+  risk: safe
+  requires_elevated: true
+related:
+- lsblk
+- findmnt
+- fdisk
+- mount
+intent:
+  tr:
+  - disk uuid
+  - blkid
+  en:
+  - disk uuid
+  - blkid
+verification:
+  status: reviewed
+  sources:
+  - man 8 blkid
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-coverage
+nova:
+  concepts:
+  - storage
+category: disks
