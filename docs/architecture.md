@@ -49,9 +49,14 @@ PR → validate_catalog.py → build_catalog.py → pytest → merge
 | 9 | Search index + manifest SHA + NOVA_INTEGRATION |
 | 10 | CI/contrib polish (Actions, issue/PR templates, SECURITY) |
 | 11+ | Grow coverage; human `verified` promotions |
+| 17 | Signed `catalog-v*` Releases (minisign) + selective `verified` |
+
+Signed publish: `docs/catalog-signing.md`, `keys/minisign.pub`,
+`.github/workflows/publish-catalog.yml` (dry-run without `MINISIGN_SECRET_KEY`).
 
 ## Non-goals (this repo)
 
 - Executing user shell commands
 - Storing host PATH scans
 - Auto-merging AI drafts as verified
+- Committing minisign/cosign private keys

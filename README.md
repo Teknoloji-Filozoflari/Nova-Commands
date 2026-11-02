@@ -49,6 +49,23 @@ Debian/Ubuntu (`apt`), Fedora/RHEL (`dnf`), Arch (`pacman`) birinci sınıf.
 Paket notlarında **Arch / pacman tercihi** (Nova tercihleri ile uyumlu).
 Karşılaştırma tabloları: [docs/package-managers-comparison.md](docs/package-managers-comparison.md).
 
+## İmzalı katalog Releases
+
+Bank metadata (`catalog.json` / `manifest.json` / `search-index.json`) GitHub
+Release etiketleri `catalog-v*` ile yayımlanır; **minisign** ile imzalanır.
+
+- Genel anahtar: [`keys/minisign.pub`](keys/minisign.pub)
+- Doğrulama + yayın: [docs/catalog-signing.md](docs/catalog-signing.md) · [SECURITY.md](SECURITY.md)
+- CI: [`.github/workflows/publish-catalog.yml`](.github/workflows/publish-catalog.yml)
+  — `MINISIGN_SECRET_KEY` yoksa dry-run (imzasız artifact; private key üretilmez/commit edilmez)
+
+```bash
+minisign -Vm catalog.json -p keys/minisign.pub -x catalog.json.minisig
+```
+
+Bu, **komut bilgi bankası** imzasıdır; yerel PATH keşfi veya Nova-Store uygulama
+katalogu değildir ([docs/dual-concept.md](docs/dual-concept.md)).
+
 ## Güvenlik
 
 - AI taslakları `verification.status: draft` kalır; `verified` yalnız insan incelemesi sonrası.

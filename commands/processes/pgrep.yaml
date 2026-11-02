@@ -47,11 +47,12 @@ intent:
   - find pid by name
   - pgrep
 verification:
-  status: reviewed
+  status: verified
   sources:
   - man 1 pgrep
   last_reviewed: '2026-11-02'
-  reviewer: nova-commands-bootstrap
+  reviewer: nova-commands-phase17
+  notes: Read-only PID search; -a/--list-full confirmed via --help.
 category: processes
 nova:
   concepts:

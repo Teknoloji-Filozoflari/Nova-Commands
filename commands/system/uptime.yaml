@@ -39,11 +39,12 @@ intent:
   - system uptime
   - load average
 verification:
-  status: reviewed
+  status: verified
   sources:
   - man 1 uptime
   last_reviewed: '2026-11-02'
-  reviewer: nova-commands-bootstrap
+  reviewer: nova-commands-phase17
+  notes: Read-only uptime/load; --help flags cross-checked.
 category: system
 nova:
   concepts:

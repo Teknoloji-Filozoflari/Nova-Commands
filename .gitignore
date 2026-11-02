@@ -7,3 +7,10 @@ __pycache__/
 venv/
 *.egg-info/
 .DS_Store
+
+# Never commit minisign / cosign private keys
+*.key
+keys/*.key
+keys/nova-commands.key
+cosign.key
+dist/

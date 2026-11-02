@@ -21,7 +21,8 @@ search index, concepts).
 
 ```
 Nova Komut Rehberi
-  ├─ load curated bank (catalog.json from release or pinned commit)
+  ├─ load curated bank (prefer signed catalog-v* Release)
+  │     ├─ verify minisign with keys/minisign.pub (docs/catalog-signing.md)
   │     ├─ schema_version == 1 && kind == nova-commands-bank
   │     └─ index by id, name, tags, intent phrases (tr/en)
   └─ (optional) local discovery snapshot
@@ -30,6 +31,7 @@ Nova Komut Rehberi
 ```
 
 Do **not** treat PATH presence as verification of bank content.
+Do **not** apply a remote bank whose signature fails.
 
 ## Field mapping hints
 

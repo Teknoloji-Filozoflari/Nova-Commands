@@ -45,11 +45,12 @@ intent:
   - memory usage
   - free ram
 verification:
-  status: reviewed
+  status: verified
   sources:
   - man 1 free
   last_reviewed: '2026-11-02'
-  reviewer: nova-commands-bootstrap
+  reviewer: nova-commands-phase17
+  notes: Flag -h/--human confirmed via --help; read-only memory summary.
 category: monitoring
 nova:
   concepts:

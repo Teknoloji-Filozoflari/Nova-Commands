@@ -64,11 +64,12 @@ intent:
   - getent passwd
   - group members
 verification:
-  status: reviewed
+  status: verified
   sources:
   - man 1 getent
   last_reviewed: '2026-11-02'
-  reviewer: nova-commands-coverage
+  reviewer: nova-commands-phase17
+  notes: Read-only NSS queries; passwd/group/hosts examples informational.
 nova:
   concepts:
   - permissions

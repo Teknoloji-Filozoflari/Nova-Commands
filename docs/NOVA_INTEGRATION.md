@@ -43,6 +43,8 @@ Clients should:
 ```
 Nova Komut Rehberi
   ├─ curated bank
+  │     ├─ prefer signed GitHub Release (catalog-v*) + minisign verify
+  │     │     (keys/minisign.pub — see docs/catalog-signing.md)
   │     ├─ prefer manifest.content_sha256 pin
   │     ├─ load catalog.json (commands + concepts)
   │     ├─ optional: search-index.json for intent/tag UI search
@@ -51,6 +53,11 @@ Nova Komut Rehberi
         ├─ kind == nova-local-commands
         └─ join on bank_id — never inherit verified from PATH hits
 ```
+
+Signed Releases are the preferred remote refresh path (mirror Nova-Store’s
+catalog trust model). On signature failure, keep the last trusted / embedded
+bank. Optional unsigned `main` sync is a separate, weaker fallback — never
+treat it as equivalent to a verified Release.
 
 ## Field mapping
 
