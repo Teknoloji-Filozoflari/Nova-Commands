@@ -9,11 +9,12 @@ platforms:
 - bsd
 requires_elevated: false
 verification:
-  status: reviewed
+  status: verified
   sources:
-  - man 1 head
+  - man 1 head (GNU coreutils)
   last_reviewed: '2026-11-02'
-  reviewer: nova-commands-bootstrap
+  reviewer: nova-commands-phase15
+  notes: Flag -n/--lines confirmed; safe text preview.
 id: head
 name: head
 summary:

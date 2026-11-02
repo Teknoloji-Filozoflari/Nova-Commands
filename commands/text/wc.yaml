@@ -9,11 +9,12 @@ platforms:
 - bsd
 requires_elevated: false
 verification:
-  status: reviewed
+  status: verified
   sources:
-  - man 1 wc
+  - man 1 wc (GNU coreutils)
   last_reviewed: '2026-11-02'
-  reviewer: nova-commands-bootstrap
+  reviewer: nova-commands-phase15
+  notes: Flags -l/-w/-c confirmed; safe text metrics.
 id: wc
 name: wc
 summary:

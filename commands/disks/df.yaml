@@ -48,11 +48,12 @@ intent:
   - disk space
   - free space
 verification:
-  status: reviewed
+  status: verified
   sources:
-  - man 1 df
+  - man 1 df (GNU coreutils)
   last_reviewed: '2026-11-02'
-  reviewer: nova-commands-bootstrap
+  reviewer: nova-commands-phase15
+  notes: Flag -h/--human-readable confirmed; read-only space report.
 category: disks
 nova:
   concepts:

@@ -4,10 +4,18 @@ summary:
   tr: Dosya sistemi bağlar.
   en: Mount a filesystem.
 description:
-  tr: Aygıt veya imajı dizin ağacına bağlar. Yanlış kullanım riskli.
-  en: Attaches a device or image into the directory tree. Misuse is risky.
+  tr: >
+    Aygıt veya imajı dizin ağacına bağlar. Argümansız `mount` tabloyu okur
+    (güvenli). Yazma bağları ve loop ISO bağlama dikkat ister; yanlış aygıt
+    veya seçenekler sistemi bozabilir.
+  en: >
+    Attaches a device or image into the directory tree. Bare `mount` reads
+    the table (safe). Write mounts and loop ISO mounts need care; wrong
+    device or options can break the system.
 tags:
 - disk
+- storage
+- mount
 risk: dangerous
 requires_elevated: true
 platforms:
@@ -19,41 +27,80 @@ packages:
   debian: mount
   ubuntu: mount
   fedora: util-linux
+install_notes:
+  tr: |
+    Arch: pacman -S util-linux (taban)
+    Debian/Ubuntu: apt install mount
+    Fedora: dnf install util-linux
+  en: |
+    Arch: pacman -S util-linux (base)
+    Debian/Ubuntu: apt install mount
+    Fedora: dnf install util-linux
+flags:
+- flag: -o
+  long: --options
+  meaning:
+    tr: Bağlama seçenekleri (virgülle; ör. loop, ro).
+    en: Comma-separated mount options (e.g. loop, ro).
+  verified: true
+  takes_value: true
+  value_name: opts
+- flag: -t
+  long: --types
+  meaning:
+    tr: Dosya sistemi türü.
+    en: Filesystem type.
+  verified: true
+  takes_value: true
+  value_name: type
+- flag: -a
+  long: --all
+  meaning:
+    tr: fstab’daki uygun girdileri bağla (dikkat).
+    en: Mount all suitable fstab entries (careful).
+  verified: true
 examples:
 - title:
     tr: Bağlı olanlar
     en: What is mounted
   command: mount
   explanation:
-    tr: Mevcut mount tablosu (okuma).
-    en: Current mount table (read).
+    tr: Mevcut mount tablosu (okuma). Tercihen `findmnt` daha okunaklıdır.
+    en: Current mount table (read). Prefer `findmnt` for readability.
   risk: safe
   requires_elevated: false
 - title:
-    tr: ISO bağla
-    en: Mount ISO
-  command: sudo mount -o loop image.iso /mnt/iso
+    tr: ISO bağla (loop)
+    en: Mount ISO (loop)
+  command: sudo mount -o loop,ro image.iso /mnt/iso
   explanation:
-    tr: ISO’yu loop ile bağlar.
-    en: Loop-mounts an ISO.
+    tr: ISO’yu salt-okunur loop ile bağlar; hedef dizin önceden var olmalı.
+    en: Loop-mounts an ISO read-only; target dir must already exist.
   risk: caution
   requires_elevated: true
 related:
 - umount
 - lsblk
+- findmnt
+- blkid
+- df
 intent:
   tr:
   - disk bağla
   - mount nedir
+  - iso bağla
   en:
   - mount disk
   - what is mounted
+  - mount iso
 verification:
   status: reviewed
   sources:
   - man 8 mount
+  - mount --help
   last_reviewed: '2026-11-02'
-  reviewer: nova-commands-bootstrap
+  reviewer: nova-commands-phase15
+  notes: Deepened flags/examples; still reviewed (dangerous class, not verified).
 category: disks
 nova:
   concepts:

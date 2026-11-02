@@ -103,12 +103,13 @@ intent:
   - list directory
   - show folder contents
 verification:
-  status: reviewed
+  status: verified
   sources:
   - man 1 ls (GNU coreutils)
-  - https://www.gnu.org/software/coreutils/manual/
+  - https://www.gnu.org/software/coreutils/manual/html_node/ls-invocation.html
   last_reviewed: '2026-11-02'
-  reviewer: nova-commands-bootstrap
+  reviewer: nova-commands-phase15
+  notes: Flags -a/-l/-h/-R and examples checked against GNU coreutils man/--help. Safe read-only listing.
 nova:
   favorite_eligible: true
   ui_priority: 90

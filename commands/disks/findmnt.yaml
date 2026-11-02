@@ -78,11 +78,13 @@ intent:
   - what is mounted
   - findmnt
 verification:
-  status: reviewed
+  status: verified
   sources:
-  - man 8 findmnt
+  - man 8 findmnt (util-linux)
+  - https://man.archlinux.org/man/findmnt.8
   last_reviewed: '2026-11-02'
-  reviewer: nova-commands-coverage
+  reviewer: nova-commands-phase15
+  notes: Flags -t/-J/-s confirmed; read-only mount listing.
 nova:
   concepts:
   - storage

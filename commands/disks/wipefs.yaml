@@ -1,0 +1,113 @@
+id: wipefs
+name: wipefs
+summary:
+  tr: Dosya sistemi/RAID imzalarını listeler veya siler (yıkıcı).
+  en: List or wipe filesystem/RAID signatures (destructive).
+description:
+  tr: >
+    util-linux `wipefs` aygıttaki sihirli imzaları gösterir; `-a` hepsini
+    siler (BE CAREFUL). `-n` / `--no-act` yazmadan simüle eder. İmza silmek
+    FS’yi “görünmez” yapabilir — veri kurtarma zorlaşır. reviewed.
+  en: >
+    util-linux `wipefs` shows on-disk magic strings; `-a` erases them all
+    (BE CAREFUL). `-n` / `--no-act` simulates without write. Wiping
+    signatures can hide a filesystem and complicate recovery. Reviewed.
+tags:
+- disk
+- storage
+- filesystem
+- signature
+risk: destructive
+requires_elevated: true
+platforms:
+- linux
+packages:
+  arch: util-linux
+  debian: util-linux
+  ubuntu: util-linux
+  fedora: util-linux
+install_notes:
+  tr: |
+    Arch: pacman -S util-linux (taban)
+    Debian/Ubuntu: apt install util-linux
+    Fedora: dnf install util-linux
+  en: |
+    Arch: pacman -S util-linux (base)
+    Debian/Ubuntu: apt install util-linux
+    Fedora: dnf install util-linux
+flags:
+- flag: -a
+  long: --all
+  meaning:
+    tr: Tüm sihirli dizgileri sil (çok dikkat!).
+    en: Wipe all magic strings (BE CAREFUL!).
+  verified: true
+- flag: -n
+  long: --no-act
+  meaning:
+    tr: Yazmadan her şeyi yap (kuru koşu).
+    en: Do everything except the actual write (dry-run).
+  verified: true
+- flag: -o
+  long: --offset
+  meaning:
+    tr: Belirli ofsetteki imzayı hedefle.
+    en: Erase signature at a given byte offset.
+  verified: true
+  takes_value: true
+  value_name: num
+examples:
+- title:
+    tr: İmzaları listele
+    en: List signatures
+  command: sudo wipefs /dev/sdXN
+  explanation:
+    tr: >
+      Yazmadan imzaları basar (bayrak yok). Yine de doğru aygıtı lsblk ile
+      doğrulayın; yer tutucuyu olduğu gibi kullanmayın.
+    en: >
+      Prints signatures without wiping (no wipe flags). Still confirm the
+      device with lsblk; do not use the placeholder as-is.
+  risk: caution
+  requires_elevated: true
+- title:
+    tr: Silme kuru koşusu
+    en: Wipe dry-run
+  command: sudo wipefs -a -n /dev/sdXN
+  explanation:
+    tr: "'-a' silme planını '-n' ile yazmadan gösterir."
+    en: Shows what -a would erase without writing (-n).
+  risk: caution
+  requires_elevated: true
+related:
+- blkid
+- lsblk
+- mkfs
+- mkfs.ext4
+- fdisk
+- parted
+see_also:
+- man 8 wipefs
+intent:
+  tr:
+  - dosya sistemi imzası sil
+  - wipefs
+  - superblock temizle
+  en:
+  - wipe filesystem signature
+  - wipefs
+  - clear superblock
+verification:
+  status: reviewed
+  sources:
+  - man 8 wipefs
+  - wipefs --help
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-phase15
+  notes: >
+    No live -a wipe example without -n. Placeholder devices only. Not verified.
+nova:
+  concepts:
+  - storage
+  favorite_eligible: false
+category: disks

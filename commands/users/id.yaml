@@ -39,11 +39,12 @@ intent:
   - show uid
   - my groups
 verification:
-  status: reviewed
+  status: verified
   sources:
-  - man 1 id
+  - man 1 id (GNU coreutils)
   last_reviewed: '2026-11-02'
-  reviewer: nova-commands-bootstrap
+  reviewer: nova-commands-phase15
+  notes: UID/GID display; safe identity helper.
 category: users
 nova:
   concepts:

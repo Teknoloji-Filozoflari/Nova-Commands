@@ -41,11 +41,12 @@ intent:
   - where am I
   - print working directory
 verification:
-  status: reviewed
+  status: verified
   sources:
-  - man 1 pwd
+  - man 1 pwd (GNU coreutils)
   last_reviewed: '2026-11-02'
-  reviewer: nova-commands-bootstrap
+  reviewer: nova-commands-phase15
+  notes: No ambiguous flags; behavior matches coreutils pwd.
 nova:
   favorite_eligible: true
   ui_priority: 70

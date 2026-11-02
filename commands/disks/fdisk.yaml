@@ -50,6 +50,8 @@ related:
 - blkid
 - parted
 - mkfs
+- mkfs.ext4
+- wipefs
 intent:
   tr:
   - disk bölümle

@@ -1,0 +1,118 @@
+id: fsck
+name: fsck
+summary:
+  tr: Dosya sistemi bütünlük kontrolü / onarım ön yüzü.
+  en: Check and repair Linux filesystems (frontend).
+description:
+  tr: >
+    util-linux `fsck`, türe göre `fsck.<type>` (ör. e2fsck) çağırır. Bağlı
+    (mounted) FS’te onarım tehlikelidir; `-N` yalnızca planı gösterir, `-M`
+    bağlı olanları atlar. Yanlış onarım veri kaybına yol açabilir — dangerous.
+    reviewed, verified değil.
+  en: >
+    util-linux `fsck` dispatches to `fsck.<type>` (e.g. e2fsck). Repairing a
+    mounted FS is hazardous; `-N` shows the plan only, `-M` skips mounted.
+    Bad repairs can lose data — dangerous. Reviewed, not verified.
+tags:
+- disk
+- storage
+- filesystem
+- repair
+risk: dangerous
+requires_elevated: true
+platforms:
+- linux
+packages:
+  arch: util-linux
+  debian: util-linux
+  ubuntu: util-linux
+  fedora: util-linux
+install_notes:
+  tr: |
+    Arch: pacman -S util-linux; ext için ayrıca e2fsprogs, XFS için xfsprogs.
+    Debian/Ubuntu: apt install util-linux e2fsprogs
+    Fedora: dnf install util-linux e2fsprogs
+  en: |
+    Arch: pacman -S util-linux; also e2fsprogs for ext, xfsprogs for XFS.
+    Debian/Ubuntu: apt install util-linux e2fsprogs
+    Fedora: dnf install util-linux e2fsprogs
+flags:
+- flag: -N
+  meaning:
+    tr: Çalıştırma; yalnızca ne yapılacağını göster.
+    en: Do not execute; show what would be done.
+  verified: true
+- flag: -M
+  meaning:
+    tr: Bağlı dosya sistemlerini kontrol etme.
+    en: Do not check mounted filesystems.
+  verified: true
+- flag: -t
+  meaning:
+    tr: FS türü süz (virgülle ayrılmış liste).
+    en: Specify filesystem types to check.
+  verified: true
+  takes_value: true
+  value_name: type
+- flag: -A
+  meaning:
+    tr: fstab’daki tüm dosya sistemlerini kontrol et.
+    en: Check all filesystems listed in fstab.
+  verified: true
+examples:
+- title:
+    tr: Planı göster
+    en: Show plan
+  command: sudo fsck -N /dev/sdXN
+  explanation:
+    tr: Yazmadan / onarmadan ne yapılacağını basar; yer tutucu aygıt.
+    en: Prints the plan without running checks/repairs; placeholder device.
+  risk: caution
+  requires_elevated: true
+- title:
+    tr: Bağlı değilken kontrol (UYARI)
+    en: Check while unmounted (CAUTION)
+  command: sudo fsck -M /dev/sdXN
+  explanation:
+    tr: >
+      Aygıtın umount edildiğinden emin olun. Otomatik onarım bayrakları
+      (`-y` vb.) bu örnekte yok — bilinçli kullanım gerektirir.
+    en: >
+      Ensure the device is unmounted. Auto-repair flags (`-y`, etc.) are
+      omitted here — they need deliberate use.
+  risk: dangerous
+  requires_elevated: true
+related:
+- mkfs.ext4
+- lsblk
+- findmnt
+- mount
+- umount
+- blkid
+see_also:
+- man 8 fsck
+- man 8 e2fsck
+intent:
+  tr:
+  - dosya sistemi kontrol
+  - fsck onar
+  - disk bütünlük
+  en:
+  - filesystem check
+  - fsck repair
+  - disk integrity
+verification:
+  status: reviewed
+  sources:
+  - man 8 fsck
+  - fsck --help
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-phase15
+  notes: >
+    No auto-repair (-y) recipes. Prefer -N/-M. Not verified. Helper tools
+    (e2fsck) remain separate future entries if needed.
+nova:
+  concepts:
+  - storage
+  favorite_eligible: false
+category: disks

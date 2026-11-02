@@ -67,11 +67,12 @@ intent:
   - make directory
   - create folder
 verification:
-  status: reviewed
+  status: verified
   sources:
-  - man 1 mkdir
+  - man 1 mkdir (GNU coreutils)
   last_reviewed: '2026-11-02'
-  reviewer: nova-commands-bootstrap
+  reviewer: nova-commands-phase15
+  notes: Flags -p/--parents and -m/--mode confirmed in man page.
 category: filesystem
 nova:
   concepts:

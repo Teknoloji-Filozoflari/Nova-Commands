@@ -66,11 +66,12 @@ intent:
   - folder size
   - disk usage directory
 verification:
-  status: reviewed
+  status: verified
   sources:
-  - man 1 du
+  - man 1 du (GNU coreutils)
   last_reviewed: '2026-11-02'
-  reviewer: nova-commands-bootstrap
+  reviewer: nova-commands-phase15
+  notes: Flags -h/-s/-d confirmed; read-only directory usage.
 category: disks
 nova:
   concepts:

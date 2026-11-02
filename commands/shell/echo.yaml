@@ -44,11 +44,12 @@ intent:
   - print text
   - echo string
 verification:
-  status: reviewed
+  status: verified
   sources:
-  - man 1 echo
+  - man 1 echo (GNU coreutils)
   last_reviewed: '2026-11-02'
-  reviewer: nova-commands-bootstrap
+  reviewer: nova-commands-phase15
+  notes: Flag -n confirmed for /bin/echo; note shell builtin may differ slightly.
 category: shell
 nova:
   concepts:

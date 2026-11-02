@@ -1,0 +1,119 @@
+id: mkfs.fat
+name: mkfs.fat
+summary:
+  tr: FAT/VFAT dosya sistemi oluşturur (yıkıcı).
+  en: Create a FAT/VFAT filesystem (destructive).
+description:
+  tr: >
+    dosfstools `mkfs.fat` (çoğu sistemde `mkfs.vfat` aynı ikili) FAT12/16/32
+    oluşturur; USB, EFI sistem bölümü ve SD kartlarda yaygındır. Yanlış
+    aygıt veriyi siler. `-n` etiket, `-F` FAT boyutu seçer. reviewed.
+  en: >
+    dosfstools `mkfs.fat` (often same binary as `mkfs.vfat`) creates
+    FAT12/16/32 — common for USB, ESP, and SD cards. Wrong device wipes
+    data. `-n` sets label, `-F` selects FAT size. Reviewed, not verified.
+tags:
+- disk
+- storage
+- filesystem
+- fat
+- vfat
+- format
+risk: destructive
+requires_elevated: true
+platforms:
+- linux
+packages:
+  arch: dosfstools
+  debian: dosfstools
+  ubuntu: dosfstools
+  fedora: dosfstools
+install_notes:
+  tr: |
+    Arch: pacman -S dosfstools
+    Debian/Ubuntu: apt install dosfstools
+    Fedora: dnf install dosfstools
+    Not: mkfs.vfat genelde mkfs.fat ile aynı aracı işaret eder.
+  en: |
+    Arch: pacman -S dosfstools
+    Debian/Ubuntu: apt install dosfstools
+    Fedora: dnf install dosfstools
+    Note: mkfs.vfat usually points at the same tool as mkfs.fat.
+flags:
+- flag: -n
+  meaning:
+    tr: Birim adı / etiket (en fazla 11 karakter).
+    en: Volume name / label (up to 11 characters).
+  verified: true
+  takes_value: true
+  value_name: label
+- flag: -F
+  meaning:
+    tr: FAT boyutu (12, 16 veya 32).
+    en: FAT size (12, 16, or 32).
+  verified: true
+  takes_value: true
+  value_name: size
+- flag: -v
+  meaning:
+    tr: Ayrıntılı çıktı.
+    en: Verbose execution.
+  verified: true
+examples:
+- title:
+    tr: Yardım
+    en: Help
+  command: mkfs.fat --help
+  explanation:
+    tr: Seçenekleri gösterir; diske yazmaz.
+    en: Shows options; does not write to disk.
+  risk: safe
+  requires_elevated: false
+- title:
+    tr: FAT32 etiketli (UYARI)
+    en: Labeled FAT32 (DANGER)
+  command: sudo mkfs.fat -F 32 -n ESP /dev/sdXN
+  explanation:
+    tr: >
+      Yer tutucu — özellikle USB/ESP yollarında lsblk ile doğrulayın.
+      Windows/EFI paylaşımlı ortamlarda yanlış disk seçimi yaygındır.
+    en: >
+      Placeholder — double-check with lsblk, especially for USB/ESP paths.
+      Wrong-disk mistakes are common in shared Windows/EFI setups.
+  risk: destructive
+  requires_elevated: true
+related:
+- mkfs
+- mkfs.ext4
+- lsblk
+- blkid
+- parted
+- wipefs
+see_also:
+- man 8 mkfs.fat
+- https://wiki.archlinux.org/title/FAT
+intent:
+  tr:
+  - fat formatla
+  - vfat oluştur
+  - mkfs.vfat
+  - efi fat32
+  en:
+  - format fat
+  - create vfat
+  - mkfs.vfat
+  - efi fat32
+verification:
+  status: reviewed
+  sources:
+  - man 8 mkfs.fat
+  - https://wiki.archlinux.org/title/File_systems
+  - mkfs.fat --help
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-phase15
+  notes: Destructive FAT creator; help-first; placeholder only. Not verified.
+nova:
+  concepts:
+  - storage
+  favorite_eligible: false
+category: disks

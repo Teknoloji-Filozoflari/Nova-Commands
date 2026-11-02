@@ -1,0 +1,115 @@
+id: mkfs.btrfs
+name: mkfs.btrfs
+summary:
+  tr: Btrfs dosya sistemi oluşturur (yıkıcı).
+  en: Create a Btrfs filesystem (destructive).
+description:
+  tr: >
+    btrfs-progs `mkfs.btrfs` bir veya birden fazla aygıtta Btrfs oluşturur.
+    Mevcut FS’yi ezmek `-f` ister. Çok diskli RAID profilleri (`-d`/`-m`)
+    karmaşıktır — yanlış aygıt listesi veri kaybıdır. reviewed, verified değil.
+  en: >
+    btrfs-progs `mkfs.btrfs` creates Btrfs on one or more devices. Overwrite
+    needs `-f`. Multi-disk RAID profiles (`-d`/`-m`) are easy to get wrong —
+    bad device lists destroy data. Reviewed, not verified.
+tags:
+- disk
+- storage
+- filesystem
+- btrfs
+- format
+risk: destructive
+requires_elevated: true
+platforms:
+- linux
+packages:
+  arch: btrfs-progs
+  debian: btrfs-progs
+  ubuntu: btrfs-progs
+  fedora: btrfs-progs
+install_notes:
+  tr: |
+    Arch: pacman -S btrfs-progs
+    Debian/Ubuntu: apt install btrfs-progs
+    Fedora: dnf install btrfs-progs
+  en: |
+    Arch: pacman -S btrfs-progs
+    Debian/Ubuntu: apt install btrfs-progs
+    Fedora: dnf install btrfs-progs
+flags:
+- flag: -L
+  long: --label
+  meaning:
+    tr: Dosya sistemi etiketi.
+    en: Set filesystem label.
+  verified: true
+  takes_value: true
+  value_name: label
+- flag: -f
+  long: --force
+  meaning:
+    tr: Mevcut dosya sisteminin üzerine yazmayı zorla.
+    en: Force overwrite of an existing filesystem.
+  verified: true
+- flag: -m
+  long: --metadata
+  meaning:
+    tr: Meta veri profili (single, raid1, …).
+    en: Metadata profile (single, raid1, …).
+  verified: true
+  takes_value: true
+  value_name: profile
+examples:
+- title:
+    tr: Sürüm / yardım
+    en: Version / help
+  command: mkfs.btrfs --help
+  explanation:
+    tr: Seçenekleri listeler; aygıta yazmaz.
+    en: Lists options; does not write to a device.
+  risk: safe
+  requires_elevated: false
+- title:
+    tr: Tek aygıt Btrfs (UYARI)
+    en: Single-device Btrfs (DANGER)
+  command: sudo mkfs.btrfs -L root /dev/sdXN
+  explanation:
+    tr: >
+      Yer tutucu. Çok aygıtlı komutları kopyalamayın; önce lsblk ile her
+      üyeyi doğrulayın. Üzerine yazma için `-f` ekstra risk.
+    en: >
+      Placeholder. Do not copy multi-device recipes blindly; verify each
+      member with lsblk. `-f` adds overwrite risk.
+  risk: destructive
+  requires_elevated: true
+related:
+- mkfs
+- mkfs.ext4
+- mkfs.xfs
+- lsblk
+- blkid
+- wipefs
+see_also:
+- man 8 mkfs.btrfs
+- https://wiki.archlinux.org/title/Btrfs
+intent:
+  tr:
+  - btrfs formatla
+  - mkfs.btrfs
+  en:
+  - format btrfs
+  - mkfs.btrfs
+verification:
+  status: reviewed
+  sources:
+  - man 8 mkfs.btrfs
+  - https://wiki.archlinux.org/title/File_systems
+  - mkfs.btrfs --help
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-phase15
+  notes: Destructive; help-first examples; placeholder device only.
+nova:
+  concepts:
+  - storage
+  favorite_eligible: false
+category: disks
