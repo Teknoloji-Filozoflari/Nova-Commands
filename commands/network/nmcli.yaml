@@ -1,0 +1,108 @@
+id: nmcli
+name: nmcli
+summary:
+  tr: NetworkManager komut satırı.
+  en: NetworkManager command-line client.
+description:
+  tr: Wi-Fi/Ethernet bağlantılarını listeleme, bağlanma ve cihaz durumunu yönetme. Masaüstü/laptop Linux’ta
+    yaygındır.
+  en: List/connect Wi-Fi/Ethernet and manage device state. Common on desktop/laptop Linux.
+tags:
+- network
+- wifi
+risk: dangerous
+requires_elevated: false
+platforms:
+- linux
+packages:
+  arch: networkmanager
+  debian: network-manager
+  ubuntu: network-manager
+  fedora: NetworkManager
+install_notes:
+  tr: |-
+    Arch: pacman -S networkmanager — sonra systemctl enable --now NetworkManager
+    Debian/Ubuntu: network-manager
+    Fedora: NetworkManager (genelde kurulu)
+  en: |-
+    Arch: pacman -S networkmanager — then systemctl enable --now NetworkManager
+    Debian/Ubuntu: network-manager
+    Fedora: NetworkManager (usually installed)
+flags:
+- flag: device
+  meaning:
+    tr: Cihaz alt komutu.
+    en: Device subcommand.
+  verified: true
+- flag: connection
+  meaning:
+    tr: Bağlantı alt komutu.
+    en: Connection subcommand.
+  verified: true
+- flag: radio
+  meaning:
+    tr: Radyo (Wi-Fi/WWAN) alt komutu.
+    en: Radio (Wi-Fi/WWAN) subcommand.
+  verified: true
+examples:
+- title:
+    tr: Durum
+    en: Status
+  command: nmcli general status
+  explanation:
+    tr: NetworkManager genel durumu.
+    en: Overall NetworkManager status.
+  risk: safe
+  requires_elevated: false
+- title:
+    tr: Cihazlar
+    en: Devices
+  command: nmcli device status
+  explanation:
+    tr: Ağ arayüzleri ve durumları.
+    en: Interfaces and their state.
+  risk: safe
+  requires_elevated: false
+- title:
+    tr: Wi-Fi listele
+    en: List Wi-Fi
+  command: nmcli device wifi list
+  explanation:
+    tr: Görünen SSID’ler.
+    en: Visible SSIDs.
+  risk: safe
+  requires_elevated: false
+- title:
+    tr: Wi-Fi bağlan
+    en: Connect Wi-Fi
+  command: nmcli device wifi connect "SSID" password "secret"
+  explanation:
+    tr: Kimlik bilgilerini komutta tutmayın; geçmişe yazılır.
+    en: Avoid passwords on argv; they land in shell history.
+  risk: dangerous
+  requires_elevated: false
+related:
+- ip
+- resolvectl
+- systemctl
+intent:
+  tr:
+  - wifi bağlan
+  - networkmanager
+  - nmcli durum
+  en:
+  - connect wifi
+  - networkmanager
+  - nmcli status
+verification:
+  status: reviewed
+  sources:
+  - man 1 nmcli
+  - https://wiki.archlinux.org/title/NetworkManager
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-coverage
+nova:
+  concepts:
+  - networking
+  ui_priority: 65
+category: network

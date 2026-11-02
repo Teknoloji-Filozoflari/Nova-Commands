@@ -1,0 +1,89 @@
+id: lsof
+name: lsof
+summary:
+  tr: Açık dosyaları ve soketleri listeler.
+  en: List open files and sockets.
+description:
+  tr: Hangi sürecin hangi dosya/portu tuttuğunu gösterir; umount busy ve port çakışmalarında vazgeçilmez.
+  en: Shows which process holds files/ports; essential for busy mounts and port conflicts.
+tags:
+- processes
+- debug
+- network
+risk: safe
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+packages:
+  arch: lsof
+  debian: lsof
+  ubuntu: lsof
+  fedora: lsof
+install_notes:
+  tr: 'Arch: pacman -S lsof'
+  en: 'Arch: pacman -S lsof'
+flags:
+- flag: -i
+  meaning:
+    tr: Ağ dosyaları.
+    en: Internet files/sockets.
+  verified: true
+- flag: -p
+  meaning:
+    tr: PID süz.
+    en: Filter by PID.
+  verified: true
+  takes_value: true
+  value_name: pid
+- flag: -n
+  meaning:
+    tr: Host çözümleme yok.
+    en: No host resolution.
+  verified: true
+- flag: -P
+  meaning:
+    tr: Port adlarını çözümleme.
+    en: No port name resolution.
+  verified: true
+examples:
+- title:
+    tr: Port 22
+    en: Port 22
+  command: sudo lsof -iTCP:22 -sTCP:LISTEN
+  explanation:
+    tr: 22 dinleyen süreç.
+    en: Process listening on 22.
+  risk: safe
+  requires_elevated: true
+- title:
+    tr: Dizin kullananlar
+    en: Who uses dir
+  command: lsof +D /mnt/usb
+  explanation:
+    tr: Busy mount teşhisi (yavaş olabilir).
+    en: Busy-mount diagnosis (can be slow).
+  risk: safe
+related:
+- ss
+- fuser
+- ps
+- umount
+intent:
+  tr:
+  - kim kullanıyor
+  - portu kim dinliyor
+  en:
+  - who is using file
+  - who listens on port
+verification:
+  status: reviewed
+  sources:
+  - man 8 lsof
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-coverage
+nova:
+  concepts:
+  - networking
+category: processes

@@ -1,0 +1,84 @@
+id: usermod
+name: usermod
+summary:
+  tr: Kullanıcı hesabını değiştirir.
+  en: Modify a user account.
+description:
+  tr: Kabuk, gruplar, ev dizini ve kilit gibi hesap özelliklerini günceller.
+  en: Updates shell, groups, home, lock state, and related account fields.
+tags:
+- users
+- accounts
+risk: dangerous
+requires_elevated: true
+platforms:
+- linux
+packages:
+  arch: shadow
+  debian: passwd
+  ubuntu: passwd
+  fedora: shadow-utils
+flags:
+- flag: -aG
+  meaning:
+    tr: Gruplara ekle (append).
+    en: Append to groups.
+  verified: true
+- flag: -s
+  meaning:
+    tr: Kabuk değiştir.
+    en: Change shell.
+  verified: true
+  takes_value: true
+  value_name: shell
+- flag: -L
+  meaning:
+    tr: Kilitle.
+    en: Lock account.
+  verified: true
+- flag: -U
+  meaning:
+    tr: Kilidi aç.
+    en: Unlock account.
+  verified: true
+examples:
+- title:
+    tr: Docker grubu
+    en: Docker group
+  command: sudo usermod -aG docker alice
+  explanation:
+    tr: Oturum yenilenmeden grup genelde uygulanmaz.
+    en: Usually needs re-login for group to apply.
+  risk: dangerous
+  requires_elevated: true
+- title:
+    tr: Kabuk
+    en: Shell
+  command: sudo usermod -s /bin/zsh alice
+  explanation:
+    tr: Giriş kabuğunu değiştirir.
+    en: Changes login shell.
+  risk: caution
+  requires_elevated: true
+related:
+- useradd
+- passwd
+- id
+- groups
+intent:
+  tr:
+  - kullanıcıyı gruba ekle
+  - usermod
+  en:
+  - add user to group
+  - usermod
+verification:
+  status: reviewed
+  sources:
+  - man 8 usermod
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-coverage
+nova:
+  concepts:
+  - permissions
+category: users

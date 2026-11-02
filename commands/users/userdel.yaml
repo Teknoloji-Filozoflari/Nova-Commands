@@ -1,0 +1,73 @@
+id: userdel
+name: userdel
+summary:
+  tr: Kullanıcı hesabını siler.
+  en: Delete a user account.
+description:
+  tr: Hesabı passwd veritabanından kaldırır; -r ile ev dizinini de siler — geri alınması zordur.
+  en: Removes an account from the user database; -r also deletes the home — hard to undo.
+tags:
+- users
+- accounts
+risk: destructive
+requires_elevated: true
+platforms:
+- linux
+packages:
+  arch: shadow
+  debian: passwd
+  ubuntu: passwd
+  fedora: shadow-utils
+flags:
+- flag: -r
+  meaning:
+    tr: Ev ve posta kutusunu sil.
+    en: Remove home and mail spool.
+  verified: true
+  long: --remove
+- flag: -f
+  meaning:
+    tr: Zorla (dikkat).
+    en: Force (dangerous).
+  verified: true
+  long: --force
+examples:
+- title:
+    tr: Hesabı sil
+    en: Delete account
+  command: sudo userdel alice
+  explanation:
+    tr: Hesabı siler; ev kalabilir.
+    en: Deletes account; home may remain.
+  risk: dangerous
+  requires_elevated: true
+- title:
+    tr: Ev ile sil
+    en: Delete with home
+  command: sudo userdel -r alice
+  explanation:
+    tr: Ev dizini dahil siler — destructive.
+    en: Removes home too — destructive.
+  risk: destructive
+  requires_elevated: true
+related:
+- useradd
+- usermod
+- passwd
+intent:
+  tr:
+  - kullanıcı sil
+  - userdel
+  en:
+  - delete user
+  - userdel
+verification:
+  status: reviewed
+  sources:
+  - man 8 userdel
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-coverage
+nova:
+  concepts:
+  - permissions
+category: users

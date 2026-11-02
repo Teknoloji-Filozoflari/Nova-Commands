@@ -1,0 +1,69 @@
+id: fdisk
+name: fdisk
+summary:
+  tr: Disk bölüm tablosu düzenleyici.
+  en: Manipulate disk partition tables.
+description:
+  tr: GPT/MBR bölümlerini listeler ve düzenler. Yanlış cihaz seçimi veri kaybına yol açar.
+  en: Lists/edits GPT/MBR partitions. Selecting the wrong device destroys data.
+tags:
+- disk
+- partition
+- storage
+risk: destructive
+requires_elevated: true
+platforms:
+- linux
+packages:
+  arch: util-linux
+  debian: fdisk
+  ubuntu: fdisk
+  fedora: util-linux
+flags:
+- flag: -l
+  meaning:
+    tr: Bölümleri listele.
+    en: List partitions.
+  verified: true
+  long: --list
+examples:
+- title:
+    tr: Listele
+    en: List
+  command: sudo fdisk -l
+  explanation:
+    tr: Disk ve bölüm özeti (okuma).
+    en: Disk/partition summary (read).
+  risk: safe
+  requires_elevated: true
+- title:
+    tr: Etkileşimli
+    en: Interactive
+  command: sudo fdisk /dev/sdX
+  explanation:
+    tr: Yanlış cihaz = veri kaybı; önce -l ile doğrulayın.
+    en: Wrong device = data loss; confirm with -l first.
+  risk: destructive
+  requires_elevated: true
+related:
+- lsblk
+- blkid
+- parted
+- mkfs
+intent:
+  tr:
+  - disk bölümle
+  - fdisk listele
+  en:
+  - partition disk
+  - fdisk list
+verification:
+  status: reviewed
+  sources:
+  - man 8 fdisk
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-coverage
+nova:
+  concepts:
+  - storage
+category: disks

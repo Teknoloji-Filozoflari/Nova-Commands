@@ -1,0 +1,81 @@
+id: ssh-add
+name: ssh-add
+summary:
+  tr: Özel anahtarları ssh-agent’a ekler.
+  en: Add private keys to the OpenSSH authentication agent.
+description:
+  tr: Çalışan ssh-agent oturumuna kimlik ekler/listeler. Agent yoksa önce eval "$(ssh-agent -s)" gerekebilir.
+  en: Loads identities into a running ssh-agent. Start an agent first if needed.
+tags:
+- security
+- ssh
+risk: caution
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+packages:
+  arch: openssh
+  debian: openssh-client
+  ubuntu: openssh-client
+  fedora: openssh-clients
+install_notes:
+  tr: 'Arch: pacman -S openssh'
+  en: 'Arch: pacman -S openssh'
+flags:
+- flag: -l
+  meaning:
+    tr: Parmak izlerini listele.
+    en: List fingerprints.
+  verified: true
+- flag: -D
+  meaning:
+    tr: Tüm kimlikleri sil.
+    en: Delete all identities.
+  verified: true
+- flag: -t
+  meaning:
+    tr: Ömür (saniye).
+    en: Lifetime in seconds.
+  verified: true
+  takes_value: true
+  value_name: seconds
+examples:
+- title:
+    tr: Listele
+    en: List
+  command: ssh-add -l
+  explanation:
+    tr: Agent’taki anahtarlar; agent yoksa hata.
+    en: Keys in agent; errors if none.
+  risk: safe
+- title:
+    tr: Ekle
+    en: Add
+  command: ssh-add ~/.ssh/id_ed25519
+  explanation:
+    tr: Özel anahtarı agent’a yükler (passphrase sorabilir).
+    en: Loads private key into agent (may prompt).
+  risk: caution
+related:
+- ssh
+- ssh-keygen
+- ssh-copy-id
+intent:
+  tr:
+  - ssh agent anahtar
+  - ssh-add
+  en:
+  - ssh agent add key
+  - ssh-add
+verification:
+  status: reviewed
+  sources:
+  - man 1 ssh-add
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-coverage
+nova:
+  concepts:
+  - ssh
+category: security

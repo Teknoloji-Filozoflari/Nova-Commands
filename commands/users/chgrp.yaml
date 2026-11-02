@@ -1,0 +1,68 @@
+id: chgrp
+name: chgrp
+summary:
+  tr: Dosya grup sahipliğini değiştirir.
+  en: Change group ownership of files.
+description:
+  tr: Dosya/dizinlerin grup alanını ayarlar. chown :group kısayolu da kullanılabilir.
+  en: Sets the group field on files/dirs. chown :group is an alternative.
+tags:
+- users
+- permissions
+risk: dangerous
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+packages:
+  arch: coreutils
+  debian: coreutils
+  ubuntu: coreutils
+  fedora: coreutils
+flags:
+- flag: -R
+  meaning:
+    tr: Özyinelemeli.
+    en: Recursive.
+  verified: true
+  long: --recursive
+examples:
+- title:
+    tr: Grup değiştir
+    en: Change group
+  command: chgrp staff report.txt
+  explanation:
+    tr: report.txt grubunu staff yapar.
+    en: Sets group staff on report.txt.
+  risk: caution
+- title:
+    tr: Özyinelemeli
+    en: Recursive
+  command: sudo chgrp -R www-data /var/www/site
+  explanation:
+    tr: Web kökü grubunu ayarlar.
+    en: Sets web root group.
+  risk: dangerous
+  requires_elevated: true
+related:
+- chown
+- chmod
+- groups
+intent:
+  tr:
+  - dosya grubu değiştir
+  - chgrp
+  en:
+  - change file group
+  - chgrp
+verification:
+  status: reviewed
+  sources:
+  - man 1 chgrp
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-coverage
+nova:
+  concepts:
+  - permissions
+category: users

@@ -1,0 +1,92 @@
+id: scp
+name: scp
+summary:
+  tr: SSH üzerinden güvenli dosya kopyalama.
+  en: Secure remote file copy over SSH.
+description:
+  tr: OpenSSH ile uzak↔yerel dosya kopyalar. Yeni kurulumlarda sftp/rsync tercih edilebilir; scp hâlâ
+    yaygındır.
+  en: Copies files over OpenSSH. Newer setups may prefer sftp/rsync; scp remains common.
+tags:
+- security
+- ssh
+- network
+risk: caution
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+packages:
+  arch: openssh
+  debian: openssh-client
+  ubuntu: openssh-client
+  fedora: openssh-clients
+install_notes:
+  tr: 'Arch: pacman -S openssh'
+  en: 'Arch: pacman -S openssh'
+flags:
+- flag: -P
+  meaning:
+    tr: Uzak SSH portu.
+    en: Remote SSH port.
+  verified: true
+  takes_value: true
+  value_name: port
+- flag: -i
+  meaning:
+    tr: Kimlik dosyası.
+    en: Identity file.
+  verified: true
+  takes_value: true
+  value_name: identity
+- flag: -r
+  meaning:
+    tr: Özyinelemeli.
+    en: Recursive.
+  verified: true
+- flag: -C
+  meaning:
+    tr: Sıkıştırma.
+    en: Compression.
+  verified: true
+examples:
+- title:
+    tr: Yerelden uzağa
+    en: Local to remote
+  command: scp ./file.txt user@host:/tmp/
+  explanation:
+    tr: Tek dosyayı uzak /tmp’ye kopyalar.
+    en: Copies one file to remote /tmp.
+  risk: caution
+- title:
+    tr: Dizin
+    en: Directory
+  command: scp -r ./dir user@host:~/dir
+  explanation:
+    tr: Dizini özyinelemeli kopyalar.
+    en: Copies a directory recursively.
+  risk: caution
+related:
+- ssh
+- sftp
+- rsync
+- ssh-keygen
+intent:
+  tr:
+  - scp ile kopyala
+  - ssh dosya gönder
+  en:
+  - scp copy file
+  - ssh send file
+verification:
+  status: reviewed
+  sources:
+  - man 1 scp
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-coverage
+nova:
+  concepts:
+  - ssh
+  - networking
+category: security

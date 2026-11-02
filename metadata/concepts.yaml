@@ -22,3 +22,27 @@ concepts:
     label:
       tr: systemd
       en: systemd
+  - id: networking
+    label:
+      tr: Ağ ve bağlantı
+      en: Networking
+  - id: dns
+    label:
+      tr: DNS
+      en: DNS
+  - id: ssh
+    label:
+      tr: SSH
+      en: SSH
+  - id: storage
+    label:
+      tr: Depolama ve disk
+      en: Storage and disks
+  - id: permissions
+    label:
+      tr: Kullanıcılar ve izinler
+      en: Users and permissions
+  - id: containers
+    label:
+      tr: Konteynerler
+      en: Containers

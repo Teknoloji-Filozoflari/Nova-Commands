@@ -1,0 +1,96 @@
+id: flatpak
+name: flatpak
+summary:
+  tr: Uygulama dağıtımı için Flatpak CLI.
+  en: Flatpak application deployment CLI.
+description:
+  tr: Sandbox’lı masaüstü uygulamalarını Flathub vb. remote’lardan kurar/günceller.
+  en: Installs/updates sandboxed desktop apps from remotes such as Flathub.
+tags:
+- packages
+- desktop
+risk: caution
+requires_elevated: false
+platforms:
+- linux
+packages:
+  arch: flatpak
+  debian: flatpak
+  ubuntu: flatpak
+  fedora: flatpak
+install_notes:
+  tr: |-
+    Arch: pacman -S flatpak — ardından flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+    Debian/Ubuntu/Fedora: flatpak paketi
+  en: |-
+    Arch: pacman -S flatpak — then flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+    Debian/Ubuntu/Fedora: flatpak package
+flags:
+- flag: install
+  meaning:
+    tr: Uygulama kur (alt komut).
+    en: Install app (subcommand).
+  verified: true
+- flag: update
+  meaning:
+    tr: Güncelle (alt komut).
+    en: Update (subcommand).
+  verified: true
+- flag: list
+  meaning:
+    tr: Kurulu uygulamalar.
+    en: List installed apps.
+  verified: true
+- flag: search
+  meaning:
+    tr: Ara.
+    en: Search.
+  verified: true
+examples:
+- title:
+    tr: Listele
+    en: List
+  command: flatpak list
+  explanation:
+    tr: Kurulu flatpak’ler.
+    en: Installed flatpaks.
+  risk: safe
+- title:
+    tr: Ara
+    en: Search
+  command: flatpak search gimp
+  explanation:
+    tr: Remote’larda GIMP ara.
+    en: Search remotes for GIMP.
+  risk: safe
+- title:
+    tr: Kur
+    en: Install
+  command: flatpak install flathub org.gimp.GIMP
+  explanation:
+    tr: Flathub’dan kurar (onay ister).
+    en: Installs from Flathub (prompts).
+  risk: caution
+related:
+- pacman
+- apt
+- dnf
+- snap
+intent:
+  tr:
+  - flatpak kur
+  - flathub
+  en:
+  - flatpak install
+  - flathub
+verification:
+  status: reviewed
+  sources:
+  - man 1 flatpak
+  - https://docs.flatpak.org/
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-coverage
+nova:
+  concepts:
+  - packages
+category: packages

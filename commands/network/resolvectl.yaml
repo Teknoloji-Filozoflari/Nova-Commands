@@ -1,0 +1,89 @@
+id: resolvectl
+name: resolvectl
+summary:
+  tr: systemd-resolved DNS denetimi.
+  en: Resolve domain names and control systemd-resolved.
+description:
+  tr: systemd-resolved ile DNS durumu, sorgu ve arayüz DNS ayarlarını yönetir.
+  en: Inspect and control DNS via systemd-resolved, including per-link settings.
+tags:
+- network
+- dns
+- systemd
+risk: caution
+requires_elevated: false
+platforms:
+- linux
+packages:
+  arch: systemd
+  debian: systemd
+  ubuntu: systemd
+  fedora: systemd
+install_notes:
+  tr: 'Arch: pacman -S systemd — systemd-resolved etkin olmalı (systemctl enable --now systemd-resolved).'
+  en: 'Arch: pacman -S systemd — enable systemd-resolved (systemctl enable --now systemd-resolved).'
+flags:
+- flag: status
+  meaning:
+    tr: Çözümleyici durumu (alt komut).
+    en: Resolver status (subcommand).
+  verified: true
+- flag: query
+  meaning:
+    tr: DNS sorgusu (alt komut).
+    en: DNS query (subcommand).
+  verified: true
+- flag: dns
+  meaning:
+    tr: Bağlantı DNS sunucuları (alt komut).
+    en: Link DNS servers (subcommand).
+  verified: true
+examples:
+- title:
+    tr: Durum
+    en: Status
+  command: resolvectl status
+  explanation:
+    tr: Resolver ve arayüz DNS özeti.
+    en: Resolver and per-link DNS summary.
+  risk: safe
+- title:
+    tr: Sorgu
+    en: Query
+  command: resolvectl query example.com
+  explanation:
+    tr: resolved üzerinden ad çözümler.
+    en: Resolves via systemd-resolved.
+  risk: safe
+- title:
+    tr: Flush
+    en: Flush cache
+  command: resolvectl flush-caches
+  explanation:
+    tr: DNS önbelleğini temizler.
+    en: Flushes DNS caches.
+  risk: caution
+related:
+- dig
+- host
+- systemctl
+- nmcli
+intent:
+  tr:
+  - dns önbellek temizle
+  - systemd resolved
+  en:
+  - flush dns cache
+  - systemd resolved
+verification:
+  status: reviewed
+  sources:
+  - man 1 resolvectl
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-coverage
+nova:
+  concepts:
+  - networking
+  - dns
+  - systemd
+category: network

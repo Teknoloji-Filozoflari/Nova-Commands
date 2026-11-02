@@ -1,0 +1,85 @@
+id: loginctl
+name: loginctl
+summary:
+  tr: systemd oturum ve kullanıcı denetimi.
+  en: Control systemd-logind sessions and users.
+description:
+  tr: Oturumları, koltukları (seat) ve kullanıcıları listeler; kilitleme/sonlandırma yapabilir.
+  en: Lists sessions/seats/users; can lock or terminate sessions.
+tags:
+- system
+- systemd
+- session
+risk: dangerous
+requires_elevated: false
+platforms:
+- linux
+packages:
+  arch: systemd
+  debian: systemd
+  ubuntu: systemd
+  fedora: systemd
+flags:
+- flag: list-sessions
+  meaning:
+    tr: Oturumları listele.
+    en: List sessions.
+  verified: true
+- flag: user-status
+  meaning:
+    tr: Kullanıcı durumu.
+    en: User status.
+  verified: true
+  takes_value: true
+  value_name: user
+- flag: lock-session
+  meaning:
+    tr: Oturumu kilitle.
+    en: Lock session.
+  verified: true
+examples:
+- title:
+    tr: Oturumlar
+    en: Sessions
+  command: loginctl list-sessions
+  explanation:
+    tr: Aktif oturum kimlikleri.
+    en: Active session ids.
+  risk: safe
+- title:
+    tr: Kullanıcı durumu
+    en: User status
+  command: loginctl user-status
+  explanation:
+    tr: Mevcut kullanıcı oturum özeti.
+    en: Current user session summary.
+  risk: safe
+- title:
+    tr: Sonlandır
+    en: Terminate
+  command: loginctl terminate-session 3
+  explanation:
+    tr: Belirtilen oturumu bitirir — veri kaybı riski.
+    en: Ends a session — risk of data loss.
+  risk: dangerous
+related:
+- systemctl
+- who
+- w
+intent:
+  tr:
+  - oturum listele
+  - loginctl
+  en:
+  - list sessions
+  - loginctl
+verification:
+  status: reviewed
+  sources:
+  - man 1 loginctl
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-coverage
+nova:
+  concepts:
+  - systemd
+category: system

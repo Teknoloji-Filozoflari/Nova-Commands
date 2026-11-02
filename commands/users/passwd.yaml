@@ -1,0 +1,96 @@
+id: passwd
+name: passwd
+summary:
+  tr: Kullanıcı parola değiştirir.
+  en: Change user password.
+description:
+  tr: Kendi veya (root ise) başka kullanıcının parolasını ayarlar. Parola politikası PAM ile gelir.
+  en: Sets your password or another user's (as root). Policy comes from PAM.
+tags:
+- users
+- password
+risk: dangerous
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+packages:
+  arch: passwd
+  debian: passwd
+  ubuntu: passwd
+  fedora: passwd
+install_notes:
+  tr: |-
+    Arch: pacman -S passwd (shadow ile ilişkili)
+    Debian/Ubuntu/Fedora: passwd
+  en: |-
+    Arch: pacman -S passwd (shadow-related)
+    Debian/Ubuntu/Fedora: passwd
+flags:
+- flag: -S
+  meaning:
+    tr: Parola durumu.
+    en: Password status.
+  verified: true
+  long: --status
+- flag: -l
+  meaning:
+    tr: Kilitle (root).
+    en: Lock (root).
+  verified: true
+  long: --lock
+- flag: -u
+  meaning:
+    tr: Kilidi aç (root).
+    en: Unlock (root).
+  verified: true
+  long: --unlock
+examples:
+- title:
+    tr: Kendi parola
+    en: Own password
+  command: passwd
+  explanation:
+    tr: Etkileşimli parola değişimi.
+    en: Interactive password change.
+  risk: caution
+- title:
+    tr: Durum
+    en: Status
+  command: passwd -S alice
+  explanation:
+    tr: alice parola durumu (root gerekebilir).
+    en: alice password status (may need root).
+  risk: safe
+- title:
+    tr: Başka kullanıcı
+    en: Other user
+  command: sudo passwd alice
+  explanation:
+    tr: Root olarak alice parolasını ayarlar.
+    en: Root sets alice's password.
+  risk: dangerous
+  requires_elevated: true
+related:
+- useradd
+- usermod
+- chpasswd
+- sudo
+intent:
+  tr:
+  - şifre değiştir
+  - passwd
+  en:
+  - change password
+  - passwd
+verification:
+  status: reviewed
+  sources:
+  - man 1 passwd
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-coverage
+nova:
+  concepts:
+  - permissions
+category: users

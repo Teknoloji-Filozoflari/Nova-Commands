@@ -1,0 +1,83 @@
+id: host
+name: host
+summary:
+  tr: Basit DNS arama aracı.
+  en: Simple DNS lookup utility.
+description:
+  tr: dig’e göre daha kısa çıktılı DNS sorgusu. Hızlı ad→IP veya IP→ad bakmak için uygundur.
+  en: Simpler DNS queries than dig. Handy for quick name↔address checks.
+tags:
+- network
+- dns
+risk: safe
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+packages:
+  arch: bind
+  debian: bind9-host
+  ubuntu: bind9-host
+  fedora: bind-utils
+install_notes:
+  tr: |-
+    Arch: pacman -S bind
+    Debian/Ubuntu: apt install bind9-host (veya dnsutils metapaketi)
+    Fedora: dnf install bind-utils
+  en: |-
+    Arch: pacman -S bind
+    Debian/Ubuntu: apt install bind9-host (or dnsutils)
+    Fedora: dnf install bind-utils
+flags:
+- flag: -t
+  meaning:
+    tr: Kayıt türü.
+    en: Query type.
+  verified: true
+  takes_value: true
+  value_name: type
+- flag: -a
+  meaning:
+    tr: Tüm kayıtlar (ANY eşdeğeri).
+    en: All records equivalent.
+  verified: true
+examples:
+- title:
+    tr: Ad çözümle
+    en: Resolve name
+  command: host example.com
+  explanation:
+    tr: A/AAAA ve mail bilgisi özeti.
+    en: Summary of A/AAAA and mail info.
+  risk: safe
+- title:
+    tr: Ters DNS
+    en: Reverse DNS
+  command: host 1.1.1.1
+  explanation:
+    tr: PTR kaydı arar.
+    en: Looks up PTR record.
+  risk: safe
+related:
+- dig
+- resolvectl
+- nslookup
+intent:
+  tr:
+  - host ile dns
+  - ip adresi bul
+  en:
+  - host dns lookup
+  - find ip address
+verification:
+  status: reviewed
+  sources:
+  - man 1 host
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-coverage
+nova:
+  concepts:
+  - networking
+  - dns
+category: network

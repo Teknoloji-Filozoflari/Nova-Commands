@@ -1,0 +1,76 @@
+id: umount
+name: umount
+summary:
+  tr: Dosya sistemi bağlantısını kaldırır.
+  en: Unmount filesystems.
+description:
+  tr: Bağlı bir aygıt veya dizini ağaçtan ayırır. Meşgul dosya sistemleri umount edilemez (lsof/fuser).
+  en: Detaches a mounted device/dir. Busy filesystems will refuse (see lsof/fuser).
+tags:
+- disk
+- storage
+risk: dangerous
+requires_elevated: true
+platforms:
+- linux
+- macos
+- bsd
+packages:
+  arch: util-linux
+  debian: mount
+  ubuntu: mount
+  fedora: util-linux
+flags:
+- flag: -l
+  meaning:
+    tr: Lazy unmount.
+    en: Lazy unmount.
+  verified: true
+  long: --lazy
+- flag: -f
+  meaning:
+    tr: Zorla (dikkat).
+    en: Force (careful).
+  verified: true
+  long: --force
+examples:
+- title:
+    tr: Ayır
+    en: Unmount
+  command: sudo umount /mnt/usb
+  explanation:
+    tr: Bağlı USB’yi ayırır.
+    en: Unmounts a USB mountpoint.
+  risk: dangerous
+  requires_elevated: true
+- title:
+    tr: Lazy
+    en: Lazy
+  command: sudo umount -l /mnt/data
+  explanation:
+    tr: Meşgulken gecikmeli ayırma.
+    en: Lazy detach when busy.
+  risk: dangerous
+  requires_elevated: true
+related:
+- mount
+- findmnt
+- lsblk
+- lsof
+intent:
+  tr:
+  - disk çıkar
+  - umount
+  en:
+  - unmount disk
+  - umount
+verification:
+  status: reviewed
+  sources:
+  - man 8 umount
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-coverage
+nova:
+  concepts:
+  - storage
+category: disks

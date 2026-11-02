@@ -1,0 +1,78 @@
+id: awk
+name: awk
+summary:
+  tr: Desen tarama ve metin işleme dili.
+  en: Pattern scanning and text processing language.
+description:
+  tr: Sütun/alan tabanlı raporlama ve dönüştürme için güçlü mini dil.
+  en: Powerful mini-language for field-oriented reporting and transforms.
+tags:
+- text
+risk: safe
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+packages:
+  arch: gawk
+  debian: gawk
+  ubuntu: gawk
+  fedora: gawk
+install_notes:
+  tr: |-
+    Arch: pacman -S gawk (awk → gawk)
+    Debian/Ubuntu/Fedora: gawk
+  en: |-
+    Arch: pacman -S gawk (awk → gawk)
+    Debian/Ubuntu/Fedora: gawk
+flags:
+- flag: -F
+  meaning:
+    tr: Alan ayırıcı.
+    en: Field separator.
+  verified: true
+  takes_value: true
+  value_name: fs
+- flag: -f
+  meaning:
+    tr: Program dosyası.
+    en: Program file.
+  verified: true
+  takes_value: true
+  value_name: progfile
+examples:
+- title:
+    tr: 1. sütun
+    en: First column
+  command: awk '{print $1}' file.txt
+  explanation:
+    tr: Boşlukla ayrılmış ilk alan.
+    en: First whitespace field.
+  risk: safe
+- title:
+    tr: CSV benzeri
+    en: CSV-ish
+  command: awk -F, '{print $2}' data.csv
+  explanation:
+    tr: Virgülle ayrılmış 2. alan.
+    en: Comma-separated 2nd field.
+  risk: safe
+related:
+- sed
+- cut
+- grep
+intent:
+  tr:
+  - awk sütun
+  - alan işle
+  en:
+  - awk column
+  - field processing
+verification:
+  status: reviewed
+  sources:
+  - man 1 gawk
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-coverage
+category: text

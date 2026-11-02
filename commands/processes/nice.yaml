@@ -1,0 +1,65 @@
+id: nice
+name: nice
+summary:
+  tr: Değiştirilmiş öncelikle komut çalıştırır.
+  en: Run a command with a modified niceness.
+description:
+  tr: CPU zamanlama önceliğini (nice değeri) ayarlayarak süreci başlatır. Negatif nice genelde root ister.
+  en: Starts a process with adjusted CPU niceness. Negative nice usually needs root.
+tags:
+- processes
+risk: caution
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+packages:
+  arch: coreutils
+  debian: coreutils
+  ubuntu: coreutils
+  fedora: coreutils
+flags:
+- flag: -n
+  meaning:
+    tr: Nice ayarı.
+    en: Niceness adjustment.
+  verified: true
+  takes_value: true
+  value_name: adjustment
+examples:
+- title:
+    tr: Düşük öncelik
+    en: Lower priority
+  command: nice -n 19 ./batch.sh
+  explanation:
+    tr: Arka plan işi için nazik öncelik.
+    en: Gentle priority for batch work.
+  risk: safe
+- title:
+    tr: Yüksek öncelik
+    en: Higher priority
+  command: sudo nice -n -5 ./job
+  explanation:
+    tr: Daha yüksek öncelik (root).
+    en: Higher priority (root).
+  risk: caution
+  requires_elevated: true
+related:
+- renice
+- top
+- ps
+intent:
+  tr:
+  - öncelik düşür
+  - nice
+  en:
+  - lower priority
+  - nice
+verification:
+  status: reviewed
+  sources:
+  - man 1 nice
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-coverage
+category: processes

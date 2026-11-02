@@ -1,0 +1,76 @@
+id: xargs
+name: xargs
+summary:
+  tr: Standart girdiden komut argümanları üretir.
+  en: Build command lines from standard input.
+description:
+  tr: find/grep çıktısını başka komutlara güvenli parçalarla aktarır. -0 ile NUL ayırıcı tercih edilir.
+  en: Feeds find/grep output into other commands in batches. Prefer -0 with NUL delimiters.
+tags:
+- text
+- find
+risk: caution
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+packages:
+  arch: findutils
+  debian: findutils
+  ubuntu: findutils
+  fedora: findutils
+flags:
+- flag: '-0'
+  meaning:
+    tr: NUL ayırıcı.
+    en: NUL delimiter.
+  verified: true
+  long: --null
+- flag: -n
+  meaning:
+    tr: Argüman sayısı.
+    en: Max args per command.
+  verified: true
+  takes_value: true
+  value_name: max
+- flag: -p
+  meaning:
+    tr: Çalıştırmadan sor.
+    en: Prompt before exec.
+  verified: true
+examples:
+- title:
+    tr: Bul + sil (dikkat)
+    en: Find + delete (care)
+  command: find . -name '*.tmp' -print0 | xargs -0 rm -f
+  explanation:
+    tr: NUL güvenli silme; önce -print ile deneyin.
+    en: NUL-safe delete; dry-run with -print first.
+  risk: dangerous
+- title:
+    tr: Satır satır echo
+    en: Echo lines
+  command: printf 'a\nb\n' | xargs -n1 echo
+  explanation:
+    tr: Her satırı ayrı argüman.
+    en: One arg per invocation.
+  risk: safe
+related:
+- find
+- grep
+- rm
+intent:
+  tr:
+  - xargs ile çalıştır
+  - find xargs
+  en:
+  - xargs run
+  - find xargs
+verification:
+  status: reviewed
+  sources:
+  - man 1 xargs
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-coverage
+category: text

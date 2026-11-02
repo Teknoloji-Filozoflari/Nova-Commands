@@ -1,0 +1,87 @@
+id: sftp
+name: sftp
+summary:
+  tr: SSH dosya transfer protokolü istemcisi.
+  en: OpenSSH SFTP client.
+description:
+  tr: Etkileşimli veya toplu dosya aktarımı için SFTP oturumu açar. scp’ye göre daha esnek dizin işlemleri
+    sunar.
+  en: Interactive or batch file transfer over SFTP. More flexible directory ops than classic scp.
+tags:
+- security
+- ssh
+- network
+risk: caution
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+packages:
+  arch: openssh
+  debian: openssh-client
+  ubuntu: openssh-client
+  fedora: openssh-clients
+install_notes:
+  tr: 'Arch: pacman -S openssh'
+  en: 'Arch: pacman -S openssh'
+flags:
+- flag: -P
+  meaning:
+    tr: Uzak port (büyük P).
+    en: Remote port (capital P).
+  verified: true
+  takes_value: true
+  value_name: port
+- flag: -i
+  meaning:
+    tr: Kimlik dosyası.
+    en: Identity file.
+  verified: true
+  takes_value: true
+  value_name: identity
+- flag: -b
+  meaning:
+    tr: Toplu komut dosyası.
+    en: Batch file.
+  verified: true
+  takes_value: true
+  value_name: batchfile
+examples:
+- title:
+    tr: Oturum
+    en: Session
+  command: sftp user@host
+  explanation:
+    tr: Etkileşimli SFTP kabuğu.
+    en: Interactive SFTP shell.
+  risk: caution
+- title:
+    tr: Tek put
+    en: Single put
+  command: sftp -b <(echo put local.txt /tmp/) user@host
+  explanation:
+    tr: Toplu put örneği (bash process substitution).
+    en: Batch put example (bash process substitution).
+  risk: caution
+related:
+- ssh
+- scp
+- rsync
+intent:
+  tr:
+  - sftp bağlan
+  - ssh dosya transfer
+  en:
+  - sftp connect
+  - ssh file transfer
+verification:
+  status: reviewed
+  sources:
+  - man 1 sftp
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-coverage
+nova:
+  concepts:
+  - ssh
+category: security

@@ -1,0 +1,67 @@
+id: watch
+name: watch
+summary:
+  tr: Komutu periyodik çalıştırıp çıktıyı yeniler.
+  en: Run a command repeatedly and show output.
+description:
+  tr: İzleme için komutu sabit aralıklarla tekrarlar. Uzun süren veya yan etkili komutlarda dikkat.
+  en: Re-runs a command on an interval for monitoring. Be careful with side-effecting commands.
+tags:
+- monitoring
+risk: caution
+requires_elevated: false
+platforms:
+- linux
+packages:
+  arch: procps-ng
+  debian: procps
+  ubuntu: procps
+  fedora: procps-ng
+flags:
+- flag: -n
+  meaning:
+    tr: Saniye aralığı.
+    en: Interval seconds.
+  verified: true
+  takes_value: true
+  value_name: secs
+- flag: -d
+  meaning:
+    tr: Değişimleri vurgula.
+    en: Highlight differences.
+  verified: true
+examples:
+- title:
+    tr: Disk
+    en: Disk
+  command: watch -n 2 df -h
+  explanation:
+    tr: df çıktısını 2 sn’de bir yeniler.
+    en: Refreshes df every 2s.
+  risk: safe
+- title:
+    tr: Pod’lar
+    en: Pods
+  command: watch -n 1 'ss -tulpn | head'
+  explanation:
+    tr: Dinleyen port özeti.
+    en: Listening ports snapshot.
+  risk: safe
+related:
+- top
+- htop
+- journalctl
+intent:
+  tr:
+  - komutu izle
+  - watch
+  en:
+  - watch command
+  - refresh output
+verification:
+  status: reviewed
+  sources:
+  - man 1 watch
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-coverage
+category: monitoring

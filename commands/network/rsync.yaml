@@ -1,0 +1,110 @@
+id: rsync
+name: rsync
+summary:
+  tr: Dosyaları verimli eşitleyerek kopyalar.
+  en: Fast incremental file transfer.
+description:
+  tr: Yerel veya uzak (SSH üzerinden) dizinleri senkronize eder. Yedek ve dağıtımda sık kullanılır; yanlış
+    bayraklar silmeye yol açabilir.
+  en: Syncs local or remote (often over SSH) trees. Common for backups; wrong flags can delete data.
+tags:
+- network
+- backup
+- copy
+risk: dangerous
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+packages:
+  arch: rsync
+  debian: rsync
+  ubuntu: rsync
+  fedora: rsync
+install_notes:
+  tr: |-
+    Arch: pacman -S rsync
+    Debian/Ubuntu/Fedora: rsync paketi
+  en: |-
+    Arch: pacman -S rsync
+    Debian/Ubuntu/Fedora: rsync package
+flags:
+- flag: -a
+  meaning:
+    tr: Arşiv modu (çoğu öznitelik).
+    en: Archive mode (most attributes).
+  verified: true
+  long: --archive
+- flag: -v
+  meaning:
+    tr: Ayrıntılı.
+    en: Verbose.
+  verified: true
+  long: --verbose
+- flag: -z
+  meaning:
+    tr: Sıkıştır.
+    en: Compress during transfer.
+  verified: true
+  long: --compress
+- flag: -n
+  meaning:
+    tr: Kuru koşu.
+    en: Dry run.
+  verified: true
+  long: --dry-run
+- flag: --delete
+  meaning:
+    tr: Hedefte fazlaları sil.
+    en: Delete extraneous files on destination.
+  verified: true
+examples:
+- title:
+    tr: Kuru koşu
+    en: Dry run
+  command: rsync -avn ./src/ ./dst/
+  explanation:
+    tr: Ne kopyalanacağını silmeden gösterir.
+    en: Shows what would copy without writing.
+  risk: safe
+- title:
+    tr: Yerel kopya
+    en: Local copy
+  command: rsync -av ./src/ ./dst/
+  explanation:
+    tr: Dizin içeriğini arşiv modunda eşitler.
+    en: Syncs directory contents in archive mode.
+  risk: caution
+- title:
+    tr: SSH ile
+    en: Over SSH
+  command: rsync -avz ./src/ user@host:/backup/src/
+  explanation:
+    tr: Uzak yedek; --delete kullanmadan önce dry-run.
+    en: Remote backup; dry-run before --delete.
+  risk: dangerous
+related:
+- scp
+- cp
+- ssh
+- tar
+intent:
+  tr:
+  - rsync yedek
+  - dizin senkron
+  en:
+  - rsync backup
+  - sync directories
+verification:
+  status: reviewed
+  sources:
+  - man 1 rsync
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-coverage
+nova:
+  concepts:
+  - networking
+  - storage
+  ui_priority: 75
+category: network

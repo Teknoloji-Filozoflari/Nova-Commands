@@ -1,0 +1,96 @@
+id: dpkg
+name: dpkg
+summary:
+  tr: Debian paket yöneticisinin düşük seviye aracı.
+  en: Debian package manager low-level tool.
+description:
+  tr: .deb kurulum/sorgu için temel araç. Günlük kullanımda çoğunlukla apt tercih edilir.
+  en: Low-level .deb install/query tool. Prefer apt for everyday use.
+tags:
+- packages
+- debian
+risk: dangerous
+requires_elevated: true
+platforms:
+- linux
+packages:
+  debian: dpkg
+  ubuntu: dpkg
+install_notes:
+  tr: Debian/Ubuntu tabanında gelir. Arch’ta yok — pacman kullanın.
+  en: Ships on Debian/Ubuntu. Not on Arch — use pacman.
+flags:
+- flag: -i
+  meaning:
+    tr: Paketi kur.
+    en: Install package.
+  verified: true
+  long: --install
+- flag: -l
+  meaning:
+    tr: Paketleri listele.
+    en: List packages.
+  verified: true
+  long: --list
+- flag: -L
+  meaning:
+    tr: Paket dosyalarını listele.
+    en: List package files.
+  verified: true
+  long: --listfiles
+- flag: -S
+  meaning:
+    tr: Dosyayı hangi paket sağlıyor.
+    en: Search owning package.
+  verified: true
+  long: --search
+examples:
+- title:
+    tr: Listele
+    en: List
+  command: dpkg -l 'curl*'
+  explanation:
+    tr: curl ile eşleşen kurulu paketler.
+    en: Installed packages matching curl*.
+  risk: safe
+  requires_elevated: false
+- title:
+    tr: Dosya sahibi
+    en: File owner
+  command: dpkg -S /usr/bin/curl
+  explanation:
+    tr: Dosyayı sağlayan paket.
+    en: Package that owns a file.
+  risk: safe
+  requires_elevated: false
+- title:
+    tr: deb kur
+    en: Install deb
+  command: sudo dpkg -i package.deb
+  explanation:
+    tr: Bağımlılık kırılırsa apt -f install gerekir.
+    en: May need apt -f install for deps.
+  risk: dangerous
+  requires_elevated: true
+related:
+- apt
+- apt-get
+- rpm
+- pacman
+intent:
+  tr:
+  - deb kur
+  - dpkg sorgu
+  en:
+  - install deb
+  - dpkg query
+verification:
+  status: reviewed
+  sources:
+  - man 1 dpkg
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-coverage
+nova:
+  concepts:
+  - packages
+category: packages

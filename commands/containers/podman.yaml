@@ -47,6 +47,7 @@ examples:
   risk: safe
 related:
 - docker
+- docker-compose
 - nerdctl
 intent:
   tr:
@@ -63,4 +64,6 @@ verification:
 nova:
   favorite_eligible: true
   ui_priority: 70
+  concepts:
+  - containers
 category: containers
