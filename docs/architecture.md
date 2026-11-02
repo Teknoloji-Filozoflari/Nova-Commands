@@ -47,7 +47,8 @@ PR → validate_catalog.py → build_catalog.py → pytest → merge
 | 7 | Concepts metadata + CONTRIBUTING |
 | 8 | Concept articles (`concepts/`) + i18n gates |
 | 9 | Search index + manifest SHA + NOVA_INTEGRATION |
-| 10+ | Grow coverage; human `verified` promotions |
+| 10 | CI/contrib polish (Actions, issue/PR templates, SECURITY) |
+| 11+ | Grow coverage; human `verified` promotions |
 
 ## Non-goals (this repo)
 

@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Nova uygulama sorunları
+    url: https://github.com/Teknoloji-Filozoflari/Nova/issues/new/choose
+    about: Masaüstü uygulama / TUI hataları Nova reposuna gider.
+  - name: Güvenlik bildirimi
+    url: https://github.com/Teknoloji-Filozoflari/Nova-Commands/blob/main/SECURITY.md
+    about: Katalogdaki tehlikeli/yanlış bilgi için SECURITY.md sürecini izleyin.

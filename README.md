@@ -53,6 +53,14 @@ Paket notlarında **Arch / pacman tercihi** (Nova tercihleri ile uyumlu).
 - AI taslakları `verification.status: draft` kalır; `verified` yalnız insan incelemesi sonrası.
 - Bilinmeyen bayrak / paket adı **uydurulmaz**; `unknown` / omit.
 - Doğrulama için tehlikeli komutlar **çalıştırılmaz**.
+- Politika: [SECURITY.md](SECURITY.md) · [docs/safety.md](docs/safety.md)
+
+## Katkı
+
+- [CONTRIBUTING.md](CONTRIBUTING.md)
+- Issue formları: bug · yeni komut · kategori · çeviri (`.github/ISSUE_TEMPLATE/`)
+- PR şablonu: `.github/PULL_REQUEST_TEMPLATE.md`
+- CI: validate → build → pytest → committed `content_sha256` eşleşmesi
 
 ## İlişkiler
 

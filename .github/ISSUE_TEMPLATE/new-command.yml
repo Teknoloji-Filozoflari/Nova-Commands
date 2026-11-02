@@ -1,0 +1,77 @@
+name: Yeni komut önerisi
+description: Kataloga eklenecek bir Linux komutu öner.
+title: "[Command]: "
+labels: ["enhancement", "command"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Kalite > sayı. Bilinmeyen bayrak/paket **uydurma**. `verified` yalnız
+        insan incelemesi sonrası. Katkı rehberi: `CONTRIBUTING.md`.
+  - type: input
+    id: command_id
+    attributes:
+      label: Önerilen id (filename stem)
+      description: `^[a-z0-9][a-z0-9+._-]*$` — örn. `nft`, `mkfs.ext4`
+      placeholder: command-name
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: Kategori (`metadata/categories.yaml`)
+      options:
+        - archives
+        - containers
+        - development
+        - disks
+        - filesystem
+        - hardware
+        - monitoring
+        - network
+        - packages
+        - processes
+        - search
+        - security
+        - shell
+        - system
+        - text
+        - users
+        - (yeni kategori — ayrı issue açın)
+    validations:
+      required: true
+  - type: dropdown
+    id: risk
+    attributes:
+      label: Tahmini risk
+      options:
+        - safe
+        - caution
+        - dangerous
+        - destructive
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Neden eklenmeli?
+      description: Tipik kullanım; Nova Komut Rehberi için değer.
+    validations:
+      required: true
+  - type: textarea
+    id: sources
+    attributes:
+      label: Kaynaklar
+      description: man sayfası, upstream docs, distro wiki (Arch tercih).
+      placeholder: man 8 pacman · https://wiki.archlinux.org/…
+    validations:
+      required: true
+  - type: checkboxes
+    id: policy
+    attributes:
+      label: Politika
+      options:
+        - label: AI ile üretilse bile verification.status draft/reviewed kalacak; verified uydurulmayacak
+          required: true
+        - label: Doğrulama için yıkıcı/ayrıcalıklı komut çalıştırmayacağım
+          required: true
