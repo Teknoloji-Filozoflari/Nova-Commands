@@ -36,8 +36,9 @@ examples:
     en: 5 samples every 2s.
   risk: safe
 related:
-- free
 - iostat
+- iotop
+- free
 - top
 intent:
   tr:

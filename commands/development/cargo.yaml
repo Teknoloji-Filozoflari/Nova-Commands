@@ -1,0 +1,88 @@
+id: cargo
+name: cargo
+category: development
+summary:
+  tr: Rust paket ve derleme aracı.
+  en: Rust package manager and build tool.
+description:
+  tr: Rust projelerini oluşturur, derler, test eder ve bağımlılıkları yönetir. crates.io ile çalışır.
+  en: Creates, builds, and tests Rust projects and manages dependencies via crates.io.
+tags:
+- rust
+- build
+- packages
+risk: caution
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+packages:
+  arch: rust
+  debian: cargo
+  ubuntu: cargo
+  fedora: cargo
+install_notes:
+  tr: 'Arch: pacman -S rust  (cargo + rustc)
+
+    Debian/Ubuntu: apt install cargo
+
+    Fedora: dnf install cargo
+
+    Alternatif: rustup (resmi toolchain; distro paketinden ayrı).'
+  en: 'Arch: pacman -S rust  (cargo + rustc)
+
+    Debian/Ubuntu: apt install cargo
+
+    Fedora: dnf install cargo
+
+    Alternative: rustup (official toolchain; separate from distro packages).'
+flags: []
+examples:
+- title:
+    tr: Derle
+    en: Build
+  command: cargo build
+  explanation:
+    tr: Debug profilinde derler.
+    en: Builds with the debug profile.
+  risk: caution
+- title:
+    tr: Test
+    en: Test
+  command: cargo test
+  explanation:
+    tr: Proje testlerini çalıştırır.
+    en: Runs project tests.
+  risk: caution
+- title:
+    tr: Yeni proje
+    en: New project
+  command: cargo new hello
+  explanation:
+    tr: hello dizininde yeni kutu oluşturur.
+    en: Creates a new crate in hello/.
+  risk: caution
+related:
+- git
+- make
+- cmake
+intent:
+  tr:
+  - rust derle
+  - cargo test
+  en:
+  - build rust
+  - cargo test
+verification:
+  status: reviewed
+  sources:
+  - https://doc.rust-lang.org/cargo/
+  - cargo --help
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-deeper
+nova:
+  concepts:
+  - package-managers
+  - terminal-basics
+  ui_priority: 72

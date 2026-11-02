@@ -1,0 +1,96 @@
+id: iptables
+name: iptables
+category: security
+summary:
+  tr: Eski nesil IPv4 netfilter aracı.
+  en: Legacy IPv4 netfilter administration.
+description:
+  tr: Birçok sistemde hâlâ mevcut; yeni kurulumlarda nft/firewalld tercih edilir. Zincir flush SSH’yi
+    kesebilir.
+  en: Still present on many systems; prefer nft/firewalld on new setups. Flushing chains can cut SSH.
+tags:
+- firewall
+- netfilter
+- legacy
+risk: destructive
+requires_elevated: true
+platforms:
+- linux
+packages:
+  arch: iptables
+  debian: iptables
+  ubuntu: iptables
+  fedora: iptables
+install_notes:
+  tr: 'Arch: pacman -S iptables
+
+    Debian/Ubuntu: apt install iptables
+
+    Fedora: dnf install iptables
+
+    Bazı distrolarda iptables-nft uyumluluk katmanı vardır.'
+  en: 'Arch: pacman -S iptables
+
+    Debian/Ubuntu: apt install iptables
+
+    Fedora: dnf install iptables
+
+    Some distros ship an iptables-nft compatibility layer.'
+flags:
+- flag: -L
+  long: --list
+  meaning:
+    tr: Kuralları listele.
+    en: List rules.
+  verified: false
+- flag: -n
+  long: --numeric
+  meaning:
+    tr: Sayısal adres/port.
+    en: Numeric addresses/ports.
+  verified: false
+- flag: -v
+  long: --verbose
+  meaning:
+    tr: Ayrıntılı liste.
+    en: Verbose listing.
+  verified: false
+examples:
+- title:
+    tr: Listele
+    en: List
+  command: sudo iptables -L -n -v
+  explanation:
+    tr: Filter tablosunu sayısal/ayrıntılı basar.
+    en: Lists filter table numerically/verbosely.
+  risk: safe
+  requires_elevated: true
+- title:
+    tr: Politikalar
+    en: Policies
+  command: sudo iptables -S
+  explanation:
+    tr: Kuralları komut biçiminde döker.
+    en: Dumps rules in command form.
+  risk: safe
+  requires_elevated: true
+related:
+- nft
+- firewall-cmd
+- ufw
+intent:
+  tr:
+  - iptables listele
+  - eski firewall
+  en:
+  - list iptables
+  - legacy firewall
+verification:
+  status: draft
+  sources:
+  - man 8 iptables
+  notes: List-only examples; no -F/-A recipes that risk lockout.
+nova:
+  concepts:
+  - firewalls
+  - networking

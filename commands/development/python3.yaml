@@ -1,0 +1,110 @@
+id: python3
+name: python3
+category: development
+summary:
+  tr: Python 3 yorumlayıcısı.
+  en: Python 3 interpreter.
+description:
+  tr: Betik çalıştırır, REPL açar ve modül araçlarına giriş noktasıdır. Paket adı Arch’ta python olabilir.
+  en: Runs scripts, opens a REPL, and is the entry point for module tools. Arch package name is often
+    python.
+tags:
+- python
+- scripting
+- language
+risk: caution
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+packages:
+  arch: python
+  debian: python3
+  ubuntu: python3
+  fedora: python3
+install_notes:
+  tr: 'Arch: pacman -S python
+
+    Debian/Ubuntu: apt install python3
+
+    Fedora: dnf install python3
+
+    venv/pip ayrı paket olabilir (python-venv / python3-venv).'
+  en: 'Arch: pacman -S python
+
+    Debian/Ubuntu: apt install python3
+
+    Fedora: dnf install python3
+
+    venv/pip may be separate packages (python-venv / python3-venv).'
+flags:
+- flag: -m
+  takes_value: true
+  value_name: MODULE
+  meaning:
+    tr: Modülü betik gibi çalıştır.
+    en: Run library module as a script.
+  verified: true
+- flag: -c
+  takes_value: true
+  value_name: CMD
+  meaning:
+    tr: Komutu dize olarak çalıştır.
+    en: Execute program passed as string.
+  verified: true
+- flag: -V
+  long: --version
+  meaning:
+    tr: Sürüm yaz.
+    en: Print version.
+  verified: true
+examples:
+- title:
+    tr: Sürüm
+    en: Version
+  command: python3 -V
+  explanation:
+    tr: Kurulu Python sürümü.
+    en: Installed Python version.
+  risk: safe
+- title:
+    tr: Modül çalıştır
+    en: Run module
+  command: python3 -m http.server 8000
+  explanation:
+    tr: Basit HTTP dosya sunucusu (ağ açar).
+    en: Simple HTTP file server (opens a network port).
+  risk: caution
+- title:
+    tr: Tek satır
+    en: One-liner
+  command: python3 -c 'print(2+2)'
+  explanation:
+    tr: Kısa ifade çalıştırır.
+    en: Runs a short expression.
+  risk: safe
+related:
+- jq
+- make
+- git
+intent:
+  tr:
+  - python çalıştır
+  - python sürüm
+  en:
+  - run python
+  - python version
+verification:
+  status: reviewed
+  sources:
+  - https://docs.python.org/3/using/cmdline.html
+  - python3 --help
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-deeper
+nova:
+  concepts:
+  - path
+  - terminal-basics
+  ui_priority: 85
+  favorite_eligible: true

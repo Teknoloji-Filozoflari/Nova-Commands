@@ -1,0 +1,121 @@
+id: rg
+name: rg
+category: search
+summary:
+  tr: Hızlı özyinelemeli regex arama (ripgrep).
+  en: Fast recursive regex search (ripgrep).
+description:
+  tr: gitignore bilincinde, çok hızlı içerik araması. Klasik grep+find birleşimine modern alternatif.
+  en: gitignore-aware, very fast content search. Modern alternative to classic grep+find combos.
+tags:
+- search
+- regex
+- ripgrep
+risk: safe
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+packages:
+  arch: ripgrep
+  debian: ripgrep
+  ubuntu: ripgrep
+  fedora: ripgrep
+install_notes:
+  tr: 'Arch: pacman -S ripgrep
+
+    Debian/Ubuntu: apt install ripgrep
+
+    Fedora: dnf install ripgrep
+
+    İkili adı: rg'
+  en: 'Arch: pacman -S ripgrep
+
+    Debian/Ubuntu: apt install ripgrep
+
+    Fedora: dnf install ripgrep
+
+    Binary name: rg'
+flags:
+- flag: -i
+  long: --ignore-case
+  meaning:
+    tr: Büyük/küçük harf yok say.
+    en: Case-insensitive.
+  verified: true
+- flag: -n
+  long: --line-number
+  meaning:
+    tr: Satır numarası göster.
+    en: Show line numbers.
+  verified: true
+- flag: -l
+  long: --files-with-matches
+  meaning:
+    tr: Yalnız eşleşen dosya yolları.
+    en: Only paths with matches.
+  verified: true
+- flag: -g
+  long: --glob
+  takes_value: true
+  value_name: GLOB
+  meaning:
+    tr: Dosya glob süzgeci.
+    en: Include/exclude via glob.
+  verified: true
+- flag: -S
+  long: --smart-case
+  meaning:
+    tr: Akıllı büyük/küçük harf.
+    en: Smart-case matching.
+  verified: true
+examples:
+- title:
+    tr: Desen ara
+    en: Search pattern
+  command: rg TODO src/
+  explanation:
+    tr: src altında TODO ara.
+    en: Search TODO under src/.
+  risk: safe
+- title:
+    tr: YAML dosyaları
+    en: YAML files
+  command: rg -g '*.yaml' 'verification:' commands/
+  explanation:
+    tr: Yalnız .yaml içinde ara.
+    en: Search only in .yaml files.
+  risk: safe
+- title:
+    tr: Dosya listesi
+    en: File list
+  command: rg -l "nova-commands" .
+  explanation:
+    tr: Eşleşen dosya yollarını listeler.
+    en: Lists matching file paths.
+  risk: safe
+related:
+- grep
+- find
+- git
+intent:
+  tr:
+  - ripgrep ara
+  - kodda ara
+  en:
+  - ripgrep search
+  - search in code
+verification:
+  status: reviewed
+  sources:
+  - https://github.com/BurntSushi/ripgrep
+  - rg --help
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-deeper
+nova:
+  favorite_eligible: true
+  ui_priority: 90
+  concepts:
+  - files
+  - terminal-basics

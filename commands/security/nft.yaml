@@ -1,0 +1,97 @@
+id: nft
+name: nft
+category: security
+summary:
+  tr: nftables kural yönetimi.
+  en: nftables ruleset management.
+description:
+  tr: Modern Linux paket süzgeci. Yanlış flush/add uzaktan erişimi kesebilir; önce list, yedek al.
+  en: Modern Linux packet filter. A bad flush/add can cut remote access; list and back up first.
+tags:
+- firewall
+- nftables
+- network
+risk: destructive
+requires_elevated: true
+platforms:
+- linux
+packages:
+  arch: nftables
+  debian: nftables
+  ubuntu: nftables
+  fedora: nftables
+install_notes:
+  tr: 'Arch: pacman -S nftables
+
+    Debian/Ubuntu: apt install nftables
+
+    Fedora: dnf install nftables
+
+    systemctl ile nftables servisi distroya göre değişir.'
+  en: 'Arch: pacman -S nftables
+
+    Debian/Ubuntu: apt install nftables
+
+    Fedora: dnf install nftables
+
+    nftables systemd unit varies by distro.'
+flags:
+- flag: list
+  meaning:
+    tr: Kuralları listele (alt komut).
+    en: List rules (subcommand).
+  verified: false
+- flag: -a
+  long: --handle
+  meaning:
+    tr: Handle numaralarını göster.
+    en: Show rule handles.
+  verified: false
+- flag: -j
+  long: --json
+  meaning:
+    tr: JSON çıktı.
+    en: JSON output.
+  verified: false
+examples:
+- title:
+    tr: Kuralları listele
+    en: List ruleset
+  command: sudo nft list ruleset
+  explanation:
+    tr: Geçerli tüm kuralları basar (salt okuma).
+    en: Prints the current ruleset (read-only).
+  risk: safe
+  requires_elevated: true
+- title:
+    tr: Tablolar
+    en: Tables
+  command: sudo nft list tables
+  explanation:
+    tr: Tablo adlarını listeler.
+    en: Lists table names.
+  risk: safe
+  requires_elevated: true
+related:
+- iptables
+- firewall-cmd
+- ufw
+- ss
+intent:
+  tr:
+  - nftables listele
+  - firewall kuralları
+  en:
+  - list nftables
+  - firewall rules
+verification:
+  status: draft
+  sources:
+  - man 8 nft
+  - https://wiki.nftables.org/
+  notes: Only safe list examples included; no flush/add recipes. Needs human review before verified.
+nova:
+  concepts:
+  - firewalls
+  - networking
+  - permissions

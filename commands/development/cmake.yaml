@@ -1,0 +1,103 @@
+id: cmake
+name: cmake
+category: development
+summary:
+  tr: Çapraz platform derleme yapılandırıcı.
+  en: Cross-platform build configurator.
+description:
+  tr: Kaynak ağaçtan native build dosyaları üretir (Ninja/Make). Yapılandırma ve üretim aşamaları ayrıdır.
+  en: Generates native build files (Ninja/Make) from a source tree. Configure and build are separate stages.
+tags:
+- build
+- cmake
+- c
+risk: caution
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+packages:
+  arch: cmake
+  debian: cmake
+  ubuntu: cmake
+  fedora: cmake
+install_notes:
+  tr: 'Arch: pacman -S cmake
+
+    Debian/Ubuntu: apt install cmake
+
+    Fedora: dnf install cmake'
+  en: 'Arch: pacman -S cmake
+
+    Debian/Ubuntu: apt install cmake
+
+    Fedora: dnf install cmake'
+flags:
+- flag: -S
+  takes_value: true
+  value_name: PATH
+  meaning:
+    tr: Kaynak dizin.
+    en: Source directory.
+  verified: true
+- flag: -B
+  takes_value: true
+  value_name: PATH
+  meaning:
+    tr: Build dizin.
+    en: Build directory.
+  verified: true
+- flag: --build
+  takes_value: true
+  value_name: DIR
+  meaning:
+    tr: Yapılandırılmış dizini derle.
+    en: Build a configured directory.
+  verified: true
+- flag: -G
+  takes_value: true
+  value_name: GENERATOR
+  meaning:
+    tr: Üretici (Ninja, Unix Makefiles…).
+    en: Generator (Ninja, Unix Makefiles…).
+  verified: true
+examples:
+- title:
+    tr: Yapılandır
+    en: Configure
+  command: cmake -S . -B build -G Ninja
+  explanation:
+    tr: Kaynağı build/ altına Ninja ile yapılandırır.
+    en: Configures source into build/ with Ninja.
+  risk: caution
+- title:
+    tr: Derle
+    en: Build
+  command: cmake --build build -j
+  explanation:
+    tr: Yapılandırılmış dizini paralel derler.
+    en: Builds the configured tree in parallel.
+  risk: caution
+related:
+- make
+- gcc
+- git
+intent:
+  tr:
+  - cmake yapılandır
+  - projeyi derle
+  en:
+  - cmake configure
+  - build project
+verification:
+  status: reviewed
+  sources:
+  - https://cmake.org/cmake/help/latest/manual/cmake.1.html
+  - cmake --help
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-deeper
+nova:
+  concepts:
+  - terminal-basics
+  ui_priority: 70

@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "kind": "nova-commands-search-index",
-  "entry_count": 124,
+  "entry_count": 147,
   "entries": [
     {
       "type": "command",
@@ -120,6 +120,37 @@
       },
       "concepts": [
         "systemd",
+        "terminal-basics"
+      ]
+    },
+    {
+      "type": "command",
+      "id": "cargo",
+      "name": "cargo",
+      "category": "development",
+      "risk": "caution",
+      "verification": "reviewed",
+      "tags": [
+        "rust",
+        "build",
+        "packages"
+      ],
+      "summary": {
+        "tr": "Rust paket ve derleme aracı.",
+        "en": "Rust package manager and build tool."
+      },
+      "intent": {
+        "tr": [
+          "rust derle",
+          "cargo test"
+        ],
+        "en": [
+          "build rust",
+          "cargo test"
+        ]
+      },
+      "concepts": [
+        "package-managers",
         "terminal-basics"
       ]
     },
@@ -268,6 +299,36 @@
       },
       "concepts": [
         "permissions"
+      ]
+    },
+    {
+      "type": "command",
+      "id": "cmake",
+      "name": "cmake",
+      "category": "development",
+      "risk": "caution",
+      "verification": "reviewed",
+      "tags": [
+        "build",
+        "cmake",
+        "c"
+      ],
+      "summary": {
+        "tr": "Çapraz platform derleme yapılandırıcı.",
+        "en": "Cross-platform build configurator."
+      },
+      "intent": {
+        "tr": [
+          "cmake yapılandır",
+          "projeyi derle"
+        ],
+        "en": [
+          "cmake configure",
+          "build project"
+        ]
+      },
+      "concepts": [
+        "terminal-basics"
       ]
     },
     {
@@ -897,7 +958,8 @@
       "concepts": [
         "networking",
         "ssh",
-        "permissions"
+        "permissions",
+        "firewalls"
       ]
     },
     {
@@ -953,6 +1015,36 @@
         "en": [
           "memory usage",
           "free ram"
+        ]
+      },
+      "concepts": [
+        "terminal-basics"
+      ]
+    },
+    {
+      "type": "command",
+      "id": "gcc",
+      "name": "gcc",
+      "category": "development",
+      "risk": "caution",
+      "verification": "reviewed",
+      "tags": [
+        "compiler",
+        "c",
+        "build"
+      ],
+      "summary": {
+        "tr": "GNU C/C++ derleyici sürücüsü.",
+        "en": "GNU C/C++ compiler driver."
+      },
+      "intent": {
+        "tr": [
+          "c derle",
+          "gcc ile derle"
+        ],
+        "en": [
+          "compile c",
+          "gcc compile"
         ]
       },
       "concepts": [
@@ -1343,6 +1435,68 @@
     },
     {
       "type": "command",
+      "id": "iostat",
+      "name": "iostat",
+      "category": "monitoring",
+      "risk": "safe",
+      "verification": "reviewed",
+      "tags": [
+        "io",
+        "disk",
+        "sysstat"
+      ],
+      "summary": {
+        "tr": "CPU ve disk I/O istatistikleri.",
+        "en": "CPU and disk I/O statistics."
+      },
+      "intent": {
+        "tr": [
+          "disk io izle",
+          "iostat"
+        ],
+        "en": [
+          "monitor disk io",
+          "iostat"
+        ]
+      },
+      "concepts": [
+        "storage",
+        "terminal-basics"
+      ]
+    },
+    {
+      "type": "command",
+      "id": "iotop",
+      "name": "iotop",
+      "category": "monitoring",
+      "risk": "caution",
+      "verification": "reviewed",
+      "tags": [
+        "io",
+        "processes",
+        "top"
+      ],
+      "summary": {
+        "tr": "Süreç başına I/O top görünümü.",
+        "en": "Per-process I/O top view."
+      },
+      "intent": {
+        "tr": [
+          "disk kim kullanıyor",
+          "iotop"
+        ],
+        "en": [
+          "who uses disk",
+          "iotop"
+        ]
+      },
+      "concepts": [
+        "storage",
+        "permissions"
+      ]
+    },
+    {
+      "type": "command",
       "id": "ip",
       "name": "ip",
       "category": "network",
@@ -1368,6 +1522,37 @@
       "concepts": [
         "networking",
         "networking-basics"
+      ]
+    },
+    {
+      "type": "command",
+      "id": "iptables",
+      "name": "iptables",
+      "category": "security",
+      "risk": "destructive",
+      "verification": "draft",
+      "tags": [
+        "firewall",
+        "netfilter",
+        "legacy"
+      ],
+      "summary": {
+        "tr": "Eski nesil IPv4 netfilter aracı.",
+        "en": "Legacy IPv4 netfilter administration."
+      },
+      "intent": {
+        "tr": [
+          "iptables listele",
+          "eski firewall"
+        ],
+        "en": [
+          "list iptables",
+          "legacy firewall"
+        ]
+      },
+      "concepts": [
+        "firewalls",
+        "networking"
       ]
     },
     {
@@ -1399,6 +1584,37 @@
       "concepts": [
         "terminal-basics",
         "systemd"
+      ]
+    },
+    {
+      "type": "command",
+      "id": "jq",
+      "name": "jq",
+      "category": "text",
+      "risk": "safe",
+      "verification": "reviewed",
+      "tags": [
+        "json",
+        "text",
+        "data"
+      ],
+      "summary": {
+        "tr": "JSON süzgeç ve dönüştürücü.",
+        "en": "JSON filter and transformer."
+      },
+      "intent": {
+        "tr": [
+          "json süz",
+          "jq ile alan"
+        ],
+        "en": [
+          "filter json",
+          "jq select field"
+        ]
+      },
+      "concepts": [
+        "shell-pipes-redirection",
+        "json-data"
       ]
     },
     {
@@ -1876,6 +2092,38 @@
     },
     {
       "type": "command",
+      "id": "nft",
+      "name": "nft",
+      "category": "security",
+      "risk": "destructive",
+      "verification": "draft",
+      "tags": [
+        "firewall",
+        "nftables",
+        "network"
+      ],
+      "summary": {
+        "tr": "nftables kural yönetimi.",
+        "en": "nftables ruleset management."
+      },
+      "intent": {
+        "tr": [
+          "nftables listele",
+          "firewall kuralları"
+        ],
+        "en": [
+          "list nftables",
+          "firewall rules"
+        ]
+      },
+      "concepts": [
+        "firewalls",
+        "networking",
+        "permissions"
+      ]
+    },
+    {
+      "type": "command",
       "id": "nice",
       "name": "nice",
       "category": "processes",
@@ -1932,6 +2180,37 @@
       "concepts": [
         "networking",
         "networking-basics"
+      ]
+    },
+    {
+      "type": "command",
+      "id": "openssl",
+      "name": "openssl",
+      "category": "security",
+      "risk": "caution",
+      "verification": "reviewed",
+      "tags": [
+        "tls",
+        "crypto",
+        "certificates"
+      ],
+      "summary": {
+        "tr": "TLS/SSL ve kriptografi araç kutusu.",
+        "en": "TLS/SSL and cryptography toolkit."
+      },
+      "intent": {
+        "tr": [
+          "sertifika incele",
+          "openssl hash"
+        ],
+        "en": [
+          "inspect certificate",
+          "openssl hash"
+        ]
+      },
+      "concepts": [
+        "ssh",
+        "permissions"
       ]
     },
     {
@@ -2028,6 +2307,37 @@
     },
     {
       "type": "command",
+      "id": "patch",
+      "name": "patch",
+      "category": "development",
+      "risk": "dangerous",
+      "verification": "reviewed",
+      "tags": [
+        "diff",
+        "patch",
+        "vcs"
+      ],
+      "summary": {
+        "tr": "diff çıktısını dosyalara uygular.",
+        "en": "Applies diff output to files."
+      },
+      "intent": {
+        "tr": [
+          "yama uygula",
+          "patch dry-run"
+        ],
+        "en": [
+          "apply patch",
+          "patch dry-run"
+        ]
+      },
+      "concepts": [
+        "files",
+        "terminal-basics"
+      ]
+    },
+    {
+      "type": "command",
       "id": "pgrep",
       "name": "pgrep",
       "category": "processes",
@@ -2082,6 +2392,36 @@
       "concepts": [
         "networking",
         "networking-basics"
+      ]
+    },
+    {
+      "type": "command",
+      "id": "pkill",
+      "name": "pkill",
+      "category": "processes",
+      "risk": "dangerous",
+      "verification": "reviewed",
+      "tags": [
+        "signal",
+        "process"
+      ],
+      "summary": {
+        "tr": "Ada göre süreçlere sinyal gönderir.",
+        "en": "Signals processes by name pattern."
+      },
+      "intent": {
+        "tr": [
+          "süreci ada göre öldür",
+          "pkill"
+        ],
+        "en": [
+          "kill by name",
+          "pkill"
+        ]
+      },
+      "concepts": [
+        "permissions",
+        "terminal-basics"
       ]
     },
     {
@@ -2142,6 +2482,37 @@
     },
     {
       "type": "command",
+      "id": "psql",
+      "name": "psql",
+      "category": "development",
+      "risk": "caution",
+      "verification": "draft",
+      "tags": [
+        "sql",
+        "database",
+        "postgresql"
+      ],
+      "summary": {
+        "tr": "PostgreSQL etkileşimli terminal.",
+        "en": "PostgreSQL interactive terminal."
+      },
+      "intent": {
+        "tr": [
+          "postgres bağlan",
+          "psql sorgu"
+        ],
+        "en": [
+          "connect postgres",
+          "psql query"
+        ]
+      },
+      "concepts": [
+        "json-data",
+        "permissions"
+      ]
+    },
+    {
+      "type": "command",
       "id": "pwd",
       "name": "pwd",
       "category": "filesystem",
@@ -2169,6 +2540,67 @@
       "concepts": [
         "files",
         "terminal-basics"
+      ]
+    },
+    {
+      "type": "command",
+      "id": "python3",
+      "name": "python3",
+      "category": "development",
+      "risk": "caution",
+      "verification": "reviewed",
+      "tags": [
+        "python",
+        "scripting",
+        "language"
+      ],
+      "summary": {
+        "tr": "Python 3 yorumlayıcısı.",
+        "en": "Python 3 interpreter."
+      },
+      "intent": {
+        "tr": [
+          "python çalıştır",
+          "python sürüm"
+        ],
+        "en": [
+          "run python",
+          "python version"
+        ]
+      },
+      "concepts": [
+        "path",
+        "terminal-basics"
+      ]
+    },
+    {
+      "type": "command",
+      "id": "renice",
+      "name": "renice",
+      "category": "processes",
+      "risk": "caution",
+      "verification": "reviewed",
+      "tags": [
+        "priority",
+        "nice",
+        "process"
+      ],
+      "summary": {
+        "tr": "Çalışan sürecin nice değerini değiştirir.",
+        "en": "Alters the nice value of running processes."
+      },
+      "intent": {
+        "tr": [
+          "öncelik değiştir",
+          "renice"
+        ],
+        "en": [
+          "change priority",
+          "renice"
+        ]
+      },
+      "concepts": [
+        "permissions"
       ]
     },
     {
@@ -2202,6 +2634,37 @@
         "dns",
         "systemd",
         "networking-basics"
+      ]
+    },
+    {
+      "type": "command",
+      "id": "rg",
+      "name": "rg",
+      "category": "search",
+      "risk": "safe",
+      "verification": "reviewed",
+      "tags": [
+        "search",
+        "regex",
+        "ripgrep"
+      ],
+      "summary": {
+        "tr": "Hızlı özyinelemeli regex arama (ripgrep).",
+        "en": "Fast recursive regex search (ripgrep)."
+      },
+      "intent": {
+        "tr": [
+          "ripgrep ara",
+          "kodda ara"
+        ],
+        "en": [
+          "ripgrep search",
+          "search in code"
+        ]
+      },
+      "concepts": [
+        "files",
+        "terminal-basics"
       ]
     },
     {
@@ -2420,6 +2883,37 @@
     },
     {
       "type": "command",
+      "id": "sqlite3",
+      "name": "sqlite3",
+      "category": "development",
+      "risk": "caution",
+      "verification": "reviewed",
+      "tags": [
+        "sql",
+        "database",
+        "data"
+      ],
+      "summary": {
+        "tr": "SQLite komut satırı kabuğu.",
+        "en": "SQLite command-line shell."
+      },
+      "intent": {
+        "tr": [
+          "sqlite sorgula",
+          "sql çalıştır"
+        ],
+        "en": [
+          "query sqlite",
+          "run sql"
+        ]
+      },
+      "concepts": [
+        "json-data",
+        "terminal-basics"
+      ]
+    },
+    {
+      "type": "command",
       "id": "ss",
       "name": "ss",
       "category": "network",
@@ -2598,6 +3092,37 @@
       "concepts": [
         "files",
         "terminal-basics"
+      ]
+    },
+    {
+      "type": "command",
+      "id": "strace",
+      "name": "strace",
+      "category": "development",
+      "risk": "caution",
+      "verification": "reviewed",
+      "tags": [
+        "debug",
+        "syscall",
+        "trace"
+      ],
+      "summary": {
+        "tr": "Sistem çağrılarını izler.",
+        "en": "Traces system calls."
+      },
+      "intent": {
+        "tr": [
+          "sistem çağrısı izle",
+          "strace debug"
+        ],
+        "en": [
+          "trace syscalls",
+          "strace debug"
+        ]
+      },
+      "concepts": [
+        "debugging",
+        "permissions"
       ]
     },
     {
@@ -2955,6 +3480,38 @@
       "concepts": [
         "files",
         "terminal-basics"
+      ]
+    },
+    {
+      "type": "command",
+      "id": "ufw",
+      "name": "ufw",
+      "category": "security",
+      "risk": "dangerous",
+      "verification": "draft",
+      "tags": [
+        "firewall",
+        "ubuntu",
+        "security"
+      ],
+      "summary": {
+        "tr": "Uncomplicated Firewall (iptables/nft ön yüz).",
+        "en": "Uncomplicated Firewall (iptables/nft frontend)."
+      },
+      "intent": {
+        "tr": [
+          "ufw durum",
+          "ubuntu firewall"
+        ],
+        "en": [
+          "ufw status",
+          "ubuntu firewall"
+        ]
+      },
+      "concepts": [
+        "firewalls",
+        "networking",
+        "permissions"
       ]
     },
     {
@@ -3484,6 +4041,87 @@
     },
     {
       "type": "concept",
+      "id": "debugging",
+      "difficulty": "intermediate",
+      "tags": [
+        "debug",
+        "strace",
+        "processes",
+        "logs"
+      ],
+      "title": {
+        "tr": "Çalışma anı hata ayıklama",
+        "en": "Runtime debugging"
+      },
+      "summary": {
+        "tr": "strace, lsof, loglar ve süreç araçlarıyla “neden başarısız?” sorusuna yaklaşım.",
+        "en": "Approaching “why did it fail?” with strace, lsof, logs, and process tools."
+      },
+      "related_commands": [
+        "strace",
+        "lsof",
+        "ps",
+        "pgrep",
+        "journalctl",
+        "dmesg",
+        "top"
+      ]
+    },
+    {
+      "type": "concept",
+      "id": "firewalls",
+      "difficulty": "intermediate",
+      "tags": [
+        "firewall",
+        "nftables",
+        "security",
+        "network"
+      ],
+      "title": {
+        "tr": "Güvenlik duvarı araçları",
+        "en": "Firewall tools"
+      },
+      "summary": {
+        "tr": "nftables, iptables, firewalld ve ufw — ne zaman hangisi, güvenli okuma alışkanlığı.",
+        "en": "nftables, iptables, firewalld, and ufw — when to use which, safe read habits."
+      },
+      "related_commands": [
+        "nft",
+        "iptables",
+        "firewall-cmd",
+        "ufw",
+        "ss",
+        "ip"
+      ]
+    },
+    {
+      "type": "concept",
+      "id": "json-data",
+      "difficulty": "beginner",
+      "tags": [
+        "json",
+        "sql",
+        "data",
+        "jq"
+      ],
+      "title": {
+        "tr": "JSON ve yapılandırılmış veri",
+        "en": "JSON and structured data"
+      },
+      "summary": {
+        "tr": "jq, sqlite3 ve boru hatlarında yapılandırılmış çıktı ile çalışma.",
+        "en": "Working with structured output via jq, sqlite3, and pipelines."
+      },
+      "related_commands": [
+        "jq",
+        "sqlite3",
+        "curl",
+        "python3",
+        "psql"
+      ]
+    },
+    {
+      "type": "concept",
       "id": "networking-basics",
       "difficulty": "beginner",
       "tags": [
@@ -3543,6 +4181,35 @@
     },
     {
       "type": "concept",
+      "id": "package-managers-comparison",
+      "difficulty": "beginner",
+      "tags": [
+        "packages",
+        "pacman",
+        "apt",
+        "dnf",
+        "comparison"
+      ],
+      "title": {
+        "tr": "Paket yöneticisi karşılaştırma tabloları",
+        "en": "Package manager comparison tables"
+      },
+      "summary": {
+        "tr": "pacman / apt / dnf / rpm-dpkg / flatpak için yan yana sık işlemler.",
+        "en": "Side-by-side common operations for pacman / apt / dnf / rpm-dpkg / flatpak."
+      },
+      "related_commands": [
+        "pacman",
+        "apt",
+        "dnf",
+        "dpkg",
+        "rpm",
+        "flatpak",
+        "paru"
+      ]
+    },
+    {
+      "type": "concept",
       "id": "path",
       "difficulty": "beginner",
       "tags": [
@@ -3564,6 +4231,37 @@
         "env",
         "export",
         "echo"
+      ]
+    },
+    {
+      "type": "concept",
+      "id": "permissions",
+      "difficulty": "beginner",
+      "tags": [
+        "permissions",
+        "users",
+        "sudo",
+        "chmod"
+      ],
+      "title": {
+        "tr": "Kullanıcılar, gruplar ve izinler",
+        "en": "Users, groups, and permissions"
+      },
+      "summary": {
+        "tr": "id/chmod/chown/sudo ile kim neyi yapabilir — temel model.",
+        "en": "Who can do what with id/chmod/chown/sudo — the basic model."
+      },
+      "related_commands": [
+        "id",
+        "whoami",
+        "chmod",
+        "chown",
+        "chgrp",
+        "sudo",
+        "passwd",
+        "useradd",
+        "usermod",
+        "getent"
       ]
     },
     {
@@ -3677,6 +4375,6 @@
       ]
     }
   ],
-  "content_sha256": "c27a056fd818c23e1c23870e97ecabbdf151ccd330c851e99f29f93dedb1be4e",
-  "generated_at": "2026-11-02T18:33:47Z"
+  "content_sha256": "c0f3ab0a0f06248f5091c8c3d482ccaa37d325584852b5e90b23f9cc1a2693e8",
+  "generated_at": "2026-11-02T18:55:46Z"
 }

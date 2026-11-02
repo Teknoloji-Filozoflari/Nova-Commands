@@ -1,0 +1,74 @@
+id: json-data
+kind: nova-commands-concept
+title:
+  tr: JSON ve yapılandırılmış veri
+  en: JSON and structured data
+summary:
+  tr: jq, sqlite3 ve boru hatlarında yapılandırılmış çıktı ile çalışma.
+  en: Working with structured output via jq, sqlite3, and pipelines.
+difficulty: beginner
+tags:
+  - json
+  - sql
+  - data
+  - jq
+related_commands:
+  - jq
+  - sqlite3
+  - curl
+  - python3
+  - psql
+related_concepts:
+  - shell-pipes-redirection
+  - terminal-basics
+  - path
+see_also:
+  - "https://jqlang.github.io/jq/manual/"
+  - "https://www.sqlite.org/cli.html"
+body:
+  tr: |
+    Modern CLI’ler sıkça **JSON** veya satır-tabanlı tablolar üretir. Ham metni
+    `grep` ile parçalamak yerine yapıya saygı duyan araçlar tercih edilir.
+
+    **jq:** JSON süzgeç dilidir. `curl … | jq -r '.field'` API yanıtlarından alan
+    seçmek için yaygındır. `-c` sıkışık, `-s` birden fazla belgeyi dizi yapar.
+    Geçersiz JSON’da jq hata verir — önce kaynağı doğrulayın.
+
+    **sqlite3:** Sunucusuz SQL. Uygulama ayarları, tarayıcı profilleri, gömülü DB
+    dosyaları. Yazmadan bakmak için `-readonly`; makineye aktarım için `-json` / `-csv`.
+    Yanlış `DELETE`/`DROP` yıkıcıdır — bankada salt okuma örnekleri öne çıkar.
+
+    **psql:** İstemci; gerçek sunucu ve kimlik bilgisi ister. Kurulum/paket adları
+    distroya göre değişir → birçok girdi `draft` kalabilir.
+
+    **python3 -m json.tool** / kısa `python3 -c` yedek biçimlendirici olabilir; jq
+    filtreleri genelde daha kısa ve kompozisyoneldir.
+
+    **Boru alışkanlığı:** üretici → süzgeç → tüketici. `tee` ile ara çıktı saklayın;
+    gizli anahtarları log’a düşürmeyin.
+  en: |
+    Modern CLIs often emit **JSON** or row-oriented tables. Prefer structure-aware
+    tools over brittle `grep` on raw blobs.
+
+    **jq:** a JSON filter language. `curl … | jq -r '.field'` is the common API
+    pattern. `-c` is compact; `-s` slurps documents into an array. Invalid JSON
+    makes jq fail — validate the source first.
+
+    **sqlite3:** serverless SQL for app settings, browser profiles, embedded DB
+    files. Use `-readonly` to inspect; `-json` / `-csv` to export. Mistaken
+    `DELETE`/`DROP` is destructive — catalog examples emphasize read paths.
+
+    **psql:** a client that needs a live server and credentials. Package names vary
+    by distro → many entries stay `draft`.
+
+    **python3 -m json.tool** / short `python3 -c` can pretty-print as a fallback;
+    jq filters are usually shorter and more compositional.
+
+    **Pipeline habit:** producer → filter → consumer. Keep intermediates with `tee`;
+    do not leak secrets into logs.
+verification:
+  status: reviewed
+  sources:
+    - "https://jqlang.github.io/jq/manual/"
+    - "https://www.sqlite.org/cli.html"
+  notes: "Agent-authored; spot-check before verified."

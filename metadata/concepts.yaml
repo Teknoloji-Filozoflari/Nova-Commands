@@ -44,6 +44,7 @@ concepts:
     label:
       tr: Kullanıcılar ve izinler
       en: Users and permissions
+    article: permissions
   - id: containers
     label:
       tr: Konteynerler
@@ -73,3 +74,23 @@ concepts:
       tr: Paket yöneticileri
       en: Package managers
     article: package-managers
+  - id: package-managers-comparison
+    label:
+      tr: Paket yöneticisi karşılaştırması
+      en: Package manager comparison
+    article: package-managers-comparison
+  - id: firewalls
+    label:
+      tr: Güvenlik duvarları
+      en: Firewalls
+    article: firewalls
+  - id: json-data
+    label:
+      tr: JSON ve yapılandırılmış veri
+      en: JSON and structured data
+    article: json-data
+  - id: debugging
+    label:
+      tr: Hata ayıklama
+      en: Debugging
+    article: debugging

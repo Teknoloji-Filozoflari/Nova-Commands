@@ -1,0 +1,104 @@
+id: package-managers-comparison
+kind: nova-commands-concept
+title:
+  tr: Paket yöneticisi karşılaştırma tabloları
+  en: Package manager comparison tables
+summary:
+  tr: pacman / apt / dnf / rpm-dpkg / flatpak için yan yana sık işlemler.
+  en: Side-by-side common operations for pacman / apt / dnf / rpm-dpkg / flatpak.
+difficulty: beginner
+tags:
+  - packages
+  - pacman
+  - apt
+  - dnf
+  - comparison
+related_commands:
+  - pacman
+  - apt
+  - dnf
+  - dpkg
+  - rpm
+  - flatpak
+  - paru
+related_concepts:
+  - package-managers
+  - packages
+  - arch
+  - path
+see_also:
+  - "docs/package-managers-comparison.md"
+  - "Arch Wiki: pacman/Rosetta"
+  - "https://wiki.archlinux.org/title/Pacman/Rosetta"
+body:
+  tr: |
+    Aynı iş farklı dağıtımlarda farklı komutlarla yapılır. Aşağıdaki tablolar **sık
+    okuma/kurulum** yollarını özetler; bayrak uydurma yok. Ayrıntılı Markdown:
+    `docs/package-managers-comparison.md`. Arch satırları Nova tercihine göre önde.
+
+    ### Sistem güncelle / senkron
+
+    | Amaç | Arch (pacman) | Debian/Ubuntu (apt) | Fedora/RHEL (dnf) |
+    |------|---------------|---------------------|-------------------|
+    | DB yenile + yükselt | `pacman -Syu` | `apt update && apt upgrade` | `dnf upgrade` |
+    | Yalnız indeks | (Syu içinde) | `apt update` | `dnf check-update` |
+    | Paket kur | `pacman -S ad` | `apt install ad` | `dnf install ad` |
+    | Kaldır (+deps sık) | `pacman -Rns ad` | `apt purge ad` | `dnf remove ad` |
+    | Ara | `pacman -Ss q` | `apt search q` | `dnf search q` |
+
+    ### Sorgulama (yerel)
+
+    | Amaç | pacman | dpkg/apt | rpm/dnf |
+    |------|--------|----------|---------|
+    | Kurulu mu? | `pacman -Q ad` | `dpkg -l ad` | `rpm -q ad` |
+    | Dosya → paket | `pacman -Qo yol` | `dpkg -S yol` | `rpm -qf yol` |
+    | Paket → dosyalar | `pacman -Ql ad` | `dpkg -L ad` | `rpm -ql ad` |
+
+    ### Katmanlar
+
+    - **pacman** — Arch resmi depolar; AUR ayrı (`paru` vb., draft/dikkat).
+    - **apt + dpkg** — yüksek seviye apt, düşük seviye dpkg.
+    - **dnf + rpm** — yüksek seviye dnf, düşük seviye rpm.
+    - **flatpak** — dağıtımdan bağımsız sandbox uygulamalar (`flatpak install` / `run`).
+
+    **Kural:** Bilinmeyen paket adı **uydurulmaz**; `packages.*` alanı omit/`draft`.
+    CI yıkıcı kurulum çalıştırmaz. Nova Arch host’ta `packages.arch` / pacman notunu önce tutar.
+  en: |
+    The same job uses different commands per distro. Tables below summarize **common
+    update/install/query** paths — no invented flags. Longer Markdown:
+    `docs/package-managers-comparison.md`. Arch rows first per Nova preference.
+
+    ### System update / sync
+
+    | Goal | Arch (pacman) | Debian/Ubuntu (apt) | Fedora/RHEL (dnf) |
+    |------|---------------|---------------------|-------------------|
+    | Refresh + upgrade | `pacman -Syu` | `apt update && apt upgrade` | `dnf upgrade` |
+    | Index only | (inside Syu) | `apt update` | `dnf check-update` |
+    | Install | `pacman -S name` | `apt install name` | `dnf install name` |
+    | Remove (+deps common) | `pacman -Rns name` | `apt purge name` | `dnf remove name` |
+    | Search | `pacman -Ss q` | `apt search q` | `dnf search q` |
+
+    ### Local queries
+
+    | Goal | pacman | dpkg/apt | rpm/dnf |
+    |------|--------|----------|---------|
+    | Installed? | `pacman -Q name` | `dpkg -l name` | `rpm -q name` |
+    | File → package | `pacman -Qo path` | `dpkg -S path` | `rpm -qf path` |
+    | Package → files | `pacman -Ql name` | `dpkg -L name` | `rpm -ql name` |
+
+    ### Layers
+
+    - **pacman** — official Arch repos; AUR is separate (`paru`, etc., draft/care).
+    - **apt + dpkg** — high-level apt, low-level dpkg.
+    - **dnf + rpm** — high-level dnf, low-level rpm.
+    - **flatpak** — distro-agnostic sandboxed apps (`flatpak install` / `run`).
+
+    **Rule:** unknown package names are **not invented**; omit `packages.*` or use
+    `draft`. CI does not run destructive installs. On Arch hosts Nova keeps
+    `packages.arch` / pacman notes first.
+verification:
+  status: reviewed
+  sources:
+    - "https://wiki.archlinux.org/title/Pacman/Rosetta"
+    - "man pacman / man apt / man dnf"
+  notes: "Comparison tables agent-authored from Rosetta + man; not verified."

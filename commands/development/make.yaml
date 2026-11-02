@@ -34,7 +34,9 @@ examples:
   risk: caution
 related:
 - cmake
+- gcc
 - git
+- patch
 intent:
   tr:
   - make derle

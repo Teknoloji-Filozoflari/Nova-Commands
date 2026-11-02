@@ -47,6 +47,7 @@ Yeni komut / konsept: [CONTRIBUTING.md](CONTRIBUTING.md) · Nova: [docs/NOVA_INT
 
 Debian/Ubuntu (`apt`), Fedora/RHEL (`dnf`), Arch (`pacman`) birinci sınıf.
 Paket notlarında **Arch / pacman tercihi** (Nova tercihleri ile uyumlu).
+Karşılaştırma tabloları: [docs/package-managers-comparison.md](docs/package-managers-comparison.md).
 
 ## Güvenlik
 

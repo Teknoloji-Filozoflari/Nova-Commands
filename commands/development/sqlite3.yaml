@@ -1,0 +1,108 @@
+id: sqlite3
+name: sqlite3
+category: development
+summary:
+  tr: SQLite komut satırı kabuğu.
+  en: SQLite command-line shell.
+description:
+  tr: Dosya tabanlı SQL veritabanlarını sorgular ve yönetir. Sunucu süreci yok; tek dosya DB.
+  en: Queries and manages file-based SQL databases. No server process; one-file DB.
+tags:
+- sql
+- database
+- data
+risk: caution
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+packages:
+  arch: sqlite
+  debian: sqlite3
+  ubuntu: sqlite3
+  fedora: sqlite
+install_notes:
+  tr: 'Arch: pacman -S sqlite
+
+    Debian/Ubuntu: apt install sqlite3
+
+    Fedora: dnf install sqlite
+
+    İkili adı genelde sqlite3.'
+  en: 'Arch: pacman -S sqlite
+
+    Debian/Ubuntu: apt install sqlite3
+
+    Fedora: dnf install sqlite
+
+    Binary is usually sqlite3.'
+flags:
+- flag: -header
+  meaning:
+    tr: Sütun başlıklarını göster.
+    en: Show column headers.
+  verified: true
+- flag: -csv
+  meaning:
+    tr: CSV çıktı kipi.
+    en: CSV output mode.
+  verified: true
+- flag: -json
+  meaning:
+    tr: JSON çıktı kipi.
+    en: JSON output mode.
+  verified: true
+- flag: -readonly
+  meaning:
+    tr: Salt okunur aç.
+    en: Open database read-only.
+  verified: true
+examples:
+- title:
+    tr: Sorgula
+    en: Query
+  command: sqlite3 app.db "SELECT count(*) FROM users;"
+  explanation:
+    tr: Tek SQL ifadesi çalıştırır.
+    en: Runs a single SQL statement.
+  risk: caution
+- title:
+    tr: JSON çıktı
+    en: JSON output
+  command: sqlite3 -json app.db 'SELECT id,name FROM users LIMIT 5;'
+  explanation:
+    tr: Satırları JSON olarak basar.
+    en: Prints rows as JSON.
+  risk: caution
+- title:
+    tr: Salt okunur
+    en: Read-only
+  command: sqlite3 -readonly app.db ".tables"
+  explanation:
+    tr: Yazmadan tablo listeler.
+    en: Lists tables without write access.
+  risk: safe
+related:
+- jq
+- python3
+intent:
+  tr:
+  - sqlite sorgula
+  - sql çalıştır
+  en:
+  - query sqlite
+  - run sql
+verification:
+  status: reviewed
+  sources:
+  - https://www.sqlite.org/cli.html
+  - sqlite3 -help
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-deeper
+nova:
+  favorite_eligible: true
+  ui_priority: 80
+  concepts:
+  - json-data
+  - terminal-basics
