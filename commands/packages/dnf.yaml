@@ -4,8 +4,8 @@ summary:
   tr: Fedora/RHEL paket yöneticisi.
   en: Fedora/RHEL package manager.
 description:
-  tr: DNF ile kurulum, yükseltme ve sorgu.
-  en: Install, upgrade, and query with DNF.
+  tr: Fedora/RHEL aile paket yöneticisi; kurulum, güncelleme ve depo işlemlerini yönetir.
+  en: Package manager for Fedora/RHEL families; installs, upgrades, and queries repositories.
 tags:
 - packages
 - fedora
@@ -73,3 +73,7 @@ verification:
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-bootstrap
 category: packages
+nova:
+  concepts:
+  - packages
+  - package-managers

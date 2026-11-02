@@ -20,14 +20,16 @@ packages:
   ubuntu: plocate
   fedora: mlocate
 install_notes:
-  tr: |-
-    Arch: pacman -S mlocate (veya plocate)
+  tr: 'Arch: pacman -S mlocate (veya plocate)
+
     Debian/Ubuntu: plocate yaygın
-    Fedora: mlocate — updatedb root ile çalışır
-  en: |-
-    Arch: pacman -S mlocate (or plocate)
+
+    Fedora: mlocate — updatedb root ile çalışır'
+  en: 'Arch: pacman -S mlocate (or plocate)
+
     Debian/Ubuntu: often plocate
-    Fedora: mlocate — updatedb runs as root
+
+    Fedora: mlocate — updatedb runs as root'
 flags:
 - flag: -i
   meaning:
@@ -68,3 +70,8 @@ verification:
   - man 1 plocate
   notes: mlocate vs plocate package/CLI differs by distro.
 category: search
+nova:
+  concepts:
+  - files
+  - shell-pipes-redirection
+  favorite_eligible: true

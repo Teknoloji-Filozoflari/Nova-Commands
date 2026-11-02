@@ -4,10 +4,10 @@ summary:
   tr: Dizin içeriğini listeler.
   en: List directory contents.
 description:
-  tr: Belirtilen dizinlerdeki dosya ve alt dizinleri listeler. GNU coreutils sürümünde
-    uzun biçim, insan okunur boyut ve renk gibi yaygın bayraklar vardır.
-  en: Lists files and directories. The GNU coreutils version supports long format,
-    human-readable sizes, and color.
+  tr: Belirtilen dizinlerdeki dosya ve alt dizinleri listeler. GNU coreutils sürümünde uzun biçim, insan
+    okunur boyut ve renk gibi yaygın bayraklar vardır.
+  en: Lists files and directories. The GNU coreutils version supports long format, human-readable sizes,
+    and color.
 tags:
 - files
 - directory
@@ -114,4 +114,5 @@ nova:
   ui_priority: 90
   concepts:
   - files
+  - terminal-basics
 category: filesystem

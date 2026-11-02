@@ -61,3 +61,6 @@ verification:
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-bootstrap
 category: archives
+nova:
+  concepts:
+  - files

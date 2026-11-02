@@ -82,4 +82,5 @@ verification:
 nova:
   concepts:
   - systemd
+  - terminal-basics
 category: system

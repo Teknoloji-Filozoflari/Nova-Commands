@@ -22,10 +22,10 @@ jobs:
       - name: Install validator dependencies
         run: python3 -m pip install -r requirements-dev.txt
 
-      - name: Schema + id + category + verification rules
+      - name: Schema + id + category + i18n + concepts
         run: python3 scripts/validate_catalog.py
 
-      - name: Build aggregate catalog.json
+      - name: Build catalog, search-index, manifest
         run: python3 scripts/build_catalog.py
 
       - name: Unit tests
@@ -37,11 +37,20 @@ jobs:
           import json
           from pathlib import Path
           cat = json.loads(Path("metadata/catalog.json").read_text())
+          man = json.loads(Path("metadata/manifest.json").read_text())
+          idx = json.loads(Path("metadata/search-index.json").read_text())
           assert cat["schema_version"] == 1
           assert cat["kind"] == "nova-commands-bank"
           assert cat["commands"], "catalog must contain commands"
+          assert cat["concepts"], "catalog must contain concepts"
           ids = [c["id"] for c in cat["commands"]]
           assert len(ids) == len(set(ids))
           assert cat["command_count"] == len(ids)
-          print(f"catalog ok: {len(ids)} commands")
+          assert cat["concept_count"] == len(cat["concepts"])
+          assert len(cat["content_sha256"]) == 64
+          assert man["content_sha256"] == cat["content_sha256"] == idx["content_sha256"]
+          print(
+              f"catalog ok: {len(ids)} commands, {cat['concept_count']} concepts, "
+              f"sha={cat['content_sha256'][:12]}…"
+          )
           PY

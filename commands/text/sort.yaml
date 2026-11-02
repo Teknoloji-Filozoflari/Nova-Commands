@@ -21,7 +21,7 @@ summary:
   en: Sort lines of text.
 description:
   tr: Standart girdi veya dosya satırlarını sıralar.
-  en: Sorts lines from files or stdin.
+  en: Sorts lines of text files or stdin; supports unique, numeric, and key-based ordering.
 tags:
 - text
 risk: safe
@@ -70,3 +70,8 @@ intent:
   - sort lines
   - sort file
 category: text
+nova:
+  concepts:
+  - files
+  - shell-pipes-redirection
+  favorite_eligible: true

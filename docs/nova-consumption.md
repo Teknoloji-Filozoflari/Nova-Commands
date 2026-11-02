@@ -2,14 +2,19 @@
 
 Repository: https://github.com/Teknoloji-Filozoflari/Nova-Commands
 
+Full client contract: **[NOVA_INTEGRATION.md](./NOVA_INTEGRATION.md)** (manifest SHA,
+search index, concepts).
+
 ## Source of truth
 
 | Path | Role |
 |------|------|
 | `commands/<category>/<id>.yaml` | One command per file; contributors PR here |
+| `concepts/<id>.yaml` | Learnable concept articles (TR/EN) |
 | `schema/command.schema.json` | Entry schema (risk, verification, i18n, …) |
 | `metadata/categories.yaml` | Taxonomy §8.1–8.16 + TR/EN labels |
 | `metadata/catalog.json` | Built aggregate for clients |
+| `metadata/manifest.json` | Deterministic `content_sha256` + counts |
 | `docs/local-discovery-contract.md` | Local PATH discovery (client-side) |
 
 ## Client flow (recommended)

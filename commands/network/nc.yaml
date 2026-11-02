@@ -23,14 +23,16 @@ packages:
   ubuntu: netcat-openbsd
   fedora: nmap-ncat
 install_notes:
-  tr: |-
-    Arch: pacman -S openbsd-netcat (alternatif: gnu-netcat)
+  tr: 'Arch: pacman -S openbsd-netcat (alternatif: gnu-netcat)
+
     Debian/Ubuntu: apt install netcat-openbsd
-    Fedora: dnf install nmap-ncat (komut sıkça ncat)
-  en: |-
-    Arch: pacman -S openbsd-netcat (alt: gnu-netcat)
+
+    Fedora: dnf install nmap-ncat (komut sıkça ncat)'
+  en: 'Arch: pacman -S openbsd-netcat (alt: gnu-netcat)
+
     Debian/Ubuntu: apt install netcat-openbsd
-    Fedora: dnf install nmap-ncat (binary often ncat)
+
+    Fedora: dnf install nmap-ncat (binary often ncat)'
 flags:
 - flag: -l
   meaning:
@@ -90,4 +92,5 @@ verification:
 nova:
   concepts:
   - networking
+  - networking-basics
 category: network

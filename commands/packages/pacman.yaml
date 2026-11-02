@@ -4,10 +4,8 @@ summary:
   tr: Arch Linux paket yöneticisi.
   en: Arch Linux package manager.
 description:
-  tr: Pacman ile kurulum, güncelleme, kaldırma ve sorgu. Nova tercihinde Arch birincil
-    hedeftir.
-  en: Install, upgrade, remove, and query with pacman. Arch is Nova’s preferred host
-    target.
+  tr: Pacman ile kurulum, güncelleme, kaldırma ve sorgu. Nova tercihinde Arch birincil hedeftir.
+  en: Install, upgrade, remove, and query with pacman. Arch is Nova’s preferred host target.
 tags:
 - packages
 - arch
@@ -108,4 +106,5 @@ nova:
   concepts:
   - packages
   - arch
+  - package-managers
 category: packages

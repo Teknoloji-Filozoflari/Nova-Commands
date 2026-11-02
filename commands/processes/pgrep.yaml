@@ -5,7 +5,7 @@ summary:
   en: Find process IDs by name.
 description:
   tr: Desene uyan süreçlerin PID listesini basar.
-  en: Lists PIDs matching a pattern.
+  en: Finds process IDs matching a name or pattern; companion to pkill in procps.
 tags:
 - process
 - search
@@ -53,3 +53,7 @@ verification:
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-bootstrap
 category: processes
+nova:
+  concepts:
+  - terminal-basics
+  favorite_eligible: true

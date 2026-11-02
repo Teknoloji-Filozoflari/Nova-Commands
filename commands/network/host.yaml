@@ -21,14 +21,16 @@ packages:
   ubuntu: bind9-host
   fedora: bind-utils
 install_notes:
-  tr: |-
-    Arch: pacman -S bind
+  tr: 'Arch: pacman -S bind
+
     Debian/Ubuntu: apt install bind9-host (veya dnsutils metapaketi)
-    Fedora: dnf install bind-utils
-  en: |-
-    Arch: pacman -S bind
+
+    Fedora: dnf install bind-utils'
+  en: 'Arch: pacman -S bind
+
     Debian/Ubuntu: apt install bind9-host (or dnsutils)
-    Fedora: dnf install bind-utils
+
+    Fedora: dnf install bind-utils'
 flags:
 - flag: -t
   meaning:
@@ -80,4 +82,5 @@ nova:
   concepts:
   - networking
   - dns
+  - networking-basics
 category: network

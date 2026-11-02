@@ -54,3 +54,7 @@ intent:
   - tee to file
   - save pipeline output
 category: text
+nova:
+  concepts:
+  - files
+  - shell-pipes-redirection

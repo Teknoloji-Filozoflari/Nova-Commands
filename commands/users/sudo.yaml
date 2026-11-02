@@ -76,4 +76,6 @@ verification:
 nova:
   favorite_eligible: true
   ui_priority: 75
+  concepts:
+  - permissions
 category: users

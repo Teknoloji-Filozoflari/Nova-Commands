@@ -75,4 +75,5 @@ verification:
 nova:
   concepts:
   - ssh
+  - permissions
 category: security

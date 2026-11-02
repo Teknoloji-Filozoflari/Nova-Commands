@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "kind": "nova-commands-manifest",
+  "generated_at": "2026-11-02T18:33:47Z",
+  "content_sha256": "c27a056fd818c23e1c23870e97ecabbdf151ccd330c851e99f29f93dedb1be4e",
+  "command_count": 117,
+  "concept_count": 7,
+  "artifacts": {
+    "catalog": "metadata/catalog.json",
+    "search_index": "metadata/search-index.json"
+  }
+}

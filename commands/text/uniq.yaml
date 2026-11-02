@@ -53,3 +53,8 @@ intent:
   - unique lines
   - remove duplicates
 category: text
+nova:
+  concepts:
+  - files
+  - shell-pipes-redirection
+  favorite_eligible: true

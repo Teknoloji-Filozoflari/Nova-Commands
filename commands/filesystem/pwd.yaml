@@ -49,4 +49,7 @@ verification:
 nova:
   favorite_eligible: true
   ui_priority: 70
+  concepts:
+  - files
+  - terminal-basics
 category: filesystem

@@ -4,8 +4,8 @@ summary:
   tr: USB aygıtlarını listeler.
   en: List USB devices.
 description:
-  tr: Bağlı USB cihazları basar.
-  en: Prints connected USB devices.
+  tr: USB aygıt ağacını listeler; hata ayıklama ve donanım envanteri için kullanılır.
+  en: Lists the USB device tree; useful for hardware inventory and debugging.
 tags:
 - hardware
 risk: safe
@@ -45,3 +45,7 @@ verification:
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-bootstrap
 category: hardware
+nova:
+  concepts:
+  - terminal-basics
+  favorite_eligible: true

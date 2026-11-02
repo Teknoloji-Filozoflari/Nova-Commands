@@ -78,3 +78,7 @@ verification:
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-bootstrap
 category: packages
+nova:
+  concepts:
+  - packages
+  - package-managers

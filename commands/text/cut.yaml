@@ -67,3 +67,8 @@ intent:
   - cut column
   - select field
 category: text
+nova:
+  concepts:
+  - files
+  - shell-pipes-redirection
+  favorite_eligible: true

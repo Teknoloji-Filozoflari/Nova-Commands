@@ -44,3 +44,7 @@ verification:
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-bootstrap
 category: hardware
+nova:
+  concepts:
+  - terminal-basics
+  favorite_eligible: true

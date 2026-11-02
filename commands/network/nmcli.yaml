@@ -20,14 +20,16 @@ packages:
   ubuntu: network-manager
   fedora: NetworkManager
 install_notes:
-  tr: |-
-    Arch: pacman -S networkmanager — sonra systemctl enable --now NetworkManager
+  tr: 'Arch: pacman -S networkmanager — sonra systemctl enable --now NetworkManager
+
     Debian/Ubuntu: network-manager
-    Fedora: NetworkManager (genelde kurulu)
-  en: |-
-    Arch: pacman -S networkmanager — then systemctl enable --now NetworkManager
+
+    Fedora: NetworkManager (genelde kurulu)'
+  en: 'Arch: pacman -S networkmanager — then systemctl enable --now NetworkManager
+
     Debian/Ubuntu: network-manager
-    Fedora: NetworkManager (usually installed)
+
+    Fedora: NetworkManager (usually installed)'
 flags:
 - flag: device
   meaning:
@@ -104,5 +106,6 @@ verification:
 nova:
   concepts:
   - networking
+  - networking-basics
   ui_priority: 65
 category: network

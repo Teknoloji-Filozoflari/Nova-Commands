@@ -1,0 +1,85 @@
+id: systemd
+kind: nova-commands-concept
+title:
+  tr: systemd temelleri
+  en: systemd basics
+summary:
+  tr: Birimler, hedefler, systemctl ve journalctl ile servis yönetimi.
+  en: Units, targets, and service control with systemctl and journalctl.
+difficulty: intermediate
+tags:
+  - systemd
+  - services
+  - boot
+related_commands:
+  - systemctl
+  - journalctl
+  - hostnamectl
+  - timedatectl
+  - loginctl
+  - systemd-analyze
+  - bootctl
+related_concepts:
+  - terminal-basics
+  - permissions
+see_also:
+  - "man systemd"
+  - "man systemctl"
+  - "Arch Wiki: systemd"
+body:
+  tr: |
+    **systemd**, birçok Linux dağıtımında init/PID 1 ve servis yöneticisidir. Yapılandırma
+    birimleri (unit) `.service`, `.timer`, `.socket`, `.mount`, `.target` gibi türlerdedir.
+
+    **Sık birim türleri:**
+    - `.service` — uzun yaşayan süreç / oneshot görev.
+    - `.target` — bir grup birimi senkronlamak (ör. `multi-user.target`).
+    - `.timer` — cron benzeri zamanlama (systemd zamanlayıcıları).
+
+    **systemctl (yaygın okuma/yazma):**
+    - `systemctl status birim` — durum (çoğu zaman sudo gerekmez).
+    - `systemctl start|stop|restart birim` — çalışma anı (genelde root).
+    - `systemctl enable|disable birim` — boot’ta etkinleştirme.
+    - `systemctl daemon-reload` — unit dosyası değişince.
+
+    **Günlükler:** `journalctl -u birim -e` son logları gösterir; `-f` takip eder.
+    Kalıcı journal dağıtıma göre `/var/log/journal` altında olabilir.
+
+    **İlgili ctl araçları:** `hostnamectl`, `timedatectl`, `loginctl`,
+    `systemd-analyze blame` (boot süresi analizi), `bootctl` (systemd-boot; her
+    kurulumda yok).
+
+    **Risk:** Yanlış `stop`/`disable` uzaktan erişimi veya ağı kesebilir; bankada
+    birçok systemd işlemi `dangerous` / `requires_elevated: true` işaretlidir.
+    Unit dosyası yolları ve distro varsayılanları değişebilir — uydurma bayrak yok.
+  en: |
+    **systemd** is init/PID 1 and the service manager on many Linux distributions.
+    Configuration lives in units: `.service`, `.timer`, `.socket`, `.mount`, `.target`, …
+
+    **Common unit types:**
+    - `.service` — long-running process or oneshot job.
+    - `.target` — synchronization point (e.g. `multi-user.target`).
+    - `.timer` — calendar/monotonic scheduling (systemd timers).
+
+    **systemctl (common):**
+    - `systemctl status unit` — status (often without sudo).
+    - `systemctl start|stop|restart unit` — runtime control (usually root).
+    - `systemctl enable|disable unit` — boot enablement.
+    - `systemctl daemon-reload` — after editing unit files.
+
+    **Logs:** `journalctl -u unit -e` shows recent logs; `-f` follows.
+    Persistent journals may live under `/var/log/journal` depending on distro config.
+
+    **Related ctl tools:** `hostnamectl`, `timedatectl`, `loginctl`,
+    `systemd-analyze blame` (boot timing), `bootctl` (systemd-boot; not everywhere).
+
+    **Risk:** Mistaken `stop`/`disable` can cut remote access or networking; many
+    entries are `dangerous` / `requires_elevated`. Unit paths and defaults vary —
+    never invent flags or package names.
+verification:
+  status: reviewed
+  sources:
+    - "man systemd"
+    - "man systemctl"
+    - "https://wiki.archlinux.org/title/Systemd"
+  notes: "Agent-authored teaching article; needs maintainer spot-check before verified."

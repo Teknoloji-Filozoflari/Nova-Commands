@@ -1,0 +1,81 @@
+id: networking-basics
+kind: nova-commands-concept
+title:
+  tr: Ağ temelleri
+  en: Networking basics
+summary:
+  tr: Arayüzler, IP, DNS, bağlantı testi ve sık Linux ağ araçları.
+  en: Interfaces, IP, DNS, connectivity checks, and common Linux network tools.
+difficulty: beginner
+tags:
+  - network
+  - dns
+  - ip
+related_commands:
+  - ip
+  - ss
+  - ping
+  - curl
+  - wget
+  - dig
+  - host
+  - resolvectl
+  - nmcli
+  - traceroute
+  - nc
+related_concepts:
+  - dns
+  - ssh
+  - networking
+  - terminal-basics
+see_also:
+  - "man ip"
+  - "man systemd-resolved"
+  - "Arch Wiki: Network configuration"
+body:
+  tr: |
+    Linux’ta modern arayüz/adres yönetimi çoğunlukla **iproute2** (`ip`) ile yapılır;
+    dinleyen soketler için `ss` (eski `netstat` yerine) tercih edilir.
+
+    **Katmanlar (pratik bakış):**
+    - Arayüz: `ip link` / `ip addr` — bağlantı ve adresler.
+    - Yol: `ip route` — varsayılan ağ geçidi ve rotalar.
+    - Taşıma: `ss -tulpn` — dinleyen TCP/UDP portlar (root ile süreç adları daha dolu).
+
+    **Bağlantı testi:** `ping` ICMP kullanır (engellenebilir). HTTP için `curl -I`
+    veya `wget`. Yol izi: `traceroute` / `tracepath` (paket kurulumuna bağlı).
+
+    **DNS:** İsim → IP çözümü. `dig` / `host` sorgular; systemd-resolved kullanan
+    sistemlerde `resolvectl status` / `resolvectl query` yararlıdır. NetworkManager
+    ile masaüstü/laptop’ta `nmcli` bağlantı profillerini yönetir.
+
+    **Güvenlik notu:** `nc` (netcat) teşhis için güçlüdür ama yanlış kullanımda
+    istenmeyen dinleyici açabilir — bankada `draft`/`caution` olabilir.
+    Firewall araçları (`firewall-cmd`, nftables/iptables) ayrı dikkat ister;
+    kuralları uydurmadan belgeleyin.
+  en: |
+    On modern Linux, interface/address management is mostly **iproute2** (`ip`);
+    use `ss` for sockets (prefer over legacy `netstat`).
+
+    **Practical layers:**
+    - Link/addr: `ip link` / `ip addr`.
+    - Routing: `ip route` — default gateway and routes.
+    - Transport: `ss -tulpn` — listening TCP/UDP (process names often need root).
+
+    **Connectivity:** `ping` uses ICMP (may be blocked). For HTTP, `curl -I` or `wget`.
+    Path tracing: `traceroute` / `tracepath` (package-dependent).
+
+    **DNS:** Name → address. `dig` / `host` query resolvers; on systemd-resolved hosts,
+    `resolvectl status` / `resolvectl query` help. Desktops often use NetworkManager
+    via `nmcli`.
+
+    **Safety:** `nc` (netcat) is powerful for diagnostics but can open unwanted
+    listeners — catalog may mark it `draft`/`caution`. Firewall tooling needs care;
+    never invent rules or flags.
+verification:
+  status: reviewed
+  sources:
+    - "man ip-address / man ss"
+    - "man systemd-resolved / resolvectl"
+    - "https://wiki.archlinux.org/title/Network_configuration"
+  notes: "Agent-authored teaching article; needs maintainer spot-check before verified."

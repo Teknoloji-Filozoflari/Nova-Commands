@@ -4,8 +4,8 @@ summary:
   tr: Bellek kullanımını gösterir.
   en: Display amount of free and used memory.
 description:
-  tr: RAM ve swap özetini basar.
-  en: Prints RAM and swap summary.
+  tr: Sistem bellek ve takas kullanımını özetler; -h insan okunur birimleri basar.
+  en: Summarizes RAM and swap usage; -h prints human-readable units.
 tags:
 - monitoring
 - memory
@@ -51,3 +51,7 @@ verification:
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-bootstrap
 category: monitoring
+nova:
+  concepts:
+  - terminal-basics
+  favorite_eligible: true

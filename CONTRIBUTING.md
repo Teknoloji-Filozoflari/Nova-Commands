@@ -10,13 +10,14 @@ This repository owns the curated **Komut Bilgi Bankası** for
 1. Pick a category under `commands/` (must match `metadata/categories.yaml`
    and `schema/command.schema.json`).
 2. Create `commands/<category>/<id>.yaml` (filename stem **must** equal `id`).
-3. Fill required fields. Prefer Arch/`pacman` first in `install_notes` when
-   relevant.
-4. Set `verification.status` to `draft` unless a human already reviewed
+3. Fill required fields (**both** `tr` and `en` on every localized object).
+   Prefer Arch/`pacman` first in `install_notes` when relevant.
+4. Optionally set `nova.concepts` to ids from `metadata/concepts.yaml`.
+5. Set `verification.status` to `draft` unless a human already reviewed
    flags, packages, and examples against man pages / `--help`.
-5. For each flag, set `verified: false` until confirmed. Do **not** invent
+6. For each flag, set `verified: false` until confirmed. Do **not** invent
    flags or package names.
-6. Run locally:
+7. Run locally:
 
    ```bash
    python3 -m pip install -r requirements-dev.txt
@@ -25,7 +26,15 @@ This repository owns the curated **Komut Bilgi Bankası** for
    python3 -m pytest tests/
    ```
 
-7. Open a pull request. CI must pass.
+8. Open a pull request. CI must pass.
+
+## Add a concept article
+
+1. Register the id in `metadata/concepts.yaml` (label tr/en; set `article:`).
+2. Create `concepts/<id>.yaml` with `kind: nova-commands-concept`, bilingual
+   `title` / `summary` / `body`, `difficulty`, and honest `verification`.
+3. `related_commands` must reference existing command ids.
+4. Do **not** mark `verified` without human review of the teaching text.
 
 ## Required fields
 

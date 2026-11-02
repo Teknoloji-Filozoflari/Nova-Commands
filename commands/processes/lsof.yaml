@@ -86,4 +86,5 @@ verification:
 nova:
   concepts:
   - networking
+  - terminal-basics
 category: processes

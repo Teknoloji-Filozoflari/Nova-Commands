@@ -65,3 +65,8 @@ verification:
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-bootstrap
 category: filesystem
+nova:
+  concepts:
+  - files
+  - terminal-basics
+  favorite_eligible: true
