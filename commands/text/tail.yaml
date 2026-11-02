@@ -9,11 +9,12 @@ platforms:
 - bsd
 requires_elevated: false
 verification:
-  status: reviewed
+  status: verified
   sources:
-  - man 1 tail
+  - man 1 tail (GNU coreutils)
   last_reviewed: '2026-11-02'
-  reviewer: nova-commands-bootstrap
+  reviewer: nova-commands-phase15
+  notes: Flags -n/--lines and -f/--follow confirmed.
 id: tail
 name: tail
 summary:

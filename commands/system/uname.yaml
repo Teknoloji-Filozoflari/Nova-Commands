@@ -49,11 +49,12 @@ intent:
   - kernel version
   - machine arch
 verification:
-  status: reviewed
+  status: verified
   sources:
-  - man 1 uname
+  - man 1 uname (GNU coreutils)
   last_reviewed: '2026-11-02'
-  reviewer: nova-commands-bootstrap
+  reviewer: nova-commands-phase15
+  notes: Flag -a/--all confirmed; read-only system identity.
 category: system
 nova:
   concepts:

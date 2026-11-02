@@ -20,15 +20,23 @@ related_commands:
   - findmnt
   - blkid
   - fdisk
+  - parted
   - dd
   - sync
+  - mkfs
+  - mkfs.ext4
+  - mkfs.xfs
+  - mkfs.btrfs
+  - mkfs.fat
+  - wipefs
+  - fsck
 related_concepts:
   - files
   - permissions
   - terminal-basics
 see_also:
-  - "man lsblk / man mount"
-  - "Arch Wiki: File systems / fstab"
+  - "man lsblk / man mount / man mkfs"
+  - "Arch Wiki: File systems / fstab / Parted"
 body:
   tr: |
     Disk ve dosya sistemi işleri **yanlış aygıt adıyla yıkıcı** olabilir. Önce okuma
@@ -44,14 +52,19 @@ body:
     **Bağlama:** `mount` / `umount` (veya fstab / systemd `.mount`). Yanlış `umount`
     açık dosyaları bozabilir; meşgulse `lsof` / `fuser` ile bakın.
 
-    **Yüksek risk:**
-    - `fdisk` / bölüm tablosu düzenleme — veri kaybı riski.
-    - `dd` — ham kopya; yanlış `of=` diski siler (`destructive` örnekler).
-    - `mkfs.*` — dosya sistemi oluşturur (bu fazda derinleştirme dikkatli olmalı).
+    **Yüksek risk (yer tutucu aygıt; asla kopyala-yapıştır):**
+    - `fdisk` / `parted` — bölüm tablosu; `parted -l` önce okuyun.
+    - `dd` — ham kopya; yanlış `of=` diski siler.
+    - `mkfs` / `mkfs.ext4` / `mkfs.xfs` / `mkfs.btrfs` / `mkfs.fat` — FS oluşturur;
+      mümkünse `-n` / `-N` / `--help` ile başlayın (Arch: ilgili `*-progs` /
+      `dosfstools` / `util-linux` paketleri).
+    - `wipefs` — imza silme; önce listeleyin, silmede `-n` kuru koşu kullanın.
+    - `fsck` — onarım; bağlı FS’te tehlikeli; `-N` plan, `-M` bağlıları atlar.
 
     **`sync`:** Bellekteki yazıları diske iter; kapatma/çıkarma öncesi kullanılır.
-    Doğrulama için asla rastgele disklere `dd`/`mkfs` çalıştırmayın; banka girdileri
-    man ve belgelere dayanmalı, `verified` yalnız insan incelemesi sonrası.
+    Doğrulama için asla rastgele disklere `dd`/`mkfs` çalıştırmayın; `verified`
+    yalnız insan incelemesi sonrası (keşif araçlarının bir kısmı Faz 15’te
+    verified’a yükseltildi).
   en: |
     Disk and filesystem operations are **destructive on the wrong device**. Start with
     read-only discovery.
@@ -66,17 +79,22 @@ body:
     **Mounting:** `mount` / `umount` (or fstab / systemd `.mount`). A busy `umount` can
     fail; inspect with `lsof` / `fuser`.
 
-    **High risk:**
-    - `fdisk` / partition edits — data loss risk.
-    - `dd` — raw copy; wrong `of=` wipes a disk (`destructive` examples).
-    - `mkfs.*` — creates filesystems (deepen carefully in later work).
+    **High risk (placeholder devices; never copy-paste blindly):**
+    - `fdisk` / `parted` — partition tables; read with `parted -l` first.
+    - `dd` — raw copy; wrong `of=` wipes a disk.
+    - `mkfs` / `mkfs.ext4` / `mkfs.xfs` / `mkfs.btrfs` / `mkfs.fat` — create
+      filesystems; start with `-n` / `-N` / `--help` when available (Arch packages:
+      matching `*-progs` / `dosfstools` / `util-linux`).
+    - `wipefs` — signature wipe; list first, use `-n` for dry-run before erase.
+    - `fsck` — repair; dangerous on mounted FS; `-N` plan, `-M` skips mounted.
 
     **`sync`:** Flushes buffered writes; used before unmount/shutdown.
     Never run `dd`/`mkfs` against arbitrary disks to “validate” catalog entries;
-    keep `verified` for human review only.
+    `verified` is for human review only (some discovery tools graduated in phase 15).
 verification:
   status: reviewed
   sources:
-    - "man lsblk / man mount / man dd"
+    - "man lsblk / man mount / man mkfs / man wipefs"
     - "https://wiki.archlinux.org/title/File_systems"
-  notes: "Agent-authored teaching article; no destructive verification runs."
+  last_reviewed: "2026-11-02"
+  notes: "Updated for mkfs/parted/wipefs/fsck coverage; no destructive runs."

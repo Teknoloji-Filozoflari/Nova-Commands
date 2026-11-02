@@ -1,0 +1,120 @@
+id: mkfs
+name: mkfs
+summary:
+  tr: Dosya sistemi oluşturma ön yüzü (yıkıcı).
+  en: Frontend to build a Linux filesystem (destructive).
+description:
+  tr: >
+    util-linux `mkfs`, seçilen türe göre `mkfs.<type>` yardımcılarını çağırır.
+    Varsayılan tür çoğu kurulumda ext2’dir; modern kullanımda doğrudan
+    `mkfs.ext4` / `mkfs.xfs` / `mkfs.btrfs` tercih edilir. Yanlış aygıt =
+    tüm verinin silinmesi. Bu girdi verified değildir; yalnızca belgelenmiş
+    uyarılarla reviewed.
+  en: >
+    util-linux `mkfs` dispatches to `mkfs.<type>` helpers. Default type is
+    often ext2; prefer calling `mkfs.ext4` / `mkfs.xfs` / `mkfs.btrfs`
+    directly. Wrong device wipes all data. Kept reviewed (not verified)
+    with strong warnings only.
+tags:
+- disk
+- storage
+- filesystem
+- format
+risk: destructive
+requires_elevated: true
+platforms:
+- linux
+packages:
+  arch: util-linux
+  debian: util-linux
+  ubuntu: util-linux
+  fedora: util-linux
+  rhel: util-linux
+install_notes:
+  tr: |
+    Arch: pacman -S util-linux (genelde taban). Tür yardımcıları ayrı paketlerde:
+    e2fsprogs, xfsprogs, btrfs-progs, dosfstools.
+    Debian/Ubuntu: apt install util-linux (+ ilgili mkfs.* paketleri)
+    Fedora: dnf install util-linux
+  en: |
+    Arch: pacman -S util-linux (usually base). Type helpers live in separate
+    packages: e2fsprogs, xfsprogs, btrfs-progs, dosfstools.
+    Debian/Ubuntu: apt install util-linux (+ matching mkfs.* packages)
+    Fedora: dnf install util-linux
+flags:
+- flag: -t
+  long: --type
+  meaning:
+    tr: Dosya sistemi türü (ör. ext4, xfs, btrfs, vfat).
+    en: Filesystem type (e.g. ext4, xfs, btrfs, vfat).
+  verified: true
+  takes_value: true
+  value_name: type
+- flag: -V
+  long: --verbose
+  meaning:
+    tr: Ayrıntı; birden fazla -V kuru koşu (dry-run) yapabilir.
+    en: Verbose; multiple -V may dry-run without writing.
+  verified: true
+examples:
+- title:
+    tr: Yardım (güvenli)
+    en: Help (safe)
+  command: mkfs --help
+  explanation:
+    tr: Seçenekleri gösterir; diske yazmaz.
+    en: Shows options; does not write to disk.
+  risk: safe
+  requires_elevated: false
+- title:
+    tr: Tür ile oluştur (UYARI)
+    en: Create by type (DANGER)
+  command: sudo mkfs -t ext4 /dev/sdXN
+  explanation:
+    tr: >
+      Yer tutucu aygıt — gerçek yolda ASLA çalıştırmayın. Önce `lsblk -f` /
+      `blkid` ile doğru bölümü doğrulayın. Tercihen `mkfs.ext4` kullanın.
+    en: >
+      Placeholder device — never run on a real path as-is. Confirm the
+      partition with `lsblk -f` / `blkid` first. Prefer `mkfs.ext4` directly.
+  risk: destructive
+  requires_elevated: true
+related:
+- mkfs.ext4
+- mkfs.xfs
+- mkfs.btrfs
+- mkfs.fat
+- lsblk
+- blkid
+- fdisk
+- parted
+- wipefs
+see_also:
+- man 8 mkfs
+- https://wiki.archlinux.org/title/File_systems
+intent:
+  tr:
+  - dosya sistemi oluştur
+  - disk formatla mkfs
+  - mkfs nedir
+  en:
+  - create filesystem
+  - format disk mkfs
+  - what is mkfs
+verification:
+  status: reviewed
+  sources:
+  - man 8 mkfs (util-linux)
+  - https://wiki.archlinux.org/title/File_systems
+  - mkfs --help
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-phase15
+  notes: >
+    Destructive formatter frontend. Examples use placeholders only; no
+    verified promotion. Never execute against real disks to validate.
+nova:
+  concepts:
+  - storage
+  favorite_eligible: false
+  ui_priority: 40
+category: disks

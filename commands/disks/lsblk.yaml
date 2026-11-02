@@ -17,11 +17,34 @@ packages:
   debian: util-linux
   ubuntu: util-linux
   fedora: util-linux
+install_notes:
+  tr: |
+    Arch: pacman -S util-linux (taban)
+    Debian/Ubuntu: apt install util-linux
+    Fedora: dnf install util-linux
+  en: |
+    Arch: pacman -S util-linux (base)
+    Debian/Ubuntu: apt install util-linux
+    Fedora: dnf install util-linux
 flags:
 - flag: -f
   meaning:
     tr: Dosya sistemi bilgisi ekle.
     en: Include filesystem info.
+  verified: true
+- flag: -o
+  long: --output
+  meaning:
+    tr: Sütun listesi (NAME,SIZE,TYPE,MOUNTPOINTS,…).
+    en: Output column list (NAME,SIZE,TYPE,MOUNTPOINTS,…).
+  verified: true
+  takes_value: true
+  value_name: list
+- flag: -J
+  long: --json
+  meaning:
+    tr: JSON çıktı.
+    en: JSON output.
   verified: true
 examples:
 - title:
@@ -29,13 +52,24 @@ examples:
     en: Tree
   command: lsblk -f
   explanation:
-    tr: Aygıtlar + FS.
-    en: Devices + filesystems.
+    tr: Aygıtlar + FS; format/mkfs öncesi doğrulama için ilk adım.
+    en: Devices + filesystems; first step before any format/mkfs.
+  risk: safe
+- title:
+    tr: JSON
+    en: JSON
+  command: lsblk -J -o NAME,SIZE,FSTYPE,MOUNTPOINTS
+  explanation:
+    tr: Betiklenebilir JSON özet.
+    en: Script-friendly JSON summary.
   risk: safe
 related:
 - df
 - mount
+- findmnt
+- blkid
 - fdisk
+- mkfs
 intent:
   tr:
   - diskleri listele
@@ -44,11 +78,14 @@ intent:
   - list disks
   - show partitions
 verification:
-  status: reviewed
+  status: verified
   sources:
-  - man 8 lsblk
+  - man 8 lsblk (util-linux)
+  - https://man.archlinux.org/man/lsblk.8
+  - lsblk --help
   last_reviewed: '2026-11-02'
-  reviewer: nova-commands-bootstrap
+  reviewer: nova-commands-phase15
+  notes: Flags -f/-o/-J confirmed; read-only block device tree; Arch util-linux.
 category: disks
 nova:
   concepts:

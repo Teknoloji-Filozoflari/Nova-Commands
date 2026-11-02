@@ -72,6 +72,8 @@ examples:
 related:
 - lsblk
 - fdisk
+- parted
+- wipefs
 - sync
 - cp
 intent:

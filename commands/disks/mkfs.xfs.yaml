@@ -1,0 +1,112 @@
+id: mkfs.xfs
+name: mkfs.xfs
+summary:
+  tr: XFS dosya sistemi oluşturur (yıkıcı).
+  en: Construct an XFS filesystem (destructive).
+description:
+  tr: >
+    xfsprogs `mkfs.xfs` aygıt üzerinde XFS oluşturur. Mevcut FS imzasını
+    ezmek için çoğu zaman `-f` gerekir — bu da yanlış aygıtta felakettir.
+    `-N` yalnızca bilgi basar (yazmaz). XFS küçültülemez; reviewed, verified değil.
+  en: >
+    xfsprogs `mkfs.xfs` builds XFS on a device. Overwriting an existing
+    signature usually needs `-f` — catastrophic on the wrong device. `-N`
+    prints info only (no write). XFS cannot be shrunk; reviewed, not verified.
+tags:
+- disk
+- storage
+- filesystem
+- xfs
+- format
+risk: destructive
+requires_elevated: true
+platforms:
+- linux
+packages:
+  arch: xfsprogs
+  debian: xfsprogs
+  ubuntu: xfsprogs
+  fedora: xfsprogs
+  rhel: xfsprogs
+install_notes:
+  tr: |
+    Arch: pacman -S xfsprogs
+    Debian/Ubuntu: apt install xfsprogs
+    Fedora/RHEL: dnf install xfsprogs
+  en: |
+    Arch: pacman -S xfsprogs
+    Debian/Ubuntu: apt install xfsprogs
+    Fedora/RHEL: dnf install xfsprogs
+flags:
+- flag: -L
+  meaning:
+    tr: Dosya sistemi etiketi (en fazla 12 karakter).
+    en: Filesystem label (max 12 characters).
+  verified: true
+  takes_value: true
+  value_name: label
+- flag: -N
+  meaning:
+    tr: Yazmadan geometri/bilgi bas (no-op).
+    en: Print configuration info without writing (no-op).
+  verified: true
+- flag: -f
+  meaning:
+    tr: Mevcut dosya sisteminin üzerine zorla yaz (çok tehlikeli).
+    en: Force overwrite of an existing filesystem (very dangerous).
+  verified: true
+examples:
+- title:
+    tr: Bilgi / no-op
+    en: Info / no-op
+  command: sudo mkfs.xfs -N /dev/sdXN
+  explanation:
+    tr: Yazmadan XFS parametre özetini basar; yine de doğru aygıtı doğrulayın.
+    en: Prints XFS parameters without writing; still verify the device.
+  risk: caution
+  requires_elevated: true
+- title:
+    tr: Etiketli XFS (UYARI)
+    en: Labeled XFS (DANGER)
+  command: sudo mkfs.xfs -L data /dev/sdXN
+  explanation:
+    tr: >
+      Yer tutucu. Üzerinde FS varsa komut reddedebilir; `-f` eklemek riski
+      artırır — yalnızca bilinçli ve yedekli ortamlarda.
+    en: >
+      Placeholder. An existing FS may cause refusal; adding `-f` raises risk —
+      only on intentional, backed-up targets.
+  risk: destructive
+  requires_elevated: true
+related:
+- mkfs
+- mkfs.ext4
+- mkfs.btrfs
+- lsblk
+- blkid
+- fdisk
+- wipefs
+see_also:
+- man 8 mkfs.xfs
+- https://wiki.archlinux.org/title/XFS
+intent:
+  tr:
+  - xfs formatla
+  - mkfs.xfs
+  en:
+  - format xfs
+  - mkfs.xfs
+verification:
+  status: reviewed
+  sources:
+  - man 8 mkfs.xfs
+  - https://wiki.archlinux.org/title/File_systems
+  - mkfs.xfs usage text
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-phase15
+  notes: Destructive XFS creator; -N preferred; no verified status.
+nova:
+  concepts:
+  - storage
+  favorite_eligible: false
+category: disks

@@ -1,0 +1,116 @@
+id: parted
+name: parted
+summary:
+  tr: GNU Parted — bölüm tablosu düzenleyici (yıkıcı).
+  en: GNU Parted — partition table manipulator (destructive).
+description:
+  tr: >
+    GPT/MBR bölüm oluşturma, silme ve yeniden boyutlandırmaya yarar.
+    `parted -l` okuma amaçlıdır; `mklabel` / `mkpart` / `rm` veri kaybettirir.
+    Script modu (`-s`) onay istemez — özellikle tehlikeli. reviewed, verified değil.
+  en: >
+    Creates, deletes, and resizes GPT/MBR partitions. `parted -l` is
+    read-oriented; `mklabel` / `mkpart` / `rm` destroy data. Script mode
+    (`-s`) skips prompts — especially dangerous. Reviewed, not verified.
+tags:
+- disk
+- storage
+- partition
+risk: destructive
+requires_elevated: true
+platforms:
+- linux
+packages:
+  arch: parted
+  debian: parted
+  ubuntu: parted
+  fedora: parted
+  rhel: parted
+install_notes:
+  tr: |
+    Arch: pacman -S parted
+    Debian/Ubuntu: apt install parted
+    Fedora/RHEL: dnf install parted
+  en: |
+    Arch: pacman -S parted
+    Debian/Ubuntu: apt install parted
+    Fedora/RHEL: dnf install parted
+flags:
+- flag: -l
+  long: --list
+  meaning:
+    tr: Tüm blok aygıtlarda bölüm düzenini listele (okuma).
+    en: List partition layout on all block devices (read).
+  verified: true
+- flag: -s
+  long: --script
+  meaning:
+    tr: Etkileşimsiz script modu (onay yok — tehlikeli).
+    en: Never prompt; script mode (no confirms — dangerous).
+  verified: true
+- flag: -h
+  long: --help
+  meaning:
+    tr: Yardım.
+    en: Display help.
+  verified: true
+examples:
+- title:
+    tr: Bölümleri listele
+    en: List partitions
+  command: sudo parted -l
+  explanation:
+    tr: Okuma odaklı özet; değişiklik yapmaz.
+    en: Read-oriented summary; does not modify tables.
+  risk: safe
+  requires_elevated: true
+- title:
+    tr: Etkileşimli (UYARI)
+    en: Interactive (DANGER)
+  command: sudo parted /dev/sdX
+  explanation:
+    tr: >
+      Yer tutucu disk. Yanlış cihaz seçimi bölüm tablosunu bozar. Önce
+      `parted -l` / `lsblk`. Bu örnek script komutu vermez.
+    en: >
+      Placeholder disk. Wrong device wrecks the partition table. Confirm
+      with `parted -l` / `lsblk` first. This example does not pass scripted
+      destroy commands.
+  risk: destructive
+  requires_elevated: true
+related:
+- fdisk
+- lsblk
+- blkid
+- mkfs
+- mkfs.ext4
+- wipefs
+see_also:
+- man 8 parted
+- https://wiki.archlinux.org/title/Parted
+- https://www.gnu.org/software/parted/manual/
+intent:
+  tr:
+  - parted bölüm
+  - gpt oluştur
+  - disk partition parted
+  en:
+  - parted partition
+  - create gpt
+  - disk partition parted
+verification:
+  status: reviewed
+  sources:
+  - man 8 parted
+  - https://wiki.archlinux.org/title/Parted
+  - parted --help
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-phase15
+  notes: >
+    List-first examples only; no mklabel/mkpart recipes that invite misuse.
+    Not verified.
+nova:
+  concepts:
+  - storage
+  favorite_eligible: false
+category: disks

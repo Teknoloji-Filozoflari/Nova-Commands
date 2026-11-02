@@ -39,11 +39,12 @@ intent:
   - who am i
   - current user
 verification:
-  status: reviewed
+  status: verified
   sources:
-  - man 1 whoami
+  - man 1 whoami (GNU coreutils)
   last_reviewed: '2026-11-02'
-  reviewer: nova-commands-bootstrap
+  reviewer: nova-commands-phase15
+  notes: Prints effective username; safe identity helper.
 category: users
 nova:
   concepts:
