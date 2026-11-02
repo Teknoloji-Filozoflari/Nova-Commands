@@ -1,0 +1,49 @@
+name: Çeviri / i18n iyileştirmesi
+description: Eksik veya kötü tr/en metinlerini bildir veya iyileştir.
+title: "[i18n]: "
+labels: ["i18n"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Her lokalize alan **hem `tr` hem `en`** ve boş olamaz (CI kapısı).
+        Konsept gövdeleri (`concepts/*.yaml`) de aynı kurala bağlıdır.
+  - type: dropdown
+    id: target
+    attributes:
+      label: Hedef
+      options:
+        - Komut YAML (`commands/`)
+        - Konsept makalesi (`concepts/`)
+        - Kategori / concepts registry etiketleri
+        - Docs (README, CONTRIBUTING, …)
+    validations:
+      required: true
+  - type: input
+    id: path_or_id
+    attributes:
+      label: Dosya yolu veya id
+      placeholder: commands/packages/pacman.yaml · concepts/systemd.yaml
+    validations:
+      required: true
+  - type: dropdown
+    id: langs
+    attributes:
+      label: Diller
+      options:
+        - tr
+        - en
+        - tr + en
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Sorun
+      description: Eksik alan, anlam kayması, jargon, tutarsız terim.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Önerilen metin (opsiyonel)

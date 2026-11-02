@@ -1,0 +1,57 @@
+name: Bug / yanlış katalog bilgisi
+description: Yanlış bayrak, paket adı, risk seviyesi veya kırık örnek bildir.
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Bu repo **Komut Bilgi Bankası** içindir (kürate YAML). Yerel PATH
+        keşfi Nova istemcisindedir — bkz. `docs/dual-concept.md`.
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Sorun türü
+      options:
+        - Yanlış veya uydurma bayrak
+        - Yanlış paket / install_notes
+        - Risk / requires_elevated yanlış
+        - i18n (tr/en) eksik veya hatalı
+        - Validator / CI / şema
+        - Diğer
+    validations:
+      required: true
+  - type: input
+    id: command_id
+    attributes:
+      label: Komut veya konsept id (varsa)
+      placeholder: örn. pacman, rm, systemd
+  - type: textarea
+    id: expected
+    attributes:
+      label: Beklenen
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Gerçek / kanıt
+      description: man sayfası, --help çıktısı veya distro wiki linki (gizli bilgi yok).
+    validations:
+      required: true
+  - type: dropdown
+    id: distro
+    attributes:
+      label: Dağıtım ailesi (ilgiliyse)
+      options:
+        - Arch
+        - Debian/Ubuntu
+        - Fedora/RHEL
+        - Genel / bilinmiyor
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Güvenlik
+      options:
+        - label: Bu bildiride gizli anahtar / token / kişisel yol yok
+          required: true

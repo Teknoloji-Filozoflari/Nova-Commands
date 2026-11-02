@@ -109,6 +109,23 @@ def test_dual_concept_docs_exist() -> None:
         assert (ROOT / "docs" / name).is_file()
 
 
+def test_community_and_ci_files_exist() -> None:
+    required = [
+        ROOT / "SECURITY.md",
+        ROOT / "CONTRIBUTING.md",
+        ROOT / ".github" / "PULL_REQUEST_TEMPLATE.md",
+        ROOT / ".github" / "dependabot.yml",
+        ROOT / ".github" / "workflows" / "ci.yml",
+        ROOT / ".github" / "ISSUE_TEMPLATE" / "config.yml",
+        ROOT / ".github" / "ISSUE_TEMPLATE" / "bug.yml",
+        ROOT / ".github" / "ISSUE_TEMPLATE" / "new-command.yml",
+        ROOT / ".github" / "ISSUE_TEMPLATE" / "category.yml",
+        ROOT / ".github" / "ISSUE_TEMPLATE" / "translation.yml",
+    ]
+    for path in required:
+        assert path.is_file(), path
+
+
 def test_filename_matches_id() -> None:
     for path in (ROOT / "commands").glob("*/*.yaml"):
         data = yaml.safe_load(path.read_text(encoding="utf-8"))

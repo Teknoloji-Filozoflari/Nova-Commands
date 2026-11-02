@@ -5,6 +5,24 @@ This repository owns the curated **Komut Bilgi Bankası** for
 “commands found on my system” list — see
 [docs/dual-concept.md](docs/dual-concept.md).
 
+Security-sensitive catalog mistakes: [SECURITY.md](SECURITY.md).
+
+## Issue templates
+
+Use GitHub issue forms when proposing work:
+
+| Template | Use |
+|----------|-----|
+| **Bug** | Wrong flags, packages, risk, i18n, CI |
+| **New command** | Propose a command id + category + sources |
+| **Category** | New taxonomy slug (§8.x / `categories.yaml`) |
+| **Translation** | tr/en fixes for commands, concepts, docs |
+
+## Pull requests
+
+PRs use [`.github/PULL_REQUEST_TEMPLATE.md`](.github/PULL_REQUEST_TEMPLATE.md).
+CI must pass: validate → build → pytest → committed `content_sha256` match.
+
 ## Add a command
 
 1. Pick a category under `commands/` (must match `metadata/categories.yaml`
@@ -26,7 +44,9 @@ This repository owns the curated **Komut Bilgi Bankası** for
    python3 -m pytest tests/
    ```
 
-8. Open a pull request. CI must pass.
+8. Commit updated `metadata/catalog.json`, `search-index.json`, and
+   `manifest.json` (CI checks `content_sha256` against a rebuild).
+9. Open a pull request.
 
 ## Add a concept article
 
@@ -35,6 +55,21 @@ This repository owns the curated **Komut Bilgi Bankası** for
    `title` / `summary` / `body`, `difficulty`, and honest `verification`.
 3. `related_commands` must reference existing command ids.
 4. Do **not** mark `verified` without human review of the teaching text.
+5. Rebuild metadata as above.
+
+## Propose a category
+
+Open a **Category** issue first. Adding a slug requires updating:
+
+- `metadata/categories.yaml`
+- `schema/command.schema.json` `category` enum
+- at least a few seed commands (avoid empty taxonomy)
+
+## Translations (i18n)
+
+Every localized mapping needs non-empty **`tr` and `en`**. Validator and CI
+reject empty strings. Prefer consistent terminology with existing entries;
+open a **Translation** issue for large sweeps.
 
 ## Required fields
 
@@ -42,7 +77,7 @@ This repository owns the curated **Komut Bilgi Bankası** for
 |-------|------|
 | `id` | Unique, `^[a-z0-9][a-z0-9+._-]*$`, matches filename |
 | `summary` / `description` | Both `tr` and `en` |
-| `category` | One of the 16 taxonomy slugs |
+| `category` | One of the taxonomy slugs |
 | `risk` | `safe` \| `caution` \| `dangerous` \| `destructive` |
 | `requires_elevated` | Boolean for typical useful use |
 | `platforms` | Non-empty (`linux`, …) |
@@ -65,8 +100,11 @@ Example `risk` must be ≥ command-level `risk` when the example is riskier
 ## Verification policy
 
 - **Never** mark AI-authored content `verified` without human review.
+- `verified` requires `sources` and `last_reviewed` (validator + tests).
 - Prefer citing sources: `man 1 <cmd>`, distro wiki, upstream docs URLs.
 - Do not execute destructive commands to “test” catalog entries.
+- Local PATH presence must not inherit curated `verified`
+  ([docs/safety.md](docs/safety.md)).
 
 ## Quality over quantity
 
