@@ -49,11 +49,12 @@ intent:
   - what groups am i in
   - groups
 verification:
-  status: reviewed
+  status: verified
   sources:
   - man 1 groups
   last_reviewed: '2026-11-02'
-  reviewer: nova-commands-coverage
+  reviewer: nova-commands-phase17
+  notes: Read-only group membership; coreutils --help checked.
 nova:
   concepts:
   - permissions

@@ -109,3 +109,10 @@ jobs:
           test -f .github/ISSUE_TEMPLATE/category.yml
           test -f .github/ISSUE_TEMPLATE/translation.yml
           test -f .github/dependabot.yml
+          test -f .github/workflows/publish-catalog.yml
+          test -f docs/catalog-signing.md
+          test -f keys/minisign.pub
+          test -f keys/README.md
+          # Private signing material must never be committed
+          ! test -f keys/nova-commands.key
+          ! ls keys/*.key >/dev/null 2>&1

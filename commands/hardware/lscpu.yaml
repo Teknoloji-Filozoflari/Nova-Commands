@@ -38,11 +38,12 @@ intent:
   - cpu info
   - how many cores
 verification:
-  status: reviewed
+  status: verified
   sources:
   - man 1 lscpu
   last_reviewed: '2026-11-02'
-  reviewer: nova-commands-bootstrap
+  reviewer: nova-commands-phase17
+  notes: Read-only CPU topology; util-linux --help checked.
 category: hardware
 nova:
   concepts:

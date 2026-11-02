@@ -62,11 +62,12 @@ intent:
   - list processes
   - show running programs
 verification:
-  status: reviewed
+  status: verified
   sources:
   - man 1 ps
   last_reviewed: '2026-11-02'
-  reviewer: nova-commands-bootstrap
+  reviewer: nova-commands-phase17
+  notes: Read-only process snapshot; aux/-ef flags already marked verified.
 category: processes
 nova:
   concepts:

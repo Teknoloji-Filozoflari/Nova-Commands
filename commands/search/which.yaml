@@ -52,11 +52,12 @@ intent:
   - which binary
   - find command path
 verification:
-  status: reviewed
+  status: verified
   sources:
   - man 1 which
   last_reviewed: '2026-11-02'
-  reviewer: nova-commands-bootstrap
+  reviewer: nova-commands-phase17
+  notes: PATH locator only; debianutils/which -- usage checked.
 category: search
 nova:
   concepts:

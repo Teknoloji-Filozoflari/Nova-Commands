@@ -36,11 +36,12 @@ intent:
   - whereis command
   - find man page path
 verification:
-  status: reviewed
+  status: verified
   sources:
   - man 1 whereis
   last_reviewed: '2026-11-02'
-  reviewer: nova-commands-bootstrap
+  reviewer: nova-commands-phase17
+  notes: Read-only binary/man path lookup; util-linux --help checked.
 category: search
 nova:
   concepts:

@@ -1,0 +1,138 @@
+name: Publish signed catalog
+
+# Builds bank metadata (catalog / manifest / search-index), signs with minisign
+# when MINISIGN_SECRET_KEY is present, and uploads to a GitHub Release.
+# See docs/catalog-signing.md.
+#
+# Required for a *signed* Release:
+#   MINISIGN_SECRET_KEY — full contents of the minisign secret key file
+# When the secret is absent (forks / first setup): dry-run — build + upload
+# unsigned workflow artifacts only. Private keys are never committed.
+
+on:
+  push:
+    tags:
+      - "catalog-v*"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Build artifacts without creating a GitHub Release"
+        required: false
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    name: Build and sign bank catalog
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements-dev.txt
+
+      - name: Install dependencies
+        run: |
+          python3 -m pip install -r requirements-dev.txt
+          sudo apt-get update
+          sudo apt-get install -y minisign
+
+      - name: Validate catalog
+        run: python3 scripts/validate_catalog.py
+
+      - name: Build catalog, search-index, manifest
+        run: |
+          python3 scripts/build_catalog.py
+          mkdir -p dist
+          cp metadata/catalog.json metadata/manifest.json metadata/search-index.json dist/
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          cat = json.loads(Path("dist/catalog.json").read_text(encoding="utf-8"))
+          man = json.loads(Path("dist/manifest.json").read_text(encoding="utf-8"))
+          idx = json.loads(Path("dist/search-index.json").read_text(encoding="utf-8"))
+          assert cat["kind"] == "nova-commands-bank"
+          assert man["kind"] == "nova-commands-manifest"
+          assert idx["kind"] == "nova-commands-search-index"
+          sha = cat["content_sha256"]
+          assert sha == man["content_sha256"] == idx["content_sha256"]
+          print(f"dist ok: commands={cat['command_count']} concepts={cat['concept_count']} sha={sha[:12]}…")
+          PY
+
+      - name: Sign with minisign (or dry-run)
+        id: sign
+        env:
+          MINISIGN_SECRET_KEY: ${{ secrets.MINISIGN_SECRET_KEY }}
+          EVENT_NAME: ${{ github.event_name }}
+          INPUT_DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run || false }}
+        run: |
+          set -euo pipefail
+          if [ "${EVENT_NAME}" = "workflow_dispatch" ] && [ "${INPUT_DRY_RUN}" = "true" ]; then
+            echo "::notice::workflow_dispatch dry_run=true — skipping sign and Release publish"
+            echo "signed=false" >> "$GITHUB_OUTPUT"
+            echo "mode=dry-run" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          if [ -z "${MINISIGN_SECRET_KEY:-}" ]; then
+            echo "::notice::MINISIGN_SECRET_KEY absent — dry-run (unsigned artifacts only)."
+            echo "Generate a keypair, commit keys/minisign.pub, set the secret — see docs/catalog-signing.md"
+            echo "signed=false" >> "$GITHUB_OUTPUT"
+            echo "mode=dry-run" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          if [ ! -f keys/minisign.pub ]; then
+            echo "::error::keys/minisign.pub missing; cannot verify signatures"
+            exit 1
+          fi
+          umask 077
+          keyfile="${RUNNER_TEMP}/nova-commands.key"
+          printf '%s\n' "$MINISIGN_SECRET_KEY" > "$keyfile"
+          for f in catalog.json manifest.json search-index.json; do
+            minisign -S -s "$keyfile" -W -m "dist/${f}" -x "dist/${f}.minisig"
+            minisign -Vm "dist/${f}" -p keys/minisign.pub -x "dist/${f}.minisig"
+          done
+          rm -f "$keyfile"
+          echo "Signed assets:"
+          ls -la dist/*.json dist/*.minisig
+          echo "signed=true" >> "$GITHUB_OUTPUT"
+          echo "mode=signed" >> "$GITHUB_OUTPUT"
+
+      - name: Upload workflow artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: bank-catalog-${{ steps.sign.outputs.mode }}
+          path: |
+            dist/catalog.json
+            dist/manifest.json
+            dist/search-index.json
+            dist/*.minisig
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Create GitHub Release (signed only)
+        if: steps.sign.outputs.signed == 'true'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_type == 'tag' && github.ref_name || format('catalog-draft-{0}', github.sha) }}
+          name: Bank catalog ${{ github.ref_type == 'tag' && github.ref_name || github.sha }}
+          body: |
+            Signed Nova-Commands bank metadata (`catalog.json` / `manifest.json` / `search-index.json`).
+
+            Clients must verify each artifact with the pinned public key in `keys/minisign.pub`
+            before applying. See `docs/catalog-signing.md` and `SECURITY.md`.
+
+            Dual-concept: this is the curated **command bank** only — not local PATH discovery.
+          files: |
+            dist/catalog.json
+            dist/catalog.json.minisig
+            dist/manifest.json
+            dist/manifest.json.minisig
+            dist/search-index.json
+            dist/search-index.json.minisig
+          fail_on_unmatched_files: true
