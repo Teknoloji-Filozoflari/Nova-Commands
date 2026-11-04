@@ -1,0 +1,49 @@
+schema_version: 2
+id: scutil
+name: scutil
+kind: executable
+category: network
+summary:
+  tr: Sistem yapılandırma çerçevesi aracı (DNS/proxy vb.).
+  en: System configuration framework tool (DNS/proxy, etc.).
+description:
+  tr: scutil, dynamic store ve DNS yapılandırmasını inceler. networksetup yüksek seviye ağ servisi CLI’sidir
+    — birlikte kullanılır, aynı değildir.
+  en: scutil inspects the dynamic store and DNS configuration. networksetup is the higher-level network-service
+    CLI — complementary, not identical.
+tags:
+- macos
+- network
+- dns
+risk: caution
+requires_elevated: false
+platforms:
+- macos
+operating_systems:
+- macos
+flags: []
+examples:
+- title:
+    tr: DNS göster
+    en: Show DNS
+  command: scutil --dns | head
+  explanation:
+    tr: Çözümleyici yapılandırmasının başını basar.
+    en: Prints the head of resolver configuration.
+  risk: safe
+  platforms:
+  - macos
+related:
+- networksetup
+intent:
+  tr:
+  - scutil
+  - scutil
+  en:
+  - scutil
+  - scutil
+verification:
+  status: draft
+  sources:
+  - man 8 scutil
+  notes: Agent-authored Faz 5 draft from official docs; not human-verified.

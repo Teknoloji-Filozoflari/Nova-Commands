@@ -1,0 +1,48 @@
+schema_version: 2
+id: pmset
+name: pmset
+kind: executable
+category: system
+summary:
+  tr: macOS güç yönetimi ayarları.
+  en: macOS power management settings.
+description:
+  tr: pmset uyku, hibernation ve güç profillerini yönetir. Yazma `sudo` ister; yanlış ayar dizüstü pili
+    ve sunucu erişimini etkiler.
+  en: pmset manages sleep, hibernation, and power profiles. Writes need sudo; wrong settings affect laptop
+    battery and server reachability.
+tags:
+- macos
+- power
+risk: caution
+requires_elevated: false
+platforms:
+- macos
+operating_systems:
+- macos
+flags: []
+examples:
+- title:
+    tr: Güç ayarlarını göster
+    en: Show power settings
+  command: pmset -g
+  explanation:
+    tr: Geçerli güç yönetimi ayarlarını basar.
+    en: Prints current power management settings.
+  risk: safe
+  platforms:
+  - macos
+related:
+- system-profiler
+intent:
+  tr:
+  - pmset
+  - pmset
+  en:
+  - pmset
+  - pmset
+verification:
+  status: draft
+  sources:
+  - man 1 pmset
+  notes: Agent-authored Faz 5 draft from official docs; not human-verified.

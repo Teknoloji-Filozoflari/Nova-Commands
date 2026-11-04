@@ -1,0 +1,71 @@
+schema_version: 2
+id: netstat
+name: netstat
+kind: executable
+category: network
+summary:
+  tr: Windows TCP/UDP bağlantı ve dinleme tablosu.
+  en: Windows TCP/UDP connection and listening table.
+description:
+  tr: netstat.exe bağlantı istatistiklerini listeler. Linux netstat/ss ve PowerShell Get-NetTCPConnection
+    ayrı kayıtlardır. `-b` yönetici ister.
+  en: netstat.exe lists connection statistics. Linux netstat/ss and PowerShell Get-NetTCPConnection are
+    separate records. -b requires elevation.
+tags:
+- windows
+- network
+- tcp
+risk: safe
+requires_elevated: false
+platforms:
+- windows
+operating_systems:
+- windows
+shells:
+- cmd
+- powershell
+- windows-powershell
+flags:
+- flag: -an
+  meaning:
+    tr: Sayısal adres/port, tüm bağlantılar.
+    en: Numeric addresses/ports, all connections.
+  verified: false
+- flag: -b
+  meaning:
+    tr: Yürütülebilir adı (yönetici).
+    en: Owning executable (admin).
+  verified: false
+examples:
+- title:
+    tr: Dinleyen portlar
+    en: Listening ports
+  command: netstat -an | findstr LISTENING
+  explanation:
+    tr: Dinleme durumundaki soketleri süzgeçler (CMD).
+    en: Filters sockets in LISTENING state (CMD).
+  risk: safe
+  shell: cmd
+  platforms:
+  - windows
+related:
+- get-nettcpconnection
+- netsh
+security:
+  notes:
+    tr: '`netstat -b` için yükseltilmiş kabuk (UAC) gerekir.'
+    en: '`netstat -b` requires an elevated shell (UAC).'
+  requires_admin: false
+  uac_prompt: true
+intent:
+  tr:
+  - netstat
+  - netstat
+  en:
+  - netstat
+  - netstat
+verification:
+  status: draft
+  sources:
+  - https://learn.microsoft.com/windows-server/administration/windows-commands/netstat
+  notes: Agent-authored Faz 5 draft from official docs; not human-verified.

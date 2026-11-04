@@ -80,9 +80,25 @@ rpm-ostree) plus expanded comparison docs. Registry rows for those PMs are
 `status: draft` / `support_level: partial` where command content exists.
 **No `verified` without human review.** LICENSE and `keys/minisign.pub` unchanged.
 
+## Faz 5 Windows / macOS command banks
+
+Live bank now includes **draft** Windows and macOS command records (schema v2):
+
+- **Windows:** PowerShell cmdlets (separate from CMD), CMD/executables (`ipconfig`,
+  `sc.exe`, …), WinGet, admin/UAC notes via `security` + example `privilege`.
+- **macOS:** Homebrew / MacPorts, `launchctl`, `diskutil`, `networksetup`,
+  `softwareupdate`, Keychain/`security`, Xcode CLT helpers, etc.
+- Existing Unix tools (`sed`, `tar`, `find`, `stat`, `date`) note **BSD vs GNU**
+  differences for macOS without changing verification status.
+
+Registry rows for `winget` / `homebrew` / `macports` and shells
+`powershell` / `windows-powershell` / `cmd` are `status: draft` /
+`support_level: partial`. **No fake `verified`.** LICENSE and
+`keys/minisign.pub` unchanged.
+
 ## Out of scope (later fazes)
 
-- Windows / macOS / BSD **new command banks** (Faz 5–6)
+- BSD / illumos / Solaris / AIX **new command banks** (Faz 6+)
 - Tasks / profiles **content** trees (schemas stubbed in Faz 2; content Faz 8)
 - Catalog index counts for registry kinds
 - Rotating minisign keys / LICENSE changes

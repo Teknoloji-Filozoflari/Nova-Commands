@@ -1,0 +1,49 @@
+schema_version: 2
+id: defaults
+name: defaults
+kind: executable
+category: system
+summary:
+  tr: macOS kullanıcı tercihlerine (plist) okuma/yazma.
+  en: Read/write macOS user preferences (plists).
+description:
+  tr: defaults, uygulama domain tercihlerini okur/yazar. Yanlış yazma uygulama ayarlarını bozar. `plutil`
+    plist doğrulama için ayrı kayıttır.
+  en: defaults reads/writes app domain preferences. Wrong writes break app settings. plutil is a separate
+    record for plist validation.
+tags:
+- macos
+- preferences
+- plist
+risk: caution
+requires_elevated: false
+platforms:
+- macos
+operating_systems:
+- macos
+flags: []
+examples:
+- title:
+    tr: Domain oku
+    en: Read domain
+  command: defaults read com.apple.dock tilesize
+  explanation:
+    tr: Dock simge boyutunu okur (varsa).
+    en: Reads Dock icon size if present.
+  risk: safe
+  platforms:
+  - macos
+related:
+- plutil
+intent:
+  tr:
+  - defaults
+  - defaults
+  en:
+  - defaults
+  - defaults
+verification:
+  status: draft
+  sources:
+  - man 1 defaults
+  notes: Agent-authored Faz 5 draft from official docs; not human-verified.

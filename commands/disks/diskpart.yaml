@@ -1,0 +1,64 @@
+schema_version: 2
+id: diskpart
+name: diskpart
+kind: administrative_tool
+category: disks
+summary:
+  tr: Etkileşimli disk bölümleme aracı (yıkıcı olabilir).
+  en: Interactive disk partitioning tool (can be destructive).
+description:
+  tr: diskpart.exe bölüm/disk yönetir. `clean` / yanlış disk numarası veri kaybına yol açar. PowerShell
+    Get-Disk ayrı kayıttır. Bu bankada yıkıcı örnek yok — yalnız list.
+  en: diskpart.exe manages disks/partitions. clean / wrong disk numbers cause data loss. PowerShell Get-Disk
+    is separate. No destructive examples here — list only.
+tags:
+- windows
+- disks
+- partition
+- admin
+risk: destructive
+requires_elevated: true
+platforms:
+- windows
+operating_systems:
+- windows
+shells:
+- cmd
+- powershell
+- windows-powershell
+flags: []
+examples:
+- title:
+    tr: Yardım (etkileşimsiz)
+    en: Help (non-interactive)
+  command: diskpart /?
+  explanation:
+    tr: Kullanım bilgisini gösterir; diske yazmaz.
+    en: Shows usage; does not write to disks.
+  risk: safe
+  requires_elevated: false
+  shell: cmd
+  platforms:
+  - windows
+related:
+- get-disk
+- get-volume
+- bcdedit
+security:
+  notes:
+    tr: Yönetici gerekir. Yanlış disk seçimi yıkıcıdır — list disk ile doğrulayın.
+    en: Admin required. Wrong disk selection is destructive — verify with list disk.
+  requires_admin: true
+  uac_prompt: true
+intent:
+  tr:
+  - diskpart
+  - diskpart
+  en:
+  - diskpart
+  - diskpart
+verification:
+  status: draft
+  sources:
+  - https://learn.microsoft.com/windows-server/administration/windows-commands/diskpart
+  notes: Agent-authored Faz 5 draft from official docs; not human-verified.

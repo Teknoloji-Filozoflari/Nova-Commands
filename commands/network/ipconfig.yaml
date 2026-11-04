@@ -1,0 +1,81 @@
+schema_version: 2
+id: ipconfig
+name: ipconfig
+kind: executable
+category: network
+summary:
+  tr: CMD/Windows IP yapılandırmasını gösterir.
+  en: Shows CMD/Windows IP configuration.
+description:
+  tr: ipconfig.exe, cmd.exe ve PowerShell’den çağrılabilen klasik Windows ağ yapılandırma aracısıdır.
+    PowerShell `Get-NetIPConfiguration` ve Linux `ip` ayrı kayıtlardır — bayraklar eşdeğer değildir. `/release`
+    `/renew` DHCP’yi etkiler.
+  en: ipconfig.exe is the classic Windows IP config tool callable from cmd.exe and PowerShell. PowerShell
+    Get-NetIPConfiguration and Linux ip are separate records — flags are not equivalent. /release and
+    /renew affect DHCP.
+tags:
+- windows
+- cmd
+- network
+risk: caution
+requires_elevated: false
+platforms:
+- windows
+operating_systems:
+- windows
+shells:
+- cmd
+- powershell
+- windows-powershell
+flags:
+- flag: /all
+  meaning:
+    tr: Ayrıntılı yapılandırma.
+    en: Detailed configuration.
+  verified: false
+- flag: /flushdns
+  meaning:
+    tr: DNS çözümleyici önbelleğini temizle.
+    en: Flush DNS resolver cache.
+  verified: false
+- flag: /release
+  meaning:
+    tr: DHCP adresini bırak (etki).
+    en: Release DHCP address (side effect).
+  verified: false
+- flag: /renew
+  meaning:
+    tr: DHCP yenile (etki).
+    en: Renew DHCP (side effect).
+  verified: false
+examples:
+- title:
+    tr: Ayrıntılı bilgi
+    en: Detailed info
+  command: ipconfig /all
+  explanation:
+    tr: Tüm arabirimler için ayrıntılı IP/DNS bilgisini basar.
+    en: Prints detailed IP/DNS info for all interfaces.
+  risk: safe
+  shell: cmd
+  platforms:
+  - windows
+  privilege: none
+related:
+- get-netipconfiguration
+- netsh
+- route
+intent:
+  tr:
+  - ipconfig
+  - windows ip
+  - cmd ip adresi
+  en:
+  - ipconfig
+  - windows ip
+  - cmd show ip
+verification:
+  status: draft
+  sources:
+  - https://learn.microsoft.com/windows-server/administration/windows-commands/ipconfig
+  notes: Agent-authored Faz 5 draft from official docs; not human-verified.

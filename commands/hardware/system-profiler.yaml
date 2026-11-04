@@ -1,0 +1,50 @@
+schema_version: 2
+id: system-profiler
+name: system_profiler
+kind: executable
+category: hardware
+summary:
+  tr: macOS sistem / donanım envanter raporu.
+  en: macOS system / hardware inventory report.
+description:
+  tr: system_profiler, System Information uygulamasının CLI karşılığıdır. Belirli veri türleri (SPHardwareDataType
+    vb.) ile süzülür. Linux lshw/lscpu karşılığı değildir.
+  en: system_profiler is the CLI counterpart of System Information. Filter with data types (SPHardwareDataType,
+    etc.). Not an lshw/lscpu alias.
+tags:
+- macos
+- hardware
+- inventory
+risk: safe
+requires_elevated: false
+platforms:
+- macos
+operating_systems:
+- macos
+flags: []
+examples:
+- title:
+    tr: Donanım özeti
+    en: Hardware overview
+  command: system_profiler SPHardwareDataType
+  explanation:
+    tr: Model, çip ve bellek özetini basar.
+    en: Prints model, chip, and memory overview.
+  risk: safe
+  platforms:
+  - macos
+related:
+- get-computerinfo
+- lscpu
+intent:
+  tr:
+  - system_profiler
+  - system profiler
+  en:
+  - system_profiler
+  - system profiler
+verification:
+  status: draft
+  sources:
+  - man 8 system_profiler
+  notes: Agent-authored Faz 5 draft from official docs; not human-verified.

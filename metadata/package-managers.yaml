@@ -580,8 +580,8 @@ package_managers:
   - macos
   - linux
   repository_model: central-repos
-  status: skeleton
-  support_level: planned
+  status: draft
+  support_level: partial
   documentation:
   - https://docs.brew.sh/
   cli_names:
@@ -601,8 +601,8 @@ package_managers:
   operating_systems:
   - macos
   repository_model: ports-tree
-  status: skeleton
-  support_level: planned
+  status: draft
+  support_level: partial
   documentation:
   - https://guide.macports.org/
   cli_names:
@@ -622,8 +622,8 @@ package_managers:
   operating_systems:
   - windows
   repository_model: app-store
-  status: skeleton
-  support_level: planned
+  status: draft
+  support_level: partial
   documentation:
   - https://learn.microsoft.com/windows/package-manager/winget/
   cli_names:

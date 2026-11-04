@@ -7,8 +7,10 @@ summary:
   tr: Dizin ağacında dosya arar.
   en: Search for files in a directory hierarchy.
 description:
-  tr: İsim, tip, zaman ve başka ölçütlerle dosya bulur; aksiyonlar çalıştırabilir.
-  en: Finds files by name, type, time, and more; can run actions.
+  tr: İsim, tip, zaman ve başka ölçütlerle dosya bulur; aksiyonlar çalıştırabilir. macOS/BSD `find` GNU
+    findutils’ten farklıdır (ör. `-printf` yok; `-exec` sonlandırma alışkanlıkları kontrol edin).
+  en: Finds files by name, type, time, and more; can run actions. macOS/BSD find differs from GNU findutils
+    (e.g. no -printf; check -exec termination).
 tags:
 - search
 - files

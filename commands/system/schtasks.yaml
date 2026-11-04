@@ -1,0 +1,60 @@
+schema_version: 2
+id: schtasks
+name: schtasks
+kind: executable
+category: system
+summary:
+  tr: Görev Zamanlayıcı komut satırı (executable).
+  en: Task Scheduler command line (executable).
+description:
+  tr: schtasks.exe görev oluşturur/sorgular/siler. PowerShell Get-ScheduledTask ayrı kayıttır. Değişiklikler
+    çoğu ortamda yönetici ister.
+  en: schtasks.exe creates/queries/deletes tasks. PowerShell Get-ScheduledTask is a separate record. Changes
+    usually need admin.
+tags:
+- windows
+- scheduler
+- cmd
+risk: dangerous
+requires_elevated: false
+platforms:
+- windows
+operating_systems:
+- windows
+shells:
+- cmd
+- powershell
+- windows-powershell
+flags: []
+examples:
+- title:
+    tr: Görevleri listele
+    en: List tasks
+  command: schtasks /Query /FO LIST
+  explanation:
+    tr: Zamanlanmış görevleri listeler (salt okuma).
+    en: Lists scheduled tasks (read-only).
+  risk: safe
+  shell: cmd
+  platforms:
+  - windows
+related:
+- get-scheduledtask
+security:
+  notes:
+    tr: Görev oluşturma/silme UAC gerektirebilir.
+    en: Creating/deleting tasks may require UAC.
+  requires_admin: true
+  uac_prompt: true
+intent:
+  tr:
+  - schtasks
+  - schtasks
+  en:
+  - schtasks
+  - schtasks
+verification:
+  status: draft
+  sources:
+  - https://learn.microsoft.com/windows-server/administration/windows-commands/schtasks
+  notes: Agent-authored Faz 5 draft from official docs; not human-verified.

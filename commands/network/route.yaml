@@ -1,0 +1,76 @@
+schema_version: 2
+id: route
+name: route
+kind: executable
+category: network
+summary:
+  tr: Windows IPv4 yönlendirme tablosu aracı.
+  en: Windows IPv4 routing table tool.
+description:
+  tr: route.exe yönlendirme tablosunu gösterir veya değiştirir. `route print` salt okumadır; add/delete
+    yönetici ister. Linux `ip route` ayrı kayıttır.
+  en: route.exe displays or modifies the routing table. route print is read-only; add/delete need admin.
+    Linux ip route is a separate record.
+tags:
+- windows
+- network
+- routing
+risk: dangerous
+requires_elevated: false
+platforms:
+- windows
+operating_systems:
+- windows
+shells:
+- cmd
+- powershell
+- windows-powershell
+flags:
+- flag: print
+  meaning:
+    tr: Tabloyu yazdır (alt komut).
+    en: Print table (subcommand).
+  verified: false
+- flag: add
+  meaning:
+    tr: Rota ekle (yönetici).
+    en: Add route (admin).
+  verified: false
+- flag: delete
+  meaning:
+    tr: Rota sil (yönetici).
+    en: Delete route (admin).
+  verified: false
+examples:
+- title:
+    tr: Tabloyu yazdır
+    en: Print table
+  command: route print
+  explanation:
+    tr: IPv4/IPv6 yönlendirme tablosunu basar.
+    en: Prints the IPv4/IPv6 routing table.
+  risk: safe
+  shell: cmd
+  platforms:
+  - windows
+related:
+- netsh
+- ipconfig
+security:
+  notes:
+    tr: Rota ekleme/silme UAC yükseltmesi ister.
+    en: Adding/deleting routes requires UAC elevation.
+  requires_admin: true
+  uac_prompt: true
+intent:
+  tr:
+  - route
+  - route
+  en:
+  - route
+  - route
+verification:
+  status: draft
+  sources:
+  - https://learn.microsoft.com/windows-server/administration/windows-commands/route
+  notes: Agent-authored Faz 5 draft from official docs; not human-verified.

@@ -1,0 +1,64 @@
+schema_version: 2
+id: networksetup
+name: networksetup
+kind: administrative_tool
+category: network
+summary:
+  tr: macOS ağ servisleri yapılandırması (System Settings CLI).
+  en: macOS network service configuration (System Settings CLI).
+description:
+  tr: networksetup, ağ konumları, DNS ve proxy ayarlarını yönetir. Linux `ip` veya `ifconfig` ile aynı
+    değildir; BSD `ifconfig` macOS’ta da vardır ama farklı model. Yazma işlemleri yönetici ister.
+  en: networksetup manages network locations, DNS, and proxies. Not the same as Linux ip or ifconfig;
+    BSD ifconfig also exists on macOS under a different model. Writes need admin.
+tags:
+- macos
+- network
+risk: dangerous
+requires_elevated: true
+platforms:
+- macos
+operating_systems:
+- macos
+flags: []
+examples:
+- title:
+    tr: Donanım portları
+    en: Hardware ports
+  command: networksetup -listallhardwareports
+  explanation:
+    tr: Donanım portlarını listeler (salt okuma).
+    en: Lists hardware ports (read-only).
+  risk: safe
+  requires_elevated: false
+  platforms:
+  - macos
+- title:
+    tr: Ağ servisleri
+    en: Network services
+  command: networksetup -listallnetworkservices
+  explanation:
+    tr: Yapılandırılmış ağ servislerini listeler.
+    en: Lists configured network services.
+  risk: safe
+  requires_elevated: false
+  platforms:
+  - macos
+related:
+- scutil
+- ip
+intent:
+  tr:
+  - macos ağ
+  - networksetup
+  - dns ayarla
+  en:
+  - macos network
+  - networksetup
+  - set dns
+verification:
+  status: draft
+  sources:
+  - man 8 networksetup
+  - https://ss64.com/mac/networksetup.html
+  notes: Agent-authored Faz 5 draft from official docs; not human-verified.

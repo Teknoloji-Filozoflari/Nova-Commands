@@ -1,0 +1,88 @@
+schema_version: 2
+id: get-service
+name: Get-Service
+kind: powershell_cmdlet
+category: system
+aliases:
+- gsv
+summary:
+  tr: Windows servislerini listeler / sorgular.
+  en: Lists or queries Windows services.
+description:
+  tr: Get-Service, Service Control Manager üzerinden Windows servis durumunu gösterir. Linux systemctl
+    karşılığı değildir. Servis değiştirmek için Start/Stop/Restart/Set-Service kullanılır; çoğu yazma
+    işlemi yönetici (UAC) ister.
+  en: Get-Service reports Windows service status via SCM. Not a systemctl alias. Use Start/Stop/Restart/Set-Service
+    to change state; most write ops need Administrator (UAC).
+tags:
+- powershell
+- windows
+- services
+risk: safe
+requires_elevated: false
+platforms:
+- windows
+operating_systems:
+- windows
+shells:
+- powershell
+- windows-powershell
+flags:
+- flag: -Name
+  meaning:
+    tr: Servis adı / joker.
+    en: Service name / wildcard.
+  verified: false
+  takes_value: true
+- flag: -DisplayName
+  meaning:
+    tr: Görünen ad.
+    en: Display name.
+  verified: false
+  takes_value: true
+examples:
+- title:
+    tr: Tüm servisler
+    en: All services
+  command: Get-Service
+  explanation:
+    tr: Yerel servisleri listeler.
+    en: Lists local services.
+  risk: safe
+  shell: powershell
+  platforms:
+  - windows
+- title:
+    tr: Ada göre
+    en: By name
+  command: Get-Service -Name wuauserv
+  explanation:
+    tr: Windows Update servis durumunu gösterir.
+    en: Shows Windows Update service status.
+  risk: safe
+  shell: powershell
+  platforms:
+  - windows
+related:
+- start-service
+- stop-service
+- restart-service
+- set-service
+- sc
+intent:
+  tr:
+  - windows servis listele
+  - get-service
+  - servis durumu
+  en:
+  - list windows services
+  - get-service
+  - service status
+verification:
+  status: draft
+  sources:
+  - https://learn.microsoft.com/powershell/module/microsoft.powershell.management/get-service
+  notes: Agent-authored Faz 5 draft from official docs; not human-verified.
+nova:
+  concepts:
+  - systemd

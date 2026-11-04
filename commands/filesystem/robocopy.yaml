@@ -1,0 +1,70 @@
+schema_version: 2
+id: robocopy
+name: robocopy
+kind: executable
+category: filesystem
+summary:
+  tr: Sağlam Windows dosya kopyalama aracı.
+  en: Robust Windows file copy utility.
+description:
+  tr: robocopy, büyük/özellikli kopyalar için tasarlanmıştır. Linux rsync karşılığı değildir. Yanlış /MIR
+    hedefi dosya silebilir — dikkat.
+  en: robocopy is built for large/attribute-aware copies. Not an rsync alias. Wrong /MIR targets can delete
+    files — use care.
+tags:
+- windows
+- filesystem
+- copy
+risk: dangerous
+requires_elevated: false
+platforms:
+- windows
+operating_systems:
+- windows
+shells:
+- cmd
+- powershell
+- windows-powershell
+flags:
+- flag: /E
+  meaning:
+    tr: Boş dahil alt dizinler.
+    en: Subdirs including empty.
+  verified: false
+- flag: /MIR
+  meaning:
+    tr: Ayna (fazla dosyaları siler — tehlikeli).
+    en: Mirror (deletes extras — dangerous).
+  verified: false
+- flag: /L
+  meaning:
+    tr: Listele, kopyalama (kuru koşu).
+    en: List only, no copy (dry run).
+  verified: false
+examples:
+- title:
+    tr: Kuru koşu
+    en: Dry run
+  command: robocopy C:\src D:\dst /E /L
+  explanation:
+    tr: Ne kopyalanacağını listeler; yazmaz.
+    en: Lists what would be copied; writes nothing.
+  risk: safe
+  shell: cmd
+  platforms:
+  - windows
+related:
+- rsync
+- icacls
+intent:
+  tr:
+  - robocopy
+  - robocopy
+  en:
+  - robocopy
+  - robocopy
+verification:
+  status: draft
+  sources:
+  - https://learn.microsoft.com/windows-server/administration/windows-commands/robocopy
+  notes: Agent-authored Faz 5 draft from official docs; not human-verified.

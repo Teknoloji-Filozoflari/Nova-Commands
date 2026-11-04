@@ -1,0 +1,84 @@
+schema_version: 2
+id: get-process
+name: Get-Process
+kind: powershell_cmdlet
+category: processes
+aliases:
+- gps
+- ps
+summary:
+  tr: Yerel süreçleri listeler (PowerShell).
+  en: Lists local processes (PowerShell).
+description:
+  tr: Get-Process, çalışan süreçleri nesne olarak döndürür. Linux `ps` karşılığı değildir — ayrı kayıt.
+    Windows’ta Task Manager / tasklist ile benzer amaç. PowerShell 7+ ve Windows PowerShell 5.1.
+  en: Get-Process returns running processes as objects. Not a Linux ps alias — separate record. Similar
+    intent to Task Manager / tasklist on Windows. PowerShell 7+ and Windows PowerShell 5.1.
+tags:
+- powershell
+- windows
+- processes
+risk: safe
+requires_elevated: false
+platforms:
+- windows
+operating_systems:
+- windows
+shells:
+- powershell
+- windows-powershell
+flags:
+- flag: -Name
+  meaning:
+    tr: Süreç adı.
+    en: Process name.
+  verified: false
+  takes_value: true
+  value_name: Name
+- flag: -Id
+  meaning:
+    tr: PID.
+    en: Process id.
+  verified: false
+  takes_value: true
+  value_name: Id
+examples:
+- title:
+    tr: Ada göre
+    en: By name
+  command: Get-Process -Name explorer
+  explanation:
+    tr: explorer süreçlerini listeler.
+    en: Lists explorer processes.
+  risk: safe
+  shell: powershell
+  platforms:
+  - windows
+- title:
+    tr: CPU sıralı
+    en: Sort by CPU
+  command: Get-Process | Sort-Object CPU -Descending | Select-Object -First 10
+  explanation:
+    tr: CPU’ya göre ilk 10 süreç.
+    en: Top 10 processes by CPU.
+  risk: safe
+  shell: powershell
+  platforms:
+  - windows
+related:
+- get-service
+- stop-service
+intent:
+  tr:
+  - powershell süreç
+  - get-process
+  - çalışan process
+  en:
+  - powershell processes
+  - get-process
+  - list processes windows
+verification:
+  status: draft
+  sources:
+  - https://learn.microsoft.com/powershell/module/microsoft.powershell.management/get-process
+  notes: Agent-authored Faz 5 draft from official docs; not human-verified.

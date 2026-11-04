@@ -1,0 +1,55 @@
+schema_version: 2
+id: get-volume
+name: Get-Volume
+kind: powershell_cmdlet
+category: disks
+summary:
+  tr: Birimleri (volume) listeler — sürücü harfi / FS.
+  en: Lists volumes — drive letter / filesystem.
+description:
+  tr: Get-Volume, Windows birimlerini (NTFS/ReFS vb.) gösterir. Linux `df` karşılığı değildir. Get-Disk
+    ile birlikte depolama envanteri için kullanılır.
+  en: Get-Volume lists Windows volumes (NTFS/ReFS, etc.). Not a df alias. Used with Get-Disk for storage
+    inventory.
+tags:
+- powershell
+- windows
+- disks
+- volume
+risk: safe
+requires_elevated: false
+platforms:
+- windows
+operating_systems:
+- windows
+shells:
+- powershell
+- windows-powershell
+flags: []
+examples:
+- title:
+    tr: Birimleri listele
+    en: List volumes
+  command: Get-Volume
+  explanation:
+    tr: Sürücü harfi, dosya sistemi ve boş alanı listeler.
+    en: Lists drive letter, filesystem, and free space.
+  risk: safe
+  shell: powershell
+  platforms:
+  - windows
+related:
+- get-disk
+- chkdsk
+intent:
+  tr:
+  - get-volume
+  - powershell get volume
+  en:
+  - Get-Volume
+  - powershell get volume
+verification:
+  status: draft
+  sources:
+  - https://learn.microsoft.com/powershell/module/storage/get-volume
+  notes: Agent-authored Faz 5 draft from official docs; not human-verified.

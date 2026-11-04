@@ -1,0 +1,51 @@
+schema_version: 2
+id: dscl
+name: dscl
+kind: administrative_tool
+category: users
+summary:
+  tr: Directory Service komut satırı (kullanıcı/düğüm).
+  en: Directory Service command line (users/nodes).
+description:
+  tr: dscl, Open Directory / yerel dizin düğümlerini okur/yazar. Kullanıcı oluşturma/silme yıkıcı olabilir.
+    Linux getent/useradd modeli değildir.
+  en: dscl reads/writes Open Directory / local directory nodes. Creating/deleting users can be destructive.
+    Not the Linux getent/useradd model.
+tags:
+- macos
+- directory
+- users
+risk: dangerous
+requires_elevated: true
+platforms:
+- macos
+operating_systems:
+- macos
+flags: []
+examples:
+- title:
+    tr: Yerel kullanıcıları listele
+    en: List local users
+  command: dscl . -list /Users
+  explanation:
+    tr: Yerel dizin kullanıcı adlarını listeler (salt okuma).
+    en: Lists local directory usernames (read-only).
+  risk: safe
+  requires_elevated: false
+  platforms:
+  - macos
+related:
+- id
+- whoami
+intent:
+  tr:
+  - dscl
+  - dscl
+  en:
+  - dscl
+  - dscl
+verification:
+  status: draft
+  sources:
+  - man 1 dscl
+  notes: Agent-authored Faz 5 draft from official docs; not human-verified.

@@ -1,0 +1,61 @@
+schema_version: 2
+id: get-itemproperty
+name: Get-ItemProperty
+kind: powershell_cmdlet
+category: filesystem
+aliases:
+- gp
+summary:
+  tr: Öğe özelliklerini (kayıt defteri değerleri vb.) okur.
+  en: Gets item properties (e.g. registry values).
+description:
+  tr: Get-ItemProperty sağlayıcı özelliklerini okur; Windows’ta sıkça kayıt defteri değerleri için kullanılır.
+    Yazma için Set-ItemProperty (ayrı kayıt olabilir) — yanlış anahtar sistem davranışını bozar.
+  en: Get-ItemProperty reads provider properties; on Windows often used for registry values. Writing uses
+    Set-ItemProperty — wrong keys can break the system.
+tags:
+- powershell
+- windows
+- registry
+risk: caution
+requires_elevated: false
+platforms:
+- windows
+operating_systems:
+- windows
+shells:
+- powershell
+- windows-powershell
+flags: []
+examples:
+- title:
+    tr: Kayıt değeri oku
+    en: Read registry value
+  command: Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion' | Select-Object
+    ProductName
+  explanation:
+    tr: Ürün adını kayıt defterinden okur (salt okuma).
+    en: Reads product name from the registry (read-only).
+  risk: caution
+  shell: powershell
+  platforms:
+  - windows
+related:
+- get-item
+- get-childitem
+security:
+  notes:
+    tr: HKLM okuma çoğu durumda normal kullanıcıyla çalışır; yazma işlemleri UAC ister.
+    en: HKLM reads often work as a normal user; writes require UAC elevation.
+intent:
+  tr:
+  - get-itemproperty
+  - powershell get itemproperty
+  en:
+  - Get-ItemProperty
+  - powershell get itemproperty
+verification:
+  status: draft
+  sources:
+  - https://learn.microsoft.com/powershell/module/microsoft.powershell.management/get-itemproperty
+  notes: Agent-authored Faz 5 draft from official docs; not human-verified.

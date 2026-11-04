@@ -1,0 +1,75 @@
+schema_version: 2
+id: get-childitem
+name: Get-ChildItem
+kind: powershell_cmdlet
+category: filesystem
+aliases:
+- gci
+- ls
+- dir
+summary:
+  tr: Dizin içeriğini listeler (PowerShell).
+  en: Lists directory contents (PowerShell).
+description:
+  tr: Get-ChildItem dosya/klasör listeler; `dir`/`ls` alias’ları PowerShell içindedir. CMD `dir` ve Linux
+    `ls` ayrı kayıtlardır — bayraklar birebir değildir. Gizli/sistem öğeleri için -Force.
+  en: Get-ChildItem lists files/folders; dir/ls are PowerShell aliases. CMD dir and Linux ls are separate
+    records — flags are not 1:1. Use -Force for hidden/system items.
+tags:
+- powershell
+- windows
+- filesystem
+risk: safe
+requires_elevated: false
+platforms:
+- windows
+operating_systems:
+- windows
+shells:
+- powershell
+- windows-powershell
+flags:
+- flag: -Recurse
+  meaning:
+    tr: Alt dizinlere in.
+    en: Recurse into children.
+  verified: false
+- flag: -Force
+  meaning:
+    tr: Gizli öğeleri de göster.
+    en: Include hidden items.
+  verified: false
+- flag: -Filter
+  meaning:
+    tr: Sağlayıcı süzgeci.
+    en: Provider filter.
+  verified: false
+  takes_value: true
+examples:
+- title:
+    tr: Listele
+    en: List
+  command: Get-ChildItem -Path C:\Windows -Filter *.exe
+  explanation:
+    tr: Belirtilen yolda exe süzgeçli liste.
+    en: Lists matching exe files under the path.
+  risk: safe
+  shell: powershell
+  platforms:
+  - windows
+related:
+- get-item
+- get-content
+- get-itemproperty
+intent:
+  tr:
+  - get-childitem
+  - powershell get childitem
+  en:
+  - Get-ChildItem
+  - powershell get childitem
+verification:
+  status: draft
+  sources:
+  - https://learn.microsoft.com/powershell/module/microsoft.powershell.management/get-childitem
+  notes: Agent-authored Faz 5 draft from official docs; not human-verified.

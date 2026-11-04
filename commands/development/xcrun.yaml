@@ -1,0 +1,49 @@
+schema_version: 2
+id: xcrun
+name: xcrun
+kind: executable
+category: development
+summary:
+  tr: Xcode araç zincirinden komut çalıştırır / yol bulur.
+  en: Runs / locates tools from the Xcode toolchain.
+description:
+  tr: xcrun, seçili Developer dizini içindeki araçları bulur veya çalıştırır (ör. `xcrun simctl`). xcode-select
+    ile birlikte kullanılır.
+  en: xcrun finds or runs tools inside the selected Developer directory (e.g. xcrun simctl). Used together
+    with xcode-select.
+tags:
+- macos
+- xcode
+- development
+risk: safe
+requires_elevated: false
+platforms:
+- macos
+operating_systems:
+- macos
+flags: []
+examples:
+- title:
+    tr: clang yolunu bul
+    en: Find clang path
+  command: xcrun --find clang
+  explanation:
+    tr: Aktif toolchain’deki clang yolunu basar.
+    en: Prints the clang path from the active toolchain.
+  risk: safe
+  platforms:
+  - macos
+related:
+- xcode-select
+intent:
+  tr:
+  - xcrun
+  - xcrun
+  en:
+  - xcrun
+  - xcrun
+verification:
+  status: draft
+  sources:
+  - man 1 xcrun
+  notes: Agent-authored Faz 5 draft from official docs; not human-verified.

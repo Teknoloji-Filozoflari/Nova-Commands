@@ -62,6 +62,9 @@ Debian/Ubuntu (`apt`), Fedora/RHEL (`dnf`), Arch (`pacman`) birinci sınıf.
 Faz 4 genişlemesi (çoğu `draft`): openSUSE (`zypper`), Alpine (`apk`), Gentoo
 (`emerge`), Void (`xbps-*`), Solus (`eopkg`), Slackware (`slackpkg`/pkgtools),
 Nix/Guix, OpenWrt (`opkg`), atomik Fedora (`rpm-ostree`).
+Faz 5 (`draft`): **Windows** (PowerShell 7+ / Windows PowerShell 5.1 / cmd.exe
+ayrımı, WinGet, UAC notları) ve **macOS** (Homebrew/MacPorts, launchd, diskutil,
+networksetup, softwareupdate, …; BSD vs GNU araç notları).
 Paket notlarında **Arch / pacman tercihi** (Nova tercihleri ile uyumlu).
 Karşılaştırma: [docs/package-managers-comparison.md](docs/package-managers-comparison.md)
 · Nix/Guix: `concepts/nix-guix.yaml`.

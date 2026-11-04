@@ -1,0 +1,54 @@
+schema_version: 2
+id: wevtutil
+name: wevtutil
+kind: executable
+category: monitoring
+summary:
+  tr: Windows Event Log komut satırı aracı.
+  en: Windows Event Log command-line tool.
+description:
+  tr: wevtutil.exe olay günlüklerini sorgular/dışa aktarır. PowerShell Get-WinEvent ayrı kayıttır. cl
+    (clear) yıkıcıdır — örneklerde yok.
+  en: wevtutil.exe queries/exports event logs. PowerShell Get-WinEvent is separate. cl (clear) is destructive
+    — omitted from examples.
+tags:
+- windows
+- logs
+- events
+risk: caution
+requires_elevated: false
+platforms:
+- windows
+operating_systems:
+- windows
+shells:
+- cmd
+- powershell
+- windows-powershell
+flags: []
+examples:
+- title:
+    tr: Kanalları listele
+    en: List channels
+  command: wevtutil el
+  explanation:
+    tr: Olay günlüğü kanal adlarını listeler.
+    en: Lists event log channel names.
+  risk: safe
+  shell: cmd
+  platforms:
+  - windows
+related:
+- get-winevent
+intent:
+  tr:
+  - wevtutil
+  - wevtutil
+  en:
+  - wevtutil
+  - wevtutil
+verification:
+  status: draft
+  sources:
+  - https://learn.microsoft.com/windows-server/administration/windows-commands/wevtutil
+  notes: Agent-authored Faz 5 draft from official docs; not human-verified.

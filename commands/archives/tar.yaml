@@ -7,8 +7,10 @@ summary:
   tr: Tar arşivlerini oluşturur veya çıkarır.
   en: Create or extract tape archives.
 description:
-  tr: Dosya ağaçlarını arşivler; sık sık gzip/xz ile birlikte.
-  en: Archives file trees; often combined with gzip/xz.
+  tr: Dosya ağaçlarını arşivler; sık sık gzip/xz ile birlikte. macOS/BSD `tar` ile GNU tar seçenekleri
+    birebir değildir (ör. `--selinux` yok; bazı uzun seçenekler farklı).
+  en: Archives file trees; often combined with gzip/xz. macOS/BSD tar options are not 1:1 with GNU tar
+    (e.g. no --selinux; some long options differ).
 tags:
 - archive
 risk: caution

@@ -1,0 +1,50 @@
+schema_version: 2
+id: profiles
+name: profiles
+kind: administrative_tool
+category: security
+summary:
+  tr: Yapılandırma profilleri (MDM) yönetimi.
+  en: Configuration profiles (MDM) management.
+description:
+  tr: profiles, cihaz/kullanıcı yapılandırma profillerini listeler/yükler. Kurumsal MDM ortamlarında kritiktir;
+    kaldırma politikaya bağlıdır.
+  en: profiles lists/installs device/user configuration profiles. Critical in enterprise MDM; removal
+    depends on policy.
+tags:
+- macos
+- mdm
+- profiles
+risk: dangerous
+requires_elevated: true
+platforms:
+- macos
+operating_systems:
+- macos
+flags: []
+examples:
+- title:
+    tr: Profilleri listele
+    en: List profiles
+  command: profiles list
+  explanation:
+    tr: Yüklü yapılandırma profillerini listeler.
+    en: Lists installed configuration profiles.
+  risk: safe
+  requires_elevated: false
+  platforms:
+  - macos
+related:
+- softwareupdate
+intent:
+  tr:
+  - profiles
+  - profiles
+  en:
+  - profiles
+  - profiles
+verification:
+  status: draft
+  sources:
+  - man 1 profiles
+  notes: Agent-authored Faz 5 draft from official docs; not human-verified.

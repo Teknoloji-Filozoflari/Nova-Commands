@@ -116,8 +116,8 @@ shells:
   - linux
   - macos
   posix_compatible: false
-  status: skeleton
-  support_level: planned
+  status: draft
+  support_level: partial
   documentation:
   - https://learn.microsoft.com/powershell/
 - id: windows-powershell
@@ -133,8 +133,8 @@ shells:
   operating_systems:
   - windows
   posix_compatible: false
-  status: skeleton
-  support_level: planned
+  status: draft
+  support_level: partial
   documentation:
   - https://learn.microsoft.com/powershell/scripting/windows-powershell/starting-windows-powershell
 - id: cmd
@@ -150,8 +150,8 @@ shells:
   operating_systems:
   - windows
   posix_compatible: false
-  status: skeleton
-  support_level: planned
+  status: draft
+  support_level: partial
   documentation:
   - https://learn.microsoft.com/windows-server/administration/windows-commands/windows-commands
 - id: elvish

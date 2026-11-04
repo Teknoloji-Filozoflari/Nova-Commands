@@ -7,8 +7,11 @@ summary:
   tr: Akış düzenleyici.
   en: Stream editor.
 description:
-  tr: Metni satır satır süzüp dönüştürür; yerinde düzenleme (-i) dikkat ister.
-  en: Filters/transforms text line by line; in-place (-i) edits need care.
+  tr: 'Metni satır satır süzüp dönüştürür; yerinde düzenleme (-i) dikkat ister. macOS/BSD `sed` GNU sed’den
+    farklıdır (ör. yerinde düzenleme: BSD `sed -i ''''`; GNU `sed -i`). Platforma özgü seçenekleri ayrı
+    doğrulayın.'
+  en: 'Filters/transforms text line by line; in-place (-i) edits need care. macOS/BSD sed differs from
+    GNU sed (e.g. in-place: BSD `sed -i ''''` vs GNU `sed -i`). Verify platform-specific options separately.'
 tags:
 - text
 risk: caution
