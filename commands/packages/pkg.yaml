@@ -1,0 +1,128 @@
+schema_version: 2
+id: pkg
+name: pkg
+kind: package_manager
+category: packages
+summary:
+  tr: FreeBSD ikili paket yöneticisi (pkgng).
+  en: FreeBSD binary package manager (pkgng).
+description:
+  tr: FreeBSD `pkg`, uzak depolardan ikili paket kurar/sorgular. FreeBSD Ports (`ports` kaydı) kaynak
+    ağacıdır — aynı değildir. OpenBSD `pkg_add`, NetBSD `pkgin`/`pkgsrc` ve DragonFly `pkg` ayrı ekosistemlerdir;
+    isim benzerliği özdeşlik değildir. Arch host’ta sistem PM olarak pacman tercih edilir.
+  en: FreeBSD pkg installs/queries binary packages from remote repos. FreeBSD Ports (ports record) is
+    the source tree — not the same. OpenBSD pkg_add, NetBSD pkgin/pkgsrc, and DragonFly pkg are separate
+    ecosystems; similar names are not identity. On Arch hosts prefer pacman as the system PM.
+tags:
+- bsd
+- freebsd
+- packages
+- pkg
+risk: caution
+requires_elevated: true
+platforms:
+- bsd
+- freebsd
+operating_systems:
+- freebsd
+package_refs:
+- manager: freebsd-pkg
+  package: pkg
+  distributions:
+  - freebsd-release
+  notes:
+    tr: Base/pkgng; Handbook ports bölümü.
+    en: Base/pkgng; see Handbook ports chapter.
+flags:
+- flag: install
+  meaning:
+    tr: Paket kur.
+    en: Install package.
+  verified: false
+- flag: delete
+  meaning:
+    tr: Paket kaldır.
+    en: Delete package.
+  verified: false
+- flag: upgrade
+  meaning:
+    tr: Kurulu paketleri yükselt.
+    en: Upgrade installed packages.
+  verified: false
+- flag: search
+  meaning:
+    tr: Depoda ara.
+    en: Search repository.
+  verified: false
+- flag: info
+  meaning:
+    tr: Kurulu/uzak paket bilgisi.
+    en: Installed/remote package info.
+  verified: false
+- flag: update
+  meaning:
+    tr: Depo kataloğunu yenile.
+    en: Refresh repository catalog.
+  verified: false
+examples:
+- title:
+    tr: Ara
+    en: Search
+  command: pkg search nginx
+  explanation:
+    tr: Depoda nginx ile eşleşen paketleri listeler.
+    en: Lists packages matching nginx in the repo.
+  risk: safe
+  platforms:
+  - bsd
+  - freebsd
+- title:
+    tr: Bilgi
+    en: Info
+  command: pkg info -x nginx
+  explanation:
+    tr: Kurulu paketlerde nginx geçenleri gösterir (salt okuma).
+    en: Shows installed packages matching nginx (read-only).
+  risk: safe
+  platforms:
+  - bsd
+  - freebsd
+- title:
+    tr: Katalog güncelle
+    en: Update catalog
+  command: pkg update
+  explanation:
+    tr: Uzak paket indeksini yeniler (paket yükseltmez).
+    en: Refreshes the remote package index (does not upgrade packages).
+  risk: caution
+  requires_elevated: true
+  platforms:
+  - bsd
+  - freebsd
+related:
+- ports
+- pkg_add
+- pkgin
+- pkgsrc
+- pacman
+- brew
+intent:
+  tr:
+  - pkg kur
+  - freebsd paket
+  - pkg search
+  en:
+  - pkg install
+  - freebsd package
+  - pkg search
+verification:
+  status: draft
+  sources:
+  - https://docs.freebsd.org/en/books/handbook/ports/#pkgng-intro
+  - https://man.freebsd.org/cgi/man.cgi?query=pkg&sektion=8
+  notes: Agent-authored Faz 6 draft from official docs; not human-verified.
+nova:
+  concepts:
+  - packages
+  - package-managers
+  - package-managers-comparison

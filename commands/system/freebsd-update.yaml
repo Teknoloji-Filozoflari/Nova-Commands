@@ -1,0 +1,74 @@
+schema_version: 2
+id: freebsd-update
+name: freebsd-update
+kind: administrative_tool
+category: system
+summary:
+  tr: FreeBSD taban sistemi ikili güncelleyicisi.
+  en: FreeBSD base-system binary updater.
+description:
+  tr: '`freebsd-update`, FreeBSD base (çekirdek/userland) ikili yamalarını yönetir. `pkg upgrade` paketleri
+    günceller — aynı değildir. `fetch`/`show` salt okumaya yakındır; `install` yükseltir. systemd/apt
+    ile karıştırılmaz.'
+  en: freebsd-update manages FreeBSD base (kernel/userland) binary patches. pkg upgrade updates packages
+    — not the same. fetch/show are near-read-only; install applies upgrades. Not systemd/apt.
+tags:
+- bsd
+- freebsd
+- update
+- base
+risk: dangerous
+requires_elevated: true
+platforms:
+- bsd
+- freebsd
+operating_systems:
+- freebsd
+flags:
+- flag: fetch
+  meaning:
+    tr: Güncellemeleri indir.
+    en: Fetch updates.
+  verified: false
+- flag: show
+  meaning:
+    tr: Bekleyen güncellemeleri göster.
+    en: Show pending updates.
+  verified: false
+- flag: install
+  meaning:
+    tr: İndirilenleri uygula.
+    en: Install fetched updates.
+  verified: false
+examples:
+- title:
+    tr: Bekleyenleri göster
+    en: Show pending
+  command: freebsd-update fetch && freebsd-update show | head
+  explanation:
+    tr: İndirir ve bekleyen değişiklik özetinin başını basmaya çalışır.
+    en: Fetches and attempts to print the head of pending changes.
+  risk: caution
+  requires_elevated: true
+  platforms:
+  - bsd
+  - freebsd
+related:
+- pkg
+- service
+intent:
+  tr:
+  - freebsd-update
+  - freebsd taban güncelle
+  en:
+  - freebsd-update
+  - freebsd base update
+verification:
+  status: draft
+  sources:
+  - https://docs.freebsd.org/en/books/handbook/cutting-edge/#updating-src-quick-start
+  - https://man.freebsd.org/cgi/man.cgi?query=freebsd-update&sektion=8
+  notes: Agent-authored Faz 6 draft from official docs; not human-verified.
+nova:
+  concepts:
+  - packages

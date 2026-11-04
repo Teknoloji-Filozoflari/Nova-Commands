@@ -96,9 +96,29 @@ Registry rows for `winget` / `homebrew` / `macports` and shells
 `support_level: partial`. **No fake `verified`.** LICENSE and
 `keys/minisign.pub` unchanged.
 
+## Faz 6 BSD command banks (+ Unix extensibility metadata)
+
+Live bank now includes **draft** BSD-family command records (schema v2):
+
+- **FreeBSD:** `pkg`, Ports (`ports`), `freebsd-update`, `service`, `sysrc`, jails
+  (`jls` / `jexec`), ZFS (`zfs` / `zpool`), plus shared `ifconfig` / `newsyslog` /
+  `pfctl` where applicable.
+- **OpenBSD:** `pkg_add`, `rcctl`, `doas`, `pfctl` (PF ≠ Linux nft/iptables).
+- **NetBSD:** `pkgin`, `pkgsrc` (source tree ≠ binary pkgin).
+- **DragonFly:** OS/PM registry rows only for the similarly named `pkg` — **not**
+  aliased to FreeBSD `pkg` (separate ecosystems).
+- **Service model:** BSD `service` / `sysrc` / `rcctl` are **not** `systemctl`.
+- **netstat:** Windows owns id `netstat`; BSD family uses id `netstat-bsd`
+  (`name: netstat`).
+
+Registry rows for FreeBSD/OpenBSD/NetBSD/DragonFly OS + release distros and BSD
+PMs are `status: draft` / `support_level: partial`. **illumos / Solaris / AIX**
+remain extensibility skeletons (`experimental`) — **no fake command banks**.
+**No fake `verified`.** LICENSE and `keys/minisign.pub` unchanged.
+
 ## Out of scope (later fazes)
 
-- BSD / illumos / Solaris / AIX **new command banks** (Faz 6+)
+- illumos / Solaris / AIX **command banks** (metadata only in Faz 6)
 - Tasks / profiles **content** trees (schemas stubbed in Faz 2; content Faz 8)
 - Catalog index counts for registry kinds
 - Rotating minisign keys / LICENSE changes

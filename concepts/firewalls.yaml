@@ -4,8 +4,8 @@ title:
   tr: Güvenlik duvarı araçları
   en: Firewall tools
 summary:
-  tr: nftables, iptables, firewalld ve ufw — ne zaman hangisi, güvenli okuma alışkanlığı.
-  en: nftables, iptables, firewalld, and ufw — when to use which, safe read habits.
+  tr: nftables, iptables, firewalld, ufw ve BSD pfctl — ne zaman hangisi, güvenli okuma.
+  en: nftables, iptables, firewalld, ufw, and BSD pfctl — when to use which, safe reads.
 difficulty: intermediate
 tags:
   - firewall
@@ -17,6 +17,7 @@ related_commands:
   - iptables
   - firewall-cmd
   - ufw
+  - pfctl
   - ss
   - ip
 related_concepts:
@@ -38,10 +39,12 @@ body:
     - **iptables** — eski IPv4 aracı; birçok sistemde `iptables-nft` uyumluluk katmanı.
     - **firewall-cmd** (`firewalld`) — bölge/servis modeli (Fedora’da sık varsayılan).
     - **ufw** — Ubuntu’da yaygın “basit” ön yüz.
+    - **pfctl** (BSD PF) — OpenBSD/FreeBSD; Linux netfilter araçları ile **eşitlenmez**.
 
     **Güvenli alışkanlık:** Uzaktan oturumdayken önce **listele** (`nft list ruleset`,
-    `iptables -L -n`, `firewall-cmd --list-all`, `ufw status`). Bu bankadaki örnekler
-    bilerek yıkıcı `flush` / kör `deny` tarifleri vermez — yanlış kural SSH’yi keser.
+    `iptables -L -n`, `firewall-cmd --list-all`, `ufw status`, BSD’de `pfctl -s rules`).
+    Bu bankadaki örnekler bilerek yıkıcı `flush` / kör `deny` tarifleri vermez —
+    yanlış kural SSH’yi keser.
 
     **Nova bankası:** `nft` / `iptables` / `ufw` girdileri `draft` veya dikkatli
     `reviewed` olabilir; `verification.status: verified` insan onayı ister.
@@ -59,10 +62,12 @@ body:
     - **iptables** — legacy IPv4 tool; many systems use an `iptables-nft` compat layer.
     - **firewall-cmd** (`firewalld`) — zone/service model (often default on Fedora).
     - **ufw** — “simple” frontend common on Ubuntu.
+    - **pfctl** (BSD PF) — OpenBSD/FreeBSD; **not** equivalent to Linux netfilter tools.
 
     **Safe habit:** On remote sessions, **list first** (`nft list ruleset`,
-    `iptables -L -n`, `firewall-cmd --list-all`, `ufw status`). Catalog examples
-    deliberately omit destructive flush / blind deny recipes — a bad rule cuts SSH.
+    `iptables -L -n`, `firewall-cmd --list-all`, `ufw status`, on BSD `pfctl -s rules`).
+    Catalog examples deliberately omit destructive flush / blind deny recipes — a bad
+    rule cuts SSH.
 
     **Nova bank:** `nft` / `iptables` / `ufw` may be `draft` or carefully `reviewed`;
     `verification.status: verified` needs a human. `dangerous` / `destructive` labels

@@ -1,0 +1,94 @@
+schema_version: 2
+id: pfctl
+name: pfctl
+kind: administrative_tool
+category: security
+summary:
+  tr: PF (Packet Filter) denetimi — OpenBSD/FreeBSD.
+  en: PF (Packet Filter) control — OpenBSD/FreeBSD.
+description:
+  tr: '`pfctl`, BSD Packet Filter kurallarını yükler/sorgular. Linux `iptables`/`nft`/`ufw` ile **eşitlenmez**.
+    `-s rules` salt okuma; `-f` / `-d` yazma/devre dışı bırakma tehlikelidir — örneklerde yok.'
+  en: pfctl loads/queries BSD Packet Filter rules. **Not** equivalent to Linux iptables/nft/ufw. -s rules
+    is read-only; -f/-d write/disable are dangerous — omitted from examples.
+tags:
+- bsd
+- openbsd
+- freebsd
+- firewall
+- pf
+risk: dangerous
+requires_elevated: true
+platforms:
+- bsd
+- openbsd
+- freebsd
+operating_systems:
+- openbsd
+- freebsd
+flags:
+- flag: -s
+  meaning:
+    tr: Durum göster (rules/info/…).
+    en: Show state (rules/info/…).
+  verified: false
+- flag: -v
+  meaning:
+    tr: Ayrıntılı.
+    en: Verbose.
+  verified: false
+- flag: -n
+  meaning:
+    tr: Sözdizimi kontrol / kuru.
+    en: Syntax check / dry.
+  verified: false
+examples:
+- title:
+    tr: Kuralları göster
+    en: Show rules
+  command: pfctl -s rules | head
+  explanation:
+    tr: Yüklü PF kurallarının başını basar (salt okuma).
+    en: Prints the head of loaded PF rules (read-only).
+  risk: safe
+  requires_elevated: true
+  platforms:
+  - bsd
+  - openbsd
+- title:
+    tr: Bilgi
+    en: Info
+  command: pfctl -s info
+  explanation:
+    tr: PF durum özetini gösterir.
+    en: Shows PF status summary.
+  risk: safe
+  requires_elevated: true
+  platforms:
+  - bsd
+  - openbsd
+related:
+- iptables
+- nft
+- ufw
+- firewall-cmd
+intent:
+  tr:
+  - pfctl
+  - pf firewall
+  - openbsd güvenlik duvarı
+  en:
+  - pfctl
+  - pf firewall
+  - openbsd firewall
+verification:
+  status: draft
+  sources:
+  - https://man.openbsd.org/pfctl.8
+  - https://www.openbsd.org/faq/pf/
+  - https://docs.freebsd.org/en/books/handbook/firewalls/#firewalls-pf
+  notes: Agent-authored Faz 6 draft from official docs; not human-verified.
+nova:
+  concepts:
+  - firewalls
+  - networking

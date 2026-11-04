@@ -1,0 +1,91 @@
+schema_version: 2
+id: ifconfig
+name: ifconfig
+kind: executable
+category: network
+summary:
+  tr: BSD ağ arayüzü yapılandırması / sorgusu.
+  en: BSD network interface configuration / query.
+description:
+  tr: '`ifconfig`, BSD userland’de arayüz adreslerini gösterir/ayarlar. Linux’ta modern karşılık `ip`
+    ayrı kayıttır; Windows `ipconfig` / PowerShell `Get-NetIPConfiguration` ayrıdır. Yazma (`up`/`down`/adres
+    ekleme) tehlikeli olabilir — örnekler salt okuma.'
+  en: ifconfig shows/sets interface addresses in BSD userland. On Linux the modern counterpart ip is a
+    separate record; Windows ipconfig / PowerShell Get-NetIPConfiguration are separate. Writes (up/down/add
+    address) can be dangerous — examples are read-only.
+tags:
+- bsd
+- network
+- interfaces
+risk: dangerous
+requires_elevated: false
+platforms:
+- bsd
+- freebsd
+- openbsd
+- netbsd
+- dragonflybsd
+operating_systems:
+- freebsd
+- openbsd
+- netbsd
+- dragonflybsd
+flags:
+- flag: -a
+  meaning:
+    tr: Tüm arayüzler.
+    en: All interfaces.
+  verified: false
+- flag: -l
+  meaning:
+    tr: Yalnız ad listesi.
+    en: Name list only.
+  verified: false
+examples:
+- title:
+    tr: Tüm arayüzler
+    en: All interfaces
+  command: ifconfig -a
+  explanation:
+    tr: Tüm arayüz yapılandırmasını basar.
+    en: Prints all interface configuration.
+  risk: safe
+  platforms:
+  - bsd
+  - freebsd
+- title:
+    tr: Ad listesi
+    en: Name list
+  command: ifconfig -l
+  explanation:
+    tr: Arayüz adlarını listeler.
+    en: Lists interface names.
+  risk: safe
+  platforms:
+  - bsd
+  - freebsd
+related:
+- ip
+- ipconfig
+- get-netipconfiguration
+- netstat-bsd
+- networksetup
+intent:
+  tr:
+  - ifconfig
+  - bsd ip adresi
+  - ağ arayüzü
+  en:
+  - ifconfig
+  - bsd show ip
+  - network interface
+verification:
+  status: draft
+  sources:
+  - https://man.freebsd.org/cgi/man.cgi?query=ifconfig&sektion=8
+  - https://man.openbsd.org/ifconfig.8
+  notes: Agent-authored Faz 6 draft from official docs; not human-verified.
+nova:
+  concepts:
+  - networking
+  - networking-basics

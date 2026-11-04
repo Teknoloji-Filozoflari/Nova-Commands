@@ -1,0 +1,103 @@
+schema_version: 2
+id: pkgin
+name: pkgin
+kind: package_manager
+category: packages
+summary:
+  tr: NetBSD ikili paket aracı (pkgsrc ön yüzü).
+  en: NetBSD binary package tool (pkgsrc frontend).
+description:
+  tr: '`pkgin`, NetBSD’te pkgsrc ikili paketlerini yönetir. Kaynak ağacı `pkgsrc` ayrı kayıttır. FreeBSD
+    `pkg` / OpenBSD `pkg_add` ile karıştırılmaz.'
+  en: pkgin manages NetBSD pkgsrc binary packages. The pkgsrc source tree is a separate record. Do not
+    confuse with FreeBSD pkg or OpenBSD pkg_add.
+tags:
+- bsd
+- netbsd
+- packages
+- pkgsrc
+risk: caution
+requires_elevated: true
+platforms:
+- bsd
+- netbsd
+operating_systems:
+- netbsd
+package_refs:
+- manager: pkgin
+  package: pkgin
+  distributions:
+  - netbsd-release
+flags:
+- flag: search
+  meaning:
+    tr: Ara.
+    en: Search.
+  verified: false
+- flag: avail
+  meaning:
+    tr: Uzakta uygun paketler.
+    en: Available remote packages.
+  verified: false
+- flag: list
+  meaning:
+    tr: Kurulu liste.
+    en: List installed.
+  verified: false
+- flag: update
+  meaning:
+    tr: İndeks güncelle.
+    en: Update index.
+  verified: false
+- flag: install
+  meaning:
+    tr: Kur.
+    en: Install.
+  verified: false
+examples:
+- title:
+    tr: Ara
+    en: Search
+  command: pkgin search nginx
+  explanation:
+    tr: İkili depoda nginx arar.
+    en: Searches the binary repo for nginx.
+  risk: safe
+  platforms:
+  - bsd
+  - netbsd
+- title:
+    tr: Kurulu liste
+    en: List installed
+  command: pkgin list
+  explanation:
+    tr: Kurulu pkgin paketlerini listeler.
+    en: Lists installed pkgin packages.
+  risk: safe
+  platforms:
+  - bsd
+  - netbsd
+related:
+- pkgsrc
+- pkg
+- pkg_add
+intent:
+  tr:
+  - pkgin
+  - netbsd paket
+  - pkgin search
+  en:
+  - pkgin
+  - netbsd package
+  - pkgin search
+verification:
+  status: draft
+  sources:
+  - https://www.netbsd.org/docs/pkgsrc/using.html
+  - https://man.netbsd.org/pkgin.1
+  notes: Agent-authored Faz 6 draft from official docs; not human-verified.
+nova:
+  concepts:
+  - packages
+  - package-managers
+  - package-managers-comparison

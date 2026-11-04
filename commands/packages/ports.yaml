@@ -1,0 +1,93 @@
+schema_version: 2
+id: ports
+name: ports
+kind: package_manager
+category: packages
+summary:
+  tr: FreeBSD Ports kaynak ağacı (make tabanlı).
+  en: FreeBSD Ports source tree (make-based).
+description:
+  tr: FreeBSD Ports, `/usr/ports` altında kaynaktan derleme ağacıdır. İkili `pkg` ile karıştırılmaz. Bu
+    kayıt Ports iş akışını belgeler; genel `make` (GNU/BSD make) ayrı kayıttır. Yıkıcı `make install`/`deinstall`
+    örnekleri verilmez — yalnız arama/açıklama. OpenBSD ports ve NetBSD pkgsrc ayrıdır.
+  en: FreeBSD Ports is a from-source build tree under /usr/ports. Do not confuse with binary pkg. This
+    record documents the Ports workflow; generic make is a separate record. No destructive make install/deinstall
+    examples — search/describe only. OpenBSD ports and NetBSD pkgsrc are separate.
+tags:
+- bsd
+- freebsd
+- ports
+- packages
+risk: caution
+requires_elevated: false
+platforms:
+- bsd
+- freebsd
+operating_systems:
+- freebsd
+package_refs:
+- manager: freebsd-ports
+  package: ports
+  distributions:
+  - freebsd-release
+  notes:
+    tr: Ports Collection; pkg ile ikili alternatif.
+    en: Ports Collection; pkg is the binary alternative.
+flags:
+- flag: search
+  meaning:
+    tr: make search / port arama.
+    en: make search / port lookup.
+  verified: false
+- flag: describe
+  meaning:
+    tr: Port açıklaması.
+    en: Port description.
+  verified: false
+examples:
+- title:
+    tr: İsimle ara
+    en: Search by name
+  command: cd /usr/ports && make search name=nginx
+  explanation:
+    tr: Ports ağacında isim arar (ağaç kurulu olmalı).
+    en: Searches the Ports tree by name (tree must be present).
+  risk: safe
+  platforms:
+  - bsd
+  - freebsd
+- title:
+    tr: Port açıklaması
+    en: Describe port
+  command: cd /usr/ports/www/nginx && make describe
+  explanation:
+    tr: Port özetini basar; kurulum yapmaz.
+    en: Prints the port summary; does not install.
+  risk: safe
+  platforms:
+  - bsd
+  - freebsd
+related:
+- pkg
+- pkgsrc
+- make
+intent:
+  tr:
+  - freebsd ports
+  - ports ara
+  - make search
+  en:
+  - freebsd ports
+  - ports search
+  - make search
+verification:
+  status: draft
+  sources:
+  - https://docs.freebsd.org/en/books/handbook/ports/
+  - https://docs.freebsd.org/en/books/porters-handbook/
+  notes: Agent-authored Faz 6 draft from official docs; not human-verified.
+nova:
+  concepts:
+  - packages
+  - package-managers
+  - package-managers-comparison
