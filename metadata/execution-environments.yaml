@@ -1,0 +1,171 @@
+# Auto-seeded Faz 1 platform registry. Status is skeleton|draft only.
+# Do not mark verified without human review.
+schema_version: 1
+kind: nova-commands-execution-environment-registry
+execution_environments:
+- id: native
+  name:
+    tr: Yerel
+    en: Native
+  summary:
+    tr: Yerel yürütme ortamı kaydı.
+    en: Native execution environment registry entry.
+  env_kind: native
+  status: skeleton
+  support_level: full
+  documentation:
+  - https://en.wikipedia.org/wiki/Execution_(computing)
+- id: wsl1
+  name:
+    tr: WSL 1
+    en: WSL 1
+  summary:
+    tr: WSL 1 yürütme ortamı kaydı.
+    en: WSL 1 execution environment registry entry.
+  env_kind: compatibility-layer
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://learn.microsoft.com/windows/wsl/
+  host_operating_systems:
+  - windows
+  guest_operating_systems:
+  - linux
+  notes:
+    tr: WSL bağımsız bir işletim sistemi değildir; Windows üzerinde Linux ortamıdır.
+    en: WSL is not a standalone OS; it is a Linux environment on Windows.
+- id: wsl2
+  name:
+    tr: WSL 2
+    en: WSL 2
+  summary:
+    tr: WSL 2 yürütme ortamı kaydı.
+    en: WSL 2 execution environment registry entry.
+  env_kind: vm-guest
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://learn.microsoft.com/windows/wsl/
+  host_operating_systems:
+  - windows
+  guest_operating_systems:
+  - linux
+  notes:
+    tr: WSL bağımsız bir işletim sistemi değildir; Windows üzerinde Linux ortamıdır.
+    en: WSL is not a standalone OS; it is a Linux environment on Windows.
+- id: termux
+  name:
+    tr: Termux
+    en: Termux
+  summary:
+    tr: Termux yürütme ortamı kaydı.
+    en: Termux execution environment registry entry.
+  env_kind: mobile-userspace
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://termux.dev/en/
+  host_operating_systems:
+  - android
+  guest_operating_systems:
+  - linux
+  notes:
+    tr: Termux Android üzerinde Linux kullanıcı alanı araçları sunar; ayrı OS değildir.
+    en: Termux provides Linux userspace tools on Android; it is not a separate OS.
+- id: crostini
+  name:
+    tr: ChromeOS Crostini
+    en: ChromeOS Linux (Crostini)
+  summary:
+    tr: ChromeOS Crostini yürütme ortamı kaydı.
+    en: ChromeOS Linux (Crostini) execution environment registry entry.
+  env_kind: container
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://chromium.googlesource.com/chromiumos/docs/+/HEAD/containers_and_vms.md
+  guest_operating_systems:
+  - linux
+- id: msys2
+  name:
+    tr: MSYS2
+    en: MSYS2
+  summary:
+    tr: MSYS2 yürütme ortamı kaydı.
+    en: MSYS2 execution environment registry entry.
+  env_kind: compatibility-layer
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://www.msys2.org/docs/
+  host_operating_systems:
+  - windows
+  guest_operating_systems:
+  - linux
+- id: cygwin
+  name:
+    tr: Cygwin
+    en: Cygwin
+  summary:
+    tr: Cygwin yürütme ortamı kaydı.
+    en: Cygwin execution environment registry entry.
+  env_kind: compatibility-layer
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://cygwin.com/cygwin-ug-net/
+  host_operating_systems:
+  - windows
+  guest_operating_systems:
+  - linux
+- id: container
+  name:
+    tr: Konteyner
+    en: Container
+  summary:
+    tr: Konteyner yürütme ortamı kaydı.
+    en: Container execution environment registry entry.
+  env_kind: container
+  status: skeleton
+  support_level: partial
+  documentation:
+  - https://opencontainers.org/
+- id: chroot
+  name:
+    tr: chroot
+    en: chroot
+  summary:
+    tr: chroot yürütme ortamı kaydı.
+    en: chroot execution environment registry entry.
+  env_kind: chroot
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://man.archlinux.org/man/chroot.1
+  host_operating_systems:
+  - linux
+  - freebsd
+- id: vm-guest
+  name:
+    tr: VM misafiri
+    en: VM guest
+  summary:
+    tr: VM misafiri yürütme ortamı kaydı.
+    en: VM guest execution environment registry entry.
+  env_kind: vm-guest
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://www.qemu.org/docs/master/
+- id: ssh-session
+  name:
+    tr: SSH oturumu
+    en: SSH session
+  summary:
+    tr: SSH oturumu yürütme ortamı kaydı.
+    en: SSH session execution environment registry entry.
+  env_kind: remote-session
+  status: skeleton
+  support_level: partial
+  documentation:
+  - https://www.openssh.com/manual.html

@@ -28,7 +28,7 @@ jobs:
       - name: Install validator dependencies
         run: python3 -m pip install -r requirements-dev.txt
 
-      - name: Schema + id + category + i18n + concepts
+      - name: Schema + id + category + i18n + concepts + platform registries
         run: python3 scripts/validate_catalog.py
 
       - name: Record committed content digests

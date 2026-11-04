@@ -1,0 +1,129 @@
+# Auto-seeded Faz 1 platform registry. Status is skeleton|draft only.
+# Do not mark verified without human review.
+schema_version: 1
+kind: nova-commands-architecture-registry
+architectures:
+- id: x86-64
+  name:
+    tr: x86-64
+    en: x86-64
+  summary:
+    tr: x86-64 donanım mimarisi kaydı.
+    en: x86-64 hardware architecture registry entry.
+  uname_machines:
+  - x86_64
+  - amd64
+  bits: 64
+  endianness: little
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://en.wikipedia.org/wiki/X86-64
+- id: aarch64
+  name:
+    tr: AArch64
+    en: AArch64
+  summary:
+    tr: AArch64 donanım mimarisi kaydı.
+    en: AArch64 hardware architecture registry entry.
+  uname_machines:
+  - aarch64
+  - arm64
+  bits: 64
+  endianness: little
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://developer.arm.com/documentation/102374/latest/
+- id: armv7
+  name:
+    tr: ARMv7
+    en: ARMv7
+  summary:
+    tr: ARMv7 donanım mimarisi kaydı.
+    en: ARMv7 hardware architecture registry entry.
+  uname_machines:
+  - armv7l
+  - armhf
+  bits: 32
+  endianness: little
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://developer.arm.com/documentation/
+- id: i686
+  name:
+    tr: i686
+    en: i686
+  summary:
+    tr: i686 donanım mimarisi kaydı.
+    en: i686 hardware architecture registry entry.
+  uname_machines:
+  - i686
+  - i386
+  bits: 32
+  endianness: little
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://en.wikipedia.org/wiki/P6_(microarchitecture)
+- id: riscv64
+  name:
+    tr: RISC-V 64
+    en: RISC-V 64
+  summary:
+    tr: RISC-V 64 donanım mimarisi kaydı.
+    en: RISC-V 64 hardware architecture registry entry.
+  uname_machines:
+  - riscv64
+  bits: 64
+  endianness: little
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://riscv.org/technical/specifications/
+- id: ppc64le
+  name:
+    tr: ppc64le
+    en: ppc64le
+  summary:
+    tr: ppc64le donanım mimarisi kaydı.
+    en: ppc64le hardware architecture registry entry.
+  uname_machines:
+  - ppc64le
+  bits: 64
+  endianness: little
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://openpowerfoundation.org/
+- id: s390x
+  name:
+    tr: s390x
+    en: s390x
+  summary:
+    tr: s390x donanım mimarisi kaydı.
+    en: s390x hardware architecture registry entry.
+  uname_machines:
+  - s390x
+  bits: 64
+  endianness: big
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://www.ibm.com/docs/en/linux-on-systems
+- id: loongarch64
+  name:
+    tr: LoongArch64
+    en: LoongArch64
+  summary:
+    tr: LoongArch64 donanım mimarisi kaydı.
+    en: LoongArch64 hardware architecture registry entry.
+  uname_machines:
+  - loongarch64
+  bits: 64
+  endianness: little
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://loongson.github.io/LoongArch-Documentation/

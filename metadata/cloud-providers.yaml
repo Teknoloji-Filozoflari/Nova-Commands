@@ -1,0 +1,101 @@
+# Auto-seeded Faz 1 platform registry. Status is skeleton|draft only.
+# Do not mark verified without human review.
+schema_version: 1
+kind: nova-commands-cloud-provider-registry
+cloud_providers:
+- id: aws
+  name:
+    tr: Amazon Web Services
+    en: Amazon Web Services
+  summary:
+    tr: Amazon Web Services bulut sağlayıcısı metadata kaydı (CLI iskeleti).
+    en: Amazon Web Services cloud provider metadata entry (CLI skeleton).
+  cli_names:
+  - aws
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://docs.aws.amazon.com/cli/
+  notes:
+    tr: Gerçek API anahtarı veya gizli kimlik içeren örnek kullanılmaz.
+    en: Examples must never include real API tokens or secrets.
+- id: azure
+  name:
+    tr: Microsoft Azure
+    en: Microsoft Azure
+  summary:
+    tr: Microsoft Azure bulut sağlayıcısı metadata kaydı (CLI iskeleti).
+    en: Microsoft Azure cloud provider metadata entry (CLI skeleton).
+  cli_names:
+  - az
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://learn.microsoft.com/cli/azure/
+  notes:
+    tr: Gerçek API anahtarı veya gizli kimlik içeren örnek kullanılmaz.
+    en: Examples must never include real API tokens or secrets.
+- id: gcp
+  name:
+    tr: Google Cloud
+    en: Google Cloud
+  summary:
+    tr: Google Cloud bulut sağlayıcısı metadata kaydı (CLI iskeleti).
+    en: Google Cloud cloud provider metadata entry (CLI skeleton).
+  cli_names:
+  - gcloud
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://cloud.google.com/sdk/docs
+  notes:
+    tr: Gerçek API anahtarı veya gizli kimlik içeren örnek kullanılmaz.
+    en: Examples must never include real API tokens or secrets.
+- id: oci
+  name:
+    tr: Oracle Cloud Infrastructure
+    en: Oracle Cloud Infrastructure
+  summary:
+    tr: Oracle Cloud Infrastructure bulut sağlayıcısı metadata kaydı (CLI iskeleti).
+    en: Oracle Cloud Infrastructure cloud provider metadata entry (CLI skeleton).
+  cli_names:
+  - oci
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://docs.oracle.com/en-us/iaas/Content/API/Concepts/cliconcepts.htm
+  notes:
+    tr: Gerçek API anahtarı veya gizli kimlik içeren örnek kullanılmaz.
+    en: Examples must never include real API tokens or secrets.
+- id: digitalocean
+  name:
+    tr: DigitalOcean
+    en: DigitalOcean
+  summary:
+    tr: DigitalOcean bulut sağlayıcısı metadata kaydı (CLI iskeleti).
+    en: DigitalOcean cloud provider metadata entry (CLI skeleton).
+  cli_names:
+  - doctl
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://docs.digitalocean.com/reference/doctl/
+  notes:
+    tr: Gerçek API anahtarı veya gizli kimlik içeren örnek kullanılmaz.
+    en: Examples must never include real API tokens or secrets.
+- id: hetzner
+  name:
+    tr: Hetzner Cloud
+    en: Hetzner Cloud
+  summary:
+    tr: Hetzner Cloud bulut sağlayıcısı metadata kaydı (CLI iskeleti).
+    en: Hetzner Cloud cloud provider metadata entry (CLI skeleton).
+  cli_names:
+  - hcloud
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://docs.hetzner.com/cloud/
+  notes:
+    tr: Gerçek API anahtarı veya gizli kimlik içeren örnek kullanılmaz.
+    en: Examples must never include real API tokens or secrets.

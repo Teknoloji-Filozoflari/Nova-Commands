@@ -1,0 +1,684 @@
+# Auto-seeded Faz 1 platform registry. Status is skeleton|draft only.
+# Do not mark verified without human review.
+schema_version: 1
+kind: nova-commands-distribution-registry
+distributions:
+- id: debian
+  name:
+    tr: Debian
+    en: Debian
+  summary:
+    tr: Debian dağıtım / ürün kaydı (iskelet).
+    en: Debian distribution / product registry entry (skeleton).
+  operating_system: linux
+  variant: general
+  package_managers:
+  - apt
+  - dpkg
+  status: draft
+  support_level: partial
+  documentation:
+  - https://www.debian.org/doc/
+  init_systems:
+  - systemd
+- id: ubuntu
+  name:
+    tr: Ubuntu
+    en: Ubuntu
+  summary:
+    tr: Ubuntu dağıtım / ürün kaydı (iskelet).
+    en: Ubuntu distribution / product registry entry (skeleton).
+  operating_system: linux
+  variant: general
+  package_managers:
+  - apt
+  - dpkg
+  status: draft
+  support_level: partial
+  documentation:
+  - https://documentation.ubuntu.com/
+  id_like:
+  - debian
+  parent: debian
+  init_systems:
+  - systemd
+- id: linux-mint
+  name:
+    tr: Linux Mint
+    en: Linux Mint
+  summary:
+    tr: Linux Mint dağıtım / ürün kaydı (iskelet).
+    en: Linux Mint distribution / product registry entry (skeleton).
+  operating_system: linux
+  variant: desktop
+  package_managers:
+  - apt
+  - dpkg
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://linuxmint.com/documentation.php
+  id_like:
+  - ubuntu
+  - debian
+  parent: ubuntu
+  init_systems:
+  - systemd
+- id: pop-os
+  name:
+    tr: Pop!_OS
+    en: Pop!_OS
+  summary:
+    tr: Pop!_OS dağıtım / ürün kaydı (iskelet).
+    en: Pop!_OS distribution / product registry entry (skeleton).
+  operating_system: linux
+  variant: desktop
+  package_managers:
+  - apt
+  - dpkg
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://support.system76.com/
+  id_like:
+  - ubuntu
+  - debian
+  parent: ubuntu
+  init_systems:
+  - systemd
+- id: fedora
+  name:
+    tr: Fedora
+    en: Fedora
+  summary:
+    tr: Fedora dağıtım / ürün kaydı (iskelet).
+    en: Fedora distribution / product registry entry (skeleton).
+  operating_system: linux
+  variant: general
+  package_managers:
+  - dnf
+  - rpm
+  status: draft
+  support_level: partial
+  documentation:
+  - https://docs.fedoraproject.org/
+  init_systems:
+  - systemd
+- id: fedora-server
+  name:
+    tr: Fedora Server
+    en: Fedora Server
+  summary:
+    tr: Fedora Server dağıtım / ürün kaydı (iskelet).
+    en: Fedora Server distribution / product registry entry (skeleton).
+  operating_system: linux
+  variant: server
+  package_managers:
+  - dnf
+  - rpm
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://docs.fedoraproject.org/en-US/fedora-server/
+  id_like:
+  - fedora
+  parent: fedora
+  init_systems:
+  - systemd
+- id: fedora-kde
+  name:
+    tr: Fedora KDE
+    en: Fedora KDE Plasma Desktop
+  summary:
+    tr: Fedora KDE dağıtım / ürün kaydı (iskelet).
+    en: Fedora KDE Plasma Desktop distribution / product registry entry (skeleton).
+  operating_system: linux
+  variant: desktop
+  package_managers:
+  - dnf
+  - rpm
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://fedoraproject.org/kde/
+  id_like:
+  - fedora
+  parent: fedora
+  init_systems:
+  - systemd
+- id: fedora-silverblue
+  name:
+    tr: Fedora Silverblue
+    en: Fedora Silverblue
+  summary:
+    tr: Fedora Silverblue dağıtım / ürün kaydı (iskelet).
+    en: Fedora Silverblue distribution / product registry entry (skeleton).
+  operating_system: linux
+  variant: immutable
+  package_managers:
+  - rpm-ostree
+  - flatpak
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://docs.fedoraproject.org/en-US/fedora-silverblue/
+  id_like:
+  - fedora
+  parent: fedora
+  init_systems:
+  - systemd
+- id: fedora-kinoite
+  name:
+    tr: Fedora Kinoite
+    en: Fedora Kinoite
+  summary:
+    tr: Fedora Kinoite dağıtım / ürün kaydı (iskelet).
+    en: Fedora Kinoite distribution / product registry entry (skeleton).
+  operating_system: linux
+  variant: immutable
+  package_managers:
+  - rpm-ostree
+  - flatpak
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://docs.fedoraproject.org/en-US/fedora-kinoite/
+  id_like:
+  - fedora
+  parent: fedora
+  init_systems:
+  - systemd
+- id: fedora-iot
+  name:
+    tr: Fedora IoT
+    en: Fedora IoT
+  summary:
+    tr: Fedora IoT dağıtım / ürün kaydı (iskelet).
+    en: Fedora IoT distribution / product registry entry (skeleton).
+  operating_system: linux
+  variant: iot
+  package_managers:
+  - rpm-ostree
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://docs.fedoraproject.org/en-US/iot/
+  id_like:
+  - fedora
+  parent: fedora
+  init_systems:
+  - systemd
+- id: rhel
+  name:
+    tr: Red Hat Enterprise Linux
+    en: Red Hat Enterprise Linux
+  summary:
+    tr: Red Hat Enterprise Linux dağıtım / ürün kaydı (iskelet).
+    en: Red Hat Enterprise Linux distribution / product registry entry (skeleton).
+  operating_system: linux
+  variant: server
+  package_managers:
+  - dnf
+  - yum
+  - rpm
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://docs.redhat.com/en/documentation/red_hat_enterprise_linux
+  id_like:
+  - fedora
+  init_systems:
+  - systemd
+- id: rocky
+  name:
+    tr: Rocky Linux
+    en: Rocky Linux
+  summary:
+    tr: Rocky Linux dağıtım / ürün kaydı (iskelet).
+    en: Rocky Linux distribution / product registry entry (skeleton).
+  operating_system: linux
+  variant: server
+  package_managers:
+  - dnf
+  - rpm
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://docs.rockylinux.org/
+  id_like:
+  - rhel
+  - fedora
+  parent: rhel
+  init_systems:
+  - systemd
+- id: almalinux
+  name:
+    tr: AlmaLinux
+    en: AlmaLinux
+  summary:
+    tr: AlmaLinux dağıtım / ürün kaydı (iskelet).
+    en: AlmaLinux distribution / product registry entry (skeleton).
+  operating_system: linux
+  variant: server
+  package_managers:
+  - dnf
+  - rpm
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://wiki.almalinux.org/
+  id_like:
+  - rhel
+  - fedora
+  parent: rhel
+  init_systems:
+  - systemd
+- id: centos-stream
+  name:
+    tr: CentOS Stream
+    en: CentOS Stream
+  summary:
+    tr: CentOS Stream dağıtım / ürün kaydı (iskelet).
+    en: CentOS Stream distribution / product registry entry (skeleton).
+  operating_system: linux
+  variant: server
+  package_managers:
+  - dnf
+  - rpm
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://docs.centos.org/
+  id_like:
+  - rhel
+  - fedora
+  parent: rhel
+  init_systems:
+  - systemd
+- id: arch
+  name:
+    tr: Arch Linux
+    en: Arch Linux
+  summary:
+    tr: Arch Linux dağıtım / ürün kaydı (iskelet).
+    en: Arch Linux distribution / product registry entry (skeleton).
+  operating_system: linux
+  variant: general
+  package_managers:
+  - pacman
+  status: draft
+  support_level: partial
+  documentation:
+  - https://wiki.archlinux.org/
+  init_systems:
+  - systemd
+  notes:
+    tr: Arch birincil Linux hedefi; paket notlarında pacman tercih edilir.
+    en: Arch is the primary Linux target; install hints prefer pacman.
+  tags:
+  - arch-first
+- id: manjaro
+  name:
+    tr: Manjaro
+    en: Manjaro
+  summary:
+    tr: Manjaro dağıtım / ürün kaydı (iskelet).
+    en: Manjaro distribution / product registry entry (skeleton).
+  operating_system: linux
+  variant: desktop
+  package_managers:
+  - pacman
+  - pamac
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://wiki.manjaro.org/
+  id_like:
+  - arch
+  parent: arch
+  init_systems:
+  - systemd
+- id: endeavouros
+  name:
+    tr: EndeavourOS
+    en: EndeavourOS
+  summary:
+    tr: EndeavourOS dağıtım / ürün kaydı (iskelet).
+    en: EndeavourOS distribution / product registry entry (skeleton).
+  operating_system: linux
+  variant: desktop
+  package_managers:
+  - pacman
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://discovery.endeavouros.com/
+  id_like:
+  - arch
+  parent: arch
+  init_systems:
+  - systemd
+- id: opensuse-leap
+  name:
+    tr: openSUSE Leap
+    en: openSUSE Leap
+  summary:
+    tr: openSUSE Leap dağıtım / ürün kaydı (iskelet).
+    en: openSUSE Leap distribution / product registry entry (skeleton).
+  operating_system: linux
+  variant: general
+  package_managers:
+  - zypper
+  - rpm
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://doc.opensuse.org/
+  init_systems:
+  - systemd
+- id: opensuse-tumbleweed
+  name:
+    tr: openSUSE Tumbleweed
+    en: openSUSE Tumbleweed
+  summary:
+    tr: openSUSE Tumbleweed dağıtım / ürün kaydı (iskelet).
+    en: openSUSE Tumbleweed distribution / product registry entry (skeleton).
+  operating_system: linux
+  variant: general
+  package_managers:
+  - zypper
+  - rpm
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://doc.opensuse.org/
+  init_systems:
+  - systemd
+- id: sles
+  name:
+    tr: SUSE Linux Enterprise
+    en: SUSE Linux Enterprise
+  summary:
+    tr: SUSE Linux Enterprise dağıtım / ürün kaydı (iskelet).
+    en: SUSE Linux Enterprise distribution / product registry entry (skeleton).
+  operating_system: linux
+  variant: server
+  package_managers:
+  - zypper
+  - rpm
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://documentation.suse.com/
+  id_like:
+  - opensuse-leap
+  init_systems:
+  - systemd
+- id: alpine
+  name:
+    tr: Alpine Linux
+    en: Alpine Linux
+  summary:
+    tr: Alpine Linux dağıtım / ürün kaydı (iskelet).
+    en: Alpine Linux distribution / product registry entry (skeleton).
+  operating_system: linux
+  variant: general
+  package_managers:
+  - apk
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://wiki.alpinelinux.org/
+  init_systems:
+  - openrc
+- id: gentoo
+  name:
+    tr: Gentoo
+    en: Gentoo
+  summary:
+    tr: Gentoo dağıtım / ürün kaydı (iskelet).
+    en: Gentoo distribution / product registry entry (skeleton).
+  operating_system: linux
+  variant: general
+  package_managers:
+  - portage
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://wiki.gentoo.org/
+  init_systems:
+  - openrc
+  - systemd
+- id: void
+  name:
+    tr: Void Linux
+    en: Void Linux
+  summary:
+    tr: Void Linux dağıtım / ürün kaydı (iskelet).
+    en: Void Linux distribution / product registry entry (skeleton).
+  operating_system: linux
+  variant: general
+  package_managers:
+  - xbps
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://docs.voidlinux.org/
+  init_systems:
+  - runit
+- id: solus
+  name:
+    tr: Solus
+    en: Solus
+  summary:
+    tr: Solus dağıtım / ürün kaydı (iskelet).
+    en: Solus distribution / product registry entry (skeleton).
+  operating_system: linux
+  variant: desktop
+  package_managers:
+  - eopkg
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://help.getsol.us/
+  init_systems:
+  - systemd
+- id: slackware
+  name:
+    tr: Slackware
+    en: Slackware
+  summary:
+    tr: Slackware dağıtım / ürün kaydı (iskelet).
+    en: Slackware distribution / product registry entry (skeleton).
+  operating_system: linux
+  variant: general
+  package_managers:
+  - slackpkg
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - http://www.slackware.com/
+  init_systems:
+  - sysvinit
+- id: nixos
+  name:
+    tr: NixOS
+    en: NixOS
+  summary:
+    tr: NixOS dağıtım / ürün kaydı (iskelet).
+    en: NixOS distribution / product registry entry (skeleton).
+  operating_system: linux
+  variant: immutable
+  package_managers:
+  - nix
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://nixos.org/manual/nixos/stable/
+  init_systems:
+  - systemd
+- id: guix-system
+  name:
+    tr: Guix System
+    en: Guix System
+  summary:
+    tr: Guix System dağıtım / ürün kaydı (iskelet).
+    en: Guix System distribution / product registry entry (skeleton).
+  operating_system: linux
+  variant: immutable
+  package_managers:
+  - guix
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://guix.gnu.org/manual/
+  init_systems:
+  - shepherd
+- id: openwrt
+  name:
+    tr: OpenWrt
+    en: OpenWrt
+  summary:
+    tr: OpenWrt dağıtım / ürün kaydı (iskelet).
+    en: OpenWrt distribution / product registry entry (skeleton).
+  operating_system: linux
+  variant: appliance
+  package_managers:
+  - opkg
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://openwrt.org/docs/start
+  init_systems:
+  - procd
+- id: windows-10
+  name:
+    tr: Windows 10
+    en: Windows 10
+  summary:
+    tr: Windows 10 dağıtım / ürün kaydı (iskelet).
+    en: Windows 10 distribution / product registry entry (skeleton).
+  operating_system: windows
+  variant: desktop
+  package_managers:
+  - winget
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://learn.microsoft.com/windows/
+- id: windows-11
+  name:
+    tr: Windows 11
+    en: Windows 11
+  summary:
+    tr: Windows 11 dağıtım / ürün kaydı (iskelet).
+    en: Windows 11 distribution / product registry entry (skeleton).
+  operating_system: windows
+  variant: desktop
+  package_managers:
+  - winget
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://learn.microsoft.com/windows/
+- id: windows-server
+  name:
+    tr: Windows Server
+    en: Windows Server
+  summary:
+    tr: Windows Server dağıtım / ürün kaydı (iskelet).
+    en: Windows Server distribution / product registry entry (skeleton).
+  operating_system: windows
+  variant: server
+  package_managers:
+  - winget
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://learn.microsoft.com/windows-server/
+- id: macos-desktop
+  name:
+    tr: macOS (masaüstü)
+    en: macOS (desktop)
+  summary:
+    tr: macOS (masaüstü) dağıtım / ürün kaydı (iskelet).
+    en: macOS (desktop) distribution / product registry entry (skeleton).
+  operating_system: macos
+  variant: desktop
+  package_managers:
+  - homebrew
+  - macports
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://support.apple.com/guide/mac-help/welcome/mac
+  init_systems:
+  - launchd
+- id: freebsd-release
+  name:
+    tr: FreeBSD
+    en: FreeBSD
+  summary:
+    tr: FreeBSD dağıtım / ürün kaydı (iskelet).
+    en: FreeBSD distribution / product registry entry (skeleton).
+  operating_system: freebsd
+  variant: general
+  package_managers:
+  - freebsd-pkg
+  - freebsd-ports
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://docs.freebsd.org/en/books/handbook/
+  init_systems:
+  - freebsd-rc
+- id: openbsd-release
+  name:
+    tr: OpenBSD
+    en: OpenBSD
+  summary:
+    tr: OpenBSD dağıtım / ürün kaydı (iskelet).
+    en: OpenBSD distribution / product registry entry (skeleton).
+  operating_system: openbsd
+  variant: general
+  package_managers:
+  - openbsd-pkg
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://www.openbsd.org/faq/
+  init_systems:
+  - openbsd-rc
+- id: netbsd-release
+  name:
+    tr: NetBSD
+    en: NetBSD
+  summary:
+    tr: NetBSD dağıtım / ürün kaydı (iskelet).
+    en: NetBSD distribution / product registry entry (skeleton).
+  operating_system: netbsd
+  variant: general
+  package_managers:
+  - pkgin
+  - pkgsrc
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://www.netbsd.org/docs/
+  init_systems:
+  - netbsd-rc
+- id: dragonflybsd-release
+  name:
+    tr: DragonFly BSD
+    en: DragonFly BSD
+  summary:
+    tr: DragonFly BSD dağıtım / ürün kaydı (iskelet).
+    en: DragonFly BSD distribution / product registry entry (skeleton).
+  operating_system: dragonflybsd
+  variant: general
+  package_managers:
+  - dragonfly-pkg
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://www.dragonflybsd.org/docs/

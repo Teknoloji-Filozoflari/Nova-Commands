@@ -155,3 +155,75 @@ def test_i18n_summary_description_present() -> None:
                 assert data[field][lang].strip(), path
         for lang in ("tr", "en"):
             assert data["intent"][lang], path
+
+
+PLATFORM_VALIDATE = ROOT / "scripts" / "validate_platform_registries.py"
+
+PLATFORM_FILES = [
+    ("operating-systems.yaml", "operating_systems", "operating-system.schema.json"),
+    ("distributions.yaml", "distributions", "distribution.schema.json"),
+    ("shells.yaml", "shells", "shell.schema.json"),
+    ("package-managers.yaml", "package_managers", "package-manager.schema.json"),
+    ("architectures.yaml", "architectures", "architecture.schema.json"),
+    ("execution-environments.yaml", "execution_environments", "execution-environment.schema.json"),
+    ("server-platforms.yaml", "server_platforms", "server-platform.schema.json"),
+    ("cloud-providers.yaml", "cloud_providers", "cloud-provider.schema.json"),
+    ("support-levels.yaml", "support_levels", "support-level.schema.json"),
+]
+
+
+def test_platform_registries_validate() -> None:
+    proc = run(PLATFORM_VALIDATE)
+    assert proc.returncode == 0, proc.stderr
+    assert "OK:" in proc.stdout
+
+
+def test_platform_registry_files_and_schemas_exist() -> None:
+    for yaml_name, _key, schema_name in PLATFORM_FILES:
+        assert (ROOT / "metadata" / yaml_name).is_file(), yaml_name
+        assert (ROOT / "schema" / schema_name).is_file(), schema_name
+
+
+def test_platform_registry_ids_unique_and_draft_status() -> None:
+    for yaml_name, list_key, _schema in PLATFORM_FILES:
+        data = yaml.safe_load(
+            (ROOT / "metadata" / yaml_name).read_text(encoding="utf-8")
+        )
+        entries = data[list_key]
+        ids = [e["id"] for e in entries]
+        assert len(ids) == len(set(ids)), yaml_name
+        assert entries, yaml_name
+        for entry in entries:
+            status = entry.get("status")
+            if status is not None:
+                assert status in ("skeleton", "draft", "reviewed"), (
+                    yaml_name,
+                    entry["id"],
+                    status,
+                )
+                assert status != "verified", entry["id"]
+
+
+def test_arch_pacman_first_class_in_registries() -> None:
+    distros = yaml.safe_load(
+        (ROOT / "metadata" / "distributions.yaml").read_text(encoding="utf-8")
+    )
+    pms = yaml.safe_load(
+        (ROOT / "metadata" / "package-managers.yaml").read_text(encoding="utf-8")
+    )
+    dist_ids = {d["id"] for d in distros["distributions"]}
+    pm_ids = {p["id"] for p in pms["package_managers"]}
+    assert "arch" in dist_ids
+    assert "pacman" in pm_ids
+    pacman = next(p for p in pms["package_managers"] if p["id"] == "pacman")
+    assert "arch" in pacman.get("distributions", [])
+
+
+def test_platform_support_doc_exists() -> None:
+    assert (ROOT / "docs" / "PLATFORM_SUPPORT.md").is_file()
+
+
+def test_catalog_schema_version_unchanged() -> None:
+    cat = json.loads((ROOT / "metadata" / "catalog.json").read_text(encoding="utf-8"))
+    assert cat["schema_version"] == 1
+    assert cat["kind"] == "nova-commands-bank"

@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/Teknoloji-Filozoflari/Nova-Commands/main/schema/operating-system.schema.json",
+  "title": "Nova-Commands operating-systems registry",
+  "description": "OS families/products registry. Distinct from distributions, shells, and package managers.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "kind", "operating_systems"],
+  "properties": {
+    "schema_version": { "type": "integer", "const": 1 },
+    "kind": { "type": "string", "const": "nova-commands-operating-system-registry" },
+    "operating_systems": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/entry" }
+    }
+  },
+  "$defs": {
+    "localizedShort": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tr", "en"],
+      "properties": {
+        "tr": { "type": "string", "minLength": 1, "maxLength": 160 },
+        "en": { "type": "string", "minLength": 1, "maxLength": 160 }
+      }
+    },
+    "localizedLong": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tr", "en"],
+      "properties": {
+        "tr": { "type": "string", "minLength": 1, "maxLength": 1024 },
+        "en": { "type": "string", "minLength": 1, "maxLength": 1024 }
+      }
+    },
+    "entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "summary", "family_kind", "status"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9-]*$",
+          "maxLength": 64
+        },
+        "name": { "$ref": "#/$defs/localizedShort" },
+        "summary": { "$ref": "#/$defs/localizedLong" },
+        "family_kind": {
+          "type": "string",
+          "enum": ["family", "product", "research"],
+          "description": "family=Linux/Windows line; product=macOS-like; research=extensible stubs (AIX/Solaris)."
+        },
+        "kernel_family": {
+          "type": "string",
+          "enum": [
+            "linux",
+            "nt",
+            "xnu",
+            "freebsd",
+            "openbsd",
+            "netbsd",
+            "dragonfly",
+            "illumos",
+            "aix",
+            "other"
+          ]
+        },
+        "posix_like": { "type": "boolean" },
+        "status": {
+          "type": "string",
+          "enum": ["skeleton", "draft", "reviewed", "verified"],
+          "description": "verified ONLY after human review. Seed entries stay skeleton|draft."
+        },
+        "support_level": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9-]*$"
+        },
+        "documentation": {
+          "type": "array",
+          "maxItems": 8,
+          "items": {
+            "type": "string",
+            "format": "uri",
+            "maxLength": 512
+          }
+        },
+        "notes": { "$ref": "#/$defs/localizedLong" },
+        "tags": {
+          "type": "array",
+          "maxItems": 16,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]*$"
+          }
+        }
+      }
+    }
+  }
+}

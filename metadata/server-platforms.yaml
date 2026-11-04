@@ -1,0 +1,370 @@
+# Auto-seeded Faz 1 platform registry. Status is skeleton|draft only.
+# Do not mark verified without human review.
+schema_version: 1
+kind: nova-commands-server-platform-registry
+server_platforms:
+- id: proxmox-ve
+  name:
+    tr: Proxmox VE
+    en: Proxmox VE
+  summary:
+    tr: Proxmox VE sunucu / altyapı platformu kaydı.
+    en: Proxmox VE server / infrastructure platform registry entry.
+  platform_kind: hypervisor
+  vendor_cli: true
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://pve.proxmox.com/pve-docs/
+  based_on_distribution: debian
+  operating_systems:
+  - linux
+- id: kvm
+  name:
+    tr: KVM
+    en: KVM
+  summary:
+    tr: KVM sunucu / altyapı platformu kaydı.
+    en: KVM server / infrastructure platform registry entry.
+  platform_kind: hypervisor
+  vendor_cli: false
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://www.linux-kvm.org/page/Documents
+  operating_systems:
+  - linux
+- id: qemu
+  name:
+    tr: QEMU
+    en: QEMU
+  summary:
+    tr: QEMU sunucu / altyapı platformu kaydı.
+    en: QEMU server / infrastructure platform registry entry.
+  platform_kind: hypervisor
+  vendor_cli: false
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://www.qemu.org/docs/master/
+  operating_systems:
+  - linux
+  - macos
+  - windows
+- id: libvirt
+  name:
+    tr: libvirt
+    en: libvirt
+  summary:
+    tr: libvirt sunucu / altyapı platformu kaydı.
+    en: libvirt server / infrastructure platform registry entry.
+  platform_kind: hypervisor
+  vendor_cli: false
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://libvirt.org/docs.html
+  operating_systems:
+  - linux
+- id: xen
+  name:
+    tr: Xen
+    en: Xen
+  summary:
+    tr: Xen sunucu / altyapı platformu kaydı.
+    en: Xen server / infrastructure platform registry entry.
+  platform_kind: hypervisor
+  vendor_cli: false
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://xenproject.org/help/documentation/
+  operating_systems:
+  - linux
+- id: hyper-v
+  name:
+    tr: Hyper-V
+    en: Hyper-V
+  summary:
+    tr: Hyper-V sunucu / altyapı platformu kaydı.
+    en: Hyper-V server / infrastructure platform registry entry.
+  platform_kind: hypervisor
+  vendor_cli: true
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://learn.microsoft.com/windows-server/virtualization/hyper-v/
+  operating_systems:
+  - windows
+- id: vmware-esxi
+  name:
+    tr: VMware ESXi
+    en: VMware ESXi
+  summary:
+    tr: VMware ESXi sunucu / altyapı platformu kaydı.
+    en: VMware ESXi server / infrastructure platform registry entry.
+  platform_kind: hypervisor
+  vendor_cli: true
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://techdocs.broadcom.com/us/en/vmware-cis/vsphere.html
+- id: truenas-scale
+  name:
+    tr: TrueNAS SCALE
+    en: TrueNAS SCALE
+  summary:
+    tr: TrueNAS SCALE sunucu / altyapı platformu kaydı.
+    en: TrueNAS SCALE server / infrastructure platform registry entry.
+  platform_kind: nas
+  vendor_cli: true
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://www.truenas.com/docs/scale/
+  based_on_distribution: debian
+  operating_systems:
+  - linux
+- id: truenas-core
+  name:
+    tr: TrueNAS CORE
+    en: TrueNAS CORE
+  summary:
+    tr: TrueNAS CORE sunucu / altyapı platformu kaydı.
+    en: TrueNAS CORE server / infrastructure platform registry entry.
+  platform_kind: nas
+  vendor_cli: true
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://www.truenas.com/docs/core/
+  operating_systems:
+  - freebsd
+- id: openmediavault
+  name:
+    tr: OpenMediaVault
+    en: OpenMediaVault
+  summary:
+    tr: OpenMediaVault sunucu / altyapı platformu kaydı.
+    en: OpenMediaVault server / infrastructure platform registry entry.
+  platform_kind: nas
+  vendor_cli: true
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://docs.openmediavault.org/
+  based_on_distribution: debian
+  operating_systems:
+  - linux
+- id: unraid
+  name:
+    tr: Unraid
+    en: Unraid
+  summary:
+    tr: Unraid sunucu / altyapı platformu kaydı.
+    en: Unraid server / infrastructure platform registry entry.
+  platform_kind: nas
+  vendor_cli: true
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://docs.unraid.net/
+  operating_systems:
+  - linux
+- id: synology-dsm
+  name:
+    tr: Synology DSM
+    en: Synology DSM
+  summary:
+    tr: Synology DSM sunucu / altyapı platformu kaydı.
+    en: Synology DSM server / infrastructure platform registry entry.
+  platform_kind: nas
+  vendor_cli: true
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://kb.synology.com/
+  operating_systems:
+  - linux
+- id: qnap-qts
+  name:
+    tr: QNAP QTS
+    en: QNAP QTS
+  summary:
+    tr: QNAP QTS sunucu / altyapı platformu kaydı.
+    en: QNAP QTS server / infrastructure platform registry entry.
+  platform_kind: nas
+  vendor_cli: true
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://www.qnap.com/en/how-to/
+  operating_systems:
+  - linux
+- id: pfsense
+  name:
+    tr: pfSense
+    en: pfSense
+  summary:
+    tr: pfSense sunucu / altyapı platformu kaydı.
+    en: pfSense server / infrastructure platform registry entry.
+  platform_kind: network-appliance
+  vendor_cli: true
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://docs.netgate.com/pfsense/
+  operating_systems:
+  - freebsd
+  notes:
+    tr: Vendor CLI Linux shell ile aynı kabul edilmemelidir.
+    en: Vendor CLI must not be treated as a generic Linux shell.
+- id: opnsense
+  name:
+    tr: OPNsense
+    en: OPNsense
+  summary:
+    tr: OPNsense sunucu / altyapı platformu kaydı.
+    en: OPNsense server / infrastructure platform registry entry.
+  platform_kind: network-appliance
+  vendor_cli: true
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://docs.opnsense.org/
+  operating_systems:
+  - freebsd
+  notes:
+    tr: Vendor CLI Linux shell ile aynı kabul edilmemelidir.
+    en: Vendor CLI must not be treated as a generic Linux shell.
+- id: mikrotik-routeros
+  name:
+    tr: MikroTik RouterOS
+    en: MikroTik RouterOS
+  summary:
+    tr: MikroTik RouterOS sunucu / altyapı platformu kaydı.
+    en: MikroTik RouterOS server / infrastructure platform registry entry.
+  platform_kind: network-appliance
+  vendor_cli: true
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://help.mikrotik.com/docs/
+  notes:
+    tr: Vendor CLI Linux shell ile aynı kabul edilmemelidir.
+    en: Vendor CLI must not be treated as a generic Linux shell.
+- id: cisco-ios
+  name:
+    tr: Cisco IOS / IOS XE
+    en: Cisco IOS / IOS XE
+  summary:
+    tr: Cisco IOS / IOS XE sunucu / altyapı platformu kaydı.
+    en: Cisco IOS / IOS XE server / infrastructure platform registry entry.
+  platform_kind: network-appliance
+  vendor_cli: true
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://www.cisco.com/c/en/us/support/ios-nx-os-software/index.html
+  notes:
+    tr: Vendor CLI Linux shell ile aynı kabul edilmemelidir.
+    en: Vendor CLI must not be treated as a generic Linux shell.
+- id: cisco-nx-os
+  name:
+    tr: Cisco NX-OS
+    en: Cisco NX-OS
+  summary:
+    tr: Cisco NX-OS sunucu / altyapı platformu kaydı.
+    en: Cisco NX-OS server / infrastructure platform registry entry.
+  platform_kind: network-appliance
+  vendor_cli: true
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://www.cisco.com/c/en/us/support/switches/nexus-9000-series-switches/series.html
+  notes:
+    tr: Vendor CLI Linux shell ile aynı kabul edilmemelidir.
+    en: Vendor CLI must not be treated as a generic Linux shell.
+- id: juniper-junos
+  name:
+    tr: Juniper Junos
+    en: Juniper Junos
+  summary:
+    tr: Juniper Junos sunucu / altyapı platformu kaydı.
+    en: Juniper Junos server / infrastructure platform registry entry.
+  platform_kind: network-appliance
+  vendor_cli: true
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://www.juniper.net/documentation/
+  notes:
+    tr: Vendor CLI Linux shell ile aynı kabul edilmemelidir.
+    en: Vendor CLI must not be treated as a generic Linux shell.
+- id: arista-eos
+  name:
+    tr: Arista EOS
+    en: Arista EOS
+  summary:
+    tr: Arista EOS sunucu / altyapı platformu kaydı.
+    en: Arista EOS server / infrastructure platform registry entry.
+  platform_kind: network-appliance
+  vendor_cli: true
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://www.arista.com/en/support/product-documentation
+  notes:
+    tr: Vendor CLI Linux shell ile aynı kabul edilmemelidir.
+    en: Vendor CLI must not be treated as a generic Linux shell.
+- id: openwrt-appliance
+  name:
+    tr: OpenWrt (cihaz)
+    en: OpenWrt (appliance)
+  summary:
+    tr: OpenWrt (cihaz) sunucu / altyapı platformu kaydı.
+    en: OpenWrt (appliance) server / infrastructure platform registry entry.
+  platform_kind: network-appliance
+  vendor_cli: true
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://openwrt.org/docs/start
+  based_on_distribution: openwrt
+  operating_systems:
+  - linux
+  notes:
+    tr: Vendor CLI Linux shell ile aynı kabul edilmemelidir.
+    en: Vendor CLI must not be treated as a generic Linux shell.
+- id: docker-engine
+  name:
+    tr: Docker Engine
+    en: Docker Engine
+  summary:
+    tr: Docker Engine sunucu / altyapı platformu kaydı.
+    en: Docker Engine server / infrastructure platform registry entry.
+  platform_kind: container-runtime
+  vendor_cli: false
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://docs.docker.com/engine/
+  operating_systems:
+  - linux
+  - windows
+  - macos
+- id: kubernetes
+  name:
+    tr: Kubernetes
+    en: Kubernetes
+  summary:
+    tr: Kubernetes sunucu / altyapı platformu kaydı.
+    en: Kubernetes server / infrastructure platform registry entry.
+  platform_kind: orchestration
+  vendor_cli: false
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://kubernetes.io/docs/
+  operating_systems:
+  - linux

@@ -1,0 +1,1309 @@
+# Auto-seeded Faz 1 platform registry. Status is skeleton|draft only.
+# Do not mark verified without human review.
+schema_version: 1
+kind: nova-commands-package-manager-registry
+package_managers:
+- id: apt
+  name:
+    tr: APT
+    en: APT
+  summary:
+    tr: APT paket yöneticisi / dağıtım aracı kaydı.
+    en: APT package manager / distribution tooling registry entry.
+  pm_kind: system
+  package_format: deb
+  scope: system
+  operating_systems:
+  - linux
+  repository_model: central-repos
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://www.debian.org/doc/manuals/debian-reference/ch02.en.html
+  cli_names:
+  - apt
+  distributions:
+  - debian
+  - ubuntu
+  - linux-mint
+  - pop-os
+- id: apt-get
+  name:
+    tr: apt-get
+    en: apt-get
+  summary:
+    tr: apt-get paket yöneticisi / dağıtım aracı kaydı.
+    en: apt-get package manager / distribution tooling registry entry.
+  pm_kind: system
+  package_format: deb
+  scope: system
+  operating_systems:
+  - linux
+  repository_model: central-repos
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://manpages.debian.org/apt-get
+  cli_names:
+  - apt-get
+  distributions:
+  - debian
+  - ubuntu
+- id: dpkg
+  name:
+    tr: dpkg
+    en: dpkg
+  summary:
+    tr: dpkg paket yöneticisi / dağıtım aracı kaydı.
+    en: dpkg package manager / distribution tooling registry entry.
+  pm_kind: system
+  package_format: deb
+  scope: system
+  operating_systems:
+  - linux
+  repository_model: central-repos
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://manpages.debian.org/dpkg
+  cli_names:
+  - dpkg
+  distributions:
+  - debian
+  - ubuntu
+- id: aptitude
+  name:
+    tr: aptitude
+    en: aptitude
+  summary:
+    tr: aptitude paket yöneticisi / dağıtım aracı kaydı.
+    en: aptitude package manager / distribution tooling registry entry.
+  pm_kind: system
+  package_format: deb
+  scope: system
+  operating_systems:
+  - linux
+  repository_model: central-repos
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://wiki.debian.org/Aptitude
+  cli_names:
+  - aptitude
+  distributions:
+  - debian
+  - ubuntu
+- id: nala
+  name:
+    tr: Nala
+    en: Nala
+  summary:
+    tr: Nala paket yöneticisi / dağıtım aracı kaydı.
+    en: Nala package manager / distribution tooling registry entry.
+  pm_kind: system
+  package_format: deb
+  scope: system
+  operating_systems:
+  - linux
+  repository_model: central-repos
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://gitlab.com/volian/nala
+  cli_names:
+  - nala
+  distributions:
+  - debian
+  - ubuntu
+- id: apt-file
+  name:
+    tr: apt-file
+    en: apt-file
+  summary:
+    tr: apt-file paket yöneticisi / dağıtım aracı kaydı.
+    en: apt-file package manager / distribution tooling registry entry.
+  pm_kind: system
+  package_format: deb
+  scope: system
+  operating_systems:
+  - linux
+  repository_model: central-repos
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://manpages.debian.org/apt-file
+  cli_names:
+  - apt-file
+  distributions:
+  - debian
+  - ubuntu
+- id: dnf
+  name:
+    tr: DNF
+    en: DNF
+  summary:
+    tr: DNF paket yöneticisi / dağıtım aracı kaydı.
+    en: DNF package manager / distribution tooling registry entry.
+  pm_kind: system
+  package_format: rpm
+  scope: system
+  operating_systems:
+  - linux
+  repository_model: central-repos
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://dnf.readthedocs.io/
+  cli_names:
+  - dnf
+  distributions:
+  - fedora
+  - rhel
+  - rocky
+  - almalinux
+  - centos-stream
+- id: dnf5
+  name:
+    tr: DNF5
+    en: DNF5
+  summary:
+    tr: DNF5 paket yöneticisi / dağıtım aracı kaydı.
+    en: DNF5 package manager / distribution tooling registry entry.
+  pm_kind: system
+  package_format: rpm
+  scope: system
+  operating_systems:
+  - linux
+  repository_model: central-repos
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://dnf5.readthedocs.io/
+  cli_names:
+  - dnf5
+  distributions:
+  - fedora
+- id: rpm
+  name:
+    tr: RPM
+    en: RPM
+  summary:
+    tr: RPM paket yöneticisi / dağıtım aracı kaydı.
+    en: RPM package manager / distribution tooling registry entry.
+  pm_kind: system
+  package_format: rpm
+  scope: system
+  operating_systems:
+  - linux
+  repository_model: central-repos
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://rpm.org/documentation.html
+  cli_names:
+  - rpm
+  distributions:
+  - fedora
+  - rhel
+  - opensuse-leap
+  - sles
+- id: yum
+  name:
+    tr: Yum
+    en: Yum
+  summary:
+    tr: Yum paket yöneticisi / dağıtım aracı kaydı.
+    en: Yum package manager / distribution tooling registry entry.
+  pm_kind: system
+  package_format: rpm
+  scope: system
+  operating_systems:
+  - linux
+  repository_model: central-repos
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://manned.org/yum
+  cli_names:
+  - yum
+  distributions:
+  - rhel
+- id: rpm-ostree
+  name:
+    tr: rpm-ostree
+    en: rpm-ostree
+  summary:
+    tr: rpm-ostree paket yöneticisi / dağıtım aracı kaydı.
+    en: rpm-ostree package manager / distribution tooling registry entry.
+  pm_kind: system
+  package_format: ostree
+  scope: system
+  operating_systems:
+  - linux
+  repository_model: channels
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://coreos.github.io/rpm-ostree/
+  cli_names:
+  - rpm-ostree
+  distributions:
+  - fedora-silverblue
+  - fedora-kinoite
+  - fedora-iot
+- id: pacman
+  name:
+    tr: pacman
+    en: pacman
+  summary:
+    tr: pacman paket yöneticisi / dağıtım aracı kaydı.
+    en: pacman package manager / distribution tooling registry entry.
+  pm_kind: system
+  package_format: pkg.tar.zst
+  scope: system
+  operating_systems:
+  - linux
+  repository_model: central-repos
+  status: draft
+  support_level: partial
+  documentation:
+  - https://wiki.archlinux.org/title/Pacman
+  cli_names:
+  - pacman
+  distributions:
+  - arch
+  - manjaro
+  - endeavouros
+  notes:
+    tr: Arch ailesi için birincil sistem paket yöneticisi; Nova tercihleri ile uyumlu.
+    en: Primary system package manager for the Arch family; aligns with Nova preferences.
+  tags:
+  - arch-first
+- id: makepkg
+  name:
+    tr: makepkg
+    en: makepkg
+  summary:
+    tr: makepkg paket yöneticisi / dağıtım aracı kaydı.
+    en: makepkg package manager / distribution tooling registry entry.
+  pm_kind: system
+  package_format: pkg.tar.zst
+  scope: system
+  operating_systems:
+  - linux
+  repository_model: ports-tree
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://wiki.archlinux.org/title/Makepkg
+  cli_names:
+  - makepkg
+  distributions:
+  - arch
+- id: yay
+  name:
+    tr: yay
+    en: yay
+  summary:
+    tr: yay paket yöneticisi / dağıtım aracı kaydı.
+    en: yay package manager / distribution tooling registry entry.
+  pm_kind: meta
+  package_format: pkg.tar.zst
+  scope: system
+  operating_systems:
+  - linux
+  repository_model: ports-tree
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://github.com/Jguer/yay
+  cli_names:
+  - yay
+  distributions:
+  - arch
+- id: paru
+  name:
+    tr: paru
+    en: paru
+  summary:
+    tr: paru paket yöneticisi / dağıtım aracı kaydı.
+    en: paru package manager / distribution tooling registry entry.
+  pm_kind: meta
+  package_format: pkg.tar.zst
+  scope: system
+  operating_systems:
+  - linux
+  repository_model: ports-tree
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://github.com/Morganamilo/paru
+  cli_names:
+  - paru
+  distributions:
+  - arch
+- id: pamac
+  name:
+    tr: Pamac
+    en: Pamac
+  summary:
+    tr: Pamac paket yöneticisi / dağıtım aracı kaydı.
+    en: Pamac package manager / distribution tooling registry entry.
+  pm_kind: system
+  package_format: pkg.tar.zst
+  scope: system
+  operating_systems:
+  - linux
+  repository_model: central-repos
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://wiki.manjaro.org/index.php/Pamac
+  cli_names:
+  - pamac
+  distributions:
+  - manjaro
+- id: zypper
+  name:
+    tr: Zypper
+    en: Zypper
+  summary:
+    tr: Zypper paket yöneticisi / dağıtım aracı kaydı.
+    en: Zypper package manager / distribution tooling registry entry.
+  pm_kind: system
+  package_format: rpm
+  scope: system
+  operating_systems:
+  - linux
+  repository_model: central-repos
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://en.opensuse.org/SDB:Zypper_manual
+  cli_names:
+  - zypper
+  distributions:
+  - opensuse-leap
+  - opensuse-tumbleweed
+  - sles
+- id: apk
+  name:
+    tr: apk
+    en: apk
+  summary:
+    tr: apk paket yöneticisi / dağıtım aracı kaydı.
+    en: apk package manager / distribution tooling registry entry.
+  pm_kind: system
+  package_format: apk
+  scope: system
+  operating_systems:
+  - linux
+  repository_model: central-repos
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://wiki.alpinelinux.org/wiki/Alpine_Package_Keeper
+  cli_names:
+  - apk
+  distributions:
+  - alpine
+- id: portage
+  name:
+    tr: Portage
+    en: Portage
+  summary:
+    tr: Portage paket yöneticisi / dağıtım aracı kaydı.
+    en: Portage package manager / distribution tooling registry entry.
+  pm_kind: system
+  package_format: ebuild
+  scope: system
+  operating_systems:
+  - linux
+  repository_model: ports-tree
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://wiki.gentoo.org/wiki/Portage
+  cli_names:
+  - emerge
+  - ebuild
+  distributions:
+  - gentoo
+- id: xbps
+  name:
+    tr: XBPS
+    en: XBPS
+  summary:
+    tr: XBPS paket yöneticisi / dağıtım aracı kaydı.
+    en: XBPS package manager / distribution tooling registry entry.
+  pm_kind: system
+  package_format: xbps
+  scope: system
+  operating_systems:
+  - linux
+  repository_model: central-repos
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://docs.voidlinux.org/xbps/
+  cli_names:
+  - xbps-install
+  - xbps-query
+  - xbps-remove
+  distributions:
+  - void
+- id: eopkg
+  name:
+    tr: eopkg
+    en: eopkg
+  summary:
+    tr: eopkg paket yöneticisi / dağıtım aracı kaydı.
+    en: eopkg package manager / distribution tooling registry entry.
+  pm_kind: system
+  package_format: eopkg
+  scope: system
+  operating_systems:
+  - linux
+  repository_model: central-repos
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://help.getsol.us/docs/user/software/package-management/eopkg
+  cli_names:
+  - eopkg
+  distributions:
+  - solus
+- id: slackpkg
+  name:
+    tr: slackpkg
+    en: slackpkg
+  summary:
+    tr: slackpkg paket yöneticisi / dağıtım aracı kaydı.
+    en: slackpkg package manager / distribution tooling registry entry.
+  pm_kind: system
+  package_format: txz
+  scope: system
+  operating_systems:
+  - linux
+  repository_model: central-repos
+  status: skeleton
+  support_level: planned
+  documentation:
+  - http://www.slackware.com/config/packages.php
+  cli_names:
+  - slackpkg
+  - installpkg
+  - removepkg
+  - upgradepkg
+  distributions:
+  - slackware
+- id: opkg
+  name:
+    tr: opkg
+    en: opkg
+  summary:
+    tr: opkg paket yöneticisi / dağıtım aracı kaydı.
+    en: opkg package manager / distribution tooling registry entry.
+  pm_kind: system
+  package_format: ipk
+  scope: system
+  operating_systems:
+  - linux
+  repository_model: central-repos
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://openwrt.org/docs/guide-user/additional-software/opkg
+  cli_names:
+  - opkg
+  distributions:
+  - openwrt
+- id: nix
+  name:
+    tr: Nix
+    en: Nix
+  summary:
+    tr: Nix paket yöneticisi / dağıtım aracı kaydı.
+    en: Nix package manager / distribution tooling registry entry.
+  pm_kind: system
+  package_format: nar
+  scope: mixed
+  operating_systems:
+  - linux
+  - macos
+  repository_model: flakes
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://nixos.org/manual/nix/stable/
+  cli_names:
+  - nix
+  - nix-shell
+  - nix-env
+  distributions:
+  - nixos
+  notes:
+    tr: NixOS'a özgü değildir; Linux ve macOS üzerinde de kurulabilir.
+    en: Not NixOS-only; installable on other Linux distros and macOS.
+- id: guix
+  name:
+    tr: GNU Guix
+    en: GNU Guix
+  summary:
+    tr: GNU Guix paket yöneticisi / dağıtım aracı kaydı.
+    en: GNU Guix package manager / distribution tooling registry entry.
+  pm_kind: system
+  package_format: guix
+  scope: mixed
+  operating_systems:
+  - linux
+  repository_model: store-profiles
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://guix.gnu.org/manual/en/html_node/
+  cli_names:
+  - guix
+  distributions:
+  - guix-system
+- id: homebrew
+  name:
+    tr: Homebrew
+    en: Homebrew
+  summary:
+    tr: Homebrew paket yöneticisi / dağıtım aracı kaydı.
+    en: Homebrew package manager / distribution tooling registry entry.
+  pm_kind: user
+  package_format: bottle
+  scope: user
+  operating_systems:
+  - macos
+  - linux
+  repository_model: central-repos
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://docs.brew.sh/
+  cli_names:
+  - brew
+  distributions:
+  - macos-desktop
+- id: macports
+  name:
+    tr: MacPorts
+    en: MacPorts
+  summary:
+    tr: MacPorts paket yöneticisi / dağıtım aracı kaydı.
+    en: MacPorts package manager / distribution tooling registry entry.
+  pm_kind: system
+  package_format: port
+  scope: system
+  operating_systems:
+  - macos
+  repository_model: ports-tree
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://guide.macports.org/
+  cli_names:
+  - port
+  distributions:
+  - macos-desktop
+- id: winget
+  name:
+    tr: WinGet
+    en: WinGet
+  summary:
+    tr: WinGet paket yöneticisi / dağıtım aracı kaydı.
+    en: WinGet package manager / distribution tooling registry entry.
+  pm_kind: system
+  package_format: msix/exe
+  scope: mixed
+  operating_systems:
+  - windows
+  repository_model: app-store
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://learn.microsoft.com/windows/package-manager/winget/
+  cli_names:
+  - winget
+  distributions:
+  - windows-10
+  - windows-11
+  - windows-server
+- id: chocolatey
+  name:
+    tr: Chocolatey
+    en: Chocolatey
+  summary:
+    tr: Chocolatey paket yöneticisi / dağıtım aracı kaydı.
+    en: Chocolatey package manager / distribution tooling registry entry.
+  pm_kind: system
+  package_format: nupkg
+  scope: system
+  operating_systems:
+  - windows
+  repository_model: central-repos
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://docs.chocolatey.org/
+  cli_names:
+  - choco
+  distributions:
+  - windows-10
+  - windows-11
+- id: scoop
+  name:
+    tr: Scoop
+    en: Scoop
+  summary:
+    tr: Scoop paket yöneticisi / dağıtım aracı kaydı.
+    en: Scoop package manager / distribution tooling registry entry.
+  pm_kind: user
+  package_format: scoop
+  scope: user
+  operating_systems:
+  - windows
+  repository_model: central-repos
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://github.com/ScoopInstaller/Scoop
+  cli_names:
+  - scoop
+  distributions:
+  - windows-10
+  - windows-11
+- id: freebsd-pkg
+  name:
+    tr: FreeBSD pkg
+    en: FreeBSD pkg
+  summary:
+    tr: FreeBSD pkg paket yöneticisi / dağıtım aracı kaydı.
+    en: FreeBSD pkg package manager / distribution tooling registry entry.
+  pm_kind: system
+  package_format: txz
+  scope: system
+  operating_systems:
+  - freebsd
+  repository_model: central-repos
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://docs.freebsd.org/en/books/handbook/ports/#pkgng-intro
+  cli_names:
+  - pkg
+  distributions:
+  - freebsd-release
+- id: freebsd-ports
+  name:
+    tr: FreeBSD Ports
+    en: FreeBSD Ports
+  summary:
+    tr: FreeBSD Ports paket yöneticisi / dağıtım aracı kaydı.
+    en: FreeBSD Ports package manager / distribution tooling registry entry.
+  pm_kind: ports-source
+  package_format: ports
+  scope: system
+  operating_systems:
+  - freebsd
+  repository_model: ports-tree
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://docs.freebsd.org/en/books/handbook/ports/
+  cli_names:
+  - make
+  distributions:
+  - freebsd-release
+- id: openbsd-pkg
+  name:
+    tr: OpenBSD pkg_add
+    en: OpenBSD pkg_add
+  summary:
+    tr: OpenBSD pkg_add paket yöneticisi / dağıtım aracı kaydı.
+    en: OpenBSD pkg_add package manager / distribution tooling registry entry.
+  pm_kind: system
+  package_format: tgz
+  scope: system
+  operating_systems:
+  - openbsd
+  repository_model: central-repos
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://www.openbsd.org/faq/faq15.html
+  cli_names:
+  - pkg_add
+  - pkg_info
+  - pkg_delete
+  distributions:
+  - openbsd-release
+- id: pkgin
+  name:
+    tr: pkgin
+    en: pkgin
+  summary:
+    tr: pkgin paket yöneticisi / dağıtım aracı kaydı.
+    en: pkgin package manager / distribution tooling registry entry.
+  pm_kind: system
+  package_format: tgz
+  scope: system
+  operating_systems:
+  - netbsd
+  repository_model: central-repos
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://www.netbsd.org/docs/pkgsrc/using.html
+  cli_names:
+  - pkgin
+  distributions:
+  - netbsd-release
+- id: pkgsrc
+  name:
+    tr: pkgsrc
+    en: pkgsrc
+  summary:
+    tr: pkgsrc paket yöneticisi / dağıtım aracı kaydı.
+    en: pkgsrc package manager / distribution tooling registry entry.
+  pm_kind: ports-source
+  package_format: pkgsrc
+  scope: system
+  operating_systems:
+  - netbsd
+  - linux
+  - macos
+  repository_model: ports-tree
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://www.netbsd.org/docs/pkgsrc/
+  cli_names:
+  - bmake
+  distributions:
+  - netbsd-release
+- id: dragonfly-pkg
+  name:
+    tr: DragonFly pkg
+    en: DragonFly BSD pkg
+  summary:
+    tr: DragonFly pkg paket yöneticisi / dağıtım aracı kaydı.
+    en: DragonFly BSD pkg package manager / distribution tooling registry entry.
+  pm_kind: system
+  package_format: txz
+  scope: system
+  operating_systems:
+  - dragonflybsd
+  repository_model: central-repos
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://www.dragonflybsd.org/docs/handbook/pkgsrc/
+  cli_names:
+  - pkg
+  distributions:
+  - dragonflybsd-release
+- id: npm
+  name:
+    tr: npm
+    en: npm
+  summary:
+    tr: npm paket yöneticisi / dağıtım aracı kaydı.
+    en: npm package manager / distribution tooling registry entry.
+  pm_kind: language
+  package_format: npm
+  scope: project
+  operating_systems:
+  - linux
+  - macos
+  - windows
+  repository_model: language-index
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://docs.npmjs.com/
+  cli_names:
+  - npm
+- id: pnpm
+  name:
+    tr: pnpm
+    en: pnpm
+  summary:
+    tr: pnpm paket yöneticisi / dağıtım aracı kaydı.
+    en: pnpm package manager / distribution tooling registry entry.
+  pm_kind: language
+  package_format: npm
+  scope: project
+  operating_systems:
+  - linux
+  - macos
+  - windows
+  repository_model: language-index
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://pnpm.io/
+  cli_names:
+  - pnpm
+- id: yarn
+  name:
+    tr: Yarn
+    en: Yarn
+  summary:
+    tr: Yarn paket yöneticisi / dağıtım aracı kaydı.
+    en: Yarn package manager / distribution tooling registry entry.
+  pm_kind: language
+  package_format: npm
+  scope: project
+  operating_systems:
+  - linux
+  - macos
+  - windows
+  repository_model: language-index
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://yarnpkg.com/
+  cli_names:
+  - yarn
+- id: bun
+  name:
+    tr: Bun
+    en: Bun
+  summary:
+    tr: Bun paket yöneticisi / dağıtım aracı kaydı.
+    en: Bun package manager / distribution tooling registry entry.
+  pm_kind: language
+  package_format: npm
+  scope: project
+  operating_systems:
+  - linux
+  - macos
+  - windows
+  repository_model: language-index
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://bun.sh/docs/cli/install
+  cli_names:
+  - bun
+- id: pip
+  name:
+    tr: pip
+    en: pip
+  summary:
+    tr: pip paket yöneticisi / dağıtım aracı kaydı.
+    en: pip package manager / distribution tooling registry entry.
+  pm_kind: language
+  package_format: wheel
+  scope: project
+  operating_systems:
+  - linux
+  - macos
+  - windows
+  repository_model: language-index
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://pip.pypa.io/
+  cli_names:
+  - pip
+- id: pipx
+  name:
+    tr: pipx
+    en: pipx
+  summary:
+    tr: pipx paket yöneticisi / dağıtım aracı kaydı.
+    en: pipx package manager / distribution tooling registry entry.
+  pm_kind: language
+  package_format: wheel
+  scope: user
+  operating_systems:
+  - linux
+  - macos
+  - windows
+  repository_model: language-index
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://pipx.pypa.io/
+  cli_names:
+  - pipx
+- id: uv
+  name:
+    tr: uv
+    en: uv
+  summary:
+    tr: uv paket yöneticisi / dağıtım aracı kaydı.
+    en: uv package manager / distribution tooling registry entry.
+  pm_kind: language
+  package_format: wheel
+  scope: mixed
+  operating_systems:
+  - linux
+  - macos
+  - windows
+  repository_model: language-index
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://docs.astral.sh/uv/
+  cli_names:
+  - uv
+- id: poetry
+  name:
+    tr: Poetry
+    en: Poetry
+  summary:
+    tr: Poetry paket yöneticisi / dağıtım aracı kaydı.
+    en: Poetry package manager / distribution tooling registry entry.
+  pm_kind: language
+  package_format: wheel
+  scope: project
+  operating_systems:
+  - linux
+  - macos
+  - windows
+  repository_model: language-index
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://python-poetry.org/docs/
+  cli_names:
+  - poetry
+- id: conda
+  name:
+    tr: Conda
+    en: Conda
+  summary:
+    tr: Conda paket yöneticisi / dağıtım aracı kaydı.
+    en: Conda package manager / distribution tooling registry entry.
+  pm_kind: language
+  package_format: conda
+  scope: mixed
+  operating_systems:
+  - linux
+  - macos
+  - windows
+  repository_model: channels
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://docs.conda.io/
+  cli_names:
+  - conda
+- id: mamba
+  name:
+    tr: Mamba
+    en: Mamba
+  summary:
+    tr: Mamba paket yöneticisi / dağıtım aracı kaydı.
+    en: Mamba package manager / distribution tooling registry entry.
+  pm_kind: language
+  package_format: conda
+  scope: mixed
+  operating_systems:
+  - linux
+  - macos
+  - windows
+  repository_model: channels
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://mamba.readthedocs.io/
+  cli_names:
+  - mamba
+- id: cargo
+  name:
+    tr: Cargo
+    en: Cargo
+  summary:
+    tr: Cargo paket yöneticisi / dağıtım aracı kaydı.
+    en: Cargo package manager / distribution tooling registry entry.
+  pm_kind: language
+  package_format: crate
+  scope: project
+  operating_systems:
+  - linux
+  - macos
+  - windows
+  repository_model: language-index
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://doc.rust-lang.org/cargo/
+  cli_names:
+  - cargo
+- id: cargo-binstall
+  name:
+    tr: cargo-binstall
+    en: cargo-binstall
+  summary:
+    tr: cargo-binstall paket yöneticisi / dağıtım aracı kaydı.
+    en: cargo-binstall package manager / distribution tooling registry entry.
+  pm_kind: language
+  package_format: crate
+  scope: user
+  operating_systems:
+  - linux
+  - macos
+  - windows
+  repository_model: language-index
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://github.com/cargo-bins/cargo-binstall
+  cli_names:
+  - cargo-binstall
+- id: rustup
+  name:
+    tr: rustup
+    en: rustup
+  summary:
+    tr: rustup paket yöneticisi / dağıtım aracı kaydı.
+    en: rustup package manager / distribution tooling registry entry.
+  pm_kind: language
+  package_format: toolchain
+  scope: user
+  operating_systems:
+  - linux
+  - macos
+  - windows
+  repository_model: channels
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://rust-lang.github.io/rustup/
+  cli_names:
+  - rustup
+- id: go-install
+  name:
+    tr: go install
+    en: go install
+  summary:
+    tr: go install paket yöneticisi / dağıtım aracı kaydı.
+    en: go install package manager / distribution tooling registry entry.
+  pm_kind: language
+  package_format: module
+  scope: user
+  operating_systems:
+  - linux
+  - macos
+  - windows
+  repository_model: language-index
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://go.dev/ref/mod#go-install
+  cli_names:
+  - go
+- id: gem
+  name:
+    tr: RubyGems
+    en: RubyGems
+  summary:
+    tr: RubyGems paket yöneticisi / dağıtım aracı kaydı.
+    en: RubyGems package manager / distribution tooling registry entry.
+  pm_kind: language
+  package_format: gem
+  scope: mixed
+  operating_systems:
+  - linux
+  - macos
+  - windows
+  repository_model: language-index
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://guides.rubygems.org/
+  cli_names:
+  - gem
+- id: bundler
+  name:
+    tr: Bundler
+    en: Bundler
+  summary:
+    tr: Bundler paket yöneticisi / dağıtım aracı kaydı.
+    en: Bundler package manager / distribution tooling registry entry.
+  pm_kind: language
+  package_format: gem
+  scope: project
+  operating_systems:
+  - linux
+  - macos
+  - windows
+  repository_model: language-index
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://bundler.io/
+  cli_names:
+  - bundle
+- id: composer
+  name:
+    tr: Composer
+    en: Composer
+  summary:
+    tr: Composer paket yöneticisi / dağıtım aracı kaydı.
+    en: Composer package manager / distribution tooling registry entry.
+  pm_kind: language
+  package_format: php
+  scope: project
+  operating_systems:
+  - linux
+  - macos
+  - windows
+  repository_model: language-index
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://getcomposer.org/doc/
+  cli_names:
+  - composer
+- id: dotnet-tool
+  name:
+    tr: dotnet tool
+    en: dotnet tool
+  summary:
+    tr: dotnet tool paket yöneticisi / dağıtım aracı kaydı.
+    en: dotnet tool package manager / distribution tooling registry entry.
+  pm_kind: language
+  package_format: nuget
+  scope: user
+  operating_systems:
+  - linux
+  - macos
+  - windows
+  repository_model: language-index
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://learn.microsoft.com/dotnet/core/tools/global-tools
+  cli_names:
+  - dotnet
+- id: nuget
+  name:
+    tr: NuGet
+    en: NuGet
+  summary:
+    tr: NuGet paket yöneticisi / dağıtım aracı kaydı.
+    en: NuGet package manager / distribution tooling registry entry.
+  pm_kind: language
+  package_format: nupkg
+  scope: project
+  operating_systems:
+  - linux
+  - macos
+  - windows
+  repository_model: language-index
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://learn.microsoft.com/nuget/
+  cli_names:
+  - nuget
+- id: maven
+  name:
+    tr: Maven
+    en: Maven
+  summary:
+    tr: Maven paket yöneticisi / dağıtım aracı kaydı.
+    en: Maven package manager / distribution tooling registry entry.
+  pm_kind: language
+  package_format: jar
+  scope: project
+  operating_systems:
+  - linux
+  - macos
+  - windows
+  repository_model: language-index
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://maven.apache.org/guides/
+  cli_names:
+  - mvn
+- id: gradle
+  name:
+    tr: Gradle
+    en: Gradle
+  summary:
+    tr: Gradle paket yöneticisi / dağıtım aracı kaydı.
+    en: Gradle package manager / distribution tooling registry entry.
+  pm_kind: language
+  package_format: jar
+  scope: project
+  operating_systems:
+  - linux
+  - macos
+  - windows
+  repository_model: language-index
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://docs.gradle.org/
+  cli_names:
+  - gradle
+- id: flatpak
+  name:
+    tr: Flatpak
+    en: Flatpak
+  summary:
+    tr: Flatpak paket yöneticisi / dağıtım aracı kaydı.
+    en: Flatpak package manager / distribution tooling registry entry.
+  pm_kind: application-runtime
+  package_format: flatpak
+  scope: user
+  operating_systems:
+  - linux
+  repository_model: app-store
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://docs.flatpak.org/
+  cli_names:
+  - flatpak
+- id: snap
+  name:
+    tr: Snap
+    en: Snap
+  summary:
+    tr: Snap paket yöneticisi / dağıtım aracı kaydı.
+    en: Snap package manager / distribution tooling registry entry.
+  pm_kind: application-runtime
+  package_format: snap
+  scope: system
+  operating_systems:
+  - linux
+  repository_model: app-store
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://snapcraft.io/docs
+  cli_names:
+  - snap
+- id: appimage
+  name:
+    tr: AppImage
+    en: AppImage
+  summary:
+    tr: AppImage paket yöneticisi / dağıtım aracı kaydı.
+    en: AppImage package manager / distribution tooling registry entry.
+  pm_kind: distribution-format
+  package_format: AppImage
+  scope: user
+  operating_systems:
+  - linux
+  repository_model: sidecar-file
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://docs.appimage.org/
+  notes:
+    tr: AppImage bir paket yöneticisi değil; taşınabilir uygulama dağıtım biçimidir.
+    en: AppImage is not a package manager; it is a portable application distribution format.
+  tags:
+  - not-a-package-manager

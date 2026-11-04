@@ -16,15 +16,28 @@ concepts/<id>.yaml              # learnable concept articles (TR/EN)
 schema/*.json                   # JSON Schema (Draft 2020-12)
 metadata/categories.yaml        # §8.x taxonomy
 metadata/concepts.yaml          # concept registry (+ optional article:)
+metadata/operating-systems.yaml # Faz 1+ platform registries (additive)
+metadata/distributions.yaml
+metadata/shells.yaml
+metadata/package-managers.yaml
+metadata/architectures.yaml
+metadata/execution-environments.yaml
+metadata/server-platforms.yaml
+metadata/cloud-providers.yaml
+metadata/support-levels.yaml
 metadata/catalog.json           # aggregate (kind: nova-commands-bank)
 metadata/search-index.json      # flattened search fields
 metadata/manifest.json          # counts + deterministic content_sha256
-scripts/validate_catalog.py     # CI gate (schema, i18n, concepts)
+scripts/validate_catalog.py     # CI gate (schema, i18n, concepts, platforms)
+scripts/validate_platform_registries.py  # soft registry consistency
 scripts/build_catalog.py        # catalog + index + manifest
 docs/                           # contracts + safety + NOVA_INTEGRATION
 tests/                          # pytest
 ```
 
+Platform registries keep OS ≠ distribution ≠ shell ≠ package-manager as
+separate models. See [PLATFORM_SUPPORT.md](PLATFORM_SUPPORT.md). Catalog
+`schema_version` remains **1** until command schema v2 migration.
 ## Verification pipeline
 
 ```

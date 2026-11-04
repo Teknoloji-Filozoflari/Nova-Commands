@@ -22,13 +22,18 @@ Ayrıntı: [docs/dual-concept.md](docs/dual-concept.md)
 commands/<category>/<id>.yaml   # kaynak gerçeği (bir komut = bir dosya)
 concepts/<id>.yaml              # öğrenilebilir konsept makaleleri (TR/EN)
 schema/{command,concept,catalog}.schema.json
+schema/{operating-system,distribution,shell,package-manager,…}.schema.json
 metadata/categories.yaml        # §8.x kategori taksonomisi
 metadata/concepts.yaml          # konsept kayıt defteri
-metadata/catalog.json           # üretilen banka (commands + concepts)
+metadata/operating-systems.yaml # platform kayıtları (OS ≠ distro ≠ shell ≠ PM)
+metadata/{distributions,shells,package-managers,…}.yaml
+metadata/catalog.json           # üretilen banka (commands + concepts; schema_version 1)
 metadata/search-index.json      # arama indeksi
 metadata/manifest.json          # sayılar + deterministik content_sha256
-scripts/validate_catalog.py     # CI kapısı (i18n + concepts)
+scripts/validate_catalog.py     # CI kapısı (i18n + concepts + platform soft-check)
+scripts/validate_platform_registries.py
 scripts/build_catalog.py        # katalog / indeks / manifest
+docs/PLATFORM_SUPPORT.md        # platform metadata kapsamı
 docs/NOVA_INTEGRATION.md        # Nova tüketim sözleşmesi
 ```
 
