@@ -1,0 +1,71 @@
+schema_version: 2
+id: get-help
+name: Get-Help
+kind: powershell_cmdlet
+category: system
+aliases:
+- help
+- man
+summary:
+  tr: PowerShell yardım konularını gösterir.
+  en: Displays PowerShell help topics.
+description:
+  tr: Get-Help, cmdlet ve kavramlar için yardım metnini getirir. İlk kullanımda `Update-Help` gerekebilir.
+    man/—help ile karıştırılmamalı; PowerShell’e özgüdür. PowerShell 7+ ve Windows PowerShell 5.1’de mevcuttur.
+  en: Get-Help shows help for cmdlets and conceptual topics. Update-Help may be needed first. Not the
+    same as man/--help — PowerShell-specific. Available in PowerShell 7+ and Windows PowerShell 5.1.
+tags:
+- powershell
+- windows
+- help
+risk: safe
+requires_elevated: false
+platforms:
+- windows
+operating_systems:
+- windows
+shells:
+- powershell
+- windows-powershell
+flags:
+- flag: -Full
+  meaning:
+    tr: Tam yardım.
+    en: Full help.
+  verified: false
+- flag: -Examples
+  meaning:
+    tr: Yalnız örnekler.
+    en: Examples only.
+  verified: false
+- flag: -Online
+  meaning:
+    tr: Çevrimiçi yardıma git.
+    en: Open online help.
+  verified: false
+examples:
+- title:
+    tr: Örnekler
+    en: Examples
+  command: Get-Help Get-Service -Examples
+  explanation:
+    tr: Get-Service için örnekleri listeler.
+    en: Lists examples for Get-Service.
+  risk: safe
+  shell: powershell
+  platforms:
+  - windows
+related:
+- get-command
+intent:
+  tr:
+  - get-help
+  - powershell get help
+  en:
+  - Get-Help
+  - powershell get help
+verification:
+  status: draft
+  sources:
+  - https://learn.microsoft.com/powershell/module/microsoft.powershell.core/get-help
+  notes: Agent-authored Faz 5 draft from official docs; not human-verified.

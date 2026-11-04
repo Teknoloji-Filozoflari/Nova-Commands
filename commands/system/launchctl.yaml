@@ -1,0 +1,66 @@
+schema_version: 2
+id: launchctl
+name: launchctl
+kind: administrative_tool
+category: system
+summary:
+  tr: launchd iş yükü denetimi (macOS servisleri).
+  en: launchd job control (macOS services).
+description:
+  tr: launchctl, macOS launchd ajanlarını yükler/başlatır/durdurur. Linux systemctl karşılığı değildir.
+    `bootout`/`enable` yanlış kullanıldığında oturum ajanlarını bozar; sorgu örnekleri tercih edilir.
+  en: launchctl loads/starts/stops macOS launchd agents. Not a systemctl alias. Misused bootout/enable
+    can break session agents; prefer query examples.
+tags:
+- macos
+- services
+- launchd
+risk: dangerous
+requires_elevated: false
+platforms:
+- macos
+operating_systems:
+- macos
+flags: []
+examples:
+- title:
+    tr: Kullanıcı etki alanı listesi
+    en: List user domain
+  command: launchctl print gui/$(id -u) 2>/dev/null | head
+  explanation:
+    tr: GUI etki alanı özetini basmaya çalışır (ortama göre değişir).
+    en: Attempts to print GUI domain summary (varies by environment).
+  risk: safe
+  platforms:
+  - macos
+- title:
+    tr: Yardım
+    en: Help
+  command: launchctl help
+  explanation:
+    tr: Alt komut yardımını gösterir.
+    en: Shows subcommand help.
+  risk: safe
+  platforms:
+  - macos
+related:
+- systemctl
+- softwareupdate
+intent:
+  tr:
+  - launchctl
+  - macos servis
+  - launchd
+  en:
+  - launchctl
+  - macos services
+  - launchd
+verification:
+  status: draft
+  sources:
+  - https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPSystemStartup/Chapters/CreatingLaunchdJobs.html
+  - man 1 launchctl
+  notes: Agent-authored Faz 5 draft from official docs; not human-verified.
+nova:
+  concepts:
+  - systemd

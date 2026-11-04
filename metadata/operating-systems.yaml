@@ -29,8 +29,8 @@ operating_systems:
   family_kind: family
   kernel_family: nt
   posix_like: false
-  status: skeleton
-  support_level: planned
+  status: draft
+  support_level: partial
   documentation:
   - https://learn.microsoft.com/windows/
   tags:
@@ -45,8 +45,8 @@ operating_systems:
   family_kind: product
   kernel_family: xnu
   posix_like: true
-  status: skeleton
-  support_level: planned
+  status: draft
+  support_level: partial
   documentation:
   - https://developer.apple.com/documentation/
   tags:

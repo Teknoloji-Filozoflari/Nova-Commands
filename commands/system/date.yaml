@@ -7,8 +7,10 @@ summary:
   tr: Tarih ve saati yazdırır veya ayarlar.
   en: Print or set the system date.
 description:
-  tr: Biçimli tarih/saat çıktısı üretir; ayarlamak root ister.
-  en: Formats date/time output; setting requires root.
+  tr: Biçimli tarih/saat çıktısı üretir; ayarlamak root ister. macOS/BSD `date` GNU date’ten farklıdır
+    (ör. `-d` yok; `-v` / `-r` kullanın).
+  en: Formats date/time output; setting requires root. macOS/BSD date differs from GNU date (e.g. no -d;
+    use -v / -r).
 tags:
 - system
 - time

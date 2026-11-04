@@ -1,0 +1,82 @@
+schema_version: 2
+id: get-winevent
+name: Get-WinEvent
+kind: powershell_cmdlet
+category: monitoring
+summary:
+  tr: Windows Olay Günlüğü kayıtlarını sorgular.
+  en: Queries Windows Event Log records.
+description:
+  tr: Get-WinEvent, Event Viewer / Windows Event Log kanallarını PowerShell ile okur. Linux journalctl
+    karşılığı değildir. Geniş sorgular yavaş olabilir; FilterHashtable tercih edin. Bazı kanallar yönetici
+    hakkı ister.
+  en: Get-WinEvent reads Event Viewer / Windows Event Log channels from PowerShell. Not a journalctl alias.
+    Prefer FilterHashtable for performance. Some channels require Administrator.
+tags:
+- powershell
+- windows
+- logs
+- events
+risk: caution
+requires_elevated: false
+platforms:
+- windows
+operating_systems:
+- windows
+shells:
+- powershell
+- windows-powershell
+flags:
+- flag: -LogName
+  meaning:
+    tr: Kanal adı (System, Application…).
+    en: Log channel name.
+  verified: false
+  takes_value: true
+- flag: -MaxEvents
+  meaning:
+    tr: En fazla olay sayısı.
+    en: Maximum events.
+  verified: false
+  takes_value: true
+- flag: -FilterHashtable
+  meaning:
+    tr: Süzgeç hash tablosu.
+    en: Filter hashtable.
+  verified: false
+  takes_value: true
+examples:
+- title:
+    tr: Son System olayları
+    en: Recent System events
+  command: Get-WinEvent -LogName System -MaxEvents 20
+  explanation:
+    tr: System kanalından son 20 olayı getirir.
+    en: Fetches the latest 20 System-channel events.
+  risk: safe
+  shell: powershell
+  platforms:
+  - windows
+related:
+- wevtutil
+- journalctl
+security:
+  notes:
+    tr: Güvenlik günlüğü gibi kanallar için yükseltilmiş kabuk (UAC) gerekebilir.
+    en: Elevated shell (UAC) may be required for channels such as Security.
+  requires_admin: false
+  uac_prompt: false
+intent:
+  tr:
+  - windows olay günlüğü
+  - get-winevent
+  - event viewer
+  en:
+  - windows event log
+  - get-winevent
+  - event viewer powershell
+verification:
+  status: draft
+  sources:
+  - https://learn.microsoft.com/powershell/module/microsoft.powershell.diagnostics/get-winevent
+  notes: Agent-authored Faz 5 draft from official docs; not human-verified.

@@ -1,0 +1,50 @@
+schema_version: 2
+id: log
+name: log
+kind: executable
+category: monitoring
+summary:
+  tr: macOS birleşik günlük (unified logging) CLI.
+  en: macOS unified logging CLI.
+description:
+  tr: '`log` aracı unified logging akışını gösterir/toplar. Linux journalctl karşılığı değildir. `log
+    show` yoğun olabilir; predicate süzgeçleri kullanın.'
+  en: The log tool shows/collects the unified logging stream. Not a journalctl alias. log show can be
+    heavy; use predicate filters.
+tags:
+- macos
+- logs
+risk: caution
+requires_elevated: false
+platforms:
+- macos
+operating_systems:
+- macos
+flags: []
+examples:
+- title:
+    tr: Son satırlar (kısa)
+    en: Recent lines (short)
+  command: log show --last 2m --style compact | tail
+  explanation:
+    tr: Son 2 dakikalık kompakt günlükten kuyruk alır.
+    en: Tails a compact log from the last 2 minutes.
+  risk: safe
+  platforms:
+  - macos
+related:
+- get-winevent
+- journalctl
+intent:
+  tr:
+  - log
+  - log
+  en:
+  - log
+  - log
+verification:
+  status: draft
+  sources:
+  - man 1 log
+  - https://developer.apple.com/documentation/os/logging
+  notes: Agent-authored Faz 5 draft from official docs; not human-verified.

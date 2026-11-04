@@ -1,0 +1,66 @@
+schema_version: 2
+id: set-service
+name: Set-Service
+kind: powershell_cmdlet
+category: system
+summary:
+  tr: Windows servis özelliklerini değiştirir.
+  en: Changes Windows service properties.
+description:
+  tr: Set-Service, Service Control Manager üzerinden servis durumunu/özelliklerini değiştirir. Linux systemctl
+    karşılığı değildir. Başlangıç türü vb. değiştirir; yanlış yapılandırma kalıcı etki yapar. UAC gerekir.
+  en: Set-Service changes service state/properties via SCM. Not a systemctl alias. Changes startup type
+    etc.; misconfiguration persists. UAC required.
+tags:
+- powershell
+- windows
+- services
+- admin
+risk: dangerous
+requires_elevated: true
+platforms:
+- windows
+operating_systems:
+- windows
+shells:
+- powershell
+- windows-powershell
+flags: []
+examples:
+- title:
+    tr: Güvenli örnek (ad değiştirin)
+    en: Safe example (change name)
+  command: Set-Service -Name Spooler -StartupType Manual -WhatIf
+  explanation:
+    tr: WhatIf ile etkiyi simüle eder; gerçek değişiklik yapmaz.
+    en: Simulates the effect with -WhatIf; makes no real change.
+  risk: safe
+  requires_elevated: true
+  shell: powershell
+  platforms:
+  - windows
+  privilege: admin
+related:
+- get-service
+- sc
+security:
+  notes:
+    tr: Yükseltilmiş PowerShell oturumu (UAC onayı) gerekir.
+    en: Requires an elevated PowerShell session (UAC prompt).
+  requires_admin: true
+  uac_prompt: true
+intent:
+  tr:
+  - set-service
+  - powershell set service
+  en:
+  - Set-Service
+  - powershell set service
+verification:
+  status: draft
+  sources:
+  - https://learn.microsoft.com/powershell/module/microsoft.powershell.management/set-service
+  notes: Agent-authored Faz 5 draft from official docs; not human-verified.
+nova:
+  concepts:
+  - systemd

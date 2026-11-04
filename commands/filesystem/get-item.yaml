@@ -1,0 +1,56 @@
+schema_version: 2
+id: get-item
+name: Get-Item
+kind: powershell_cmdlet
+category: filesystem
+aliases:
+- gi
+summary:
+  tr: Belirtilen yolu (dosya/klasör) nesne olarak alır.
+  en: Gets the item at a path as an object.
+description:
+  tr: Get-Item tek bir öğeyi (dosya, dizin, kayıt defteri anahtarı vb. sağlayıcı yolu) döndürür. Get-ChildItem
+    alt öğeleri listeler; karıştırmayın.
+  en: Get-Item returns a single item (file, directory, registry key, etc.). Get-ChildItem lists children
+    — do not confuse them.
+tags:
+- powershell
+- windows
+- filesystem
+risk: safe
+requires_elevated: false
+platforms:
+- windows
+operating_systems:
+- windows
+shells:
+- powershell
+- windows-powershell
+flags: []
+examples:
+- title:
+    tr: Dosya nesnesi
+    en: File object
+  command: Get-Item -Path C:\Windows\System32\notepad.exe
+  explanation:
+    tr: Dosya meta verisini nesne olarak döndürür.
+    en: Returns file metadata as an object.
+  risk: safe
+  shell: powershell
+  platforms:
+  - windows
+related:
+- get-childitem
+- get-itemproperty
+intent:
+  tr:
+  - get-item
+  - powershell get item
+  en:
+  - Get-Item
+  - powershell get item
+verification:
+  status: draft
+  sources:
+  - https://learn.microsoft.com/powershell/module/microsoft.powershell.management/get-item
+  notes: Agent-authored Faz 5 draft from official docs; not human-verified.

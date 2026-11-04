@@ -1,0 +1,56 @@
+schema_version: 2
+id: get-disk
+name: Get-Disk
+kind: powershell_cmdlet
+category: disks
+summary:
+  tr: Fiziksel diskleri listeler (Storage cmdlet).
+  en: Lists physical disks (Storage cmdlet).
+description:
+  tr: Get-Disk, Windows Storage modülü ile fiziksel diskleri gösterir. Linux `lsblk` karşılığı değildir.
+    Disk numarası ile Get-Partition/Get-Volume birlikte kullanılır. Yazma işlemleri yönetici ister; bu
+    kayıt salt okuma odaklıdır.
+  en: Get-Disk lists physical disks via the Windows Storage module. Not an lsblk alias. Often paired with
+    Get-Partition/Get-Volume by disk number. Write ops need admin; this record focuses on read-only queries.
+tags:
+- powershell
+- windows
+- disks
+- storage
+risk: safe
+requires_elevated: false
+platforms:
+- windows
+operating_systems:
+- windows
+shells:
+- powershell
+- windows-powershell
+flags: []
+examples:
+- title:
+    tr: Diskleri listele
+    en: List disks
+  command: Get-Disk
+  explanation:
+    tr: Fiziksel disk numarası, boyutu ve sağlık bilgisini gösterir.
+    en: Shows physical disk number, size, and health.
+  risk: safe
+  shell: powershell
+  platforms:
+  - windows
+related:
+- get-volume
+- diskpart
+intent:
+  tr:
+  - windows disk listele
+  - get-disk
+  en:
+  - list windows disks
+  - get-disk
+verification:
+  status: draft
+  sources:
+  - https://learn.microsoft.com/powershell/module/storage/get-disk
+  notes: Agent-authored Faz 5 draft from official docs; not human-verified.

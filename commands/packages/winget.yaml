@@ -1,0 +1,121 @@
+schema_version: 2
+id: winget
+name: winget
+kind: package_manager
+category: packages
+summary:
+  tr: Windows Paket Yöneticisi (WinGet) CLI.
+  en: Windows Package Manager (WinGet) CLI.
+description:
+  tr: winget, Microsoft’un Windows paket yöneticisidir. Chocolatey/Scoop ayrı kayıtlardır (henüz bankada
+    olmayabilir). Kurulum/upgrade yönetici veya kullanıcı kapsamına göre değişir. Arch/pacman ile ilişkisi
+    yoktur.
+  en: winget is Microsoft’s Windows package manager. Chocolatey/Scoop are separate records (may not be
+    in the bank yet). Install/upgrade elevation depends on scope. Unrelated to Arch/pacman.
+tags:
+- windows
+- packages
+- winget
+risk: caution
+requires_elevated: false
+platforms:
+- windows
+operating_systems:
+- windows
+shells:
+- cmd
+- powershell
+- windows-powershell
+package_refs:
+- manager: winget
+  package: Microsoft.AppInstaller
+  distributions:
+  - windows-10
+  - windows-11
+  - windows-server
+  notes:
+    tr: App Installer / WinGet ile gelir; sürümler Windows’a göre değişir.
+    en: Ships via App Installer / WinGet; versions vary by Windows edition.
+flags:
+- flag: search
+  meaning:
+    tr: Depoda ara (alt komut).
+    en: Search repository (subcommand).
+  verified: false
+- flag: install
+  meaning:
+    tr: Paket kur (alt komut).
+    en: Install package (subcommand).
+  verified: false
+- flag: upgrade
+  meaning:
+    tr: Paket yükselt.
+    en: Upgrade package.
+  verified: false
+- flag: list
+  meaning:
+    tr: Kurulu paketleri listele.
+    en: List installed packages.
+  verified: false
+- flag: show
+  meaning:
+    tr: Paket ayrıntısı.
+    en: Show package details.
+  verified: false
+examples:
+- title:
+    tr: Ara
+    en: Search
+  command: winget search vscode
+  explanation:
+    tr: vscode ile eşleşen paketleri arar.
+    en: Searches packages matching vscode.
+  risk: safe
+  shell: powershell
+  platforms:
+  - windows
+- title:
+    tr: Listele
+    en: List
+  command: winget list
+  explanation:
+    tr: Kurulu WinGet paketlerini listeler.
+    en: Lists installed WinGet packages.
+  risk: safe
+  shell: powershell
+  platforms:
+  - windows
+- title:
+    tr: Göster
+    en: Show
+  command: winget show Microsoft.PowerShell
+  explanation:
+    tr: PowerShell paket manifesto özetini gösterir.
+    en: Shows the PowerShell package manifest summary.
+  risk: safe
+  shell: powershell
+  platforms:
+  - windows
+related:
+- brew
+- pacman
+intent:
+  tr:
+  - winget kur
+  - windows paket
+  - winget ara
+  en:
+  - winget install
+  - windows package
+  - winget search
+verification:
+  status: draft
+  sources:
+  - https://learn.microsoft.com/windows/package-manager/winget/
+  - https://learn.microsoft.com/windows/package-manager/winget/install
+  notes: Agent-authored Faz 5 draft from official docs; not human-verified.
+nova:
+  concepts:
+  - packages
+  - package-managers
+  - package-managers-comparison

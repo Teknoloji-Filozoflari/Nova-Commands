@@ -1,0 +1,64 @@
+schema_version: 2
+id: dism
+name: DISM
+kind: administrative_tool
+category: system
+summary:
+  tr: Deployment Image Servicing and Management.
+  en: Deployment Image Servicing and Management.
+description:
+  tr: DISM, Windows imajlarını ve çevrimiçi bileşen deposunu yönetir. `/Cleanup-Image /RestoreHealth`
+    onarım için yaygındır; yönetici ister. Yanlış imaj yolu sistemi bozabilir.
+  en: DISM services Windows images and the online component store. /Cleanup-Image /RestoreHealth is a
+    common repair path; needs admin. Wrong image paths can damage the system.
+tags:
+- windows
+- system
+- image
+- admin
+risk: dangerous
+requires_elevated: true
+platforms:
+- windows
+operating_systems:
+- windows
+shells:
+- cmd
+- powershell
+- windows-powershell
+flags: []
+examples:
+- title:
+    tr: Bileşen deposu sağlığı (bilgi)
+    en: Component store health (info)
+  command: DISM /Online /Cleanup-Image /CheckHealth
+  explanation:
+    tr: Depo bozulma işaretini kontrol eder (düşük etkili).
+    en: Checks for component-store corruption flags (low impact).
+  risk: caution
+  requires_elevated: true
+  shell: cmd
+  platforms:
+  - windows
+  privilege: admin
+related:
+- sfc
+- chkdsk
+security:
+  notes:
+    tr: UAC yükseltmesi zorunlu; online onarım uzun sürer.
+    en: UAC elevation required; online repair takes time.
+  requires_admin: true
+  uac_prompt: true
+intent:
+  tr:
+  - dism
+  - dism
+  en:
+  - DISM
+  - dism
+verification:
+  status: draft
+  sources:
+  - https://learn.microsoft.com/windows-hardware/manufacture/desktop/what-is-dism
+  notes: Agent-authored Faz 5 draft from official docs; not human-verified.

@@ -1,0 +1,75 @@
+schema_version: 2
+id: port
+name: port
+kind: package_manager
+category: packages
+summary:
+  tr: MacPorts paket yöneticisi CLI.
+  en: MacPorts package manager CLI.
+description:
+  tr: MacPorts (`port`), macOS için ports-tree tabanlı paket yöneticisidir. Homebrew `brew` ile aynı değildir
+    — ayrı kayıt. Çoğu işlem `sudo` ister.
+  en: MacPorts (port) is a ports-tree package manager for macOS. It is not Homebrew brew — separate record.
+    Most operations need sudo.
+tags:
+- macos
+- packages
+- macports
+risk: caution
+requires_elevated: true
+platforms:
+- macos
+operating_systems:
+- macos
+package_refs:
+- manager: macports
+  package: MacPorts
+  distributions:
+  - macos-desktop
+  notes:
+    tr: Resmi kurulum pkg/guide.macports.org.
+    en: Official install via pkg / guide.macports.org.
+flags: []
+examples:
+- title:
+    tr: Ara
+    en: Search
+  command: port search ripgrep
+  explanation:
+    tr: Ports ağacında arar.
+    en: Searches the ports tree.
+  risk: safe
+  requires_elevated: false
+  platforms:
+  - macos
+- title:
+    tr: Bilgi
+    en: Info
+  command: port info git
+  explanation:
+    tr: Port meta verisini gösterir.
+    en: Shows port metadata.
+  risk: safe
+  requires_elevated: false
+  platforms:
+  - macos
+related:
+- brew
+- softwareupdate
+intent:
+  tr:
+  - port
+  - port
+  en:
+  - port
+  - port
+verification:
+  status: draft
+  sources:
+  - https://guide.macports.org/
+  - https://www.macports.org/
+  notes: Agent-authored Faz 5 draft from official docs; not human-verified.
+nova:
+  concepts:
+  - packages
+  - package-managers-comparison

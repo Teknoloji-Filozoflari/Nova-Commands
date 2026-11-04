@@ -1,0 +1,49 @@
+schema_version: 2
+id: plutil
+name: plutil
+kind: executable
+category: development
+summary:
+  tr: Property list (plist) doğrulama ve dönüştürme.
+  en: Validate and convert property list (plist) files.
+description:
+  tr: plutil plist dosyalarını lint’ler ve xml1/binary1/json arasında dönüştürür. `defaults` tercih yazma
+    aracıdır — karıştırmayın.
+  en: plutil lints plists and converts among xml1/binary1/json. defaults is for preference writes — do
+    not confuse them.
+tags:
+- macos
+- plist
+- development
+risk: caution
+requires_elevated: false
+platforms:
+- macos
+operating_systems:
+- macos
+flags: []
+examples:
+- title:
+    tr: Lint
+    en: Lint
+  command: plutil -lint ~/Library/Preferences/com.apple.dock.plist
+  explanation:
+    tr: Plist sözdizimini doğrular.
+    en: Validates plist syntax.
+  risk: safe
+  platforms:
+  - macos
+related:
+- defaults
+intent:
+  tr:
+  - plutil
+  - plutil
+  en:
+  - plutil
+  - plutil
+verification:
+  status: draft
+  sources:
+  - man 1 plutil
+  notes: Agent-authored Faz 5 draft from official docs; not human-verified.

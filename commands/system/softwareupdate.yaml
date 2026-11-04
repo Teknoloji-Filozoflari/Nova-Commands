@@ -1,0 +1,66 @@
+schema_version: 2
+id: softwareupdate
+name: softwareupdate
+kind: administrative_tool
+category: system
+summary:
+  tr: macOS yazılım / sistem güncelleme CLI.
+  en: macOS software / system update CLI.
+description:
+  tr: softwareupdate, Apple sistem ve güvenlik güncellemelerini listeler/kurar. Homebrew `brew upgrade`
+    OS güncellemesi değildir. Kurulum yeniden başlatma gerektirebilir; üretimde bakım penceresi kullanın.
+  en: softwareupdate lists/installs Apple system and security updates. Homebrew brew upgrade is not an
+    OS update. Installs may require reboot; use a maintenance window in production.
+tags:
+- macos
+- system
+- updates
+risk: dangerous
+requires_elevated: true
+platforms:
+- macos
+operating_systems:
+- macos
+flags:
+- flag: -l
+  meaning:
+    tr: Kullanılabilir güncellemeleri listele.
+    en: List available updates.
+  verified: false
+- flag: -i
+  meaning:
+    tr: Güncelleme kur.
+    en: Install updates.
+  verified: false
+- flag: --all
+  meaning:
+    tr: Tüm uygun güncellemeler.
+    en: All applicable updates.
+  verified: false
+examples:
+- title:
+    tr: Listele
+    en: List
+  command: softwareupdate -l
+  explanation:
+    tr: Bekleyen güncellemeleri listeler (kurmaz).
+    en: Lists pending updates (does not install).
+  risk: safe
+  requires_elevated: false
+  platforms:
+  - macos
+related:
+- brew
+- launchctl
+intent:
+  tr:
+  - macos güncelle
+  - softwareupdate
+  en:
+  - macos update
+  - softwareupdate
+verification:
+  status: draft
+  sources:
+  - https://support.apple.com/guide/terminal/update-software-apd3c5f3772/mac
+  notes: Agent-authored Faz 5 draft from official docs; not human-verified.

@@ -1,0 +1,53 @@
+schema_version: 2
+id: get-scheduledtask
+name: Get-ScheduledTask
+kind: powershell_cmdlet
+category: system
+summary:
+  tr: Zamanlanmış görevleri listeler (Task Scheduler).
+  en: Lists scheduled tasks (Task Scheduler).
+description:
+  tr: Get-ScheduledTask, Windows Görev Zamanlayıcı görevlerini listeler. `schtasks.exe` ayrı bir executable
+    kaydıdır. Görev oluşturma/silme yönetici gerektirebilir; bu kayıt sorgu odaklıdır.
+  en: Get-ScheduledTask lists Windows Task Scheduler tasks. schtasks.exe is a separate executable record.
+    Creating/deleting tasks may need admin; this record is query-focused.
+tags:
+- powershell
+- windows
+- scheduler
+risk: safe
+requires_elevated: false
+platforms:
+- windows
+operating_systems:
+- windows
+shells:
+- powershell
+- windows-powershell
+flags: []
+examples:
+- title:
+    tr: Görevleri listele
+    en: List tasks
+  command: Get-ScheduledTask | Select-Object TaskName, State
+  explanation:
+    tr: Görev adı ve durumunu listeler.
+    en: Lists task name and state.
+  risk: safe
+  shell: powershell
+  platforms:
+  - windows
+related:
+- schtasks
+intent:
+  tr:
+  - get-scheduledtask
+  - powershell get scheduledtask
+  en:
+  - Get-ScheduledTask
+  - powershell get scheduledtask
+verification:
+  status: draft
+  sources:
+  - https://learn.microsoft.com/powershell/module/scheduledtasks/get-scheduledtask
+  notes: Agent-authored Faz 5 draft from official docs; not human-verified.

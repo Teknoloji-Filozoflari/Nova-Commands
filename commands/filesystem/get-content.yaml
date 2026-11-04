@@ -1,0 +1,77 @@
+schema_version: 2
+id: get-content
+name: Get-Content
+kind: powershell_cmdlet
+category: filesystem
+aliases:
+- gc
+- cat
+- type
+summary:
+  tr: Dosya içeriğini okur (PowerShell).
+  en: Reads file content (PowerShell).
+description:
+  tr: Get-Content satır satır veya ham içerik okur (`cat`/`type` alias). Linux `cat` ve CMD `type` ayrı
+    kayıtlardır. Büyük dosyalarda -TotalCount / -Tail kullanın.
+  en: Get-Content reads line-oriented or raw content (cat/type aliases). Linux cat and CMD type are separate
+    records. Prefer -TotalCount / -Tail for large files.
+tags:
+- powershell
+- windows
+- filesystem
+- text
+risk: safe
+requires_elevated: false
+platforms:
+- windows
+operating_systems:
+- windows
+shells:
+- powershell
+- windows-powershell
+flags:
+- flag: -TotalCount
+  meaning:
+    tr: İlk N satır.
+    en: First N lines.
+  verified: false
+  takes_value: true
+- flag: -Tail
+  meaning:
+    tr: Son N satır.
+    en: Last N lines.
+  verified: false
+  takes_value: true
+- flag: -Raw
+  meaning:
+    tr: Tek dize olarak oku.
+    en: Read as a single string.
+  verified: false
+examples:
+- title:
+    tr: Son satırlar
+    en: Tail lines
+  command: Get-Content -Path C:\log.txt -Tail 50
+  explanation:
+    tr: Dosyanın son 50 satırını basar.
+    en: Prints the last 50 lines of the file.
+  risk: safe
+  shell: powershell
+  platforms:
+  - windows
+related:
+- get-childitem
+- get-item
+- cat
+intent:
+  tr:
+  - get-content
+  - powershell get content
+  en:
+  - Get-Content
+  - powershell get content
+verification:
+  status: draft
+  sources:
+  - https://learn.microsoft.com/powershell/module/microsoft.powershell.management/get-content
+  notes: Agent-authored Faz 5 draft from official docs; not human-verified.

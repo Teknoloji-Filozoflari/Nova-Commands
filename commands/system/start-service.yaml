@@ -1,0 +1,66 @@
+schema_version: 2
+id: start-service
+name: Start-Service
+kind: powershell_cmdlet
+category: system
+summary:
+  tr: Windows servisini başlatır.
+  en: Starts a Windows service.
+description:
+  tr: Start-Service, Service Control Manager üzerinden servis durumunu/özelliklerini değiştirir. Linux
+    systemctl karşılığı değildir. Yönetici (UAC) gerekir. Get-Service ile durumu doğrulayın.
+  en: Start-Service changes service state/properties via SCM. Not a systemctl alias. Requires Administrator
+    (UAC). Verify state with Get-Service.
+tags:
+- powershell
+- windows
+- services
+- admin
+risk: caution
+requires_elevated: true
+platforms:
+- windows
+operating_systems:
+- windows
+shells:
+- powershell
+- windows-powershell
+flags: []
+examples:
+- title:
+    tr: Güvenli örnek (ad değiştirin)
+    en: Safe example (change name)
+  command: Start-Service -Name Spooler -WhatIf
+  explanation:
+    tr: WhatIf ile etkiyi simüle eder; gerçek değişiklik yapmaz.
+    en: Simulates the effect with -WhatIf; makes no real change.
+  risk: safe
+  requires_elevated: true
+  shell: powershell
+  platforms:
+  - windows
+  privilege: admin
+related:
+- get-service
+- sc
+security:
+  notes:
+    tr: Yükseltilmiş PowerShell oturumu (UAC onayı) gerekir.
+    en: Requires an elevated PowerShell session (UAC prompt).
+  requires_admin: true
+  uac_prompt: true
+intent:
+  tr:
+  - start-service
+  - powershell start service
+  en:
+  - Start-Service
+  - powershell start service
+verification:
+  status: draft
+  sources:
+  - https://learn.microsoft.com/powershell/module/microsoft.powershell.management/start-service
+  notes: Agent-authored Faz 5 draft from official docs; not human-verified.
+nova:
+  concepts:
+  - systemd

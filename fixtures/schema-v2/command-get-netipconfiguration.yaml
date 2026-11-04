@@ -62,4 +62,4 @@ verification:
   status: draft
   sources:
     - https://learn.microsoft.com/powershell/module/nettcpip/get-netipconfiguration
-  notes: Fixture draft only — Faz 5 content will supersede.
+  notes: Fixture only — live bank commands/network/get-netipconfiguration.yaml (Faz 5).

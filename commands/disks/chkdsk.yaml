@@ -1,0 +1,65 @@
+schema_version: 2
+id: chkdsk
+name: chkdsk
+kind: administrative_tool
+category: disks
+summary:
+  tr: NTFS/FAT birim bütünlüğü denetimi.
+  en: NTFS/FAT volume integrity check.
+description:
+  tr: chkdsk dosya sistemi hatalarını tarar; `/f` onarım yapar ve birimi kilitleyebilir. Linux fsck karşılığı
+    değildir. Üretimde yedek ve bakım penceresi.
+  en: chkdsk scans filesystem errors; /f repairs and may lock the volume. Not an fsck alias. Use backups
+    and a maintenance window in production.
+tags:
+- windows
+- disks
+- ntfs
+- admin
+risk: dangerous
+requires_elevated: true
+platforms:
+- windows
+operating_systems:
+- windows
+shells:
+- cmd
+- powershell
+- windows-powershell
+flags: []
+examples:
+- title:
+    tr: Salt okuma tarama
+    en: Read-only scan
+  command: 'chkdsk C:'
+  explanation:
+    tr: 'C: birimini onarmadan tarar (yine de yük bindirir).'
+    en: 'Scans C: without fixing (still I/O heavy).'
+  risk: caution
+  requires_elevated: true
+  shell: cmd
+  platforms:
+  - windows
+  privilege: admin
+related:
+- sfc
+- dism
+- get-volume
+security:
+  notes:
+    tr: Onarım için yönetici ve çoğu zaman yeniden başlatma gerekir.
+    en: Repair needs admin and often a reboot.
+  requires_admin: true
+  uac_prompt: true
+intent:
+  tr:
+  - chkdsk
+  - chkdsk
+  en:
+  - chkdsk
+  - chkdsk
+verification:
+  status: draft
+  sources:
+  - https://learn.microsoft.com/windows-server/administration/windows-commands/chkdsk
+  notes: Agent-authored Faz 5 draft from official docs; not human-verified.

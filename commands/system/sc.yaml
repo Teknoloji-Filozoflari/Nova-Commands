@@ -1,0 +1,69 @@
+schema_version: 2
+id: sc
+name: sc.exe
+kind: administrative_tool
+category: system
+summary:
+  tr: Service Control — Windows servis yönetimi (executable).
+  en: Service Control — Windows service management (executable).
+description:
+  tr: sc.exe, cmd.exe’den servis sorgu/denetimi yapar. PowerShell Get-Service / Start-Service ayrı kayıtlardır.
+    PowerShell’de `sc` alias’ı Set-Content’tir — mutlaka `sc.exe` çağırın. Yazma işlemleri yönetici (UAC)
+    ister.
+  en: sc.exe queries/controls services from cmd.exe. PowerShell Get-Service / Start-Service are separate
+    records. In PowerShell, sc aliases Set-Content — always invoke sc.exe. Write ops need Administrator
+    (UAC).
+tags:
+- windows
+- services
+- cmd
+- admin
+risk: dangerous
+requires_elevated: true
+platforms:
+- windows
+operating_systems:
+- windows
+shells:
+- cmd
+- powershell
+- windows-powershell
+flags: []
+examples:
+- title:
+    tr: Servis sorgula
+    en: Query service
+  command: sc.exe query wuauserv
+  explanation:
+    tr: Windows Update servis durumunu sorgular (salt okuma).
+    en: Queries Windows Update service status (read-only).
+  risk: safe
+  requires_elevated: false
+  shell: cmd
+  platforms:
+  - windows
+  privilege: none
+related:
+- get-service
+- start-service
+- stop-service
+security:
+  notes:
+    tr: Servis değiştirme UAC ister. PowerShell’de sc ≠ sc.exe.
+    en: Changing services needs UAC. In PowerShell sc ≠ sc.exe.
+  requires_admin: true
+  uac_prompt: true
+intent:
+  tr:
+  - sc.exe
+  - windows servis cmd
+  - servis sorgula
+  en:
+  - sc.exe
+  - windows service cmd
+  - query service
+verification:
+  status: draft
+  sources:
+  - https://learn.microsoft.com/windows-server/administration/windows-commands/sc-query
+  notes: Agent-authored Faz 5 draft from official docs; not human-verified.

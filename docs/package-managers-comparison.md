@@ -58,6 +58,26 @@ High-level frontends (`apt`, `dnf`, `zypper`) wrap these; low-level tools remain
 Nix is installable on non-NixOS Linux and macOS; Guix is primarily Linux. On Arch
 hosts, **pacman remains the system package manager** — Nix/Guix may coexist.
 
+## Windows and macOS (Faz 5 draft)
+
+These are **not** Linux system PMs and are **not** interchangeable with pacman/apt/dnf.
+
+| Goal / Amaç | Windows (`winget`) | macOS Homebrew (`brew`) | macOS MacPorts (`port`) |
+|-------------|--------------------|-------------------------|-------------------------|
+| Search | `winget search name` | `brew search name` | `port search name` |
+| Info / show | `winget show id` | `brew info name` | `port info name` |
+| List installed | `winget list` | `brew list` | `port installed` |
+| Install | `winget install id` | `brew install name` | `sudo port install name` |
+| Upgrade | `winget upgrade` | `brew update` then `brew upgrade` | `sudo port selfupdate` / `upgrade outdated` |
+| OS updates | (Windows Update / `softwareupdate` N/A) | use `softwareupdate` — **not** `brew upgrade` | same — OS ≠ ports |
+
+Notes:
+
+- WinGet ≠ Chocolatey ≠ Scoop (separate ecosystems; only `winget` is banked in Faz 5).
+- Homebrew formulae vs casks differ; Linuxbrew exists but this bank’s `brew` record is macOS-first.
+- MacPorts `port` is a separate record from `brew` — do not treat as aliases.
+- On Arch hosts, **pacman remains** the preferred system package manager.
+
 ## Flatpak (cross-distro apps)
 
 | Goal | Command |

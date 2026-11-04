@@ -7,8 +7,10 @@ summary:
   tr: Dosya durumu ve inode bilgisi gösterir.
   en: Display file status and inode data.
 description:
-  tr: Boyut, izinler, zaman damgaları ve dosya türü gibi meta verileri basar.
-  en: Prints metadata such as size, permissions, timestamps, and file type.
+  tr: Boyut, izinler, zaman damgaları ve dosya türü gibi meta verileri basar. macOS/BSD `stat` biçim dizgileri
+    GNU `stat -c` ile uyumlu değildir (`-f` vs `-c`).
+  en: Prints metadata such as size, permissions, timestamps, and file type. macOS/BSD stat format strings
+    are not compatible with GNU `stat -c` (`-f` vs `-c`).
 tags:
 - files
 - metadata

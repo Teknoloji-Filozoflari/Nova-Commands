@@ -1,0 +1,67 @@
+schema_version: 2
+id: get-nettcpconnection
+name: Get-NetTCPConnection
+kind: powershell_cmdlet
+category: network
+summary:
+  tr: Windows TCP bağlantılarını listeler.
+  en: Lists Windows TCP connections.
+description:
+  tr: NetTCPIP Get-NetTCPConnection, yerel TCP dinleyicileri ve bağlantıları gösterir. Linux `ss`/`netstat`
+    veya CMD `netstat` ile aynı komut değildir. Windows’a özgü NetTCPIP modülü gerektirir.
+  en: Get-NetTCPConnection shows local TCP listeners and connections. Not the same command as Linux ss/netstat
+    or CMD netstat. Requires the Windows NetTCPIP module.
+tags:
+- powershell
+- windows
+- network
+- tcp
+risk: safe
+requires_elevated: false
+platforms:
+- windows
+operating_systems:
+- windows
+shells:
+- powershell
+- windows-powershell
+flags:
+- flag: -LocalPort
+  meaning:
+    tr: Yerel port süz.
+    en: Filter local port.
+  verified: false
+  takes_value: true
+- flag: -State
+  meaning:
+    tr: Listen/Established vb.
+    en: Filter by state.
+  verified: false
+  takes_value: true
+examples:
+- title:
+    tr: Dinleyen portlar
+    en: Listening ports
+  command: Get-NetTCPConnection -State Listen
+  explanation:
+    tr: Dinleme durumundaki TCP soketleri listeler.
+    en: Lists TCP sockets in Listen state.
+  risk: safe
+  shell: powershell
+  platforms:
+  - windows
+related:
+- get-netipconfiguration
+- netstat
+intent:
+  tr:
+  - windows tcp bağlantı
+  - dinleyen port powershell
+  en:
+  - windows tcp connections
+  - listening ports powershell
+verification:
+  status: draft
+  sources:
+  - https://learn.microsoft.com/powershell/module/nettcpip/get-nettcpconnection
+  notes: Agent-authored Faz 5 draft from official docs; not human-verified.

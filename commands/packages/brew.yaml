@@ -1,0 +1,120 @@
+schema_version: 2
+id: brew
+name: brew
+kind: package_manager
+category: packages
+summary:
+  tr: Homebrew paket yöneticisi (macOS).
+  en: Homebrew package manager (macOS).
+description:
+  tr: Homebrew (`brew`), macOS (ve Linuxbrew) için kullanıcı alanı paket yöneticisidir. MacPorts `port`
+    ayrı kayıttır. formül/cask ayrımına dikkat; sistem güncellemesi `softwareupdate` ile karıştırılmamalı.
+    Arch host’ta sistem PM olarak pacman tercih edilir.
+  en: Homebrew (brew) is a user-space package manager for macOS (and Linuxbrew). MacPorts port is a separate
+    record. Mind formula vs cask; do not confuse with OS updates via softwareupdate. On Arch hosts prefer
+    pacman as the system PM.
+tags:
+- macos
+- packages
+- homebrew
+risk: caution
+requires_elevated: false
+platforms:
+- macos
+operating_systems:
+- macos
+package_refs:
+- manager: homebrew
+  package: homebrew
+  distributions:
+  - macos-desktop
+  notes:
+    tr: Resmi kurulum betiği docs.brew.sh; Linuxbrew ayrı ortam.
+    en: Official install script at docs.brew.sh; Linuxbrew is a separate env.
+flags:
+- flag: install
+  meaning:
+    tr: Formül/cask kur.
+    en: Install formula/cask.
+  verified: false
+- flag: uninstall
+  meaning:
+    tr: Kaldır.
+    en: Uninstall.
+  verified: false
+- flag: update
+  meaning:
+    tr: brew’i ve formül indekslerini güncelle.
+    en: Update brew and formula indexes.
+  verified: false
+- flag: upgrade
+  meaning:
+    tr: Kurulu formülleri yükselt.
+    en: Upgrade installed formulae.
+  verified: false
+- flag: search
+  meaning:
+    tr: Ara.
+    en: Search.
+  verified: false
+- flag: info
+  meaning:
+    tr: Paket bilgisi.
+    en: Package info.
+  verified: false
+examples:
+- title:
+    tr: Ara
+    en: Search
+  command: brew search ripgrep
+  explanation:
+    tr: ripgrep formül/cask arar.
+    en: Searches formulae/casks for ripgrep.
+  risk: safe
+  platforms:
+  - macos
+- title:
+    tr: Bilgi
+    en: Info
+  command: brew info git
+  explanation:
+    tr: git formül ayrıntısını gösterir.
+    en: Shows git formula details.
+  risk: safe
+  platforms:
+  - macos
+- title:
+    tr: Güncelle indeksler
+    en: Update indexes
+  command: brew update
+  explanation:
+    tr: Homebrew ve formül tanımlarını yeniler (paket yükseltmez).
+    en: Refreshes Homebrew and formula definitions (does not upgrade packages).
+  risk: safe
+  platforms:
+  - macos
+related:
+- port
+- softwareupdate
+- winget
+- pacman
+intent:
+  tr:
+  - brew kur
+  - homebrew
+  - macos paket
+  en:
+  - brew install
+  - homebrew
+  - macos package
+verification:
+  status: draft
+  sources:
+  - https://docs.brew.sh/
+  - https://docs.brew.sh/Manpage
+  notes: Agent-authored Faz 5 draft from official docs; not human-verified.
+nova:
+  concepts:
+  - packages
+  - package-managers
+  - package-managers-comparison

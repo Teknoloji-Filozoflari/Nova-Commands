@@ -1,0 +1,50 @@
+schema_version: 2
+id: security
+name: security
+kind: administrative_tool
+category: security
+summary:
+  tr: macOS Anahtarlık (Keychain) komut satırı.
+  en: macOS Keychain command-line tool.
+description:
+  tr: security, anahtarlık öğelerini listeler/yönetir. Gizli anahtar işlemleri dikkat ister; örnekler
+    salt listeleme odaklıdır.
+  en: security lists/manages keychain items. Secret-key operations need care; examples focus on listing
+    only.
+tags:
+- macos
+- keychain
+- security
+risk: dangerous
+requires_elevated: false
+platforms:
+- macos
+operating_systems:
+- macos
+flags: []
+examples:
+- title:
+    tr: Anahtarlıkları listele
+    en: List keychains
+  command: security list-keychains
+  explanation:
+    tr: Arama listesindeki anahtarlıkları basar.
+    en: Prints keychains on the search list.
+  risk: safe
+  platforms:
+  - macos
+related:
+- openssl
+- gpg
+intent:
+  tr:
+  - security
+  - security
+  en:
+  - security
+  - security
+verification:
+  status: draft
+  sources:
+  - man 1 security
+  notes: Agent-authored Faz 5 draft from official docs; not human-verified.

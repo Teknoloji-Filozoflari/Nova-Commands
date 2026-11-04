@@ -1,0 +1,73 @@
+schema_version: 2
+id: sfc
+name: sfc
+kind: administrative_tool
+category: system
+summary:
+  tr: Sistem Dosyası Denetleyicisi (Windows).
+  en: System File Checker (Windows).
+description:
+  tr: sfc.exe korunan sistem dosyalarını tarar/onarır. `/scannow` uzun sürer ve yönetici ister. DISM ile
+    birlikte kullanılır; diskpart ile karıştırmayın.
+  en: sfc.exe scans/repairs protected system files. /scannow is long-running and needs admin. Often paired
+    with DISM; do not confuse with diskpart.
+tags:
+- windows
+- system
+- repair
+- admin
+risk: dangerous
+requires_elevated: true
+platforms:
+- windows
+operating_systems:
+- windows
+shells:
+- cmd
+- powershell
+- windows-powershell
+flags:
+- flag: /scannow
+  meaning:
+    tr: Tara ve onarmaya çalış.
+    en: Scan and attempt repairs.
+  verified: false
+- flag: /verifyonly
+  meaning:
+    tr: Onarmadan doğrula.
+    en: Verify without repairing.
+  verified: false
+examples:
+- title:
+    tr: Yardım
+    en: Help
+  command: sfc /?
+  explanation:
+    tr: Sözdizimini gösterir.
+    en: Shows syntax.
+  risk: safe
+  requires_elevated: false
+  shell: cmd
+  platforms:
+  - windows
+related:
+- dism
+- chkdsk
+security:
+  notes:
+    tr: Yükseltilmiş CMD/PowerShell (UAC) zorunlu.
+    en: Elevated CMD/PowerShell (UAC) required.
+  requires_admin: true
+  uac_prompt: true
+intent:
+  tr:
+  - sfc
+  - sfc
+  en:
+  - sfc
+  - sfc
+verification:
+  status: draft
+  sources:
+  - https://learn.microsoft.com/windows-server/administration/windows-commands/sfc
+  notes: Agent-authored Faz 5 draft from official docs; not human-verified.

@@ -1,0 +1,63 @@
+schema_version: 2
+id: bcdedit
+name: bcdedit
+kind: administrative_tool
+category: system
+summary:
+  tr: Önyükleme Yapılandırma Verisi (BCD) düzenleyicisi.
+  en: Boot Configuration Data (BCD) editor.
+description:
+  tr: bcdedit önyükleme girdilerini görüntüler/değiştirir. Yanlış değişiklik sistemi açılmaz hale getirebilir.
+    Yönetici gerekir; bu kayıtta salt görüntüleme örneği vardır.
+  en: bcdedit displays/modifies boot entries. Wrong edits can make the system unbootable. Admin required;
+    this record only shows a display example.
+tags:
+- windows
+- boot
+- admin
+risk: destructive
+requires_elevated: true
+platforms:
+- windows
+operating_systems:
+- windows
+shells:
+- cmd
+- powershell
+- windows-powershell
+flags: []
+examples:
+- title:
+    tr: BCD özeti
+    en: BCD summary
+  command: bcdedit /enum
+  explanation:
+    tr: Önyükleme girdilerini listeler (yazmaz).
+    en: Lists boot entries (does not write).
+  risk: caution
+  requires_elevated: true
+  shell: cmd
+  platforms:
+  - windows
+  privilege: admin
+related:
+- diskpart
+- bootctl
+security:
+  notes:
+    tr: BCD yazma UAC ister; değişiklik öncesi `bcdedit /export` yedeği alın.
+    en: BCD writes need UAC; take a bcdedit /export backup first.
+  requires_admin: true
+  uac_prompt: true
+intent:
+  tr:
+  - bcdedit
+  - bcdedit
+  en:
+  - bcdedit
+  - bcdedit
+verification:
+  status: draft
+  sources:
+  - https://learn.microsoft.com/windows-server/administration/windows-commands/bcdedit
+  notes: Agent-authored Faz 5 draft from official docs; not human-verified.

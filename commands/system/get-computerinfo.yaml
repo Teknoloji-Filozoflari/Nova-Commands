@@ -1,0 +1,55 @@
+schema_version: 2
+id: get-computerinfo
+name: Get-ComputerInfo
+kind: powershell_cmdlet
+category: system
+summary:
+  tr: Windows sistem / donanım özet bilgisi.
+  en: Windows system / hardware summary info.
+description:
+  tr: Get-ComputerInfo, işletim sistemi, BIOS ve donanım özetini bir nesnede toplar. Windows Server ve
+    istemci sürümlerinde yönetim keşfi için kullanışlıdır. Linux `uname`/`hostnamectl` karşılığı değildir.
+  en: Get-ComputerInfo aggregates OS, BIOS, and hardware summary into one object. Useful on Windows Server
+    and client for inventory. Not a uname/hostnamectl alias.
+tags:
+- powershell
+- windows
+- system
+- inventory
+risk: safe
+requires_elevated: false
+platforms:
+- windows
+operating_systems:
+- windows
+shells:
+- powershell
+- windows-powershell
+flags: []
+examples:
+- title:
+    tr: Özet
+    en: Summary
+  command: Get-ComputerInfo | Select-Object WindowsProductName, OsVersion, CsProcessors
+  explanation:
+    tr: Ürün adı, OS sürümü ve işlemci özetini seçer.
+    en: Selects product name, OS version, and CPU summary.
+  risk: safe
+  shell: powershell
+  platforms:
+  - windows
+related:
+- system-profiler
+- get-winevent
+intent:
+  tr:
+  - windows sistem bilgisi
+  - get-computerinfo
+  en:
+  - windows system info
+  - get-computerinfo
+verification:
+  status: draft
+  sources:
+  - https://learn.microsoft.com/powershell/module/microsoft.powershell.management/get-computerinfo
+  notes: Agent-authored Faz 5 draft from official docs; not human-verified.

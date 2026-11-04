@@ -1,0 +1,64 @@
+schema_version: 2
+id: netsh
+name: netsh
+kind: administrative_tool
+category: network
+summary:
+  tr: Windows ağ yığını yapılandırma kabuğu.
+  en: Windows networking stack configuration shell.
+description:
+  tr: netsh, arabirim, güvenlik duvarı, WLAN ve diğer ağ bağlamlarını yönetir. Yazma komutları yönetici
+    (UAC) ister. Salt okuma örnekleri tercih edilir; yanlış bağlam sistemi ağdan düşürebilir.
+  en: netsh manages interface, firewall, WLAN, and other networking contexts. Write commands need Administrator
+    (UAC). Prefer read-only examples; wrong context can drop connectivity.
+tags:
+- windows
+- network
+- admin
+risk: dangerous
+requires_elevated: true
+platforms:
+- windows
+operating_systems:
+- windows
+shells:
+- cmd
+- powershell
+- windows-powershell
+flags: []
+examples:
+- title:
+    tr: Arabirimleri göster
+    en: Show interfaces
+  command: netsh interface show interface
+  explanation:
+    tr: Ağ arabirimlerini salt okuma listeler.
+    en: Lists network interfaces read-only.
+  risk: safe
+  requires_elevated: false
+  shell: cmd
+  platforms:
+  - windows
+  privilege: none
+related:
+- ipconfig
+- route
+- get-netipconfiguration
+security:
+  notes:
+    tr: Yapılandırma değişiklikleri UAC yükseltmesi ister; üretimde dikkat.
+    en: Configuration changes require UAC elevation; use care in production.
+  requires_admin: true
+  uac_prompt: true
+intent:
+  tr:
+  - netsh
+  - netsh
+  en:
+  - netsh
+  - netsh
+verification:
+  status: draft
+  sources:
+  - https://learn.microsoft.com/windows-server/administration/windows-commands/netsh
+  notes: Agent-authored Faz 5 draft from official docs; not human-verified.

@@ -1,0 +1,62 @@
+schema_version: 2
+id: icacls
+name: icacls
+kind: executable
+category: users
+summary:
+  tr: NTFS ACL görüntüleme ve düzenleme.
+  en: Display and edit NTFS ACLs.
+description:
+  tr: icacls, Windows NTFS izinlerini gösterir/değiştirir. Linux chmod/chown modeli değildir. Yanlış /grant
+    veya /reset erişimi kilitleyebilir; yönetici gerekebilir.
+  en: icacls displays/changes Windows NTFS permissions. Not the Linux chmod/chown model. Wrong /grant
+    or /reset can lock you out; admin may be required.
+tags:
+- windows
+- acl
+- ntfs
+- permissions
+risk: dangerous
+requires_elevated: false
+platforms:
+- windows
+operating_systems:
+- windows
+shells:
+- cmd
+- powershell
+- windows-powershell
+flags: []
+examples:
+- title:
+    tr: ACL göster
+    en: Show ACL
+  command: icacls C:\Users\Public
+  explanation:
+    tr: Dizin ACL’sini salt okuma listeler.
+    en: Lists the directory ACL read-only.
+  risk: safe
+  shell: cmd
+  platforms:
+  - windows
+related:
+- takeown
+- chmod
+security:
+  notes:
+    tr: Sistem yollarında değişiklik UAC ister; yedek ACL alın.
+    en: Changing ACLs on system paths needs UAC; back up ACLs first.
+  requires_admin: true
+  uac_prompt: true
+intent:
+  tr:
+  - icacls
+  - icacls
+  en:
+  - icacls
+  - icacls
+verification:
+  status: draft
+  sources:
+  - https://learn.microsoft.com/windows-server/administration/windows-commands/icacls
+  notes: Agent-authored Faz 5 draft from official docs; not human-verified.

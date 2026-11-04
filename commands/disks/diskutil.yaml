@@ -1,0 +1,74 @@
+schema_version: 2
+id: diskutil
+name: diskutil
+kind: administrative_tool
+category: disks
+summary:
+  tr: macOS disk / APFS yönetim aracı.
+  en: macOS disk / APFS management utility.
+description:
+  tr: diskutil birimleri listeler, bağlar/ayarlar ve APFS işlemleri yapar. `eraseDisk` yıkıcıdır — örneklerde
+    yok. Linux lsblk/fdisk karşılığı değildir. macOS diskleri listelemek için `diskutil list` kullanın.
+  en: diskutil lists volumes, mounts/manages, and performs APFS ops. eraseDisk is destructive — omitted
+    from examples. Not an lsblk/fdisk alias. Use diskutil list to list macOS disks.
+tags:
+- macos
+- disks
+- apfs
+risk: destructive
+requires_elevated: false
+platforms:
+- macos
+operating_systems:
+- macos
+flags:
+- flag: list
+  meaning:
+    tr: Diskleri listele.
+    en: List disks.
+  verified: false
+- flag: info
+  meaning:
+    tr: Birim bilgisi.
+    en: Volume info.
+  verified: false
+examples:
+- title:
+    tr: Diskleri listele
+    en: List disks
+  command: diskutil list
+  explanation:
+    tr: Bağlı disk ve bölümleri listeler (yazmaz).
+    en: Lists attached disks and partitions (no writes).
+  risk: safe
+  platforms:
+  - macos
+- title:
+    tr: Birim bilgisi
+    en: Volume info
+  command: diskutil info /
+  explanation:
+    tr: Kök birim hakkında bilgi basar.
+    en: Prints info about the root volume.
+  risk: safe
+  platforms:
+  - macos
+related:
+- get-disk
+- lsblk
+- df
+intent:
+  tr:
+  - macos disk listele
+  - diskutil
+  - apfs
+  en:
+  - list macos disks
+  - diskutil
+  - apfs
+verification:
+  status: draft
+  sources:
+  - man 8 diskutil
+  - https://ss64.com/mac/diskutil.html
+  notes: Agent-authored Faz 5 draft from official docs; not human-verified.

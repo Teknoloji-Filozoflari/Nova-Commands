@@ -4,8 +4,8 @@ title:
   tr: Paket yöneticisi karşılaştırma tabloları
   en: Package manager comparison tables
 summary:
-  tr: pacman / apt / dnf / zypper / apk / xbps / emerge / Nix / Guix / ostree yan yana.
-  en: Side-by-side pacman / apt / dnf / zypper / apk / xbps / emerge / Nix / Guix / ostree.
+  tr: Linux PM’ler + WinGet / Homebrew / MacPorts yan yana (çoğu draft).
+  en: Linux PMs plus WinGet / Homebrew / MacPorts side-by-side (mostly draft).
 difficulty: beginner
 tags:
   - packages
@@ -35,6 +35,9 @@ related_commands:
   - guix
   - opkg
   - rpm-ostree
+  - brew
+  - port
+  - winget
 related_concepts:
   - package-managers
   - packages
@@ -84,6 +87,16 @@ body:
 
     Eski `nix-env` / klasik `nix-shell` modern CLI ile **karıştırılmaz** — bkz. `nix-guix`.
 
+    ### Windows / macOS (Faz 5 draft)
+
+    | Amaç | WinGet | Homebrew | MacPorts |
+    |------|--------|----------|----------|
+    | Ara | `winget search` | `brew search` | `port search` |
+    | Kur | `winget install` | `brew install` | `sudo port install` |
+    | Liste | `winget list` | `brew list` | `port installed` |
+
+    OS güncellemesi macOS’ta `softwareupdate` — `brew upgrade` değildir. `brew` ≠ `port`.
+
     **Kural:** Bilinmeyen paket adı **uydurulmaz**. Yeni PM kayıtları çoğunlukla `draft`.
     Nova Arch host’ta pacman notunu önce tutar.
   en: |
@@ -124,6 +137,16 @@ body:
     Do **not** mix legacy `nix-env` / classic `nix-shell` with the modern CLI —
     see `nix-guix`.
 
+    ### Windows / macOS (Faz 5 draft)
+
+    | Goal | WinGet | Homebrew | MacPorts |
+    |------|--------|----------|----------|
+    | Search | `winget search` | `brew search` | `port search` |
+    | Install | `winget install` | `brew install` | `sudo port install` |
+    | List | `winget list` | `brew list` | `port installed` |
+
+    OS updates on macOS use `softwareupdate` — not `brew upgrade`. `brew` ≠ `port`.
+
     **Rule:** unknown package names are **not invented**. New PM records are mostly
     `draft`. On Arch hosts Nova keeps pacman notes first.
 verification:
@@ -137,4 +160,7 @@ verification:
     - "https://nixos.org/manual/nix/stable/"
     - "https://guix.gnu.org/manual/en/html_node/"
     - "https://coreos.github.io/rpm-ostree/"
-  notes: "Faz 4 comparison expansion; draft pending human review."
+    - "https://learn.microsoft.com/windows/package-manager/winget/"
+    - "https://docs.brew.sh/"
+    - "https://guide.macports.org/"
+  notes: "Faz 4–5 comparison expansion; draft pending human review."
