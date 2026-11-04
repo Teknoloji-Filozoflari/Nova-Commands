@@ -56,7 +56,6 @@ examples:
     en: Pages through syslog.
   risk: safe
 related:
-- more
 - cat
 intent:
   tr:

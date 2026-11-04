@@ -96,7 +96,6 @@ examples:
 related:
 - mv
 - rsync
-- install
 intent:
   tr:
   - dosya kopyala

@@ -78,7 +78,6 @@ examples:
     en: Lists what sudo allows.
   risk: safe
 related:
-- su
 - doas
 intent:
   tr:

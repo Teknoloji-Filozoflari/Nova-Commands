@@ -72,7 +72,6 @@ examples:
   risk: safe
 related:
 - ls
-- file
 intent:
   tr:
   - dosya bilgisi

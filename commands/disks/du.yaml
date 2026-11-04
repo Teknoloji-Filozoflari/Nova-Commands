@@ -77,7 +77,6 @@ examples:
   risk: safe
 related:
 - df
-- ncdu
 intent:
   tr:
   - klasör boyutu

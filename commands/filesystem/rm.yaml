@@ -90,7 +90,6 @@ examples:
   risk: destructive
 related:
 - mv
-- trash-put
 intent:
   tr:
   - dosya sil

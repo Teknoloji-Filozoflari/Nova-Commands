@@ -36,7 +36,6 @@ examples:
   risk: caution
 related:
 - env
-- set
 intent:
   tr:
   - ortam değişkeni ayarla

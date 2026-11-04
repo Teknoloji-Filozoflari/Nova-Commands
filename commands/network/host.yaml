@@ -82,7 +82,6 @@ examples:
 related:
 - dig
 - resolvectl
-- nslookup
 intent:
   tr:
   - host ile dns

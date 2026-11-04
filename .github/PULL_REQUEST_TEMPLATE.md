@@ -13,8 +13,10 @@
 - [ ] Yeni/değişen komutlarda **tr + en** dolu
 - [ ] `verification.status: verified` **yalnız** insan incelemesi sonrası (AI taslağı `draft` / `reviewed`)
 - [ ] Bilinmeyen bayrak / paket adı uydurulmadı
-- [ ] Tehlikeli komutlar doğrulama için çalıştırılmadı
+- [ ] Tehlikeli komutlar doğrulama için çalıştırılmadı (CI de çalıştırmaz)
 - [ ] Risk seviyesi ve `requires_elevated` gözden geçirildi
+- [ ] Wipe-class örneklerde bilingual `warnings` var; `related` id’leri mevcut
+- [ ] `keys/*.key` / secret eklenmedi; minisign pubkey’e dokunulmadı (gerekmedikçe)
 - [ ] İlgili docs / CONTRIBUTING güncellendi (gerekirse)
 
 ## İnceleme notları

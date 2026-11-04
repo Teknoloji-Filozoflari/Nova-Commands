@@ -45,6 +45,18 @@ Do not run destructive or privileged commands to validate YAML. Prefer:
 - upstream HTML docs
 - static `--help` only for **safe** binaries already on the maintainer machine
 
+CI (`scripts/validate_security.py`) additionally:
+
+- Requires bilingual `examples[].warnings` for live wipe-class patterns
+  (`dd of=/dev/…`, live `mkfs` / `wipefs -a` / `shred` on devices)
+- Rejects `curl|sh` / fork-bomb style examples unless risk is elevated and
+  warnings are present
+- Rejects dangling `related` command ids and duplicate aliases
+- Confirms `keys/minisign.pub` exists and no `*.key` private material is committed
+
+Dry-run / probe-only examples (`mkfs -n`, `wipefs` without `-a`, etc.) are not
+treated as live wipes.
+
 ## Dual concept reminder
 
 Local discovery must not inherit `verified` from “file exists on disk”.

@@ -95,6 +95,9 @@ examples:
       Placeholder. Do not copy multi-device recipes blindly; verify each member with lsblk. `-f` adds overwrite risk.
   risk: destructive
   requires_elevated: true
+  warnings:
+    - tr: Yanlış aygıt seçimi veriyi kalıcı olarak siler; önce lsblk/diskutil ile doğrula.
+      en: Wrong device permanently destroys data; verify with lsblk/diskutil first.
 related:
 - mkfs
 - mkfs.ext4

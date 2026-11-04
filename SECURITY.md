@@ -48,6 +48,17 @@ Please report privately or via a carefully worded public issue when you find:
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) and [docs/safety.md](docs/safety.md).
 
+## CI security posture (Faz 10)
+
+- Validators are **static**: CI never executes catalog shell/PowerShell examples
+  on runners (Ubuntu / Windows / macOS matrix runs Python tooling only).
+- Third-party GitHub Actions are pinned to **full commit SHAs** (see
+  `.github/workflows/*.yml`); Dependabot may open pin-update PRs.
+- `scripts/validate_security.py` hard-fails on wipe-class examples missing
+  bilingual `warnings`, broken `related` refs, duplicate aliases, and any
+  private key files under `keys/`.
+- CI does **not** invent or promote `verification.status: verified`.
+
 ## Signed bank Releases (supply chain)
 
 Published bank metadata (`catalog.json`, `manifest.json`, `search-index.json`)

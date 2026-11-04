@@ -87,7 +87,6 @@ examples:
   risk: safe
 related:
 - ss
-- fuser
 - ps
 - umount
 intent:

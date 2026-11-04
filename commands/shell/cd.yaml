@@ -44,7 +44,6 @@ examples:
   risk: safe
 related:
 - pwd
-- pushd
 intent:
   tr:
   - dizine gir

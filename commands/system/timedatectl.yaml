@@ -92,7 +92,6 @@ examples:
 related:
 - date
 - systemctl
-- hwclock
 intent:
   tr:
   - saat dilimi ayarla

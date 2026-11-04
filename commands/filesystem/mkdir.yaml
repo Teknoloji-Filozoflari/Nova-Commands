@@ -77,7 +77,6 @@ examples:
     en: Creates the full path including parents.
   risk: safe
 related:
-- rmdir
 - touch
 intent:
   tr:

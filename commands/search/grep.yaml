@@ -93,7 +93,6 @@ examples:
 related:
 - find
 - rg
-- ag
 intent:
   tr:
   - metin ara

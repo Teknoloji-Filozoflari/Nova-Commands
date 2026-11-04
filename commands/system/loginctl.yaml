@@ -83,8 +83,6 @@ examples:
   risk: dangerous
 related:
 - systemctl
-- who
-- w
 intent:
   tr:
   - oturum listele
