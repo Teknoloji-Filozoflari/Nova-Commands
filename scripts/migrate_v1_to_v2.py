@@ -305,9 +305,15 @@ def main() -> int:
             continue
 
         migrated += 1
-        if args.dry_run:
-            rel = path.relative_to(ROOT) if path.is_relative_to(ROOT) else path
-            print(f"would migrate {rel} kind={kind} refs={len(new.get('package_refs') or [])}")
+        if args.dry_run or args.check:
+            # --check must never rewrite on-disk YAML (field-order / dumper drift
+            # would mutate the bank and break catalog content_sha256 in CI).
+            if args.dry_run:
+                rel = path.relative_to(ROOT) if path.is_relative_to(ROOT) else path
+                print(
+                    f"would migrate {rel} kind={kind} "
+                    f"refs={len(new.get('package_refs') or [])}"
+                )
         else:
             path.write_text(new_text, encoding="utf-8")
 
