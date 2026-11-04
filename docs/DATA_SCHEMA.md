@@ -53,4 +53,6 @@ Fixtures under `fixtures/schema-v2/` stay `draft` and are **not** in the catalog
 - Demoting honest `verified` / `reviewed` statuses
 - Changing LICENSE or `keys/minisign.pub`
 
-See also: [PLATFORM_SUPPORT.md](PLATFORM_SUPPORT.md), [architecture.md](architecture.md), [NOVA_INTEGRATION.md](NOVA_INTEGRATION.md).
+See also: [PLATFORM_SUPPORT.md](PLATFORM_SUPPORT.md), [ROADMAP.md](ROADMAP.md),
+[SECURITY_MODEL.md](SECURITY_MODEL.md), [architecture.md](architecture.md),
+[NOVA_INTEGRATION.md](NOVA_INTEGRATION.md).

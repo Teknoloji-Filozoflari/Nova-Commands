@@ -46,7 +46,8 @@ Please report privately or via a carefully worded public issue when you find:
 - Dual concept: file-on-disk ≠ curated `verified`
 - Never commit minisign/cosign **private** keys or paste them into issues/PRs
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) and [docs/safety.md](docs/safety.md).
+See [CONTRIBUTING.md](CONTRIBUTING.md), [docs/SECURITY_MODEL.md](docs/SECURITY_MODEL.md),
+and [docs/safety.md](docs/safety.md).
 
 ## CI security posture (Faz 10)
 

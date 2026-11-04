@@ -59,24 +59,24 @@ PR → validate_catalog.py → build_catalog.py → pytest → merge
 `content_sha256` hashes commands+concepts+tasks+profiles (excludes `generated_at`).
 Tasks/profiles are validated in CI and indexed into catalog / search-index / manifest (**Faz 9**).
 
-## Phases (implementation track)
+## Phases
 
-| Phase | Scope |
-|-------|--------|
-| 1 | Repo scaffold, license, docs, taxonomy, schema |
-| 2 | Seed commands + validator + unit tests |
-| 3 | CI workflow + catalog build artifact |
-| 4 | Dual-concept + local discovery contract docs |
-| 5 | Nova consumption + Arch-first package notes |
-| 6 | Safety rules + draft/verified enforcement |
-| 7 | Concepts metadata + CONTRIBUTING |
-| 8 | Concept articles (`concepts/`) + i18n gates |
-| 9 | Tasks/profiles in catalog + search-index + manifest counts |
-| 10 | CI/contrib polish (Actions, issue/PR templates, SECURITY) |
-| 11+ | Grow coverage; human `verified` promotions |
-| 17 | Signed `catalog-v*` Releases (minisign) + selective `verified` |
+**Linux-era (historical):** scaffold → seed bank → CI → dual-concept → Nova
+wire → safety → concepts → signed Releases (`catalog-v*` workflow + selective
+human `verified`).
 
-Signed publish: `docs/catalog-signing.md`, `keys/minisign.pub`,
+**Cross-platform (master §22, on `main` through [#23](https://github.com/Teknoloji-Filozoflari/Nova-Commands/pull/23)):**
+
+| Faz | Scope | Status |
+|-----|--------|--------|
+| 0–3 | Audit → registries → schema v2 → live migrate | Done |
+| 4–7 | Linux PM / Win+macOS / BSD / server-DevOps banks | Done (mostly `draft`) |
+| 8–9 | Tasks + profiles + catalog/search index | Done |
+| 10 | CI / security harden (minisign preserved) | Done (#23) |
+| 11 | Docs + migration / release policy | Docs track |
+
+Authoritative status table: [ROADMAP.md](ROADMAP.md).  
+Signed publish: [catalog-signing.md](catalog-signing.md), `keys/minisign.pub`,
 `.github/workflows/publish-catalog.yml` (dry-run without `MINISIGN_SECRET_KEY`).
 
 ## Non-goals (this repo)

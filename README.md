@@ -1,11 +1,29 @@
 # Nova-Commands
 
-Linux terminal **komut bilgi bankası** — aranabilir, kategorize, çok dilli (TR/EN),
-doğrulanabilir YAML kataloğu.
+Open-source **cross-platform command & system-administration knowledge base** —
+searchable, categorized, bilingual (TR/EN), schema-validated YAML.
 
-Nova’nın **Komut Rehberi**ni besler; tek başına da kullanılabilir.
+Feeds Nova’s **Komut Rehberi**; usable standalone. Data format is
+application-independent.
 
-**Repository:** https://github.com/Teknoloji-Filozoflari/Nova-Commands
+**Repository:** https://github.com/Teknoloji-Filozoflari/Nova-Commands  
+**Türkçe:** [README.tr.md](README.tr.md)
+
+## Live catalog (after [#23](https://github.com/Teknoloji-Filozoflari/Nova-Commands/pull/23))
+
+| Metric | Value |
+|--------|------:|
+| Commands | **256** |
+| Concepts | **20** |
+| Tasks / profiles | **21** / **13** (all `draft`) |
+| Search entries | **310** |
+| OS / package-manager registry rows | **11** / **60** |
+| `schema_version` | **2** |
+| verification | verified **26** / reviewed **105** / draft **125** |
+| `content_sha256` | `7b24390eb92de6cda76b330d61fd34dcdb304afe27c1595355621717b653bf54` |
+
+Registry presence ≠ every command verified on that OS. Roadmap:
+[docs/ROADMAP.md](docs/ROADMAP.md).
 
 ## İki alan — karıştırma
 
@@ -42,11 +60,13 @@ scripts/migrate_v1_to_v2.py     # v1→v2 göç (idempotent)
 scripts/validate_platform_registries.py
 scripts/validate_schema_v2.py
 scripts/build_catalog.py        # katalog / indeks / manifest
-docs/DATA_SCHEMA.md             # canlı v2 şema politikası
-docs/SCHEMA_MIGRATION_V2.md     # göç notları
-docs/PLATFORM_SUPPORT.md        # platform metadata kapsamı
-docs/SERVER_ADMINISTRATION.md   # sunucu / görev / profil kapsamı
-docs/NOVA_INTEGRATION.md        # Nova tüketim sözleşmesi (v2 breakage notes)
+docs/DATA_SCHEMA.md             # live v2 schema policy
+docs/SCHEMA_MIGRATION_V2.md     # migration + release policy
+docs/PLATFORM_SUPPORT.md        # platform support matrix
+docs/ROADMAP.md                 # faz status + follow-ups
+docs/SECURITY_MODEL.md          # risk / trust model
+docs/SERVER_ADMINISTRATION.md   # server / task / profile scope
+docs/NOVA_INTEGRATION.md        # Nova consume contract (v2 notes)
 ```
 
 ## Geliştirici
@@ -81,13 +101,18 @@ Terraform/Ansible/`gh`; yeni kategoriler `virtualization`/`backup`/
 Faz 8 (`draft`): **`tasks/`** (çok platform niyet tarifleri) + **`profiles/`**
 (linux/debian/fedora/arch/windows/freebsd sunucu, homelab, docker-host,
 kubernetes, web/db/nas/virt).
-Faz 9: tasks/profiles `catalog.json` / `search-index.json` / `manifest.json`
-içinde indekslenir; `content_sha256` commands+concepts+tasks+profiles kapsar.
-Paket notlarında **Arch / pacman tercihi** (Nova tercihleri ile uyumlu).
-Karşılaştırma: [docs/package-managers-comparison.md](docs/package-managers-comparison.md)
+Faz 9: tasks/profiles indexed in `catalog.json` / `search-index.json` /
+`manifest.json`; `content_sha256` covers commands+concepts+tasks+profiles.
+Faz 10 ([#23](https://github.com/Teknoloji-Filozoflari/Nova-Commands/pull/23)):
+static security validator + SHA-pinned multi-OS CI (tooling only; no catalog
+command execution on runners).
+Faz 11: docs / migration / release policy polish (this track).
+Install notes prefer **Arch / pacman** when Arch-family applies.
+Compare: [docs/package-managers-comparison.md](docs/package-managers-comparison.md)
 · Nix/Guix: `concepts/nix-guix.yaml`
 · Platform: [docs/PLATFORM_SUPPORT.md](docs/PLATFORM_SUPPORT.md)
-· Sunucu: [docs/SERVER_ADMINISTRATION.md](docs/SERVER_ADMINISTRATION.md).
+· Roadmap: [docs/ROADMAP.md](docs/ROADMAP.md)
+· Server: [docs/SERVER_ADMINISTRATION.md](docs/SERVER_ADMINISTRATION.md).
 
 ## İmzalı katalog Releases
 
@@ -106,19 +131,22 @@ minisign -Vm catalog.json -p keys/minisign.pub -x catalog.json.minisig
 Bu, **komut bilgi bankası** imzasıdır; yerel PATH keşfi veya Nova-Store uygulama
 katalogu değildir ([docs/dual-concept.md](docs/dual-concept.md)).
 
-## Güvenlik
+## Security
 
-- AI taslakları `verification.status: draft` kalır; `verified` yalnız insan incelemesi sonrası.
-- Bilinmeyen bayrak / paket adı **uydurulmaz**; `unknown` / omit.
-- Doğrulama için tehlikeli komutlar **çalıştırılmaz**.
-- Politika: [SECURITY.md](SECURITY.md) · [docs/safety.md](docs/safety.md)
+- AI drafts stay `verification.status: draft`; `verified` only after human review.
+- Unknown flags / package names are **not invented**; omit or keep draft.
+- Dangerous commands are **not executed** to validate YAML; CI runners never
+  execute catalog examples.
+- Policy: [SECURITY.md](SECURITY.md) · [docs/SECURITY_MODEL.md](docs/SECURITY_MODEL.md) ·
+  [docs/safety.md](docs/safety.md)
 
-## Katkı
+## Contributing
 
-- [CONTRIBUTING.md](CONTRIBUTING.md)
-- Issue formları: bug · yeni komut · kategori · çeviri (`.github/ISSUE_TEMPLATE/`)
-- PR şablonu: `.github/PULL_REQUEST_TEMPLATE.md`
-- CI: validate → build → pytest → committed `content_sha256` eşleşmesi
+- [CONTRIBUTING.md](CONTRIBUTING.md) · [docs/ROADMAP.md](docs/ROADMAP.md)
+- Issue forms: bug · new command · category · translation (`.github/ISSUE_TEMPLATE/`)
+- PR template: `.github/PULL_REQUEST_TEMPLATE.md`
+- CI: validate → security gates → build → pytest → committed `content_sha256`
+  (Ubuntu / Windows / macOS matrix for Python tooling)
 
 ## İlişkiler
 
