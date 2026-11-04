@@ -94,7 +94,8 @@ related:
 - pacman
 - apt
 - dnf
-- snap
+- rpm-ostree
+- nix
 intent:
   tr:
   - flatpak kur
@@ -113,3 +114,5 @@ nova:
   concepts:
   - packages
   - package-managers
+  - package-managers-comparison
+  - nix-guix

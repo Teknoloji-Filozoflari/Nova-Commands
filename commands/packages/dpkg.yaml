@@ -85,9 +85,9 @@ examples:
   requires_elevated: true
 related:
 - apt
-- apt-get
 - rpm
 - pacman
+- apk
 intent:
   tr:
   - deb kur
@@ -105,3 +105,4 @@ nova:
   concepts:
   - packages
   - package-managers
+  - package-managers-comparison

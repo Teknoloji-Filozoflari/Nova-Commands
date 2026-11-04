@@ -241,8 +241,8 @@ package_managers:
   operating_systems:
   - linux
   repository_model: channels
-  status: skeleton
-  support_level: planned
+  status: draft
+  support_level: partial
   documentation:
   - https://coreos.github.io/rpm-ostree/
   cli_names:
@@ -376,8 +376,8 @@ package_managers:
   operating_systems:
   - linux
   repository_model: central-repos
-  status: skeleton
-  support_level: planned
+  status: draft
+  support_level: partial
   documentation:
   - https://en.opensuse.org/SDB:Zypper_manual
   cli_names:
@@ -399,8 +399,8 @@ package_managers:
   operating_systems:
   - linux
   repository_model: central-repos
-  status: skeleton
-  support_level: planned
+  status: draft
+  support_level: partial
   documentation:
   - https://wiki.alpinelinux.org/wiki/Alpine_Package_Keeper
   cli_names:
@@ -420,8 +420,8 @@ package_managers:
   operating_systems:
   - linux
   repository_model: ports-tree
-  status: skeleton
-  support_level: planned
+  status: draft
+  support_level: partial
   documentation:
   - https://wiki.gentoo.org/wiki/Portage
   cli_names:
@@ -442,8 +442,8 @@ package_managers:
   operating_systems:
   - linux
   repository_model: central-repos
-  status: skeleton
-  support_level: planned
+  status: draft
+  support_level: partial
   documentation:
   - https://docs.voidlinux.org/xbps/
   cli_names:
@@ -465,8 +465,8 @@ package_managers:
   operating_systems:
   - linux
   repository_model: central-repos
-  status: skeleton
-  support_level: planned
+  status: draft
+  support_level: partial
   documentation:
   - https://help.getsol.us/docs/user/software/package-management/eopkg
   cli_names:
@@ -486,8 +486,8 @@ package_managers:
   operating_systems:
   - linux
   repository_model: central-repos
-  status: skeleton
-  support_level: planned
+  status: draft
+  support_level: partial
   documentation:
   - http://www.slackware.com/config/packages.php
   cli_names:
@@ -510,8 +510,8 @@ package_managers:
   operating_systems:
   - linux
   repository_model: central-repos
-  status: skeleton
-  support_level: planned
+  status: draft
+  support_level: partial
   documentation:
   - https://openwrt.org/docs/guide-user/additional-software/opkg
   cli_names:
@@ -532,8 +532,8 @@ package_managers:
   - linux
   - macos
   repository_model: flakes
-  status: skeleton
-  support_level: planned
+  status: draft
+  support_level: partial
   documentation:
   - https://nixos.org/manual/nix/stable/
   cli_names:
@@ -558,8 +558,8 @@ package_managers:
   operating_systems:
   - linux
   repository_model: store-profiles
-  status: skeleton
-  support_level: planned
+  status: draft
+  support_level: partial
   documentation:
   - https://guix.gnu.org/manual/en/html_node/
   cli_names:

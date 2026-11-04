@@ -1,0 +1,73 @@
+schema_version: 2
+id: upgradepkg
+name: upgradepkg
+kind: package_manager
+category: packages
+summary:
+  tr: Slackware düşük seviye paket yükseltme.
+  en: Slackware low-level package upgrade.
+description:
+  tr: upgradepkg yerel paket dosyasıyla kurulu paketi yükseltir/değiştirir. Resmi depo akışı için slackpkg
+    tercih edilir.
+  en: upgradepkg upgrades/replaces an installed package from a local package file. Prefer slackpkg for
+    official repo workflows.
+tags:
+- packages
+- slackware
+risk: dangerous
+requires_elevated: true
+platforms:
+- linux
+operating_systems:
+- linux
+package_refs:
+- manager: slackpkg
+  package: pkgtools
+  distributions:
+  - slackware
+install_notes:
+  tr: Slackware pkgtools parçasıdır.
+  en: Part of Slackware pkgtools.
+flags:
+- flag: --install-new
+  meaning:
+    tr: Yeni paketi kur (yoksa).
+    en: Install if not present.
+  verified: false
+- flag: --reinstall
+  meaning:
+    tr: Aynı sürümü yeniden kur.
+    en: Reinstall same version.
+  verified: false
+examples:
+- title:
+    tr: Yükselt
+    en: Upgrade
+  command: sudo upgradepkg package-name.txz
+  explanation:
+    tr: Yerel paket dosyasıyla yükseltir.
+    en: Upgrades using a local package file.
+  risk: dangerous
+  requires_elevated: true
+related:
+- slackpkg
+- installpkg
+- removepkg
+intent:
+  tr:
+  - upgradepkg
+  - slackware yükselt
+  en:
+  - upgradepkg
+  - slackware upgrade package
+verification:
+  status: draft
+  sources:
+  - http://www.slackware.com/config/packages.php
+  - https://manpages.org/upgradepkg
+  notes: Agent-authored Faz 4 draft from official docs; not human-verified.
+nova:
+  concepts:
+  - packages
+  - package-managers
+  - package-managers-comparison

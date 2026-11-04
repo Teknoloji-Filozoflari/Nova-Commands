@@ -1,0 +1,99 @@
+schema_version: 2
+id: xbps-query
+name: xbps-query
+kind: package_manager
+category: packages
+summary:
+  tr: Void Linux XBPS sorgu aracı.
+  en: Void Linux XBPS query tool.
+description:
+  tr: xbps-query yerel ve uzak XBPS paket veritabanını sorgular. Kurulum yapmaz; salt okuma işlemleri
+    için güvenlidir.
+  en: xbps-query inspects local and remote XBPS package databases. It does not install packages; read-only
+    queries are safe.
+tags:
+- packages
+- void
+- xbps
+risk: safe
+requires_elevated: false
+platforms:
+- linux
+operating_systems:
+- linux
+package_refs:
+- manager: xbps
+  package: xbps
+  distributions:
+  - void
+install_notes:
+  tr: Void tabanında xbps ile gelir.
+  en: Ships with xbps on Void.
+flags:
+- flag: -l
+  meaning:
+    tr: Kurulu paketleri listele.
+    en: List installed packages.
+  verified: false
+- flag: -Rs
+  meaning:
+    tr: Depoda ara.
+    en: Search repositories.
+  verified: false
+- flag: -f
+  meaning:
+    tr: Paketin dosyalarını listele.
+    en: List files in a package.
+  verified: false
+- flag: -o
+  meaning:
+    tr: Dosya sahibi paketi bul.
+    en: Find package owning a file.
+  verified: false
+- flag: -S
+  meaning:
+    tr: Paket özeti göster.
+    en: Show package summary.
+  verified: false
+examples:
+- title:
+    tr: Ara
+    en: Search
+  command: xbps-query -Rs ripgrep
+  explanation:
+    tr: Depoda ripgrep arar.
+    en: Searches repos for ripgrep.
+  risk: safe
+  requires_elevated: false
+- title:
+    tr: Dosya sahibi
+    en: File owner
+  command: xbps-query -o /usr/bin/ls
+  explanation:
+    tr: Dosyayı sağlayan paketi bulur.
+    en: Finds the package owning a file.
+  risk: safe
+  requires_elevated: false
+related:
+- xbps-install
+- xbps-remove
+- pacman
+- dpkg
+intent:
+  tr:
+  - xbps sorgu
+  - void paket ara
+  en:
+  - xbps-query
+  - void search package
+verification:
+  status: draft
+  sources:
+  - https://docs.voidlinux.org/xbps/
+  - https://man.voidlinux.org/xbps-query.1
+  notes: Agent-authored Faz 4 draft from official docs; not human-verified.
+nova:
+  concepts:
+  - packages
+  - package-managers
+  - package-managers-comparison

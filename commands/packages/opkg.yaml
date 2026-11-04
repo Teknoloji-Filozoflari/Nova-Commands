@@ -1,0 +1,107 @@
+schema_version: 2
+id: opkg
+name: opkg
+kind: package_manager
+category: packages
+summary:
+  tr: OpenWrt paket yöneticisi (opkg).
+  en: OpenWrt package manager (opkg).
+description:
+  tr: opkg, OpenWrt yönlendirici/firmware ortamlarında ipk paketlerini yönetir. Masaüstü dağıtım apt/pacman
+    karşılığı değildir; flash alanı ve mimari kısıtlarına dikkat edin.
+  en: opkg manages ipk packages on OpenWrt router/firmware environments. It is not a desktop apt/pacman
+    equivalent; watch flash space and architecture constraints.
+tags:
+- packages
+- openwrt
+- embedded
+risk: dangerous
+requires_elevated: true
+platforms:
+- linux
+operating_systems:
+- linux
+package_refs:
+- manager: opkg
+  package: opkg
+  distributions:
+  - openwrt
+install_notes:
+  tr: OpenWrt görüntülerinde gelir. Arch masaüstü için pacman kullanın.
+  en: Ships in OpenWrt images. On Arch desktops use pacman.
+flags:
+- flag: update
+  meaning:
+    tr: Paket listesini yenile.
+    en: Refresh package lists.
+  verified: false
+- flag: install
+  meaning:
+    tr: Paket kur.
+    en: Install packages.
+  verified: false
+- flag: remove
+  meaning:
+    tr: Paket kaldır.
+    en: Remove packages.
+  verified: false
+- flag: list
+  meaning:
+    tr: Paketleri listele.
+    en: List packages.
+  verified: false
+- flag: find
+  meaning:
+    tr: Ara.
+    en: Find/search packages.
+  verified: false
+examples:
+- title:
+    tr: Liste yenile
+    en: Update lists
+  command: opkg update
+  explanation:
+    tr: Depo indekslerini yeniler (cihazda root gerekebilir).
+    en: Refreshes repo indexes (may need root on device).
+  risk: caution
+  requires_elevated: true
+- title:
+    tr: Kur
+    en: Install
+  command: opkg install luci
+  explanation:
+    tr: Örnek paket kurar — flash alanını kontrol edin.
+    en: Installs an example package — check flash space.
+  risk: dangerous
+  requires_elevated: true
+- title:
+    tr: Ara
+    en: Find
+  command: opkg find '*wireguard*'
+  explanation:
+    tr: İsim kalıbıyla arar.
+    en: Searches by name pattern.
+  risk: safe
+  requires_elevated: false
+related:
+- apk
+- apt
+- pacman
+intent:
+  tr:
+  - openwrt paket
+  - opkg kur
+  en:
+  - opkg install
+  - openwrt package
+verification:
+  status: draft
+  sources:
+  - https://openwrt.org/docs/guide-user/additional-software/opkg
+  - https://openwrt.org/docs/guide-user/additional-software/opkg-package-manager
+  notes: Agent-authored Faz 4 draft from official docs; not human-verified.
+nova:
+  concepts:
+  - packages
+  - package-managers
+  - package-managers-comparison

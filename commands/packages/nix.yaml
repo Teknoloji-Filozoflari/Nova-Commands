@@ -1,0 +1,142 @@
+schema_version: 2
+id: nix
+name: nix
+kind: package_manager
+category: packages
+summary:
+  tr: Nix paket yöneticisi (modern CLI).
+  en: Nix package manager (modern CLI).
+description:
+  tr: Nix, NixOS’a özgü olmayan, Linux ve macOS’ta da çalışan deklaratif paket yöneticisidir. Güncel iş
+    akışları `nix profile`, `nix develop`, `nix run`, `nix build`, `nix flake` ve `nix shell` üzerinedir.
+    Eski `nix-env` / klasik `nix-shell` yollarını modern CLI ile karıştırmayın.
+  en: Nix is a declarative package manager usable beyond NixOS — including other Linux distros and macOS.
+    Modern workflows center on `nix profile`, `nix develop`, `nix run`, `nix build`, `nix flake`, and
+    `nix shell`. Do not mix legacy `nix-env` / classic `nix-shell` with the modern CLI.
+tags:
+- packages
+- nix
+- nixos
+- declarative
+risk: dangerous
+requires_elevated: true
+platforms:
+- linux
+- macos
+operating_systems:
+- linux
+- macos
+package_refs:
+- manager: nix
+  package: nix
+  distributions:
+  - nixos
+install_notes:
+  tr: NixOS’ta tabandır. Diğer Linux/macOS için resmi kurulum belgelerini izleyin. Arch host’ta sistem
+    PM olarak pacman önceliklidir; Nix yan yana kullanılabilir.
+  en: Base on NixOS. On other Linux/macOS follow official install docs. On Arch hosts pacman remains the
+    system PM; Nix can coexist.
+flags:
+- flag: profile
+  meaning:
+    tr: Kullanıcı profili yönetimi.
+    en: User profile management.
+  verified: false
+- flag: develop
+  meaning:
+    tr: Geliştirme kabuğu (flake).
+    en: Dev shell (flake).
+  verified: false
+- flag: run
+  meaning:
+    tr: Paketi çalıştır (kurmadan).
+    en: Run a package without lasting install.
+  verified: false
+- flag: build
+  meaning:
+    tr: Türev derle.
+    en: Build a derivation.
+  verified: false
+- flag: flake
+  meaning:
+    tr: Flake alt komutları.
+    en: Flake subcommands.
+  verified: false
+- flag: shell
+  meaning:
+    tr: Geçici ortam kabuğu.
+    en: Temporary environment shell.
+  verified: false
+- flag: search
+  meaning:
+    tr: Paket ara.
+    en: Search packages.
+  verified: false
+examples:
+- title:
+    tr: Ara
+    en: Search
+  command: nix search nixpkgs ripgrep
+  explanation:
+    tr: nixpkgs içinde ripgrep arar.
+    en: Searches nixpkgs for ripgrep.
+  risk: safe
+  requires_elevated: false
+- title:
+    tr: Çalıştır
+    en: Run
+  command: nix run nixpkgs#hello
+  explanation:
+    tr: Paketi kalıcı kurmadan çalıştırır.
+    en: Runs a package without a lasting install.
+  risk: caution
+  requires_elevated: false
+- title:
+    tr: Profil kur
+    en: Profile install
+  command: nix profile install nixpkgs#curl
+  explanation:
+    tr: Kullanıcı profiline curl ekler (modern yol).
+    en: Adds curl to the user profile (modern path).
+  risk: caution
+  requires_elevated: false
+- title:
+    tr: Geliştirme kabuğu
+    en: Dev shell
+  command: nix develop
+  explanation:
+    tr: Flake tabanlı geliştirme ortamı açar.
+    en: Opens a flake-based development environment.
+  risk: safe
+  requires_elevated: false
+related:
+- nix-shell
+- nix-env
+- nixos-rebuild
+- nix-collect-garbage
+- guix
+- pacman
+intent:
+  tr:
+  - nix kur
+  - nix flake
+  - nix search
+  en:
+  - nix profile install
+  - nix flake
+  - nix search
+verification:
+  status: draft
+  sources:
+  - https://nixos.org/manual/nix/stable/
+  - https://nix.dev/manual/nix/stable/
+  - https://nixos.org/guides/how-nix-works/
+  notes: Agent-authored Faz 4 draft from official docs; not human-verified.
+nova:
+  concepts:
+  - packages
+  - package-managers
+  - package-managers-comparison
+  - nix-guix
+  ui_priority: 70
+  favorite_eligible: true

@@ -1,0 +1,122 @@
+schema_version: 2
+id: apk
+name: apk
+kind: package_manager
+category: packages
+summary:
+  tr: Alpine Linux paket yöneticisi (apk).
+  en: Alpine Linux package manager (apk).
+description:
+  tr: apk (Alpine Package Keeper) Alpine Linux’un sistem paket yöneticisidir. Hafif konteyner imajlarında
+    da yaygındır. Android APK dosya formatı ile karıştırılmamalıdır.
+  en: apk (Alpine Package Keeper) is Alpine Linux’s system package manager. It is also common in minimal
+    container images. Do not confuse it with Android APK application packages.
+tags:
+- packages
+- alpine
+risk: dangerous
+requires_elevated: true
+platforms:
+- linux
+operating_systems:
+- linux
+package_refs:
+- manager: apk
+  package: apk-tools
+  distributions:
+  - alpine
+install_notes:
+  tr: Alpine tabanında gelir. Arch host’ta sistem PM değildir; Arch için pacman kullanın.
+  en: Ships with Alpine. Not a system PM on Arch hosts; use pacman there.
+flags:
+- flag: update
+  meaning:
+    tr: İndeks yenile.
+    en: Refresh package indexes.
+  verified: false
+- flag: upgrade
+  meaning:
+    tr: Kurulu paketleri yükselt.
+    en: Upgrade installed packages.
+  verified: false
+- flag: add
+  meaning:
+    tr: Paket kur.
+    en: Install packages.
+  verified: false
+- flag: del
+  meaning:
+    tr: Paket kaldır.
+    en: Remove packages.
+  verified: false
+- flag: search
+  meaning:
+    tr: Ara.
+    en: Search packages.
+  verified: false
+- flag: info
+  meaning:
+    tr: Paket bilgisi.
+    en: Show package information.
+  verified: false
+examples:
+- title:
+    tr: Güncelle + yükselt
+    en: Update + upgrade
+  command: sudo apk update && sudo apk upgrade
+  explanation:
+    tr: İndeksleri yeniler ve paketleri yükseltir.
+    en: Refreshes indexes and upgrades packages.
+  risk: dangerous
+  requires_elevated: true
+- title:
+    tr: Kur
+    en: Install
+  command: sudo apk add curl
+  explanation:
+    tr: curl kurar.
+    en: Installs curl.
+  risk: caution
+  requires_elevated: true
+- title:
+    tr: Ara
+    en: Search
+  command: apk search ripgrep
+  explanation:
+    tr: Depoda ara.
+    en: Search repositories.
+  risk: safe
+  requires_elevated: false
+- title:
+    tr: Bilgi
+    en: Info
+  command: apk info -e curl
+  explanation:
+    tr: curl kurulu mu kontrol eder.
+    en: Checks whether curl is installed.
+  risk: safe
+  requires_elevated: false
+related:
+- pacman
+- apt
+- opkg
+intent:
+  tr:
+  - alpine paket kur
+  - apk add
+  - apk güncelle
+  en:
+  - apk add
+  - alpine install
+  - apk upgrade
+verification:
+  status: draft
+  sources:
+  - https://wiki.alpinelinux.org/wiki/Alpine_Package_Keeper
+  - https://docs.alpinelinux.org/user-handbook/0.1a/Working/apk.html
+  notes: Agent-authored Faz 4 draft from official docs; not human-verified.
+nova:
+  concepts:
+  - packages
+  - package-managers
+  - package-managers-comparison

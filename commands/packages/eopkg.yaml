@@ -1,0 +1,105 @@
+schema_version: 2
+id: eopkg
+name: eopkg
+kind: package_manager
+category: packages
+summary:
+  tr: Solus paket yöneticisi (eopkg).
+  en: Solus package manager (eopkg).
+description:
+  tr: eopkg, Solus dağıtımının paket yöneticisidir. Kurulum, yükseltme, arama ve kaldırma işlemlerini
+    yönetir.
+  en: eopkg is Solus’s package manager. It handles install, upgrade, search, and remove operations.
+tags:
+- packages
+- solus
+risk: dangerous
+requires_elevated: true
+platforms:
+- linux
+operating_systems:
+- linux
+package_refs:
+- manager: eopkg
+  package: eopkg
+  distributions:
+  - solus
+install_notes:
+  tr: Solus tabanında gelir. Arch için pacman kullanın.
+  en: Ships on Solus. On Arch use pacman.
+flags:
+- flag: upgrade
+  meaning:
+    tr: Sistem paketlerini yükselt.
+    en: Upgrade system packages.
+  verified: false
+- flag: install
+  meaning:
+    tr: Paket kur.
+    en: Install packages.
+  verified: false
+- flag: remove
+  meaning:
+    tr: Paket kaldır.
+    en: Remove packages.
+  verified: false
+- flag: search
+  meaning:
+    tr: Ara.
+    en: Search packages.
+  verified: false
+- flag: info
+  meaning:
+    tr: Paket bilgisi.
+    en: Show package info.
+  verified: false
+examples:
+- title:
+    tr: Yükselt
+    en: Upgrade
+  command: sudo eopkg upgrade
+  explanation:
+    tr: Sistem paketlerini yükseltir.
+    en: Upgrades system packages.
+  risk: dangerous
+  requires_elevated: true
+- title:
+    tr: Kur
+    en: Install
+  command: sudo eopkg install curl
+  explanation:
+    tr: curl kurar.
+    en: Installs curl.
+  risk: caution
+  requires_elevated: true
+- title:
+    tr: Ara
+    en: Search
+  command: eopkg search ripgrep
+  explanation:
+    tr: Depoda ara.
+    en: Search repositories.
+  risk: safe
+  requires_elevated: false
+related:
+- pacman
+- apt
+- dnf
+- zypper
+intent:
+  tr:
+  - solus kur
+  - eopkg yükselt
+  en:
+  - eopkg install
+  - solus upgrade
+verification:
+  status: draft
+  sources:
+  - https://help.getsol.us/docs/user/software/package-management/eopkg
+  notes: Agent-authored Faz 4 draft from official docs; not human-verified.
+nova:
+  concepts:
+  - packages
+  - package-managers
+  - package-managers-comparison

@@ -71,10 +71,12 @@ examples:
   risk: caution
   requires_elevated: true
 related:
-- apt-get
 - dpkg
 - pacman
 - dnf
+- zypper
+- apk
+- opkg
 intent:
   tr:
   - ubuntu paket kur
@@ -92,3 +94,4 @@ nova:
   concepts:
   - packages
   - package-managers
+  - package-managers-comparison

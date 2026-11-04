@@ -1,0 +1,71 @@
+schema_version: 2
+id: removepkg
+name: removepkg
+kind: package_manager
+category: packages
+summary:
+  tr: Slackware düşük seviye paket kaldırıcı.
+  en: Slackware low-level package remover.
+description:
+  tr: removepkg kurulu bir Slackware paketini kaldırır. Bağımlılık analizi yapmaz; dikkatli kullanın.
+  en: removepkg removes an installed Slackware package. It does not analyze dependencies; use carefully.
+tags:
+- packages
+- slackware
+risk: dangerous
+requires_elevated: true
+platforms:
+- linux
+operating_systems:
+- linux
+package_refs:
+- manager: slackpkg
+  package: pkgtools
+  distributions:
+  - slackware
+install_notes:
+  tr: Slackware pkgtools parçasıdır.
+  en: Part of Slackware pkgtools.
+flags:
+- flag: -warn
+  meaning:
+    tr: Uyarı modu.
+    en: Warn mode.
+  verified: false
+- flag: -preserve
+  meaning:
+    tr: Korunan dosyaları tut.
+    en: Preserve protected files.
+  verified: false
+examples:
+- title:
+    tr: Kaldır
+    en: Remove
+  command: sudo removepkg package-name
+  explanation:
+    tr: Kurulu paketi kaldırır.
+    en: Removes an installed package.
+  risk: dangerous
+  requires_elevated: true
+related:
+- slackpkg
+- installpkg
+- upgradepkg
+intent:
+  tr:
+  - removepkg
+  - slackware paket sil
+  en:
+  - removepkg
+  - slackware remove package
+verification:
+  status: draft
+  sources:
+  - http://www.slackware.com/config/packages.php
+  - https://manpages.org/removepkg
+  notes: Agent-authored Faz 4 draft from official docs; not human-verified.
+nova:
+  concepts:
+  - packages
+  - package-managers
+  - package-managers-comparison

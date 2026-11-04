@@ -93,6 +93,8 @@ related:
 - dnf
 - dpkg
 - pacman
+- zypper
+- rpm-ostree
 intent:
   tr:
   - rpm sorgu
@@ -110,3 +112,4 @@ nova:
   concepts:
   - packages
   - package-managers
+  - package-managers-comparison

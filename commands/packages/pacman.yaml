@@ -93,9 +93,14 @@ examples:
   requires_elevated: false
 related:
 - paru
-- yay
 - apt
 - dnf
+- zypper
+- apk
+- xbps-install
+- nix
+- guix
+- emerge
 intent:
   tr:
   - arch paket kur
@@ -117,3 +122,5 @@ nova:
   - packages
   - arch
   - package-managers
+  - package-managers-comparison
+  - nix-guix

@@ -1,0 +1,81 @@
+schema_version: 2
+id: nix-shell
+name: nix-shell
+kind: package_manager
+category: packages
+summary:
+  tr: Klasik Nix geçici kabuk (eski yol).
+  en: Classic Nix ephemeral shell (legacy path).
+description:
+  tr: nix-shell geçici Nix ortamları açar. Yeni iş akışlarında `nix shell` / `nix develop` tercih edilir;
+    bu kayıt klasik komutu ayırır.
+  en: nix-shell opens ephemeral Nix environments. Prefer `nix shell` / `nix develop` for new workflows;
+    this record isolates the classic command.
+tags:
+- packages
+- nix
+- legacy
+risk: caution
+requires_elevated: false
+platforms:
+- linux
+- macos
+operating_systems:
+- linux
+- macos
+package_refs:
+- manager: nix
+  package: nix
+  distributions:
+  - nixos
+install_notes:
+  tr: 'Nix kurulumuyla gelir. Modern alternatif: `nix shell` / `nix develop`.'
+  en: 'Ships with Nix. Modern alternatives: `nix shell` / `nix develop`.'
+flags:
+- flag: -p
+  meaning:
+    tr: Paketlerle kabuk aç.
+    en: Open shell with packages.
+  verified: false
+- flag: --pure
+  meaning:
+    tr: Saf ortam (daha az sızıntı).
+    en: More pure environment.
+  verified: false
+- flag: --run
+  meaning:
+    tr: Komutu kabukta çalıştır.
+    en: Run command inside the shell.
+  verified: false
+examples:
+- title:
+    tr: Paketlerle kabuk
+    en: Shell with packages
+  command: nix-shell -p python3
+  explanation:
+    tr: python3 içeren geçici kabuk (klasik).
+    en: Ephemeral shell with python3 (classic).
+  risk: safe
+  requires_elevated: false
+related:
+- nix
+- nix-env
+- guix
+intent:
+  tr:
+  - nix-shell
+  - geçici nix kabuğu
+  en:
+  - nix-shell
+  - temporary nix shell
+verification:
+  status: draft
+  sources:
+  - https://nixos.org/manual/nix/stable/command-ref/nix-shell.html
+  notes: Legacy/classic Nix CLI; prefer modern `nix shell`/`nix develop`. Draft — not human-verified.
+nova:
+  concepts:
+  - packages
+  - package-managers
+  - package-managers-comparison
+  - nix-guix

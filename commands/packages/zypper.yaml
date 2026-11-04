@@ -1,0 +1,139 @@
+schema_version: 2
+id: zypper
+name: zypper
+kind: package_manager
+category: packages
+summary:
+  tr: openSUSE/SUSE paket yöneticisi.
+  en: openSUSE/SUSE package manager.
+description:
+  tr: Zypper, openSUSE Leap/Tumbleweed ve SLES üzerinde RPM tabanlı yüksek seviye paket yöneticisidir.
+    Günlük kurulum/güncelleme için kullanılır; düşük seviye sorgularda rpm de geçerlidir. Tumbleweed’de
+    dağıtım yükseltmesi için `dup` yolu Leap’teki `update` ile karıştırılmamalıdır.
+  en: Zypper is the high-level RPM package manager on openSUSE Leap/Tumbleweed and SLES. Use it for everyday
+    install/upgrade; rpm remains useful for low-level queries. On Tumbleweed, distribution upgrades use
+    `dup` — do not confuse with Leap’s `update` path.
+tags:
+- packages
+- opensuse
+- suse
+- rpm
+risk: dangerous
+requires_elevated: true
+platforms:
+- linux
+operating_systems:
+- linux
+package_refs:
+- manager: zypper
+  package: zypper
+  distributions:
+  - opensuse-leap
+  - opensuse-tumbleweed
+  - sles
+install_notes:
+  tr: openSUSE/SLES tabanında gelir. Arch host’ta sistem paketi olarak kullanılmaz; Arch için pacman tercih
+    edin.
+  en: Ships on openSUSE/SLES. Not a system PM on Arch hosts; prefer pacman there.
+flags:
+- flag: refresh
+  meaning:
+    tr: Depo indekslerini yenile.
+    en: Refresh repository indexes.
+  verified: false
+- flag: install
+  meaning:
+    tr: Paket kur (alt komut).
+    en: Install packages (subcommand).
+  verified: false
+- flag: update
+  meaning:
+    tr: Güvenlik/kararlı güncelleme (Leap).
+    en: Patch/update packages (Leap).
+  verified: false
+- flag: dup
+  meaning:
+    tr: Dağıtım yükseltmesi (Tumbleweed).
+    en: Distro upgrade (Tumbleweed).
+  verified: false
+- flag: search
+  meaning:
+    tr: Depolarda ara.
+    en: Search repositories.
+  verified: false
+- flag: remove
+  meaning:
+    tr: Paket kaldır.
+    en: Remove packages.
+  verified: false
+examples:
+- title:
+    tr: İndeks yenile
+    en: Refresh repos
+  command: sudo zypper refresh
+  explanation:
+    tr: Depo metadata’sını yeniler.
+    en: Refreshes repository metadata.
+  risk: caution
+  requires_elevated: true
+- title:
+    tr: Kur
+    en: Install
+  command: sudo zypper install curl
+  explanation:
+    tr: curl paketini kurar.
+    en: Installs the curl package.
+  risk: caution
+  requires_elevated: true
+- title:
+    tr: Leap güncelle
+    en: Leap update
+  command: sudo zypper update
+  explanation:
+    tr: Leap’te paket güncellemesi (dup değil).
+    en: Package updates on Leap (not dup).
+  risk: dangerous
+  requires_elevated: true
+- title:
+    tr: Tumbleweed dup
+    en: Tumbleweed dup
+  command: sudo zypper dup
+  explanation:
+    tr: Tumbleweed dağıtım yükseltmesi — dikkatli kullanın.
+    en: Tumbleweed distribution upgrade — use carefully.
+  risk: dangerous
+  requires_elevated: true
+- title:
+    tr: Ara
+    en: Search
+  command: zypper search ripgrep
+  explanation:
+    tr: Depoda ripgrep arar.
+    en: Searches repos for ripgrep.
+  risk: safe
+  requires_elevated: false
+related:
+- rpm
+- dnf
+- pacman
+- apt
+intent:
+  tr:
+  - zypper kur
+  - opensuse güncelle
+  - zypper ara
+  en:
+  - zypper install
+  - opensuse update
+  - zypper search
+verification:
+  status: draft
+  sources:
+  - https://en.opensuse.org/SDB:Zypper_manual
+  - https://doc.opensuse.org/documentation/leap/reference/html/book-reference/cha-sw-cl.html
+  notes: Agent-authored Faz 4 draft from official docs; not human-verified.
+nova:
+  concepts:
+  - packages
+  - package-managers
+  - package-managers-comparison

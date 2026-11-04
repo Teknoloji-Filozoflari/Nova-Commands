@@ -1,0 +1,96 @@
+schema_version: 2
+id: xbps-install
+name: xbps-install
+kind: package_manager
+category: packages
+summary:
+  tr: Void Linux XBPS kurulum aracı.
+  en: Void Linux XBPS install tool.
+description:
+  tr: xbps-install, Void Linux XBPS paket sisteminde kurulum ve güncelleme yapar. Sorgu için xbps-query,
+    kaldırma için xbps-remove kullanılır.
+  en: xbps-install installs and upgrades packages in Void Linux’s XBPS system. Use xbps-query for queries
+    and xbps-remove for removal.
+tags:
+- packages
+- void
+- xbps
+risk: dangerous
+requires_elevated: true
+platforms:
+- linux
+operating_systems:
+- linux
+package_refs:
+- manager: xbps
+  package: xbps
+  distributions:
+  - void
+install_notes:
+  tr: Void tabanında gelir. Arch için pacman kullanın.
+  en: Ships on Void. On Arch use pacman.
+flags:
+- flag: -S
+  meaning:
+    tr: Depo indeksini senkronize et.
+    en: Sync repository index.
+  verified: false
+- flag: -u
+  meaning:
+    tr: Paketleri güncelle / yükselt.
+    en: Update/upgrade packages.
+  verified: false
+- flag: -y
+  meaning:
+    tr: Onayları otomatik kabul et.
+    en: Assume yes.
+  verified: false
+- flag: -n
+  meaning:
+    tr: Kuru çalıştırma.
+    en: Dry run.
+  verified: false
+examples:
+- title:
+    tr: Senkron + yükselt
+    en: Sync + upgrade
+  command: sudo xbps-install -Su
+  explanation:
+    tr: İndeksi yeniler ve sistemi yükseltir.
+    en: Refreshes the index and upgrades the system.
+  risk: dangerous
+  requires_elevated: true
+- title:
+    tr: Kur
+    en: Install
+  command: sudo xbps-install curl
+  explanation:
+    tr: curl kurar.
+    en: Installs curl.
+  risk: caution
+  requires_elevated: true
+related:
+- xbps-query
+- xbps-remove
+- pacman
+- apk
+intent:
+  tr:
+  - void kur
+  - xbps-install
+  - void güncelle
+  en:
+  - xbps-install
+  - void upgrade
+  - void install
+verification:
+  status: draft
+  sources:
+  - https://docs.voidlinux.org/xbps/
+  - https://man.voidlinux.org/xbps-install.1
+  notes: Agent-authored Faz 4 draft from official docs; not human-verified.
+nova:
+  concepts:
+  - packages
+  - package-managers
+  - package-managers-comparison

@@ -4,14 +4,16 @@ title:
   tr: Paket yöneticileri
   en: Package managers
 summary:
-  tr: pacman, apt, dnf ve paket ↔ komut ilişkisi (Arch öncelikli notlar).
-  en: pacman, apt, dnf, and package ↔ command mapping (Arch-first notes).
+  tr: Linux sistem PM’leri (pacman önce), Nix/Guix ve atomik ostree notları.
+  en: Linux system PMs (pacman first), Nix/Guix, and atomic ostree notes.
 difficulty: beginner
 tags:
   - packages
   - pacman
   - apt
   - dnf
+  - nix
+  - guix
 related_commands:
   - pacman
   - apt
@@ -20,58 +22,93 @@ related_commands:
   - rpm
   - flatpak
   - paru
+  - zypper
+  - apk
+  - emerge
+  - xbps-install
+  - eopkg
+  - slackpkg
+  - nix
+  - guix
+  - opkg
+  - rpm-ostree
 related_concepts:
   - packages
   - arch
   - path
   - package-managers-comparison
+  - nix-guix
 see_also:
   - "Arch Wiki: pacman"
   - "man apt / man dnf"
   - "docs/package-managers-comparison.md"
   - "concepts/package-managers-comparison.yaml"
+  - "concepts/nix-guix.yaml"
 body:
   tr: |
     Dağıtımlar yazılıımı *paket* olarak kurar. Aynı komut farklı paket adında olabilir;
     bilinmeyen ad **uydurulmaz** (omit / `draft`).
 
-    **Birinci sınıf yöneticiler (bu banka):**
+    **Birinci sınıf yöneticiler (çekirdek):**
     - **Arch — pacman:** `pacman -Syu` sistem güncellemesi; `pacman -S paket` kurulum;
-      `pacman -Ss anahtar` arama; `pacman -Ql paket` dosya listesi.
-      AUR yardımcıları (ör. `paru`) resmi depoda olmayabilir — ayrı not/draft.
-    - **Debian/Ubuntu — apt (+ dpkg):** `apt update` / `apt install`; düşük seviye
-      `dpkg -i` / `dpkg -l`.
+      `pacman -Ss anahtar` arama. AUR yardımcıları (ör. `paru`) resmi depoda olmayabilir.
+    - **Debian/Ubuntu — apt (+ dpkg):** `apt update` / `apt install`; düşük seviye `dpkg`.
     - **Fedora/RHEL — dnf (+ rpm):** `dnf install` / `dnf upgrade`; `rpm -q` sorguları.
 
-    **Flatpak:** Dağıtımdan bağımsız uygulama sandboxes; `flatpak install` / `flatpak run`.
+    **Genişleyen Linux PM’ler (Faz 4, çoğu draft):**
+    - **openSUSE/SUSE — zypper** (Leap `update` ≠ Tumbleweed `dup`)
+    - **Alpine — apk** (Android APK ile karıştırma)
+    - **Gentoo — emerge / Portage** (kaynak derleme, USE / `@world`)
+    - **Void — xbps-install / query / remove**
+    - **Solus — eopkg** · **Slackware — slackpkg** (+ installpkg/removepkg/upgradepkg)
+    - **OpenWrt — opkg** (gömülü; flash alanı)
+    - **Atomik Fedora — rpm-ostree** (klasik dnf modeli değil; genelde reboot)
+
+    **Deklaratif ekosistemler:** Nix (NixOS + diğer Linux/macOS) ve GNU Guix —
+    ayrı makale: `concepts/nix-guix.yaml`. Eski `nix-env` ile modern `nix profile`
+    karıştırılmaz.
+
+    **Flatpak:** Dağıtımdan bağımsız uygulama sandboxes; çekirdek toolchain yerine geçmez.
 
     **Nova tercihi:** Arch host’ta kurulum ipuçlarında **pacman / `packages.arch` önce**.
-    `install_notes` içinde Arch satırı üstte tutulur.
-
-    **Komut ≠ paket:** `which` ile bulunan ikili, paket adını kanıtlamaz; doğrulama için
-    distro paket veritabanı / man sayfası kullanılır. CI yıkıcı kurulum çalıştırmaz.
+    CI yıkıcı kurulum çalıştırmaz. `verification: verified` yalnızca insan incelemesi sonrası.
   en: |
     Distros install software as *packages*. The same command may live in differently
     named packages; unknown names are **not invented** (omit / `draft`).
 
-    **First-class managers in this bank:**
+    **First-class managers (core):**
     - **Arch — pacman:** `pacman -Syu` full upgrade; `pacman -S pkg` install;
-      `pacman -Ss keyword` search; `pacman -Ql pkg` file list.
-      AUR helpers (e.g. `paru`) may be unofficial — document carefully / draft.
-    - **Debian/Ubuntu — apt (+ dpkg):** `apt update` / `apt install`; lower-level
-      `dpkg -i` / `dpkg -l`.
+      `pacman -Ss keyword` search. AUR helpers (e.g. `paru`) may be unofficial.
+    - **Debian/Ubuntu — apt (+ dpkg):** `apt update` / `apt install`; lower-level `dpkg`.
     - **Fedora/RHEL — dnf (+ rpm):** `dnf install` / `dnf upgrade`; `rpm -q` queries.
 
-    **Flatpak:** Distro-agnostic sandboxed apps; `flatpak install` / `flatpak run`.
+    **Broader Linux PMs (Faz 4, mostly draft):**
+    - **openSUSE/SUSE — zypper** (Leap `update` ≠ Tumbleweed `dup`)
+    - **Alpine — apk** (not Android APK)
+    - **Gentoo — emerge / Portage** (source builds, USE / `@world`)
+    - **Void — xbps-install / query / remove**
+    - **Solus — eopkg** · **Slackware — slackpkg** (+ installpkg/removepkg/upgradepkg)
+    - **OpenWrt — opkg** (embedded; watch flash space)
+    - **Atomic Fedora — rpm-ostree** (not classic dnf; reboot often required)
 
-    **Nova preference:** On Arch hosts, prefer **pacman / `packages.arch` first** in
-    install hints; keep Arch lines at the top of `install_notes`.
+    **Declarative ecosystems:** Nix (NixOS + other Linux/macOS) and GNU Guix —
+    see `concepts/nix-guix.yaml`. Do not mix legacy `nix-env` with modern `nix profile`.
 
-    **Command ≠ package:** A PATH hit does not prove the package name; confirm via
-    distro package DB / man pages. CI does not run destructive installs to “test”.
+    **Flatpak:** Distro-agnostic sandboxed apps; does not replace the base toolchain.
+
+    **Nova preference:** On Arch hosts prefer **pacman / `packages.arch` first**.
+    CI does not run destructive installs. `verification: verified` only after human review.
 verification:
-  status: reviewed
+  status: draft
   sources:
     - "https://wiki.archlinux.org/title/Pacman"
-    - "man pacman / man apt / man dnf"
-  notes: "Agent-authored teaching article; Arch-first per project preferences."
+    - "https://wiki.archlinux.org/title/Pacman/Rosetta"
+    - "https://en.opensuse.org/SDB:Zypper_manual"
+    - "https://wiki.alpinelinux.org/wiki/Alpine_Package_Keeper"
+    - "https://wiki.gentoo.org/wiki/Portage"
+    - "https://docs.voidlinux.org/xbps/"
+    - "https://nixos.org/manual/nix/stable/"
+    - "https://guix.gnu.org/manual/en/html_node/"
+    - "https://coreos.github.io/rpm-ostree/"
+    - "https://openwrt.org/docs/guide-user/additional-software/opkg"
+  notes: "Faz 4 expansion; demoted to draft pending human review of new PM coverage."

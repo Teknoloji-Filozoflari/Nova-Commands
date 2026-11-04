@@ -72,12 +72,20 @@ package-manager and distribution registries (install-hint policy for Arch
 family remains pacman-first). Schema v2 `package_refs` should keep pacman
 first-class for Arch-family install hints.
 
+## Faz 4 Linux PM coverage
+
+Command bank now includes draft records for broader Linux package managers
+(zypper, apk, emerge, xbps-*, eopkg, slackpkg/pkgtools, nix*, guix, opkg,
+rpm-ostree) plus expanded comparison docs. Registry rows for those PMs are
+`status: draft` / `support_level: partial` where command content exists.
+**No `verified` without human review.** LICENSE and `keys/minisign.pub` unchanged.
+
 ## Out of scope (later fazes)
 
-- Migrating the 143 v1 commands onto `command.schema.v2.json` (Faz 3)
+- Windows / macOS / BSD **new command banks** (Faz 5–6)
 - Tasks / profiles **content** trees (schemas stubbed in Faz 2; content Faz 8)
 - Catalog index counts for registry kinds
-- Bumping catalog `schema_version` or rotating minisign keys
+- Rotating minisign keys / LICENSE changes
 
 ## Maintainer note
 
