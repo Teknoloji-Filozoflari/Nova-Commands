@@ -13,7 +13,11 @@
 ```
 commands/<category>/<id>.yaml   # curated entries
 concepts/<id>.yaml              # learnable concept articles (TR/EN)
-schema/*.json                   # JSON Schema (Draft 2020-12)
+schema/command.schema.json      # v1 — live commands/ bank
+schema/command.schema.v2.json   # v2 design (fixtures until Faz 3 migrate)
+schema/{task,profile,compatibility}.schema.json  # stubs (Faz 8 content)
+schema/*.json                   # JSON Schema (Draft 2020-12) + platform regs
+fixtures/schema-v2/             # soft-validate samples (not catalog content)
 metadata/categories.yaml        # §8.x taxonomy
 metadata/concepts.yaml          # concept registry (+ optional article:)
 metadata/operating-systems.yaml # Faz 1+ platform registries (additive)
@@ -28,16 +32,18 @@ metadata/support-levels.yaml
 metadata/catalog.json           # aggregate (kind: nova-commands-bank)
 metadata/search-index.json      # flattened search fields
 metadata/manifest.json          # counts + deterministic content_sha256
-scripts/validate_catalog.py     # CI gate (schema, i18n, concepts, platforms)
+scripts/validate_catalog.py     # CI gate (v1 bank, i18n, concepts, soft gates)
 scripts/validate_platform_registries.py  # soft registry consistency
+scripts/validate_schema_v2.py   # soft v2 + stub fixture check
 scripts/build_catalog.py        # catalog + index + manifest
-docs/                           # contracts + safety + NOVA_INTEGRATION
+docs/                           # contracts + safety + NOVA_INTEGRATION + DATA_SCHEMA
 tests/                          # pytest
 ```
 
 Platform registries keep OS ≠ distribution ≠ shell ≠ package-manager as
-separate models. See [PLATFORM_SUPPORT.md](PLATFORM_SUPPORT.md). Catalog
-`schema_version` remains **1** until command schema v2 migration.
+separate models. See [PLATFORM_SUPPORT.md](PLATFORM_SUPPORT.md) and
+[DATA_SCHEMA.md](DATA_SCHEMA.md). Catalog `schema_version` remains **1** until
+Faz 3 migrates the bank onto command schema v2.
 ## Verification pipeline
 
 ```

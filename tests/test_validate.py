@@ -105,6 +105,8 @@ def test_dual_concept_docs_exist() -> None:
         "nova-consumption.md",
         "NOVA_INTEGRATION.md",
         "safety.md",
+        "DATA_SCHEMA.md",
+        "PLATFORM_SUPPORT.md",
     ):
         assert (ROOT / "docs" / name).is_file()
 
@@ -227,3 +229,54 @@ def test_catalog_schema_version_unchanged() -> None:
     cat = json.loads((ROOT / "metadata" / "catalog.json").read_text(encoding="utf-8"))
     assert cat["schema_version"] == 1
     assert cat["kind"] == "nova-commands-bank"
+
+
+SCHEMA_V2_VALIDATE = ROOT / "scripts" / "validate_schema_v2.py"
+
+SCHEMA_V2_FILES = [
+    "command.schema.v2.json",
+    "task.schema.json",
+    "profile.schema.json",
+    "compatibility.schema.json",
+]
+
+
+def test_schema_v2_soft_validate() -> None:
+    proc = run(SCHEMA_V2_VALIDATE)
+    assert proc.returncode == 0, proc.stderr
+    assert "OK:" in proc.stdout
+
+
+def test_schema_v2_files_and_fixtures_exist() -> None:
+    for name in SCHEMA_V2_FILES:
+        assert (ROOT / "schema" / name).is_file(), name
+    fixtures = ROOT / "fixtures" / "schema-v2"
+    assert fixtures.is_dir()
+    assert (fixtures / "README.md").is_file()
+    assert list(fixtures.glob("command-*.yaml"))
+    assert list(fixtures.glob("task-*.yaml"))
+    assert list(fixtures.glob("profile-*.yaml"))
+    assert list(fixtures.glob("compatibility-*.yaml"))
+
+
+def test_schema_v2_distinct_from_v1() -> None:
+    v1 = json.loads((ROOT / "schema" / "command.schema.json").read_text())
+    v2 = json.loads((ROOT / "schema" / "command.schema.v2.json").read_text())
+    assert v1["$id"] != v2["$id"]
+    assert "windows" in v2["properties"]["platforms"]["items"]["enum"]
+    assert "windows" not in v1["properties"]["platforms"]["items"]["enum"]
+    assert "package_refs" in v2["properties"]
+    assert "package_refs" not in v1["properties"]
+    assert "powershell" in v2["properties"]["shells"]["items"]["enum"]
+    assert "cmd" in v2["properties"]["shells"]["items"]["enum"]
+
+
+def test_live_bank_still_v1_only() -> None:
+    """commands/ must not carry schema_version: 2 until Faz 3 migrate."""
+    for path in (ROOT / "commands").glob("*/*.yaml"):
+        data = yaml.safe_load(path.read_text(encoding="utf-8"))
+        assert data.get("schema_version") in (None, 1), path
+
+
+def test_data_schema_doc_exists() -> None:
+    assert (ROOT / "docs" / "DATA_SCHEMA.md").is_file()

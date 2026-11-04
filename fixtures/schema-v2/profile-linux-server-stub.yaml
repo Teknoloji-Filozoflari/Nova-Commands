@@ -1,0 +1,27 @@
+# Fixture only — profiles/ content is Faz 8.
+schema_version: 2
+kind: profile
+id: linux-server-basic
+name:
+  tr: Temel Linux sunucu
+  en: Basic Linux server
+summary:
+  tr: Genel amaçlı Linux sunucu yönetim profili iskeleti.
+  en: Skeleton profile for general-purpose Linux server administration.
+operating_systems:
+  - linux
+distributions:
+  - arch
+  - debian
+  - ubuntu
+  - fedora
+related_commands:
+  - systemctl
+  - journalctl
+  - ip
+tags:
+  - server
+  - linux
+verification:
+  status: draft
+  notes: Stub fixture for profile.schema.json soft-validate.

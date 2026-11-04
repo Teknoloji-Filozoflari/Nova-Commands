@@ -1,0 +1,65 @@
+# Fixture only — NOT part of the live commands/ bank.
+# Windows PowerShell cmdlet shape for command.schema.v2.json.
+schema_version: 2
+id: get-netipconfiguration
+name: Get-NetIPConfiguration
+kind: powershell_cmdlet
+category: network
+summary:
+  tr: Windows ağ IP yapılandırmasını gösterir.
+  en: Show Windows network IP configuration.
+description:
+  tr: PowerShell NetTCPIP modülü cmdlet'i; Linux ip/ifconfig karşılığı değildir — ayrı kayıt.
+  en: PowerShell NetTCPIP cmdlet; not a Linux ip/ifconfig alias — separate record.
+aliases:
+  - gip
+tags:
+  - network
+  - windows
+risk: safe
+requires_elevated: false
+platforms:
+  - windows
+operating_systems:
+  - windows
+shells:
+  - powershell
+  - windows-powershell
+package_refs:
+  - manager: winget
+    package: Microsoft.PowerShell
+    notes:
+      tr: PowerShell 7+ için isteğe bağlı; Windows PowerShell 5.1 ile de gelir.
+      en: Optional for PowerShell 7+; also available via Windows PowerShell 5.1.
+flags: []
+examples:
+  - title:
+      tr: IP yapılandırması
+      en: IP configuration
+    command: Get-NetIPConfiguration
+    explanation:
+      tr: Yerel arabirim IP/DNS/gateway özetini listeler.
+      en: Lists local interface IP/DNS/gateway summary.
+    risk: safe
+    requires_elevated: false
+    shell: powershell
+    platforms: [windows]
+    privilege: none
+implementations:
+  - id: windows-powershell
+    operating_systems: [windows]
+    shells: [powershell, windows-powershell]
+    platforms: [windows]
+    invocation: Get-NetIPConfiguration
+intent:
+  tr:
+    - windows ip adresi
+    - ağ yapılandırması powershell
+  en:
+    - windows show ip
+    - powershell network configuration
+verification:
+  status: draft
+  sources:
+    - https://learn.microsoft.com/powershell/module/nettcpip/get-netipconfiguration
+  notes: Fixture draft only — Faz 5 content will supersede.

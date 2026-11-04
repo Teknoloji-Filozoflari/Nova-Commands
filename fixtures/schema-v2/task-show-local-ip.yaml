@@ -1,0 +1,59 @@
+# Fixture only — tasks/ content is Faz 8. Soft-validates task.schema.json.
+schema_version: 2
+kind: task
+id: show-local-ip
+name:
+  tr: Yerel IP adresini göster
+  en: Show local IP address
+summary:
+  tr: Farklı platformlarda yerel IP / ağ yapılandırmasını öğrenme görevi.
+  en: Learn local IP / network configuration across platforms.
+category: network
+intent:
+  tr:
+    - ip adresimi öğren
+    - ağ yapılandırmasını göster
+    - yerel IP adresini bul
+  en:
+    - show local ip
+    - inspect network configuration
+implementations:
+  - id: linux-ip
+    operating_systems: [linux]
+    platforms: [linux]
+    shells: [bash]
+    commands: [ip]
+    examples:
+      - command: ip -br addr
+        shell: bash
+        risk: safe
+        privilege: none
+  - id: windows-powershell
+    operating_systems: [windows]
+    platforms: [windows]
+    shells: [powershell]
+    commands: [get-netipconfiguration]
+    examples:
+      - command: Get-NetIPConfiguration
+        shell: powershell
+        risk: safe
+        privilege: none
+  - id: windows-cmd
+    operating_systems: [windows]
+    platforms: [windows]
+    shells: [cmd]
+    commands: [ipconfig]
+    examples:
+      - command: ipconfig
+        shell: cmd
+        risk: safe
+        privilege: none
+related_commands:
+  - ip
+  - get-netipconfiguration
+verification:
+  status: draft
+  sources:
+    - man 8 ip
+    - https://learn.microsoft.com/powershell/module/nettcpip/get-netipconfiguration
+  notes: Schema stub fixture; not published bank content.

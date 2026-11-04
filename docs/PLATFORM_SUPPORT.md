@@ -3,7 +3,9 @@
 Faz 1 introduces **additive** platform metadata. These registries describe
 operating systems, distributions, shells, package managers, and related
 concepts as **separate models**. They do **not** yet drive command schema
-enums or catalog `schema_version` (still **1**).
+enums for the **live** bank. Catalog `schema_version` is still **1**.
+Command schema **v2** (dual-path) is documented in [DATA_SCHEMA.md](DATA_SCHEMA.md);
+fixtures soft-validate v2 without migrating `commands/`.
 
 ## Dual concept (unchanged)
 
@@ -56,21 +58,23 @@ python3 scripts/validate_catalog.py   # also invokes platform soft-check
 ```
 
 Soft checks: schema conformance, unique ids, and cross-refs (OS ↔ distro ↔ PM,
-support levels). Commands are **not** required to cite registry ids yet.
+support levels). Live `commands/` are **not** required to cite registry ids yet
+(v1 schema). Schema v2 fixtures may cite them via `package_refs` /
+`operating_systems`.
 
 ## Arch / pacman
 
 Per project preference, **Arch Linux** and **pacman** are first-class in the
 package-manager and distribution registries (install-hint policy for Arch
-family remains pacman-first).
+family remains pacman-first). Schema v2 `package_refs` should keep pacman
+first-class for Arch-family install hints.
 
 ## Out of scope (later fazes)
 
-- Command schema v2 / Windows platform enum
-- Migrating the 143 v1 commands
-- Tasks / profiles content
+- Migrating the 143 v1 commands onto `command.schema.v2.json` (Faz 3)
+- Tasks / profiles **content** trees (schemas stubbed in Faz 2; content Faz 8)
 - Catalog index counts for registry kinds
-- Bumping `schema_version` or rotating minisign keys
+- Bumping catalog `schema_version` or rotating minisign keys
 
 ## Maintainer note
 

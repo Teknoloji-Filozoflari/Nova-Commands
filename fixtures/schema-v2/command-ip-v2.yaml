@@ -1,0 +1,76 @@
+# Fixture only — NOT part of the live commands/ bank.
+# Proves command.schema.v2.json accepts windows + package_refs + kind.
+# Faz 3 will migrate real bank YAML; this file must stay under fixtures/.
+schema_version: 2
+id: ip
+name: ip
+kind: executable
+category: network
+summary:
+  tr: Ağ aygıtları, adresler ve rotaları yönetir.
+  en: Show and manipulate routing, devices, and tunnels.
+description:
+  tr: Eski ifconfig yerine modern iproute2 aracı (Linux).
+  en: Modern iproute2 tool replacing much of ifconfig (Linux).
+tags:
+  - network
+risk: dangerous
+requires_elevated: true
+platforms:
+  - linux
+operating_systems:
+  - linux
+shells:
+  - bash
+  - zsh
+  - fish
+packages:
+  arch: iproute2
+  debian: iproute2
+  ubuntu: iproute2
+  fedora: iproute
+package_refs:
+  - manager: pacman
+    package: iproute2
+    distributions: [arch]
+  - manager: apt
+    package: iproute2
+    distributions: [debian, ubuntu]
+  - manager: dnf
+    package: iproute
+    distributions: [fedora]
+install_notes:
+  tr: 'Arch: pacman -S iproute2'
+  en: 'Arch: pacman -S iproute2'
+flags: []
+examples:
+  - title:
+      tr: Adresler
+      en: Addresses
+    command: ip addr
+    explanation:
+      tr: Arayüz adreslerini listeler.
+      en: Lists interface addresses.
+    risk: safe
+    requires_elevated: false
+    shell: bash
+    platforms: [linux]
+    privilege: none
+related:
+  - ss
+  - ping
+intent:
+  tr:
+    - ip adresi gör
+    - ağ arayüzü
+  en:
+    - show ip address
+    - list interfaces
+verification:
+  status: draft
+  sources:
+    - man 8 ip
+  notes: Fixture for schema v2 soft-validate; not a bank promotion.
+nova:
+  concepts:
+    - networking

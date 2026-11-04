@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://raw.githubusercontent.com/Teknoloji-Filozoflari/Nova-Commands/main/schema/command.schema.json",
-  "title": "Nova-Commands command entry",
-  "description": "Single curated command record. Source of truth is YAML under commands/<category>/<id>.yaml. Validation must never mark draft AI content as verified.",
+  "title": "Nova-Commands command entry (schema v1)",
+  "description": "Single curated command record (v1). Source of truth is YAML under commands/<category>/<id>.yaml. Dual-path: cross-platform expansions live in command.schema.v2.json; the live bank stays on this v1 schema until Faz 3 migration. Validation must never mark draft AI content as verified.",
   "type": "object",
   "additionalProperties": false,
   "required": [
