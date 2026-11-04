@@ -93,7 +93,6 @@ related:
 - ss
 - nmap
 - curl
-- telnet
 intent:
   tr:
   - port test et

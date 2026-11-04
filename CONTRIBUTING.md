@@ -40,11 +40,14 @@ CI must pass: validate → build → pytest → committed `content_sha256` match
 6. For each flag, set `verified: false` until confirmed. Do **not** invent
    flags or package names. Schema migration notes:
    [docs/SCHEMA_MIGRATION_V2.md](docs/SCHEMA_MIGRATION_V2.md).
+   Live wipe examples (`dd of=/dev/…`, live `mkfs` / `wipefs -a`) need
+   bilingual `warnings` under the example ([docs/safety.md](docs/safety.md)).
+   `related` must reference existing command ids only.
 7. Run locally:
 
    ```bash
    python3 -m pip install -r requirements-dev.txt
-   python3 scripts/validate_catalog.py
+   python3 scripts/validate_catalog.py   # includes validate_security.py
    python3 scripts/build_catalog.py
    python3 -m pytest tests/
    ```

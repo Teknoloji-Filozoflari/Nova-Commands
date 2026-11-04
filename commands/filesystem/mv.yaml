@@ -85,7 +85,6 @@ examples:
   risk: caution
 related:
 - cp
-- rename
 intent:
   tr:
   - dosya taşı

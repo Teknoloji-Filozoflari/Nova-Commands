@@ -96,7 +96,6 @@ examples:
 related:
 - pgrep
 - kill
-- killall
 intent:
   tr:
   - süreci ada göre öldür

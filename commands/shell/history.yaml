@@ -32,8 +32,6 @@ examples:
     tr: Son 20 komut.
     en: Last 20 commands.
   risk: safe
-related:
-- alias
 intent:
   tr:
   - komut geçmişi

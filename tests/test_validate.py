@@ -438,3 +438,61 @@ def test_catalog_indexes_tasks_profiles() -> None:
     assert cat["content_sha256"] == digest(
         cat["commands"], cat["concepts"], cat["tasks"], cat["profiles"]
     )
+
+
+SECURITY_VALIDATE = ROOT / "scripts" / "validate_security.py"
+
+
+def test_security_validate_passes() -> None:
+    proc = run(SECURITY_VALIDATE)
+    assert proc.returncode == 0, proc.stderr + proc.stdout
+    assert "OK:" in proc.stdout
+
+
+def test_minisign_pubkey_present_no_private_keys() -> None:
+    pub = ROOT / "keys" / "minisign.pub"
+    assert pub.is_file()
+    text = pub.read_text(encoding="utf-8")
+    assert "minisign public key" in text.lower() or "RW" in text
+    assert not list((ROOT / "keys").glob("*.key"))
+    assert not (ROOT / "keys" / "nova-commands.key").exists()
+
+
+def test_example_schema_allows_warnings() -> None:
+    live = json.loads((ROOT / "schema" / "command.schema.json").read_text())
+    v2 = json.loads((ROOT / "schema" / "command.schema.v2.json").read_text())
+    assert "warnings" in live["$defs"]["example"]["properties"]
+    assert "warnings" in v2["$defs"]["example"]["properties"]
+
+
+def test_related_refs_resolve() -> None:
+    cmd_ids = {
+        yaml.safe_load(p.read_text(encoding="utf-8"))["id"]
+        for p in (ROOT / "commands").glob("*/*.yaml")
+    }
+    for path in (ROOT / "commands").glob("*/*.yaml"):
+        data = yaml.safe_load(path.read_text(encoding="utf-8"))
+        for rid in data.get("related") or []:
+            assert rid in cmd_ids, (path, rid)
+
+
+def test_ci_workflows_pin_action_shas() -> None:
+    """Faz 10: third-party Actions must be pinned to full commit SHAs."""
+    import re
+
+    sha_re = re.compile(r"^[0-9a-f]{40}$")
+    for name in ("ci.yml", "publish-catalog.yml"):
+        text = (ROOT / ".github" / "workflows" / name).read_text(encoding="utf-8")
+        for line in text.splitlines():
+            stripped = line.strip()
+            if not stripped.startswith("- uses:") and not stripped.startswith("uses:"):
+                continue
+            # uses: owner/repo@ref  or  uses: owner/repo/path@ref
+            ref = stripped.split("@", 1)[-1].split("#", 1)[0].strip()
+            assert sha_re.match(ref), f"{name}: unpinned action ref {ref!r} in {stripped}"
+
+
+def test_ci_helper_scripts_exist() -> None:
+    assert (ROOT / "scripts" / "ci_check_committed_sha.py").is_file()
+    assert (ROOT / "scripts" / "ci_check_rebuild_coherence.py").is_file()
+    assert SECURITY_VALIDATE.is_file()

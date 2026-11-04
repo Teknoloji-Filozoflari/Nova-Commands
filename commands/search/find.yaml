@@ -81,7 +81,6 @@ examples:
   risk: safe
 related:
 - grep
-- fd
 - locate
 intent:
   tr:

@@ -93,7 +93,6 @@ examples:
   risk: safe
 related:
 - wget
-- http
 intent:
   tr:
   - http isteği

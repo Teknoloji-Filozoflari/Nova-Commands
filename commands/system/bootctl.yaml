@@ -80,7 +80,6 @@ examples:
 related:
 - systemctl
 - systemd-analyze
-- efibootmgr
 intent:
   tr:
   - efi boot durum

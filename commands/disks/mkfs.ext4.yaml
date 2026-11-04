@@ -83,6 +83,9 @@ examples:
       `-n` prints the plan without writing. Still confirm the device with `lsblk -f`; do not run the placeholder as-is.
   risk: caution
   requires_elevated: true
+  warnings:
+    - tr: Yanlış aygıt seçimi veriyi kalıcı olarak siler; önce lsblk/diskutil ile doğrula.
+      en: Wrong device permanently destroys data; verify with lsblk/diskutil first.
 - title:
     tr: Etiketli oluştur (UYARI)
     en: Create with label (DANGER)
@@ -94,6 +97,9 @@ examples:
       Placeholder partition path. Wrong device wipes data; confirm with lsblk/blkid, back up, then proceed deliberately.
   risk: destructive
   requires_elevated: true
+  warnings:
+    - tr: Yanlış aygıt seçimi veriyi kalıcı olarak siler; önce lsblk/diskutil ile doğrula.
+      en: Wrong device permanently destroys data; verify with lsblk/diskutil first.
 related:
 - mkfs
 - mkfs.xfs

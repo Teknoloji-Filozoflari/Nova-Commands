@@ -25,7 +25,8 @@ See [SCHEMA_MIGRATION_V2.md](SCHEMA_MIGRATION_V2.md) for the field map and `migr
 - **`package_refs`**: `{ manager: <package-managers.yaml id>, package, distributions? }` — preferred. Legacy `packages` keys kept for dual-read.
 - **`operating_systems` / `distributions` / …**: optional registry refs (Faz 1 metadata).
 - **`implementations`**: optional per-command variants (tasks use `task.schema.json`).
-- Examples may carry `shell`, `platforms`, `privilege`.
+- Examples may carry `shell`, `platforms`, `privilege`, and optional bilingual
+  `warnings` (required by `validate_security.py` for live wipe-class patterns).
 
 ## Tasks vs commands
 
@@ -36,7 +37,8 @@ Multi-tool user goals (`show-local-ip` with linux-ip / windows-powershell / wind
 ## Validation
 
 ```bash
-python3 scripts/validate_catalog.py           # live v2 bank + concepts + soft gates + tasks/profiles
+python3 scripts/validate_catalog.py           # live v2 bank + concepts + tasks/profiles + security
+python3 scripts/validate_security.py          # wipe/related/minisign gates (also via validate_catalog)
 python3 scripts/validate_tasks_profiles.py --require
 python3 scripts/validate_schema_v2.py         # schema load + fixtures
 python3 scripts/migrate_v1_to_v2.py --check

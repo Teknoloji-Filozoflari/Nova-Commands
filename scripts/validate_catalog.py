@@ -16,6 +16,7 @@ Checks (CI gate):
   - Soft: platform registries (scripts/validate_platform_registries.py)
   - Soft: stub fixtures task/profile/compatibility (scripts/validate_schema_v2.py)
   - Hard when present: tasks/ + profiles/ (scripts/validate_tasks_profiles.py)
+  - Hard: security / wipe-pattern / related / minisign gates (scripts/validate_security.py)
 """
 
 from __future__ import annotations
@@ -41,6 +42,7 @@ CONCEPTS_META_PATH = ROOT / "metadata" / "concepts.yaml"
 PLATFORM_VALIDATE = ROOT / "scripts" / "validate_platform_registries.py"
 SCHEMA_V2_VALIDATE = ROOT / "scripts" / "validate_schema_v2.py"
 TASKS_PROFILES_VALIDATE = ROOT / "scripts" / "validate_tasks_profiles.py"
+SECURITY_VALIDATE = ROOT / "scripts" / "validate_security.py"
 META = ROOT / "metadata"
 
 RISK_RANK = {"safe": 0, "caution": 1, "dangerous": 2, "destructive": 3}
@@ -374,6 +376,16 @@ def main() -> int:
         if (ROOT / "tasks").is_dir() or (ROOT / "profiles").is_dir():
             tp_args.append("--require")
         proc = subprocess.run(tp_args, cwd=ROOT, check=False)
+        if proc.returncode != 0:
+            return proc.returncode
+
+    # Faz 10: security / compatibility / signing-material gates (static only).
+    if SECURITY_VALIDATE.is_file():
+        proc = subprocess.run(
+            [sys.executable, str(SECURITY_VALIDATE), "--commands-dir", str(commands_dir)],
+            cwd=ROOT,
+            check=False,
+        )
         if proc.returncode != 0:
             return proc.returncode
 

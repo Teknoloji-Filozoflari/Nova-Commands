@@ -54,8 +54,6 @@ examples:
     tr: hello yazar.
     en: Prints hello.
   risk: safe
-related:
-- printf
 intent:
   tr:
   - ekrana yaz

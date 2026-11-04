@@ -1,8 +1,8 @@
 {
   "schema_version": 2,
   "kind": "nova-commands-bank",
-  "generated_at": "2026-11-04T20:52:51Z",
-  "content_sha256": "f08edacc291b3d81d5d1ac24f8eead941873498c0e252e72f1ff96def4e2f6ee",
+  "generated_at": "2026-11-04T21:04:30Z",
+  "content_sha256": "7b24390eb92de6cda76b330d61fd34dcdb304afe27c1595355621717b653bf54",
   "command_count": 256,
   "concept_count": 20,
   "task_count": 21,
@@ -1106,8 +1106,7 @@
       ],
       "related": [
         "systemctl",
-        "systemd-analyze",
-        "efibootmgr"
+        "systemd-analyze"
       ],
       "intent": {
         "tr": [
@@ -1843,8 +1842,7 @@
         }
       ],
       "related": [
-        "pwd",
-        "pushd"
+        "pwd"
       ],
       "intent": {
         "tr": [
@@ -2631,8 +2629,7 @@
       ],
       "related": [
         "mv",
-        "rsync",
-        "install"
+        "rsync"
       ],
       "intent": {
         "tr": [
@@ -2876,8 +2873,7 @@
         }
       ],
       "related": [
-        "wget",
-        "http"
+        "wget"
       ],
       "intent": {
         "tr": [
@@ -3284,7 +3280,13 @@
             "en": "Wrong of= wipes a disk; verify with lsblk."
           },
           "risk": "destructive",
-          "requires_elevated": true
+          "requires_elevated": true,
+          "warnings": [
+            {
+              "tr": "Yanlış aygıt seçimi veriyi kalıcı olarak siler; önce lsblk/diskutil ile doğrula.",
+              "en": "Wrong device permanently destroys data; verify with lsblk/diskutil first."
+            }
+          ]
         }
       ],
       "related": [
@@ -3740,7 +3742,6 @@
       ],
       "related": [
         "host",
-        "nslookup",
         "resolvectl",
         "ping"
       ],
@@ -5012,8 +5013,7 @@
         }
       ],
       "related": [
-        "df",
-        "ncdu"
+        "df"
       ],
       "intent": {
         "tr": [
@@ -5122,9 +5122,6 @@
           },
           "risk": "safe"
         }
-      ],
-      "related": [
-        "printf"
       ],
       "intent": {
         "tr": [
@@ -5408,8 +5405,7 @@
         }
       ],
       "related": [
-        "export",
-        "printenv"
+        "export"
       ],
       "intent": {
         "tr": [
@@ -5747,8 +5743,7 @@
         }
       ],
       "related": [
-        "env",
-        "set"
+        "env"
       ],
       "intent": {
         "tr": [
@@ -6022,7 +6017,6 @@
       ],
       "related": [
         "grep",
-        "fd",
         "locate"
       ],
       "intent": {
@@ -9274,8 +9268,7 @@
       ],
       "related": [
         "find",
-        "rg",
-        "ag"
+        "rg"
       ],
       "intent": {
         "tr": [
@@ -10011,9 +10004,6 @@
           "risk": "safe"
         }
       ],
-      "related": [
-        "alias"
-      ],
       "intent": {
         "tr": [
           "komut geçmişi",
@@ -10152,8 +10142,7 @@
       ],
       "related": [
         "dig",
-        "resolvectl",
-        "nslookup"
+        "resolvectl"
       ],
       "intent": {
         "tr": [
@@ -12188,7 +12177,6 @@
       ],
       "related": [
         "pkill",
-        "killall",
         "ps"
       ],
       "intent": {
@@ -12532,7 +12520,6 @@
         }
       ],
       "related": [
-        "more",
         "cat"
       ],
       "intent": {
@@ -12673,8 +12660,7 @@
         }
       ],
       "related": [
-        "cp",
-        "readlink"
+        "cp"
       ],
       "intent": {
         "tr": [
@@ -13019,9 +13005,7 @@
         }
       ],
       "related": [
-        "systemctl",
-        "who",
-        "w"
+        "systemctl"
       ],
       "intent": {
         "tr": [
@@ -13454,8 +13438,7 @@
         }
       ],
       "related": [
-        "lspci",
-        "lshw"
+        "lspci"
       ],
       "intent": {
         "tr": [
@@ -13612,7 +13595,6 @@
       ],
       "related": [
         "ss",
-        "fuser",
         "ps",
         "umount"
       ],
@@ -14083,7 +14065,6 @@
         }
       ],
       "related": [
-        "rmdir",
         "touch"
       ],
       "intent": {
@@ -14224,7 +14205,13 @@
             "en": "Placeholder device — never run on a real path as-is. Confirm the partition with `lsblk -f` / `blkid` first. Prefer `mkfs.ext4` directly.\n"
           },
           "risk": "destructive",
-          "requires_elevated": true
+          "requires_elevated": true,
+          "warnings": [
+            {
+              "tr": "Yanlış aygıt seçimi veriyi kalıcı olarak siler; önce lsblk/diskutil ile doğrula.",
+              "en": "Wrong device permanently destroys data; verify with lsblk/diskutil first."
+            }
+          ]
         }
       ],
       "related": [
@@ -14394,7 +14381,13 @@
             "en": "Placeholder. Do not copy multi-device recipes blindly; verify each member with lsblk. `-f` adds overwrite risk.\n"
           },
           "risk": "destructive",
-          "requires_elevated": true
+          "requires_elevated": true,
+          "warnings": [
+            {
+              "tr": "Yanlış aygıt seçimi veriyi kalıcı olarak siler; önce lsblk/diskutil ile doğrula.",
+              "en": "Wrong device permanently destroys data; verify with lsblk/diskutil first."
+            }
+          ]
         }
       ],
       "related": [
@@ -14542,7 +14535,13 @@
             "en": "`-n` prints the plan without writing. Still confirm the device with `lsblk -f`; do not run the placeholder as-is.\n"
           },
           "risk": "caution",
-          "requires_elevated": true
+          "requires_elevated": true,
+          "warnings": [
+            {
+              "tr": "Yanlış aygıt seçimi veriyi kalıcı olarak siler; önce lsblk/diskutil ile doğrula.",
+              "en": "Wrong device permanently destroys data; verify with lsblk/diskutil first."
+            }
+          ]
         },
         {
           "title": {
@@ -14555,7 +14554,13 @@
             "en": "Placeholder partition path. Wrong device wipes data; confirm with lsblk/blkid, back up, then proceed deliberately.\n"
           },
           "risk": "destructive",
-          "requires_elevated": true
+          "requires_elevated": true,
+          "warnings": [
+            {
+              "tr": "Yanlış aygıt seçimi veriyi kalıcı olarak siler; önce lsblk/diskutil ile doğrula.",
+              "en": "Wrong device permanently destroys data; verify with lsblk/diskutil first."
+            }
+          ]
         }
       ],
       "related": [
@@ -14725,7 +14730,13 @@
             "en": "Placeholder — double-check with lsblk, especially for USB/ESP paths. Wrong-disk mistakes are common in shared Windows/EFI setups.\n"
           },
           "risk": "destructive",
-          "requires_elevated": true
+          "requires_elevated": true,
+          "warnings": [
+            {
+              "tr": "Yanlış aygıt seçimi veriyi kalıcı olarak siler; önce lsblk/diskutil ile doğrula.",
+              "en": "Wrong device permanently destroys data; verify with lsblk/diskutil first."
+            }
+          ]
         }
       ],
       "related": [
@@ -14877,7 +14888,13 @@
             "en": "Prints XFS parameters without writing; still verify the device."
           },
           "risk": "caution",
-          "requires_elevated": true
+          "requires_elevated": true,
+          "warnings": [
+            {
+              "tr": "Yanlış aygıt seçimi veriyi kalıcı olarak siler; önce lsblk/diskutil ile doğrula.",
+              "en": "Wrong device permanently destroys data; verify with lsblk/diskutil first."
+            }
+          ]
         },
         {
           "title": {
@@ -14890,7 +14907,13 @@
             "en": "Placeholder. An existing FS may cause refusal; adding `-f` raises risk — only on intentional, backed-up targets.\n"
           },
           "risk": "destructive",
-          "requires_elevated": true
+          "requires_elevated": true,
+          "warnings": [
+            {
+              "tr": "Yanlış aygıt seçimi veriyi kalıcı olarak siler; önce lsblk/diskutil ile doğrula.",
+              "en": "Wrong device permanently destroys data; verify with lsblk/diskutil first."
+            }
+          ]
         }
       ],
       "related": [
@@ -15353,8 +15376,7 @@
         }
       ],
       "related": [
-        "cp",
-        "rename"
+        "cp"
       ],
       "intent": {
         "tr": [
@@ -15621,8 +15643,7 @@
       "related": [
         "ss",
         "nmap",
-        "curl",
-        "telnet"
+        "curl"
       ],
       "intent": {
         "tr": [
@@ -18422,9 +18443,7 @@
         }
       ],
       "related": [
-        "pacman",
-        "yay",
-        "makepkg"
+        "pacman"
       ],
       "intent": {
         "tr": [
@@ -18585,7 +18604,6 @@
       "related": [
         "useradd",
         "usermod",
-        "chpasswd",
         "sudo"
       ],
       "intent": {
@@ -19822,8 +19840,7 @@
       ],
       "related": [
         "pgrep",
-        "kill",
-        "killall"
+        "kill"
       ],
       "intent": {
         "tr": [
@@ -22393,8 +22410,7 @@
         }
       ],
       "related": [
-        "mv",
-        "trash-put"
+        "mv"
       ],
       "intent": {
         "tr": [
@@ -25644,8 +25660,7 @@
         }
       ],
       "related": [
-        "ls",
-        "file"
+        "ls"
       ],
       "intent": {
         "tr": [
@@ -26036,7 +26051,6 @@
         }
       ],
       "related": [
-        "su",
         "doas"
       ],
       "intent": {
@@ -27559,8 +27573,7 @@
       ],
       "related": [
         "date",
-        "systemctl",
-        "hwclock"
+        "systemctl"
       ],
       "intent": {
         "tr": [
@@ -27662,8 +27675,7 @@
       ],
       "related": [
         "htop",
-        "ps",
-        "btop"
+        "ps"
       ],
       "intent": {
         "tr": [
@@ -27947,7 +27959,6 @@
       ],
       "related": [
         "ping",
-        "tracepath",
         "mtr",
         "ip"
       ],
@@ -28897,8 +28908,7 @@
         }
       ],
       "related": [
-        "top",
-        "w"
+        "top"
       ],
       "intent": {
         "tr": [
@@ -30231,9 +30241,7 @@
         }
       ],
       "related": [
-        "whereis",
-        "type",
-        "command"
+        "whereis"
       ],
       "intent": {
         "tr": [
@@ -30641,7 +30649,13 @@
             "en": "Prints signatures without wiping (no wipe flags). Still confirm the device with lsblk; do not use the placeholder as-is.\n"
           },
           "risk": "caution",
-          "requires_elevated": true
+          "requires_elevated": true,
+          "warnings": [
+            {
+              "tr": "Yanlış aygıt seçimi veriyi kalıcı olarak siler; önce lsblk/diskutil ile doğrula.",
+              "en": "Wrong device permanently destroys data; verify with lsblk/diskutil first."
+            }
+          ]
         },
         {
           "title": {
@@ -30654,7 +30668,13 @@
             "en": "Shows what -a would erase without writing (-n)."
           },
           "risk": "caution",
-          "requires_elevated": true
+          "requires_elevated": true,
+          "warnings": [
+            {
+              "tr": "Yanlış aygıt seçimi veriyi kalıcı olarak siler; önce lsblk/diskutil ile doğrula.",
+              "en": "Wrong device permanently destroys data; verify with lsblk/diskutil first."
+            }
+          ]
         }
       ],
       "related": [
@@ -31497,8 +31517,7 @@
       ],
       "related": [
         "tar",
-        "gzip",
-        "zstd"
+        "gzip"
       ],
       "intent": {
         "tr": [

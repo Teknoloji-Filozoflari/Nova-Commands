@@ -87,7 +87,6 @@ examples:
   risk: caution
 related:
 - ping
-- tracepath
 - mtr
 - ip
 intent:

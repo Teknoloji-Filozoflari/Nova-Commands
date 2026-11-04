@@ -95,7 +95,6 @@ examples:
 related:
 - useradd
 - usermod
-- chpasswd
 - sudo
 intent:
   tr:

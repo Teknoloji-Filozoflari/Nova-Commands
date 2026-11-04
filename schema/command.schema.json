@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://raw.githubusercontent.com/Teknoloji-Filozoflari/Nova-Commands/main/schema/command.schema.json",
   "title": "Nova-Commands command entry (schema v2)",
-  "description": "Cross-platform command record (schema v2 \u2014 live bank). Source of truth is YAML under commands/<category>/<id>.yaml with schema_version: 2. Prefer package_refs and registry id references. Legacy packages keys allowed for dual-read. Do not mark AI drafts verified. Historical v1 schema: command.schema.v1.json.",
+  "description": "Cross-platform command record (schema v2 — live bank). Source of truth is YAML under commands/<category>/<id>.yaml with schema_version: 2. Prefer package_refs and registry id references. Legacy packages keys allowed for dual-read. Do not mark AI drafts verified. Historical v1 schema: command.schema.v1.json.",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -89,7 +89,7 @@
         "cloud",
         "devops"
       ],
-      "description": "v1 taxonomy plus Faz 7 additive categories (virtualization, backup, databases, cloud, devops). Do not rename network\u2192networking."
+      "description": "v1 taxonomy plus Faz 7 additive categories (virtualization, backup, databases, cloud, devops). Do not rename network→networking."
     },
     "aliases": {
       "type": "array",
@@ -176,7 +176,7 @@
     "execution_environments": {
       "type": "array",
       "uniqueItems": true,
-      "description": "Optional refs into metadata/execution-environments.yaml (WSL, Termux, \u2026).",
+      "description": "Optional refs into metadata/execution-environments.yaml (WSL, Termux, …).",
       "items": {
         "$ref": "#/$defs/registryId"
       }
@@ -184,7 +184,7 @@
     "shells": {
       "type": "array",
       "uniqueItems": true,
-      "description": "Shell ids. Accepts v1 short names (sh/bash/\u2026) and Faz 1 registry ids (powershell/cmd/nushell/\u2026). Prefer shells.yaml ids going forward.",
+      "description": "Shell ids. Accepts v1 short names (sh/bash/…) and Faz 1 registry ids (powershell/cmd/nushell/…). Prefer shells.yaml ids going forward.",
       "items": {
         "type": "string",
         "enum": [
@@ -666,6 +666,14 @@
         "explanation": {
           "$ref": "#/$defs/localizedLong"
         },
+        "warnings": {
+          "type": "array",
+          "description": "Optional bilingual operator warnings (required by security gate for wipe/unsafe patterns).",
+          "maxItems": 8,
+          "items": {
+            "$ref": "#/$defs/localizedShort"
+          }
+        },
         "risk": {
           "type": "string",
           "enum": [
@@ -680,7 +688,7 @@
         },
         "shell": {
           "type": "string",
-          "description": "Shell this example targets (powershell, cmd, bash, \u2026).",
+          "description": "Shell this example targets (powershell, cmd, bash, …).",
           "pattern": "^[a-z][a-z0-9-]*$"
         },
         "platforms": {

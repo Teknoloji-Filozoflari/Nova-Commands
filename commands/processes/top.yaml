@@ -52,7 +52,6 @@ examples:
 related:
 - htop
 - ps
-- btop
 intent:
   tr:
   - cpu kullanımı

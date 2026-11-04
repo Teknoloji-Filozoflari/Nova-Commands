@@ -83,6 +83,9 @@ examples:
       Prints signatures without wiping (no wipe flags). Still confirm the device with lsblk; do not use the placeholder as-is.
   risk: caution
   requires_elevated: true
+  warnings:
+    - tr: Yanlış aygıt seçimi veriyi kalıcı olarak siler; önce lsblk/diskutil ile doğrula.
+      en: Wrong device permanently destroys data; verify with lsblk/diskutil first.
 - title:
     tr: Silme kuru koşusu
     en: Wipe dry-run
@@ -92,6 +95,9 @@ examples:
     en: Shows what -a would erase without writing (-n).
   risk: caution
   requires_elevated: true
+  warnings:
+    - tr: Yanlış aygıt seçimi veriyi kalıcı olarak siler; önce lsblk/diskutil ile doğrula.
+      en: Wrong device permanently destroys data; verify with lsblk/diskutil first.
 related:
 - blkid
 - lsblk

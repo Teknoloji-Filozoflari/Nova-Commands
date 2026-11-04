@@ -76,7 +76,6 @@ examples:
   risk: caution
 related:
 - cp
-- readlink
 intent:
   tr:
   - sembolik bağ

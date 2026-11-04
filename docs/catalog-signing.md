@@ -22,7 +22,9 @@ metadata** — not installable apps, and not local PATH discovery
 ## Trust model
 
 1. Contributors PR YAML under `commands/` / `concepts/` / `tasks/` / `profiles/`.
-2. CI validates schema, ids, categories, i18n, concepts, tasks/profiles, and rebuilds metadata.
+2. CI validates schema, ids, categories, i18n, concepts, tasks/profiles,
+   security gates (`validate_security.py`), and rebuilds metadata.
+   GitHub Actions are SHA-pinned; runners never execute catalog commands.
 3. Maintainers merge to `main`.
 4. Tag `catalog-v*` (or run **Publish signed catalog** via `workflow_dispatch`).
 5. The workflow builds metadata, signs when `MINISIGN_SECRET_KEY` is set, and
@@ -30,7 +32,8 @@ metadata** — not installable apps, and not local PATH discovery
 6. Clients fetch the latest `catalog-v*` release over HTTPS, verify, then apply.
 
 **Signing private keys never live in this repository.** Only the public
-verification material is committed under `keys/`.
+verification material is committed under `keys/`. Do not rotate
+`keys/minisign.pub` without a coordinated secret + client pin update.
 
 ## One-time key generation (maintainer laptop)
 

@@ -90,6 +90,9 @@ examples:
       Placeholder device — never run on a real path as-is. Confirm the partition with `lsblk -f` / `blkid` first. Prefer `mkfs.ext4` directly.
   risk: destructive
   requires_elevated: true
+  warnings:
+    - tr: Yanlış aygıt seçimi veriyi kalıcı olarak siler; önce lsblk/diskutil ile doğrula.
+      en: Wrong device permanently destroys data; verify with lsblk/diskutil first.
 related:
 - mkfs.ext4
 - mkfs.xfs

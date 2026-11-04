@@ -60,8 +60,6 @@ examples:
   risk: safe
 related:
 - whereis
-- type
-- command
 intent:
   tr:
   - komut yolu
