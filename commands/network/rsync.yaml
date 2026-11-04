@@ -1,5 +1,8 @@
+schema_version: 2
 id: rsync
 name: rsync
+kind: executable
+category: network
 summary:
   tr: Dosyaları verimli eşitleyerek kopyalar.
   en: Fast incremental file transfer.
@@ -17,18 +20,35 @@ platforms:
 - linux
 - macos
 - bsd
+operating_systems:
+- linux
+- macos
 packages:
   arch: rsync
   debian: rsync
   ubuntu: rsync
   fedora: rsync
+package_refs:
+- manager: pacman
+  package: rsync
+  distributions:
+  - arch
+- manager: apt
+  package: rsync
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: rsync
+  distributions:
+  - fedora
 install_notes:
-  tr: 'Arch: pacman -S rsync
-
-    Debian/Ubuntu/Fedora: rsync paketi'
-  en: 'Arch: pacman -S rsync
-
-    Debian/Ubuntu/Fedora: rsync package'
+  tr: |-
+    Arch: pacman -S rsync
+    Debian/Ubuntu/Fedora: rsync paketi
+  en: |-
+    Arch: pacman -S rsync
+    Debian/Ubuntu/Fedora: rsync package
 flags:
 - flag: -a
   meaning:
@@ -108,4 +128,3 @@ nova:
   - storage
   - networking-basics
   ui_priority: 75
-category: network

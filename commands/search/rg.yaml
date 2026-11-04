@@ -1,5 +1,7 @@
+schema_version: 2
 id: rg
 name: rg
+kind: executable
 category: search
 summary:
   tr: Hızlı özyinelemeli regex arama (ripgrep).
@@ -17,26 +19,39 @@ platforms:
 - linux
 - macos
 - bsd
+operating_systems:
+- linux
+- macos
 packages:
   arch: ripgrep
   debian: ripgrep
   ubuntu: ripgrep
   fedora: ripgrep
+package_refs:
+- manager: pacman
+  package: ripgrep
+  distributions:
+  - arch
+- manager: apt
+  package: ripgrep
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: ripgrep
+  distributions:
+  - fedora
 install_notes:
-  tr: 'Arch: pacman -S ripgrep
-
+  tr: |-
+    Arch: pacman -S ripgrep
     Debian/Ubuntu: apt install ripgrep
-
     Fedora: dnf install ripgrep
-
-    İkili adı: rg'
-  en: 'Arch: pacman -S ripgrep
-
+    İkili adı: rg
+  en: |-
+    Arch: pacman -S ripgrep
     Debian/Ubuntu: apt install ripgrep
-
     Fedora: dnf install ripgrep
-
-    Binary name: rg'
+    Binary name: rg
 flags:
 - flag: -i
   long: --ignore-case

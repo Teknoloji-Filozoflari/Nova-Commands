@@ -1,5 +1,8 @@
+schema_version: 2
 id: df
 name: df
+kind: executable
+category: disks
 summary:
   tr: Dosya sistemi disk kullanımı.
   en: Report file system disk space usage.
@@ -14,11 +17,28 @@ platforms:
 - linux
 - macos
 - bsd
+operating_systems:
+- linux
+- macos
 packages:
   arch: coreutils
   debian: coreutils
   ubuntu: coreutils
   fedora: coreutils
+package_refs:
+- manager: pacman
+  package: coreutils
+  distributions:
+  - arch
+- manager: apt
+  package: coreutils
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: coreutils
+  distributions:
+  - fedora
 flags:
 - flag: -h
   long: --human-readable
@@ -54,7 +74,6 @@ verification:
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-phase15
   notes: Flag -h/--human-readable confirmed; read-only space report.
-category: disks
 nova:
   concepts:
   - storage

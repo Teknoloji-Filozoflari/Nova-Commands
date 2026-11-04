@@ -1,5 +1,7 @@
+schema_version: 2
 id: pkill
 name: pkill
+kind: executable
 category: processes
 summary:
   tr: Ada göre süreçlere sinyal gönderir.
@@ -16,22 +18,37 @@ platforms:
 - linux
 - macos
 - bsd
+operating_systems:
+- linux
+- macos
 packages:
   arch: procps-ng
   debian: procps
   ubuntu: procps
   fedora: procps-ng
+package_refs:
+- manager: pacman
+  package: procps-ng
+  distributions:
+  - arch
+- manager: apt
+  package: procps
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: procps-ng
+  distributions:
+  - fedora
 install_notes:
-  tr: 'Arch: pacman -S procps-ng
-
+  tr: |-
+    Arch: pacman -S procps-ng
     Debian/Ubuntu: apt install procps
-
-    Fedora: dnf install procps-ng'
-  en: 'Arch: pacman -S procps-ng
-
+    Fedora: dnf install procps-ng
+  en: |-
+    Arch: pacman -S procps-ng
     Debian/Ubuntu: apt install procps
-
-    Fedora: dnf install procps-ng'
+    Fedora: dnf install procps-ng
 flags:
 - flag: -l
   long: --list-name

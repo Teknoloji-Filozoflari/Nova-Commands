@@ -1,5 +1,8 @@
+schema_version: 2
 id: uptime
 name: uptime
+kind: executable
+category: system
 summary:
   tr: Çalışma süresi ve yük ortalaması.
   en: Tell how long the system has been running.
@@ -14,11 +17,28 @@ platforms:
 - linux
 - macos
 - bsd
+operating_systems:
+- linux
+- macos
 packages:
   arch: procps-ng
   debian: procps
   ubuntu: procps
   fedora: procps-ng
+package_refs:
+- manager: pacman
+  package: procps-ng
+  distributions:
+  - arch
+- manager: apt
+  package: procps
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: procps-ng
+  distributions:
+  - fedora
 examples:
 - title:
     tr: Uptime
@@ -45,7 +65,6 @@ verification:
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-phase17
   notes: Read-only uptime/load; --help flags cross-checked.
-category: system
 nova:
   concepts:
   - systemd

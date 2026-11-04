@@ -1,5 +1,8 @@
+schema_version: 2
 id: systemctl
 name: systemctl
+kind: executable
+category: system
 summary:
   tr: systemd birimlerini denetler.
   en: Control the systemd system and service manager.
@@ -14,11 +17,27 @@ risk: dangerous
 requires_elevated: true
 platforms:
 - linux
+operating_systems:
+- linux
 packages:
   arch: systemd
   debian: systemd
   ubuntu: systemd
   fedora: systemd
+package_refs:
+- manager: pacman
+  package: systemd
+  distributions:
+  - arch
+- manager: apt
+  package: systemd
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: systemd
+  distributions:
+  - fedora
 install_notes:
   tr: 'Arch: pacman -S systemd (taban).'
   en: 'Arch: pacman -S systemd (base).'
@@ -68,10 +87,6 @@ related:
 - timedatectl
 - loginctl
 - bootctl
-nova:
-  concepts:
-  - systemd
-  - terminal-basics
 intent:
   tr:
   - servis başlat
@@ -85,4 +100,7 @@ verification:
   - man 1 systemctl
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-bootstrap
-category: system
+nova:
+  concepts:
+  - systemd
+  - terminal-basics

@@ -1,5 +1,8 @@
+schema_version: 2
 id: rm
 name: rm
+kind: executable
+category: filesystem
 summary:
   tr: Dosya veya dizinleri siler.
   en: Remove files or directories.
@@ -15,11 +18,28 @@ platforms:
 - linux
 - macos
 - bsd
+operating_systems:
+- linux
+- macos
 packages:
   arch: coreutils
   debian: coreutils
   ubuntu: coreutils
   fedora: coreutils
+package_refs:
+- manager: pacman
+  package: coreutils
+  distributions:
+  - arch
+- manager: apt
+  package: coreutils
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: coreutils
+  distributions:
+  - fedora
 flags:
 - flag: -r
   long: --recursive
@@ -91,4 +111,3 @@ nova:
   concepts:
   - files
   - terminal-basics
-category: filesystem

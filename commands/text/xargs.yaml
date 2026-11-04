@@ -1,5 +1,8 @@
+schema_version: 2
 id: xargs
 name: xargs
+kind: executable
+category: text
 summary:
   tr: Standart girdiden komut argümanları üretir.
   en: Build command lines from standard input.
@@ -15,11 +18,28 @@ platforms:
 - linux
 - macos
 - bsd
+operating_systems:
+- linux
+- macos
 packages:
   arch: findutils
   debian: findutils
   ubuntu: findutils
   fedora: findutils
+package_refs:
+- manager: pacman
+  package: findutils
+  distributions:
+  - arch
+- manager: apt
+  package: findutils
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: findutils
+  distributions:
+  - fedora
 flags:
 - flag: '-0'
   meaning:
@@ -73,7 +93,6 @@ verification:
   - man 1 xargs
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-coverage
-category: text
 nova:
   concepts:
   - files

@@ -1,5 +1,8 @@
+schema_version: 2
 id: gpg
 name: gpg
+kind: executable
+category: security
 summary:
   tr: OpenPGP şifreleme ve imza aracı.
   en: OpenPGP encryption and signing tool.
@@ -15,11 +18,28 @@ platforms:
 - linux
 - macos
 - bsd
+operating_systems:
+- linux
+- macos
 packages:
   arch: gnupg
   debian: gnupg
   ubuntu: gnupg
   fedora: gnupg2
+package_refs:
+- manager: pacman
+  package: gnupg
+  distributions:
+  - arch
+- manager: apt
+  package: gnupg
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: gnupg2
+  distributions:
+  - fedora
 install_notes:
   tr: 'Arch: pacman -S gnupg'
   en: 'Arch: pacman -S gnupg'
@@ -46,7 +66,6 @@ verification:
   sources:
   - man 1 gpg
   notes: Minimal seed; expand subcommands later.
-category: security
 nova:
   concepts:
   - permissions

@@ -1,21 +1,8 @@
-packages:
-  arch: coreutils
-  debian: coreutils
-  ubuntu: coreutils
-  fedora: coreutils
-platforms:
-- linux
-- macos
-- bsd
-requires_elevated: false
-verification:
-  status: reviewed
-  sources:
-  - man 1 tee
-  last_reviewed: '2026-11-02'
-  reviewer: nova-commands-bootstrap
+schema_version: 2
 id: tee
 name: tee
+kind: executable
+category: text
 summary:
   tr: Çıktıyı hem dosyaya hem stdout’a yazar.
   en: Write output to files and stdout.
@@ -26,6 +13,33 @@ tags:
 - text
 - pipe
 risk: caution
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+operating_systems:
+- linux
+- macos
+packages:
+  arch: coreutils
+  debian: coreutils
+  ubuntu: coreutils
+  fedora: coreutils
+package_refs:
+- manager: pacman
+  package: coreutils
+  distributions:
+  - arch
+- manager: apt
+  package: coreutils
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: coreutils
+  distributions:
+  - fedora
 flags:
 - flag: -a
   long: --append
@@ -53,7 +67,12 @@ intent:
   en:
   - tee to file
   - save pipeline output
-category: text
+verification:
+  status: reviewed
+  sources:
+  - man 1 tee
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-bootstrap
 nova:
   concepts:
   - files

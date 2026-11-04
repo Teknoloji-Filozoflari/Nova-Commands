@@ -1,5 +1,7 @@
+schema_version: 2
 id: cmake
 name: cmake
+kind: executable
 category: development
 summary:
   tr: Çapraz platform derleme yapılandırıcı.
@@ -17,22 +19,37 @@ platforms:
 - linux
 - macos
 - bsd
+operating_systems:
+- linux
+- macos
 packages:
   arch: cmake
   debian: cmake
   ubuntu: cmake
   fedora: cmake
+package_refs:
+- manager: pacman
+  package: cmake
+  distributions:
+  - arch
+- manager: apt
+  package: cmake
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: cmake
+  distributions:
+  - fedora
 install_notes:
-  tr: 'Arch: pacman -S cmake
-
+  tr: |-
+    Arch: pacman -S cmake
     Debian/Ubuntu: apt install cmake
-
-    Fedora: dnf install cmake'
-  en: 'Arch: pacman -S cmake
-
+    Fedora: dnf install cmake
+  en: |-
+    Arch: pacman -S cmake
     Debian/Ubuntu: apt install cmake
-
-    Fedora: dnf install cmake'
+    Fedora: dnf install cmake
 flags:
 - flag: -S
   takes_value: true

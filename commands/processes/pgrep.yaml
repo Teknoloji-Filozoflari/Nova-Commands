@@ -1,5 +1,8 @@
+schema_version: 2
 id: pgrep
 name: pgrep
+kind: executable
+category: processes
 summary:
   tr: Ada göre süreç PID’lerini bulur.
   en: Find process IDs by name.
@@ -13,11 +16,27 @@ risk: safe
 requires_elevated: false
 platforms:
 - linux
+operating_systems:
+- linux
 packages:
   arch: procps-ng
   debian: procps
   ubuntu: procps
   fedora: procps-ng
+package_refs:
+- manager: pacman
+  package: procps-ng
+  distributions:
+  - arch
+- manager: apt
+  package: procps
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: procps-ng
+  distributions:
+  - fedora
 flags:
 - flag: -a
   long: --list-full
@@ -53,7 +72,6 @@ verification:
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-phase17
   notes: Read-only PID search; -a/--list-full confirmed via --help.
-category: processes
 nova:
   concepts:
   - terminal-basics

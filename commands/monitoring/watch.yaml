@@ -1,5 +1,8 @@
+schema_version: 2
 id: watch
 name: watch
+kind: executable
+category: monitoring
 summary:
   tr: Komutu periyodik çalıştırıp çıktıyı yeniler.
   en: Run a command repeatedly and show output.
@@ -12,11 +15,27 @@ risk: caution
 requires_elevated: false
 platforms:
 - linux
+operating_systems:
+- linux
 packages:
   arch: procps-ng
   debian: procps
   ubuntu: procps
   fedora: procps-ng
+package_refs:
+- manager: pacman
+  package: procps-ng
+  distributions:
+  - arch
+- manager: apt
+  package: procps
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: procps-ng
+  distributions:
+  - fedora
 flags:
 - flag: -n
   meaning:
@@ -64,7 +83,6 @@ verification:
   - man 1 watch
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-coverage
-category: monitoring
 nova:
   concepts:
   - terminal-basics

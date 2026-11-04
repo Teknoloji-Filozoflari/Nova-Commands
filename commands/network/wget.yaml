@@ -1,5 +1,8 @@
+schema_version: 2
 id: wget
 name: wget
+kind: executable
+category: network
 summary:
   tr: Ağ üzerinden dosya indirir (tekrar denemeli).
   en: Non-interactive network downloader.
@@ -13,11 +16,27 @@ risk: caution
 requires_elevated: false
 platforms:
 - linux
+operating_systems:
+- linux
 packages:
   arch: wget
   debian: wget
   ubuntu: wget
   fedora: wget
+package_refs:
+- manager: pacman
+  package: wget
+  distributions:
+  - arch
+- manager: apt
+  package: wget
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: wget
+  distributions:
+  - fedora
 install_notes:
   tr: 'Arch: pacman -S wget'
   en: 'Arch: pacman -S wget'
@@ -52,7 +71,6 @@ verification:
   - man 1 wget
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-bootstrap
-category: network
 nova:
   concepts:
   - networking

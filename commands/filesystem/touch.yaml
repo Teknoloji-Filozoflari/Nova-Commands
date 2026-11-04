@@ -1,5 +1,8 @@
+schema_version: 2
 id: touch
 name: touch
+kind: executable
+category: filesystem
 summary:
   tr: Dosya zaman damgasını günceller veya boş dosya oluşturur.
   en: Update timestamps or create empty files.
@@ -14,11 +17,28 @@ platforms:
 - linux
 - macos
 - bsd
+operating_systems:
+- linux
+- macos
 packages:
   arch: coreutils
   debian: coreutils
   ubuntu: coreutils
   fedora: coreutils
+package_refs:
+- manager: pacman
+  package: coreutils
+  distributions:
+  - arch
+- manager: apt
+  package: coreutils
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: coreutils
+  distributions:
+  - fedora
 flags:
 - flag: -c
   long: --no-create
@@ -67,7 +87,6 @@ verification:
   - man 1 touch
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-bootstrap
-category: filesystem
 nova:
   concepts:
   - files

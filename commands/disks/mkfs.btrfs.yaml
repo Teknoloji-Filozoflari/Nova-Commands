@@ -1,17 +1,16 @@
+schema_version: 2
 id: mkfs.btrfs
 name: mkfs.btrfs
+kind: executable
+category: disks
 summary:
   tr: Btrfs dosya sistemi oluşturur (yıkıcı).
   en: Create a Btrfs filesystem (destructive).
 description:
-  tr: >
-    btrfs-progs `mkfs.btrfs` bir veya birden fazla aygıtta Btrfs oluşturur.
-    Mevcut FS’yi ezmek `-f` ister. Çok diskli RAID profilleri (`-d`/`-m`)
-    karmaşıktır — yanlış aygıt listesi veri kaybıdır. reviewed, verified değil.
-  en: >
-    btrfs-progs `mkfs.btrfs` creates Btrfs on one or more devices. Overwrite
-    needs `-f`. Multi-disk RAID profiles (`-d`/`-m`) are easy to get wrong —
-    bad device lists destroy data. Reviewed, not verified.
+  tr: |
+    btrfs-progs `mkfs.btrfs` bir veya birden fazla aygıtta Btrfs oluşturur. Mevcut FS’yi ezmek `-f` ister. Çok diskli RAID profilleri (`-d`/`-m`) karmaşıktır — yanlış aygıt listesi veri kaybıdır. reviewed, verified değil.
+  en: |
+    btrfs-progs `mkfs.btrfs` creates Btrfs on one or more devices. Overwrite needs `-f`. Multi-disk RAID profiles (`-d`/`-m`) are easy to get wrong — bad device lists destroy data. Reviewed, not verified.
 tags:
 - disk
 - storage
@@ -22,11 +21,27 @@ risk: destructive
 requires_elevated: true
 platforms:
 - linux
+operating_systems:
+- linux
 packages:
   arch: btrfs-progs
   debian: btrfs-progs
   ubuntu: btrfs-progs
   fedora: btrfs-progs
+package_refs:
+- manager: pacman
+  package: btrfs-progs
+  distributions:
+  - arch
+- manager: apt
+  package: btrfs-progs
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: btrfs-progs
+  distributions:
+  - fedora
 install_notes:
   tr: |
     Arch: pacman -S btrfs-progs
@@ -74,12 +89,10 @@ examples:
     en: Single-device Btrfs (DANGER)
   command: sudo mkfs.btrfs -L root /dev/sdXN
   explanation:
-    tr: >
-      Yer tutucu. Çok aygıtlı komutları kopyalamayın; önce lsblk ile her
-      üyeyi doğrulayın. Üzerine yazma için `-f` ekstra risk.
-    en: >
-      Placeholder. Do not copy multi-device recipes blindly; verify each
-      member with lsblk. `-f` adds overwrite risk.
+    tr: |
+      Yer tutucu. Çok aygıtlı komutları kopyalamayın; önce lsblk ile her üyeyi doğrulayın. Üzerine yazma için `-f` ekstra risk.
+    en: |
+      Placeholder. Do not copy multi-device recipes blindly; verify each member with lsblk. `-f` adds overwrite risk.
   risk: destructive
   requires_elevated: true
 related:
@@ -112,4 +125,3 @@ nova:
   concepts:
   - storage
   favorite_eligible: false
-category: disks

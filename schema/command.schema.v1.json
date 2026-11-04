@@ -1,0 +1,411 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/Teknoloji-Filozoflari/Nova-Commands/main/schema/command.schema.v1.json",
+  "title": "Nova-Commands command entry (schema v1 — archived)",
+  "description": "ARCHIVED Linux-era command schema (v1). Live bank uses command.schema.json (v2). Retained for migration reference and historical dual-path docs. Do not validate new YAML against this.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "name",
+    "summary",
+    "description",
+    "category",
+    "risk",
+    "requires_elevated",
+    "platforms",
+    "verification",
+    "examples",
+    "intent"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": "^[a-z0-9][a-z0-9+._-]*$",
+      "description": "Stable unique id; usually matches binary name (e.g. ls, systemctl)."
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "description": "Display / invocation name."
+    },
+    "summary": {
+      "$ref": "#/$defs/localizedShort"
+    },
+    "description": {
+      "$ref": "#/$defs/localizedLong"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "filesystem",
+        "text",
+        "search",
+        "processes",
+        "system",
+        "network",
+        "users",
+        "packages",
+        "archives",
+        "disks",
+        "shell",
+        "development",
+        "containers",
+        "security",
+        "monitoring",
+        "hardware"
+      ]
+    },
+    "tags": {
+      "type": "array",
+      "maxItems": 24,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 32,
+        "pattern": "^[a-z0-9][a-z0-9-]*$"
+      }
+    },
+    "risk": {
+      "type": "string",
+      "description": "Inherent danger class of typical use. destructive > dangerous > caution > safe.",
+      "enum": [
+        "safe",
+        "caution",
+        "dangerous",
+        "destructive"
+      ]
+    },
+    "requires_elevated": {
+      "type": "boolean",
+      "description": "True when common useful invocations need root/sudo."
+    },
+    "platforms": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "enum": [
+          "linux",
+          "macos",
+          "bsd"
+        ]
+      }
+    },
+    "shells": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "enum": [
+          "sh",
+          "bash",
+          "zsh",
+          "fish",
+          "any"
+        ]
+      }
+    },
+    "packages": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Distro package names when known. Prefer Arch (pacman) notes first in install_notes. Use null/omit when unknown — never invent.",
+      "properties": {
+        "arch": {
+          "$ref": "#/$defs/packageName"
+        },
+        "debian": {
+          "$ref": "#/$defs/packageName"
+        },
+        "ubuntu": {
+          "$ref": "#/$defs/packageName"
+        },
+        "fedora": {
+          "$ref": "#/$defs/packageName"
+        },
+        "rhel": {
+          "$ref": "#/$defs/packageName"
+        }
+      }
+    },
+    "install_notes": {
+      "$ref": "#/$defs/localizedLong",
+      "description": "Human install hints. Arch/pacman first when relevant."
+    },
+    "flags": {
+      "type": "array",
+      "maxItems": 64,
+      "items": {
+        "$ref": "#/$defs/flag"
+      }
+    },
+    "examples": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 32,
+      "items": {
+        "$ref": "#/$defs/example"
+      }
+    },
+    "related": {
+      "type": "array",
+      "maxItems": 16,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9][a-z0-9+._-]*$"
+      }
+    },
+    "see_also": {
+      "type": "array",
+      "maxItems": 16,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 256
+      }
+    },
+    "intent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "tr",
+        "en"
+      ],
+      "properties": {
+        "tr": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 24,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 96
+          }
+        },
+        "en": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 24,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 96
+          }
+        }
+      }
+    },
+    "verification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "draft",
+            "reviewed",
+            "verified"
+          ],
+          "description": "verified ONLY after human review of flags/packages/examples. AI drafts stay draft."
+        },
+        "sources": {
+          "type": "array",
+          "maxItems": 12,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 512
+          }
+        },
+        "last_reviewed": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+        },
+        "reviewer": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 128
+        },
+        "notes": {
+          "type": "string",
+          "maxLength": 512
+        }
+      }
+    },
+    "nova": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Optional hooks for Nova Komut Rehberi (favorites, UI hints).",
+      "properties": {
+        "favorite_eligible": {
+          "type": "boolean"
+        },
+        "ui_priority": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "concepts": {
+          "type": "array",
+          "maxItems": 8,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]*$"
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "localizedShort": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "tr",
+        "en"
+      ],
+      "properties": {
+        "tr": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        },
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        }
+      }
+    },
+    "localizedLong": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "tr",
+        "en"
+      ],
+      "properties": {
+        "tr": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        }
+      }
+    },
+    "packageName": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9+._@/-]*$"
+    },
+    "flag": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "flag",
+        "meaning",
+        "verified"
+      ],
+      "properties": {
+        "flag": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "long": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "takes_value": {
+          "type": "boolean"
+        },
+        "value_name": {
+          "type": "string",
+          "maxLength": 64
+        },
+        "meaning": {
+          "$ref": "#/$defs/localizedShort"
+        },
+        "verified": {
+          "type": "boolean",
+          "description": "Must be false unless a human confirmed against man/help for the documented platform."
+        },
+        "platforms": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "linux",
+              "macos",
+              "bsd",
+              "gnu",
+              "bsd-utils"
+            ]
+          }
+        }
+      }
+    },
+    "example": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "title",
+        "command",
+        "explanation",
+        "risk"
+      ],
+      "properties": {
+        "title": {
+          "$ref": "#/$defs/localizedShort"
+        },
+        "command": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512
+        },
+        "explanation": {
+          "$ref": "#/$defs/localizedLong"
+        },
+        "risk": {
+          "type": "string",
+          "enum": [
+            "safe",
+            "caution",
+            "dangerous",
+            "destructive"
+          ]
+        },
+        "requires_elevated": {
+          "type": "boolean"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]*$"
+          }
+        }
+      }
+    }
+  }
+}

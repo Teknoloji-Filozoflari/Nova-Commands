@@ -1,20 +1,16 @@
+schema_version: 2
 id: mkfs
 name: mkfs
+kind: executable
+category: disks
 summary:
   tr: Dosya sistemi oluşturma ön yüzü (yıkıcı).
   en: Frontend to build a Linux filesystem (destructive).
 description:
-  tr: >
-    util-linux `mkfs`, seçilen türe göre `mkfs.<type>` yardımcılarını çağırır.
-    Varsayılan tür çoğu kurulumda ext2’dir; modern kullanımda doğrudan
-    `mkfs.ext4` / `mkfs.xfs` / `mkfs.btrfs` tercih edilir. Yanlış aygıt =
-    tüm verinin silinmesi. Bu girdi verified değildir; yalnızca belgelenmiş
-    uyarılarla reviewed.
-  en: >
-    util-linux `mkfs` dispatches to `mkfs.<type>` helpers. Default type is
-    often ext2; prefer calling `mkfs.ext4` / `mkfs.xfs` / `mkfs.btrfs`
-    directly. Wrong device wipes all data. Kept reviewed (not verified)
-    with strong warnings only.
+  tr: |
+    util-linux `mkfs`, seçilen türe göre `mkfs.<type>` yardımcılarını çağırır. Varsayılan tür çoğu kurulumda ext2’dir; modern kullanımda doğrudan `mkfs.ext4` / `mkfs.xfs` / `mkfs.btrfs` tercih edilir. Yanlış aygıt = tüm verinin silinmesi. Bu girdi verified değildir; yalnızca belgelenmiş uyarılarla reviewed.
+  en: |
+    util-linux `mkfs` dispatches to `mkfs.<type>` helpers. Default type is often ext2; prefer calling `mkfs.ext4` / `mkfs.xfs` / `mkfs.btrfs` directly. Wrong device wipes all data. Kept reviewed (not verified) with strong warnings only.
 tags:
 - disk
 - storage
@@ -24,12 +20,29 @@ risk: destructive
 requires_elevated: true
 platforms:
 - linux
+operating_systems:
+- linux
 packages:
   arch: util-linux
   debian: util-linux
   ubuntu: util-linux
   fedora: util-linux
   rhel: util-linux
+package_refs:
+- manager: pacman
+  package: util-linux
+  distributions:
+  - arch
+- manager: apt
+  package: util-linux
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: util-linux
+  distributions:
+  - fedora
+  - rhel
 install_notes:
   tr: |
     Arch: pacman -S util-linux (genelde taban). Tür yardımcıları ayrı paketlerde:
@@ -71,12 +84,10 @@ examples:
     en: Create by type (DANGER)
   command: sudo mkfs -t ext4 /dev/sdXN
   explanation:
-    tr: >
-      Yer tutucu aygıt — gerçek yolda ASLA çalıştırmayın. Önce `lsblk -f` /
-      `blkid` ile doğru bölümü doğrulayın. Tercihen `mkfs.ext4` kullanın.
-    en: >
-      Placeholder device — never run on a real path as-is. Confirm the
-      partition with `lsblk -f` / `blkid` first. Prefer `mkfs.ext4` directly.
+    tr: |
+      Yer tutucu aygıt — gerçek yolda ASLA çalıştırmayın. Önce `lsblk -f` / `blkid` ile doğru bölümü doğrulayın. Tercihen `mkfs.ext4` kullanın.
+    en: |
+      Placeholder device — never run on a real path as-is. Confirm the partition with `lsblk -f` / `blkid` first. Prefer `mkfs.ext4` directly.
   risk: destructive
   requires_elevated: true
 related:
@@ -109,12 +120,10 @@ verification:
   - mkfs --help
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-phase15
-  notes: >
-    Destructive formatter frontend. Examples use placeholders only; no
-    verified promotion. Never execute against real disks to validate.
+  notes: |
+    Destructive formatter frontend. Examples use placeholders only; no verified promotion. Never execute against real disks to validate.
 nova:
   concepts:
   - storage
   favorite_eligible: false
   ui_priority: 40
-category: disks

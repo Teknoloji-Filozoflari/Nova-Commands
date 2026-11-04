@@ -1,5 +1,7 @@
+schema_version: 2
 id: iptables
 name: iptables
+kind: executable
 category: security
 summary:
   tr: Eski nesil IPv4 netfilter aracı.
@@ -16,26 +18,38 @@ risk: destructive
 requires_elevated: true
 platforms:
 - linux
+operating_systems:
+- linux
 packages:
   arch: iptables
   debian: iptables
   ubuntu: iptables
   fedora: iptables
+package_refs:
+- manager: pacman
+  package: iptables
+  distributions:
+  - arch
+- manager: apt
+  package: iptables
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: iptables
+  distributions:
+  - fedora
 install_notes:
-  tr: 'Arch: pacman -S iptables
-
+  tr: |-
+    Arch: pacman -S iptables
     Debian/Ubuntu: apt install iptables
-
     Fedora: dnf install iptables
-
-    Bazı distrolarda iptables-nft uyumluluk katmanı vardır.'
-  en: 'Arch: pacman -S iptables
-
+    Bazı distrolarda iptables-nft uyumluluk katmanı vardır.
+  en: |-
+    Arch: pacman -S iptables
     Debian/Ubuntu: apt install iptables
-
     Fedora: dnf install iptables
-
-    Some distros ship an iptables-nft compatibility layer.'
+    Some distros ship an iptables-nft compatibility layer.
 flags:
 - flag: -L
   long: --list

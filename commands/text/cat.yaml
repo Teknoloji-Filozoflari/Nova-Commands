@@ -1,22 +1,8 @@
-packages:
-  arch: coreutils
-  debian: coreutils
-  ubuntu: coreutils
-  fedora: coreutils
-platforms:
-- linux
-- macos
-- bsd
-requires_elevated: false
-verification:
-  status: verified
-  sources:
-  - man 1 cat (GNU coreutils)
-  last_reviewed: '2026-11-02'
-  reviewer: nova-commands-phase15
-  notes: Flag -n/--number and safe read example confirmed.
+schema_version: 2
 id: cat
 name: cat
+kind: executable
+category: text
 summary:
   tr: Dosyaları birleştirip yazar.
   en: Concatenate and print files.
@@ -27,6 +13,33 @@ tags:
 - text
 - view
 risk: safe
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+operating_systems:
+- linux
+- macos
+packages:
+  arch: coreutils
+  debian: coreutils
+  ubuntu: coreutils
+  fedora: coreutils
+package_refs:
+- manager: pacman
+  package: coreutils
+  distributions:
+  - arch
+- manager: apt
+  package: coreutils
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: coreutils
+  distributions:
+  - fedora
 flags:
 - flag: -n
   long: --number
@@ -56,7 +69,13 @@ intent:
   en:
   - show file contents
   - print file
-category: text
+verification:
+  status: verified
+  sources:
+  - man 1 cat (GNU coreutils)
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-phase15
+  notes: Flag -n/--number and safe read example confirmed.
 nova:
   concepts:
   - files

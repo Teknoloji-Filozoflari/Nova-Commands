@@ -1,5 +1,8 @@
+schema_version: 2
 id: resolvectl
 name: resolvectl
+kind: executable
+category: network
 summary:
   tr: systemd-resolved DNS denetimi.
   en: Resolve domain names and control systemd-resolved.
@@ -14,11 +17,27 @@ risk: caution
 requires_elevated: false
 platforms:
 - linux
+operating_systems:
+- linux
 packages:
   arch: systemd
   debian: systemd
   ubuntu: systemd
   fedora: systemd
+package_refs:
+- manager: pacman
+  package: systemd
+  distributions:
+  - arch
+- manager: apt
+  package: systemd
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: systemd
+  distributions:
+  - fedora
 install_notes:
   tr: 'Arch: pacman -S systemd — systemd-resolved etkin olmalı (systemctl enable --now systemd-resolved).'
   en: 'Arch: pacman -S systemd — enable systemd-resolved (systemctl enable --now systemd-resolved).'
@@ -87,4 +106,3 @@ nova:
   - dns
   - systemd
   - networking-basics
-category: network

@@ -1,5 +1,8 @@
+schema_version: 2
 id: unzip
 name: unzip
+kind: executable
+category: archives
 summary:
   tr: ZIP arşivlerini çıkarır.
   en: Extract ZIP archives.
@@ -13,11 +16,28 @@ requires_elevated: false
 platforms:
 - linux
 - macos
+operating_systems:
+- linux
+- macos
 packages:
   arch: unzip
   debian: unzip
   ubuntu: unzip
   fedora: unzip
+package_refs:
+- manager: pacman
+  package: unzip
+  distributions:
+  - arch
+- manager: apt
+  package: unzip
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: unzip
+  distributions:
+  - fedora
 install_notes:
   tr: 'Arch: pacman -S unzip'
   en: 'Arch: pacman -S unzip'
@@ -46,7 +66,6 @@ verification:
   - man 1 unzip
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-bootstrap
-category: archives
 nova:
   concepts:
   - files

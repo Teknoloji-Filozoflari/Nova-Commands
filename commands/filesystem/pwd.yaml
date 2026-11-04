@@ -1,5 +1,8 @@
+schema_version: 2
 id: pwd
 name: pwd
+kind: executable
+category: filesystem
 summary:
   tr: Çalışma dizinini yazdırır.
   en: Print working directory.
@@ -16,11 +19,28 @@ platforms:
 - linux
 - macos
 - bsd
+operating_systems:
+- linux
+- macos
 packages:
   arch: coreutils
   debian: coreutils
   ubuntu: coreutils
   fedora: coreutils
+package_refs:
+- manager: pacman
+  package: coreutils
+  distributions:
+  - arch
+- manager: apt
+  package: coreutils
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: coreutils
+  distributions:
+  - fedora
 examples:
 - title:
     tr: Neredeyim?
@@ -53,4 +73,3 @@ nova:
   concepts:
   - files
   - terminal-basics
-category: filesystem

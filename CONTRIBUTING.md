@@ -26,15 +26,20 @@ CI must pass: validate → build → pytest → committed `content_sha256` match
 ## Add a command
 
 1. Pick a category under `commands/` (must match `metadata/categories.yaml`
-   and `schema/command.schema.json`).
+   and `schema/command.schema.json` — **schema v2**).
 2. Create `commands/<category>/<id>.yaml` (filename stem **must** equal `id`).
+   Set `schema_version: 2` and an honest `kind` (`executable`, `shell_builtin`,
+   `package_manager`, …).
 3. Fill required fields (**both** `tr` and `en` on every localized object).
-   Prefer Arch/`pacman` first in `install_notes` when relevant.
+   Prefer Arch/`pacman` first in `install_notes` / `package_refs` when relevant.
+   Prefer `package_refs` (`manager` from `metadata/package-managers.yaml`);
+   legacy `packages.{arch,debian,…}` may remain for dual-read.
 4. Optionally set `nova.concepts` to ids from `metadata/concepts.yaml`.
 5. Set `verification.status` to `draft` unless a human already reviewed
    flags, packages, and examples against man pages / `--help`.
 6. For each flag, set `verified: false` until confirmed. Do **not** invent
-   flags or package names.
+   flags or package names. Schema migration notes:
+   [docs/SCHEMA_MIGRATION_V2.md](docs/SCHEMA_MIGRATION_V2.md).
 7. Run locally:
 
    ```bash
@@ -75,12 +80,14 @@ open a **Translation** issue for large sweeps.
 
 | Field | Rule |
 |-------|------|
+| `schema_version` | Must be `2` |
 | `id` | Unique, `^[a-z0-9][a-z0-9+._-]*$`, matches filename |
+| `kind` | e.g. `executable`, `shell_builtin`, `package_manager`, … |
 | `summary` / `description` | Both `tr` and `en` |
 | `category` | One of the taxonomy slugs |
 | `risk` | `safe` \| `caution` \| `dangerous` \| `destructive` |
 | `requires_elevated` | Boolean for typical useful use |
-| `platforms` | Non-empty (`linux`, …) |
+| `platforms` | Non-empty (`linux`, `macos`, `bsd`, `windows`, …) |
 | `examples` | ≥1; each with `risk` |
 | `intent.tr` / `intent.en` | Natural-language search phrases |
 | `verification.status` | `draft` \| `reviewed` \| `verified` |

@@ -1,5 +1,8 @@
+schema_version: 2
 id: uname
 name: uname
+kind: executable
+category: system
 summary:
   tr: Sistem bilgisini yazdırır.
   en: Print system information.
@@ -15,11 +18,28 @@ platforms:
 - linux
 - macos
 - bsd
+operating_systems:
+- linux
+- macos
 packages:
   arch: coreutils
   debian: coreutils
   ubuntu: coreutils
   fedora: coreutils
+package_refs:
+- manager: pacman
+  package: coreutils
+  distributions:
+  - arch
+- manager: apt
+  package: coreutils
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: coreutils
+  distributions:
+  - fedora
 flags:
 - flag: -a
   long: --all
@@ -55,7 +75,6 @@ verification:
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-phase15
   notes: Flag -a/--all confirmed; read-only system identity.
-category: system
 nova:
   concepts:
   - systemd

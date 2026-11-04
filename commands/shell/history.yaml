@@ -1,5 +1,8 @@
+schema_version: 2
 id: history
 name: history
+kind: shell_builtin
+category: shell
 summary:
   tr: Komut geçmişini listeler (yerleşik).
   en: Display command history (builtin).
@@ -14,6 +17,9 @@ platforms:
 - linux
 - macos
 - bsd
+operating_systems:
+- linux
+- macos
 shells:
 - bash
 - zsh
@@ -47,4 +53,3 @@ nova:
   - shell-builtin
   - terminal-basics
   - path
-category: shell

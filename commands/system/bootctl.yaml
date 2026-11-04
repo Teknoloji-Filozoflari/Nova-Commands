@@ -1,5 +1,8 @@
+schema_version: 2
 id: bootctl
 name: bootctl
+kind: executable
+category: system
 summary:
   tr: systemd-boot ve EFI önyükleme denetimi.
   en: Control firmware and systemd-boot entries.
@@ -16,18 +19,34 @@ risk: dangerous
 requires_elevated: true
 platforms:
 - linux
+operating_systems:
+- linux
 packages:
   arch: systemd
   debian: systemd-boot
   ubuntu: systemd-boot
   fedora: systemd-boot-unsigned
+package_refs:
+- manager: pacman
+  package: systemd
+  distributions:
+  - arch
+- manager: apt
+  package: systemd-boot
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: systemd-boot-unsigned
+  distributions:
+  - fedora
 install_notes:
-  tr: 'Arch: pacman -S systemd (systemd-boot kullanımı ayrı kurulum)
-
-    Debian/Ubuntu paket adı systemd-boot; Fedora’da systemd-boot-unsigned — doğrulayın.'
-  en: 'Arch: pacman -S systemd (systemd-boot setup is separate)
-
-    Debian/Ubuntu: systemd-boot; Fedora often systemd-boot-unsigned — verify on target.'
+  tr: |-
+    Arch: pacman -S systemd (systemd-boot kullanımı ayrı kurulum)
+    Debian/Ubuntu paket adı systemd-boot; Fedora’da systemd-boot-unsigned — doğrulayın.
+  en: |-
+    Arch: pacman -S systemd (systemd-boot setup is separate)
+    Debian/Ubuntu: systemd-boot; Fedora often systemd-boot-unsigned — verify on target.
 flags:
 - flag: status
   meaning:
@@ -78,4 +97,3 @@ nova:
   concepts:
   - systemd
   - terminal-basics
-category: system

@@ -1,5 +1,8 @@
+schema_version: 2
 id: blkid
 name: blkid
+kind: executable
+category: disks
 summary:
   tr: Blok aygıt özniteliklerini basar.
   en: Print block device attributes.
@@ -13,11 +16,27 @@ risk: safe
 requires_elevated: false
 platforms:
 - linux
+operating_systems:
+- linux
 packages:
   arch: util-linux
   debian: util-linux
   ubuntu: util-linux
   fedora: util-linux
+package_refs:
+- manager: pacman
+  package: util-linux
+  distributions:
+  - arch
+- manager: apt
+  package: util-linux
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: util-linux
+  distributions:
+  - fedora
 flags:
 - flag: -o
   meaning:
@@ -73,4 +92,3 @@ verification:
 nova:
   concepts:
   - storage
-category: disks

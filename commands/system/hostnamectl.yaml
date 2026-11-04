@@ -1,5 +1,8 @@
+schema_version: 2
 id: hostnamectl
 name: hostnamectl
+kind: executable
+category: system
 summary:
   tr: Hostname ve ilgili ayarları yönetir.
   en: Query or change system hostname settings.
@@ -13,11 +16,27 @@ risk: caution
 requires_elevated: true
 platforms:
 - linux
+operating_systems:
+- linux
 packages:
   arch: systemd
   debian: systemd
   ubuntu: systemd
   fedora: systemd
+package_refs:
+- manager: pacman
+  package: systemd
+  distributions:
+  - arch
+- manager: apt
+  package: systemd
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: systemd
+  distributions:
+  - fedora
 examples:
 - title:
     tr: Bilgi
@@ -52,7 +71,6 @@ verification:
   - man 1 hostnamectl
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-bootstrap
-category: system
 nova:
   concepts:
   - systemd

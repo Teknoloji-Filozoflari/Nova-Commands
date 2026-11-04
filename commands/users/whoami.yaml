@@ -1,5 +1,8 @@
+schema_version: 2
 id: whoami
 name: whoami
+kind: executable
+category: users
 summary:
   tr: Geçerli etkili kullanıcı adını basar.
   en: Print effective user name.
@@ -14,11 +17,28 @@ platforms:
 - linux
 - macos
 - bsd
+operating_systems:
+- linux
+- macos
 packages:
   arch: coreutils
   debian: coreutils
   ubuntu: coreutils
   fedora: coreutils
+package_refs:
+- manager: pacman
+  package: coreutils
+  distributions:
+  - arch
+- manager: apt
+  package: coreutils
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: coreutils
+  distributions:
+  - fedora
 examples:
 - title:
     tr: Kimim?
@@ -45,7 +65,6 @@ verification:
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-phase15
   notes: Prints effective username; safe identity helper.
-category: users
 nova:
   concepts:
   - permissions

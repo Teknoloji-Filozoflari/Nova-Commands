@@ -1,5 +1,8 @@
+schema_version: 2
 id: dmesg
 name: dmesg
+kind: executable
+category: monitoring
 summary:
   tr: Çekirdek mesaj halkasını yazdırır.
   en: Print or control the kernel ring buffer.
@@ -15,11 +18,28 @@ platforms:
 - linux
 - macos
 - bsd
+operating_systems:
+- linux
+- macos
 packages:
   arch: util-linux
   debian: util-linux
   ubuntu: util-linux
   fedora: util-linux
+package_refs:
+- manager: pacman
+  package: util-linux
+  distributions:
+  - arch
+- manager: apt
+  package: util-linux
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: util-linux
+  distributions:
+  - fedora
 flags:
 - flag: -T
   meaning:
@@ -50,7 +70,6 @@ verification:
   - man 1 dmesg
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-bootstrap
-category: monitoring
 nova:
   concepts:
   - terminal-basics

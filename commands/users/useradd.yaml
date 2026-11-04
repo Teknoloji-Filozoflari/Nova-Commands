@@ -1,5 +1,8 @@
+schema_version: 2
 id: useradd
 name: useradd
+kind: executable
+category: users
 summary:
   tr: Yeni kullanıcı hesabı oluşturur.
   en: Create a new user account.
@@ -13,11 +16,27 @@ risk: dangerous
 requires_elevated: true
 platforms:
 - linux
+operating_systems:
+- linux
 packages:
   arch: shadow
   debian: passwd
   ubuntu: passwd
   fedora: shadow-utils
+package_refs:
+- manager: pacman
+  package: shadow
+  distributions:
+  - arch
+- manager: apt
+  package: passwd
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: shadow-utils
+  distributions:
+  - fedora
 install_notes:
   tr: |-
     Arch: pacman -S shadow (taban)
@@ -96,4 +115,3 @@ verification:
 nova:
   concepts:
   - permissions
-category: users

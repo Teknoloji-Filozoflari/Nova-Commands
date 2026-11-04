@@ -1,5 +1,8 @@
+schema_version: 2
 id: git
 name: git
+kind: executable
+category: development
 summary:
   tr: Dağıtık sürüm kontrol sistemi.
   en: Distributed version control system.
@@ -15,22 +18,37 @@ platforms:
 - linux
 - macos
 - bsd
+operating_systems:
+- linux
+- macos
 packages:
   arch: git
   debian: git
   ubuntu: git
   fedora: git
+package_refs:
+- manager: pacman
+  package: git
+  distributions:
+  - arch
+- manager: apt
+  package: git
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: git
+  distributions:
+  - fedora
 install_notes:
-  tr: 'Arch: pacman -S git
-
+  tr: |-
+    Arch: pacman -S git
     Debian/Ubuntu: apt install git
-
-    Fedora: dnf install git'
-  en: 'Arch: pacman -S git
-
+    Fedora: dnf install git
+  en: |-
+    Arch: pacman -S git
     Debian/Ubuntu: apt install git
-
-    Fedora: dnf install git'
+    Fedora: dnf install git
 flags: []
 examples:
 - title:
@@ -79,4 +97,3 @@ nova:
   ui_priority: 92
   concepts:
   - terminal-basics
-category: development

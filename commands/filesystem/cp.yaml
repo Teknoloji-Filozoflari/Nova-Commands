@@ -1,5 +1,8 @@
+schema_version: 2
 id: cp
 name: cp
+kind: executable
+category: filesystem
 summary:
   tr: Dosya ve dizinleri kopyalar.
   en: Copy files and directories.
@@ -15,11 +18,28 @@ platforms:
 - linux
 - macos
 - bsd
+operating_systems:
+- linux
+- macos
 packages:
   arch: coreutils
   debian: coreutils
   ubuntu: coreutils
   fedora: coreutils
+package_refs:
+- manager: pacman
+  package: coreutils
+  distributions:
+  - arch
+- manager: apt
+  package: coreutils
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: coreutils
+  distributions:
+  - fedora
 install_notes:
   tr: 'Arch: pacman -S coreutils'
   en: 'Arch: pacman -S coreutils'
@@ -96,4 +116,3 @@ nova:
   concepts:
   - files
   - terminal-basics
-category: filesystem

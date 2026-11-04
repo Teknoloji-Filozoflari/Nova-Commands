@@ -1,5 +1,8 @@
+schema_version: 2
 id: lsof
 name: lsof
+kind: executable
+category: processes
 summary:
   tr: Açık dosyaları ve soketleri listeler.
   en: List open files and sockets.
@@ -16,11 +19,28 @@ platforms:
 - linux
 - macos
 - bsd
+operating_systems:
+- linux
+- macos
 packages:
   arch: lsof
   debian: lsof
   ubuntu: lsof
   fedora: lsof
+package_refs:
+- manager: pacman
+  package: lsof
+  distributions:
+  - arch
+- manager: apt
+  package: lsof
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: lsof
+  distributions:
+  - fedora
 install_notes:
   tr: 'Arch: pacman -S lsof'
   en: 'Arch: pacman -S lsof'
@@ -87,4 +107,3 @@ nova:
   concepts:
   - networking
   - terminal-basics
-category: processes

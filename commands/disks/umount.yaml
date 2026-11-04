@@ -1,5 +1,8 @@
+schema_version: 2
 id: umount
 name: umount
+kind: executable
+category: disks
 summary:
   tr: Dosya sistemi bağlantısını kaldırır.
   en: Unmount filesystems.
@@ -15,11 +18,28 @@ platforms:
 - linux
 - macos
 - bsd
+operating_systems:
+- linux
+- macos
 packages:
   arch: util-linux
   debian: mount
   ubuntu: mount
   fedora: util-linux
+package_refs:
+- manager: pacman
+  package: util-linux
+  distributions:
+  - arch
+- manager: apt
+  package: mount
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: util-linux
+  distributions:
+  - fedora
 flags:
 - flag: -l
   meaning:
@@ -73,4 +93,3 @@ verification:
 nova:
   concepts:
   - storage
-category: disks

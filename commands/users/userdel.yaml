@@ -1,5 +1,8 @@
+schema_version: 2
 id: userdel
 name: userdel
+kind: executable
+category: users
 summary:
   tr: Kullanıcı hesabını siler.
   en: Delete a user account.
@@ -13,11 +16,27 @@ risk: destructive
 requires_elevated: true
 platforms:
 - linux
+operating_systems:
+- linux
 packages:
   arch: shadow
   debian: passwd
   ubuntu: passwd
   fedora: shadow-utils
+package_refs:
+- manager: pacman
+  package: shadow
+  distributions:
+  - arch
+- manager: apt
+  package: passwd
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: shadow-utils
+  distributions:
+  - fedora
 flags:
 - flag: -r
   meaning:
@@ -70,4 +89,3 @@ verification:
 nova:
   concepts:
   - permissions
-category: users

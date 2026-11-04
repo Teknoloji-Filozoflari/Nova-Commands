@@ -1,5 +1,8 @@
+schema_version: 2
 id: htop
 name: htop
+kind: executable
+category: processes
 summary:
   tr: Etkileşimli süreç görüntüleyici.
   en: Interactive process viewer.
@@ -15,11 +18,28 @@ platforms:
 - linux
 - macos
 - bsd
+operating_systems:
+- linux
+- macos
 packages:
   arch: htop
   debian: htop
   ubuntu: htop
   fedora: htop
+package_refs:
+- manager: pacman
+  package: htop
+  distributions:
+  - arch
+- manager: apt
+  package: htop
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: htop
+  distributions:
+  - fedora
 install_notes:
   tr: 'Arch: pacman -S htop'
   en: 'Arch: pacman -S htop'
@@ -50,7 +70,6 @@ verification:
   - https://htop.dev/
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-coverage
-category: processes
 nova:
   concepts:
   - terminal-basics

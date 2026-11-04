@@ -1,5 +1,8 @@
+schema_version: 2
 id: nice
 name: nice
+kind: executable
+category: processes
 summary:
   tr: Değiştirilmiş öncelikle komut çalıştırır.
   en: Run a command with a modified niceness.
@@ -14,11 +17,28 @@ platforms:
 - linux
 - macos
 - bsd
+operating_systems:
+- linux
+- macos
 packages:
   arch: coreutils
   debian: coreutils
   ubuntu: coreutils
   fedora: coreutils
+package_refs:
+- manager: pacman
+  package: coreutils
+  distributions:
+  - arch
+- manager: apt
+  package: coreutils
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: coreutils
+  distributions:
+  - fedora
 flags:
 - flag: -n
   meaning:
@@ -62,7 +82,6 @@ verification:
   - man 1 nice
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-coverage
-category: processes
 nova:
   concepts:
   - terminal-basics

@@ -1,5 +1,8 @@
+schema_version: 2
 id: ssh-keygen
 name: ssh-keygen
+kind: executable
+category: security
 summary:
   tr: SSH kimlik doğrulama anahtarları üretir.
   en: Generate authentication keys for SSH.
@@ -15,11 +18,28 @@ platforms:
 - linux
 - macos
 - bsd
+operating_systems:
+- linux
+- macos
 packages:
   arch: openssh
   debian: openssh-client
   ubuntu: openssh-client
   fedora: openssh-clients
+package_refs:
+- manager: pacman
+  package: openssh
+  distributions:
+  - arch
+- manager: apt
+  package: openssh-client
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: openssh-clients
+  distributions:
+  - fedora
 flags:
 - flag: -t
   takes_value: true
@@ -66,7 +86,6 @@ verification:
   - man 1 ssh-keygen
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-bootstrap
-category: security
 nova:
   concepts:
   - permissions

@@ -1,5 +1,8 @@
+schema_version: 2
 id: lspci
 name: lspci
+kind: executable
+category: hardware
 summary:
   tr: PCI aygıtlarını listeler.
   en: List PCI devices.
@@ -12,11 +15,27 @@ risk: safe
 requires_elevated: false
 platforms:
 - linux
+operating_systems:
+- linux
 packages:
   arch: pciutils
   debian: pciutils
   ubuntu: pciutils
   fedora: pciutils
+package_refs:
+- manager: pacman
+  package: pciutils
+  distributions:
+  - arch
+- manager: apt
+  package: pciutils
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: pciutils
+  distributions:
+  - fedora
 install_notes:
   tr: 'Arch: pacman -S pciutils'
   en: 'Arch: pacman -S pciutils'
@@ -56,7 +75,6 @@ verification:
   - man 8 lspci
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-bootstrap
-category: hardware
 nova:
   concepts:
   - terminal-basics

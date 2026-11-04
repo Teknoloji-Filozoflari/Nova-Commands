@@ -1,5 +1,8 @@
+schema_version: 2
 id: which
 name: which
+kind: executable
+category: search
 summary:
   tr: Komutun PATH üzerindeki konumunu gösterir.
   en: Locate a command on PATH.
@@ -15,22 +18,37 @@ platforms:
 - linux
 - macos
 - bsd
+operating_systems:
+- linux
+- macos
 packages:
   arch: which
   debian: debianutils
   ubuntu: debianutils
   fedora: which
+package_refs:
+- manager: pacman
+  package: which
+  distributions:
+  - arch
+- manager: apt
+  package: debianutils
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: which
+  distributions:
+  - fedora
 install_notes:
-  tr: 'Arch: pacman -S which
-
+  tr: |-
+    Arch: pacman -S which
     Debian/Ubuntu: generally in debianutils
-
-    Fedora: dnf install which'
-  en: 'Arch: pacman -S which
-
+    Fedora: dnf install which
+  en: |-
+    Arch: pacman -S which
     Debian/Ubuntu: typically debianutils
-
-    Fedora: dnf install which'
+    Fedora: dnf install which
 examples:
 - title:
     tr: Nerede?
@@ -58,7 +76,6 @@ verification:
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-phase17
   notes: PATH locator only; debianutils/which -- usage checked.
-category: search
 nova:
   concepts:
   - files

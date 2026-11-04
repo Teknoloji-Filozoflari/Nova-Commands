@@ -1,5 +1,7 @@
+schema_version: 2
 id: iotop
 name: iotop
+kind: executable
 category: monitoring
 summary:
   tr: Süreç başına I/O top görünümü.
@@ -15,26 +17,38 @@ risk: caution
 requires_elevated: true
 platforms:
 - linux
+operating_systems:
+- linux
 packages:
   arch: iotop
   debian: iotop
   ubuntu: iotop
   fedora: iotop
+package_refs:
+- manager: pacman
+  package: iotop
+  distributions:
+  - arch
+- manager: apt
+  package: iotop
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: iotop
+  distributions:
+  - fedora
 install_notes:
-  tr: 'Arch: pacman -S iotop
-
+  tr: |-
+    Arch: pacman -S iotop
     Debian/Ubuntu: apt install iotop
-
     Fedora: dnf install iotop
-
-    Çoğu kurulumda sudo ile çalıştırılır.'
-  en: 'Arch: pacman -S iotop
-
+    Çoğu kurulumda sudo ile çalıştırılır.
+  en: |-
+    Arch: pacman -S iotop
     Debian/Ubuntu: apt install iotop
-
     Fedora: dnf install iotop
-
-    Usually run with sudo.'
+    Usually run with sudo.
 flags:
 - flag: -o
   long: --only

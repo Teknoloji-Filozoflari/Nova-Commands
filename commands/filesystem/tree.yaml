@@ -1,5 +1,8 @@
+schema_version: 2
 id: tree
 name: tree
+kind: executable
+category: filesystem
 summary:
   tr: Dizin ağacını görsel listeler.
   en: List contents of directories in a tree-like format.
@@ -14,22 +17,37 @@ requires_elevated: false
 platforms:
 - linux
 - macos
+operating_systems:
+- linux
+- macos
 packages:
   arch: tree
   debian: tree
   ubuntu: tree
   fedora: tree
+package_refs:
+- manager: pacman
+  package: tree
+  distributions:
+  - arch
+- manager: apt
+  package: tree
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: tree
+  distributions:
+  - fedora
 install_notes:
-  tr: 'Arch: pacman -S tree
-
+  tr: |-
+    Arch: pacman -S tree
     Debian/Ubuntu: apt install tree
-
-    Fedora: dnf install tree'
-  en: 'Arch: pacman -S tree
-
+    Fedora: dnf install tree
+  en: |-
+    Arch: pacman -S tree
     Debian/Ubuntu: apt install tree
-
-    Fedora: dnf install tree'
+    Fedora: dnf install tree
 flags:
 - flag: -L
   takes_value: true
@@ -68,7 +86,6 @@ verification:
   - man 1 tree
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-bootstrap
-category: filesystem
 nova:
   concepts:
   - files

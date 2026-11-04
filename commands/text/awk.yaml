@@ -1,5 +1,8 @@
+schema_version: 2
 id: awk
 name: awk
+kind: executable
+category: text
 summary:
   tr: Desen tarama ve metin işleme dili.
   en: Pattern scanning and text processing language.
@@ -14,18 +17,35 @@ platforms:
 - linux
 - macos
 - bsd
+operating_systems:
+- linux
+- macos
 packages:
   arch: gawk
   debian: gawk
   ubuntu: gawk
   fedora: gawk
+package_refs:
+- manager: pacman
+  package: gawk
+  distributions:
+  - arch
+- manager: apt
+  package: gawk
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: gawk
+  distributions:
+  - fedora
 install_notes:
-  tr: 'Arch: pacman -S gawk (awk → gawk)
-
-    Debian/Ubuntu/Fedora: gawk'
-  en: 'Arch: pacman -S gawk (awk → gawk)
-
-    Debian/Ubuntu/Fedora: gawk'
+  tr: |-
+    Arch: pacman -S gawk (awk → gawk)
+    Debian/Ubuntu/Fedora: gawk
+  en: |-
+    Arch: pacman -S gawk (awk → gawk)
+    Debian/Ubuntu/Fedora: gawk
 flags:
 - flag: -F
   meaning:
@@ -75,7 +95,6 @@ verification:
   - man 1 gawk
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-coverage
-category: text
 nova:
   concepts:
   - files

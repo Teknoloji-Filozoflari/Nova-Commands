@@ -1,5 +1,8 @@
+schema_version: 2
 id: nmcli
 name: nmcli
+kind: executable
+category: network
 summary:
   tr: NetworkManager komut satırı.
   en: NetworkManager command-line client.
@@ -14,22 +17,36 @@ risk: dangerous
 requires_elevated: false
 platforms:
 - linux
+operating_systems:
+- linux
 packages:
   arch: networkmanager
   debian: network-manager
   ubuntu: network-manager
   fedora: NetworkManager
+package_refs:
+- manager: pacman
+  package: networkmanager
+  distributions:
+  - arch
+- manager: apt
+  package: network-manager
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: NetworkManager
+  distributions:
+  - fedora
 install_notes:
-  tr: 'Arch: pacman -S networkmanager — sonra systemctl enable --now NetworkManager
-
+  tr: |-
+    Arch: pacman -S networkmanager — sonra systemctl enable --now NetworkManager
     Debian/Ubuntu: network-manager
-
-    Fedora: NetworkManager (genelde kurulu)'
-  en: 'Arch: pacman -S networkmanager — then systemctl enable --now NetworkManager
-
+    Fedora: NetworkManager (genelde kurulu)
+  en: |-
+    Arch: pacman -S networkmanager — then systemctl enable --now NetworkManager
     Debian/Ubuntu: network-manager
-
-    Fedora: NetworkManager (usually installed)'
+    Fedora: NetworkManager (usually installed)
 flags:
 - flag: device
   meaning:
@@ -108,4 +125,3 @@ nova:
   - networking
   - networking-basics
   ui_priority: 65
-category: network

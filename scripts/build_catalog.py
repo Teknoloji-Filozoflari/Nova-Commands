@@ -57,9 +57,12 @@ def canonical_bytes(obj: Any) -> bytes:
     ).encode("utf-8")
 
 
+CATALOG_SCHEMA_VERSION = 2
+
+
 def content_sha256(commands: list[dict], concepts: list[dict]) -> str:
     payload = {
-        "schema_version": 1,
+        "schema_version": CATALOG_SCHEMA_VERSION,
         "kind": "nova-commands-bank",
         "commands": commands,
         "concepts": concepts,
@@ -76,7 +79,9 @@ def build_search_index(commands: list[dict], concepts: list[dict]) -> dict:
                 "id": c["id"],
                 "name": c.get("name"),
                 "category": c.get("category"),
+                "kind": c.get("kind"),
                 "risk": c.get("risk"),
+                "platforms": c.get("platforms") or [],
                 "verification": (c.get("verification") or {}).get("status"),
                 "tags": c.get("tags") or [],
                 "summary": c.get("summary") or {},
@@ -98,7 +103,7 @@ def build_search_index(commands: list[dict], concepts: list[dict]) -> dict:
         )
     entries.sort(key=lambda e: (e["type"], e["id"]))
     return {
-        "schema_version": 1,
+        "schema_version": CATALOG_SCHEMA_VERSION,
         "kind": "nova-commands-search-index",
         "entry_count": len(entries),
         "entries": entries,
@@ -120,7 +125,7 @@ def main() -> int:
     generated_at = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
     catalog = {
-        "schema_version": 1,
+        "schema_version": CATALOG_SCHEMA_VERSION,
         "kind": "nova-commands-bank",
         "generated_at": generated_at,
         "content_sha256": digest,
@@ -135,7 +140,7 @@ def main() -> int:
     search_index["generated_at"] = generated_at
 
     manifest = {
-        "schema_version": 1,
+        "schema_version": CATALOG_SCHEMA_VERSION,
         "kind": "nova-commands-manifest",
         "generated_at": generated_at,
         "content_sha256": digest,

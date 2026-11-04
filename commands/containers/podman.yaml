@@ -1,5 +1,8 @@
+schema_version: 2
 id: podman
 name: podman
+kind: executable
+category: containers
 summary:
   tr: Demonssuz konteyner motoru.
   en: Daemonless container engine.
@@ -12,22 +15,36 @@ risk: dangerous
 requires_elevated: false
 platforms:
 - linux
+operating_systems:
+- linux
 packages:
   arch: podman
   debian: podman
   ubuntu: podman
   fedora: podman
+package_refs:
+- manager: pacman
+  package: podman
+  distributions:
+  - arch
+- manager: apt
+  package: podman
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: podman
+  distributions:
+  - fedora
 install_notes:
-  tr: 'Arch: pacman -S podman
-
+  tr: |-
+    Arch: pacman -S podman
     Fedora: dnf install podman
-
-    Debian/Ubuntu: apt install podman'
-  en: 'Arch: pacman -S podman
-
+    Debian/Ubuntu: apt install podman
+  en: |-
+    Arch: pacman -S podman
     Fedora: dnf install podman
-
-    Debian/Ubuntu: apt install podman'
+    Debian/Ubuntu: apt install podman
 examples:
 - title:
     tr: Çalışanlar
@@ -66,4 +83,3 @@ nova:
   ui_priority: 70
   concepts:
   - containers
-category: containers

@@ -1,5 +1,8 @@
+schema_version: 2
 id: grep
 name: grep
+kind: executable
+category: search
 summary:
   tr: Metinde desen arar.
   en: Print lines matching a pattern.
@@ -15,11 +18,28 @@ platforms:
 - linux
 - macos
 - bsd
+operating_systems:
+- linux
+- macos
 packages:
   arch: grep
   debian: grep
   ubuntu: grep
   fedora: grep
+package_refs:
+- manager: pacman
+  package: grep
+  distributions:
+  - arch
+- manager: apt
+  package: grep
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: grep
+  distributions:
+  - fedora
 flags:
 - flag: -i
   long: --ignore-case
@@ -93,4 +113,3 @@ nova:
   concepts:
   - files
   - shell-pipes-redirection
-category: search

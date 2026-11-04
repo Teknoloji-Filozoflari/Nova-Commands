@@ -1,5 +1,8 @@
+schema_version: 2
 id: top
 name: top
+kind: executable
+category: processes
 summary:
   tr: Canlı süreç izleyici.
   en: Dynamic real-time process viewer.
@@ -15,11 +18,28 @@ platforms:
 - linux
 - macos
 - bsd
+operating_systems:
+- linux
+- macos
 packages:
   arch: procps-ng
   debian: procps
   ubuntu: procps
   fedora: procps-ng
+package_refs:
+- manager: pacman
+  package: procps-ng
+  distributions:
+  - arch
+- manager: apt
+  package: procps
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: procps-ng
+  distributions:
+  - fedora
 examples:
 - title:
     tr: İzle
@@ -46,7 +66,6 @@ verification:
   - man 1 top
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-bootstrap
-category: processes
 nova:
   concepts:
   - terminal-basics

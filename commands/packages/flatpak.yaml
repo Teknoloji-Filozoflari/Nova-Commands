@@ -1,5 +1,8 @@
+schema_version: 2
 id: flatpak
 name: flatpak
+kind: package_manager
+category: packages
 summary:
   tr: Uygulama dağıtımı için Flatpak CLI.
   en: Flatpak application deployment CLI.
@@ -13,18 +16,34 @@ risk: caution
 requires_elevated: false
 platforms:
 - linux
+operating_systems:
+- linux
 packages:
   arch: flatpak
   debian: flatpak
   ubuntu: flatpak
   fedora: flatpak
+package_refs:
+- manager: pacman
+  package: flatpak
+  distributions:
+  - arch
+- manager: apt
+  package: flatpak
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: flatpak
+  distributions:
+  - fedora
 install_notes:
-  tr: 'Arch: pacman -S flatpak — ardından flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-
-    Debian/Ubuntu/Fedora: flatpak paketi'
-  en: 'Arch: pacman -S flatpak — then flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-
-    Debian/Ubuntu/Fedora: flatpak package'
+  tr: |-
+    Arch: pacman -S flatpak — ardından flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+    Debian/Ubuntu/Fedora: flatpak paketi
+  en: |-
+    Arch: pacman -S flatpak — then flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+    Debian/Ubuntu/Fedora: flatpak package
 flags:
 - flag: install
   meaning:
@@ -94,4 +113,3 @@ nova:
   concepts:
   - packages
   - package-managers
-category: packages

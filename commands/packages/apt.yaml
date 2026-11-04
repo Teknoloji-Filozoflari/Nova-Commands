@@ -1,5 +1,8 @@
+schema_version: 2
 id: apt
 name: apt
+kind: package_manager
+category: packages
 summary:
   tr: Debian/Ubuntu yüksek seviye paket aracı.
   en: Debian/Ubuntu high-level package tool.
@@ -13,9 +16,17 @@ risk: dangerous
 requires_elevated: true
 platforms:
 - linux
+operating_systems:
+- linux
 packages:
   debian: apt
   ubuntu: apt
+package_refs:
+- manager: apt
+  package: apt
+  distributions:
+  - debian
+  - ubuntu
 install_notes:
   tr: Debian/Ubuntu tabanında gelir. Arch için pacman kullanın.
   en: On Debian/Ubuntu base. On Arch use pacman instead.
@@ -77,7 +88,6 @@ verification:
   - man 8 apt
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-bootstrap
-category: packages
 nova:
   concepts:
   - packages

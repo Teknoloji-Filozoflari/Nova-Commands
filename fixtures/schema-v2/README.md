@@ -1,6 +1,6 @@
-# Schema v2 fixtures (Faz 2)
+# Schema fixtures (task / profile / compatibility + sample commands)
 
-These YAML files exercise `command.schema.v2.json` and stub
+These YAML files exercise live `command.schema.json` (v2) and stub
 `task` / `profile` / `compatibility` schemas.
 
 - **Not** part of the live `commands/` bank.
@@ -8,4 +8,5 @@ These YAML files exercise `command.schema.v2.json` and stub
 - Must remain `verification.status: draft`.
 - Soft-checked by `scripts/validate_schema_v2.py`.
 
-Real bank migration is **Faz 3**. Task/profile content trees are **Faz 8**.
+The live bank under `commands/` is schema v2 (Faz 3). Task/profile **content**
+trees remain **Faz 8**.

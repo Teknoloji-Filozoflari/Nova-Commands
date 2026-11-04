@@ -1,5 +1,8 @@
+schema_version: 2
 id: sync
 name: sync
+kind: executable
+category: disks
 summary:
   tr: Önbellekteki yazıları diske boşaltır.
   en: Flush filesystem write caches to disk.
@@ -15,11 +18,28 @@ platforms:
 - linux
 - macos
 - bsd
+operating_systems:
+- linux
+- macos
 packages:
   arch: coreutils
   debian: coreutils
   ubuntu: coreutils
   fedora: coreutils
+package_refs:
+- manager: pacman
+  package: coreutils
+  distributions:
+  - arch
+- manager: apt
+  package: coreutils
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: coreutils
+  distributions:
+  - fedora
 examples:
 - title:
     tr: Tümünü senkronla
@@ -49,4 +69,3 @@ verification:
 nova:
   concepts:
   - storage
-category: disks

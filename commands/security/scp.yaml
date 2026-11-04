@@ -1,5 +1,8 @@
+schema_version: 2
 id: scp
 name: scp
+kind: executable
+category: security
 summary:
   tr: SSH üzerinden güvenli dosya kopyalama.
   en: Secure remote file copy over SSH.
@@ -17,11 +20,28 @@ platforms:
 - linux
 - macos
 - bsd
+operating_systems:
+- linux
+- macos
 packages:
   arch: openssh
   debian: openssh-client
   ubuntu: openssh-client
   fedora: openssh-clients
+package_refs:
+- manager: pacman
+  package: openssh
+  distributions:
+  - arch
+- manager: apt
+  package: openssh-client
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: openssh-clients
+  distributions:
+  - fedora
 install_notes:
   tr: 'Arch: pacman -S openssh'
   en: 'Arch: pacman -S openssh'
@@ -90,4 +110,3 @@ nova:
   - ssh
   - networking
   - permissions
-category: security

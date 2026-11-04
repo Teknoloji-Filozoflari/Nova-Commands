@@ -1,5 +1,8 @@
+schema_version: 2
 id: timedatectl
 name: timedatectl
+kind: executable
+category: system
 summary:
   tr: Sistem saati ve zaman dilimini denetler.
   en: Control system time and timezone.
@@ -14,11 +17,27 @@ risk: caution
 requires_elevated: true
 platforms:
 - linux
+operating_systems:
+- linux
 packages:
   arch: systemd
   debian: systemd
   ubuntu: systemd
   fedora: systemd
+package_refs:
+- manager: pacman
+  package: systemd
+  distributions:
+  - arch
+- manager: apt
+  package: systemd
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: systemd
+  distributions:
+  - fedora
 install_notes:
   tr: 'Arch: pacman -S systemd (taban)'
   en: 'Arch: pacman -S systemd (base)'
@@ -91,4 +110,3 @@ nova:
   concepts:
   - systemd
   - terminal-basics
-category: system

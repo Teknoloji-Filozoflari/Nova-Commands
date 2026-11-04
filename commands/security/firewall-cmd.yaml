@@ -1,5 +1,8 @@
+schema_version: 2
 id: firewall-cmd
 name: firewall-cmd
+kind: executable
+category: security
 summary:
   tr: firewalld komut satırı.
   en: firewalld command-line client.
@@ -15,18 +18,34 @@ risk: dangerous
 requires_elevated: true
 platforms:
 - linux
+operating_systems:
+- linux
 packages:
   arch: firewalld
   debian: firewalld
   ubuntu: firewalld
   fedora: firewalld
+package_refs:
+- manager: pacman
+  package: firewalld
+  distributions:
+  - arch
+- manager: apt
+  package: firewalld
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: firewalld
+  distributions:
+  - fedora
 install_notes:
-  tr: 'Arch: pacman -S firewalld — systemctl enable --now firewalld
-
-    Fedora’da sık varsayılan; Debian/Ubuntu’da isteğe bağlı.'
-  en: 'Arch: pacman -S firewalld — systemctl enable --now firewalld
-
-    Often default on Fedora; optional on Debian/Ubuntu.'
+  tr: |-
+    Arch: pacman -S firewalld — systemctl enable --now firewalld
+    Fedora’da sık varsayılan; Debian/Ubuntu’da isteğe bağlı.
+  en: |-
+    Arch: pacman -S firewalld — systemctl enable --now firewalld
+    Often default on Fedora; optional on Debian/Ubuntu.
 flags:
 - flag: --state
   meaning:
@@ -101,4 +120,3 @@ nova:
   - ssh
   - permissions
   - firewalls
-category: security

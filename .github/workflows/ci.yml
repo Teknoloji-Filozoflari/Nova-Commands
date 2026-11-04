@@ -67,7 +67,7 @@ jobs:
           man = json.loads(Path("metadata/manifest.json").read_text(encoding="utf-8"))
           idx = json.loads(Path("metadata/search-index.json").read_text(encoding="utf-8"))
 
-          assert cat["schema_version"] == 1
+          assert cat["schema_version"] == 2
           assert cat["kind"] == "nova-commands-bank"
           assert cat["commands"], "catalog must contain commands"
           assert cat["concepts"], "catalog must contain concepts"

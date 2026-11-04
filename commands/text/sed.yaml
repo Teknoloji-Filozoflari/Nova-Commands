@@ -1,5 +1,8 @@
+schema_version: 2
 id: sed
 name: sed
+kind: executable
+category: text
 summary:
   tr: Akış düzenleyici.
   en: Stream editor.
@@ -14,11 +17,28 @@ platforms:
 - linux
 - macos
 - bsd
+operating_systems:
+- linux
+- macos
 packages:
   arch: sed
   debian: sed
   ubuntu: sed
   fedora: sed
+package_refs:
+- manager: pacman
+  package: sed
+  distributions:
+  - arch
+- manager: apt
+  package: sed
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: sed
+  distributions:
+  - fedora
 flags:
 - flag: -n
   meaning:
@@ -69,7 +89,6 @@ verification:
   - man 1 sed
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-coverage
-category: text
 nova:
   concepts:
   - files

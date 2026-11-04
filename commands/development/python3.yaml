@@ -1,5 +1,7 @@
+schema_version: 2
 id: python3
 name: python3
+kind: executable
 category: development
 summary:
   tr: Python 3 yorumlayıcısı.
@@ -18,26 +20,39 @@ platforms:
 - linux
 - macos
 - bsd
+operating_systems:
+- linux
+- macos
 packages:
   arch: python
   debian: python3
   ubuntu: python3
   fedora: python3
+package_refs:
+- manager: pacman
+  package: python
+  distributions:
+  - arch
+- manager: apt
+  package: python3
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: python3
+  distributions:
+  - fedora
 install_notes:
-  tr: 'Arch: pacman -S python
-
+  tr: |-
+    Arch: pacman -S python
     Debian/Ubuntu: apt install python3
-
     Fedora: dnf install python3
-
-    venv/pip ayrı paket olabilir (python-venv / python3-venv).'
-  en: 'Arch: pacman -S python
-
+    venv/pip ayrı paket olabilir (python-venv / python3-venv).
+  en: |-
+    Arch: pacman -S python
     Debian/Ubuntu: apt install python3
-
     Fedora: dnf install python3
-
-    venv/pip may be separate packages (python-venv / python3-venv).'
+    venv/pip may be separate packages (python-venv / python3-venv).
 flags:
 - flag: -m
   takes_value: true

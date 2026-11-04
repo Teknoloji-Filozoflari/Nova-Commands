@@ -23,7 +23,7 @@ search index, concepts).
 Nova Komut Rehberi
   ├─ load curated bank (prefer signed catalog-v* Release)
   │     ├─ verify minisign with keys/minisign.pub (docs/catalog-signing.md)
-  │     ├─ schema_version == 1 && kind == nova-commands-bank
+  │     ├─ schema_version == 2 && kind == nova-commands-bank
   │     └─ index by id, name, tags, intent phrases (tr/en)
   └─ (optional) local discovery snapshot
         ├─ kind == nova-local-commands
@@ -40,15 +40,21 @@ Do **not** apply a remote bank whose signature fails.
 | `summary` / `description` | Locale from Nova settings (`tr`/`en`) |
 | `risk` + example `risk` | Warning badges / confirm gates |
 | `requires_elevated` | Sudo affordance |
-| `packages` + `install_notes` | “How to install” — prefer pacman on Arch hosts |
+| `packages` + `install_notes` | “How to install” — prefer pacman on Arch hosts (legacy keys kept) |
+| `package_refs` | Preferred PM-registry install mapping |
+| `kind` | Builtin vs executable vs package manager |
 | `intent` | Natural-language search |
 | `verification.status` | Draft watermark vs verified badge |
 | `nova.favorite_eligible` | Favorites hint |
 
 ## Distro preference
 
-When showing install hints on an Arch host, prefer `packages.arch` and
-pacman lines in `install_notes` (Nova project preference).
+When showing install hints on an Arch host, prefer `packages.arch` /
+`package_refs` with `manager: pacman` and pacman lines in `install_notes`
+(Nova project preference).
+
+Clients that still require `schema_version == 1` must be updated — see
+[NOVA_INTEGRATION.md](./NOVA_INTEGRATION.md) § Schema v2.
 
 ## Related repos
 

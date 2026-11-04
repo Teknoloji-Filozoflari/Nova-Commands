@@ -1,5 +1,8 @@
+schema_version: 2
 id: traceroute
 name: traceroute
+kind: executable
+category: network
 summary:
   tr: Paketlerin rota hop’larını izler.
   en: Print the route packets take to a host.
@@ -16,22 +19,37 @@ platforms:
 - linux
 - macos
 - bsd
+operating_systems:
+- linux
+- macos
 packages:
   arch: traceroute
   debian: traceroute
   ubuntu: traceroute
   fedora: traceroute
+package_refs:
+- manager: pacman
+  package: traceroute
+  distributions:
+  - arch
+- manager: apt
+  package: traceroute
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: traceroute
+  distributions:
+  - fedora
 install_notes:
-  tr: 'Arch: pacman -S traceroute
-
+  tr: |-
+    Arch: pacman -S traceroute
     Debian/Ubuntu: apt install traceroute
-
-    Fedora: dnf install traceroute'
-  en: 'Arch: pacman -S traceroute
-
+    Fedora: dnf install traceroute
+  en: |-
+    Arch: pacman -S traceroute
     Debian/Ubuntu: apt install traceroute
-
-    Fedora: dnf install traceroute'
+    Fedora: dnf install traceroute
 flags:
 - flag: -n
   meaning:
@@ -89,4 +107,3 @@ nova:
   concepts:
   - networking
   - networking-basics
-category: network

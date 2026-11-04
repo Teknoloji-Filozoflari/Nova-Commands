@@ -1,5 +1,8 @@
+schema_version: 2
 id: sftp
 name: sftp
+kind: executable
+category: security
 summary:
   tr: SSH dosya transfer protokolü istemcisi.
   en: OpenSSH SFTP client.
@@ -17,11 +20,28 @@ platforms:
 - linux
 - macos
 - bsd
+operating_systems:
+- linux
+- macos
 packages:
   arch: openssh
   debian: openssh-client
   ubuntu: openssh-client
   fedora: openssh-clients
+package_refs:
+- manager: pacman
+  package: openssh
+  distributions:
+  - arch
+- manager: apt
+  package: openssh-client
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: openssh-clients
+  distributions:
+  - fedora
 install_notes:
   tr: 'Arch: pacman -S openssh'
   en: 'Arch: pacman -S openssh'
@@ -85,4 +105,3 @@ nova:
   concepts:
   - ssh
   - permissions
-category: security

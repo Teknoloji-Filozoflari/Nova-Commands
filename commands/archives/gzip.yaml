@@ -1,5 +1,8 @@
+schema_version: 2
 id: gzip
 name: gzip
+kind: executable
+category: archives
 summary:
   tr: Dosyaları gzip ile sıkıştırır veya açar.
   en: Compress or expand files with gzip.
@@ -15,11 +18,28 @@ platforms:
 - linux
 - macos
 - bsd
+operating_systems:
+- linux
+- macos
 packages:
   arch: gzip
   debian: gzip
   ubuntu: gzip
   fedora: gzip
+package_refs:
+- manager: pacman
+  package: gzip
+  distributions:
+  - arch
+- manager: apt
+  package: gzip
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: gzip
+  distributions:
+  - fedora
 flags:
 - flag: -d
   long: --decompress
@@ -60,7 +80,6 @@ verification:
   - man 1 gzip
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-bootstrap
-category: archives
 nova:
   concepts:
   - files

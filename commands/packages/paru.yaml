@@ -1,5 +1,8 @@
+schema_version: 2
 id: paru
 name: paru
+kind: package_manager
+category: packages
 summary:
   tr: AUR yardımcı pacman sarmalayıcı.
   en: AUR helper wrapping pacman.
@@ -14,6 +17,8 @@ tags:
 risk: dangerous
 requires_elevated: true
 platforms:
+- linux
+operating_systems:
 - linux
 install_notes:
   tr: Resmî Arch deposunda yok (unknown official package). Genelde AUR’dan kurulur; PKGBUILD’i okuyun.
@@ -71,4 +76,3 @@ nova:
   - packages
   - arch
   - package-managers
-category: packages
