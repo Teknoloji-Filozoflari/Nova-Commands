@@ -11,12 +11,14 @@ Checks (CI gate):
   - i18n consistency: every localized object has non-empty tr and en
   - nova.concepts / concept related_* reference known registry or article ids
   - Concept articles under concepts/; id == filename; related_commands exist
+  - Soft: platform registries (scripts/validate_platform_registries.py)
 """
 
 from __future__ import annotations
 
 import argparse
 import json
+import subprocess
 import sys
 from pathlib import Path
 from typing import Any
@@ -32,6 +34,7 @@ SCHEMA_PATH = ROOT / "schema" / "command.schema.json"
 CONCEPT_SCHEMA_PATH = ROOT / "schema" / "concept.schema.json"
 CATEGORIES_PATH = ROOT / "metadata" / "categories.yaml"
 CONCEPTS_META_PATH = ROOT / "metadata" / "concepts.yaml"
+PLATFORM_VALIDATE = ROOT / "scripts" / "validate_platform_registries.py"
 
 RISK_RANK = {"safe": 0, "caution": 1, "dangerous": 2, "destructive": 3}
 
@@ -294,6 +297,16 @@ def main() -> int:
         for e in errors:
             print(f"  - {e}", file=sys.stderr)
         return 1
+
+    # Soft platform-registry gate (additive; does not alter command bank).
+    if PLATFORM_VALIDATE.is_file():
+        proc = subprocess.run(
+            [sys.executable, str(PLATFORM_VALIDATE)],
+            cwd=ROOT,
+            check=False,
+        )
+        if proc.returncode != 0:
+            return proc.returncode
 
     print(
         f"OK: {len(seen_ids)} commands, {len(seen_concept_articles)} concepts validated"

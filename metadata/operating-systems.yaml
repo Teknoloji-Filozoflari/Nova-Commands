@@ -1,0 +1,181 @@
+# Auto-seeded Faz 1 platform registry. Status is skeleton|draft only.
+# Do not mark verified without human review.
+schema_version: 1
+kind: nova-commands-operating-system-registry
+operating_systems:
+- id: linux
+  name:
+    tr: Linux
+    en: Linux
+  summary:
+    tr: Linux işletim sistemi / ailesi için metadata kaydı.
+    en: Metadata entry for the Linux operating system / family.
+  family_kind: family
+  kernel_family: linux
+  posix_like: true
+  status: draft
+  support_level: full
+  documentation:
+  - https://kernel.org/
+  tags:
+  - os-family
+- id: windows
+  name:
+    tr: Windows
+    en: Windows
+  summary:
+    tr: Windows işletim sistemi / ailesi için metadata kaydı.
+    en: Metadata entry for the Windows operating system / family.
+  family_kind: family
+  kernel_family: nt
+  posix_like: false
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://learn.microsoft.com/windows/
+  tags:
+  - os-family
+- id: macos
+  name:
+    tr: macOS
+    en: macOS
+  summary:
+    tr: macOS işletim sistemi / ailesi için metadata kaydı.
+    en: Metadata entry for the macOS operating system / family.
+  family_kind: product
+  kernel_family: xnu
+  posix_like: true
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://developer.apple.com/documentation/
+  tags:
+  - os-family
+- id: freebsd
+  name:
+    tr: FreeBSD
+    en: FreeBSD
+  summary:
+    tr: FreeBSD işletim sistemi / ailesi için metadata kaydı.
+    en: Metadata entry for the FreeBSD operating system / family.
+  family_kind: product
+  kernel_family: freebsd
+  posix_like: true
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://docs.freebsd.org/
+  tags:
+  - bsd
+- id: openbsd
+  name:
+    tr: OpenBSD
+    en: OpenBSD
+  summary:
+    tr: OpenBSD işletim sistemi / ailesi için metadata kaydı.
+    en: Metadata entry for the OpenBSD operating system / family.
+  family_kind: product
+  kernel_family: openbsd
+  posix_like: true
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://www.openbsd.org/faq/
+  tags:
+  - bsd
+- id: netbsd
+  name:
+    tr: NetBSD
+    en: NetBSD
+  summary:
+    tr: NetBSD işletim sistemi / ailesi için metadata kaydı.
+    en: Metadata entry for the NetBSD operating system / family.
+  family_kind: product
+  kernel_family: netbsd
+  posix_like: true
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://www.netbsd.org/docs/
+  tags:
+  - bsd
+- id: dragonflybsd
+  name:
+    tr: DragonFly BSD
+    en: DragonFly BSD
+  summary:
+    tr: DragonFly BSD işletim sistemi / ailesi için metadata kaydı.
+    en: Metadata entry for the DragonFly BSD operating system / family.
+  family_kind: product
+  kernel_family: dragonfly
+  posix_like: true
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://www.dragonflybsd.org/docs/
+  tags:
+  - bsd
+- id: illumos
+  name:
+    tr: illumos
+    en: illumos
+  summary:
+    tr: illumos işletim sistemi / ailesi için metadata kaydı.
+    en: Metadata entry for the illumos operating system / family.
+  family_kind: research
+  kernel_family: illumos
+  posix_like: true
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://illumos.org/docs/
+  tags:
+  - unix
+- id: solaris
+  name:
+    tr: Oracle Solaris
+    en: Oracle Solaris
+  summary:
+    tr: Oracle Solaris işletim sistemi / ailesi için metadata kaydı.
+    en: Metadata entry for the Oracle Solaris operating system / family.
+  family_kind: research
+  kernel_family: other
+  posix_like: true
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://docs.oracle.com/en/operating-systems/solaris.html
+  tags:
+  - unix
+- id: aix
+  name:
+    tr: IBM AIX
+    en: IBM AIX
+  summary:
+    tr: IBM AIX işletim sistemi / ailesi için metadata kaydı.
+    en: Metadata entry for the IBM AIX operating system / family.
+  family_kind: research
+  kernel_family: aix
+  posix_like: true
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://www.ibm.com/docs/en/aix
+  tags:
+  - unix
+- id: android
+  name:
+    tr: Android
+    en: Android
+  summary:
+    tr: Android işletim sistemi / ailesi için metadata kaydı.
+    en: Metadata entry for the Android operating system / family.
+  family_kind: family
+  kernel_family: linux
+  posix_like: false
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://developer.android.com/docs
+  tags:
+  - mobile

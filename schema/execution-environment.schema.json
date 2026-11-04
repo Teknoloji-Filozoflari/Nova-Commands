@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/Teknoloji-Filozoflari/Nova-Commands/main/schema/execution-environment.schema.json",
+  "title": "Nova-Commands execution-environments registry",
+  "description": "Where commands run (native, WSL, Termux, containers, …). Not the same as OS family.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "kind", "execution_environments"],
+  "properties": {
+    "schema_version": { "type": "integer", "const": 1 },
+    "kind": { "type": "string", "const": "nova-commands-execution-environment-registry" },
+    "execution_environments": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/entry" }
+    }
+  },
+  "$defs": {
+    "localizedShort": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tr", "en"],
+      "properties": {
+        "tr": { "type": "string", "minLength": 1, "maxLength": 160 },
+        "en": { "type": "string", "minLength": 1, "maxLength": 160 }
+      }
+    },
+    "localizedLong": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tr", "en"],
+      "properties": {
+        "tr": { "type": "string", "minLength": 1, "maxLength": 1024 },
+        "en": { "type": "string", "minLength": 1, "maxLength": 1024 }
+      }
+    },
+    "entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "summary", "env_kind", "status"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9-]*$",
+          "maxLength": 64
+        },
+        "name": { "$ref": "#/$defs/localizedShort" },
+        "summary": { "$ref": "#/$defs/localizedLong" },
+        "env_kind": {
+          "type": "string",
+          "enum": [
+            "native",
+            "compatibility-layer",
+            "container",
+            "vm-guest",
+            "chroot",
+            "mobile-userspace",
+            "remote-session",
+            "other"
+          ]
+        },
+        "host_operating_systems": {
+          "type": "array",
+          "maxItems": 16,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9-]*$"
+          }
+        },
+        "guest_operating_systems": {
+          "type": "array",
+          "maxItems": 16,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9-]*$"
+          }
+        },
+        "status": {
+          "type": "string",
+          "enum": ["skeleton", "draft", "reviewed", "verified"]
+        },
+        "support_level": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9-]*$"
+        },
+        "documentation": {
+          "type": "array",
+          "maxItems": 8,
+          "items": {
+            "type": "string",
+            "format": "uri",
+            "maxLength": 512
+          }
+        },
+        "notes": { "$ref": "#/$defs/localizedLong" },
+        "tags": {
+          "type": "array",
+          "maxItems": 16,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]*$"
+          }
+        }
+      }
+    }
+  }
+}

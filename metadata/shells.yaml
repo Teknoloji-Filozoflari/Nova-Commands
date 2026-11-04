@@ -1,0 +1,286 @@
+# Auto-seeded Faz 1 platform registry. Status is skeleton|draft only.
+# Do not mark verified without human review.
+schema_version: 1
+kind: nova-commands-shell-registry
+shells:
+- id: posix-sh
+  name:
+    tr: POSIX sh
+    en: POSIX sh
+  summary:
+    tr: POSIX sh kabuk / komut yorumlayıcısı kaydı.
+    en: POSIX sh shell / command interpreter registry entry.
+  shell_kind: posix
+  executable_names:
+  - sh
+  operating_systems:
+  - linux
+  - macos
+  - freebsd
+  - openbsd
+  - netbsd
+  posix_compatible: true
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://pubs.opengroup.org/onlinepubs/9699919799/utilities/V3_chap02.html
+- id: bash
+  name:
+    tr: Bash
+    en: Bash
+  summary:
+    tr: Bash kabuk / komut yorumlayıcısı kaydı.
+    en: Bash shell / command interpreter registry entry.
+  shell_kind: bourne-like
+  executable_names:
+  - bash
+  operating_systems:
+  - linux
+  - macos
+  - windows
+  - freebsd
+  posix_compatible: true
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://www.gnu.org/software/bash/manual/
+- id: zsh
+  name:
+    tr: Zsh
+    en: Zsh
+  summary:
+    tr: Zsh kabuk / komut yorumlayıcısı kaydı.
+    en: Zsh shell / command interpreter registry entry.
+  shell_kind: bourne-like
+  executable_names:
+  - zsh
+  operating_systems:
+  - linux
+  - macos
+  - freebsd
+  posix_compatible: true
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://zsh.sourceforge.io/Doc/
+- id: fish
+  name:
+    tr: Fish
+    en: Fish
+  summary:
+    tr: Fish kabuk / komut yorumlayıcısı kaydı.
+    en: Fish shell / command interpreter registry entry.
+  shell_kind: other
+  executable_names:
+  - fish
+  operating_systems:
+  - linux
+  - macos
+  - freebsd
+  posix_compatible: false
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://fishshell.com/docs/current/
+- id: nushell
+  name:
+    tr: Nushell
+    en: Nushell
+  summary:
+    tr: Nushell kabuk / komut yorumlayıcısı kaydı.
+    en: Nushell shell / command interpreter registry entry.
+  shell_kind: structured
+  executable_names:
+  - nu
+  operating_systems:
+  - linux
+  - macos
+  - windows
+  posix_compatible: false
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://www.nushell.sh/book/
+- id: powershell
+  name:
+    tr: PowerShell 7+
+    en: PowerShell 7+
+  summary:
+    tr: PowerShell 7+ kabuk / komut yorumlayıcısı kaydı.
+    en: PowerShell 7+ shell / command interpreter registry entry.
+  shell_kind: powershell
+  executable_names:
+  - pwsh
+  operating_systems:
+  - windows
+  - linux
+  - macos
+  posix_compatible: false
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://learn.microsoft.com/powershell/
+- id: windows-powershell
+  name:
+    tr: Windows PowerShell 5.1
+    en: Windows PowerShell 5.1
+  summary:
+    tr: Windows PowerShell 5.1 kabuk / komut yorumlayıcısı kaydı.
+    en: Windows PowerShell 5.1 shell / command interpreter registry entry.
+  shell_kind: powershell
+  executable_names:
+  - powershell
+  operating_systems:
+  - windows
+  posix_compatible: false
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://learn.microsoft.com/powershell/scripting/windows-powershell/starting-windows-powershell
+- id: cmd
+  name:
+    tr: cmd.exe
+    en: cmd.exe
+  summary:
+    tr: cmd.exe kabuk / komut yorumlayıcısı kaydı.
+    en: cmd.exe shell / command interpreter registry entry.
+  shell_kind: cmd
+  executable_names:
+  - cmd
+  operating_systems:
+  - windows
+  posix_compatible: false
+  status: skeleton
+  support_level: planned
+  documentation:
+  - https://learn.microsoft.com/windows-server/administration/windows-commands/windows-commands
+- id: elvish
+  name:
+    tr: Elvish
+    en: Elvish
+  summary:
+    tr: Elvish kabuk / komut yorumlayıcısı kaydı.
+    en: Elvish shell / command interpreter registry entry.
+  shell_kind: structured
+  executable_names:
+  - elvish
+  operating_systems:
+  - linux
+  - macos
+  - windows
+  posix_compatible: false
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://elv.sh/ref/
+- id: tcsh
+  name:
+    tr: tcsh
+    en: tcsh
+  summary:
+    tr: tcsh kabuk / komut yorumlayıcısı kaydı.
+    en: tcsh shell / command interpreter registry entry.
+  shell_kind: csh-like
+  executable_names:
+  - tcsh
+  operating_systems:
+  - linux
+  - macos
+  - freebsd
+  - netbsd
+  posix_compatible: false
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://www.tcsh.org/tcsh.html/top.html
+- id: csh
+  name:
+    tr: csh
+    en: csh
+  summary:
+    tr: csh kabuk / komut yorumlayıcısı kaydı.
+    en: csh shell / command interpreter registry entry.
+  shell_kind: csh-like
+  executable_names:
+  - csh
+  operating_systems:
+  - freebsd
+  - netbsd
+  - macos
+  posix_compatible: false
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://man.freebsd.org/cgi/man.cgi?csh
+- id: ksh
+  name:
+    tr: ksh
+    en: ksh
+  summary:
+    tr: ksh kabuk / komut yorumlayıcısı kaydı.
+    en: ksh shell / command interpreter registry entry.
+  shell_kind: bourne-like
+  executable_names:
+  - ksh
+  operating_systems:
+  - linux
+  - aix
+  - solaris
+  posix_compatible: true
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - http://www.kornshell.org/doc/
+- id: dash
+  name:
+    tr: dash
+    en: dash
+  summary:
+    tr: dash kabuk / komut yorumlayıcısı kaydı.
+    en: dash shell / command interpreter registry entry.
+  shell_kind: posix
+  executable_names:
+  - dash
+  operating_systems:
+  - linux
+  posix_compatible: true
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://manpages.debian.org/dash
+- id: busybox-ash
+  name:
+    tr: BusyBox ash
+    en: BusyBox ash
+  summary:
+    tr: BusyBox ash kabuk / komut yorumlayıcısı kaydı.
+    en: BusyBox ash shell / command interpreter registry entry.
+  shell_kind: embedded
+  executable_names:
+  - ash
+  operating_systems:
+  - linux
+  posix_compatible: true
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://busybox.net/downloads/BusyBox.html
+- id: xonsh
+  name:
+    tr: Xonsh
+    en: Xonsh
+  summary:
+    tr: Xonsh kabuk / komut yorumlayıcısı kaydı.
+    en: Xonsh shell / command interpreter registry entry.
+  shell_kind: other
+  executable_names:
+  - xonsh
+  operating_systems:
+  - linux
+  - macos
+  - windows
+  posix_compatible: false
+  status: skeleton
+  support_level: experimental
+  documentation:
+  - https://xon.sh/contents.html

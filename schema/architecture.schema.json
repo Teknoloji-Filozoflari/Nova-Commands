@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/Teknoloji-Filozoflari/Nova-Commands/main/schema/architecture.schema.json",
+  "title": "Nova-Commands architectures registry",
+  "description": "CPU / hardware architecture identifiers for compatibility metadata.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "kind", "architectures"],
+  "properties": {
+    "schema_version": { "type": "integer", "const": 1 },
+    "kind": { "type": "string", "const": "nova-commands-architecture-registry" },
+    "architectures": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/entry" }
+    }
+  },
+  "$defs": {
+    "localizedShort": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tr", "en"],
+      "properties": {
+        "tr": { "type": "string", "minLength": 1, "maxLength": 160 },
+        "en": { "type": "string", "minLength": 1, "maxLength": 160 }
+      }
+    },
+    "localizedLong": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tr", "en"],
+      "properties": {
+        "tr": { "type": "string", "minLength": 1, "maxLength": 1024 },
+        "en": { "type": "string", "minLength": 1, "maxLength": 1024 }
+      }
+    },
+    "entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "summary", "status"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9-]*$",
+          "maxLength": 64
+        },
+        "name": { "$ref": "#/$defs/localizedShort" },
+        "summary": { "$ref": "#/$defs/localizedLong" },
+        "uname_machines": {
+          "type": "array",
+          "maxItems": 12,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 32
+          },
+          "description": "Common `uname -m` / equivalent tokens."
+        },
+        "bits": {
+          "type": "integer",
+          "enum": [32, 64]
+        },
+        "endianness": {
+          "type": "string",
+          "enum": ["little", "big", "bi"]
+        },
+        "status": {
+          "type": "string",
+          "enum": ["skeleton", "draft", "reviewed", "verified"]
+        },
+        "support_level": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9-]*$"
+        },
+        "documentation": {
+          "type": "array",
+          "maxItems": 8,
+          "items": {
+            "type": "string",
+            "format": "uri",
+            "maxLength": 512
+          }
+        },
+        "notes": { "$ref": "#/$defs/localizedLong" },
+        "tags": {
+          "type": "array",
+          "maxItems": 16,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]*$"
+          }
+        }
+      }
+    }
+  }
+}

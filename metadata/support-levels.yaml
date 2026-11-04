@@ -1,0 +1,45 @@
+# Auto-seeded Faz 1 platform registry. Status is skeleton|draft only.
+# Do not mark verified without human review.
+schema_version: 1
+kind: nova-commands-support-level-registry
+support_levels:
+- id: planned
+  label:
+    tr: Planlandı
+    en: Planned
+  summary:
+    tr: Veri modeli hazır; içerik henüz yok.
+    en: Data model ready; content not started.
+  rank: 10
+- id: experimental
+  label:
+    tr: Deneysel
+    en: Experimental
+  summary:
+    tr: İskelet veya sınırlı taslak; üretim iddiası yok.
+    en: Skeleton or limited draft; no production claim.
+  rank: 30
+- id: partial
+  label:
+    tr: Kısmi
+    en: Partial
+  summary:
+    tr: Bazı komut/konseptler var; kapsam eksik.
+    en: Some commands/concepts present; coverage incomplete.
+  rank: 60
+- id: full
+  label:
+    tr: Geniş
+    en: Broad
+  summary:
+    tr: Birinci sınıf hedef; kapsam büyütülüyor.
+    en: First-class target; coverage being expanded.
+  rank: 90
+- id: unsupported
+  label:
+    tr: Desteklenmiyor
+    en: Unsupported
+  summary:
+    tr: Kayıt referans için var; destek iddiası yok.
+    en: Present for reference; no support claim.
+  rank: 0
