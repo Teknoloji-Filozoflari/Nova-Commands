@@ -56,8 +56,8 @@ PR → validate_catalog.py → build_catalog.py → pytest → merge
 ```
 
 `verification.status` is never auto-promoted to `verified` by CI.
-`content_sha256` hashes commands+concepts only (excludes `generated_at`).
-Tasks/profiles are validated in CI but indexed into the catalog in **Faz 9**.
+`content_sha256` hashes commands+concepts+tasks+profiles (excludes `generated_at`).
+Tasks/profiles are validated in CI and indexed into catalog / search-index / manifest (**Faz 9**).
 
 ## Phases (implementation track)
 
@@ -71,7 +71,7 @@ Tasks/profiles are validated in CI but indexed into the catalog in **Faz 9**.
 | 6 | Safety rules + draft/verified enforcement |
 | 7 | Concepts metadata + CONTRIBUTING |
 | 8 | Concept articles (`concepts/`) + i18n gates |
-| 9 | Search index + manifest SHA + NOVA_INTEGRATION |
+| 9 | Tasks/profiles in catalog + search-index + manifest counts |
 | 10 | CI/contrib polish (Actions, issue/PR templates, SECURITY) |
 | 11+ | Grow coverage; human `verified` promotions |
 | 17 | Signed `catalog-v*` Releases (minisign) + selective `verified` |

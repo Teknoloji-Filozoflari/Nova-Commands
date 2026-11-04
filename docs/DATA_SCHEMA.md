@@ -10,7 +10,7 @@
 | **Tasks** | `schema/task.schema.json` + `tasks/*.yaml` | Live intent → multi-OS implementations (Faz 8) |
 | **Profiles** | `schema/profile.schema.json` + `profiles/*.yaml` | Server / role reference collections (Faz 8) |
 | **Compatibility** | `schema/compatibility.schema.json` | Fixtures / later deepen |
-| **Catalog** | `metadata/catalog.json` | `schema_version: **2**` (commands+concepts; task/profile index → Faz 9) |
+| **Catalog** | `metadata/catalog.json` | `schema_version: **2**` (commands+concepts+tasks+profiles) |
 
 Faz 2 used a dual-path (v1 bank + v2 fixtures). **Faz 3 ends dual forever for the live bank:** all 143 commands migrated; catalog/manifest/search-index bumped to 2.
 
@@ -31,7 +31,7 @@ See [SCHEMA_MIGRATION_V2.md](SCHEMA_MIGRATION_V2.md) for the field map and `migr
 
 Multi-tool user goals (`show-local-ip` with linux-ip / windows-powershell / windows-cmd) are **tasks** under `tasks/`. Individual tools remain **command** records. Do not reuse command ids for tasks. Server / role **profiles** under `profiles/` point at related commands + tasks; they are teaching collections, not runbooks.
 
-`content_sha256` still hashes **commands + concepts only**. Task/profile catalog indexing is **Faz 9**.
+`content_sha256` hashes **commands + concepts + tasks + profiles** (Faz 9). `generated_at` stays excluded.
 
 ## Validation
 

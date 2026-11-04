@@ -12,7 +12,7 @@ Hard gate when the directories exist (Faz 8+). Checks:
   - i18n: name/summary(+description/intent) non-empty tr/en
   - no silent verified promotions expected for agent drafts
 
-Does NOT add tasks/profiles to catalog content_sha256 (Faz 9).
+Catalog indexing / content_sha256 inclusion is handled by scripts/build_catalog.py (Faz 9).
 """
 from __future__ import annotations
 
@@ -321,7 +321,7 @@ def main() -> int:
 
     print(
         f"OK: {len(tasks)} tasks, {len(profiles)} profiles validated "
-        f"(not in catalog hash; Faz 9 indexes)"
+        f"(catalog index via build_catalog.py)"
     )
     return 0
 

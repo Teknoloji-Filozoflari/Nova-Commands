@@ -3,8 +3,8 @@
 
 Not for re-run after content is curated — edits go in tasks/ and profiles/ directly.
 All records are draft; never mark verified. Implementations reference existing
-command bank ids only. Catalog hash still covers commands+concepts (Faz 9 indexes
-tasks/profiles).
+command bank ids only. Re-run build_catalog.py after edits so tasks/profiles
+enter catalog / search-index / content_sha256 (Faz 9).
 """
 from __future__ import annotations
 

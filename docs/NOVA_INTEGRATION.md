@@ -14,7 +14,7 @@ Repository: https://github.com/Teknoloji-Filozoflari/Nova-Commands
 | `concepts/<id>.yaml` | source | Learnable concept articles (TR/EN) |
 | `metadata/categories.yaml` | taxonomy | §8.1–8.16 labels |
 | `metadata/concepts.yaml` | registry | Concept ids + optional `article` pointer |
-| `metadata/catalog.json` | `nova-commands-bank` | Aggregate commands + concepts |
+| `metadata/catalog.json` | `nova-commands-bank` | Aggregate commands + concepts + tasks + profiles |
 | `metadata/search-index.json` | `nova-commands-search-index` | Flattened search fields |
 | `metadata/manifest.json` | `nova-commands-manifest` | Counts + **deterministic** `content_sha256` |
 | `schema/*.json` | schema | Validation contracts |
@@ -25,7 +25,7 @@ Repository: https://github.com/Teknoloji-Filozoflari/Nova-Commands
 `build_catalog.py` hashes the **canonical** JSON of:
 
 ```json
-{ "schema_version": 2, "kind": "nova-commands-bank", "commands": [...], "concepts": [...] }
+{ "schema_version": 2, "kind": "nova-commands-bank", "commands": [...], "concepts": [...], "tasks": [...], "profiles": [...] }
 ```
 
 - Keys sorted; UTF-8; compact separators.
@@ -47,7 +47,7 @@ Nova Komut Rehberi
   │     ├─ prefer signed GitHub Release (catalog-v*) + minisign verify
   │     │     (keys/minisign.pub — see docs/catalog-signing.md)
   │     ├─ prefer manifest.content_sha256 pin
-  │     ├─ load catalog.json (commands + concepts)
+  │     ├─ load catalog.json (commands + concepts + tasks + profiles)
   │     ├─ optional: search-index.json for intent/tag UI search
   │     └─ show verification.status (draft watermark ≠ verified badge)
   └─ local discovery (optional, device-only)

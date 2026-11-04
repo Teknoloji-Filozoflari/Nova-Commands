@@ -148,14 +148,14 @@ Live trees (all `draft`):
   scripts.
 
 Validated by `scripts/validate_tasks_profiles.py` (wired into
-`validate_catalog.py`). **Not** yet part of `content_sha256` / search index
-(Faz 9). Arch/pacman preference preserved on update/install tasks.
+`validate_catalog.py`). Indexed into `catalog.json` / `search-index.json` /
+`manifest.json` with `task_count` / `profile_count` (Faz 9); included in
+`content_sha256`. Arch/pacman preference preserved on update/install tasks.
 **No fake `verified`.** LICENSE / `keys/minisign.pub` unchanged.
 
 ## Out of scope (later fazes)
 
 - illumos / Solaris / AIX **command banks** (metadata only in Faz 6)
-- Catalog / search-index counts for tasks, profiles, and registry kinds (Faz 9)
 - Full vendor appliance CLIs (Proxmox `qm`, RouterOS, Cisco IOS, …)
 - OpenTofu / Pulumi / Nomad / observability CLIs (follow-up deepen)
 - Native Windows `Resolve-DnsName` command bank row (task notes dig fallback)

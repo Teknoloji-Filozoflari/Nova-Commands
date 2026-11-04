@@ -28,7 +28,7 @@ commands.
   first-class command banks yet (metadata may exist as `planned`/`skeleton`).
 - Tasks (`tasks/`) and server **profiles** (`profiles/`) are Faz 8 teaching
   collections: multi-OS intents + role maps. They do **not** auto-run commands
-  and are not yet in the signed catalog hash (Faz 9 indexes them).
+  and are indexed into catalog / search-index / manifest (Faz 9; included in `content_sha256`).
 
 ## Profiles (Faz 8)
 

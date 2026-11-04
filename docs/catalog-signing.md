@@ -5,7 +5,7 @@ Published bank metadata is a GitHub Release asset set:
 
 | Asset | Purpose |
 |-------|---------|
-| `catalog.json` | Aggregated commands + concepts (`kind: nova-commands-bank`) |
+| `catalog.json` | Aggregated commands + concepts + tasks + profiles (`kind: nova-commands-bank`) |
 | `manifest.json` | Counts + deterministic `content_sha256` |
 | `search-index.json` | Flattened search fields |
 | `*.minisig` | Detached **minisign** signatures over each JSON file’s exact bytes |
@@ -21,8 +21,8 @@ metadata** — not installable apps, and not local PATH discovery
 
 ## Trust model
 
-1. Contributors PR YAML under `commands/` / `concepts/`.
-2. CI validates schema, ids, categories, i18n, concepts, and rebuilds metadata.
+1. Contributors PR YAML under `commands/` / `concepts/` / `tasks/` / `profiles/`.
+2. CI validates schema, ids, categories, i18n, concepts, tasks/profiles, and rebuilds metadata.
 3. Maintainers merge to `main`.
 4. Tag `catalog-v*` (or run **Publish signed catalog** via `workflow_dispatch`).
 5. The workflow builds metadata, signs when `MINISIGN_SECRET_KEY` is set, and

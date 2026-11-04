@@ -251,7 +251,7 @@ def main() -> int:
     parser.add_argument(
         "--check",
         action="store_true",
-        help="Exit 1 if any command YAML is still schema v1",
+        help="Exit 1 if any command YAML is still schema v1 (read-only; never writes)",
     )
     args = parser.parse_args()
     commands_dir: Path = args.commands_dir
@@ -326,7 +326,7 @@ def main() -> int:
     print(f"package_refs_total={refs_total}")
 
     if args.check:
-        # Re-read after optional writes
+        # Read-only: never rewrite YAML under --check (CI runs this via pytest).
         left = 0
         for path in files:
             raw = yaml.safe_load(path.read_text(encoding="utf-8"))
