@@ -1,0 +1,36 @@
+schema_version: 2
+kind: profile
+id: virtualization-host
+name:
+  tr: Sanallaştırma ana makinesi
+  en: Virtualization host
+summary:
+  tr: 'libvirt/QEMU host: virsh / qemu-img (konteyner ile eşitlenmez).'
+  en: 'libvirt/QEMU host: virsh / qemu-img (not equated with containers).'
+verification:
+  status: draft
+  sources:
+  - https://libvirt.org/manpages/virsh.html
+  notes: Agent-authored Faz 8 draft; not human-verified.
+operating_systems:
+- linux
+server_platforms:
+- kvm
+- qemu
+- libvirt
+- proxmox-ve
+related_commands:
+- virsh
+- qemu-img
+- systemctl
+- ip
+- ss
+- df
+related_tasks:
+- list-running-services
+- check-disk-space
+- show-local-ip
+- connect-ssh
+tags:
+- virtualization
+- kvm

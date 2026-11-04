@@ -1,0 +1,104 @@
+schema_version: 2
+kind: task
+id: check-open-ports
+name:
+  tr: Açık / dinleyen portları kontrol et
+  en: Check listening / open ports
+summary:
+  tr: Yerel dinleyen soketleri ss/netstat veya Get-NetTCPConnection ile listele.
+  en: List local listening sockets with ss/netstat or Get-NetTCPConnection.
+category: network
+intent:
+  tr:
+  - açık portlar
+  - dinleyen servisler
+  - hangi port dinliyor
+  en:
+  - open ports
+  - listening sockets
+  - which ports are listening
+implementations:
+- id: linux-ss
+  commands:
+  - ss
+  examples:
+  - command: ss -tulpn
+    risk: safe
+    shell: bash
+    privilege: none
+    title:
+      tr: Dinleyen TCP/UDP
+      en: Listening TCP/UDP
+    explanation:
+      tr: TCP/UDP dinleyenleri süreç bilgisiyle listeler.
+      en: Lists listening TCP/UDP with process info.
+  operating_systems:
+  - linux
+  platforms:
+  - linux
+  shells:
+  - bash
+- id: windows-nettcp
+  commands:
+  - get-nettcpconnection
+  examples:
+  - command: Get-NetTCPConnection -State Listen
+    risk: safe
+    shell: powershell
+    privilege: none
+    title:
+      tr: Dinleyen TCP
+      en: Listening TCP
+    explanation:
+      tr: Windows NetTCPIP dinleyen bağlantılar.
+      en: Windows NetTCPIP listening connections.
+  operating_systems:
+  - windows
+  platforms:
+  - windows
+  shells:
+  - powershell
+- id: bsd-netstat
+  commands:
+  - netstat-bsd
+  examples:
+  - command: netstat -an -p tcp
+    risk: safe
+    shell: bash
+    privilege: none
+    title:
+      tr: BSD netstat
+      en: BSD netstat
+    explanation:
+      tr: 'Windows netstat ile aynı kayıt değildir (id: netstat-bsd).'
+      en: 'Not the same bank record as Windows netstat (id: netstat-bsd).'
+  platforms:
+  - bsd
+  - macos
+  shells:
+  - bash
+verification:
+  status: draft
+  sources:
+  - man 8 ss
+  - https://learn.microsoft.com/powershell/module/nettcpip/get-nettcpconnection
+  - man 1 netstat
+  notes: Agent-authored Faz 8 draft; not human-verified.
+description:
+  tr: Uzak tarama (nmap) ayrı bir risk sınıfıdır; önce yerel dinleyenleri tercih et. Yetkisiz tarama yapma.
+  en: Remote scanning (nmap) is a different risk class; prefer local listeners first. Do not scan without
+    authorization.
+tags:
+- network
+- ports
+- security
+related_commands:
+- ss
+- netstat
+- netstat-bsd
+- get-nettcpconnection
+- nmap
+- lsof
+related_tasks:
+- list-running-services
+- check-firewall-status

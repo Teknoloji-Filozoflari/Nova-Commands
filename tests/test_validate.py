@@ -333,3 +333,65 @@ def test_verification_statuses_not_silently_demoted() -> None:
 def test_data_schema_doc_exists() -> None:
     assert (ROOT / "docs" / "DATA_SCHEMA.md").is_file()
     assert (ROOT / "docs" / "SCHEMA_MIGRATION_V2.md").is_file()
+
+
+TASKS_PROFILES_VALIDATE = ROOT / "scripts" / "validate_tasks_profiles.py"
+
+
+def test_tasks_profiles_validate() -> None:
+    proc = run(TASKS_PROFILES_VALIDATE, "--require")
+    assert proc.returncode == 0, proc.stderr + proc.stdout
+    assert "OK:" in proc.stdout
+
+
+def test_tasks_and_profiles_trees_exist() -> None:
+    tasks = sorted((ROOT / "tasks").glob("*.yaml"))
+    profiles = sorted((ROOT / "profiles").glob("*.yaml"))
+    assert len(tasks) >= 10
+    assert len(profiles) >= 8
+    assert (ROOT / "schema" / "task.schema.json").is_file()
+    assert (ROOT / "schema" / "profile.schema.json").is_file()
+    assert TASKS_PROFILES_VALIDATE.is_file()
+
+
+def test_task_ids_do_not_collide_with_commands() -> None:
+    cmd_ids = set()
+    for path in (ROOT / "commands").glob("*/*.yaml"):
+        data = yaml.safe_load(path.read_text(encoding="utf-8"))
+        cmd_ids.add(data["id"])
+    for path in (ROOT / "tasks").glob("*.yaml"):
+        data = yaml.safe_load(path.read_text(encoding="utf-8"))
+        assert data["id"] == path.stem
+        assert data["kind"] == "task"
+        assert data["id"] not in cmd_ids
+        assert data["verification"]["status"] in ("draft", "reviewed", "verified")
+        for lang in ("tr", "en"):
+            assert data["name"][lang].strip()
+            assert data["summary"][lang].strip()
+            assert data["intent"][lang]
+
+
+def test_profile_ids_and_refs() -> None:
+    task_ids = {
+        yaml.safe_load(p.read_text(encoding="utf-8"))["id"]
+        for p in (ROOT / "tasks").glob("*.yaml")
+    }
+    for path in (ROOT / "profiles").glob("*.yaml"):
+        data = yaml.safe_load(path.read_text(encoding="utf-8"))
+        assert data["id"] == path.stem
+        assert data["kind"] == "profile"
+        assert data["verification"]["status"] != "verified" or data["verification"].get(
+            "sources"
+        )
+        for tid in data.get("related_tasks") or []:
+            assert tid in task_ids, (path, tid)
+
+
+def test_catalog_hash_excludes_tasks_profiles() -> None:
+    """Faz 8: content_sha256 remains commands+concepts only (Faz 9 indexes)."""
+    run(BUILD)
+    cat = json.loads((ROOT / "metadata" / "catalog.json").read_text(encoding="utf-8"))
+    assert "tasks" not in cat
+    assert "profiles" not in cat
+    assert cat["command_count"] >= 200
+    assert "task_count" not in cat

@@ -1,0 +1,95 @@
+schema_version: 2
+kind: task
+id: inspect-system-logs
+name:
+  tr: Sistem günlüklerini incele
+  en: Inspect system logs
+summary:
+  tr: journalctl / Get-WinEvent / log / dmesg ile okuma odaklı günlük inceleme.
+  en: Read-oriented log inspection via journalctl / Get-WinEvent / log / dmesg.
+category: system
+intent:
+  tr:
+  - sistem logları
+  - journalctl oku
+  - hata günlükleri
+  en:
+  - system logs
+  - read journalctl
+  - error logs
+implementations:
+- id: linux-journalctl
+  commands:
+  - journalctl
+  examples:
+  - command: journalctl -xe --no-pager | tail -n 50
+    risk: safe
+    shell: bash
+    privilege: none
+  operating_systems:
+  - linux
+  platforms:
+  - linux
+  shells:
+  - bash
+- id: windows-winevent
+  commands:
+  - get-winevent
+  examples:
+  - command: Get-WinEvent -LogName System -MaxEvents 20
+    risk: safe
+    shell: powershell
+    privilege: none
+  operating_systems:
+  - windows
+  platforms:
+  - windows
+  shells:
+  - powershell
+- id: macos-log
+  commands:
+  - log
+  examples:
+  - command: log show --last 5m --style compact
+    risk: safe
+    shell: zsh
+    privilege: none
+  operating_systems:
+  - macos
+  platforms:
+  - macos
+  shells:
+  - zsh
+- id: kernel-dmesg
+  commands:
+  - dmesg
+  examples:
+  - command: dmesg | tail -n 40
+    risk: safe
+    shell: bash
+    privilege: none
+  platforms:
+  - linux
+  - macos
+  - bsd
+  shells:
+  - bash
+verification:
+  status: draft
+  sources:
+  - man 1 journalctl
+  - man 1 log
+  - man 1 dmesg
+  notes: Agent-authored Faz 8 draft; not human-verified.
+tags:
+- logs
+- journal
+related_commands:
+- journalctl
+- get-winevent
+- log
+- dmesg
+- tail
+- get-content
+related_tasks:
+- list-running-services

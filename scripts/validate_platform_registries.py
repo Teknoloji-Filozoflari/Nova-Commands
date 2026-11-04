@@ -9,7 +9,8 @@ Checks registry YAML against JSON Schema and internal cross-references:
 
 Does NOT require commands/concepts to reference registries yet (Faz 2+).
 Does NOT migrate commands or bump catalog schema_version.
-Missing optional dirs (tasks/, profiles/) are ignored.
+Missing optional dirs (tasks/, profiles/) are ignored here; Faz 8+ uses
+scripts/validate_tasks_profiles.py when those trees exist.
 """
 
 from __future__ import annotations

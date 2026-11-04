@@ -1,0 +1,65 @@
+schema_version: 2
+kind: task
+id: list-running-processes
+name:
+  tr: Çalışan süreçleri listele
+  en: List running processes
+summary:
+  tr: ps / Get-Process / top ile süreç envanteri.
+  en: Process inventory via ps / Get-Process / top.
+category: processes
+intent:
+  tr:
+  - süreç listesi
+  - hangi program çalışıyor
+  - task manager cli
+  en:
+  - list processes
+  - what is running
+  - task manager cli
+implementations:
+- id: unix-ps
+  commands:
+  - ps
+  examples:
+  - command: ps aux
+    risk: safe
+    shell: bash
+    privilege: none
+  platforms:
+  - linux
+  - macos
+  - bsd
+  shells:
+  - bash
+- id: windows-get-process
+  commands:
+  - get-process
+  examples:
+  - command: Get-Process | Sort-Object CPU -Descending | Select-Object -First 20
+    risk: safe
+    shell: powershell
+    privilege: none
+  operating_systems:
+  - windows
+  platforms:
+  - windows
+  shells:
+  - powershell
+verification:
+  status: draft
+  sources:
+  - man 1 ps
+  - https://learn.microsoft.com/powershell/module/microsoft.powershell.management/get-process
+  notes: Agent-authored Faz 8 draft; not human-verified.
+tags:
+- processes
+- monitoring
+related_commands:
+- ps
+- top
+- htop
+- get-process
+related_tasks:
+- check-memory
+- list-running-services

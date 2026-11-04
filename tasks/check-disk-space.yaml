@@ -1,0 +1,66 @@
+schema_version: 2
+kind: task
+id: check-disk-space
+name:
+  tr: Disk alanını kontrol et
+  en: Check disk space
+summary:
+  tr: Dosya sistemlerinin doluluk oranını df / Get-Volume ile göster.
+  en: Show filesystem free space with df / Get-Volume.
+category: disks
+intent:
+  tr:
+  - disk dolu mu
+  - boş alan
+  - df çıktısı
+  en:
+  - disk space
+  - free space
+  - df output
+implementations:
+- id: unix-df
+  commands:
+  - df
+  examples:
+  - command: df -h
+    risk: safe
+    shell: bash
+    privilege: none
+  platforms:
+  - linux
+  - macos
+  - bsd
+  shells:
+  - bash
+- id: windows-get-volume
+  commands:
+  - get-volume
+  examples:
+  - command: Get-Volume
+    risk: safe
+    shell: powershell
+    privilege: none
+  operating_systems:
+  - windows
+  platforms:
+  - windows
+  shells:
+  - powershell
+verification:
+  status: draft
+  sources:
+  - man 1 df
+  - https://learn.microsoft.com/powershell/module/storage/get-volume
+  notes: Agent-authored Faz 8 draft; not human-verified.
+tags:
+- disks
+- storage
+- capacity
+related_commands:
+- df
+- du
+- lsblk
+- get-volume
+- diskutil
+related_tasks:
+- inspect-disk-usage

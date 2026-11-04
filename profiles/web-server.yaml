@@ -1,0 +1,32 @@
+schema_version: 2
+kind: profile
+id: web-server
+name:
+  tr: Web / reverse proxy sunucu
+  en: Web / reverse-proxy server
+summary:
+  tr: nginx/Caddy + TLS/servis alışkanlıkları (config test önce).
+  en: nginx/Caddy + TLS/service habits (config test first).
+verification:
+  status: draft
+  sources:
+  - https://nginx.org/en/docs/
+  - https://caddyserver.com/docs/
+  notes: Agent-authored Faz 8 draft; not human-verified.
+operating_systems:
+- linux
+related_commands:
+- nginx
+- caddy
+- systemctl
+- ss
+- ufw
+related_tasks:
+- list-running-services
+- check-open-ports
+- check-firewall-status
+- inspect-system-logs
+tags:
+- web
+- proxy
+- server

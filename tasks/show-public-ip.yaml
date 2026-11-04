@@ -1,0 +1,64 @@
+schema_version: 2
+kind: task
+id: show-public-ip
+name:
+  tr: Genel (wan) IP adresini göster
+  en: Show public (WAN) IP address
+summary:
+  tr: Harici HTTPS uç noktası ile görünen genel IP (ağ çıkışı).
+  en: Query an external HTTPS endpoint for the apparent public IP.
+category: network
+intent:
+  tr:
+  - genel ip adresim
+  - wan ip
+  - dış ip öğren
+  en:
+  - show public ip
+  - wan ip address
+  - external ip
+implementations:
+- id: curl-https
+  commands:
+  - curl
+  examples:
+  - command: curl -4 -s https://ifconfig.me/ip
+    risk: safe
+    shell: bash
+    privilege: none
+    title:
+      tr: IPv4 genel IP
+      en: IPv4 public IP
+    explanation:
+      tr: HTTPS ile görünen IPv4; uç nokta değişebilir.
+      en: Apparent IPv4 over HTTPS; endpoint may change.
+  platforms:
+  - linux
+  - macos
+  - bsd
+  - windows
+  shells:
+  - bash
+  - zsh
+  - powershell
+verification:
+  status: draft
+  sources:
+  - https://curl.se/docs/manpage.html
+  notes: Agent-authored Faz 8 draft; not human-verified.
+description:
+  tr: Üçüncü taraf uç noktalara güvenir; gizlilik ve oran sınırları dikkate alın. Yerel IP görevi ile
+    karıştırma.
+  en: Depends on third-party endpoints; consider privacy and rate limits. Do not confuse with the local-IP
+    task.
+tags:
+- network
+- ip
+- wan
+related_commands:
+- curl
+- wget
+- dig
+related_tasks:
+- show-local-ip
+- check-internet-connectivity

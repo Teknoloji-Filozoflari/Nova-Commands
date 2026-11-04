@@ -1,0 +1,41 @@
+schema_version: 2
+kind: profile
+id: nas-server
+name:
+  tr: NAS / depolama sunucu
+  en: NAS / storage server
+summary:
+  tr: Disk, paylaşım ve yedek odaklı depolama profili (vendor CLI bankası değil).
+  en: Disk, share, and backup oriented storage profile (not a vendor CLI bank).
+verification:
+  status: draft
+  sources:
+  - docs/SERVER_ADMINISTRATION.md
+  notes: Agent-authored Faz 8 draft; not human-verified.
+operating_systems:
+- linux
+- freebsd
+server_platforms:
+- truenas-scale
+- truenas-core
+- openmediavault
+- synology-dsm
+related_commands:
+- df
+- du
+- lsblk
+- mount
+- rsync
+- restic
+- borg
+- rclone
+- zfs
+related_tasks:
+- check-disk-space
+- inspect-disk-usage
+- backup-directory
+- connect-ssh
+tags:
+- nas
+- storage
+- backup

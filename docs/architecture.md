@@ -13,12 +13,14 @@
 ```
 commands/<category>/<id>.yaml   # curated entries (schema_version: 2)
 concepts/<id>.yaml              # learnable concept articles (TR/EN)
+tasks/<id>.yaml                 # intent → multi-OS implementations (Faz 8)
+profiles/<id>.yaml              # server / role reference collections (Faz 8)
 schema/command.schema.json      # v2 — live commands/ bank
 schema/command.schema.v2.json   # v2 twin (distinct $id)
 schema/command.schema.v1.json   # archived v1
-schema/{task,profile,compatibility}.schema.json  # stubs (Faz 8 content)
+schema/{task,profile}.schema.json
 schema/*.json                   # JSON Schema (Draft 2020-12) + platform regs
-fixtures/schema-v2/             # stub/fixture samples (not catalog content)
+fixtures/schema-v2/             # small schema samples (not catalog content)
 metadata/categories.yaml        # §8.x taxonomy
 metadata/concepts.yaml          # concept registry (+ optional article:)
 metadata/operating-systems.yaml # Faz 1+ platform registries (additive)
@@ -33,10 +35,11 @@ metadata/support-levels.yaml
 metadata/catalog.json           # aggregate (kind: nova-commands-bank, schema_version 2)
 metadata/search-index.json      # flattened search fields
 metadata/manifest.json          # counts + deterministic content_sha256
-scripts/validate_catalog.py     # CI gate (v2 bank, i18n, concepts, soft gates)
+scripts/validate_catalog.py     # CI gate (v2 bank, i18n, concepts, soft + tasks/profiles)
+scripts/validate_tasks_profiles.py
 scripts/migrate_v1_to_v2.py     # v1→v2 migration (idempotent)
 scripts/validate_platform_registries.py  # soft registry consistency
-scripts/validate_schema_v2.py   # live v2 load + stub fixture check
+scripts/validate_schema_v2.py   # live v2 load + fixture check
 scripts/build_catalog.py        # catalog + index + manifest
 docs/                           # contracts + safety + NOVA_INTEGRATION + DATA_SCHEMA
 tests/                          # pytest
@@ -54,6 +57,7 @@ PR → validate_catalog.py → build_catalog.py → pytest → merge
 
 `verification.status` is never auto-promoted to `verified` by CI.
 `content_sha256` hashes commands+concepts only (excludes `generated_at`).
+Tasks/profiles are validated in CI but indexed into the catalog in **Faz 9**.
 
 ## Phases (implementation track)
 

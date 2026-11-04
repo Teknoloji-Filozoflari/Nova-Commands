@@ -1,0 +1,90 @@
+schema_version: 2
+kind: task
+id: check-firewall-status
+name:
+  tr: Güvenlik duvarı durumunu kontrol et
+  en: Check firewall status
+summary:
+  tr: ufw / firewall-cmd / pfctl / netsh ile durum okuma (kural silme yok).
+  en: Read status via ufw / firewall-cmd / pfctl / netsh (no rule deletes).
+category: security
+intent:
+  tr:
+  - firewall durumu
+  - ufw status
+  - pfctl kurallar
+  en:
+  - firewall status
+  - ufw status
+  - pfctl rules
+implementations:
+- id: linux-ufw
+  commands:
+  - ufw
+  examples:
+  - command: sudo ufw status verbose
+    risk: safe
+    shell: bash
+    privilege: elevated
+  platforms:
+  - linux
+  shells:
+  - bash
+- id: linux-firewalld
+  commands:
+  - firewall-cmd
+  examples:
+  - command: firewall-cmd --state
+    risk: safe
+    shell: bash
+    privilege: none
+  platforms:
+  - linux
+  shells:
+  - bash
+- id: bsd-pfctl
+  commands:
+  - pfctl
+  examples:
+  - command: sudo pfctl -s info
+    risk: safe
+    shell: bash
+    privilege: elevated
+  platforms:
+  - bsd
+  - macos
+  shells:
+  - bash
+- id: windows-netsh
+  commands:
+  - netsh
+  examples:
+  - command: netsh advfirewall show allprofiles
+    risk: safe
+    shell: cmd
+    privilege: none
+  operating_systems:
+  - windows
+  platforms:
+  - windows
+  shells:
+  - cmd
+verification:
+  status: draft
+  sources:
+  - man 8 ufw
+  - man 1 firewall-cmd
+  - man 8 pfctl
+  notes: Agent-authored Faz 8 draft; not human-verified.
+tags:
+- firewall
+- security
+related_commands:
+- ufw
+- firewall-cmd
+- nft
+- iptables
+- pfctl
+- netsh
+related_tasks:
+- check-open-ports

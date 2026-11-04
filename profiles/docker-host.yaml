@@ -1,0 +1,34 @@
+schema_version: 2
+kind: profile
+id: docker-host
+name:
+  tr: Docker ana makinesi
+  en: Docker host
+summary:
+  tr: 'Konteyner runtime odaklı host: docker/podman/nerdctl, disk ve servisler.'
+  en: 'Container-runtime host: docker/podman/nerdctl, disk, and services.'
+verification:
+  status: draft
+  sources:
+  - https://docs.docker.com/engine/
+  notes: Agent-authored Faz 8 draft; not human-verified.
+operating_systems:
+- linux
+server_platforms:
+- docker-engine
+related_commands:
+- docker
+- docker-compose
+- podman
+- nerdctl
+- systemctl
+- df
+- ss
+related_tasks:
+- inspect-container
+- check-container-logs
+- check-disk-space
+- list-running-services
+tags:
+- containers
+- docker

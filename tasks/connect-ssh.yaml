@@ -1,0 +1,54 @@
+schema_version: 2
+kind: task
+id: connect-ssh
+name:
+  tr: SSH ile bağlan
+  en: Connect over SSH
+summary:
+  tr: Uzak kabuğa OpenSSH istemcisi ile bağlanma (öğretici).
+  en: Connect to a remote shell with the OpenSSH client (teaching).
+category: security
+intent:
+  tr:
+  - ssh bağlan
+  - uzak sunucuya gir
+  - ssh user@host
+  en:
+  - ssh connect
+  - remote shell
+  - ssh user@host
+implementations:
+- id: openssh-client
+  commands:
+  - ssh
+  examples:
+  - command: ssh user@server.example
+    risk: caution
+    shell: bash
+    privilege: user
+    explanation:
+      tr: Host anahtarını doğrula; parola/anahtar sızdırma.
+      en: Verify host keys; avoid leaking passwords/keys.
+  platforms:
+  - linux
+  - macos
+  - bsd
+  - windows
+  shells:
+  - bash
+  - powershell
+verification:
+  status: draft
+  sources:
+  - man 1 ssh
+  notes: Agent-authored Faz 8 draft; not human-verified.
+tags:
+- ssh
+- remote
+related_commands:
+- ssh
+- scp
+- sftp
+- rsync
+related_tasks:
+- transfer-files-ssh

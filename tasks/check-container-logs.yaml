@@ -1,0 +1,67 @@
+schema_version: 2
+kind: task
+id: check-container-logs
+name:
+  tr: Konteyner günlüklerini kontrol et
+  en: Check container logs
+summary:
+  tr: Runtime log akışını oku (kubectl logs ayrı orchestrator yolu).
+  en: Read runtime log streams (kubectl logs is a separate orchestrator path).
+category: containers
+intent:
+  tr:
+  - docker logs
+  - konteyner log
+  - podman logs
+  en:
+  - docker logs
+  - container logs
+  - podman logs
+implementations:
+- id: docker-logs
+  commands:
+  - docker
+  examples:
+  - command: docker logs --tail 100 mycontainer
+    risk: safe
+    shell: bash
+    privilege: none
+  platforms:
+  - linux
+  - macos
+  - windows
+  shells:
+  - bash
+- id: kubectl-logs
+  commands:
+  - kubectl
+  examples:
+  - command: kubectl logs deploy/myapp --tail=100
+    risk: caution
+    shell: bash
+    privilege: none
+  platforms:
+  - linux
+  - macos
+  - windows
+  shells:
+  - bash
+  notes:
+    tr: Yanlış kubeconfig bağlamı risklidir; önce context doğrula.
+    en: Wrong kubeconfig context is risky; verify context first.
+verification:
+  status: draft
+  sources:
+  - https://docs.docker.com/engine/reference/commandline/logs/
+  notes: Agent-authored Faz 8 draft; not human-verified.
+tags:
+- containers
+- logs
+related_commands:
+- docker
+- podman
+- nerdctl
+- kubectl
+- crictl
+related_tasks:
+- inspect-container

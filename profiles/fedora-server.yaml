@@ -1,0 +1,39 @@
+schema_version: 2
+kind: profile
+id: fedora-server
+name:
+  tr: Fedora / RHEL ailesi sunucu
+  en: Fedora / RHEL-family server
+summary:
+  tr: dnf + firewalld + systemd odaklı sunucu profili.
+  en: dnf + firewalld + systemd oriented server profile.
+verification:
+  status: draft
+  sources:
+  - https://docs.fedoraproject.org/
+  - https://access.redhat.com/documentation
+  notes: Agent-authored Faz 8 draft; not human-verified.
+operating_systems:
+- linux
+distributions:
+- fedora
+- fedora-server
+- rhel
+- rocky
+- almalinux
+related_commands:
+- dnf
+- systemctl
+- journalctl
+- firewall-cmd
+- ss
+- ip
+related_tasks:
+- update-system
+- install-package
+- list-running-services
+- check-firewall-status
+tags:
+- server
+- fedora
+- rhel

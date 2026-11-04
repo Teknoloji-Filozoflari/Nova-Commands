@@ -1,0 +1,77 @@
+schema_version: 2
+kind: task
+id: check-dns
+name:
+  tr: DNS çözümlemesini kontrol et
+  en: Check DNS resolution
+summary:
+  tr: Bir adın DNS kaydını dig / Resolve-DnsName benzeri araçlarla sorgula.
+  en: Query a name's DNS records with dig / Resolve-DnsName-style tools.
+category: network
+intent:
+  tr:
+  - dns kontrol
+  - alan adı çözümle
+  - dig sorgusu
+  en:
+  - check dns
+  - resolve hostname
+  - dig lookup
+implementations:
+- id: unix-dig
+  commands:
+  - dig
+  examples:
+  - command: dig +short example.com A
+    risk: safe
+    shell: bash
+    privilege: none
+    title:
+      tr: A kaydı
+      en: A record
+    explanation:
+      tr: Kısa A yanıtı; yetkili sunucu için @ kullanın.
+      en: Short A answer; use @ for a specific nameserver.
+  platforms:
+  - linux
+  - macos
+  - bsd
+  shells:
+  - bash
+- id: windows-dig
+  commands:
+  - dig
+  examples:
+  - command: dig +short example.com A
+    risk: safe
+    shell: powershell
+    privilege: none
+    title:
+      tr: dig (Windows)
+      en: dig (Windows)
+    explanation:
+      tr: dig Windows'ta ayrı kurulum olabilir. Resolve-DnsName henüz bankada yok.
+      en: dig may need a separate Windows install. Resolve-DnsName not in bank yet.
+  operating_systems:
+  - windows
+  platforms:
+  - windows
+  shells:
+  - powershell
+  notes:
+    tr: Native Resolve-DnsName kaydı sonraki derinleştirmeye bırakıldı.
+    en: Native Resolve-DnsName record deferred to a later deepen.
+verification:
+  status: draft
+  sources:
+  - man 1 dig
+  notes: Agent-authored Faz 8 draft; not human-verified.
+tags:
+- network
+- dns
+related_commands:
+- dig
+- host
+- resolvectl
+related_tasks:
+- check-internet-connectivity

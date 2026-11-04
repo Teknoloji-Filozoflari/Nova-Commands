@@ -1,0 +1,40 @@
+schema_version: 2
+kind: profile
+id: homelab
+name:
+  tr: Homelab sunucu
+  en: Homelab server
+summary:
+  tr: 'Ev laboratuvarı: Docker, reverse proxy, yedek, SSH ve temel ağ.'
+  en: 'Home lab: Docker, reverse proxy, backup, SSH, and basic networking.'
+verification:
+  status: draft
+  sources:
+  - docs/SERVER_ADMINISTRATION.md
+  notes: Agent-authored Faz 8 draft; not human-verified.
+operating_systems:
+- linux
+server_platforms:
+- docker-engine
+- proxmox-ve
+related_commands:
+- docker
+- docker-compose
+- nginx
+- caddy
+- restic
+- rsync
+- ssh
+- ufw
+- systemctl
+related_tasks:
+- inspect-container
+- check-container-logs
+- backup-directory
+- connect-ssh
+- check-firewall-status
+- update-system
+tags:
+- homelab
+- server
+- self-hosted

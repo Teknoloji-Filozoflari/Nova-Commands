@@ -1,0 +1,34 @@
+schema_version: 2
+kind: profile
+id: kubernetes
+name:
+  tr: Kubernetes düğümü / operatör
+  en: Kubernetes node / operator
+summary:
+  tr: kubectl/helm/crictl referansı; yanlış context riskine dikkat.
+  en: kubectl/helm/crictl reference; watch wrong-context risk.
+verification:
+  status: draft
+  sources:
+  - https://kubernetes.io/docs/
+  - https://helm.sh/docs/
+  notes: Agent-authored Faz 8 draft; not human-verified.
+operating_systems:
+- linux
+server_platforms:
+- kubernetes
+- docker-engine
+related_commands:
+- kubectl
+- helm
+- crictl
+- nerdctl
+- ssh
+related_tasks:
+- inspect-container
+- check-container-logs
+- connect-ssh
+tags:
+- kubernetes
+- containers
+- devops

@@ -7,8 +7,10 @@
 | **Live bank** | `schema/command.schema.json` (**v2**) | Validates all `commands/**/*.yaml` |
 | **v2 twin** | `schema/command.schema.v2.json` | Same properties; distinct `$id` for tooling |
 | **Archived v1** | `schema/command.schema.v1.json` | Historical Linux-era schema |
-| **Stubs** | `task` / `profile` / `compatibility` | Fixtures only until Faz 8 |
-| **Catalog** | `metadata/catalog.json` | `schema_version: **2**` |
+| **Tasks** | `schema/task.schema.json` + `tasks/*.yaml` | Live intent → multi-OS implementations (Faz 8) |
+| **Profiles** | `schema/profile.schema.json` + `profiles/*.yaml` | Server / role reference collections (Faz 8) |
+| **Compatibility** | `schema/compatibility.schema.json` | Fixtures / later deepen |
+| **Catalog** | `metadata/catalog.json` | `schema_version: **2**` (commands+concepts; task/profile index → Faz 9) |
 
 Faz 2 used a dual-path (v1 bank + v2 fixtures). **Faz 3 ends dual forever for the live bank:** all 143 commands migrated; catalog/manifest/search-index bumped to 2.
 
@@ -27,22 +29,25 @@ See [SCHEMA_MIGRATION_V2.md](SCHEMA_MIGRATION_V2.md) for the field map and `migr
 
 ## Tasks vs commands
 
-Multi-tool user goals (`show-local-ip` with linux-ip / windows-powershell / windows-cmd) are **tasks**. Individual tools remain **command** records. Do not reuse command ids for tasks. Real `tasks/` / `profiles/` trees are Faz 8.
+Multi-tool user goals (`show-local-ip` with linux-ip / windows-powershell / windows-cmd) are **tasks** under `tasks/`. Individual tools remain **command** records. Do not reuse command ids for tasks. Server / role **profiles** under `profiles/` point at related commands + tasks; they are teaching collections, not runbooks.
+
+`content_sha256` still hashes **commands + concepts only**. Task/profile catalog indexing is **Faz 9**.
 
 ## Validation
 
 ```bash
-python3 scripts/validate_catalog.py      # live v2 bank + concepts + soft registries/stubs
-python3 scripts/validate_schema_v2.py    # schema load + fixtures
+python3 scripts/validate_catalog.py           # live v2 bank + concepts + soft gates + tasks/profiles
+python3 scripts/validate_tasks_profiles.py --require
+python3 scripts/validate_schema_v2.py         # schema load + fixtures
 python3 scripts/migrate_v1_to_v2.py --check
 ```
 
 Fixtures under `fixtures/schema-v2/` stay `draft` and are **not** in the catalog hash.
 
-## Non-goals of Faz 3
+## Non-goals of Faz 3 (historical)
 
-- Adding Windows/macOS/BSD **command content** (Faz 5–6)
-- Creating real `tasks/` or `profiles/` trees (Faz 8)
+- Adding Windows/macOS/BSD **command content** (done in Faz 5–6)
+- Creating real `tasks/` or `profiles/` trees (done in Faz 8)
 - Demoting honest `verified` / `reviewed` statuses
 - Changing LICENSE or `keys/minisign.pub`
 

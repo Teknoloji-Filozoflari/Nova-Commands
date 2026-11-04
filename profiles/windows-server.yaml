@@ -1,0 +1,44 @@
+schema_version: 2
+kind: profile
+id: windows-server
+name:
+  tr: Windows sunucu / masaüstü yönetim
+  en: Windows server / admin basics
+summary:
+  tr: PowerShell odaklı servis, ağ, disk ve WinGet güncelleme referansı.
+  en: PowerShell-oriented services, network, disk, and WinGet update reference.
+verification:
+  status: draft
+  sources:
+  - https://learn.microsoft.com/windows-server/
+  - https://learn.microsoft.com/powershell/
+  notes: Agent-authored Faz 8 draft; not human-verified.
+operating_systems:
+- windows
+distributions:
+- windows-server
+- windows-11
+- windows-10
+related_commands:
+- get-service
+- get-process
+- get-netipconfiguration
+- get-nettcpconnection
+- get-volume
+- get-winevent
+- winget
+- netsh
+- ipconfig
+- sc
+related_tasks:
+- show-local-ip
+- check-open-ports
+- check-disk-space
+- list-running-services
+- inspect-system-logs
+- update-system
+- check-firewall-status
+tags:
+- server
+- windows
+- powershell

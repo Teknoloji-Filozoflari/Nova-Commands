@@ -1,0 +1,63 @@
+schema_version: 2
+kind: task
+id: inspect-disk-usage
+name:
+  tr: Dizin disk kullanımını incele
+  en: Inspect directory disk usage
+summary:
+  tr: Bir yolun kapladığı alanı du ile özetle (silme yok).
+  en: Summarize space used by a path with du (no deletes).
+category: disks
+intent:
+  tr:
+  - hangi klasör yer kaplıyor
+  - du kullanımı
+  en:
+  - which folder uses space
+  - du usage
+implementations:
+- id: unix-du
+  commands:
+  - du
+  examples:
+  - command: du -sh /* 2>/dev/null | sort -h
+    risk: caution
+    shell: bash
+    privilege: none
+  platforms:
+  - linux
+  - macos
+  - bsd
+  shells:
+  - bash
+- id: windows-measure
+  commands:
+  - get-childitem
+  examples:
+  - command: Get-ChildItem -Force | Measure-Object -Property Length -Sum
+    risk: caution
+    shell: powershell
+    privilege: none
+  operating_systems:
+  - windows
+  platforms:
+  - windows
+  shells:
+  - powershell
+  notes:
+    tr: Measure-Object ayrı bir banka kaydı değildir; Get-ChildItem ile birlikte örnek.
+    en: Measure-Object is not a separate bank record; example pairs with Get-ChildItem.
+verification:
+  status: draft
+  sources:
+  - man 1 du
+  notes: Agent-authored Faz 8 draft; not human-verified.
+tags:
+- disks
+- du
+related_commands:
+- du
+- df
+- get-childitem
+related_tasks:
+- check-disk-space
