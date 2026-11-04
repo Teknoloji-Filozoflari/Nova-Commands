@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/Teknoloji-Filozoflari/Nova-Commands/main/schema/compatibility.schema.json",
+  "title": "Nova-Commands compatibility matrix entry (stub — Faz 2)",
+  "description": "Optional compatibility / support matrix rows linking entities (command|task|tool) to OS/distro/shell/PM with a support_level. Content optional until later fazes; soft-validated via fixtures.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "subject", "support_level"],
+  "properties": {
+    "schema_version": {
+      "type": "integer",
+      "const": 2
+    },
+    "kind": {
+      "type": "string",
+      "const": "compatibility"
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 96,
+      "pattern": "^[a-z0-9][a-z0-9._-]*$"
+    },
+    "subject": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "id"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["command", "task", "profile", "package-manager", "shell"]
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64
+        }
+      }
+    },
+    "operating_systems": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/registryId" }
+    },
+    "distributions": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/registryId" }
+    },
+    "shells": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/registryId" }
+    },
+    "package_managers": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/registryId" }
+    },
+    "architectures": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/registryId" }
+    },
+    "execution_environments": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/registryId" }
+    },
+    "support_level": {
+      "type": "string",
+      "description": "Must match metadata/support-levels.yaml id when registries are loaded.",
+      "enum": ["planned", "experimental", "partial", "full", "unsupported"]
+    },
+    "notes": {
+      "$ref": "#/$defs/localizedShort"
+    },
+    "verification": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": ["draft", "reviewed", "verified"]
+        },
+        "sources": {
+          "type": "array",
+          "maxItems": 8,
+          "items": { "type": "string", "minLength": 1, "maxLength": 512 }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "registryId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": "^[a-z][a-z0-9-]*$"
+    },
+    "localizedShort": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tr", "en"],
+      "properties": {
+        "tr": { "type": "string", "minLength": 1, "maxLength": 160 },
+        "en": { "type": "string", "minLength": 1, "maxLength": 160 }
+      }
+    }
+  }
+}

@@ -12,6 +12,8 @@ Checks (CI gate):
   - nova.concepts / concept related_* reference known registry or article ids
   - Concept articles under concepts/; id == filename; related_commands exist
   - Soft: platform registries (scripts/validate_platform_registries.py)
+  - Soft: schema v2 + stub fixtures (scripts/validate_schema_v2.py)
+    Live commands/ still validate against command.schema.json (v1) only.
 """
 
 from __future__ import annotations
@@ -35,6 +37,7 @@ CONCEPT_SCHEMA_PATH = ROOT / "schema" / "concept.schema.json"
 CATEGORIES_PATH = ROOT / "metadata" / "categories.yaml"
 CONCEPTS_META_PATH = ROOT / "metadata" / "concepts.yaml"
 PLATFORM_VALIDATE = ROOT / "scripts" / "validate_platform_registries.py"
+SCHEMA_V2_VALIDATE = ROOT / "scripts" / "validate_schema_v2.py"
 
 RISK_RANK = {"safe": 0, "caution": 1, "dangerous": 2, "destructive": 3}
 
@@ -302,6 +305,16 @@ def main() -> int:
     if PLATFORM_VALIDATE.is_file():
         proc = subprocess.run(
             [sys.executable, str(PLATFORM_VALIDATE)],
+            cwd=ROOT,
+            check=False,
+        )
+        if proc.returncode != 0:
+            return proc.returncode
+
+    # Soft schema-v2 gate (dual-path; fixtures only — bank stays on v1).
+    if SCHEMA_V2_VALIDATE.is_file():
+        proc = subprocess.run(
+            [sys.executable, str(SCHEMA_V2_VALIDATE)],
             cwd=ROOT,
             check=False,
         )

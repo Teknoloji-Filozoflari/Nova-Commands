@@ -21,8 +21,11 @@ Ayrıntı: [docs/dual-concept.md](docs/dual-concept.md)
 ```
 commands/<category>/<id>.yaml   # kaynak gerçeği (bir komut = bir dosya)
 concepts/<id>.yaml              # öğrenilebilir konsept makaleleri (TR/EN)
-schema/{command,concept,catalog}.schema.json
-schema/{operating-system,distribution,shell,package-manager,…}.schema.json
+schema/command.schema.json      # v1 — canlı commands/ bankası
+schema/command.schema.v2.json   # v2 tasarım (Faz 3 göçüne kadar fixtures)
+schema/{task,profile,compatibility}.schema.json  # stub (içerik Faz 8)
+schema/{concept,catalog,operating-system,…}.schema.json
+fixtures/schema-v2/             # v2 soft-validate örnekleri (katalogda yok)
 metadata/categories.yaml        # §8.x kategori taksonomisi
 metadata/concepts.yaml          # konsept kayıt defteri
 metadata/operating-systems.yaml # platform kayıtları (OS ≠ distro ≠ shell ≠ PM)
@@ -30,9 +33,11 @@ metadata/{distributions,shells,package-managers,…}.yaml
 metadata/catalog.json           # üretilen banka (commands + concepts; schema_version 1)
 metadata/search-index.json      # arama indeksi
 metadata/manifest.json          # sayılar + deterministik content_sha256
-scripts/validate_catalog.py     # CI kapısı (i18n + concepts + platform soft-check)
+scripts/validate_catalog.py     # CI kapısı (v1 bank + soft platform + soft v2)
 scripts/validate_platform_registries.py
+scripts/validate_schema_v2.py
 scripts/build_catalog.py        # katalog / indeks / manifest
+docs/DATA_SCHEMA.md             # v1/v2 dual-path politika
 docs/PLATFORM_SUPPORT.md        # platform metadata kapsamı
 docs/NOVA_INTEGRATION.md        # Nova tüketim sözleşmesi
 ```

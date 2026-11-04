@@ -1,0 +1,20 @@
+# Fixture only — compatibility rows optional until later fazes.
+schema_version: 2
+kind: compatibility
+id: ip.linux.partial
+subject:
+  type: command
+  id: ip
+operating_systems:
+  - linux
+distributions:
+  - arch
+  - debian
+  - ubuntu
+  - fedora
+support_level: partial
+notes:
+  tr: Mevcut Linux bank kaydı; macOS/BSD/Windows için ayrı araçlar gerekir.
+  en: Existing Linux bank entry; macOS/BSD/Windows need separate tools.
+verification:
+  status: draft

@@ -1,0 +1,579 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/Teknoloji-Filozoflari/Nova-Commands/main/schema/command.schema.v2.json",
+  "title": "Nova-Commands command entry (schema v2)",
+  "description": "Cross-platform command record (Faz 2+). Dual-path: live bank under commands/ still validates against command.schema.json (v1) until Faz 3 migration. Prefer registry id references (OS/distro/shell/PM) over fixed package keys. Do not mark AI drafts verified.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "name",
+    "summary",
+    "description",
+    "category",
+    "risk",
+    "requires_elevated",
+    "platforms",
+    "verification",
+    "examples",
+    "intent"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "integer",
+      "const": 2,
+      "description": "Present on migrated v2 YAML. Omit on v1 bank files (validated by command.schema.json)."
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": "^[a-z0-9][a-z0-9+._-]*$",
+      "description": "Stable unique id; usually matches binary/cmdlet name (e.g. ls, Get-NetIPConfiguration)."
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "description": "Display / invocation name (command binary, builtin, or cmdlet)."
+    },
+    "kind": {
+      "type": "string",
+      "description": "Command kind. Optional during dual-path; Faz 3 migration should set explicitly.",
+      "enum": [
+        "executable",
+        "shell_builtin",
+        "shell_keyword",
+        "powershell_cmdlet",
+        "command_interpreter",
+        "package_manager",
+        "subcommand",
+        "script",
+        "administrative_tool",
+        "remote_cli",
+        "vendor_cli"
+      ]
+    },
+    "summary": {
+      "$ref": "#/$defs/localizedShort"
+    },
+    "description": {
+      "$ref": "#/$defs/localizedLong"
+    },
+    "purpose": {
+      "$ref": "#/$defs/localizedLong",
+      "description": "Optional longer purpose statement beyond summary/description."
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "filesystem",
+        "text",
+        "search",
+        "processes",
+        "system",
+        "network",
+        "users",
+        "packages",
+        "archives",
+        "disks",
+        "shell",
+        "development",
+        "containers",
+        "security",
+        "monitoring",
+        "hardware"
+      ],
+      "description": "v1 taxonomy enum retained. Additive categories land in later fazes — do not rename network→networking here."
+    },
+    "aliases": {
+      "type": "array",
+      "maxItems": 24,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 64
+      }
+    },
+    "tags": {
+      "type": "array",
+      "maxItems": 24,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 32,
+        "pattern": "^[a-z0-9][a-z0-9-]*$"
+      }
+    },
+    "risk": {
+      "type": "string",
+      "description": "Inherent danger class of typical use. destructive > dangerous > caution > safe.",
+      "enum": ["safe", "caution", "dangerous", "destructive"]
+    },
+    "requires_elevated": {
+      "type": "boolean",
+      "description": "True when common useful invocations need root/sudo/Administrator/UAC."
+    },
+    "platforms": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "description": "Coarse platform tags. Prefer operating_systems registry refs when more precise. Includes windows (v1 had linux|macos|bsd only).",
+      "items": {
+        "type": "string",
+        "enum": [
+          "linux",
+          "macos",
+          "bsd",
+          "windows",
+          "android",
+          "freebsd",
+          "openbsd",
+          "netbsd",
+          "dragonflybsd",
+          "illumos",
+          "solaris",
+          "aix"
+        ]
+      }
+    },
+    "operating_systems": {
+      "type": "array",
+      "uniqueItems": true,
+      "description": "Optional refs into metadata/operating-systems.yaml ids.",
+      "items": { "$ref": "#/$defs/registryId" }
+    },
+    "distributions": {
+      "type": "array",
+      "uniqueItems": true,
+      "description": "Optional refs into metadata/distributions.yaml ids.",
+      "items": { "$ref": "#/$defs/registryId" }
+    },
+    "architectures": {
+      "type": "array",
+      "uniqueItems": true,
+      "description": "Optional refs into metadata/architectures.yaml ids.",
+      "items": { "$ref": "#/$defs/registryId" }
+    },
+    "execution_environments": {
+      "type": "array",
+      "uniqueItems": true,
+      "description": "Optional refs into metadata/execution-environments.yaml (WSL, Termux, …).",
+      "items": { "$ref": "#/$defs/registryId" }
+    },
+    "shells": {
+      "type": "array",
+      "uniqueItems": true,
+      "description": "Shell ids. Accepts v1 short names (sh/bash/…) and Faz 1 registry ids (powershell/cmd/nushell/…). Prefer shells.yaml ids going forward.",
+      "items": {
+        "type": "string",
+        "enum": [
+          "any",
+          "sh",
+          "posix-sh",
+          "bash",
+          "zsh",
+          "fish",
+          "nushell",
+          "powershell",
+          "windows-powershell",
+          "cmd",
+          "elvish",
+          "tcsh",
+          "csh",
+          "ksh",
+          "dash",
+          "busybox-ash",
+          "xonsh"
+        ]
+      }
+    },
+    "packages": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "LEGACY v1 fixed distro keys (arch/debian/ubuntu/fedora/rhel). Kept for dual-read / migration. Prefer package_refs.",
+      "properties": {
+        "arch": { "$ref": "#/$defs/packageName" },
+        "debian": { "$ref": "#/$defs/packageName" },
+        "ubuntu": { "$ref": "#/$defs/packageName" },
+        "fedora": { "$ref": "#/$defs/packageName" },
+        "rhel": { "$ref": "#/$defs/packageName" }
+      }
+    },
+    "package_refs": {
+      "type": "array",
+      "maxItems": 64,
+      "description": "Preferred package mapping: package-manager registry id + package name. Never invent names.",
+      "items": { "$ref": "#/$defs/packageRef" }
+    },
+    "install_notes": {
+      "$ref": "#/$defs/localizedLong",
+      "description": "Human install hints. Arch/pacman first when Arch-family applies."
+    },
+    "implementations": {
+      "type": "array",
+      "maxItems": 32,
+      "description": "Optional platform-/shell-specific invocation variants for THIS command id. Multi-command tasks belong in task.schema.json.",
+      "items": { "$ref": "#/$defs/implementation" }
+    },
+    "flags": {
+      "type": "array",
+      "maxItems": 64,
+      "items": { "$ref": "#/$defs/flag" }
+    },
+    "examples": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 32,
+      "items": { "$ref": "#/$defs/example" }
+    },
+    "related": {
+      "type": "array",
+      "maxItems": 16,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9][a-z0-9+._-]*$"
+      }
+    },
+    "see_also": {
+      "type": "array",
+      "maxItems": 16,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 256
+      }
+    },
+    "documentation": {
+      "type": "array",
+      "maxItems": 16,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 512
+      }
+    },
+    "sources": {
+      "type": "array",
+      "maxItems": 16,
+      "description": "Top-level source URLs/man pages (also allowed under verification.sources).",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 512
+      }
+    },
+    "security": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Optional security / privilege notes (UAC, admin, destructive side effects).",
+      "properties": {
+        "notes": { "$ref": "#/$defs/localizedLong" },
+        "requires_admin": { "type": "boolean" },
+        "uac_prompt": { "type": "boolean" }
+      }
+    },
+    "version_constraints": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Optional version / release constraints for the tool itself.",
+      "properties": {
+        "min": { "type": "string", "maxLength": 64 },
+        "max": { "type": "string", "maxLength": 64 },
+        "notes": { "$ref": "#/$defs/localizedShort" }
+      }
+    },
+    "intent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tr", "en"],
+      "properties": {
+        "tr": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 24,
+          "items": { "type": "string", "minLength": 1, "maxLength": 96 }
+        },
+        "en": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 24,
+          "items": { "type": "string", "minLength": 1, "maxLength": 96 }
+        }
+      }
+    },
+    "verification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status"],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": ["draft", "reviewed", "verified"],
+          "description": "verified ONLY after human review of flags/packages/examples. AI drafts stay draft."
+        },
+        "sources": {
+          "type": "array",
+          "maxItems": 12,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 512
+          }
+        },
+        "last_reviewed": {
+          "type": ["string", "null"],
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+        },
+        "reviewer": {
+          "type": ["string", "null"],
+          "maxLength": 128
+        },
+        "notes": {
+          "type": "string",
+          "maxLength": 512
+        }
+      }
+    },
+    "nova": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Optional hooks for Nova Komut Rehberi (favorites, UI hints).",
+      "properties": {
+        "favorite_eligible": { "type": "boolean" },
+        "ui_priority": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "concepts": {
+          "type": "array",
+          "maxItems": 8,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]*$"
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "registryId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": "^[a-z][a-z0-9-]*$"
+    },
+    "localizedShort": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tr", "en"],
+      "properties": {
+        "tr": { "type": "string", "minLength": 1, "maxLength": 160 },
+        "en": { "type": "string", "minLength": 1, "maxLength": 160 }
+      }
+    },
+    "localizedLong": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tr", "en"],
+      "properties": {
+        "tr": { "type": "string", "minLength": 1, "maxLength": 2000 },
+        "en": { "type": "string", "minLength": 1, "maxLength": 2000 }
+      }
+    },
+    "packageName": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9+._@/-]*$"
+    },
+    "packageRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["manager", "package"],
+      "properties": {
+        "manager": {
+          "$ref": "#/$defs/registryId",
+          "description": "Id from metadata/package-managers.yaml (e.g. pacman, winget, homebrew)."
+        },
+        "package": { "$ref": "#/$defs/packageName" },
+        "distributions": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/registryId" }
+        },
+        "notes": { "$ref": "#/$defs/localizedShort" }
+      }
+    },
+    "implementation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "^[a-z0-9][a-z0-9-]*$"
+        },
+        "operating_systems": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/registryId" }
+        },
+        "platforms": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": [
+              "linux",
+              "macos",
+              "bsd",
+              "windows",
+              "android",
+              "freebsd",
+              "openbsd",
+              "netbsd",
+              "dragonflybsd"
+            ]
+          }
+        },
+        "shells": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9-]*$"
+          }
+        },
+        "distributions": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/registryId" }
+        },
+        "invocation": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256,
+          "description": "Primary invocation string for this variant when it differs from name."
+        },
+        "examples": {
+          "type": "array",
+          "maxItems": 16,
+          "items": { "$ref": "#/$defs/example" }
+        },
+        "notes": { "$ref": "#/$defs/localizedShort" }
+      }
+    },
+    "flag": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["flag", "meaning", "verified"],
+      "properties": {
+        "flag": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "long": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "takes_value": { "type": "boolean" },
+        "value_name": {
+          "type": "string",
+          "maxLength": 64
+        },
+        "meaning": { "$ref": "#/$defs/localizedShort" },
+        "verified": {
+          "type": "boolean",
+          "description": "Must be false unless a human confirmed against man/help for the documented platform."
+        },
+        "platforms": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "linux",
+              "macos",
+              "bsd",
+              "windows",
+              "android",
+              "gnu",
+              "bsd-utils"
+            ]
+          }
+        },
+        "shells": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9-]*$"
+          }
+        }
+      }
+    },
+    "example": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title", "command", "explanation", "risk"],
+      "properties": {
+        "title": { "$ref": "#/$defs/localizedShort" },
+        "command": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512
+        },
+        "explanation": { "$ref": "#/$defs/localizedLong" },
+        "risk": {
+          "type": "string",
+          "enum": ["safe", "caution", "dangerous", "destructive"]
+        },
+        "requires_elevated": { "type": "boolean" },
+        "shell": {
+          "type": "string",
+          "description": "Shell this example targets (powershell, cmd, bash, …).",
+          "pattern": "^[a-z][a-z0-9-]*$"
+        },
+        "platforms": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": [
+              "linux",
+              "macos",
+              "bsd",
+              "windows",
+              "android",
+              "freebsd",
+              "openbsd",
+              "netbsd",
+              "dragonflybsd"
+            ]
+          }
+        },
+        "privilege": {
+          "type": "string",
+          "enum": ["none", "user", "elevated", "admin"],
+          "description": "Optional privilege hint (Windows admin / UAC aware)."
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]*$"
+          }
+        }
+      }
+    }
+  }
+}
