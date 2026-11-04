@@ -22,20 +22,6 @@ platforms:
 operating_systems:
 - linux
 - macos
-package_refs:
-- manager: pacman
-  package: qemu-img
-  distributions:
-  - arch
-- manager: apt
-  package: qemu-utils
-  distributions:
-  - debian
-  - ubuntu
-- manager: dnf
-  package: qemu-img
-  distributions:
-  - fedora
 flags: []
 examples:
 - title:
@@ -54,10 +40,6 @@ examples:
     tr: Alt komut özeti.
     en: Subcommand summary.
   risk: safe
-related:
-- virsh
-- dd
-- lsblk
 intent:
   tr:
   - qemu-img
@@ -73,6 +55,24 @@ verification:
   - https://www.qemu.org/docs/master/tools/qemu-img.html
   - https://www.qemu.org/docs/master/
   notes: Agent-authored Faz 7 draft from official docs; not human-verified.
+related:
+- virsh
+- dd
+- lsblk
+package_refs:
+- manager: pacman
+  package: qemu-img
+  distributions:
+  - arch
+- manager: apt
+  package: qemu-utils
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: qemu-img
+  distributions:
+  - fedora
 nova:
   favorite_eligible: true
   ui_priority: 60

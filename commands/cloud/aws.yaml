@@ -25,11 +25,6 @@ operating_systems:
 - linux
 - macos
 - windows
-package_refs:
-- manager: pacman
-  package: aws-cli
-  distributions:
-  - arch
 flags: []
 examples:
 - title:
@@ -48,11 +43,6 @@ examples:
     tr: Yapılandırılmış kimliğin ARN/Account bilgisini gösterir (secret yazdırmaz).
     en: Shows ARN/Account for configured identity (does not print secrets).
   risk: caution
-related:
-- az
-- gcloud
-- terraform
-- rclone
 intent:
   tr:
   - aws cli
@@ -68,6 +58,16 @@ verification:
   - https://docs.aws.amazon.com/cli/
   - https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-welcome.html
   notes: Agent-authored Faz 7 draft from official docs; not human-verified.
+related:
+- az
+- gcloud
+- terraform
+- rclone
+package_refs:
+- manager: pacman
+  package: aws-cli
+  distributions:
+  - arch
 nova:
   favorite_eligible: true
   ui_priority: 60

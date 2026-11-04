@@ -41,10 +41,6 @@ examples:
     tr: Aktif proje/bölge ayarları (secret değil).
     en: Active project/region settings (not secrets).
   risk: caution
-related:
-- aws
-- az
-- terraform
 intent:
   tr:
   - gcloud
@@ -60,6 +56,10 @@ verification:
   - https://cloud.google.com/sdk/docs
   - https://cloud.google.com/sdk/gcloud/reference
   notes: Agent-authored Faz 7 draft from official docs; not human-verified.
+related:
+- aws
+- az
+- terraform
 nova:
   favorite_eligible: true
   ui_priority: 60

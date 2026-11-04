@@ -39,10 +39,6 @@ examples:
     tr: Çalışan CRI konteynerleri.
     en: Running CRI containers.
   risk: safe
-related:
-- kubectl
-- nerdctl
-- docker
 intent:
   tr:
   - crictl
@@ -56,6 +52,10 @@ verification:
   - https://github.com/kubernetes-sigs/cri-tools
   - https://kubernetes.io/docs/tasks/debug/debug-cluster/crictl/
   notes: Agent-authored Faz 7 draft from official docs; not human-verified.
+related:
+- kubectl
+- nerdctl
+- docker
 nova:
   favorite_eligible: true
   ui_priority: 60

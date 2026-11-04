@@ -25,25 +25,9 @@ platforms:
 operating_systems:
 - linux
 - macos
-packages:
-  arch: tcpdump
-  debian: tcpdump
-  ubuntu: tcpdump
-  fedora: tcpdump
-package_refs:
-- manager: pacman
-  package: tcpdump
-  distributions:
-  - arch
-- manager: apt
-  package: tcpdump
-  distributions:
-  - debian
-  - ubuntu
-- manager: dnf
-  package: tcpdump
-  distributions:
-  - fedora
+- freebsd
+- openbsd
+- netbsd
 flags:
 - flag: -i
   meaning:
@@ -78,11 +62,6 @@ examples:
     en: 20 packets on any interface (elevated). May include sensitive data.
   risk: caution
   requires_elevated: true
-related:
-- ss
-- nmap
-- mtr
-- ip
 intent:
   tr:
   - paket yakala
@@ -98,6 +77,30 @@ verification:
   - https://www.tcpdump.org/manpages/tcpdump.1.html
   - https://www.tcpdump.org/
   notes: Agent-authored Faz 7 draft from official docs; not human-verified.
+related:
+- ss
+- nmap
+- mtr
+- ip
+package_refs:
+- manager: pacman
+  package: tcpdump
+  distributions:
+  - arch
+- manager: apt
+  package: tcpdump
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: tcpdump
+  distributions:
+  - fedora
+packages:
+  arch: tcpdump
+  debian: tcpdump
+  ubuntu: tcpdump
+  fedora: tcpdump
 nova:
   favorite_eligible: true
   ui_priority: 60

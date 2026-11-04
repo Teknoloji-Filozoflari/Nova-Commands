@@ -24,20 +24,6 @@ operating_systems:
 - linux
 - macos
 - windows
-package_refs:
-- manager: pacman
-  package: redis
-  distributions:
-  - arch
-- manager: apt
-  package: redis-tools
-  distributions:
-  - debian
-  - ubuntu
-- manager: dnf
-  package: redis
-  distributions:
-  - fedora
 flags: []
 examples:
 - title:
@@ -56,10 +42,6 @@ examples:
     tr: Sunucu INFO bölümü (bağlantı gerekir).
     en: Server INFO section (needs connection).
   risk: caution
-related:
-- mysql
-- psql
-- sqlite3
 intent:
   tr:
   - redis-cli
@@ -73,6 +55,24 @@ verification:
   - https://redis.io/docs/latest/develop/tools/cli/
   - https://redis.io/docs/latest/commands/
   notes: Agent-authored Faz 7 draft from official docs; not human-verified.
+related:
+- mysql
+- psql
+- sqlite3
+package_refs:
+- manager: pacman
+  package: redis
+  distributions:
+  - arch
+- manager: apt
+  package: redis-tools
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: redis
+  distributions:
+  - fedora
 nova:
   favorite_eligible: true
   ui_priority: 60

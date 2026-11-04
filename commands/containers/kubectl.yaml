@@ -26,13 +26,6 @@ operating_systems:
 - linux
 - macos
 - windows
-packages:
-  arch: kubectl
-package_refs:
-- manager: pacman
-  package: kubectl
-  distributions:
-  - arch
 flags:
 - flag: get
   meaning:
@@ -74,11 +67,6 @@ examples:
     tr: kubeconfig bağlamlarını listeler.
     en: Lists kubeconfig contexts.
   risk: safe
-related:
-- helm
-- crictl
-- nerdctl
-- docker
 intent:
   tr:
   - kubectl
@@ -94,6 +82,18 @@ verification:
   - https://kubernetes.io/docs/reference/kubectl/
   - https://kubernetes.io/docs/reference/kubectl/quick-reference/
   notes: Agent-authored Faz 7 draft from official docs; not human-verified.
+related:
+- helm
+- crictl
+- nerdctl
+- docker
+package_refs:
+- manager: pacman
+  package: kubectl
+  distributions:
+  - arch
+packages:
+  arch: kubectl
 nova:
   favorite_eligible: true
   ui_priority: 60

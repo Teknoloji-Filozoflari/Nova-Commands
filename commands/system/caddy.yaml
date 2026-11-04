@@ -25,13 +25,6 @@ operating_systems:
 - linux
 - macos
 - windows
-packages:
-  arch: caddy
-package_refs:
-- manager: pacman
-  package: caddy
-  distributions:
-  - arch
 flags: []
 examples:
 - title:
@@ -50,10 +43,6 @@ examples:
     tr: Caddyfile’ı doğrular (servisi değiştirmez).
     en: Validates a Caddyfile (does not change the service).
   risk: safe
-related:
-- nginx
-- openssl
-- curl
 intent:
   tr:
   - caddy
@@ -69,6 +58,17 @@ verification:
   - https://caddyserver.com/docs/
   - https://caddyserver.com/docs/command-line
   notes: Agent-authored Faz 7 draft from official docs; not human-verified.
+related:
+- nginx
+- openssl
+- curl
+package_refs:
+- manager: pacman
+  package: caddy
+  distributions:
+  - arch
+packages:
+  arch: caddy
 nova:
   favorite_eligible: true
   ui_priority: 60

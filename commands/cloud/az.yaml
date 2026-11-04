@@ -41,10 +41,6 @@ examples:
     tr: Aktif abonelik özeti (oturum açıkken).
     en: Active subscription summary (when logged in).
   risk: caution
-related:
-- aws
-- gcloud
-- terraform
 intent:
   tr:
   - azure cli
@@ -58,6 +54,10 @@ verification:
   - https://learn.microsoft.com/cli/azure/
   - https://learn.microsoft.com/cli/azure/get-started-with-azure-cli
   notes: Agent-authored Faz 7 draft from official docs; not human-verified.
+related:
+- aws
+- gcloud
+- terraform
 nova:
   favorite_eligible: true
   ui_priority: 60

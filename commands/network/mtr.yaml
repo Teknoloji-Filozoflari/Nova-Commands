@@ -22,25 +22,6 @@ platforms:
 operating_systems:
 - linux
 - macos
-packages:
-  arch: mtr
-  debian: mtr
-  ubuntu: mtr
-  fedora: mtr
-package_refs:
-- manager: pacman
-  package: mtr
-  distributions:
-  - arch
-- manager: apt
-  package: mtr
-  distributions:
-  - debian
-  - ubuntu
-- manager: dnf
-  package: mtr
-  distributions:
-  - fedora
 flags:
 - flag: -r
   meaning:
@@ -66,10 +47,6 @@ examples:
     tr: 5 döngülük metin raporu (DNS çözmez).
     en: 5-cycle text report (no DNS).
   risk: safe
-related:
-- traceroute
-- ping
-- dig
 intent:
   tr:
   - yol izle
@@ -85,6 +62,29 @@ verification:
   - https://www.bitwizard.nl/mtr/
   - https://github.com/traviscross/mtr
   notes: Agent-authored Faz 7 draft from official docs; not human-verified.
+related:
+- traceroute
+- ping
+- dig
+package_refs:
+- manager: pacman
+  package: mtr
+  distributions:
+  - arch
+- manager: apt
+  package: mtr
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: mtr
+  distributions:
+  - fedora
+packages:
+  arch: mtr
+  debian: mtr
+  ubuntu: mtr
+  fedora: mtr
 nova:
   favorite_eligible: true
   ui_priority: 60

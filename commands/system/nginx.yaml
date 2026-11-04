@@ -25,25 +25,7 @@ platforms:
 operating_systems:
 - linux
 - macos
-packages:
-  arch: nginx
-  debian: nginx
-  ubuntu: nginx
-  fedora: nginx
-package_refs:
-- manager: pacman
-  package: nginx
-  distributions:
-  - arch
-- manager: apt
-  package: nginx
-  distributions:
-  - debian
-  - ubuntu
-- manager: dnf
-  package: nginx
-  distributions:
-  - fedora
+- freebsd
 flags:
 - flag: -t
   meaning:
@@ -78,11 +60,6 @@ examples:
     tr: nginx sürümü.
     en: nginx version.
   risk: safe
-related:
-- caddy
-- systemctl
-- curl
-- ss
 intent:
   tr:
   - nginx
@@ -98,6 +75,30 @@ verification:
   - https://nginx.org/en/docs/
   - https://nginx.org/en/docs/switches.html
   notes: Agent-authored Faz 7 draft from official docs; not human-verified.
+related:
+- caddy
+- systemctl
+- curl
+- ss
+package_refs:
+- manager: pacman
+  package: nginx
+  distributions:
+  - arch
+- manager: apt
+  package: nginx
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: nginx
+  distributions:
+  - fedora
+packages:
+  arch: nginx
+  debian: nginx
+  ubuntu: nginx
+  fedora: nginx
 nova:
   favorite_eligible: true
   ui_priority: 60

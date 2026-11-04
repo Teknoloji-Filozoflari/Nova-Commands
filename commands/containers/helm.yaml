@@ -26,13 +26,6 @@ operating_systems:
 - linux
 - macos
 - windows
-packages:
-  arch: helm
-package_refs:
-- manager: pacman
-  package: helm
-  distributions:
-  - arch
 flags: []
 examples:
 - title:
@@ -51,9 +44,6 @@ examples:
     tr: Tüm namespace release’leri (küme erişimi).
     en: Releases across namespaces (needs cluster access).
   risk: caution
-related:
-- kubectl
-- terraform
 intent:
   tr:
   - helm
@@ -69,6 +59,16 @@ verification:
   - https://helm.sh/docs/
   - https://helm.sh/docs/helm/helm/
   notes: Agent-authored Faz 7 draft from official docs; not human-verified.
+related:
+- kubectl
+- terraform
+package_refs:
+- manager: pacman
+  package: helm
+  distributions:
+  - arch
+packages:
+  arch: helm
 nova:
   favorite_eligible: true
   ui_priority: 60

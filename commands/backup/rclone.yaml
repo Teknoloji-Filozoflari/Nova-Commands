@@ -26,25 +26,6 @@ operating_systems:
 - linux
 - macos
 - windows
-packages:
-  arch: rclone
-  debian: rclone
-  ubuntu: rclone
-  fedora: rclone
-package_refs:
-- manager: pacman
-  package: rclone
-  distributions:
-  - arch
-- manager: apt
-  package: rclone
-  distributions:
-  - debian
-  - ubuntu
-- manager: dnf
-  package: rclone
-  distributions:
-  - fedora
 flags: []
 examples:
 - title:
@@ -63,11 +44,6 @@ examples:
     tr: Yapılandırılmış uzak adları (içerik/secret göstermez).
     en: Configured remote names (does not show secrets).
   risk: safe
-related:
-- restic
-- borg
-- rsync
-- aws
 intent:
   tr:
   - rclone
@@ -83,6 +59,30 @@ verification:
   - https://rclone.org/docs/
   - https://rclone.org/commands/
   notes: Agent-authored Faz 7 draft from official docs; not human-verified.
+related:
+- restic
+- borg
+- rsync
+- aws
+package_refs:
+- manager: pacman
+  package: rclone
+  distributions:
+  - arch
+- manager: apt
+  package: rclone
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: rclone
+  distributions:
+  - fedora
+packages:
+  arch: rclone
+  debian: rclone
+  ubuntu: rclone
+  fedora: rclone
 nova:
   favorite_eligible: true
   ui_priority: 60

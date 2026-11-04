@@ -20,25 +20,6 @@ platforms:
 - linux
 operating_systems:
 - linux
-packages:
-  arch: ethtool
-  debian: ethtool
-  ubuntu: ethtool
-  fedora: ethtool
-package_refs:
-- manager: pacman
-  package: ethtool
-  distributions:
-  - arch
-- manager: apt
-  package: ethtool
-  distributions:
-  - debian
-  - ubuntu
-- manager: dnf
-  package: ethtool
-  distributions:
-  - fedora
 flags: []
 examples:
 - title:
@@ -50,10 +31,6 @@ examples:
     en: Link speed/duplex for eth0 (iface name varies).
   risk: safe
   requires_elevated: true
-related:
-- ip
-- ss
-- nmcli
 intent:
   tr:
   - nic durumu
@@ -69,6 +46,29 @@ verification:
   - https://www.kernel.org/pub/software/network/ethtool/
   - https://man7.org/linux/man-pages/man8/ethtool.8.html
   notes: Agent-authored Faz 7 draft from official docs; not human-verified.
+related:
+- ip
+- ss
+- nmcli
+package_refs:
+- manager: pacman
+  package: ethtool
+  distributions:
+  - arch
+- manager: apt
+  package: ethtool
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: ethtool
+  distributions:
+  - fedora
+packages:
+  arch: ethtool
+  debian: ethtool
+  ubuntu: ethtool
+  fedora: ethtool
 nova:
   favorite_eligible: true
   ui_priority: 60

@@ -22,25 +22,6 @@ platforms:
 operating_systems:
 - linux
 - macos
-packages:
-  arch: borg
-  debian: borgbackup
-  ubuntu: borgbackup
-  fedora: borgbackup
-package_refs:
-- manager: pacman
-  package: borg
-  distributions:
-  - arch
-- manager: apt
-  package: borgbackup
-  distributions:
-  - debian
-  - ubuntu
-- manager: dnf
-  package: borgbackup
-  distributions:
-  - fedora
 flags: []
 examples:
 - title:
@@ -59,10 +40,6 @@ examples:
     tr: Alt komut yardımı.
     en: Subcommand help.
   risk: safe
-related:
-- restic
-- rclone
-- rsync
 intent:
   tr:
   - borg yedek
@@ -76,6 +53,29 @@ verification:
   - https://borgbackup.readthedocs.io/
   - https://borgbackup.readthedocs.io/en/stable/usage/general.html
   notes: Agent-authored Faz 7 draft from official docs; not human-verified.
+related:
+- restic
+- rclone
+- rsync
+package_refs:
+- manager: pacman
+  package: borg
+  distributions:
+  - arch
+- manager: apt
+  package: borgbackup
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: borgbackup
+  distributions:
+  - fedora
+packages:
+  arch: borg
+  debian: borgbackup
+  ubuntu: borgbackup
+  fedora: borgbackup
 nova:
   favorite_eligible: true
   ui_priority: 60

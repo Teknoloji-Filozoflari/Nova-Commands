@@ -24,25 +24,6 @@ operating_systems:
 - linux
 - macos
 - windows
-packages:
-  arch: github-cli
-  debian: gh
-  ubuntu: gh
-  fedora: gh
-package_refs:
-- manager: pacman
-  package: github-cli
-  distributions:
-  - arch
-- manager: apt
-  package: gh
-  distributions:
-  - debian
-  - ubuntu
-- manager: dnf
-  package: gh
-  distributions:
-  - fedora
 flags: []
 examples:
 - title:
@@ -61,10 +42,6 @@ examples:
     tr: Oturum durumunu gösterir (token’ı yazdırmaz).
     en: Shows login status (does not print the token).
   risk: safe
-related:
-- git
-- ansible
-- terraform
 intent:
   tr:
   - gh
@@ -80,6 +57,29 @@ verification:
   - https://cli.github.com/manual/
   - https://docs.github.com/en/github-cli
   notes: Agent-authored Faz 7 draft from official docs; not human-verified.
+related:
+- git
+- ansible
+- terraform
+package_refs:
+- manager: pacman
+  package: github-cli
+  distributions:
+  - arch
+- manager: apt
+  package: gh
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: gh
+  distributions:
+  - fedora
+packages:
+  arch: github-cli
+  debian: gh
+  ubuntu: gh
+  fedora: gh
 nova:
   favorite_eligible: true
   ui_priority: 60

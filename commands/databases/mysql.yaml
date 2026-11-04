@@ -26,20 +26,6 @@ operating_systems:
 - linux
 - macos
 - windows
-package_refs:
-- manager: pacman
-  package: mariadb-clients
-  distributions:
-  - arch
-- manager: apt
-  package: mariadb-client
-  distributions:
-  - debian
-  - ubuntu
-- manager: dnf
-  package: mariadb
-  distributions:
-  - fedora
 flags: []
 examples:
 - title:
@@ -58,10 +44,6 @@ examples:
     tr: Bayrak özeti (bağlantı açmaz).
     en: Flag summary (does not open a connection).
   risk: safe
-related:
-- psql
-- redis-cli
-- sqlite3
 intent:
   tr:
   - mysql istemci
@@ -75,6 +57,24 @@ verification:
   - https://dev.mysql.com/doc/refman/8.4/en/mysql.html
   - https://mariadb.com/kb/en/mysql-command-line-client/
   notes: Agent-authored Faz 7 draft from official docs; not human-verified.
+related:
+- psql
+- redis-cli
+- sqlite3
+package_refs:
+- manager: pacman
+  package: mariadb-clients
+  distributions:
+  - arch
+- manager: apt
+  package: mariadb-client
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: mariadb
+  distributions:
+  - fedora
 nova:
   favorite_eligible: true
   ui_priority: 60

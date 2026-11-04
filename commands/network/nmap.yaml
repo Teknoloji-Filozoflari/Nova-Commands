@@ -27,25 +27,6 @@ operating_systems:
 - linux
 - macos
 - windows
-packages:
-  arch: nmap
-  debian: nmap
-  ubuntu: nmap
-  fedora: nmap
-package_refs:
-- manager: pacman
-  package: nmap
-  distributions:
-  - arch
-- manager: apt
-  package: nmap
-  distributions:
-  - debian
-  - ubuntu
-- manager: dnf
-  package: nmap
-  distributions:
-  - fedora
 flags:
 - flag: -sn
   meaning:
@@ -79,11 +60,6 @@ examples:
     tr: Yalnızca localhost üzerinde seçili portları tarar.
     en: Scans selected ports on localhost only.
   risk: caution
-related:
-- ss
-- tcpdump
-- nc
-- ping
 intent:
   tr:
   - port tara
@@ -99,6 +75,30 @@ verification:
   - https://nmap.org/book/man.html
   - https://nmap.org/
   notes: Agent-authored Faz 7 draft from official docs; not human-verified.
+related:
+- ss
+- tcpdump
+- nc
+- ping
+package_refs:
+- manager: pacman
+  package: nmap
+  distributions:
+  - arch
+- manager: apt
+  package: nmap
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: nmap
+  distributions:
+  - fedora
+packages:
+  arch: nmap
+  debian: nmap
+  ubuntu: nmap
+  fedora: nmap
 nova:
   favorite_eligible: true
   ui_priority: 60

@@ -26,13 +26,6 @@ operating_systems:
 - linux
 - macos
 - windows
-packages:
-  arch: terraform
-package_refs:
-- manager: pacman
-  package: terraform
-  distributions:
-  - arch
 flags: []
 examples:
 - title:
@@ -59,12 +52,6 @@ examples:
     tr: Değişiklik planı (uygulamaz). Provider kimliği gerekir.
     en: Change plan (does not apply). Needs provider credentials.
   risk: caution
-related:
-- ansible
-- aws
-- az
-- gcloud
-- kubectl
 intent:
   tr:
   - terraform
@@ -80,6 +67,19 @@ verification:
   - https://developer.hashicorp.com/terraform/cli
   - https://developer.hashicorp.com/terraform/cli/commands
   notes: Agent-authored Faz 7 draft from official docs; not human-verified.
+related:
+- ansible
+- aws
+- az
+- gcloud
+- kubectl
+package_refs:
+- manager: pacman
+  package: terraform
+  distributions:
+  - arch
+packages:
+  arch: terraform
 nova:
   favorite_eligible: true
   ui_priority: 60

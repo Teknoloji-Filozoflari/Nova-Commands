@@ -26,25 +26,6 @@ operating_systems:
 - linux
 - macos
 - windows
-packages:
-  arch: restic
-  debian: restic
-  ubuntu: restic
-  fedora: restic
-package_refs:
-- manager: pacman
-  package: restic
-  distributions:
-  - arch
-- manager: apt
-  package: restic
-  distributions:
-  - debian
-  - ubuntu
-- manager: dnf
-  package: restic
-  distributions:
-  - fedora
 flags: []
 examples:
 - title:
@@ -63,10 +44,6 @@ examples:
     tr: Repo snapshot listesi (RESTIC_PASSWORD gerekir; yol yer tutucu).
     en: Lists repo snapshots (needs RESTIC_PASSWORD; path is placeholder).
   risk: caution
-related:
-- borg
-- rclone
-- rsync
 intent:
   tr:
   - restic yedek
@@ -80,6 +57,29 @@ verification:
   - https://restic.readthedocs.io/
   - https://restic.readthedocs.io/en/stable/010_introduction.html
   notes: Agent-authored Faz 7 draft from official docs; not human-verified.
+related:
+- borg
+- rclone
+- rsync
+package_refs:
+- manager: pacman
+  package: restic
+  distributions:
+  - arch
+- manager: apt
+  package: restic
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: restic
+  distributions:
+  - fedora
+packages:
+  arch: restic
+  debian: restic
+  ubuntu: restic
+  fedora: restic
 nova:
   favorite_eligible: true
   ui_priority: 60

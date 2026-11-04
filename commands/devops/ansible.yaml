@@ -24,25 +24,6 @@ platforms:
 operating_systems:
 - linux
 - macos
-packages:
-  arch: ansible
-  debian: ansible
-  ubuntu: ansible
-  fedora: ansible
-package_refs:
-- manager: pacman
-  package: ansible
-  distributions:
-  - arch
-- manager: apt
-  package: ansible
-  distributions:
-  - debian
-  - ubuntu
-- manager: dnf
-  package: ansible
-  distributions:
-  - fedora
 flags: []
 examples:
 - title:
@@ -61,10 +42,6 @@ examples:
     tr: Yapılandırılmış envanteri JSON olarak listeler.
     en: Lists configured inventory as JSON.
   risk: safe
-related:
-- terraform
-- ssh
-- systemctl
 intent:
   tr:
   - ansible
@@ -80,6 +57,29 @@ verification:
   - https://docs.ansible.com/
   - https://docs.ansible.com/ansible/latest/command_guide/index.html
   notes: Agent-authored Faz 7 draft from official docs; not human-verified.
+related:
+- terraform
+- ssh
+- systemctl
+package_refs:
+- manager: pacman
+  package: ansible
+  distributions:
+  - arch
+- manager: apt
+  package: ansible
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: ansible
+  distributions:
+  - fedora
+packages:
+  arch: ansible
+  debian: ansible
+  ubuntu: ansible
+  fedora: ansible
 nova:
   favorite_eligible: true
   ui_priority: 60

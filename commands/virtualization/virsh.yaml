@@ -22,20 +22,6 @@ platforms:
 - linux
 operating_systems:
 - linux
-package_refs:
-- manager: pacman
-  package: libvirt
-  distributions:
-  - arch
-- manager: apt
-  package: libvirt-clients
-  distributions:
-  - debian
-  - ubuntu
-- manager: dnf
-  package: libvirt-client
-  distributions:
-  - fedora
 flags: []
 examples:
 - title:
@@ -56,9 +42,6 @@ examples:
     en: Hypervisor node summary.
   risk: safe
   requires_elevated: true
-related:
-- qemu-img
-- systemctl
 intent:
   tr:
   - virsh
@@ -74,6 +57,23 @@ verification:
   - https://libvirt.org/manpages/virsh.html
   - https://libvirt.org/docs.html
   notes: Agent-authored Faz 7 draft from official docs; not human-verified.
+related:
+- qemu-img
+- systemctl
+package_refs:
+- manager: pacman
+  package: libvirt
+  distributions:
+  - arch
+- manager: apt
+  package: libvirt-clients
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: libvirt-client
+  distributions:
+  - fedora
 nova:
   favorite_eligible: true
   ui_priority: 60

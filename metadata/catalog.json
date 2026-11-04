@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "kind": "nova-commands-bank",
-  "generated_at": "2026-11-04T20:29:08Z",
+  "generated_at": "2026-11-04T20:33:14Z",
   "content_sha256": "cca5bd35662ba1c69d521669367942de222e2b9a9630bb0f3dc85f6ac5156ce5",
   "command_count": 256,
   "concept_count": 20,

@@ -21,16 +21,6 @@ platforms:
 - linux
 operating_systems:
 - linux
-packages:
-  arch: nerdctl
-package_refs:
-- manager: pacman
-  package: nerdctl
-  distributions:
-  - arch
-install_notes:
-  tr: 'Arch: pacman -S nerdctl. Diğer dağıtımlarda paket adı/kurulum yolu değişebilir.'
-  en: 'Arch: pacman -S nerdctl. Other distros may use different package names/paths.'
 flags: []
 examples:
 - title:
@@ -49,11 +39,6 @@ examples:
     tr: Yerel imaj listesi.
     en: Local image list.
   risk: safe
-related:
-- docker
-- podman
-- crictl
-- kubectl
 intent:
   tr:
   - nerdctl
@@ -67,6 +52,21 @@ verification:
   - https://github.com/containerd/nerdctl
   - https://github.com/containerd/nerdctl/blob/main/docs/command-reference.md
   notes: Agent-authored Faz 7 draft from official docs; not human-verified.
+related:
+- docker
+- podman
+- crictl
+- kubectl
+package_refs:
+- manager: pacman
+  package: nerdctl
+  distributions:
+  - arch
+packages:
+  arch: nerdctl
+install_notes:
+  tr: 'Arch: pacman -S nerdctl. Diğer dağıtımlarda paket adı/kurulum yolu değişebilir.'
+  en: 'Arch: pacman -S nerdctl. Other distros may use different package names/paths.'
 nova:
   favorite_eligible: true
   ui_priority: 60
