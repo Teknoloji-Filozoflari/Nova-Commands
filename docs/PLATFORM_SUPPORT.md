@@ -4,11 +4,31 @@ Faz 1 introduced **additive** platform metadata. These registries describe
 operating systems, distributions, shells, package managers, and related
 concepts as **separate models**.
 
-**Faz 3:** the live command bank is schema **v2** (`schema_version: 2` on YAML +
-catalog). Commands may cite registry ids via `operating_systems`,
+**Post–[#23](https://github.com/Teknoloji-Filozoflari/Nova-Commands/pull/23)
+(Faz 10 on `main`):** live command bank is schema **v2**; tasks/profiles are
+indexed (Faz 9); CI/security gates are static. Docs/roadmap polish is Faz 11
+([ROADMAP.md](ROADMAP.md)).
+
+**Faz 3:** commands may cite registry ids via `operating_systems`,
 `package_refs.manager` / `distributions`, and expanded `shells`. Presence of a
-registry id is still **not** proof of local install. See
+registry id is still **not** proof of local install or full coverage. See
 [DATA_SCHEMA.md](DATA_SCHEMA.md) and [SCHEMA_MIGRATION_V2.md](SCHEMA_MIGRATION_V2.md).
+
+## Snapshot counts (committed catalog)
+
+| Registry / bank | Count | Notes |
+|-----------------|------:|-------|
+| Operating systems | 11 | linux, windows, macos, freebsd, openbsd, netbsd, dragonflybsd, illumos, solaris, aix, android |
+| Distributions | 36 | includes Windows/macOS/BSD product rows |
+| Shells | 15 | includes powershell / windows-powershell / cmd / nushell |
+| Package managers | 60 | system + language + Flatpak/Snap/AppImage |
+| Server platforms | 23 | many `planned` / `experimental` without command banks |
+| Cloud providers | 6 | aws, azure, gcp, oci, digitalocean, hetzner |
+| Execution environments | 11 | WSL, Termux, container, … |
+| Architectures | 8 | |
+| Commands / concepts / tasks / profiles | 256 / 20 / 21 / 13 | tasks+profiles all `draft` |
+| Search entries | 310 | |
+| `content_sha256` | `7b24390e…` | see `metadata/manifest.json` |
 
 ## Dual concept (unchanged)
 
@@ -61,9 +81,9 @@ python3 scripts/validate_catalog.py   # also invokes platform soft-check
 ```
 
 Soft checks: schema conformance, unique ids, and cross-refs (OS ↔ distro ↔ PM,
-support levels). Live `commands/` are **not** required to cite registry ids yet
-(v1 schema). Schema v2 fixtures may cite them via `package_refs` /
-`operating_systems`.
+support levels). Live `commands/` may omit registry citations; citing an id is
+optional and does not imply every example was run on that OS. Schema v2 fields
+`package_refs` / `operating_systems` are the preferred cite path when used.
 
 ## Arch / pacman
 
@@ -153,13 +173,38 @@ Validated by `scripts/validate_tasks_profiles.py` (wired into
 `content_sha256`. Arch/pacman preference preserved on update/install tasks.
 **No fake `verified`.** LICENSE / `keys/minisign.pub` unchanged.
 
-## Out of scope (later fazes)
+## Faz 9 — catalog / search indexing
+
+`tasks/` and `profiles/` are loaded into `catalog.json`, `search-index.json`,
+and `manifest.json` (`task_count` / `profile_count` / OS+PM registry counts).
+`content_sha256` hashes `{schema_version, kind, commands, concepts, tasks,
+profiles}`. Search may prefer a platform when `--os` is passed to
+`scripts/search_bank.py`. **No new platform claims** beyond the YAML already in
+tree.
+
+## Faz 10 — CI / security (merged #23)
+
+- Multi-OS GitHub Actions matrix runs **Python validate + pytest only**
+- `scripts/validate_security.py` hard gates wipe-class warnings, related refs,
+  aliases, and minisign pubkey presence
+- Third-party Actions pinned to full commit SHAs
+- Verification counts unchanged; minisign pubkey unchanged
+
+## Faz 11 — documentation
+
+README (EN/TR), this matrix, [ROADMAP.md](ROADMAP.md),
+[SECURITY_MODEL.md](SECURITY_MODEL.md), and migration/release notes are kept
+aligned with the committed catalog. **No fake features** — unfinished items
+stay listed as unfinished.
+
+## Out of scope (still)
 
 - illumos / Solaris / AIX **command banks** (metadata only in Faz 6)
 - Full vendor appliance CLIs (Proxmox `qm`, RouterOS, Cisco IOS, …)
 - OpenTofu / Pulumi / Nomad / observability CLIs (follow-up deepen)
 - Native Windows `Resolve-DnsName` command bank row (task notes dig fallback)
 - Rotating minisign keys / LICENSE changes
+- Claiming `support_level: full` means “complete OS coverage”
 
 ## Maintainer note
 

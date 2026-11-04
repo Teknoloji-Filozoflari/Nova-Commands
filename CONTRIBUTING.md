@@ -5,7 +5,10 @@ This repository owns the curated **Komut Bilgi Bankası** for
 “commands found on my system” list — see
 [docs/dual-concept.md](docs/dual-concept.md).
 
-Security-sensitive catalog mistakes: [SECURITY.md](SECURITY.md).
+Security-sensitive catalog mistakes: [SECURITY.md](SECURITY.md) ·
+[docs/SECURITY_MODEL.md](docs/SECURITY_MODEL.md).  
+Roadmap / faz status: [docs/ROADMAP.md](docs/ROADMAP.md).  
+Türkçe README: [README.tr.md](README.tr.md).
 
 ## Issue templates
 
