@@ -1,0 +1,108 @@
+schema_version: 2
+id: nmap
+name: nmap
+kind: executable
+category: network
+summary:
+  tr: Ağ keşfi ve port tarama.
+  en: Network discovery and port scanning.
+description:
+  tr: Host/port keşfi ve servis parmak izi. Yalnızca yetkili hedeflerde kullanın; yetkisiz tarama yasal
+    sorun yaratabilir. Örnekler TEST-NET / localhost ile sınırlı.
+  en: Host/port discovery and service fingerprinting. Use only on authorized targets; unauthorized scanning
+    can be illegal. Examples limited to TEST-NET / localhost.
+tags:
+- network
+- security
+- scanning
+- server
+risk: caution
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+- windows
+operating_systems:
+- linux
+- macos
+- windows
+packages:
+  arch: nmap
+  debian: nmap
+  ubuntu: nmap
+  fedora: nmap
+package_refs:
+- manager: pacman
+  package: nmap
+  distributions:
+  - arch
+- manager: apt
+  package: nmap
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: nmap
+  distributions:
+  - fedora
+flags:
+- flag: -sn
+  meaning:
+    tr: Ping taraması (port yok).
+    en: Ping scan (no port scan).
+  verified: false
+- flag: -sV
+  meaning:
+    tr: Servis/sürüm tespiti.
+    en: Service/version detection.
+  verified: false
+- flag: -p
+  meaning:
+    tr: Port aralığı.
+    en: Port range.
+  verified: false
+examples:
+- title:
+    tr: Sürüm
+    en: Version
+  command: nmap -V
+  explanation:
+    tr: Nmap sürümünü gösterir (ağ taraması yok).
+    en: Shows Nmap version (no network scan).
+  risk: safe
+- title:
+    tr: Yerel portlar
+    en: Localhost ports
+  command: nmap -p 22,80,443 127.0.0.1
+  explanation:
+    tr: Yalnızca localhost üzerinde seçili portları tarar.
+    en: Scans selected ports on localhost only.
+  risk: caution
+related:
+- ss
+- tcpdump
+- nc
+- ping
+intent:
+  tr:
+  - port tara
+  - nmap
+  - açık port
+  en:
+  - scan ports
+  - nmap
+  - open ports
+verification:
+  status: draft
+  sources:
+  - https://nmap.org/book/man.html
+  - https://nmap.org/
+  notes: Agent-authored Faz 7 draft from official docs; not human-verified.
+nova:
+  favorite_eligible: true
+  ui_priority: 60
+  concepts:
+  - networking
+  - networking-basics
+  - firewalls

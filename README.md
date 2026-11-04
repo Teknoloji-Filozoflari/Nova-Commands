@@ -69,9 +69,15 @@ Faz 6 (`draft`): **BSD** (FreeBSD `pkg`/Ports/`service`/`sysrc`/jails/ZFS;
 OpenBSD `pkg_add`/`rcctl`/`doas`/`pfctl`; NetBSD `pkgin`/`pkgsrc`; shared
 `ifconfig`/`newsyslog`; systemd ile eşitlenmez). illumos/Solaris/AIX yalnız
 genişletilebilirlik metadata’sı.
+Faz 7 (`draft`): **sunucu / network / DevOps** — `tcpdump`/`nmap`/`mtr`,
+Kubernetes (`kubectl`/`helm`/`nerdctl`/`crictl`), libvirt/`qemu-img`,
+nginx/Caddy, DB istemcileri, restic/Borg/rclone, AWS/Azure/GCP CLI,
+Terraform/Ansible/`gh`; yeni kategoriler `virtualization`/`backup`/
+`databases`/`cloud`/`devops`. Görev/profil içerikleri Faz 8.
 Paket notlarında **Arch / pacman tercihi** (Nova tercihleri ile uyumlu).
 Karşılaştırma: [docs/package-managers-comparison.md](docs/package-managers-comparison.md)
-· Nix/Guix: `concepts/nix-guix.yaml`.
+· Nix/Guix: `concepts/nix-guix.yaml`
+· Platform: [docs/PLATFORM_SUPPORT.md](docs/PLATFORM_SUPPORT.md).
 
 ## İmzalı katalog Releases
 

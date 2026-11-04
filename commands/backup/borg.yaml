@@ -1,0 +1,84 @@
+schema_version: 2
+id: borg
+name: borg
+kind: executable
+category: backup
+summary:
+  tr: BorgBackup dedupe yedekleme.
+  en: BorgBackup deduplicating backups.
+description:
+  tr: Borg, sıkıştırılmış/dedupe arşivler oluşturur. `borg create` veri yazar; örnekler info/list odaklı.
+  en: Borg creates compressed/deduplicated archives. `borg create` writes data; examples focus on info/list.
+tags:
+- backup
+- borg
+- server
+risk: dangerous
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+operating_systems:
+- linux
+- macos
+packages:
+  arch: borg
+  debian: borgbackup
+  ubuntu: borgbackup
+  fedora: borgbackup
+package_refs:
+- manager: pacman
+  package: borg
+  distributions:
+  - arch
+- manager: apt
+  package: borgbackup
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: borgbackup
+  distributions:
+  - fedora
+flags: []
+examples:
+- title:
+    tr: Sürüm
+    en: Version
+  command: borg --version
+  explanation:
+    tr: Borg sürümü.
+    en: Borg version.
+  risk: safe
+- title:
+    tr: Yardım
+    en: Help
+  command: borg help
+  explanation:
+    tr: Alt komut yardımı.
+    en: Subcommand help.
+  risk: safe
+related:
+- restic
+- rclone
+- rsync
+intent:
+  tr:
+  - borg yedek
+  - borgbackup
+  en:
+  - borg backup
+  - borgbackup
+verification:
+  status: draft
+  sources:
+  - https://borgbackup.readthedocs.io/
+  - https://borgbackup.readthedocs.io/en/stable/usage/general.html
+  notes: Agent-authored Faz 7 draft from official docs; not human-verified.
+nova:
+  favorite_eligible: true
+  ui_priority: 60
+  concepts:
+  - backup
+  - storage

@@ -23,6 +23,10 @@ related_commands:
   - nmcli
   - traceroute
   - nc
+  - tcpdump
+  - nmap
+  - mtr
+  - ethtool
 related_concepts:
   - dns
   - ssh

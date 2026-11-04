@@ -1,0 +1,66 @@
+id: kubernetes
+kind: nova-commands-concept
+title:
+  tr: Kubernetes ve konteyner orkestrasyon
+  en: Kubernetes and container orchestration
+summary:
+  tr: kubectl/Helm/CRI araçları — Docker Engine ile karıştırılmayan küme modeli.
+  en: kubectl/Helm/CRI tools — cluster model distinct from Docker Engine alone.
+difficulty: intermediate
+tags:
+  - kubernetes
+  - containers
+  - devops
+  - orchestration
+related_commands:
+  - kubectl
+  - helm
+  - crictl
+  - nerdctl
+  - docker
+  - podman
+related_concepts:
+  - containers
+  - infrastructure-as-code
+  - networking
+see_also:
+  - "https://kubernetes.io/docs/concepts/overview/"
+  - "https://helm.sh/docs/"
+body:
+  tr: |
+    **Kubernetes** konteyner iş yüklerini bir küme API’si üzerinden yönetir.
+    Günlük kullanıcı arayüzü çoğu zaman **kubectl**’tir; paket/uygulama dağıtımı
+    için **Helm** chart’ları kullanılır.
+
+    **Katmanlar (karıştırmayın):**
+    - **Docker Engine / Podman** — tek düğümde konteyner çalıştırma.
+    - **containerd + nerdctl/crictl** — CRI runtime teşhisi (kubelet altı).
+    - **kubectl** — küme API’si (Deployment, Service, Pod, …).
+
+    **Güvenlik:** Yanlış kubeconfig bağlamı üretim kümesini etkileyebilir.
+    Bu bankadaki örnekler çoğunlukla `version` / `get` / `list` odaklıdır;
+    `apply`/`delete` yıkıcı olabilir. Gerçek cluster credential’ları YAML’a
+    yazılmaz.
+
+    Kayıtlar `draft` kalır; `verified` yalnız insan incelemesi sonrası.
+  en: |
+    **Kubernetes** manages container workloads through a cluster API.
+    Day-to-day UX is often **kubectl**; app packaging frequently uses **Helm**
+    charts.
+
+    **Do not conflate layers:**
+    - **Docker Engine / Podman** — run containers on a node.
+    - **containerd + nerdctl/crictl** — CRI runtime diagnostics under kubelet.
+    - **kubectl** — cluster API (Deployments, Services, Pods, …).
+
+    **Safety:** A wrong kubeconfig context can hit production. Catalog examples
+    favor `version` / `get` / `list`; `apply`/`delete` can be destructive.
+    Real cluster credentials never belong in YAML examples.
+
+    Records stay `draft` until human review marks `verified`.
+verification:
+  status: draft
+  sources:
+    - "https://kubernetes.io/docs/concepts/overview/"
+    - "https://helm.sh/docs/"
+  notes: "Agent-authored Faz 7 teaching draft; not human-verified."

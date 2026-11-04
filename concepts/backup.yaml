@@ -1,0 +1,58 @@
+id: backup
+kind: nova-commands-concept
+title:
+  tr: Yedekleme araçları
+  en: Backup tools
+summary:
+  tr: restic, Borg ve rclone — şifre/kimlik bilgisi kuralları ve risk.
+  en: restic, Borg, and rclone — credential rules and risk.
+difficulty: intermediate
+tags:
+  - backup
+  - restic
+  - borg
+  - rclone
+related_commands:
+  - restic
+  - borg
+  - rclone
+  - rsync
+  - tar
+related_concepts:
+  - storage
+  - permissions
+see_also:
+  - "https://restic.readthedocs.io/"
+  - "https://borgbackup.readthedocs.io/"
+  - "https://rclone.org/docs/"
+body:
+  tr: |
+    Sunucu yedekleri genelde **artımlı + doğrulanabilir** olmalıdır.
+
+    **restic** — şifreli, dedupe repo; parola ve backend secret’ları gizli.
+    **BorgBackup** — dedupe arşivler; `create` veri yazar.
+    **rclone** — bulut/uzak depolara kopyalama/senkron; config’te credential.
+
+    **rsync** klasik dosya senkronudur; tek başına şifreli yedek çözümü değildir.
+    Banka örneklerinde gerçek parola, API anahtarı veya `rclone.conf` içeriği
+    yoktur. `forget`/`prune`/`sync --delete` yıkıcı olabilir — risk etiketlerine
+    bakın. Hepsi `draft`.
+  en: |
+    Server backups should usually be **incremental and verifiable**.
+
+    **restic** — encrypted, deduplicated repos; keep passwords and backend
+    secrets private.
+    **BorgBackup** — deduplicated archives; `create` writes data.
+    **rclone** — copy/sync to cloud/remote storage; credentials live in config.
+
+    **rsync** is classic file sync — not by itself an encrypted backup solution.
+    Catalog examples never embed real passwords, API keys, or `rclone.conf`
+    bodies. `forget`/`prune`/`sync --delete` can be destructive — respect risk
+    labels. All stay `draft`.
+verification:
+  status: draft
+  sources:
+    - "https://restic.readthedocs.io/"
+    - "https://borgbackup.readthedocs.io/"
+    - "https://rclone.org/docs/"
+  notes: "Agent-authored Faz 7 teaching draft; not human-verified."

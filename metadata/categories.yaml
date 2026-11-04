@@ -130,3 +130,43 @@ categories:
     description:
       tr: lscpu, lspci, lsusb, sensörler.
       en: lscpu, lspci, lsusb, sensors.
+  - id: virtualization
+    section: "8.17"
+    label:
+      tr: Sanallaştırma
+      en: Virtualization
+    description:
+      tr: libvirt/virsh, QEMU ve hypervisor yönetim araçları.
+      en: libvirt/virsh, QEMU, and hypervisor management tools.
+  - id: backup
+    section: "8.18"
+    label:
+      tr: Yedekleme
+      en: Backup
+    description:
+      tr: restic, Borg, rclone ve yedekleme iş akışları.
+      en: restic, Borg, rclone, and backup workflows.
+  - id: databases
+    section: "8.19"
+    label:
+      tr: Veritabanları
+      en: Databases
+    description:
+      tr: İstemci CLI’ler (mysql, redis-cli, …); sunucu kurulum scriptleri değil.
+      en: Client CLIs (mysql, redis-cli, …); not server install scripts.
+  - id: cloud
+    section: "8.20"
+    label:
+      tr: Bulut CLI
+      en: Cloud CLI
+    description:
+      tr: AWS / Azure / GCP ve benzeri sağlayıcı CLI’leri (gizli anahtarsız örnekler).
+      en: AWS / Azure / GCP and similar provider CLIs (no secret-bearing examples).
+  - id: devops
+    section: "8.21"
+    label:
+      tr: DevOps ve IaC
+      en: DevOps and IaC
+    description:
+      tr: Terraform, Ansible ve altyapı-kodu araçları.
+      en: Terraform, Ansible, and infrastructure-as-code tools.

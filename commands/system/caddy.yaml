@@ -1,0 +1,77 @@
+schema_version: 2
+id: caddy
+name: caddy
+kind: administrative_tool
+category: system
+summary:
+  tr: Otomatik TLS’li web sunucu.
+  en: Web server with automatic TLS.
+description:
+  tr: Caddy, ACME ile otomatik HTTPS sunabilen web sunucu/proxy. Üretimde Caddyfile değişiklikleri dikkat
+    ister.
+  en: Caddy is a web server/proxy that can obtain HTTPS via ACME. Production Caddyfile changes need care.
+tags:
+- web
+- proxy
+- tls
+- server
+risk: caution
+requires_elevated: false
+platforms:
+- linux
+- macos
+- windows
+operating_systems:
+- linux
+- macos
+- windows
+packages:
+  arch: caddy
+package_refs:
+- manager: pacman
+  package: caddy
+  distributions:
+  - arch
+flags: []
+examples:
+- title:
+    tr: Sürüm
+    en: Version
+  command: caddy version
+  explanation:
+    tr: Caddy sürümü.
+    en: Caddy version.
+  risk: safe
+- title:
+    tr: Config validate
+    en: Validate config
+  command: caddy validate --config Caddyfile
+  explanation:
+    tr: Caddyfile’ı doğrular (servisi değiştirmez).
+    en: Validates a Caddyfile (does not change the service).
+  risk: safe
+related:
+- nginx
+- openssl
+- curl
+intent:
+  tr:
+  - caddy
+  - otomatik https
+  - web sunucu
+  en:
+  - caddy
+  - automatic https
+  - web server
+verification:
+  status: draft
+  sources:
+  - https://caddyserver.com/docs/
+  - https://caddyserver.com/docs/command-line
+  notes: Agent-authored Faz 7 draft from official docs; not human-verified.
+nova:
+  favorite_eligible: true
+  ui_priority: 60
+  concepts:
+  - reverse-proxy
+  - networking

@@ -1,0 +1,106 @@
+schema_version: 2
+id: tcpdump
+name: tcpdump
+kind: executable
+category: network
+summary:
+  tr: Paket yakalama (pcap).
+  en: Packet capture (pcap).
+description:
+  tr: Ağ arayüzünde paketleri yakalar/filtreler. Çoğu yararlı kullanım root ister. Üretimde hassas trafik
+    içerebilir — çıktıyı dikkatli saklayın.
+  en: Captures/filters packets on an interface. Most useful use needs root. May contain sensitive traffic
+    — store output carefully.
+tags:
+- network
+- pcap
+- diagnostics
+- server
+risk: caution
+requires_elevated: true
+platforms:
+- linux
+- macos
+- bsd
+operating_systems:
+- linux
+- macos
+packages:
+  arch: tcpdump
+  debian: tcpdump
+  ubuntu: tcpdump
+  fedora: tcpdump
+package_refs:
+- manager: pacman
+  package: tcpdump
+  distributions:
+  - arch
+- manager: apt
+  package: tcpdump
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: tcpdump
+  distributions:
+  - fedora
+flags:
+- flag: -i
+  meaning:
+    tr: Arayüz seç.
+    en: Select interface.
+  verified: false
+- flag: -n
+  meaning:
+    tr: DNS çözümleme yapma.
+    en: Do not resolve hostnames.
+  verified: false
+- flag: -c
+  meaning:
+    tr: Paket sayısı sınırı.
+    en: Packet count limit.
+  verified: false
+examples:
+- title:
+    tr: Arayüzler
+    en: List interfaces
+  command: tcpdump -D
+  explanation:
+    tr: Yakalama için kullanılabilir arayüzleri listeler.
+    en: Lists interfaces available for capture.
+  risk: safe
+- title:
+    tr: Kısa yakalama
+    en: Short capture
+  command: tcpdump -i any -n -c 20
+  explanation:
+    tr: any arayüzünde 20 paket (elevated). Hassas veri içerebilir.
+    en: 20 packets on any interface (elevated). May include sensitive data.
+  risk: caution
+  requires_elevated: true
+related:
+- ss
+- nmap
+- mtr
+- ip
+intent:
+  tr:
+  - paket yakala
+  - tcpdump
+  - pcap
+  en:
+  - capture packets
+  - tcpdump
+  - pcap
+verification:
+  status: draft
+  sources:
+  - https://www.tcpdump.org/manpages/tcpdump.1.html
+  - https://www.tcpdump.org/
+  notes: Agent-authored Faz 7 draft from official docs; not human-verified.
+nova:
+  favorite_eligible: true
+  ui_priority: 60
+  concepts:
+  - networking
+  - networking-basics

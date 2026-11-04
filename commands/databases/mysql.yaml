@@ -1,0 +1,82 @@
+schema_version: 2
+id: mysql
+name: mysql
+kind: executable
+category: databases
+summary:
+  tr: MySQL/MariaDB istemci CLI.
+  en: MySQL/MariaDB client CLI.
+description:
+  tr: MySQL protokolü istemcisi (MariaDB `mariadb` istemcisiyle çoğu kullanımda uyumlu). Parola komut
+    satırına yazılmaz — etkileşimli veya config kullanın.
+  en: MySQL protocol client (often compatible with MariaDB `mariadb` client). Do not put passwords on
+    the argv — use interactive or config files.
+tags:
+- database
+- mysql
+- mariadb
+- server
+risk: caution
+requires_elevated: false
+platforms:
+- linux
+- macos
+- windows
+operating_systems:
+- linux
+- macos
+- windows
+package_refs:
+- manager: pacman
+  package: mariadb-clients
+  distributions:
+  - arch
+- manager: apt
+  package: mariadb-client
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: mariadb
+  distributions:
+  - fedora
+flags: []
+examples:
+- title:
+    tr: Sürüm
+    en: Version
+  command: mysql --version
+  explanation:
+    tr: İstemci sürümü.
+    en: Client version.
+  risk: safe
+- title:
+    tr: Yardım
+    en: Help
+  command: mysql --help
+  explanation:
+    tr: Bayrak özeti (bağlantı açmaz).
+    en: Flag summary (does not open a connection).
+  risk: safe
+related:
+- psql
+- redis-cli
+- sqlite3
+intent:
+  tr:
+  - mysql istemci
+  - mariadb bağlan
+  en:
+  - mysql client
+  - connect mariadb
+verification:
+  status: draft
+  sources:
+  - https://dev.mysql.com/doc/refman/8.4/en/mysql.html
+  - https://mariadb.com/kb/en/mysql-command-line-client/
+  notes: Agent-authored Faz 7 draft from official docs; not human-verified.
+nova:
+  favorite_eligible: true
+  ui_priority: 60
+  concepts:
+  - databases

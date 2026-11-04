@@ -1,0 +1,81 @@
+schema_version: 2
+id: qemu-img
+name: qemu-img
+kind: executable
+category: virtualization
+summary:
+  tr: QEMU disk imajı aracı.
+  en: QEMU disk image utility.
+description:
+  tr: qcow2/raw vb. disk imajlarını oluşturur/dönüştürür/sorgular. Yanlış convert veri kaybına yol açabilir
+    — örnekler info odaklı.
+  en: Creates/converts/queries qcow2/raw disk images. Bad convert can lose data — examples focus on info.
+tags:
+- virtualization
+- qemu
+- storage
+risk: dangerous
+requires_elevated: false
+platforms:
+- linux
+- macos
+operating_systems:
+- linux
+- macos
+package_refs:
+- manager: pacman
+  package: qemu-img
+  distributions:
+  - arch
+- manager: apt
+  package: qemu-utils
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: qemu-img
+  distributions:
+  - fedora
+flags: []
+examples:
+- title:
+    tr: İmaj bilgisi
+    en: Image info
+  command: qemu-img info disk.qcow2
+  explanation:
+    tr: Mevcut imajın format/boyut bilgisini gösterir.
+    en: Shows format/size info for an existing image.
+  risk: safe
+- title:
+    tr: Yardım
+    en: Help
+  command: qemu-img --help
+  explanation:
+    tr: Alt komut özeti.
+    en: Subcommand summary.
+  risk: safe
+related:
+- virsh
+- dd
+- lsblk
+intent:
+  tr:
+  - qemu-img
+  - qcow2 bilgi
+  - disk imajı
+  en:
+  - qemu-img
+  - qcow2 info
+  - disk image
+verification:
+  status: draft
+  sources:
+  - https://www.qemu.org/docs/master/tools/qemu-img.html
+  - https://www.qemu.org/docs/master/
+  notes: Agent-authored Faz 7 draft from official docs; not human-verified.
+nova:
+  favorite_eligible: true
+  ui_priority: 60
+  concepts:
+  - virtualization
+  - storage

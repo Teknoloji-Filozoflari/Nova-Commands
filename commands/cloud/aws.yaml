@@ -1,0 +1,76 @@
+schema_version: 2
+id: aws
+name: aws
+kind: remote_cli
+category: cloud
+summary:
+  tr: AWS Command Line Interface.
+  en: AWS Command Line Interface.
+description:
+  tr: Amazon Web Services API istemcisi. Örneklerde gerçek access key / secret / session token kullanılmaz.
+    Kimlik `aws configure` veya ortam değişkenleri ile.
+  en: Amazon Web Services API client. Examples never include real access keys, secrets, or session tokens.
+    Auth via `aws configure` or env vars.
+tags:
+- cloud
+- aws
+- devops
+risk: dangerous
+requires_elevated: false
+platforms:
+- linux
+- macos
+- windows
+operating_systems:
+- linux
+- macos
+- windows
+package_refs:
+- manager: pacman
+  package: aws-cli
+  distributions:
+  - arch
+flags: []
+examples:
+- title:
+    tr: Sürüm
+    en: Version
+  command: aws --version
+  explanation:
+    tr: AWS CLI sürümü.
+    en: AWS CLI version.
+  risk: safe
+- title:
+    tr: Kimlik (okuma)
+    en: Caller identity
+  command: aws sts get-caller-identity
+  explanation:
+    tr: Yapılandırılmış kimliğin ARN/Account bilgisini gösterir (secret yazdırmaz).
+    en: Shows ARN/Account for configured identity (does not print secrets).
+  risk: caution
+related:
+- az
+- gcloud
+- terraform
+- rclone
+intent:
+  tr:
+  - aws cli
+  - aws kimlik
+  - sts
+  en:
+  - aws cli
+  - aws identity
+  - sts
+verification:
+  status: draft
+  sources:
+  - https://docs.aws.amazon.com/cli/
+  - https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-welcome.html
+  notes: Agent-authored Faz 7 draft from official docs; not human-verified.
+nova:
+  favorite_eligible: true
+  ui_priority: 60
+  concepts:
+  - cloud
+  - infrastructure-as-code

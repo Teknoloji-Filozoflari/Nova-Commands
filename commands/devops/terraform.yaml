@@ -1,0 +1,88 @@
+schema_version: 2
+id: terraform
+name: terraform
+kind: remote_cli
+category: devops
+summary:
+  tr: HashiCorp Terraform (IaC).
+  en: HashiCorp Terraform (IaC).
+description:
+  tr: Altyapıyı deklaratif kodla yönetir. `apply`/`destroy` yıkıcı olabilir; OpenTofu ayrı bir araçtır
+    (henüz ayrı kayıt yok). Provider credential örneklerinde gerçek secret yok.
+  en: Manages infrastructure as declarative code. `apply`/`destroy` can be destructive; OpenTofu is a
+    separate tool (no separate record yet). Provider credential examples never include real secrets.
+tags:
+- iac
+- terraform
+- devops
+- cloud
+risk: dangerous
+requires_elevated: false
+platforms:
+- linux
+- macos
+- windows
+operating_systems:
+- linux
+- macos
+- windows
+packages:
+  arch: terraform
+package_refs:
+- manager: pacman
+  package: terraform
+  distributions:
+  - arch
+flags: []
+examples:
+- title:
+    tr: Sürüm
+    en: Version
+  command: terraform version
+  explanation:
+    tr: Terraform sürümü.
+    en: Terraform version.
+  risk: safe
+- title:
+    tr: Validate
+    en: Validate
+  command: terraform validate
+  explanation:
+    tr: Çalışma dizinindeki yapılandırmayı doğrular (uygulamaz).
+    en: Validates config in the working directory (does not apply).
+  risk: safe
+- title:
+    tr: Plan
+    en: Plan
+  command: terraform plan
+  explanation:
+    tr: Değişiklik planı (uygulamaz). Provider kimliği gerekir.
+    en: Change plan (does not apply). Needs provider credentials.
+  risk: caution
+related:
+- ansible
+- aws
+- az
+- gcloud
+- kubectl
+intent:
+  tr:
+  - terraform
+  - altyapı kodu
+  - iac
+  en:
+  - terraform
+  - infrastructure as code
+  - iac
+verification:
+  status: draft
+  sources:
+  - https://developer.hashicorp.com/terraform/cli
+  - https://developer.hashicorp.com/terraform/cli/commands
+  notes: Agent-authored Faz 7 draft from official docs; not human-verified.
+nova:
+  favorite_eligible: true
+  ui_priority: 60
+  concepts:
+  - infrastructure-as-code
+  - cloud

@@ -116,10 +116,33 @@ PMs are `status: draft` / `support_level: partial`. **illumos / Solaris / AIX**
 remain extensibility skeletons (`experimental`) — **no fake command banks**.
 **No fake `verified`.** LICENSE and `keys/minisign.pub` unchanged.
 
+## Faz 7 server / network / DevOps deepen
+
+Live bank adds **draft** server-oriented command records (schema v2) plus five
+additive categories: `virtualization`, `backup`, `databases`, `cloud`, `devops`.
+
+- **Network:** `tcpdump`, `nmap`, `mtr`, `ethtool` (authorized-target / read-first habits).
+- **Containers / orchestration:** `nerdctl`, `crictl`, `kubectl`, `helm`.
+- **Virtualization:** `virsh`, `qemu-img` (libvirt/QEMU; not equated with containers).
+- **Web / proxy (system):** `nginx`, `caddy` (config test / version examples).
+- **Databases (clients):** `mysql`, `redis-cli` (`psql`/`sqlite3` already exist).
+- **Backup:** `restic`, `borg`, `rclone` (no secret-bearing examples).
+- **Cloud CLI:** `aws`, `az`, `gcloud` (no API keys / tokens in YAML).
+- **DevOps / IaC:** `terraform`, `ansible`, `gh`.
+
+Concepts: `kubernetes`, `virtualization`, `infrastructure-as-code`, `reverse-proxy`,
+`backup`, `databases`, `cloud` (all `draft`). Cloud provider rows for aws/azure/gcp
+and server platforms kvm/qemu/libvirt/docker-engine/kubernetes are
+`status: draft` / `support_level: partial` where command content exists.
+**No fake `verified`.** Tasks/profiles **content** remains Faz 8. LICENSE and
+`keys/minisign.pub` unchanged.
+
 ## Out of scope (later fazes)
 
 - illumos / Solaris / AIX **command banks** (metadata only in Faz 6)
 - Tasks / profiles **content** trees (schemas stubbed in Faz 2; content Faz 8)
+- Full vendor appliance CLIs (Proxmox `qm`, RouterOS, Cisco IOS, …)
+- OpenTofu / Pulumi / Nomad / observability CLIs (follow-up deepen)
 - Catalog index counts for registry kinds
 - Rotating minisign keys / LICENSE changes
 

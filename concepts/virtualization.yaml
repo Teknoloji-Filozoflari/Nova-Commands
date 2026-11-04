@@ -1,0 +1,57 @@
+id: virtualization
+kind: nova-commands-concept
+title:
+  tr: Sanallaştırma (KVM / libvirt / QEMU)
+  en: Virtualization (KVM / libvirt / QEMU)
+summary:
+  tr: Hipervizör katmanları ve virsh/qemu-img — konteyner orkestrasyonu değil.
+  en: Hypervisor layers and virsh/qemu-img — not container orchestration.
+difficulty: intermediate
+tags:
+  - virtualization
+  - kvm
+  - qemu
+  - libvirt
+related_commands:
+  - virsh
+  - qemu-img
+  - systemctl
+  - lsblk
+related_concepts:
+  - storage
+  - containers
+  - networking
+see_also:
+  - "https://libvirt.org/docs.html"
+  - "https://www.qemu.org/docs/master/"
+body:
+  tr: |
+    **KVM/QEMU** donanım sanallaştırması sağlar; **libvirt** çoğu Linux
+    dağıtımında yönetim API’si ve **virsh** CLI’sini sunar.
+
+    **Konteyner ≠ VM:** Podman/Docker süreç yalıtımı kullanır; virsh domain’leri
+    tam sanal makinelerdir. Kubernetes bir hipervizör değildir.
+
+    **Disk imajları:** `qemu-img` qcow2/raw gibi formatları sorgular/dönüştürür.
+    Yanlış `convert` veri kaybettirebilir — banka örnekleri `info` odaklıdır.
+
+    Proxmox gibi ürün CLI’leri vendor-specific’tir; genel libvirt kayıtlarıyla
+    karıştırılmamalıdır. Hepsi `draft` başlar.
+  en: |
+    **KVM/QEMU** provide hardware virtualization; **libvirt** is the common
+    Linux management API with the **virsh** CLI.
+
+    **Containers ≠ VMs:** Podman/Docker isolate processes; virsh domains are
+    full VMs. Kubernetes is not a hypervisor.
+
+    **Disk images:** `qemu-img` queries/converts qcow2/raw formats. A bad
+    `convert` can lose data — catalog examples stay `info`-focused.
+
+    Product CLIs like Proxmox are vendor-specific and must not be equated with
+    generic libvirt records. Everything starts as `draft`.
+verification:
+  status: draft
+  sources:
+    - "https://libvirt.org/docs.html"
+    - "https://www.qemu.org/docs/master/tools/qemu-img.html"
+  notes: "Agent-authored Faz 7 teaching draft; not human-verified."
