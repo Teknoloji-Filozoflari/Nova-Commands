@@ -1,0 +1,31 @@
+schema_version: 2
+kind: profile
+id: database-server
+name:
+  tr: Veritabanı sunucu
+  en: Database server
+summary:
+  tr: İstemci CLI odaklı DB profili (parola argv'de yok).
+  en: Client-CLI oriented DB profile (no passwords on argv).
+verification:
+  status: draft
+  sources:
+  - docs/SERVER_ADMINISTRATION.md
+  notes: Agent-authored Faz 8 draft; not human-verified.
+operating_systems:
+- linux
+related_commands:
+- mysql
+- psql
+- redis-cli
+- sqlite3
+- systemctl
+- ss
+related_tasks:
+- list-running-services
+- check-open-ports
+- backup-directory
+- inspect-system-logs
+tags:
+- databases
+- server

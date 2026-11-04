@@ -1,0 +1,74 @@
+schema_version: 2
+kind: task
+id: check-internet-connectivity
+name:
+  tr: İnternet bağlantısını kontrol et
+  en: Check internet connectivity
+summary:
+  tr: ICMP ping veya HTTPS ile temel erişilebilirlik testi.
+  en: Basic reachability via ICMP ping or HTTPS.
+category: network
+intent:
+  tr:
+  - internet var mı
+  - bağlantı testi
+  - ping at
+  en:
+  - am i online
+  - connectivity test
+  - ping host
+implementations:
+- id: ping-icmp
+  commands:
+  - ping
+  examples:
+  - command: ping -c 3 1.1.1.1
+    risk: safe
+    shell: bash
+    privilege: none
+    title:
+      tr: Üç ICMP
+      en: Three ICMP
+    explanation:
+      tr: Windows'ta -n kullanın; politikalar ICMP'yi engelleyebilir.
+      en: Use -n on Windows; policies may block ICMP.
+  platforms:
+  - linux
+  - macos
+  - bsd
+  - windows
+  shells:
+  - bash
+  - cmd
+- id: curl-https
+  commands:
+  - curl
+  examples:
+  - command: curl -I -m 5 https://example.com
+    risk: safe
+    shell: bash
+    privilege: none
+  platforms:
+  - linux
+  - macos
+  - bsd
+  - windows
+  shells:
+  - bash
+verification:
+  status: draft
+  sources:
+  - man 8 ping
+  - https://curl.se/docs/manpage.html
+  notes: Agent-authored Faz 8 draft; not human-verified.
+tags:
+- network
+- connectivity
+related_commands:
+- ping
+- curl
+- mtr
+- traceroute
+related_tasks:
+- check-dns
+- show-public-ip

@@ -1,6 +1,6 @@
 # Schema fixtures (task / profile / compatibility + sample commands)
 
-These YAML files exercise live `command.schema.json` (v2) and stub
+These YAML files exercise live `command.schema.json` (v2) and
 `task` / `profile` / `compatibility` schemas.
 
 - **Not** part of the live `commands/` bank.
@@ -8,5 +8,6 @@ These YAML files exercise live `command.schema.json` (v2) and stub
 - Must remain `verification.status: draft`.
 - Soft-checked by `scripts/validate_schema_v2.py`.
 
-The live bank under `commands/` is schema v2 (Faz 3). Task/profile **content**
-trees remain **Faz 8**.
+Live task/profile **content** lives under `tasks/` and `profiles/` (Faz 8) and
+is validated by `scripts/validate_tasks_profiles.py`. These fixtures stay as
+small schema samples and may diverge from published content.

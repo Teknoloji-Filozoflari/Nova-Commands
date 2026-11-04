@@ -1,0 +1,68 @@
+schema_version: 2
+kind: task
+id: transfer-files-ssh
+name:
+  tr: SSH üzerinden dosya aktar
+  en: Transfer files over SSH
+summary:
+  tr: scp veya rsync ile güvenli kopyalama (öğretici örnekler).
+  en: Secure copy with scp or rsync (teaching examples).
+category: security
+intent:
+  tr:
+  - scp ile kopyala
+  - rsync uzak
+  - dosya gönder
+  en:
+  - scp copy
+  - rsync remote
+  - send files over ssh
+implementations:
+- id: scp
+  commands:
+  - scp
+  examples:
+  - command: scp ./report.txt user@server.example:~/inbox/
+    risk: caution
+    shell: bash
+    privilege: user
+  platforms:
+  - linux
+  - macos
+  - bsd
+  - windows
+  shells:
+  - bash
+- id: rsync-ssh
+  commands:
+  - rsync
+  - ssh
+  examples:
+  - command: rsync -avz -e ssh ./dir/ user@server.example:~/dir/
+    risk: caution
+    shell: bash
+    privilege: user
+  platforms:
+  - linux
+  - macos
+  - bsd
+  shells:
+  - bash
+verification:
+  status: draft
+  sources:
+  - man 1 scp
+  - man 1 rsync
+  notes: Agent-authored Faz 8 draft; not human-verified.
+tags:
+- ssh
+- scp
+- rsync
+related_commands:
+- scp
+- rsync
+- ssh
+- sftp
+related_tasks:
+- connect-ssh
+- backup-directory

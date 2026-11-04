@@ -21,12 +21,14 @@ Ayrıntı: [docs/dual-concept.md](docs/dual-concept.md)
 ```
 commands/<category>/<id>.yaml   # kaynak gerçeği (schema_version: 2)
 concepts/<id>.yaml              # öğrenilebilir konsept makaleleri (TR/EN)
+tasks/<id>.yaml                 # niyet → çok platform uygulama (Faz 8)
+profiles/<id>.yaml              # sunucu / rol referans koleksiyonları (Faz 8)
 schema/command.schema.json      # v2 — canlı commands/ bankası
 schema/command.schema.v2.json   # v2 twin (ayrı $id; tooling)
 schema/command.schema.v1.json   # arşiv v1
-schema/{task,profile,compatibility}.schema.json  # stub (içerik Faz 8)
-schema/{concept,catalog,operating-system,…}.schema.json
-fixtures/schema-v2/             # stub/örnek fixtures (katalogda yok)
+schema/{task,profile}.schema.json
+schema/{concept,catalog,compatibility,operating-system,…}.schema.json
+fixtures/schema-v2/             # şema örnekleri (katalogda yok)
 metadata/categories.yaml        # §8.x kategori taksonomisi
 metadata/concepts.yaml          # konsept kayıt defteri
 metadata/operating-systems.yaml # platform kayıtları (OS ≠ distro ≠ shell ≠ PM)
@@ -34,7 +36,8 @@ metadata/{distributions,shells,package-managers,…}.yaml
 metadata/catalog.json           # üretilen banka (commands + concepts; schema_version 2)
 metadata/search-index.json      # arama indeksi
 metadata/manifest.json          # sayılar + deterministik content_sha256
-scripts/validate_catalog.py     # CI kapısı (v2 bank + soft platform + stubs)
+scripts/validate_catalog.py     # CI kapısı (v2 bank + soft gates + tasks/profiles)
+scripts/validate_tasks_profiles.py
 scripts/migrate_v1_to_v2.py     # v1→v2 göç (idempotent)
 scripts/validate_platform_registries.py
 scripts/validate_schema_v2.py
@@ -42,6 +45,7 @@ scripts/build_catalog.py        # katalog / indeks / manifest
 docs/DATA_SCHEMA.md             # canlı v2 şema politikası
 docs/SCHEMA_MIGRATION_V2.md     # göç notları
 docs/PLATFORM_SUPPORT.md        # platform metadata kapsamı
+docs/SERVER_ADMINISTRATION.md   # sunucu / görev / profil kapsamı
 docs/NOVA_INTEGRATION.md        # Nova tüketim sözleşmesi (v2 breakage notes)
 ```
 
@@ -73,11 +77,15 @@ Faz 7 (`draft`): **sunucu / network / DevOps** — `tcpdump`/`nmap`/`mtr`,
 Kubernetes (`kubectl`/`helm`/`nerdctl`/`crictl`), libvirt/`qemu-img`,
 nginx/Caddy, DB istemcileri, restic/Borg/rclone, AWS/Azure/GCP CLI,
 Terraform/Ansible/`gh`; yeni kategoriler `virtualization`/`backup`/
-`databases`/`cloud`/`devops`. Görev/profil içerikleri Faz 8.
+`databases`/`cloud`/`devops`.
+Faz 8 (`draft`): **`tasks/`** (çok platform niyet tarifleri) + **`profiles/`**
+(linux/debian/fedora/arch/windows/freebsd sunucu, homelab, docker-host,
+kubernetes, web/db/nas/virt). Katalog hash hâlâ commands+concepts (indeks Faz 9).
 Paket notlarında **Arch / pacman tercihi** (Nova tercihleri ile uyumlu).
 Karşılaştırma: [docs/package-managers-comparison.md](docs/package-managers-comparison.md)
 · Nix/Guix: `concepts/nix-guix.yaml`
-· Platform: [docs/PLATFORM_SUPPORT.md](docs/PLATFORM_SUPPORT.md).
+· Platform: [docs/PLATFORM_SUPPORT.md](docs/PLATFORM_SUPPORT.md)
+· Sunucu: [docs/SERVER_ADMINISTRATION.md](docs/SERVER_ADMINISTRATION.md).
 
 ## İmzalı katalog Releases
 

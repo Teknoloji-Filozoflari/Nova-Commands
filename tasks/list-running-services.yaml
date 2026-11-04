@@ -1,0 +1,117 @@
+schema_version: 2
+kind: task
+id: list-running-services
+name:
+  tr: Çalışan servisleri listele
+  en: List running services
+summary:
+  tr: systemd / BSD service / Windows Get-Service / launchctl ile servis durumu.
+  en: Service state via systemd / BSD service / Windows Get-Service / launchctl.
+category: system
+intent:
+  tr:
+  - servis listesi
+  - systemctl status
+  - hangi servisler aktif
+  en:
+  - list services
+  - systemctl status
+  - which services are active
+implementations:
+- id: linux-systemctl
+  commands:
+  - systemctl
+  examples:
+  - command: systemctl list-units --type=service --state=running
+    risk: safe
+    shell: bash
+    privilege: none
+  operating_systems:
+  - linux
+  platforms:
+  - linux
+  shells:
+  - bash
+- id: bsd-service
+  commands:
+  - service
+  examples:
+  - command: service -e
+    risk: safe
+    shell: bash
+    privilege: none
+  operating_systems:
+  - freebsd
+  - netbsd
+  - dragonflybsd
+  platforms:
+  - bsd
+  shells:
+  - bash
+- id: openbsd-rcctl
+  commands:
+  - rcctl
+  examples:
+  - command: rcctl ls started
+    risk: safe
+    shell: ksh
+    privilege: none
+  operating_systems:
+  - openbsd
+  platforms:
+  - bsd
+  shells:
+  - ksh
+- id: windows-get-service
+  commands:
+  - get-service
+  examples:
+  - command: Get-Service | Where-Object Status -eq Running
+    risk: safe
+    shell: powershell
+    privilege: none
+  operating_systems:
+  - windows
+  platforms:
+  - windows
+  shells:
+  - powershell
+- id: macos-launchctl
+  commands:
+  - launchctl
+  examples:
+  - command: launchctl list
+    risk: safe
+    shell: zsh
+    privilege: none
+  operating_systems:
+  - macos
+  platforms:
+  - macos
+  shells:
+  - zsh
+verification:
+  status: draft
+  sources:
+  - man 1 systemctl
+  - man 8 service
+  - man 8 rcctl
+  - https://learn.microsoft.com/powershell/module/microsoft.powershell.management/get-service
+  notes: Agent-authored Faz 8 draft; not human-verified.
+description:
+  tr: 'Servis modelleri eşitlenmez: systemctl ≠ service ≠ Get-Service ≠ launchctl.'
+  en: 'Service models are not equated: systemctl ≠ service ≠ Get-Service ≠ launchctl.'
+tags:
+- services
+- systemd
+related_commands:
+- systemctl
+- service
+- rcctl
+- get-service
+- sc
+- launchctl
+- sysrc
+related_tasks:
+- inspect-system-logs
+- check-open-ports

@@ -1,0 +1,80 @@
+schema_version: 2
+kind: task
+id: inspect-network-interfaces
+name:
+  tr: Ağ arayüzlerini incele
+  en: Inspect network interfaces
+summary:
+  tr: Arayüz adı, durum ve adresleri platform araçlarıyla göster.
+  en: Show interface names, state, and addresses with platform tools.
+category: network
+intent:
+  tr:
+  - ağ kartları
+  - arayüz listesi
+  - ethernet wifi durumu
+  en:
+  - list network interfaces
+  - nic status
+  - ethernet wifi state
+implementations:
+- id: linux-ip-link
+  commands:
+  - ip
+  examples:
+  - command: ip -br link
+    risk: safe
+    shell: bash
+    privilege: none
+  operating_systems:
+  - linux
+  platforms:
+  - linux
+  shells:
+  - bash
+- id: macos-networksetup
+  commands:
+  - networksetup
+  examples:
+  - command: networksetup -listallhardwareports
+    risk: safe
+    shell: zsh
+    privilege: none
+  operating_systems:
+  - macos
+  platforms:
+  - macos
+  shells:
+  - zsh
+- id: windows-ipconfig-all
+  commands:
+  - ipconfig
+  examples:
+  - command: ipconfig /all
+    risk: safe
+    shell: cmd
+    privilege: none
+  operating_systems:
+  - windows
+  platforms:
+  - windows
+  shells:
+  - cmd
+verification:
+  status: draft
+  sources:
+  - man 8 ip
+  - man 8 networksetup
+  notes: Agent-authored Faz 8 draft; not human-verified.
+tags:
+- network
+- interfaces
+related_commands:
+- ip
+- ifconfig
+- networksetup
+- ipconfig
+- nmcli
+related_tasks:
+- show-local-ip
+- inspect-routing-table

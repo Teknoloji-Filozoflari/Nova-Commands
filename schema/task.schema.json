@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://raw.githubusercontent.com/Teknoloji-Filozoflari/Nova-Commands/main/schema/task.schema.json",
-  "title": "Nova-Commands task entry (stub — Faz 2)",
-  "description": "Intent → multi-platform implementations. Content under tasks/ lands in Faz 8; this stub defines the shape so tools can soft-validate fixtures. Tasks must NOT reuse command ids. Separate from command.schema.v2.json.",
+  "title": "Nova-Commands task entry",
+  "description": "Intent → multi-platform implementations under tasks/. Tasks must NOT reuse command ids. Separate from command.schema.v2.json. Catalog indexing of tasks is Faz 9; Faz 8 validates the tree.",
   "type": "object",
   "additionalProperties": false,
   "required": [

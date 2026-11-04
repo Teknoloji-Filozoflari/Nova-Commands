@@ -1,0 +1,39 @@
+schema_version: 2
+kind: profile
+id: debian-server
+name:
+  tr: Debian / Ubuntu sunucu
+  en: Debian / Ubuntu server
+summary:
+  tr: 'apt tabanlı sunucu: servisler, ufw, günlükler, güncelleme.'
+  en: 'apt-based server: services, ufw, logs, updates.'
+verification:
+  status: draft
+  sources:
+  - https://www.debian.org/doc/
+  - https://ubuntu.com/server/docs
+  notes: Agent-authored Faz 8 draft; not human-verified.
+operating_systems:
+- linux
+distributions:
+- debian
+- ubuntu
+- linux-mint
+- pop-os
+related_commands:
+- apt
+- systemctl
+- journalctl
+- ufw
+- ss
+- ip
+- ssh
+related_tasks:
+- update-system
+- install-package
+- list-running-services
+- check-firewall-status
+tags:
+- server
+- debian
+- ubuntu

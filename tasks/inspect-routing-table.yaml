@@ -1,0 +1,81 @@
+schema_version: 2
+kind: task
+id: inspect-routing-table
+name:
+  tr: Yönlendirme tablosunu incele
+  en: Inspect routing table
+summary:
+  tr: Varsayılan rota ve yönlendirme tablosunu oku (salt okuma).
+  en: Read the default route and routing table (read-only).
+category: network
+intent:
+  tr:
+  - routing tablosu
+  - varsayılan ağ geçidi
+  - route göster
+  en:
+  - routing table
+  - default gateway
+  - show routes
+implementations:
+- id: linux-ip-route
+  commands:
+  - ip
+  - route
+  examples:
+  - command: ip route
+    risk: safe
+    shell: bash
+    privilege: none
+  operating_systems:
+  - linux
+  platforms:
+  - linux
+  shells:
+  - bash
+- id: unix-netstat-r
+  commands:
+  - netstat-bsd
+  - route
+  examples:
+  - command: netstat -rn
+    risk: safe
+    shell: bash
+    privilege: none
+  platforms:
+  - macos
+  - bsd
+  shells:
+  - bash
+- id: windows-route-print
+  commands:
+  - route
+  - netsh
+  examples:
+  - command: route print
+    risk: safe
+    shell: cmd
+    privilege: none
+  operating_systems:
+  - windows
+  platforms:
+  - windows
+  shells:
+  - cmd
+verification:
+  status: draft
+  sources:
+  - man 8 ip-route
+  - man 8 route
+  notes: Agent-authored Faz 8 draft; not human-verified.
+tags:
+- network
+- routing
+related_commands:
+- ip
+- route
+- netstat-bsd
+- netsh
+related_tasks:
+- inspect-network-interfaces
+- check-internet-connectivity

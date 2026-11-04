@@ -1,0 +1,133 @@
+schema_version: 2
+kind: task
+id: show-local-ip
+name:
+  tr: Yerel IP adresini göster
+  en: Show local IP address
+summary:
+  tr: Farklı platformlarda yerel IP / ağ yapılandırmasını öğrenme.
+  en: Learn local IP / network configuration across platforms.
+category: network
+intent:
+  tr:
+  - ip adresimi öğren
+  - ağ yapılandırmasını göster
+  - yerel IP adresini bul
+  en:
+  - show local ip
+  - inspect network configuration
+  - find my ip address
+implementations:
+- id: linux-ip
+  commands:
+  - ip
+  examples:
+  - command: ip -br addr
+    risk: safe
+    shell: bash
+    privilege: none
+    title:
+      tr: Kısa adres listesi
+      en: Brief address list
+    explanation:
+      tr: Arayüz adı, durum ve IPv4/IPv6 adreslerini kısaca listeler.
+      en: Briefly lists interface name, state, and IPv4/IPv6 addresses.
+  operating_systems:
+  - linux
+  platforms:
+  - linux
+  shells:
+  - bash
+- id: windows-powershell
+  commands:
+  - get-netipconfiguration
+  examples:
+  - command: Get-NetIPConfiguration
+    risk: safe
+    shell: powershell
+    privilege: none
+    title:
+      tr: IP yapılandırması
+      en: IP configuration
+    explanation:
+      tr: Windows NetTCPIP modülü ile arayüz IP bilgisi.
+      en: Interface IP info via Windows NetTCPIP module.
+  operating_systems:
+  - windows
+  platforms:
+  - windows
+  shells:
+  - powershell
+- id: windows-cmd
+  commands:
+  - ipconfig
+  examples:
+  - command: ipconfig
+    risk: safe
+    shell: cmd
+    privilege: none
+    title:
+      tr: ipconfig özeti
+      en: ipconfig summary
+    explanation:
+      tr: Klasik CMD ile adapter IP özeti.
+      en: Classic CMD adapter IP summary.
+  operating_systems:
+  - windows
+  platforms:
+  - windows
+  shells:
+  - cmd
+- id: macos-bsd-ifconfig
+  commands:
+  - ifconfig
+  examples:
+  - command: ifconfig -a
+    risk: safe
+    shell: zsh
+    privilege: none
+    title:
+      tr: Tüm arayüzler
+      en: All interfaces
+    explanation:
+      tr: macOS/BSD ifconfig; GNU ip ile aynı araç değildir.
+      en: macOS/BSD ifconfig; not the same tool as GNU ip.
+  operating_systems:
+  - macos
+  - freebsd
+  - openbsd
+  - netbsd
+  platforms:
+  - macos
+  - bsd
+  shells:
+  - bash
+  - zsh
+  notes:
+    tr: networksetup macOS GUI köprüsüdür; ayrı kayıt.
+    en: networksetup is a macOS GUI bridge; separate record.
+verification:
+  status: draft
+  sources:
+  - man 8 ip
+  - https://learn.microsoft.com/powershell/module/nettcpip/get-netipconfiguration
+  - man 8 ifconfig
+  notes: Agent-authored Faz 8 draft; not human-verified.
+description:
+  tr: Aynı kullanıcı amacını Linux `ip`, Windows PowerShell/CMD ve macOS/BSD `ifconfig` ile ayrı uygulamalar
+    olarak gösterir. Komutlar eşitlenmez.
+  en: Shows the same user goal via Linux ip, Windows PowerShell/CMD, and macOS/BSD ifconfig as separate
+    implementations. Commands are not equated.
+tags:
+- network
+- ip
+- diagnostics
+related_commands:
+- ip
+- get-netipconfiguration
+- ipconfig
+- ifconfig
+- networksetup
+related_tasks:
+- inspect-network-interfaces
+- show-public-ip

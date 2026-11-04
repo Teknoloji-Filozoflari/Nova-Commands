@@ -15,6 +15,7 @@ Checks (CI gate):
   - Concept articles under concepts/; id == filename; related_commands exist
   - Soft: platform registries (scripts/validate_platform_registries.py)
   - Soft: stub fixtures task/profile/compatibility (scripts/validate_schema_v2.py)
+  - Hard when present: tasks/ + profiles/ (scripts/validate_tasks_profiles.py)
 """
 
 from __future__ import annotations
@@ -39,6 +40,7 @@ CATEGORIES_PATH = ROOT / "metadata" / "categories.yaml"
 CONCEPTS_META_PATH = ROOT / "metadata" / "concepts.yaml"
 PLATFORM_VALIDATE = ROOT / "scripts" / "validate_platform_registries.py"
 SCHEMA_V2_VALIDATE = ROOT / "scripts" / "validate_schema_v2.py"
+TASKS_PROFILES_VALIDATE = ROOT / "scripts" / "validate_tasks_profiles.py"
 META = ROOT / "metadata"
 
 RISK_RANK = {"safe": 0, "caution": 1, "dangerous": 2, "destructive": 3}
@@ -363,6 +365,15 @@ def main() -> int:
             cwd=ROOT,
             check=False,
         )
+        if proc.returncode != 0:
+            return proc.returncode
+
+    # Faz 8+: validate tasks/ + profiles/ when present (not in catalog hash yet).
+    if TASKS_PROFILES_VALIDATE.is_file():
+        tp_args = [sys.executable, str(TASKS_PROFILES_VALIDATE)]
+        if (ROOT / "tasks").is_dir() or (ROOT / "profiles").is_dir():
+            tp_args.append("--require")
+        proc = subprocess.run(tp_args, cwd=ROOT, check=False)
         if proc.returncode != 0:
             return proc.returncode
 

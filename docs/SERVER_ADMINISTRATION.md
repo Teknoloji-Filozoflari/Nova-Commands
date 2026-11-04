@@ -1,4 +1,4 @@
-# Server administration scope (Faz 7)
+# Server administration scope (Faz 7–8)
 
 This document describes **what the command bank covers today** for server,
 network, and DevOps operations. It is not a runbook and does not execute
@@ -26,7 +26,20 @@ commands.
 - AI-authored Faz 7 records stay `verification.status: draft` until human review.
 - Vendor appliance CLIs (Proxmox `qm`, MikroTik, Cisco IOS, …) are **not**
   first-class command banks yet (metadata may exist as `planned`/`skeleton`).
-- Tasks and server **profiles** content land in **Faz 8** (schemas already stubbed).
+- Tasks (`tasks/`) and server **profiles** (`profiles/`) are Faz 8 teaching
+  collections: multi-OS intents + role maps. They do **not** auto-run commands
+  and are not yet in the signed catalog hash (Faz 9 indexes them).
+
+## Profiles (Faz 8)
+
+| Profile | Focus |
+|---------|--------|
+| `linux-server` | General Linux admin (services, net, disk, SSH) |
+| `debian-server` / `fedora-server` / `arch-server` | Distro-specific PM + firewall |
+| `windows-server` | PowerShell services / net / WinGet |
+| `freebsd-server` | pkg / service / sysrc / pfctl |
+| `homelab` / `docker-host` / `kubernetes` | Self-host + containers + k8s |
+| `web-server` / `database-server` / `nas-server` / `virtualization-host` | Role maps |
 
 ## Safety
 

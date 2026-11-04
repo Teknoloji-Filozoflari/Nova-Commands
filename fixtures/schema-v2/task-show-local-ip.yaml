@@ -1,4 +1,4 @@
-# Fixture only — tasks/ content is Faz 8. Soft-validates task.schema.json.
+# Fixture only — soft-validates task.schema.json. Live content: tasks/show-local-ip.yaml.
 schema_version: 2
 kind: task
 id: show-local-ip

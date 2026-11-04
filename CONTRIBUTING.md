@@ -62,6 +62,21 @@ CI must pass: validate → build → pytest → committed `content_sha256` match
 4. Do **not** mark `verified` without human review of the teaching text.
 5. Rebuild metadata as above.
 
+## Add a task or profile (Faz 8+)
+
+1. Tasks: create `tasks/<id>.yaml` (`kind: task`). Id must **not** collide with
+   a command id. `implementations[].commands` and `related_commands` must
+   reference existing command bank ids. Prefer multi-OS implementations over
+   fake cross-platform aliases.
+2. Profiles: create `profiles/<id>.yaml` (`kind: profile`) as a guiding
+   reference collection (related commands + tasks). Not an executable runbook.
+3. Keep `verification.status: draft` until human review. Do not invent
+   command ids or secret-bearing examples.
+4. Run `python3 scripts/validate_tasks_profiles.py --require` (also wired into
+   `validate_catalog.py`). Catalog `content_sha256` still covers
+   commands+concepts only until Faz 9 indexes tasks/profiles — rebuild catalog
+   only if you also changed commands or concepts.
+
 ## Propose a category
 
 Open a **Category** issue first. Adding a slug requires updating:

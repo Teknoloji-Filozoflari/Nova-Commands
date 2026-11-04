@@ -1,0 +1,85 @@
+schema_version: 2
+kind: task
+id: backup-directory
+name:
+  tr: Dizin yedekle
+  en: Back up a directory
+summary:
+  tr: rsync / restic / borg ile dizin yedeği (gizli anahtar örnek yok).
+  en: Directory backup with rsync / restic / borg (no secret-key examples).
+category: backup
+intent:
+  tr:
+  - klasör yedekle
+  - restic backup
+  - rsync yedek
+  en:
+  - backup folder
+  - restic backup
+  - rsync backup
+implementations:
+- id: rsync-local
+  commands:
+  - rsync
+  examples:
+  - command: rsync -aHAX --info=progress2 /path/to/src/ /path/to/backup/
+    risk: caution
+    shell: bash
+    privilege: user
+  platforms:
+  - linux
+  - macos
+  - bsd
+  shells:
+  - bash
+- id: restic-snapshot
+  commands:
+  - restic
+  examples:
+  - command: restic -r /path/to/repo backup /path/to/data
+    risk: caution
+    shell: bash
+    privilege: user
+    explanation:
+      tr: Depo parolası/ortam değişkeni örneğe yazılmaz.
+      en: Repo password/env vars are omitted from examples.
+  platforms:
+  - linux
+  - macos
+  - bsd
+  - windows
+  shells:
+  - bash
+- id: borg-create
+  commands:
+  - borg
+  examples:
+  - command: borg create /path/to/repo::'{hostname}-{now}' /path/to/data
+    risk: caution
+    shell: bash
+    privilege: user
+  platforms:
+  - linux
+  - macos
+  - bsd
+  shells:
+  - bash
+verification:
+  status: draft
+  sources:
+  - man 1 rsync
+  - https://restic.readthedocs.io/
+  - https://borgbackup.readthedocs.io/
+  notes: Agent-authored Faz 8 draft; not human-verified.
+tags:
+- backup
+- storage
+related_commands:
+- rsync
+- restic
+- borg
+- rclone
+- tar
+related_tasks:
+- transfer-files-ssh
+- check-disk-space

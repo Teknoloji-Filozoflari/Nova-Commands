@@ -1,0 +1,41 @@
+schema_version: 2
+kind: profile
+id: arch-server
+name:
+  tr: Arch Linux sunucu
+  en: Arch Linux server
+summary:
+  tr: 'pacman-first Arch sunucu: rolling güncelleme, systemd, nft/ufw seçenekleri.'
+  en: 'pacman-first Arch server: rolling updates, systemd, nft/ufw options.'
+verification:
+  status: draft
+  sources:
+  - https://wiki.archlinux.org/title/Server
+  notes: Agent-authored Faz 8 draft; not human-verified.
+description:
+  tr: Kurulum/güncelleme notlarında pacman tercih edilir (proje tercihi).
+  en: Install/update notes prefer pacman (project preference).
+operating_systems:
+- linux
+distributions:
+- arch
+- endeavouros
+- manjaro
+related_commands:
+- pacman
+- systemctl
+- journalctl
+- ip
+- ss
+- nft
+- ufw
+- ssh
+related_tasks:
+- update-system
+- install-package
+- list-running-services
+- show-local-ip
+tags:
+- server
+- arch
+- pacman

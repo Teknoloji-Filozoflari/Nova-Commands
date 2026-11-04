@@ -1,0 +1,112 @@
+schema_version: 2
+kind: task
+id: install-package
+name:
+  tr: Paket kur
+  en: Install a package
+summary:
+  tr: İsim bilinen bir paketi platform PM ile kur (örnek placeholder).
+  en: Install a named package with the platform PM (placeholder examples).
+category: packages
+intent:
+  tr:
+  - paket kur
+  - yazılım yükle
+  - pacman -S
+  en:
+  - install package
+  - add software
+  - pacman -S
+implementations:
+- id: arch-pacman
+  commands:
+  - pacman
+  examples:
+  - command: sudo pacman -S package-name
+    risk: caution
+    shell: bash
+    privilege: elevated
+  platforms:
+  - linux
+  shells:
+  - bash
+  distributions:
+  - arch
+- id: debian-apt
+  commands:
+  - apt
+  examples:
+  - command: sudo apt install package-name
+    risk: caution
+    shell: bash
+    privilege: elevated
+  platforms:
+  - linux
+  shells:
+  - bash
+  distributions:
+  - debian
+  - ubuntu
+- id: fedora-dnf
+  commands:
+  - dnf
+  examples:
+  - command: sudo dnf install package-name
+    risk: caution
+    shell: bash
+    privilege: elevated
+  platforms:
+  - linux
+  shells:
+  - bash
+  distributions:
+  - fedora
+- id: macos-brew
+  commands:
+  - brew
+  examples:
+  - command: brew install package-name
+    risk: caution
+    shell: zsh
+    privilege: none
+  operating_systems:
+  - macos
+  platforms:
+  - macos
+  shells:
+  - zsh
+- id: windows-winget
+  commands:
+  - winget
+  examples:
+  - command: winget install --id Vendor.Package
+    risk: caution
+    shell: powershell
+    privilege: admin
+  operating_systems:
+  - windows
+  platforms:
+  - windows
+  shells:
+  - powershell
+verification:
+  status: draft
+  sources:
+  - man 8 pacman
+  - man 8 apt
+  - https://docs.brew.sh/Manpage
+  notes: Agent-authored Faz 8 draft; not human-verified.
+tags:
+- packages
+- install
+related_commands:
+- pacman
+- apt
+- dnf
+- brew
+- winget
+- pkg
+- zypper
+- apk
+related_tasks:
+- update-system

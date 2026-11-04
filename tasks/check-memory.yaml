@@ -1,0 +1,80 @@
+schema_version: 2
+kind: task
+id: check-memory
+name:
+  tr: Bellek kullanımını kontrol et
+  en: Check memory usage
+summary:
+  tr: free / vm_stat tarzı araçlarla bellek özeti (okuma).
+  en: Memory summary with free / vm_stat-style tools (read).
+category: monitoring
+intent:
+  tr:
+  - ram kullanımı
+  - bellek dolu mu
+  - free çıktısı
+  en:
+  - ram usage
+  - memory pressure
+  - free output
+implementations:
+- id: linux-free
+  commands:
+  - free
+  examples:
+  - command: free -h
+    risk: safe
+    shell: bash
+    privilege: none
+  operating_systems:
+  - linux
+  platforms:
+  - linux
+  shells:
+  - bash
+- id: unix-vmstat
+  commands:
+  - vmstat
+  examples:
+  - command: vmstat 1 3
+    risk: safe
+    shell: bash
+    privilege: none
+  platforms:
+  - linux
+  - macos
+  - bsd
+  shells:
+  - bash
+- id: windows-get-process-mem
+  commands:
+  - get-process
+  - get-computerinfo
+  examples:
+  - command: Get-ComputerInfo | Select-Object OsTotalVisibleMemorySize, OsFreePhysicalMemory
+    risk: safe
+    shell: powershell
+    privilege: none
+  operating_systems:
+  - windows
+  platforms:
+  - windows
+  shells:
+  - powershell
+verification:
+  status: draft
+  sources:
+  - man 1 free
+  - man 8 vmstat
+  notes: Agent-authored Faz 8 draft; not human-verified.
+tags:
+- memory
+- monitoring
+related_commands:
+- free
+- vmstat
+- top
+- get-process
+- get-computerinfo
+related_tasks:
+- list-running-processes

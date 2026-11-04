@@ -1,0 +1,153 @@
+schema_version: 2
+kind: task
+id: update-system
+name:
+  tr: Sistem paketlerini güncelle
+  en: Update system packages
+summary:
+  tr: Dağıtıma özgü paket yöneticisi ile güncelleme (yıkıcı olabilir).
+  en: Distro-specific package manager update (may be disruptive).
+category: packages
+intent:
+  tr:
+  - sistem güncelle
+  - paket upgrade
+  - güncelleme yap
+  en:
+  - update system
+  - upgrade packages
+  - os update
+implementations:
+- id: arch-pacman
+  commands:
+  - pacman
+  examples:
+  - command: sudo pacman -Syu
+    risk: caution
+    shell: bash
+    privilege: elevated
+  operating_systems:
+  - linux
+  platforms:
+  - linux
+  shells:
+  - bash
+  distributions:
+  - arch
+  - endeavouros
+  - manjaro
+  notes:
+    tr: 'Arch-first: pacman -Syu; AUR yardımcıları ayrı kayıtlardır.'
+    en: 'Arch-first: pacman -Syu; AUR helpers are separate records.'
+- id: debian-apt
+  commands:
+  - apt
+  examples:
+  - command: sudo apt update && sudo apt upgrade
+    risk: caution
+    shell: bash
+    privilege: elevated
+  operating_systems:
+  - linux
+  platforms:
+  - linux
+  shells:
+  - bash
+  distributions:
+  - debian
+  - ubuntu
+  - linux-mint
+  - pop-os
+- id: fedora-dnf
+  commands:
+  - dnf
+  examples:
+  - command: sudo dnf upgrade
+    risk: caution
+    shell: bash
+    privilege: elevated
+  operating_systems:
+  - linux
+  platforms:
+  - linux
+  shells:
+  - bash
+  distributions:
+  - fedora
+  - rhel
+  - rocky
+  - almalinux
+- id: freebsd-pkg
+  commands:
+  - pkg
+  - freebsd-update
+  examples:
+  - command: sudo pkg upgrade
+    risk: caution
+    shell: bash
+    privilege: elevated
+  operating_systems:
+  - freebsd
+  platforms:
+  - bsd
+  shells:
+  - bash
+- id: macos-softwareupdate
+  commands:
+  - softwareupdate
+  - brew
+  examples:
+  - command: softwareupdate -l
+    risk: safe
+    shell: zsh
+    privilege: none
+  operating_systems:
+  - macos
+  platforms:
+  - macos
+  shells:
+  - zsh
+- id: windows-winget
+  commands:
+  - winget
+  examples:
+  - command: winget upgrade --all
+    risk: caution
+    shell: powershell
+    privilege: admin
+  operating_systems:
+  - windows
+  platforms:
+  - windows
+  shells:
+  - powershell
+verification:
+  status: draft
+  sources:
+  - man 8 pacman
+  - man 8 apt
+  - man 8 dnf
+  - https://docs.brew.sh/
+  - https://learn.microsoft.com/windows/package-manager/winget/
+  notes: Agent-authored Faz 8 draft; not human-verified.
+description:
+  tr: Arch'ta pacman tercih edilir. Windows/macOS güncelleme modelleri ayrıdır. Örnekler caution/elevated;
+    otomatik çalıştırılmaz.
+  en: Prefer pacman on Arch. Windows/macOS update models differ. Examples are caution/elevated; not auto-executed.
+tags:
+- packages
+- update
+- maintenance
+related_commands:
+- pacman
+- apt
+- dnf
+- zypper
+- apk
+- pkg
+- brew
+- softwareupdate
+- winget
+- freebsd-update
+related_tasks:
+- install-package

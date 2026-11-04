@@ -1,0 +1,51 @@
+schema_version: 2
+kind: profile
+id: linux-server
+name:
+  tr: Linux sunucu (temel)
+  en: Linux server (basics)
+summary:
+  tr: 'Genel amaçlı Linux sunucu: servisler, ağ, disk, güncelleme ve SSH.'
+  en: 'General-purpose Linux server: services, network, disk, updates, SSH.'
+verification:
+  status: draft
+  sources:
+  - docs/SERVER_ADMINISTRATION.md
+  notes: Agent-authored Faz 8 draft; not human-verified.
+description:
+  tr: Yönlendirici referans koleksiyonu; komutları otomatik çalıştırmaz. Dağıtıma özel profiller (debian/fedora/arch)
+    ile birlikte kullan.
+  en: Guiding reference collection; does not auto-run commands. Use with distro-specific profiles (debian/fedora/arch).
+operating_systems:
+- linux
+distributions:
+- arch
+- debian
+- ubuntu
+- fedora
+related_commands:
+- systemctl
+- journalctl
+- ip
+- ss
+- df
+- ssh
+- ufw
+- firewall-cmd
+- pacman
+- apt
+- dnf
+related_tasks:
+- show-local-ip
+- check-disk-space
+- list-running-services
+- inspect-system-logs
+- update-system
+- check-firewall-status
+- connect-ssh
+- check-open-ports
+- check-memory
+- list-running-processes
+tags:
+- server
+- linux

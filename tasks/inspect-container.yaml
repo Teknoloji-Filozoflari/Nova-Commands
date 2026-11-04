@@ -1,0 +1,75 @@
+schema_version: 2
+kind: task
+id: inspect-container
+name:
+  tr: Konteyneri incele
+  en: Inspect a container
+summary:
+  tr: docker/podman/nerdctl ile çalışan konteyner envanteri (orkestrasyon değil).
+  en: Running container inventory via docker/podman/nerdctl (not orchestration).
+category: containers
+intent:
+  tr:
+  - konteyner listesi
+  - docker ps
+  - podman konteyner
+  en:
+  - list containers
+  - docker ps
+  - podman containers
+implementations:
+- id: docker-ps
+  commands:
+  - docker
+  examples:
+  - command: docker ps
+    risk: safe
+    shell: bash
+    privilege: none
+  platforms:
+  - linux
+  - macos
+  - windows
+  shells:
+  - bash
+- id: podman-ps
+  commands:
+  - podman
+  examples:
+  - command: podman ps
+    risk: safe
+    shell: bash
+    privilege: none
+  platforms:
+  - linux
+  shells:
+  - bash
+- id: nerdctl-ps
+  commands:
+  - nerdctl
+  examples:
+  - command: nerdctl ps
+    risk: safe
+    shell: bash
+    privilege: none
+  platforms:
+  - linux
+  shells:
+  - bash
+verification:
+  status: draft
+  sources:
+  - https://docs.docker.com/engine/reference/commandline/ps/
+  - https://docs.podman.io/
+  notes: Agent-authored Faz 8 draft; not human-verified.
+tags:
+- containers
+- docker
+related_commands:
+- docker
+- podman
+- nerdctl
+- crictl
+- kubectl
+related_tasks:
+- check-container-logs

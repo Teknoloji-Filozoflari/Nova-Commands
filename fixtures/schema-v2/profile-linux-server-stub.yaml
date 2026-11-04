@@ -1,4 +1,4 @@
-# Fixture only — profiles/ content is Faz 8.
+# Fixture only — soft-validates profile.schema.json. Live content: profiles/linux-server.yaml.
 schema_version: 2
 kind: profile
 id: linux-server-basic

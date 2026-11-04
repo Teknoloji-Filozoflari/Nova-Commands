@@ -1,0 +1,35 @@
+schema_version: 2
+kind: profile
+id: freebsd-server
+name:
+  tr: FreeBSD sunucu
+  en: FreeBSD server
+summary:
+  tr: pkg / service / sysrc / pfctl — systemd ile eşitlenmez.
+  en: pkg / service / sysrc / pfctl — not equated with systemd.
+verification:
+  status: draft
+  sources:
+  - https://docs.freebsd.org/
+  notes: Agent-authored Faz 8 draft; not human-verified.
+operating_systems:
+- freebsd
+distributions:
+- freebsd-release
+related_commands:
+- pkg
+- freebsd-update
+- service
+- sysrc
+- pfctl
+- ifconfig
+- ssh
+related_tasks:
+- update-system
+- list-running-services
+- check-firewall-status
+- show-local-ip
+tags:
+- server
+- freebsd
+- bsd

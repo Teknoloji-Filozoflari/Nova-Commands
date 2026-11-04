@@ -134,16 +134,31 @@ Concepts: `kubernetes`, `virtualization`, `infrastructure-as-code`, `reverse-pro
 `backup`, `databases`, `cloud` (all `draft`). Cloud provider rows for aws/azure/gcp
 and server platforms kvm/qemu/libvirt/docker-engine/kubernetes are
 `status: draft` / `support_level: partial` where command content exists.
-**No fake `verified`.** Tasks/profiles **content** remains Faz 8. LICENSE and
-`keys/minisign.pub` unchanged.
+**No fake `verified`.** LICENSE and `keys/minisign.pub` unchanged.
+
+## Faz 8 tasks + profiles
+
+Live trees (all `draft`):
+
+- **`tasks/`** — intent → multi-platform implementations (e.g. `show-local-ip`,
+  `check-disk-space`, `update-system`, `inspect-container`). Implementations
+  reference existing **command** ids only; task ids never collide with commands.
+- **`profiles/`** — guiding server/role collections (e.g. `linux-server`,
+  `arch-server`, `docker-host`, `kubernetes`, `homelab`). Not auto-executed
+  scripts.
+
+Validated by `scripts/validate_tasks_profiles.py` (wired into
+`validate_catalog.py`). **Not** yet part of `content_sha256` / search index
+(Faz 9). Arch/pacman preference preserved on update/install tasks.
+**No fake `verified`.** LICENSE / `keys/minisign.pub` unchanged.
 
 ## Out of scope (later fazes)
 
 - illumos / Solaris / AIX **command banks** (metadata only in Faz 6)
-- Tasks / profiles **content** trees (schemas stubbed in Faz 2; content Faz 8)
+- Catalog / search-index counts for tasks, profiles, and registry kinds (Faz 9)
 - Full vendor appliance CLIs (Proxmox `qm`, RouterOS, Cisco IOS, …)
 - OpenTofu / Pulumi / Nomad / observability CLIs (follow-up deepen)
-- Catalog index counts for registry kinds
+- Native Windows `Resolve-DnsName` command bank row (task notes dig fallback)
 - Rotating minisign keys / LICENSE changes
 
 ## Maintainer note
