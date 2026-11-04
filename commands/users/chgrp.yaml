@@ -1,5 +1,8 @@
+schema_version: 2
 id: chgrp
 name: chgrp
+kind: executable
+category: users
 summary:
   tr: Dosya grup sahipliğini değiştirir.
   en: Change group ownership of files.
@@ -15,11 +18,28 @@ platforms:
 - linux
 - macos
 - bsd
+operating_systems:
+- linux
+- macos
 packages:
   arch: coreutils
   debian: coreutils
   ubuntu: coreutils
   fedora: coreutils
+package_refs:
+- manager: pacman
+  package: coreutils
+  distributions:
+  - arch
+- manager: apt
+  package: coreutils
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: coreutils
+  distributions:
+  - fedora
 flags:
 - flag: -R
   meaning:
@@ -65,4 +85,3 @@ verification:
 nova:
   concepts:
   - permissions
-category: users

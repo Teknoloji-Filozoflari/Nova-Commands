@@ -1,5 +1,7 @@
+schema_version: 2
 id: ufw
 name: ufw
+kind: executable
 category: security
 summary:
   tr: Uncomplicated Firewall (iptables/nft ön yüz).
@@ -15,25 +17,33 @@ risk: dangerous
 requires_elevated: true
 platforms:
 - linux
+operating_systems:
+- linux
 packages:
   arch: ufw
   debian: ufw
   ubuntu: ufw
+package_refs:
+- manager: pacman
+  package: ufw
+  distributions:
+  - arch
+- manager: apt
+  package: ufw
+  distributions:
+  - debian
+  - ubuntu
 install_notes:
-  tr: 'Arch: pacman -S ufw
-
+  tr: |-
+    Arch: pacman -S ufw
     Debian/Ubuntu: apt install ufw
-
     Fedora: paket her depoda yok — uydurma; nft/firewalld tercih edilebilir.
-
-    Ubuntu sunucularda sık varsayılan araç.'
-  en: 'Arch: pacman -S ufw
-
+    Ubuntu sunucularda sık varsayılan araç.
+  en: |-
+    Arch: pacman -S ufw
     Debian/Ubuntu: apt install ufw
-
     Fedora: not always packaged — do not invent; prefer nft/firewalld.
-
-    Common default tool on Ubuntu servers.'
+    Common default tool on Ubuntu servers.
 flags:
 - flag: status
   meaning:

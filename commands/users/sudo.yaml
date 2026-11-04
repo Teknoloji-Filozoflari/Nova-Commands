@@ -1,5 +1,8 @@
+schema_version: 2
 id: sudo
 name: sudo
+kind: executable
+category: users
 summary:
   tr: Komutu başka kullanıcı olarak çalıştırır (genelde root).
   en: Execute a command as another user (usually root).
@@ -14,11 +17,28 @@ requires_elevated: false
 platforms:
 - linux
 - macos
+operating_systems:
+- linux
+- macos
 packages:
   arch: sudo
   debian: sudo
   ubuntu: sudo
   fedora: sudo
+package_refs:
+- manager: pacman
+  package: sudo
+  distributions:
+  - arch
+- manager: apt
+  package: sudo
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: sudo
+  distributions:
+  - fedora
 install_notes:
   tr: 'Arch: pacman -S sudo — kullanıcınızı wheel grubuna ekleyin.'
   en: 'Arch: pacman -S sudo — add your user to the wheel group.'
@@ -78,4 +98,3 @@ nova:
   ui_priority: 75
   concepts:
   - permissions
-category: users

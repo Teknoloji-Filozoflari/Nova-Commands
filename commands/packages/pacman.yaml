@@ -1,5 +1,8 @@
+schema_version: 2
 id: pacman
 name: pacman
+kind: package_manager
+category: packages
 summary:
   tr: Arch Linux paket yöneticisi.
   en: Arch Linux package manager.
@@ -13,8 +16,15 @@ risk: dangerous
 requires_elevated: true
 platforms:
 - linux
+operating_systems:
+- linux
 packages:
   arch: pacman
+package_refs:
+- manager: pacman
+  package: pacman
+  distributions:
+  - arch
 install_notes:
   tr: 'Arch taban sistemde gelir. Resmî wiki: https://wiki.archlinux.org/title/Pacman'
   en: 'Ships with Arch base. Wiki: https://wiki.archlinux.org/title/Pacman'
@@ -107,4 +117,3 @@ nova:
   - packages
   - arch
   - package-managers
-category: packages

@@ -1,5 +1,8 @@
+schema_version: 2
 id: ss
 name: ss
+kind: executable
+category: network
 summary:
   tr: Soket istatistiklerini gösterir.
   en: Investigate sockets.
@@ -13,11 +16,27 @@ risk: safe
 requires_elevated: false
 platforms:
 - linux
+operating_systems:
+- linux
 packages:
   arch: iproute2
   debian: iproute2
   ubuntu: iproute2
   fedora: iproute
+package_refs:
+- manager: pacman
+  package: iproute2
+  distributions:
+  - arch
+- manager: apt
+  package: iproute2
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: iproute
+  distributions:
+  - fedora
 flags:
 - flag: -t
   long: --tcp
@@ -74,7 +93,6 @@ verification:
   - man 8 ss
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-bootstrap
-category: network
 nova:
   concepts:
   - networking

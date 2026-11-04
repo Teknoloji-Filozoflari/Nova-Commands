@@ -1,5 +1,8 @@
+schema_version: 2
 id: ssh-copy-id
 name: ssh-copy-id
+kind: executable
+category: security
 summary:
   tr: Genel anahtarı uzak authorized_keys’e ekler.
   en: Install public key on a remote authorized_keys.
@@ -15,11 +18,28 @@ platforms:
 - linux
 - macos
 - bsd
+operating_systems:
+- linux
+- macos
 packages:
   arch: openssh
   debian: openssh-client
   ubuntu: openssh-client
   fedora: openssh-clients
+package_refs:
+- manager: pacman
+  package: openssh
+  distributions:
+  - arch
+- manager: apt
+  package: openssh-client
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: openssh-clients
+  distributions:
+  - fedora
 install_notes:
   tr: 'Arch: pacman -S openssh'
   en: 'Arch: pacman -S openssh'
@@ -76,4 +96,3 @@ nova:
   concepts:
   - ssh
   - permissions
-category: security

@@ -1,5 +1,8 @@
+schema_version: 2
 id: systemd-analyze
 name: systemd-analyze
+kind: executable
+category: system
 summary:
   tr: systemd önyükleme ve birim çözümlemesi.
   en: Analyze systemd boot and unit structure.
@@ -14,11 +17,27 @@ risk: safe
 requires_elevated: false
 platforms:
 - linux
+operating_systems:
+- linux
 packages:
   arch: systemd
   debian: systemd
   ubuntu: systemd
   fedora: systemd
+package_refs:
+- manager: pacman
+  package: systemd
+  distributions:
+  - arch
+- manager: apt
+  package: systemd
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: systemd
+  distributions:
+  - fedora
 flags:
 - flag: blame
   meaning:
@@ -81,4 +100,3 @@ nova:
   concepts:
   - systemd
   - terminal-basics
-category: system

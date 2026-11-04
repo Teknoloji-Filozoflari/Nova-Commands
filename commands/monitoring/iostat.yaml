@@ -1,5 +1,7 @@
+schema_version: 2
 id: iostat
 name: iostat
+kind: executable
 category: monitoring
 summary:
   tr: CPU ve disk I/O istatistikleri.
@@ -15,22 +17,36 @@ risk: safe
 requires_elevated: false
 platforms:
 - linux
+operating_systems:
+- linux
 packages:
   arch: sysstat
   debian: sysstat
   ubuntu: sysstat
   fedora: sysstat
+package_refs:
+- manager: pacman
+  package: sysstat
+  distributions:
+  - arch
+- manager: apt
+  package: sysstat
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: sysstat
+  distributions:
+  - fedora
 install_notes:
-  tr: 'Arch: pacman -S sysstat
-
+  tr: |-
+    Arch: pacman -S sysstat
     Debian/Ubuntu: apt install sysstat
-
-    Fedora: dnf install sysstat'
-  en: 'Arch: pacman -S sysstat
-
+    Fedora: dnf install sysstat
+  en: |-
+    Arch: pacman -S sysstat
     Debian/Ubuntu: apt install sysstat
-
-    Fedora: dnf install sysstat'
+    Fedora: dnf install sysstat
 flags:
 - flag: -x
   meaning:

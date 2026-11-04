@@ -1,5 +1,8 @@
+schema_version: 2
 id: ssh
 name: ssh
+kind: executable
+category: security
 summary:
   tr: Uzaktan güvenli kabuk oturumu.
   en: OpenSSH remote login client.
@@ -15,11 +18,28 @@ platforms:
 - linux
 - macos
 - bsd
+operating_systems:
+- linux
+- macos
 packages:
   arch: openssh
   debian: openssh-client
   ubuntu: openssh-client
   fedora: openssh-clients
+package_refs:
+- manager: pacman
+  package: openssh
+  distributions:
+  - arch
+- manager: apt
+  package: openssh-client
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: openssh-clients
+  distributions:
+  - fedora
 install_notes:
   tr: 'Arch: pacman -S openssh'
   en: 'Arch: pacman -S openssh'
@@ -53,12 +73,6 @@ related:
 - sftp
 - ssh-copy-id
 - ssh-add
-nova:
-  concepts:
-  - ssh
-  - networking
-  - permissions
-  - networking-basics
 intent:
   tr:
   - ssh ile bağlan
@@ -72,4 +86,9 @@ verification:
   - man 1 ssh
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-bootstrap
-category: security
+nova:
+  concepts:
+  - ssh
+  - networking
+  - permissions
+  - networking-basics

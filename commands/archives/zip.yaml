@@ -1,5 +1,8 @@
+schema_version: 2
 id: zip
 name: zip
+kind: executable
+category: archives
 summary:
   tr: ZIP arşivi oluşturur.
   en: Package and compress files into a ZIP archive.
@@ -13,11 +16,28 @@ requires_elevated: false
 platforms:
 - linux
 - macos
+operating_systems:
+- linux
+- macos
 packages:
   arch: zip
   debian: zip
   ubuntu: zip
   fedora: zip
+package_refs:
+- manager: pacman
+  package: zip
+  distributions:
+  - arch
+- manager: apt
+  package: zip
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: zip
+  distributions:
+  - fedora
 install_notes:
   tr: 'Arch: pacman -S zip unzip'
   en: 'Arch: pacman -S zip unzip'
@@ -46,7 +66,6 @@ verification:
   - man 1 zip
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-bootstrap
-category: archives
 nova:
   concepts:
   - files

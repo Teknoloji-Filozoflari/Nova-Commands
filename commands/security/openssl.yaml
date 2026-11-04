@@ -1,5 +1,7 @@
+schema_version: 2
 id: openssl
 name: openssl
+kind: executable
 category: security
 summary:
   tr: TLS/SSL ve kriptografi araç kutusu.
@@ -19,22 +21,37 @@ platforms:
 - linux
 - macos
 - bsd
+operating_systems:
+- linux
+- macos
 packages:
   arch: openssl
   debian: openssl
   ubuntu: openssl
   fedora: openssl
+package_refs:
+- manager: pacman
+  package: openssl
+  distributions:
+  - arch
+- manager: apt
+  package: openssl
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: openssl
+  distributions:
+  - fedora
 install_notes:
-  tr: 'Arch: pacman -S openssl
-
+  tr: |-
+    Arch: pacman -S openssl
     Debian/Ubuntu: apt install openssl
-
-    Fedora: dnf install openssl'
-  en: 'Arch: pacman -S openssl
-
+    Fedora: dnf install openssl
+  en: |-
+    Arch: pacman -S openssl
     Debian/Ubuntu: apt install openssl
-
-    Fedora: dnf install openssl'
+    Fedora: dnf install openssl
 flags: []
 examples:
 - title:

@@ -1,5 +1,8 @@
+schema_version: 2
 id: rpm
 name: rpm
+kind: package_manager
+category: packages
 summary:
   tr: RPM paket yöneticisi (düşük seviye).
   en: RPM package manager (low-level).
@@ -14,17 +17,29 @@ risk: dangerous
 requires_elevated: true
 platforms:
 - linux
+operating_systems:
+- linux
 packages:
   fedora: rpm
   rhel: rpm
   arch: rpm-tools
+package_refs:
+- manager: pacman
+  package: rpm-tools
+  distributions:
+  - arch
+- manager: dnf
+  package: rpm
+  distributions:
+  - fedora
+  - rhel
 install_notes:
-  tr: 'Fedora/RHEL: rpm tabanda gelir; günlük için dnf.
-
-    Arch: pacman -S rpm-tools (yabancı .rpm incelemek için; sistem paketi değil).'
-  en: 'Fedora/RHEL: rpm is base; use dnf daily.
-
-    Arch: pacman -S rpm-tools (inspect foreign .rpm; not system pkgs).'
+  tr: |-
+    Fedora/RHEL: rpm tabanda gelir; günlük için dnf.
+    Arch: pacman -S rpm-tools (yabancı .rpm incelemek için; sistem paketi değil).
+  en: |-
+    Fedora/RHEL: rpm is base; use dnf daily.
+    Arch: pacman -S rpm-tools (inspect foreign .rpm; not system pkgs).
 flags:
 - flag: -q
   meaning:
@@ -95,4 +110,3 @@ nova:
   concepts:
   - packages
   - package-managers
-category: packages

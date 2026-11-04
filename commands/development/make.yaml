@@ -1,5 +1,8 @@
+schema_version: 2
 id: make
 name: make
+kind: executable
+category: development
 summary:
   tr: Makefile’dan derleme hedefleri çalıştırır.
   en: GNU make utility to maintain groups of programs.
@@ -15,11 +18,28 @@ platforms:
 - linux
 - macos
 - bsd
+operating_systems:
+- linux
+- macos
 packages:
   arch: make
   debian: make
   ubuntu: make
   fedora: make
+package_refs:
+- manager: pacman
+  package: make
+  distributions:
+  - arch
+- manager: apt
+  package: make
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: make
+  distributions:
+  - fedora
 install_notes:
   tr: 'Arch: pacman -S make'
   en: 'Arch: pacman -S make'
@@ -50,7 +70,6 @@ verification:
   - man 1 make
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-bootstrap
-category: development
 nova:
   concepts:
   - terminal-basics

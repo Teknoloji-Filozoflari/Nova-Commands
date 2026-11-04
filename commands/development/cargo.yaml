@@ -1,5 +1,7 @@
+schema_version: 2
 id: cargo
 name: cargo
+kind: executable
 category: development
 summary:
   tr: Rust paket ve derleme aracı.
@@ -17,26 +19,39 @@ platforms:
 - linux
 - macos
 - bsd
+operating_systems:
+- linux
+- macos
 packages:
   arch: rust
   debian: cargo
   ubuntu: cargo
   fedora: cargo
+package_refs:
+- manager: pacman
+  package: rust
+  distributions:
+  - arch
+- manager: apt
+  package: cargo
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: cargo
+  distributions:
+  - fedora
 install_notes:
-  tr: 'Arch: pacman -S rust  (cargo + rustc)
-
+  tr: |-
+    Arch: pacman -S rust  (cargo + rustc)
     Debian/Ubuntu: apt install cargo
-
     Fedora: dnf install cargo
-
-    Alternatif: rustup (resmi toolchain; distro paketinden ayrı).'
-  en: 'Arch: pacman -S rust  (cargo + rustc)
-
+    Alternatif: rustup (resmi toolchain; distro paketinden ayrı).
+  en: |-
+    Arch: pacman -S rust  (cargo + rustc)
     Debian/Ubuntu: apt install cargo
-
     Fedora: dnf install cargo
-
-    Alternative: rustup (official toolchain; separate from distro packages).'
+    Alternative: rustup (official toolchain; separate from distro packages).
 flags: []
 examples:
 - title:

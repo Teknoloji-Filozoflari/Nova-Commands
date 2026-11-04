@@ -1,5 +1,8 @@
+schema_version: 2
 id: host
 name: host
+kind: executable
+category: network
 summary:
   tr: Basit DNS arama aracı.
   en: Simple DNS lookup utility.
@@ -15,22 +18,37 @@ platforms:
 - linux
 - macos
 - bsd
+operating_systems:
+- linux
+- macos
 packages:
   arch: bind
   debian: bind9-host
   ubuntu: bind9-host
   fedora: bind-utils
+package_refs:
+- manager: pacman
+  package: bind
+  distributions:
+  - arch
+- manager: apt
+  package: bind9-host
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: bind-utils
+  distributions:
+  - fedora
 install_notes:
-  tr: 'Arch: pacman -S bind
-
+  tr: |-
+    Arch: pacman -S bind
     Debian/Ubuntu: apt install bind9-host (veya dnsutils metapaketi)
-
-    Fedora: dnf install bind-utils'
-  en: 'Arch: pacman -S bind
-
+    Fedora: dnf install bind-utils
+  en: |-
+    Arch: pacman -S bind
     Debian/Ubuntu: apt install bind9-host (or dnsutils)
-
-    Fedora: dnf install bind-utils'
+    Fedora: dnf install bind-utils
 flags:
 - flag: -t
   meaning:
@@ -83,4 +101,3 @@ nova:
   - networking
   - dns
   - networking-basics
-category: network

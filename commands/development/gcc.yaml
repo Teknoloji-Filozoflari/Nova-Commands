@@ -1,5 +1,7 @@
+schema_version: 2
 id: gcc
 name: gcc
+kind: executable
 category: development
 summary:
   tr: GNU C/C++ derleyici sürücüsü.
@@ -18,26 +20,39 @@ platforms:
 - linux
 - macos
 - bsd
+operating_systems:
+- linux
+- macos
 packages:
   arch: gcc
   debian: gcc
   ubuntu: gcc
   fedora: gcc
+package_refs:
+- manager: pacman
+  package: gcc
+  distributions:
+  - arch
+- manager: apt
+  package: gcc
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: gcc
+  distributions:
+  - fedora
 install_notes:
-  tr: 'Arch: pacman -S gcc
-
+  tr: |-
+    Arch: pacman -S gcc
     Debian/Ubuntu: apt install gcc
-
     Fedora: dnf install gcc
-
-    C++ için g++ / gcc-c++ ayrı paket olabilir.'
-  en: 'Arch: pacman -S gcc
-
+    C++ için g++ / gcc-c++ ayrı paket olabilir.
+  en: |-
+    Arch: pacman -S gcc
     Debian/Ubuntu: apt install gcc
-
     Fedora: dnf install gcc
-
-    C++ may need g++ / gcc-c++ as a separate package.'
+    C++ may need g++ / gcc-c++ as a separate package.
 flags:
 - flag: -o
   takes_value: true

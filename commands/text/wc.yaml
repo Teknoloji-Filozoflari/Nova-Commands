@@ -1,22 +1,8 @@
-packages:
-  arch: coreutils
-  debian: coreutils
-  ubuntu: coreutils
-  fedora: coreutils
-platforms:
-- linux
-- macos
-- bsd
-requires_elevated: false
-verification:
-  status: verified
-  sources:
-  - man 1 wc (GNU coreutils)
-  last_reviewed: '2026-11-02'
-  reviewer: nova-commands-phase15
-  notes: Flags -l/-w/-c confirmed; safe text metrics.
+schema_version: 2
 id: wc
 name: wc
+kind: executable
+category: text
 summary:
   tr: Satır, kelime ve bayt sayar.
   en: Count lines, words, and bytes.
@@ -27,6 +13,33 @@ tags:
 - text
 - count
 risk: safe
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+operating_systems:
+- linux
+- macos
+packages:
+  arch: coreutils
+  debian: coreutils
+  ubuntu: coreutils
+  fedora: coreutils
+package_refs:
+- manager: pacman
+  package: coreutils
+  distributions:
+  - arch
+- manager: apt
+  package: coreutils
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: coreutils
+  distributions:
+  - fedora
 flags:
 - flag: -l
   long: --lines
@@ -71,7 +84,13 @@ intent:
   en:
   - count lines
   - word count
-category: text
+verification:
+  status: verified
+  sources:
+  - man 1 wc (GNU coreutils)
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-phase15
+  notes: Flags -l/-w/-c confirmed; safe text metrics.
 nova:
   concepts:
   - files

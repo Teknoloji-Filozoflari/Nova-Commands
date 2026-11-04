@@ -1,5 +1,8 @@
+schema_version: 2
 id: locate
 name: locate
+kind: executable
+category: search
 summary:
   tr: Önceden indekslenmiş dosya adı araması.
   en: Find files by name via a prebuilt database.
@@ -14,22 +17,37 @@ platforms:
 - linux
 - macos
 - bsd
+operating_systems:
+- linux
+- macos
 packages:
   arch: mlocate
   debian: plocate
   ubuntu: plocate
   fedora: mlocate
+package_refs:
+- manager: pacman
+  package: mlocate
+  distributions:
+  - arch
+- manager: apt
+  package: plocate
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: mlocate
+  distributions:
+  - fedora
 install_notes:
-  tr: 'Arch: pacman -S mlocate (veya plocate)
-
+  tr: |-
+    Arch: pacman -S mlocate (veya plocate)
     Debian/Ubuntu: plocate yaygın
-
-    Fedora: mlocate — updatedb root ile çalışır'
-  en: 'Arch: pacman -S mlocate (or plocate)
-
+    Fedora: mlocate — updatedb root ile çalışır
+  en: |-
+    Arch: pacman -S mlocate (or plocate)
     Debian/Ubuntu: often plocate
-
-    Fedora: mlocate — updatedb runs as root'
+    Fedora: mlocate — updatedb runs as root
 flags:
 - flag: -i
   meaning:
@@ -69,7 +87,6 @@ verification:
   - man 1 locate
   - man 1 plocate
   notes: mlocate vs plocate package/CLI differs by distro.
-category: search
 nova:
   concepts:
   - files

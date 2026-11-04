@@ -1,11 +1,14 @@
 # Platform support (metadata registries)
 
-Faz 1 introduces **additive** platform metadata. These registries describe
+Faz 1 introduced **additive** platform metadata. These registries describe
 operating systems, distributions, shells, package managers, and related
-concepts as **separate models**. They do **not** yet drive command schema
-enums for the **live** bank. Catalog `schema_version` is still **1**.
-Command schema **v2** (dual-path) is documented in [DATA_SCHEMA.md](DATA_SCHEMA.md);
-fixtures soft-validate v2 without migrating `commands/`.
+concepts as **separate models**.
+
+**Faz 3:** the live command bank is schema **v2** (`schema_version: 2` on YAML +
+catalog). Commands may cite registry ids via `operating_systems`,
+`package_refs.manager` / `distributions`, and expanded `shells`. Presence of a
+registry id is still **not** proof of local install. See
+[DATA_SCHEMA.md](DATA_SCHEMA.md) and [SCHEMA_MIGRATION_V2.md](SCHEMA_MIGRATION_V2.md).
 
 ## Dual concept (unchanged)
 

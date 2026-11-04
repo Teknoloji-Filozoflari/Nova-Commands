@@ -2,9 +2,11 @@
 """Validate Nova-Commands curated bank + concept articles.
 
 Checks (CI gate):
-  - JSON Schema conformance (command.schema.json, concept.schema.json)
+  - JSON Schema conformance (command.schema.json = live v2, concept.schema.json)
   - Unique command ids; filename stem == id; directory == category
+  - schema_version == 2 on every command YAML
   - Category ∈ metadata/categories.yaml
+  - package_refs.manager / distributions reference Faz 1 registries when present
   - verification.status rules (verified requires sources + last_reviewed)
   - Flag verified=true only allowed when command verification is reviewed|verified
   - Risk consistency helpers; related must not self-ref
@@ -12,8 +14,7 @@ Checks (CI gate):
   - nova.concepts / concept related_* reference known registry or article ids
   - Concept articles under concepts/; id == filename; related_commands exist
   - Soft: platform registries (scripts/validate_platform_registries.py)
-  - Soft: schema v2 + stub fixtures (scripts/validate_schema_v2.py)
-    Live commands/ still validate against command.schema.json (v1) only.
+  - Soft: stub fixtures task/profile/compatibility (scripts/validate_schema_v2.py)
 """
 
 from __future__ import annotations
@@ -38,8 +39,21 @@ CATEGORIES_PATH = ROOT / "metadata" / "categories.yaml"
 CONCEPTS_META_PATH = ROOT / "metadata" / "concepts.yaml"
 PLATFORM_VALIDATE = ROOT / "scripts" / "validate_platform_registries.py"
 SCHEMA_V2_VALIDATE = ROOT / "scripts" / "validate_schema_v2.py"
+META = ROOT / "metadata"
 
 RISK_RANK = {"safe": 0, "caution": 1, "dangerous": 2, "destructive": 3}
+
+# Shells allowed by schema enum that are short/legacy names (not all in shells.yaml).
+LEGACY_SHELL_NAMES = frozenset({"any", "sh", "bash", "zsh", "fish"})
+
+
+def load_registry_ids(yaml_name: str, list_key: str) -> set[str]:
+    path = META / yaml_name
+    if not path.is_file():
+        return set()
+    data = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+    entries = data.get(list_key) or []
+    return {e["id"] for e in entries if isinstance(e, dict) and "id" in e}
 
 
 def load_categories() -> set[str]:
@@ -137,6 +151,10 @@ def main() -> int:
     validator = load_schema_validator(SCHEMA_PATH)
     concept_validator = load_schema_validator(CONCEPT_SCHEMA_PATH)
     seen_ids: dict[str, Path] = {}
+    pm_ids = load_registry_ids("package-managers.yaml", "package_managers")
+    distro_ids = load_registry_ids("distributions.yaml", "distributions")
+    os_ids = load_registry_ids("operating-systems.yaml", "operating_systems")
+    shell_ids = load_registry_ids("shells.yaml", "shells")
 
     files = sorted(commands_dir.glob("*/*.yaml")) if commands_dir.is_dir() else []
     if not files:
@@ -153,6 +171,11 @@ def main() -> int:
         if not isinstance(raw, dict):
             errors.append(f"{rel}: root must be a mapping")
             continue
+
+        if raw.get("schema_version") != 2:
+            errors.append(
+                f"{rel}: schema_version must be 2 (got {raw.get('schema_version')!r})"
+            )
 
         for err in sorted(validator.iter_errors(raw), key=lambda e: list(e.path)):
             loc = "/".join(str(p) for p in err.absolute_path) or "(root)"
@@ -181,6 +204,28 @@ def main() -> int:
                 )
             else:
                 seen_ids[cid] = rel
+
+        for os_id in raw.get("operating_systems") or []:
+            if os_ids and os_id not in os_ids:
+                errors.append(f"{rel}: operating_systems unknown id {os_id!r}")
+
+        for sh in raw.get("shells") or []:
+            if shell_ids and sh not in shell_ids and sh not in LEGACY_SHELL_NAMES:
+                errors.append(f"{rel}: shells unknown id {sh!r}")
+
+        for i, pref in enumerate(raw.get("package_refs") or []):
+            if not isinstance(pref, dict):
+                continue
+            mgr = pref.get("manager")
+            if pm_ids and mgr not in pm_ids:
+                errors.append(
+                    f"{rel}: package_refs[{i}].manager unknown id {mgr!r}"
+                )
+            for dist in pref.get("distributions") or []:
+                if distro_ids and dist not in distro_ids:
+                    errors.append(
+                        f"{rel}: package_refs[{i}].distributions unknown id {dist!r}"
+                    )
 
         ver = raw.get("verification") or {}
         status = ver.get("status")
@@ -311,7 +356,7 @@ def main() -> int:
         if proc.returncode != 0:
             return proc.returncode
 
-    # Soft schema-v2 gate (dual-path; fixtures only — bank stays on v1).
+    # Soft stub-schema gate (task/profile/compatibility fixtures; bank is live v2).
     if SCHEMA_V2_VALIDATE.is_file():
         proc = subprocess.run(
             [sys.executable, str(SCHEMA_V2_VALIDATE)],
@@ -322,7 +367,8 @@ def main() -> int:
             return proc.returncode
 
     print(
-        f"OK: {len(seen_ids)} commands, {len(seen_concept_articles)} concepts validated"
+        f"OK: {len(seen_ids)} commands (schema v2), "
+        f"{len(seen_concept_articles)} concepts validated"
     )
     return 0
 

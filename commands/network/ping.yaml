@@ -1,5 +1,8 @@
+schema_version: 2
 id: ping
 name: ping
+kind: executable
+category: network
 summary:
   tr: ICMP ile host erişimini dener.
   en: Send ICMP ECHO_REQUEST to network hosts.
@@ -14,11 +17,28 @@ platforms:
 - linux
 - macos
 - bsd
+operating_systems:
+- linux
+- macos
 packages:
   arch: iputils
   debian: iputils-ping
   ubuntu: iputils-ping
   fedora: iputils
+package_refs:
+- manager: pacman
+  package: iputils
+  distributions:
+  - arch
+- manager: apt
+  package: iputils-ping
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: iputils
+  distributions:
+  - fedora
 install_notes:
   tr: 'Arch: pacman -S iputils'
   en: 'Arch: pacman -S iputils'
@@ -56,7 +76,6 @@ verification:
   - man 8 ping
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-bootstrap
-category: network
 nova:
   concepts:
   - networking

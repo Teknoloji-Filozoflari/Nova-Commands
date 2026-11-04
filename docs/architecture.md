@@ -11,13 +11,14 @@
 ## Layout
 
 ```
-commands/<category>/<id>.yaml   # curated entries
+commands/<category>/<id>.yaml   # curated entries (schema_version: 2)
 concepts/<id>.yaml              # learnable concept articles (TR/EN)
-schema/command.schema.json      # v1 — live commands/ bank
-schema/command.schema.v2.json   # v2 design (fixtures until Faz 3 migrate)
+schema/command.schema.json      # v2 — live commands/ bank
+schema/command.schema.v2.json   # v2 twin (distinct $id)
+schema/command.schema.v1.json   # archived v1
 schema/{task,profile,compatibility}.schema.json  # stubs (Faz 8 content)
 schema/*.json                   # JSON Schema (Draft 2020-12) + platform regs
-fixtures/schema-v2/             # soft-validate samples (not catalog content)
+fixtures/schema-v2/             # stub/fixture samples (not catalog content)
 metadata/categories.yaml        # §8.x taxonomy
 metadata/concepts.yaml          # concept registry (+ optional article:)
 metadata/operating-systems.yaml # Faz 1+ platform registries (additive)
@@ -29,21 +30,22 @@ metadata/execution-environments.yaml
 metadata/server-platforms.yaml
 metadata/cloud-providers.yaml
 metadata/support-levels.yaml
-metadata/catalog.json           # aggregate (kind: nova-commands-bank)
+metadata/catalog.json           # aggregate (kind: nova-commands-bank, schema_version 2)
 metadata/search-index.json      # flattened search fields
 metadata/manifest.json          # counts + deterministic content_sha256
-scripts/validate_catalog.py     # CI gate (v1 bank, i18n, concepts, soft gates)
+scripts/validate_catalog.py     # CI gate (v2 bank, i18n, concepts, soft gates)
+scripts/migrate_v1_to_v2.py     # v1→v2 migration (idempotent)
 scripts/validate_platform_registries.py  # soft registry consistency
-scripts/validate_schema_v2.py   # soft v2 + stub fixture check
+scripts/validate_schema_v2.py   # live v2 load + stub fixture check
 scripts/build_catalog.py        # catalog + index + manifest
 docs/                           # contracts + safety + NOVA_INTEGRATION + DATA_SCHEMA
 tests/                          # pytest
 ```
 
 Platform registries keep OS ≠ distribution ≠ shell ≠ package-manager as
-separate models. See [PLATFORM_SUPPORT.md](PLATFORM_SUPPORT.md) and
-[DATA_SCHEMA.md](DATA_SCHEMA.md). Catalog `schema_version` remains **1** until
-Faz 3 migrates the bank onto command schema v2.
+separate models. See [PLATFORM_SUPPORT.md](PLATFORM_SUPPORT.md),
+[DATA_SCHEMA.md](DATA_SCHEMA.md), and [SCHEMA_MIGRATION_V2.md](SCHEMA_MIGRATION_V2.md).
+Catalog `schema_version` is **2** (live command schema v2).
 ## Verification pipeline
 
 ```

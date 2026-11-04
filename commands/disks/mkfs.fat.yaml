@@ -1,17 +1,16 @@
+schema_version: 2
 id: mkfs.fat
 name: mkfs.fat
+kind: executable
+category: disks
 summary:
   tr: FAT/VFAT dosya sistemi oluşturur (yıkıcı).
   en: Create a FAT/VFAT filesystem (destructive).
 description:
-  tr: >
-    dosfstools `mkfs.fat` (çoğu sistemde `mkfs.vfat` aynı ikili) FAT12/16/32
-    oluşturur; USB, EFI sistem bölümü ve SD kartlarda yaygındır. Yanlış
-    aygıt veriyi siler. `-n` etiket, `-F` FAT boyutu seçer. reviewed.
-  en: >
-    dosfstools `mkfs.fat` (often same binary as `mkfs.vfat`) creates
-    FAT12/16/32 — common for USB, ESP, and SD cards. Wrong device wipes
-    data. `-n` sets label, `-F` selects FAT size. Reviewed, not verified.
+  tr: |
+    dosfstools `mkfs.fat` (çoğu sistemde `mkfs.vfat` aynı ikili) FAT12/16/32 oluşturur; USB, EFI sistem bölümü ve SD kartlarda yaygındır. Yanlış aygıt veriyi siler. `-n` etiket, `-F` FAT boyutu seçer. reviewed.
+  en: |
+    dosfstools `mkfs.fat` (often same binary as `mkfs.vfat`) creates FAT12/16/32 — common for USB, ESP, and SD cards. Wrong device wipes data. `-n` sets label, `-F` selects FAT size. Reviewed, not verified.
 tags:
 - disk
 - storage
@@ -23,11 +22,27 @@ risk: destructive
 requires_elevated: true
 platforms:
 - linux
+operating_systems:
+- linux
 packages:
   arch: dosfstools
   debian: dosfstools
   ubuntu: dosfstools
   fedora: dosfstools
+package_refs:
+- manager: pacman
+  package: dosfstools
+  distributions:
+  - arch
+- manager: apt
+  package: dosfstools
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: dosfstools
+  distributions:
+  - fedora
 install_notes:
   tr: |
     Arch: pacman -S dosfstools
@@ -74,12 +89,10 @@ examples:
     en: Labeled FAT32 (DANGER)
   command: sudo mkfs.fat -F 32 -n ESP /dev/sdXN
   explanation:
-    tr: >
-      Yer tutucu — özellikle USB/ESP yollarında lsblk ile doğrulayın.
-      Windows/EFI paylaşımlı ortamlarda yanlış disk seçimi yaygındır.
-    en: >
-      Placeholder — double-check with lsblk, especially for USB/ESP paths.
-      Wrong-disk mistakes are common in shared Windows/EFI setups.
+    tr: |
+      Yer tutucu — özellikle USB/ESP yollarında lsblk ile doğrulayın. Windows/EFI paylaşımlı ortamlarda yanlış disk seçimi yaygındır.
+    en: |
+      Placeholder — double-check with lsblk, especially for USB/ESP paths. Wrong-disk mistakes are common in shared Windows/EFI setups.
   risk: destructive
   requires_elevated: true
 related:
@@ -116,4 +129,3 @@ nova:
   concepts:
   - storage
   favorite_eligible: false
-category: disks

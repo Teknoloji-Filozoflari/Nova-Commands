@@ -1,5 +1,8 @@
+schema_version: 2
 id: ls
 name: ls
+kind: executable
+category: filesystem
 summary:
   tr: Dizin içeriğini listeler.
   en: List directory contents.
@@ -18,6 +21,9 @@ platforms:
 - linux
 - macos
 - bsd
+operating_systems:
+- linux
+- macos
 shells:
 - any
 packages:
@@ -26,17 +32,30 @@ packages:
   ubuntu: coreutils
   fedora: coreutils
   rhel: coreutils
+package_refs:
+- manager: pacman
+  package: coreutils
+  distributions:
+  - arch
+- manager: apt
+  package: coreutils
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: coreutils
+  distributions:
+  - fedora
+  - rhel
 install_notes:
-  tr: 'Arch: pacman -S coreutils (genelde taban sistemde vardır).
-
+  tr: |-
+    Arch: pacman -S coreutils (genelde taban sistemde vardır).
     Debian/Ubuntu: apt install coreutils
-
-    Fedora: dnf install coreutils'
-  en: 'Arch: pacman -S coreutils (usually in base).
-
+    Fedora: dnf install coreutils
+  en: |-
+    Arch: pacman -S coreutils (usually in base).
     Debian/Ubuntu: apt install coreutils
-
-    Fedora: dnf install coreutils'
+    Fedora: dnf install coreutils
 flags:
 - flag: -a
   long: --all
@@ -116,4 +135,3 @@ nova:
   concepts:
   - files
   - terminal-basics
-category: filesystem

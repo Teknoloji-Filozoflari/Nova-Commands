@@ -1,5 +1,8 @@
+schema_version: 2
 id: lsusb
 name: lsusb
+kind: executable
+category: hardware
 summary:
   tr: USB aygıtlarını listeler.
   en: List USB devices.
@@ -12,11 +15,27 @@ risk: safe
 requires_elevated: false
 platforms:
 - linux
+operating_systems:
+- linux
 packages:
   arch: usbutils
   debian: usbutils
   ubuntu: usbutils
   fedora: usbutils
+package_refs:
+- manager: pacman
+  package: usbutils
+  distributions:
+  - arch
+- manager: apt
+  package: usbutils
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: usbutils
+  distributions:
+  - fedora
 install_notes:
   tr: 'Arch: pacman -S usbutils'
   en: 'Arch: pacman -S usbutils'
@@ -44,7 +63,6 @@ verification:
   - man 8 lsusb
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-bootstrap
-category: hardware
 nova:
   concepts:
   - terminal-basics

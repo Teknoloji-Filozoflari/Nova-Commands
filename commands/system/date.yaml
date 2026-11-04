@@ -1,5 +1,8 @@
+schema_version: 2
 id: date
 name: date
+kind: executable
+category: system
 summary:
   tr: Tarih ve saati yazdırır veya ayarlar.
   en: Print or set the system date.
@@ -15,11 +18,28 @@ platforms:
 - linux
 - macos
 - bsd
+operating_systems:
+- linux
+- macos
 packages:
   arch: coreutils
   debian: coreutils
   ubuntu: coreutils
   fedora: coreutils
+package_refs:
+- manager: pacman
+  package: coreutils
+  distributions:
+  - arch
+- manager: apt
+  package: coreutils
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: coreutils
+  distributions:
+  - fedora
 flags:
 - flag: -u
   long: --utc
@@ -54,7 +74,6 @@ verification:
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-phase15
   notes: Flag -u and -Iseconds (GNU --iso-8601) confirmed; print-only examples (no set).
-category: system
 nova:
   concepts:
   - systemd

@@ -1,5 +1,8 @@
+schema_version: 2
 id: cd
 name: cd
+kind: shell_builtin
+category: shell
 summary:
   tr: Çalışma dizinini değiştirir (kabuk yerleşiği).
   en: Change the shell working directory (builtin).
@@ -14,6 +17,9 @@ platforms:
 - linux
 - macos
 - bsd
+operating_systems:
+- linux
+- macos
 shells:
 - bash
 - zsh
@@ -59,4 +65,3 @@ nova:
   - shell-builtin
   - terminal-basics
   - path
-category: shell

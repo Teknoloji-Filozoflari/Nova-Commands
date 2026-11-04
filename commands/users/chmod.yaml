@@ -1,5 +1,8 @@
+schema_version: 2
 id: chmod
 name: chmod
+kind: executable
+category: users
 summary:
   tr: Dosya kipini (izinlerini) değiştirir.
   en: Change file mode bits.
@@ -15,11 +18,28 @@ platforms:
 - linux
 - macos
 - bsd
+operating_systems:
+- linux
+- macos
 packages:
   arch: coreutils
   debian: coreutils
   ubuntu: coreutils
   fedora: coreutils
+package_refs:
+- manager: pacman
+  package: coreutils
+  distributions:
+  - arch
+- manager: apt
+  package: coreutils
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: coreutils
+  distributions:
+  - fedora
 flags:
 - flag: -R
   long: --recursive
@@ -62,7 +82,6 @@ verification:
   - man 1 chmod
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-bootstrap
-category: users
 nova:
   concepts:
   - permissions

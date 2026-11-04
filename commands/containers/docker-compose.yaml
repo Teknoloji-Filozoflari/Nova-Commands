@@ -1,5 +1,8 @@
+schema_version: 2
 id: docker-compose
 name: docker-compose
+kind: executable
+category: containers
 summary:
   tr: Çok konteynerli Compose aracı.
   en: Multi-container Compose tool.
@@ -15,8 +18,15 @@ risk: dangerous
 requires_elevated: false
 platforms:
 - linux
+operating_systems:
+- linux
 packages:
   arch: docker-compose
+package_refs:
+- manager: pacman
+  package: docker-compose
+  distributions:
+  - arch
 install_notes:
   tr: |-
     Arch: pacman -S docker-compose
@@ -88,4 +98,3 @@ verification:
 nova:
   concepts:
   - containers
-category: containers

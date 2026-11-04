@@ -1,5 +1,8 @@
+schema_version: 2
 id: tar
 name: tar
+kind: executable
+category: archives
 summary:
   tr: Tar arşivlerini oluşturur veya çıkarır.
   en: Create or extract tape archives.
@@ -14,11 +17,28 @@ platforms:
 - linux
 - macos
 - bsd
+operating_systems:
+- linux
+- macos
 packages:
   arch: tar
   debian: tar
   ubuntu: tar
   fedora: tar
+package_refs:
+- manager: pacman
+  package: tar
+  distributions:
+  - arch
+- manager: apt
+  package: tar
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: tar
+  distributions:
+  - fedora
 flags:
 - flag: -x
   long: --extract
@@ -92,7 +112,6 @@ verification:
   - man 1 tar
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-bootstrap
-category: archives
 nova:
   concepts:
   - files

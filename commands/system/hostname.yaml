@@ -1,5 +1,8 @@
+schema_version: 2
 id: hostname
 name: hostname
+kind: executable
+category: system
 summary:
   tr: Sistem ana bilgisayar adını gösterir veya ayarlar.
   en: Show or set the system hostname.
@@ -14,18 +17,35 @@ platforms:
 - linux
 - macos
 - bsd
+operating_systems:
+- linux
+- macos
 packages:
   arch: inetutils
   debian: hostname
   ubuntu: hostname
   fedora: hostname
+package_refs:
+- manager: pacman
+  package: inetutils
+  distributions:
+  - arch
+- manager: apt
+  package: hostname
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: hostname
+  distributions:
+  - fedora
 install_notes:
-  tr: 'Arch: pacman -S inetutils (hostname).
-
-    Kalıcı ad için hostnamectl tercih edin.'
-  en: 'Arch: pacman -S inetutils.
-
-    Prefer hostnamectl for persistent names.'
+  tr: |-
+    Arch: pacman -S inetutils (hostname).
+    Kalıcı ad için hostnamectl tercih edin.
+  en: |-
+    Arch: pacman -S inetutils.
+    Prefer hostnamectl for persistent names.
 examples:
 - title:
     tr: Adı gör
@@ -51,7 +71,6 @@ verification:
   - man 1 hostname
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-bootstrap
-category: system
 nova:
   concepts:
   - systemd

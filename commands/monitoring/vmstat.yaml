@@ -1,5 +1,8 @@
+schema_version: 2
 id: vmstat
 name: vmstat
+kind: executable
+category: monitoring
 summary:
   tr: Sanal bellek ve CPU istatistikleri.
   en: Report virtual memory and CPU statistics.
@@ -13,11 +16,27 @@ risk: safe
 requires_elevated: false
 platforms:
 - linux
+operating_systems:
+- linux
 packages:
   arch: procps-ng
   debian: procps
   ubuntu: procps
   fedora: procps-ng
+package_refs:
+- manager: pacman
+  package: procps-ng
+  distributions:
+  - arch
+- manager: apt
+  package: procps
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: procps-ng
+  distributions:
+  - fedora
 examples:
 - title:
     tr: Anlık
@@ -53,7 +72,6 @@ verification:
   - man 8 vmstat
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-coverage
-category: monitoring
 nova:
   concepts:
   - terminal-basics

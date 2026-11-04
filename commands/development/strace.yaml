@@ -1,5 +1,7 @@
+schema_version: 2
 id: strace
 name: strace
+kind: executable
 category: development
 summary:
   tr: Sistem çağrılarını izler.
@@ -16,26 +18,38 @@ risk: caution
 requires_elevated: false
 platforms:
 - linux
+operating_systems:
+- linux
 packages:
   arch: strace
   debian: strace
   ubuntu: strace
   fedora: strace
+package_refs:
+- manager: pacman
+  package: strace
+  distributions:
+  - arch
+- manager: apt
+  package: strace
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: strace
+  distributions:
+  - fedora
 install_notes:
-  tr: 'Arch: pacman -S strace
-
+  tr: |-
+    Arch: pacman -S strace
     Debian/Ubuntu: apt install strace
-
     Fedora: dnf install strace
-
-    Bazı süreçler için ptrace izinleri / sudo gerekebilir.'
-  en: 'Arch: pacman -S strace
-
+    Bazı süreçler için ptrace izinleri / sudo gerekebilir.
+  en: |-
+    Arch: pacman -S strace
     Debian/Ubuntu: apt install strace
-
     Fedora: dnf install strace
-
-    Some targets need ptrace permissions or sudo.'
+    Some targets need ptrace permissions or sudo.
 flags:
 - flag: -e
   takes_value: true

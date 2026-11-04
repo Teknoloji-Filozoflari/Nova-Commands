@@ -1,5 +1,8 @@
+schema_version: 2
 id: mv
 name: mv
+kind: executable
+category: filesystem
 summary:
   tr: Dosya/dizin taşır veya yeniden adlandırır.
   en: Move or rename files and directories.
@@ -16,11 +19,28 @@ platforms:
 - linux
 - macos
 - bsd
+operating_systems:
+- linux
+- macos
 packages:
   arch: coreutils
   debian: coreutils
   ubuntu: coreutils
   fedora: coreutils
+package_refs:
+- manager: pacman
+  package: coreutils
+  distributions:
+  - arch
+- manager: apt
+  package: coreutils
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: coreutils
+  distributions:
+  - fedora
 flags:
 - flag: -i
   long: --interactive
@@ -79,7 +99,6 @@ verification:
   - man 1 mv (GNU coreutils)
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-bootstrap
-category: filesystem
 nova:
   concepts:
   - files

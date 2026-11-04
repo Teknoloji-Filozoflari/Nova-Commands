@@ -1,5 +1,8 @@
+schema_version: 2
 id: dpkg
 name: dpkg
+kind: package_manager
+category: packages
 summary:
   tr: Debian paket yöneticisinin düşük seviye aracı.
   en: Debian package manager low-level tool.
@@ -13,9 +16,17 @@ risk: dangerous
 requires_elevated: true
 platforms:
 - linux
+operating_systems:
+- linux
 packages:
   debian: dpkg
   ubuntu: dpkg
+package_refs:
+- manager: apt
+  package: dpkg
+  distributions:
+  - debian
+  - ubuntu
 install_notes:
   tr: Debian/Ubuntu tabanında gelir. Arch’ta yok — pacman kullanın.
   en: Ships on Debian/Ubuntu. Not on Arch — use pacman.
@@ -94,4 +105,3 @@ nova:
   concepts:
   - packages
   - package-managers
-category: packages

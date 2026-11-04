@@ -1,5 +1,8 @@
+schema_version: 2
 id: diff
 name: diff
+kind: executable
+category: development
 summary:
   tr: Dosyaları satır satır karşılaştırır.
   en: Compare files line by line.
@@ -15,11 +18,28 @@ platforms:
 - linux
 - macos
 - bsd
+operating_systems:
+- linux
+- macos
 packages:
   arch: diffutils
   debian: diffutils
   ubuntu: diffutils
   fedora: diffutils
+package_refs:
+- manager: pacman
+  package: diffutils
+  distributions:
+  - arch
+- manager: apt
+  package: diffutils
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: diffutils
+  distributions:
+  - fedora
 flags:
 - flag: -u
   long: --unified
@@ -54,7 +74,6 @@ verification:
   - man 1 diff
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-bootstrap
-category: development
 nova:
   concepts:
   - terminal-basics

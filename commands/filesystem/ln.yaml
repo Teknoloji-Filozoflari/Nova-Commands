@@ -1,5 +1,8 @@
+schema_version: 2
 id: ln
 name: ln
+kind: executable
+category: filesystem
 summary:
   tr: Sabit veya sembolik bağ oluşturur.
   en: Make hard or symbolic links.
@@ -15,11 +18,28 @@ platforms:
 - linux
 - macos
 - bsd
+operating_systems:
+- linux
+- macos
 packages:
   arch: coreutils
   debian: coreutils
   ubuntu: coreutils
   fedora: coreutils
+package_refs:
+- manager: pacman
+  package: coreutils
+  distributions:
+  - arch
+- manager: apt
+  package: coreutils
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: coreutils
+  distributions:
+  - fedora
 flags:
 - flag: -s
   long: --symbolic
@@ -70,7 +90,6 @@ verification:
   - man 1 ln
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-bootstrap
-category: filesystem
 nova:
   concepts:
   - files

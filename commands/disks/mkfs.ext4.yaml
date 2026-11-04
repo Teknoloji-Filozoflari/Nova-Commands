@@ -1,19 +1,16 @@
+schema_version: 2
 id: mkfs.ext4
 name: mkfs.ext4
+kind: executable
+category: disks
 summary:
   tr: ext4 dosya sistemi oluşturur (yıkıcı).
   en: Create an ext4 filesystem (destructive).
 description:
-  tr: >
-    `mke2fs` / `mkfs.ext4` (e2fsprogs) belirtilen blok aygıtta ext4 oluşturur;
-    mevcut imza ve veriyi yok eder. Yanlış `/dev/...` seçimi kalıcı veri
-    kaybıdır. Etiket için `-L` kullanın. Bu banka girdisi reviewed — verified
-    değil; örnekler yer tutucu ve uyarı odaklıdır.
-  en: >
-    `mke2fs` / `mkfs.ext4` (e2fsprogs) creates ext4 on a block device and
-    destroys existing signatures/data. Wrong `/dev/...` means permanent loss.
-    Use `-L` for a label. Entry is reviewed, not verified; examples are
-    placeholder- and warning-focused.
+  tr: |
+    `mke2fs` / `mkfs.ext4` (e2fsprogs) belirtilen blok aygıtta ext4 oluşturur; mevcut imza ve veriyi yok eder. Yanlış `/dev/...` seçimi kalıcı veri kaybıdır. Etiket için `-L` kullanın. Bu banka girdisi reviewed — verified değil; örnekler yer tutucu ve uyarı odaklıdır.
+  en: |
+    `mke2fs` / `mkfs.ext4` (e2fsprogs) creates ext4 on a block device and destroys existing signatures/data. Wrong `/dev/...` means permanent loss. Use `-L` for a label. Entry is reviewed, not verified; examples are placeholder- and warning-focused.
 tags:
 - disk
 - storage
@@ -24,12 +21,29 @@ risk: destructive
 requires_elevated: true
 platforms:
 - linux
+operating_systems:
+- linux
 packages:
   arch: e2fsprogs
   debian: e2fsprogs
   ubuntu: e2fsprogs
   fedora: e2fsprogs
   rhel: e2fsprogs
+package_refs:
+- manager: pacman
+  package: e2fsprogs
+  distributions:
+  - arch
+- manager: apt
+  package: e2fsprogs
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: e2fsprogs
+  distributions:
+  - fedora
+  - rhel
 install_notes:
   tr: |
     Arch: pacman -S e2fsprogs
@@ -63,12 +77,10 @@ examples:
     en: Dry-run (near-safe)
   command: sudo mkfs.ext4 -n /dev/sdXN
   explanation:
-    tr: >
-      `-n` yazmadan planı gösterir. Yine de doğru aygıtı `lsblk -f` ile
-      doğrulayın; yer tutucuyu olduğu gibi çalıştırmayın.
-    en: >
-      `-n` prints the plan without writing. Still confirm the device with
-      `lsblk -f`; do not run the placeholder as-is.
+    tr: |
+      `-n` yazmadan planı gösterir. Yine de doğru aygıtı `lsblk -f` ile doğrulayın; yer tutucuyu olduğu gibi çalıştırmayın.
+    en: |
+      `-n` prints the plan without writing. Still confirm the device with `lsblk -f`; do not run the placeholder as-is.
   risk: caution
   requires_elevated: true
 - title:
@@ -76,12 +88,10 @@ examples:
     en: Create with label (DANGER)
   command: sudo mkfs.ext4 -L DATA /dev/sdXN
   explanation:
-    tr: >
-      Yer tutucu bölüm yolu. Yanlış aygıt tüm veriyi siler; önce lsblk/blkid,
-      yedek, ardından bilinçli onay.
-    en: >
-      Placeholder partition path. Wrong device wipes data; confirm with
-      lsblk/blkid, back up, then proceed deliberately.
+    tr: |
+      Yer tutucu bölüm yolu. Yanlış aygıt tüm veriyi siler; önce lsblk/blkid, yedek, ardından bilinçli onay.
+    en: |
+      Placeholder partition path. Wrong device wipes data; confirm with lsblk/blkid, back up, then proceed deliberately.
   risk: destructive
   requires_elevated: true
 related:
@@ -116,12 +126,10 @@ verification:
   - mkfs.ext4 -h
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-phase15
-  notes: >
-    Destructive. Prefer -n dry-run example; create example uses /dev/sdXN
-    placeholder only. Not verified.
+  notes: |
+    Destructive. Prefer -n dry-run example; create example uses /dev/sdXN placeholder only. Not verified.
 nova:
   concepts:
   - storage
   favorite_eligible: false
   ui_priority: 45
-category: disks

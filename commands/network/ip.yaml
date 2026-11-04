@@ -1,5 +1,8 @@
+schema_version: 2
 id: ip
 name: ip
+kind: executable
+category: network
 summary:
   tr: Ağ aygıtları, adresler ve rotaları yönetir.
   en: Show and manipulate routing, devices, and tunnels.
@@ -12,11 +15,27 @@ risk: dangerous
 requires_elevated: true
 platforms:
 - linux
+operating_systems:
+- linux
 packages:
   arch: iproute2
   debian: iproute2
   ubuntu: iproute2
   fedora: iproute
+package_refs:
+- manager: pacman
+  package: iproute2
+  distributions:
+  - arch
+- manager: apt
+  package: iproute2
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: iproute
+  distributions:
+  - fedora
 install_notes:
   tr: 'Arch: pacman -S iproute2'
   en: 'Arch: pacman -S iproute2'
@@ -65,7 +84,6 @@ verification:
   - man 8 ip
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-bootstrap
-category: network
 nova:
   concepts:
   - networking

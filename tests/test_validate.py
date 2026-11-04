@@ -37,7 +37,7 @@ def test_build_catalog_shape_and_sha() -> None:
     proc = run(BUILD)
     assert proc.returncode == 0, proc.stderr
     cat = json.loads(out.read_text(encoding="utf-8"))
-    assert cat["schema_version"] == 1
+    assert cat["schema_version"] == 2
     assert cat["kind"] == "nova-commands-bank"
     assert cat["command_count"] == len(cat["commands"])
     assert cat["concept_count"] == len(cat["concepts"])
@@ -46,10 +46,28 @@ def test_build_catalog_shape_and_sha() -> None:
     assert len(cat["content_sha256"]) == 64
     ids = [c["id"] for c in cat["commands"]]
     assert len(ids) == len(set(ids))
+    # Live bank is schema v2
+    for cmd in cat["commands"]:
+        assert cmd.get("schema_version") == 2
+        assert cmd.get("kind") in {
+            "executable",
+            "shell_builtin",
+            "shell_keyword",
+            "powershell_cmdlet",
+            "command_interpreter",
+            "package_manager",
+            "subcommand",
+            "script",
+            "administrative_tool",
+            "remote_cli",
+            "vendor_cli",
+        }
 
     man = json.loads(manifest.read_text(encoding="utf-8"))
     idx = json.loads(search.read_text(encoding="utf-8"))
+    assert man["schema_version"] == 2
     assert man["kind"] == "nova-commands-manifest"
+    assert idx["schema_version"] == 2
     assert idx["kind"] == "nova-commands-search-index"
     assert man["content_sha256"] == cat["content_sha256"] == idx["content_sha256"]
 
@@ -225,16 +243,19 @@ def test_platform_support_doc_exists() -> None:
     assert (ROOT / "docs" / "PLATFORM_SUPPORT.md").is_file()
 
 
-def test_catalog_schema_version_unchanged() -> None:
+def test_catalog_schema_version_is_v2() -> None:
     cat = json.loads((ROOT / "metadata" / "catalog.json").read_text(encoding="utf-8"))
-    assert cat["schema_version"] == 1
+    assert cat["schema_version"] == 2
     assert cat["kind"] == "nova-commands-bank"
 
 
 SCHEMA_V2_VALIDATE = ROOT / "scripts" / "validate_schema_v2.py"
+MIGRATE = ROOT / "scripts" / "migrate_v1_to_v2.py"
 
 SCHEMA_V2_FILES = [
+    "command.schema.json",
     "command.schema.v2.json",
+    "command.schema.v1.json",
     "task.schema.json",
     "profile.schema.json",
     "compatibility.schema.json",
@@ -257,26 +278,58 @@ def test_schema_v2_files_and_fixtures_exist() -> None:
     assert list(fixtures.glob("task-*.yaml"))
     assert list(fixtures.glob("profile-*.yaml"))
     assert list(fixtures.glob("compatibility-*.yaml"))
+    assert MIGRATE.is_file()
 
 
-def test_schema_v2_distinct_from_v1() -> None:
-    v1 = json.loads((ROOT / "schema" / "command.schema.json").read_text())
-    v2 = json.loads((ROOT / "schema" / "command.schema.v2.json").read_text())
-    assert v1["$id"] != v2["$id"]
-    assert "windows" in v2["properties"]["platforms"]["items"]["enum"]
+def test_live_schema_is_v2_with_archived_v1() -> None:
+    live = json.loads((ROOT / "schema" / "command.schema.json").read_text())
+    twin = json.loads((ROOT / "schema" / "command.schema.v2.json").read_text())
+    v1 = json.loads((ROOT / "schema" / "command.schema.v1.json").read_text())
+    assert live["$id"] != twin["$id"]
+    assert live["$id"] != v1["$id"]
+    assert "windows" in live["properties"]["platforms"]["items"]["enum"]
     assert "windows" not in v1["properties"]["platforms"]["items"]["enum"]
-    assert "package_refs" in v2["properties"]
+    assert "package_refs" in live["properties"]
     assert "package_refs" not in v1["properties"]
-    assert "powershell" in v2["properties"]["shells"]["items"]["enum"]
-    assert "cmd" in v2["properties"]["shells"]["items"]["enum"]
+    assert "powershell" in live["properties"]["shells"]["items"]["enum"]
+    assert "cmd" in live["properties"]["shells"]["items"]["enum"]
 
 
-def test_live_bank_still_v1_only() -> None:
-    """commands/ must not carry schema_version: 2 until Faz 3 migrate."""
+def test_live_bank_is_schema_v2() -> None:
+    """All commands/ YAML must carry schema_version: 2 after Faz 3 migrate."""
     for path in (ROOT / "commands").glob("*/*.yaml"):
         data = yaml.safe_load(path.read_text(encoding="utf-8"))
-        assert data.get("schema_version") in (None, 1), path
+        assert data.get("schema_version") == 2, path
+        assert data.get("kind"), path
+
+
+def test_migrate_check_passes() -> None:
+    proc = run(MIGRATE, "--check")
+    assert proc.returncode == 0, proc.stderr
+    assert "OK:" in proc.stdout
+
+
+def test_package_refs_prefer_pacman_when_arch() -> None:
+    """Arch-first: when packages.arch exists, package_refs should lead with pacman."""
+    for path in (ROOT / "commands").glob("*/*.yaml"):
+        data = yaml.safe_load(path.read_text(encoding="utf-8"))
+        packages = data.get("packages") or {}
+        refs = data.get("package_refs") or []
+        if "arch" in packages and refs:
+            assert refs[0]["manager"] == "pacman", path
+
+
+def test_verification_statuses_not_silently_demoted() -> None:
+    """Sanity: bank still has verified + reviewed after migrate (not all draft)."""
+    statuses = {}
+    for path in (ROOT / "commands").glob("*/*.yaml"):
+        data = yaml.safe_load(path.read_text(encoding="utf-8"))
+        st = data["verification"]["status"]
+        statuses[st] = statuses.get(st, 0) + 1
+    assert statuses.get("verified", 0) >= 20
+    assert statuses.get("reviewed", 0) >= 100
 
 
 def test_data_schema_doc_exists() -> None:
     assert (ROOT / "docs" / "DATA_SCHEMA.md").is_file()
+    assert (ROOT / "docs" / "SCHEMA_MIGRATION_V2.md").is_file()

@@ -1,21 +1,8 @@
-packages:
-  arch: coreutils
-  debian: coreutils
-  ubuntu: coreutils
-  fedora: coreutils
-platforms:
-- linux
-- macos
-- bsd
-requires_elevated: false
-verification:
-  status: reviewed
-  sources:
-  - man 1 cut
-  last_reviewed: '2026-11-02'
-  reviewer: nova-commands-bootstrap
+schema_version: 2
 id: cut
 name: cut
+kind: executable
+category: text
 summary:
   tr: Satırlardan alan veya bayt keser.
   en: Remove sections from each line.
@@ -26,6 +13,33 @@ tags:
 - text
 - fields
 risk: safe
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+operating_systems:
+- linux
+- macos
+packages:
+  arch: coreutils
+  debian: coreutils
+  ubuntu: coreutils
+  fedora: coreutils
+package_refs:
+- manager: pacman
+  package: coreutils
+  distributions:
+  - arch
+- manager: apt
+  package: coreutils
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: coreutils
+  distributions:
+  - fedora
 flags:
 - flag: -d
   long: --delimiter
@@ -66,7 +80,12 @@ intent:
   en:
   - cut column
   - select field
-category: text
+verification:
+  status: reviewed
+  sources:
+  - man 1 cut
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-bootstrap
 nova:
   concepts:
   - files

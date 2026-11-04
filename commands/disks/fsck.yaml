@@ -1,18 +1,16 @@
+schema_version: 2
 id: fsck
 name: fsck
+kind: executable
+category: disks
 summary:
   tr: Dosya sistemi bütünlük kontrolü / onarım ön yüzü.
   en: Check and repair Linux filesystems (frontend).
 description:
-  tr: >
-    util-linux `fsck`, türe göre `fsck.<type>` (ör. e2fsck) çağırır. Bağlı
-    (mounted) FS’te onarım tehlikelidir; `-N` yalnızca planı gösterir, `-M`
-    bağlı olanları atlar. Yanlış onarım veri kaybına yol açabilir — dangerous.
-    reviewed, verified değil.
-  en: >
-    util-linux `fsck` dispatches to `fsck.<type>` (e.g. e2fsck). Repairing a
-    mounted FS is hazardous; `-N` shows the plan only, `-M` skips mounted.
-    Bad repairs can lose data — dangerous. Reviewed, not verified.
+  tr: |
+    util-linux `fsck`, türe göre `fsck.<type>` (ör. e2fsck) çağırır. Bağlı (mounted) FS’te onarım tehlikelidir; `-N` yalnızca planı gösterir, `-M` bağlı olanları atlar. Yanlış onarım veri kaybına yol açabilir — dangerous. reviewed, verified değil.
+  en: |
+    util-linux `fsck` dispatches to `fsck.<type>` (e.g. e2fsck). Repairing a mounted FS is hazardous; `-N` shows the plan only, `-M` skips mounted. Bad repairs can lose data — dangerous. Reviewed, not verified.
 tags:
 - disk
 - storage
@@ -22,11 +20,27 @@ risk: dangerous
 requires_elevated: true
 platforms:
 - linux
+operating_systems:
+- linux
 packages:
   arch: util-linux
   debian: util-linux
   ubuntu: util-linux
   fedora: util-linux
+package_refs:
+- manager: pacman
+  package: util-linux
+  distributions:
+  - arch
+- manager: apt
+  package: util-linux
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: util-linux
+  distributions:
+  - fedora
 install_notes:
   tr: |
     Arch: pacman -S util-linux; ext için ayrıca e2fsprogs, XFS için xfsprogs.
@@ -74,12 +88,10 @@ examples:
     en: Check while unmounted (CAUTION)
   command: sudo fsck -M /dev/sdXN
   explanation:
-    tr: >
-      Aygıtın umount edildiğinden emin olun. Otomatik onarım bayrakları
-      (`-y` vb.) bu örnekte yok — bilinçli kullanım gerektirir.
-    en: >
-      Ensure the device is unmounted. Auto-repair flags (`-y`, etc.) are
-      omitted here — they need deliberate use.
+    tr: |
+      Aygıtın umount edildiğinden emin olun. Otomatik onarım bayrakları (`-y` vb.) bu örnekte yok — bilinçli kullanım gerektirir.
+    en: |
+      Ensure the device is unmounted. Auto-repair flags (`-y`, etc.) are omitted here — they need deliberate use.
   risk: dangerous
   requires_elevated: true
 related:
@@ -108,11 +120,9 @@ verification:
   - fsck --help
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-phase15
-  notes: >
-    No auto-repair (-y) recipes. Prefer -N/-M. Not verified. Helper tools
-    (e2fsck) remain separate future entries if needed.
+  notes: |
+    No auto-repair (-y) recipes. Prefer -N/-M. Not verified. Helper tools (e2fsck) remain separate future entries if needed.
 nova:
   concepts:
   - storage
   favorite_eligible: false
-category: disks

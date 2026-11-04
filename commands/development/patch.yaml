@@ -1,5 +1,7 @@
+schema_version: 2
 id: patch
 name: patch
+kind: executable
 category: development
 summary:
   tr: diff çıktısını dosyalara uygular.
@@ -17,22 +19,37 @@ platforms:
 - linux
 - macos
 - bsd
+operating_systems:
+- linux
+- macos
 packages:
   arch: patch
   debian: patch
   ubuntu: patch
   fedora: patch
+package_refs:
+- manager: pacman
+  package: patch
+  distributions:
+  - arch
+- manager: apt
+  package: patch
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: patch
+  distributions:
+  - fedora
 install_notes:
-  tr: 'Arch: pacman -S patch
-
+  tr: |-
+    Arch: pacman -S patch
     Debian/Ubuntu: apt install patch
-
-    Fedora: dnf install patch'
-  en: 'Arch: pacman -S patch
-
+    Fedora: dnf install patch
+  en: |-
+    Arch: pacman -S patch
     Debian/Ubuntu: apt install patch
-
-    Fedora: dnf install patch'
+    Fedora: dnf install patch
 flags:
 - flag: -p1
   meaning:

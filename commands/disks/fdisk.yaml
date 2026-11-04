@@ -1,5 +1,8 @@
+schema_version: 2
 id: fdisk
 name: fdisk
+kind: executable
+category: disks
 summary:
   tr: Disk bölüm tablosu düzenleyici.
   en: Manipulate disk partition tables.
@@ -14,11 +17,27 @@ risk: destructive
 requires_elevated: true
 platforms:
 - linux
+operating_systems:
+- linux
 packages:
   arch: util-linux
   debian: fdisk
   ubuntu: fdisk
   fedora: util-linux
+package_refs:
+- manager: pacman
+  package: util-linux
+  distributions:
+  - arch
+- manager: apt
+  package: fdisk
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: util-linux
+  distributions:
+  - fedora
 flags:
 - flag: -l
   meaning:
@@ -68,4 +87,3 @@ verification:
 nova:
   concepts:
   - storage
-category: disks

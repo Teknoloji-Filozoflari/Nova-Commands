@@ -1,5 +1,8 @@
+schema_version: 2
 id: stat
 name: stat
+kind: executable
+category: filesystem
 summary:
   tr: Dosya durumu ve inode bilgisi gösterir.
   en: Display file status and inode data.
@@ -15,11 +18,28 @@ platforms:
 - linux
 - macos
 - bsd
+operating_systems:
+- linux
+- macos
 packages:
   arch: coreutils
   debian: coreutils
   ubuntu: coreutils
   fedora: coreutils
+package_refs:
+- manager: pacman
+  package: coreutils
+  distributions:
+  - arch
+- manager: apt
+  package: coreutils
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: coreutils
+  distributions:
+  - fedora
 flags:
 - flag: -c
   long: --format
@@ -65,7 +85,6 @@ verification:
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-phase17
   notes: Read-only file metadata; -c/-L already marked verified.
-category: filesystem
 nova:
   concepts:
   - files

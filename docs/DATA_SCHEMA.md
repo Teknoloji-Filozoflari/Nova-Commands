@@ -1,62 +1,49 @@
-# Data schema — dual-path (v1 bank + v2 design)
+# Data schema — live v2 (Faz 3)
 
-## Strategy: **dual**, not breaking
+## Strategy: **live catalog on schema v2**
 
-| Layer | File | Role today (Faz 2) |
-|-------|------|--------------------|
-| **Live bank** | `schema/command.schema.json` (**v1**) | Validates all `commands/**/*.yaml` |
-| **v2 design** | `schema/command.schema.v2.json` | Soft-validated via `fixtures/schema-v2/` only |
-| **Stubs** | `task.schema.json`, `profile.schema.json`, `compatibility.schema.json` | Shapes for Faz 8+; fixtures only |
-| **Catalog** | `metadata/catalog.json` | Remains `schema_version: **1**` until Faz 3 migrate |
+| Layer | File | Role (Faz 3+) |
+|-------|------|---------------|
+| **Live bank** | `schema/command.schema.json` (**v2**) | Validates all `commands/**/*.yaml` |
+| **v2 twin** | `schema/command.schema.v2.json` | Same properties; distinct `$id` for tooling |
+| **Archived v1** | `schema/command.schema.v1.json` | Historical Linux-era schema |
+| **Stubs** | `task` / `profile` / `compatibility` | Fixtures only until Faz 8 |
+| **Catalog** | `metadata/catalog.json` | `schema_version: **2**` |
 
-Faz 3 will migrate the 143 command YAML files onto v2 and then bump the catalog.
-This PR does **not** mass-migrate, demote `verified`, or change LICENSE / minisign.
+Faz 2 used a dual-path (v1 bank + v2 fixtures). **Faz 3 ends dual forever for the live bank:** all 143 commands migrated; catalog/manifest/search-index bumped to 2.
 
-## Why dual (not a single additive v1)?
-
-v1 uses `additionalProperties: false`, hard enums without `windows` /
-`powershell` / `cmd`, and fixed `packages.{arch,debian,ubuntu,fedora,rhel}`
-keys. Expanding that file in place would either reject new fields or force an
-immediate bank rewrite. Keeping v1 untouched preserves CI + Nova vendor pins;
-v2 evolves beside it.
+See [SCHEMA_MIGRATION_V2.md](SCHEMA_MIGRATION_V2.md) for the field map and `migrate_v1_to_v2.py`.
 
 ## Command schema v2 highlights
 
-- **`platforms`**: adds `windows` (and finer OS tags); optional
-  `operating_systems` / `distributions` / `architectures` /
-  `execution_environments` registry refs (Faz 1 metadata).
-- **`shells`**: PowerShell, Windows PowerShell, cmd, nushell, … plus v1 short
-  names (`bash`, `sh`, `any`, …).
-- **`kind`**: `executable`, `shell_builtin`, `powershell_cmdlet`,
-  `vendor_cli`, …
-- **`package_refs`**: `{ manager: <package-managers.yaml id>, package: name }`
-  — preferred over legacy fixed keys. Legacy `packages` object still allowed
-  for migration dual-read.
-- **`implementations`**: optional per-command platform/shell variants.
-  Multi-command **tasks** use `task.schema.json` (not command records).
-- Examples may carry `shell`, `platforms`, `privilege` (admin/UAC-aware).
+- **`schema_version: 2`** required on every command YAML.
+- **`platforms`**: includes `windows` (capability); existing bank entries keep their honest linux/macos/bsd tags.
+- **`shells`**: PowerShell, cmd, nushell, … plus v1 short names.
+- **`kind`**: `executable`, `shell_builtin`, `package_manager`, …
+- **`package_refs`**: `{ manager: <package-managers.yaml id>, package, distributions? }` — preferred. Legacy `packages` keys kept for dual-read.
+- **`operating_systems` / `distributions` / …**: optional registry refs (Faz 1 metadata).
+- **`implementations`**: optional per-command variants (tasks use `task.schema.json`).
+- Examples may carry `shell`, `platforms`, `privilege`.
 
 ## Tasks vs commands
 
-Master §9 example (`show-network-config` with linux-ip / windows-powershell /
-windows-cmd) is a **task**. Individual tools (`ip`, `Get-NetIPConfiguration`,
-`ipconfig`) remain **command** records. Do not reuse command ids for tasks.
+Multi-tool user goals (`show-local-ip` with linux-ip / windows-powershell / windows-cmd) are **tasks**. Individual tools remain **command** records. Do not reuse command ids for tasks. Real `tasks/` / `profiles/` trees are Faz 8.
 
-## Soft validation
+## Validation
 
 ```bash
-python3 scripts/validate_schema_v2.py
-python3 scripts/validate_catalog.py   # still v1 bank + soft platform + soft v2
+python3 scripts/validate_catalog.py      # live v2 bank + concepts + soft registries/stubs
+python3 scripts/validate_schema_v2.py    # schema load + fixtures
+python3 scripts/migrate_v1_to_v2.py --check
 ```
 
-Fixtures live under `fixtures/schema-v2/` and must stay `verification.status:
-draft`. They are **not** part of the published catalog hash.
+Fixtures under `fixtures/schema-v2/` stay `draft` and are **not** in the catalog hash.
 
-## Out of scope here
+## Non-goals of Faz 3
 
-- Migrating `commands/` or `concepts/`
-- Creating `tasks/` or `profiles/` trees with real content
-- Bumping catalog / search-index / manifest `schema_version`
-- Rotating `keys/minisign.pub` or changing LICENSE
+- Adding Windows/macOS/BSD **command content** (Faz 5–6)
+- Creating real `tasks/` or `profiles/` trees (Faz 8)
+- Demoting honest `verified` / `reviewed` statuses
+- Changing LICENSE or `keys/minisign.pub`
 
-See also: [PLATFORM_SUPPORT.md](PLATFORM_SUPPORT.md), [architecture.md](architecture.md).
+See also: [PLATFORM_SUPPORT.md](PLATFORM_SUPPORT.md), [architecture.md](architecture.md), [NOVA_INTEGRATION.md](NOVA_INTEGRATION.md).

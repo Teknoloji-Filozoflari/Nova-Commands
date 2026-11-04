@@ -1,5 +1,7 @@
+schema_version: 2
 id: renice
 name: renice
+kind: executable
 category: processes
 summary:
   tr: Çalışan sürecin nice değerini değiştirir.
@@ -19,22 +21,37 @@ platforms:
 - linux
 - macos
 - bsd
+operating_systems:
+- linux
+- macos
 packages:
   arch: util-linux
   debian: bsdutils
   ubuntu: bsdutils
   fedora: util-linux
+package_refs:
+- manager: pacman
+  package: util-linux
+  distributions:
+  - arch
+- manager: apt
+  package: bsdutils
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: util-linux
+  distributions:
+  - fedora
 install_notes:
-  tr: 'Arch: util-linux (temel)
-
+  tr: |-
+    Arch: util-linux (temel)
     Debian/Ubuntu: bsdutils (temel)
-
-    Fedora: util-linux'
-  en: 'Arch: util-linux (base)
-
+    Fedora: util-linux
+  en: |-
+    Arch: util-linux (base)
     Debian/Ubuntu: bsdutils (base)
-
-    Fedora: util-linux'
+    Fedora: util-linux
 flags:
 - flag: -n
   long: --priority

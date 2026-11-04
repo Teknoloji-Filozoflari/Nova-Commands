@@ -1,17 +1,16 @@
+schema_version: 2
 id: parted
 name: parted
+kind: executable
+category: disks
 summary:
   tr: GNU Parted — bölüm tablosu düzenleyici (yıkıcı).
   en: GNU Parted — partition table manipulator (destructive).
 description:
-  tr: >
-    GPT/MBR bölüm oluşturma, silme ve yeniden boyutlandırmaya yarar.
-    `parted -l` okuma amaçlıdır; `mklabel` / `mkpart` / `rm` veri kaybettirir.
-    Script modu (`-s`) onay istemez — özellikle tehlikeli. reviewed, verified değil.
-  en: >
-    Creates, deletes, and resizes GPT/MBR partitions. `parted -l` is
-    read-oriented; `mklabel` / `mkpart` / `rm` destroy data. Script mode
-    (`-s`) skips prompts — especially dangerous. Reviewed, not verified.
+  tr: |
+    GPT/MBR bölüm oluşturma, silme ve yeniden boyutlandırmaya yarar. `parted -l` okuma amaçlıdır; `mklabel` / `mkpart` / `rm` veri kaybettirir. Script modu (`-s`) onay istemez — özellikle tehlikeli. reviewed, verified değil.
+  en: |
+    Creates, deletes, and resizes GPT/MBR partitions. `parted -l` is read-oriented; `mklabel` / `mkpart` / `rm` destroy data. Script mode (`-s`) skips prompts — especially dangerous. Reviewed, not verified.
 tags:
 - disk
 - storage
@@ -20,12 +19,29 @@ risk: destructive
 requires_elevated: true
 platforms:
 - linux
+operating_systems:
+- linux
 packages:
   arch: parted
   debian: parted
   ubuntu: parted
   fedora: parted
   rhel: parted
+package_refs:
+- manager: pacman
+  package: parted
+  distributions:
+  - arch
+- manager: apt
+  package: parted
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: parted
+  distributions:
+  - fedora
+  - rhel
 install_notes:
   tr: |
     Arch: pacman -S parted
@@ -69,13 +85,10 @@ examples:
     en: Interactive (DANGER)
   command: sudo parted /dev/sdX
   explanation:
-    tr: >
-      Yer tutucu disk. Yanlış cihaz seçimi bölüm tablosunu bozar. Önce
-      `parted -l` / `lsblk`. Bu örnek script komutu vermez.
-    en: >
-      Placeholder disk. Wrong device wrecks the partition table. Confirm
-      with `parted -l` / `lsblk` first. This example does not pass scripted
-      destroy commands.
+    tr: |
+      Yer tutucu disk. Yanlış cihaz seçimi bölüm tablosunu bozar. Önce `parted -l` / `lsblk`. Bu örnek script komutu vermez.
+    en: |
+      Placeholder disk. Wrong device wrecks the partition table. Confirm with `parted -l` / `lsblk` first. This example does not pass scripted destroy commands.
   risk: destructive
   requires_elevated: true
 related:
@@ -106,11 +119,9 @@ verification:
   - parted --help
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-phase15
-  notes: >
-    List-first examples only; no mklabel/mkpart recipes that invite misuse.
-    Not verified.
+  notes: |
+    List-first examples only; no mklabel/mkpart recipes that invite misuse. Not verified.
 nova:
   concepts:
   - storage
   favorite_eligible: false
-category: disks

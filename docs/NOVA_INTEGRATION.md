@@ -25,18 +25,19 @@ Repository: https://github.com/Teknoloji-Filozoflari/Nova-Commands
 `build_catalog.py` hashes the **canonical** JSON of:
 
 ```json
-{ "schema_version": 1, "kind": "nova-commands-bank", "commands": [...], "concepts": [...] }
+{ "schema_version": 2, "kind": "nova-commands-bank", "commands": [...], "concepts": [...] }
 ```
 
 - Keys sorted; UTF-8; compact separators.
 - **`generated_at` is excluded** so rebuilds with the same content keep the same digest.
 - The same digest is copied into `catalog.json`, `search-index.json`, and `manifest.json`.
+- **Faz 3:** `schema_version` inside the hash payload is **2** — digests are not comparable to v1 pins.
 
 Clients should:
 
 1. Fetch `manifest.json` (or catalog).
 2. Compare `content_sha256` to a pinned release digest when offline-caching.
-3. Reject payloads whose `kind` / `schema_version` do not match.
+3. Reject payloads whose `kind` / `schema_version` do not match (**accept `schema_version == 2`**).
 
 ## Client flow
 
@@ -66,15 +67,35 @@ treat it as equivalent to a verified Release.
 | `summary` / `description` / concept `body` | Locale from Nova settings (`tr` / `en`) |
 | `risk` + example `risk` | Warning badges / confirm gates |
 | `requires_elevated` | Sudo affordance |
-| `packages` + `install_notes` | Install hints — **Arch/pacman first** on Arch hosts |
+| `packages` + `install_notes` | Install hints — **Arch/pacman first** on Arch hosts (legacy keys kept) |
+| `package_refs` | Preferred PM-registry install mapping (`manager` + `package`) |
+| `kind` | Optional UI chrome (builtin vs executable vs package manager) |
+| `platforms` / `operating_systems` | Platform filters (schema allows `windows`) |
 | `intent` | Natural-language search phrases |
 | `nova.concepts` | Cross-links into concept articles / chips |
 | `verification.status` | Trust chrome |
 
 ## Distro preference
 
-When the host is Arch, prefer `packages.arch` and pacman lines in `install_notes`
-(project preference).
+When the host is Arch, prefer `packages.arch` / `package_refs` with `manager: pacman`
+and pacman lines in `install_notes` (project preference).
+
+## Schema v2 — Nova follow-up required (do not ignore)
+
+Faz 3 made the **live** catalog schema v2. Nova (and any vendor pin at
+`schema_version: 1` / `content_sha256` from the Linux-era bank) will **break hard**
+if it still asserts `schema_version == 1` or rejects unknown command fields under a
+strict decoder.
+
+**Required Nova follow-up (separate PR; not in this repo):**
+
+1. Accept catalog / manifest / search-index `schema_version: **2**`.
+2. Re-vendor / re-pin `content_sha256` after this bank merges (digest changes).
+3. Prefer `package_refs` for install hints; keep reading legacy `packages.*` during transition.
+4. Tolerate additive fields (`kind`, `operating_systems`, `package_refs`, example `shell` / `privilege`). Ignore unknown keys rather than failing the whole bank load.
+5. Do **not** treat `platforms` containing only linux/macos/bsd as a regression — Windows content arrives in later fazes; the schema merely allows `windows`.
+
+Dual-concept (bank ≠ local PATH discovery) is unchanged — see [dual-concept.md](./dual-concept.md).
 
 ## Non-goals for Nova UI
 

@@ -1,5 +1,8 @@
+schema_version: 2
 id: docker
 name: docker
+kind: executable
+category: containers
 summary:
   tr: Docker konteyner CLI.
   en: Docker container CLI.
@@ -12,22 +15,29 @@ risk: dangerous
 requires_elevated: false
 platforms:
 - linux
+operating_systems:
+- linux
 packages:
   arch: docker
   fedora: docker-ce
+package_refs:
+- manager: pacman
+  package: docker
+  distributions:
+  - arch
+- manager: dnf
+  package: docker-ce
+  distributions:
+  - fedora
 install_notes:
-  tr: 'Arch: pacman -S docker — sonra systemctl enable --now docker; kullanıcıyı docker
-    grubuna ekleyin.
-
+  tr: |-
+    Arch: pacman -S docker — sonra systemctl enable --now docker; kullanıcıyı docker grubuna ekleyin.
     Debian/Ubuntu paket adları dağıtıma göre değişir (unknown — dokümantasyona bakın).
-
-    Fedora sıkça docker-ce (docker.com repo).'
-  en: 'Arch: pacman -S docker — then systemctl enable --now docker; add user to docker
-    group.
-
+    Fedora sıkça docker-ce (docker.com repo).
+  en: |-
+    Arch: pacman -S docker — then systemctl enable --now docker; add user to docker group.
     Debian/Ubuntu package names vary (unknown — see distro docs).
-
-    Fedora often docker-ce from docker.com.'
+    Fedora often docker-ce from docker.com.
 examples:
 - title:
     tr: ps
@@ -97,4 +107,3 @@ verification:
 nova:
   concepts:
   - containers
-category: containers

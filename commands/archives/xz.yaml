@@ -1,5 +1,8 @@
+schema_version: 2
 id: xz
 name: xz
+kind: executable
+category: archives
 summary:
   tr: XZ sıkıştırma aracı.
   en: Compress or decompress .xz files.
@@ -15,22 +18,37 @@ platforms:
 - linux
 - macos
 - bsd
+operating_systems:
+- linux
+- macos
 packages:
   arch: xz
   debian: xz-utils
   ubuntu: xz-utils
   fedora: xz
+package_refs:
+- manager: pacman
+  package: xz
+  distributions:
+  - arch
+- manager: apt
+  package: xz-utils
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: xz
+  distributions:
+  - fedora
 install_notes:
-  tr: 'Arch: pacman -S xz
-
+  tr: |-
+    Arch: pacman -S xz
     Debian/Ubuntu: xz-utils
-
-    Fedora: xz'
-  en: 'Arch: pacman -S xz
-
+    Fedora: xz
+  en: |-
+    Arch: pacman -S xz
     Debian/Ubuntu: xz-utils
-
-    Fedora: xz'
+    Fedora: xz
 flags:
 - flag: -d
   meaning:
@@ -84,7 +102,6 @@ verification:
   - man 1 xz
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-coverage
-category: archives
 nova:
   concepts:
   - files

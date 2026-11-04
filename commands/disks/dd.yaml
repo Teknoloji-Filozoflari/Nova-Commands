@@ -1,5 +1,8 @@
+schema_version: 2
 id: dd
 name: dd
+kind: executable
+category: disks
 summary:
   tr: Blok düzeyinde kopyalama/dönüştürme.
   en: Convert and copy files at block level.
@@ -16,11 +19,28 @@ platforms:
 - linux
 - macos
 - bsd
+operating_systems:
+- linux
+- macos
 packages:
   arch: coreutils
   debian: coreutils
   ubuntu: coreutils
   fedora: coreutils
+package_refs:
+- manager: pacman
+  package: coreutils
+  distributions:
+  - arch
+- manager: apt
+  package: coreutils
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: coreutils
+  distributions:
+  - fedora
 flags:
 - flag: if=
   meaning:
@@ -92,4 +112,3 @@ verification:
 nova:
   concepts:
   - storage
-category: disks

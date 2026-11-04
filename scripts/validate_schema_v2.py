@@ -1,16 +1,14 @@
 #!/usr/bin/env python3
-"""Soft-validate command schema v2 + stub schemas (Faz 2).
+"""Validate live command schema v2 load + stub schema fixtures (Faz 3).
 
-Dual-path policy:
-  - Live bank under commands/ continues to validate against command.schema.json (v1)
-    via validate_catalog.py until Faz 3 migration.
-  - This script soft-checks that v2/task/profile/compatibility schemas load as
-    Draft 2020-12 and that fixtures/schema-v2/* YAML conforms.
-  - Does NOT migrate commands, demote verified, bump catalog schema_version,
-    or require commands/ to pass v2.
+Live bank under commands/ validates against command.schema.json (v2) via
+validate_catalog.py. This script:
 
-Optional cross-ref: when fixtures cite package_refs.manager / operating_systems /
-shells, check ids exist in Faz 1 registries (warn-as-error for fixtures only).
+  - Confirms command.schema.json (live v2) and archived command.schema.v1.json load
+  - Soft-checks task/profile/compatibility schemas + fixtures/schema-v2/*
+  - Optionally re-checks command-* fixtures against live command.schema.json
+
+Does NOT demote verification statuses or invent platform claims.
 """
 
 from __future__ import annotations
@@ -31,7 +29,8 @@ FIXTURES = ROOT / "fixtures" / "schema-v2"
 META = ROOT / "metadata"
 
 SCHEMA_FILES = [
-    "command.schema.v2.json",
+    "command.schema.json",  # live v2
+    "command.schema.v2.json",  # twin ($id differs)
     "task.schema.json",
     "profile.schema.json",
     "compatibility.schema.json",
@@ -39,7 +38,7 @@ SCHEMA_FILES = [
 
 # (glob pattern under fixtures/, schema filename)
 FIXTURE_MAP: list[tuple[str, str]] = [
-    ("command-*.yaml", "command.schema.v2.json"),
+    ("command-*.yaml", "command.schema.json"),
     ("task-*.yaml", "task.schema.json"),
     ("profile-*.yaml", "profile.schema.json"),
     ("compatibility-*.yaml", "compatibility.schema.json"),
@@ -70,14 +69,7 @@ def check_command_fixture_refs(
         if ids["os"] and os_id not in ids["os"]:
             errors.append(f"{rel}: operating_systems unknown id {os_id!r}")
     for sh in raw.get("shells") or []:
-        # v1 short names (sh/bash/any) are allowed alongside registry ids
-        legacy = {
-            "any",
-            "sh",
-            "bash",
-            "zsh",
-            "fish",
-        }
+        legacy = {"any", "sh", "bash", "zsh", "fish"}
         if ids["shells"] and sh not in ids["shells"] and sh not in legacy:
             errors.append(f"{rel}: shells unknown id {sh!r}")
     for pref in raw.get("package_refs") or []:
@@ -125,16 +117,34 @@ def main() -> int:
         except Exception as exc:  # noqa: BLE001 — surface schema errors
             errors.append(f"{rel}: invalid JSON Schema: {exc}")
 
-    # Dual-path invariant: v1 schema must still exist and differ from v2 $id
-    v1 = schema_dir / "command.schema.json"
-    v2 = schema_dir / "command.schema.v2.json"
-    if not v1.is_file():
-        errors.append("missing schema/command.schema.json (v1 dual-path)")
-    if v1.is_file() and v2.is_file():
-        v1_id = json.loads(v1.read_text(encoding="utf-8")).get("$id")
-        v2_id = json.loads(v2.read_text(encoding="utf-8")).get("$id")
-        if v1_id == v2_id:
-            errors.append("command.schema.json and .v2.json must have distinct $id")
+    live = schema_dir / "command.schema.json"
+    v2_twin = schema_dir / "command.schema.v2.json"
+    v1_arch = schema_dir / "command.schema.v1.json"
+    if not v1_arch.is_file():
+        errors.append("missing schema/command.schema.v1.json (archived v1)")
+    if live.is_file() and v2_twin.is_file():
+        live_doc = json.loads(live.read_text(encoding="utf-8"))
+        twin_doc = json.loads(v2_twin.read_text(encoding="utf-8"))
+        if live_doc.get("$id") == twin_doc.get("$id"):
+            errors.append(
+                "command.schema.json and command.schema.v2.json must have distinct $id"
+            )
+        if "windows" not in live_doc["properties"]["platforms"]["items"]["enum"]:
+            errors.append("live command.schema.json must include platforms windows")
+        if "package_refs" not in live_doc["properties"]:
+            errors.append("live command.schema.json must include package_refs")
+        # Core property sets must match (ignore $id/title/description drift).
+        if set(live_doc.get("properties", {})) != set(twin_doc.get("properties", {})):
+            errors.append(
+                "command.schema.json and .v2.json property keys drifted — keep in sync"
+            )
+
+    if v1_arch.is_file():
+        v1_doc = json.loads(v1_arch.read_text(encoding="utf-8"))
+        if "windows" in v1_doc["properties"]["platforms"]["items"]["enum"]:
+            errors.append("archived v1 must not list windows (historical)")
+        if "package_refs" in v1_doc["properties"]:
+            errors.append("archived v1 must not define package_refs")
 
     ids = {
         "os": load_registry_ids("operating-systems.yaml", "operating_systems"),
@@ -171,9 +181,8 @@ def main() -> int:
                     loc = "/".join(str(p) for p in err.absolute_path) or "(root)"
                     errors.append(f"{rel}: schema {loc}: {err.message}")
 
-                if schema_name == "command.schema.v2.json":
+                if schema_name == "command.schema.json":
                     check_command_fixture_refs(errors, rel, raw, ids)
-                    # Fixtures must stay draft — never fake verified
                     status = (raw.get("verification") or {}).get("status")
                     if status == "verified":
                         errors.append(
@@ -187,8 +196,8 @@ def main() -> int:
         return 1
 
     print(
-        f"OK: schema v2 soft-validate — {len(SCHEMA_FILES)} schemas, "
-        f"{fixture_count} fixtures (bank remains on command.schema.json v1)"
+        f"OK: schema v2 live + stubs — {len(SCHEMA_FILES)} schemas, "
+        f"{fixture_count} fixtures (bank on command.schema.json v2)"
     )
     return 0
 

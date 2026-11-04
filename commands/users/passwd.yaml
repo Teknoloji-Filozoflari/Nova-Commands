@@ -1,5 +1,8 @@
+schema_version: 2
 id: passwd
 name: passwd
+kind: executable
+category: users
 summary:
   tr: Kullanıcı parola değiştirir.
   en: Change user password.
@@ -15,11 +18,28 @@ platforms:
 - linux
 - macos
 - bsd
+operating_systems:
+- linux
+- macos
 packages:
   arch: passwd
   debian: passwd
   ubuntu: passwd
   fedora: passwd
+package_refs:
+- manager: pacman
+  package: passwd
+  distributions:
+  - arch
+- manager: apt
+  package: passwd
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: passwd
+  distributions:
+  - fedora
 install_notes:
   tr: |-
     Arch: pacman -S passwd (shadow ile ilişkili)
@@ -93,4 +113,3 @@ verification:
 nova:
   concepts:
   - permissions
-category: users

@@ -1,5 +1,7 @@
+schema_version: 2
 id: sqlite3
 name: sqlite3
+kind: executable
 category: development
 summary:
   tr: SQLite komut satırı kabuğu.
@@ -17,26 +19,39 @@ platforms:
 - linux
 - macos
 - bsd
+operating_systems:
+- linux
+- macos
 packages:
   arch: sqlite
   debian: sqlite3
   ubuntu: sqlite3
   fedora: sqlite
+package_refs:
+- manager: pacman
+  package: sqlite
+  distributions:
+  - arch
+- manager: apt
+  package: sqlite3
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: sqlite
+  distributions:
+  - fedora
 install_notes:
-  tr: 'Arch: pacman -S sqlite
-
+  tr: |-
+    Arch: pacman -S sqlite
     Debian/Ubuntu: apt install sqlite3
-
     Fedora: dnf install sqlite
-
-    İkili adı genelde sqlite3.'
-  en: 'Arch: pacman -S sqlite
-
+    İkili adı genelde sqlite3.
+  en: |-
+    Arch: pacman -S sqlite
     Debian/Ubuntu: apt install sqlite3
-
     Fedora: dnf install sqlite
-
-    Binary is usually sqlite3.'
+    Binary is usually sqlite3.
 flags:
 - flag: -header
   meaning:

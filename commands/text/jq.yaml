@@ -1,5 +1,7 @@
+schema_version: 2
 id: jq
 name: jq
+kind: executable
 category: text
 summary:
   tr: JSON süzgeç ve dönüştürücü.
@@ -18,22 +20,37 @@ platforms:
 - linux
 - macos
 - bsd
+operating_systems:
+- linux
+- macos
 packages:
   arch: jq
   debian: jq
   ubuntu: jq
   fedora: jq
+package_refs:
+- manager: pacman
+  package: jq
+  distributions:
+  - arch
+- manager: apt
+  package: jq
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: jq
+  distributions:
+  - fedora
 install_notes:
-  tr: 'Arch: pacman -S jq
-
+  tr: |-
+    Arch: pacman -S jq
     Debian/Ubuntu: apt install jq
-
-    Fedora: dnf install jq'
-  en: 'Arch: pacman -S jq
-
+    Fedora: dnf install jq
+  en: |-
+    Arch: pacman -S jq
     Debian/Ubuntu: apt install jq
-
-    Fedora: dnf install jq'
+    Fedora: dnf install jq
 flags:
 - flag: -r
   long: --raw-output

@@ -1,5 +1,8 @@
+schema_version: 2
 id: dnf
 name: dnf
+kind: package_manager
+category: packages
 summary:
   tr: Fedora/RHEL paket yöneticisi.
   en: Fedora/RHEL package manager.
@@ -13,9 +16,17 @@ risk: dangerous
 requires_elevated: true
 platforms:
 - linux
+operating_systems:
+- linux
 packages:
   fedora: dnf
   rhel: dnf
+package_refs:
+- manager: dnf
+  package: dnf
+  distributions:
+  - fedora
+  - rhel
 install_notes:
   tr: Fedora/RHEL’de taban. Arch için pacman.
   en: Base on Fedora/RHEL. On Arch use pacman.
@@ -72,7 +83,6 @@ verification:
   - man 8 dnf
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-bootstrap
-category: packages
 nova:
   concepts:
   - packages

@@ -1,5 +1,7 @@
+schema_version: 2
 id: nft
 name: nft
+kind: executable
 category: security
 summary:
   tr: nftables kural yönetimi.
@@ -15,26 +17,38 @@ risk: destructive
 requires_elevated: true
 platforms:
 - linux
+operating_systems:
+- linux
 packages:
   arch: nftables
   debian: nftables
   ubuntu: nftables
   fedora: nftables
+package_refs:
+- manager: pacman
+  package: nftables
+  distributions:
+  - arch
+- manager: apt
+  package: nftables
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: nftables
+  distributions:
+  - fedora
 install_notes:
-  tr: 'Arch: pacman -S nftables
-
+  tr: |-
+    Arch: pacman -S nftables
     Debian/Ubuntu: apt install nftables
-
     Fedora: dnf install nftables
-
-    systemctl ile nftables servisi distroya göre değişir.'
-  en: 'Arch: pacman -S nftables
-
+    systemctl ile nftables servisi distroya göre değişir.
+  en: |-
+    Arch: pacman -S nftables
     Debian/Ubuntu: apt install nftables
-
     Fedora: dnf install nftables
-
-    nftables systemd unit varies by distro.'
+    nftables systemd unit varies by distro.
 flags:
 - flag: list
   meaning:

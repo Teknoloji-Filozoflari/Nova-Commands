@@ -1,5 +1,7 @@
+schema_version: 2
 id: psql
 name: psql
+kind: executable
 category: development
 summary:
   tr: PostgreSQL etkileşimli terminal.
@@ -19,27 +21,39 @@ platforms:
 - linux
 - macos
 - bsd
+operating_systems:
+- linux
+- macos
 packages:
   arch: postgresql
   debian: postgresql-client
   ubuntu: postgresql-client
   fedora: postgresql
+package_refs:
+- manager: pacman
+  package: postgresql
+  distributions:
+  - arch
+- manager: apt
+  package: postgresql-client
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: postgresql
+  distributions:
+  - fedora
 install_notes:
-  tr: 'Arch: pacman -S postgresql  (istemci+sunucu bileşenleri; yalnızca istemci için paket seti sürüme
-    bağlı)
-
+  tr: |-
+    Arch: pacman -S postgresql  (istemci+sunucu bileşenleri; yalnızca istemci için paket seti sürüme bağlı)
     Debian/Ubuntu: apt install postgresql-client
-
     Fedora: dnf install postgresql
-
-    Sunucu ayrı kurulur; bu girdi istemci odaklıdır.'
-  en: 'Arch: pacman -S postgresql  (client+server bits; pure-client packaging is version-dependent)
-
+    Sunucu ayrı kurulur; bu girdi istemci odaklıdır.
+  en: |-
+    Arch: pacman -S postgresql  (client+server bits; pure-client packaging is version-dependent)
     Debian/Ubuntu: apt install postgresql-client
-
     Fedora: dnf install postgresql
-
-    Server is separate; this entry is client-focused.'
+    Server is separate; this entry is client-focused.
 flags:
 - flag: -h
   long: --host

@@ -15,7 +15,8 @@
   "properties": {
     "schema_version": {
       "type": "integer",
-      "const": 1
+      "const": 2,
+      "description": "Catalog aggregate schema version. Bumped to 2 with live command schema v2 (Faz 3)."
     },
     "kind": {
       "type": "string",

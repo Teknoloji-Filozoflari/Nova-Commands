@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://raw.githubusercontent.com/Teknoloji-Filozoflari/Nova-Commands/main/schema/command.schema.v2.json",
   "title": "Nova-Commands command entry (schema v2)",
-  "description": "Cross-platform command record (Faz 2+). Dual-path: live bank under commands/ still validates against command.schema.json (v1) until Faz 3 migration. Prefer registry id references (OS/distro/shell/PM) over fixed package keys. Do not mark AI drafts verified.",
+  "description": "Same contract as command.schema.json (live). Kept as command.schema.v2.json for fixture tooling and docs continuity. Prefer command.schema.json for new work.",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -110,7 +110,12 @@
     "risk": {
       "type": "string",
       "description": "Inherent danger class of typical use. destructive > dangerous > caution > safe.",
-      "enum": ["safe", "caution", "dangerous", "destructive"]
+      "enum": [
+        "safe",
+        "caution",
+        "dangerous",
+        "destructive"
+      ]
     },
     "requires_elevated": {
       "type": "boolean",
@@ -143,25 +148,33 @@
       "type": "array",
       "uniqueItems": true,
       "description": "Optional refs into metadata/operating-systems.yaml ids.",
-      "items": { "$ref": "#/$defs/registryId" }
+      "items": {
+        "$ref": "#/$defs/registryId"
+      }
     },
     "distributions": {
       "type": "array",
       "uniqueItems": true,
       "description": "Optional refs into metadata/distributions.yaml ids.",
-      "items": { "$ref": "#/$defs/registryId" }
+      "items": {
+        "$ref": "#/$defs/registryId"
+      }
     },
     "architectures": {
       "type": "array",
       "uniqueItems": true,
       "description": "Optional refs into metadata/architectures.yaml ids.",
-      "items": { "$ref": "#/$defs/registryId" }
+      "items": {
+        "$ref": "#/$defs/registryId"
+      }
     },
     "execution_environments": {
       "type": "array",
       "uniqueItems": true,
       "description": "Optional refs into metadata/execution-environments.yaml (WSL, Termux, …).",
-      "items": { "$ref": "#/$defs/registryId" }
+      "items": {
+        "$ref": "#/$defs/registryId"
+      }
     },
     "shells": {
       "type": "array",
@@ -195,18 +208,30 @@
       "additionalProperties": false,
       "description": "LEGACY v1 fixed distro keys (arch/debian/ubuntu/fedora/rhel). Kept for dual-read / migration. Prefer package_refs.",
       "properties": {
-        "arch": { "$ref": "#/$defs/packageName" },
-        "debian": { "$ref": "#/$defs/packageName" },
-        "ubuntu": { "$ref": "#/$defs/packageName" },
-        "fedora": { "$ref": "#/$defs/packageName" },
-        "rhel": { "$ref": "#/$defs/packageName" }
+        "arch": {
+          "$ref": "#/$defs/packageName"
+        },
+        "debian": {
+          "$ref": "#/$defs/packageName"
+        },
+        "ubuntu": {
+          "$ref": "#/$defs/packageName"
+        },
+        "fedora": {
+          "$ref": "#/$defs/packageName"
+        },
+        "rhel": {
+          "$ref": "#/$defs/packageName"
+        }
       }
     },
     "package_refs": {
       "type": "array",
       "maxItems": 64,
       "description": "Preferred package mapping: package-manager registry id + package name. Never invent names.",
-      "items": { "$ref": "#/$defs/packageRef" }
+      "items": {
+        "$ref": "#/$defs/packageRef"
+      }
     },
     "install_notes": {
       "$ref": "#/$defs/localizedLong",
@@ -216,18 +241,24 @@
       "type": "array",
       "maxItems": 32,
       "description": "Optional platform-/shell-specific invocation variants for THIS command id. Multi-command tasks belong in task.schema.json.",
-      "items": { "$ref": "#/$defs/implementation" }
+      "items": {
+        "$ref": "#/$defs/implementation"
+      }
     },
     "flags": {
       "type": "array",
       "maxItems": 64,
-      "items": { "$ref": "#/$defs/flag" }
+      "items": {
+        "$ref": "#/$defs/flag"
+      }
     },
     "examples": {
       "type": "array",
       "minItems": 1,
       "maxItems": 32,
-      "items": { "$ref": "#/$defs/example" }
+      "items": {
+        "$ref": "#/$defs/example"
+      }
     },
     "related": {
       "type": "array",
@@ -271,9 +302,15 @@
       "additionalProperties": false,
       "description": "Optional security / privilege notes (UAC, admin, destructive side effects).",
       "properties": {
-        "notes": { "$ref": "#/$defs/localizedLong" },
-        "requires_admin": { "type": "boolean" },
-        "uac_prompt": { "type": "boolean" }
+        "notes": {
+          "$ref": "#/$defs/localizedLong"
+        },
+        "requires_admin": {
+          "type": "boolean"
+        },
+        "uac_prompt": {
+          "type": "boolean"
+        }
       }
     },
     "version_constraints": {
@@ -281,38 +318,63 @@
       "additionalProperties": false,
       "description": "Optional version / release constraints for the tool itself.",
       "properties": {
-        "min": { "type": "string", "maxLength": 64 },
-        "max": { "type": "string", "maxLength": 64 },
-        "notes": { "$ref": "#/$defs/localizedShort" }
+        "min": {
+          "type": "string",
+          "maxLength": 64
+        },
+        "max": {
+          "type": "string",
+          "maxLength": 64
+        },
+        "notes": {
+          "$ref": "#/$defs/localizedShort"
+        }
       }
     },
     "intent": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["tr", "en"],
+      "required": [
+        "tr",
+        "en"
+      ],
       "properties": {
         "tr": {
           "type": "array",
           "minItems": 1,
           "maxItems": 24,
-          "items": { "type": "string", "minLength": 1, "maxLength": 96 }
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 96
+          }
         },
         "en": {
           "type": "array",
           "minItems": 1,
           "maxItems": 24,
-          "items": { "type": "string", "minLength": 1, "maxLength": 96 }
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 96
+          }
         }
       }
     },
     "verification": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["status"],
+      "required": [
+        "status"
+      ],
       "properties": {
         "status": {
           "type": "string",
-          "enum": ["draft", "reviewed", "verified"],
+          "enum": [
+            "draft",
+            "reviewed",
+            "verified"
+          ],
           "description": "verified ONLY after human review of flags/packages/examples. AI drafts stay draft."
         },
         "sources": {
@@ -325,11 +387,17 @@
           }
         },
         "last_reviewed": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
         },
         "reviewer": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "maxLength": 128
         },
         "notes": {
@@ -343,7 +411,9 @@
       "additionalProperties": false,
       "description": "Optional hooks for Nova Komut Rehberi (favorites, UI hints).",
       "properties": {
-        "favorite_eligible": { "type": "boolean" },
+        "favorite_eligible": {
+          "type": "boolean"
+        },
         "ui_priority": {
           "type": "integer",
           "minimum": 0,
@@ -371,19 +441,41 @@
     "localizedShort": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["tr", "en"],
+      "required": [
+        "tr",
+        "en"
+      ],
       "properties": {
-        "tr": { "type": "string", "minLength": 1, "maxLength": 160 },
-        "en": { "type": "string", "minLength": 1, "maxLength": 160 }
+        "tr": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        },
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        }
       }
     },
     "localizedLong": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["tr", "en"],
+      "required": [
+        "tr",
+        "en"
+      ],
       "properties": {
-        "tr": { "type": "string", "minLength": 1, "maxLength": 2000 },
-        "en": { "type": "string", "minLength": 1, "maxLength": 2000 }
+        "tr": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        }
       }
     },
     "packageName": {
@@ -395,25 +487,36 @@
     "packageRef": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["manager", "package"],
+      "required": [
+        "manager",
+        "package"
+      ],
       "properties": {
         "manager": {
           "$ref": "#/$defs/registryId",
           "description": "Id from metadata/package-managers.yaml (e.g. pacman, winget, homebrew)."
         },
-        "package": { "$ref": "#/$defs/packageName" },
+        "package": {
+          "$ref": "#/$defs/packageName"
+        },
         "distributions": {
           "type": "array",
           "uniqueItems": true,
-          "items": { "$ref": "#/$defs/registryId" }
+          "items": {
+            "$ref": "#/$defs/registryId"
+          }
         },
-        "notes": { "$ref": "#/$defs/localizedShort" }
+        "notes": {
+          "$ref": "#/$defs/localizedShort"
+        }
       }
     },
     "implementation": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["id"],
+      "required": [
+        "id"
+      ],
       "properties": {
         "id": {
           "type": "string",
@@ -424,7 +527,9 @@
         "operating_systems": {
           "type": "array",
           "uniqueItems": true,
-          "items": { "$ref": "#/$defs/registryId" }
+          "items": {
+            "$ref": "#/$defs/registryId"
+          }
         },
         "platforms": {
           "type": "array",
@@ -455,7 +560,9 @@
         "distributions": {
           "type": "array",
           "uniqueItems": true,
-          "items": { "$ref": "#/$defs/registryId" }
+          "items": {
+            "$ref": "#/$defs/registryId"
+          }
         },
         "invocation": {
           "type": "string",
@@ -466,15 +573,23 @@
         "examples": {
           "type": "array",
           "maxItems": 16,
-          "items": { "$ref": "#/$defs/example" }
+          "items": {
+            "$ref": "#/$defs/example"
+          }
         },
-        "notes": { "$ref": "#/$defs/localizedShort" }
+        "notes": {
+          "$ref": "#/$defs/localizedShort"
+        }
       }
     },
     "flag": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["flag", "meaning", "verified"],
+      "required": [
+        "flag",
+        "meaning",
+        "verified"
+      ],
       "properties": {
         "flag": {
           "type": "string",
@@ -486,12 +601,16 @@
           "minLength": 1,
           "maxLength": 64
         },
-        "takes_value": { "type": "boolean" },
+        "takes_value": {
+          "type": "boolean"
+        },
         "value_name": {
           "type": "string",
           "maxLength": 64
         },
-        "meaning": { "$ref": "#/$defs/localizedShort" },
+        "meaning": {
+          "$ref": "#/$defs/localizedShort"
+        },
         "verified": {
           "type": "boolean",
           "description": "Must be false unless a human confirmed against man/help for the documented platform."
@@ -524,20 +643,36 @@
     "example": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["title", "command", "explanation", "risk"],
+      "required": [
+        "title",
+        "command",
+        "explanation",
+        "risk"
+      ],
       "properties": {
-        "title": { "$ref": "#/$defs/localizedShort" },
+        "title": {
+          "$ref": "#/$defs/localizedShort"
+        },
         "command": {
           "type": "string",
           "minLength": 1,
           "maxLength": 512
         },
-        "explanation": { "$ref": "#/$defs/localizedLong" },
+        "explanation": {
+          "$ref": "#/$defs/localizedLong"
+        },
         "risk": {
           "type": "string",
-          "enum": ["safe", "caution", "dangerous", "destructive"]
+          "enum": [
+            "safe",
+            "caution",
+            "dangerous",
+            "destructive"
+          ]
         },
-        "requires_elevated": { "type": "boolean" },
+        "requires_elevated": {
+          "type": "boolean"
+        },
         "shell": {
           "type": "string",
           "description": "Shell this example targets (powershell, cmd, bash, …).",
@@ -563,7 +698,12 @@
         },
         "privilege": {
           "type": "string",
-          "enum": ["none", "user", "elevated", "admin"],
+          "enum": [
+            "none",
+            "user",
+            "elevated",
+            "admin"
+          ],
           "description": "Optional privilege hint (Windows admin / UAC aware)."
         },
         "tags": {

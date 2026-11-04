@@ -1,21 +1,8 @@
-packages:
-  arch: less
-  debian: less
-  ubuntu: less
-  fedora: less
-platforms:
-- linux
-- macos
-- bsd
-requires_elevated: false
-verification:
-  status: reviewed
-  sources:
-  - man 1 less
-  last_reviewed: '2026-11-02'
-  reviewer: nova-commands-bootstrap
+schema_version: 2
 id: less
 name: less
+kind: executable
+category: text
 summary:
   tr: Metni sayfa sayfa görüntüler.
   en: Page through text interactively.
@@ -26,6 +13,33 @@ tags:
 - text
 - pager
 risk: safe
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+operating_systems:
+- linux
+- macos
+packages:
+  arch: less
+  debian: less
+  ubuntu: less
+  fedora: less
+package_refs:
+- manager: pacman
+  package: less
+  distributions:
+  - arch
+- manager: apt
+  package: less
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: less
+  distributions:
+  - fedora
 flags:
 - flag: -N
   meaning:
@@ -51,7 +65,12 @@ intent:
   en:
   - page through file
   - view log
-category: text
+verification:
+  status: reviewed
+  sources:
+  - man 1 less
+  last_reviewed: '2026-11-02'
+  reviewer: nova-commands-bootstrap
 nova:
   concepts:
   - files

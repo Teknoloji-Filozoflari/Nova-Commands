@@ -1,5 +1,8 @@
+schema_version: 2
 id: kill
 name: kill
+kind: executable
+category: processes
 summary:
   tr: Sürece sinyal gönderir.
   en: Send a signal to a process.
@@ -14,11 +17,28 @@ platforms:
 - linux
 - macos
 - bsd
+operating_systems:
+- linux
+- macos
 packages:
   arch: util-linux
   debian: procps
   ubuntu: procps
   fedora: util-linux
+package_refs:
+- manager: pacman
+  package: util-linux
+  distributions:
+  - arch
+- manager: apt
+  package: procps
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: util-linux
+  distributions:
+  - fedora
 flags:
 - flag: -l
   meaning:
@@ -69,7 +89,6 @@ verification:
   - man 1 kill
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-bootstrap
-category: processes
 nova:
   concepts:
   - terminal-basics

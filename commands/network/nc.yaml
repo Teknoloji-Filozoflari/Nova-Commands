@@ -1,5 +1,8 @@
+schema_version: 2
 id: nc
 name: nc
+kind: executable
+category: network
 summary:
   tr: Netcat — ham TCP/UDP istemci/sunucu.
   en: Netcat — arbitrary TCP/UDP client/server.
@@ -17,22 +20,37 @@ platforms:
 - linux
 - macos
 - bsd
+operating_systems:
+- linux
+- macos
 packages:
   arch: openbsd-netcat
   debian: netcat-openbsd
   ubuntu: netcat-openbsd
   fedora: nmap-ncat
+package_refs:
+- manager: pacman
+  package: openbsd-netcat
+  distributions:
+  - arch
+- manager: apt
+  package: netcat-openbsd
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: nmap-ncat
+  distributions:
+  - fedora
 install_notes:
-  tr: 'Arch: pacman -S openbsd-netcat (alternatif: gnu-netcat)
-
+  tr: |-
+    Arch: pacman -S openbsd-netcat (alternatif: gnu-netcat)
     Debian/Ubuntu: apt install netcat-openbsd
-
-    Fedora: dnf install nmap-ncat (komut sıkça ncat)'
-  en: 'Arch: pacman -S openbsd-netcat (alt: gnu-netcat)
-
+    Fedora: dnf install nmap-ncat (komut sıkça ncat)
+  en: |-
+    Arch: pacman -S openbsd-netcat (alt: gnu-netcat)
     Debian/Ubuntu: apt install netcat-openbsd
-
-    Fedora: dnf install nmap-ncat (binary often ncat)'
+    Fedora: dnf install nmap-ncat (binary often ncat)
 flags:
 - flag: -l
   meaning:
@@ -93,4 +111,3 @@ nova:
   concepts:
   - networking
   - networking-basics
-category: network

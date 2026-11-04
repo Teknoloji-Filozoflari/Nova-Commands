@@ -1,17 +1,16 @@
+schema_version: 2
 id: mkfs.xfs
 name: mkfs.xfs
+kind: executable
+category: disks
 summary:
   tr: XFS dosya sistemi oluşturur (yıkıcı).
   en: Construct an XFS filesystem (destructive).
 description:
-  tr: >
-    xfsprogs `mkfs.xfs` aygıt üzerinde XFS oluşturur. Mevcut FS imzasını
-    ezmek için çoğu zaman `-f` gerekir — bu da yanlış aygıtta felakettir.
-    `-N` yalnızca bilgi basar (yazmaz). XFS küçültülemez; reviewed, verified değil.
-  en: >
-    xfsprogs `mkfs.xfs` builds XFS on a device. Overwriting an existing
-    signature usually needs `-f` — catastrophic on the wrong device. `-N`
-    prints info only (no write). XFS cannot be shrunk; reviewed, not verified.
+  tr: |
+    xfsprogs `mkfs.xfs` aygıt üzerinde XFS oluşturur. Mevcut FS imzasını ezmek için çoğu zaman `-f` gerekir — bu da yanlış aygıtta felakettir. `-N` yalnızca bilgi basar (yazmaz). XFS küçültülemez; reviewed, verified değil.
+  en: |
+    xfsprogs `mkfs.xfs` builds XFS on a device. Overwriting an existing signature usually needs `-f` — catastrophic on the wrong device. `-N` prints info only (no write). XFS cannot be shrunk; reviewed, not verified.
 tags:
 - disk
 - storage
@@ -22,12 +21,29 @@ risk: destructive
 requires_elevated: true
 platforms:
 - linux
+operating_systems:
+- linux
 packages:
   arch: xfsprogs
   debian: xfsprogs
   ubuntu: xfsprogs
   fedora: xfsprogs
   rhel: xfsprogs
+package_refs:
+- manager: pacman
+  package: xfsprogs
+  distributions:
+  - arch
+- manager: apt
+  package: xfsprogs
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: xfsprogs
+  distributions:
+  - fedora
+  - rhel
 install_notes:
   tr: |
     Arch: pacman -S xfsprogs
@@ -70,12 +86,10 @@ examples:
     en: Labeled XFS (DANGER)
   command: sudo mkfs.xfs -L data /dev/sdXN
   explanation:
-    tr: >
-      Yer tutucu. Üzerinde FS varsa komut reddedebilir; `-f` eklemek riski
-      artırır — yalnızca bilinçli ve yedekli ortamlarda.
-    en: >
-      Placeholder. An existing FS may cause refusal; adding `-f` raises risk —
-      only on intentional, backed-up targets.
+    tr: |
+      Yer tutucu. Üzerinde FS varsa komut reddedebilir; `-f` eklemek riski artırır — yalnızca bilinçli ve yedekli ortamlarda.
+    en: |
+      Placeholder. An existing FS may cause refusal; adding `-f` raises risk — only on intentional, backed-up targets.
   risk: destructive
   requires_elevated: true
 related:
@@ -109,4 +123,3 @@ nova:
   concepts:
   - storage
   favorite_eligible: false
-category: disks

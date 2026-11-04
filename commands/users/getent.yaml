@@ -1,5 +1,8 @@
+schema_version: 2
 id: getent
 name: getent
+kind: executable
+category: users
 summary:
   tr: Name Service Switch veritabanlarını sorgular.
   en: Query Name Service Switch databases.
@@ -13,11 +16,27 @@ risk: safe
 requires_elevated: false
 platforms:
 - linux
+operating_systems:
+- linux
 packages:
   arch: glibc
   debian: libc-bin
   ubuntu: libc-bin
   fedora: glibc-common
+package_refs:
+- manager: pacman
+  package: glibc
+  distributions:
+  - arch
+- manager: apt
+  package: libc-bin
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: glibc-common
+  distributions:
+  - fedora
 install_notes:
   tr: |-
     Arch: glibc ile gelir
@@ -74,4 +93,3 @@ nova:
   concepts:
   - permissions
   - dns
-category: users
