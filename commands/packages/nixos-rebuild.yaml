@@ -1,0 +1,99 @@
+schema_version: 2
+id: nixos-rebuild
+name: nixos-rebuild
+kind: package_manager
+category: packages
+summary:
+  tr: NixOS sistem yapılandırmasını uygula.
+  en: Apply NixOS system configuration.
+description:
+  tr: nixos-rebuild, NixOS’ta deklaratif sistem yapılandırmasını derleyip boot/switch/test ile uygular.
+    Yalnızca NixOS host’larda birincil sistem aracıdır.
+  en: nixos-rebuild builds and applies declarative NixOS system configuration via boot/switch/test. It
+    is the primary system tool on NixOS hosts only.
+tags:
+- packages
+- nixos
+- declarative
+risk: dangerous
+requires_elevated: true
+platforms:
+- linux
+operating_systems:
+- linux
+package_refs:
+- manager: nix
+  package: nixos-rebuild
+  distributions:
+  - nixos
+install_notes:
+  tr: NixOS tabanında gelir. Diğer dağıtımlarda sistem PM değildir.
+  en: Ships on NixOS. Not a system PM on other distros.
+flags:
+- flag: switch
+  meaning:
+    tr: Hemen uygula ve boot girdilerini güncelle.
+    en: Apply now and update boot entries.
+  verified: false
+- flag: boot
+  meaning:
+    tr: Sonraki boot için hazırla.
+    en: Prepare for next boot.
+  verified: false
+- flag: test
+  meaning:
+    tr: Geçici uygula (kalıcı boot yok).
+    en: Temporary apply (no lasting boot entry).
+  verified: false
+- flag: build
+  meaning:
+    tr: Yalnız derle.
+    en: Build only.
+  verified: false
+- flag: --flake
+  meaning:
+    tr: Flake tabanlı yapılandırma.
+    en: Flake-based configuration.
+  verified: false
+examples:
+- title:
+    tr: Switch
+    en: Switch
+  command: sudo nixos-rebuild switch
+  explanation:
+    tr: Yapılandırmayı uygular — sistemi etkiler.
+    en: Applies configuration — affects the running system.
+  risk: dangerous
+  requires_elevated: true
+- title:
+    tr: Flake switch
+    en: Flake switch
+  command: sudo nixos-rebuild switch --flake .#hostname
+  explanation:
+    tr: Flake çıktısından sistem uygular.
+    en: Applies system from a flake output.
+  risk: dangerous
+  requires_elevated: true
+related:
+- nix
+- nix-collect-garbage
+- guix
+intent:
+  tr:
+  - nixos-rebuild
+  - nixos switch
+  en:
+  - nixos-rebuild switch
+  - nixos rebuild
+verification:
+  status: draft
+  sources:
+  - https://nixos.org/manual/nixos/stable/
+  - https://nixos.org/manual/nixos/stable/index.html#sec-changing-config
+  notes: Agent-authored Faz 4 draft from official docs; not human-verified.
+nova:
+  concepts:
+  - packages
+  - package-managers
+  - package-managers-comparison
+  - nix-guix

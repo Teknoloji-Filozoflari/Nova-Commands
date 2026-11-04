@@ -79,6 +79,11 @@ concepts:
       tr: Paket yöneticisi karşılaştırması
       en: Package manager comparison
     article: package-managers-comparison
+  - id: nix-guix
+    label:
+      tr: Nix ve Guix
+      en: Nix and Guix
+    article: nix-guix
   - id: firewalls
     label:
       tr: Güvenlik duvarları

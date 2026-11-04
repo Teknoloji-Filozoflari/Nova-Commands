@@ -59,8 +59,12 @@ Yeni komut / konsept: [CONTRIBUTING.md](CONTRIBUTING.md) · Nova: [docs/NOVA_INT
 ## Çok dağıtım
 
 Debian/Ubuntu (`apt`), Fedora/RHEL (`dnf`), Arch (`pacman`) birinci sınıf.
+Faz 4 genişlemesi (çoğu `draft`): openSUSE (`zypper`), Alpine (`apk`), Gentoo
+(`emerge`), Void (`xbps-*`), Solus (`eopkg`), Slackware (`slackpkg`/pkgtools),
+Nix/Guix, OpenWrt (`opkg`), atomik Fedora (`rpm-ostree`).
 Paket notlarında **Arch / pacman tercihi** (Nova tercihleri ile uyumlu).
-Karşılaştırma tabloları: [docs/package-managers-comparison.md](docs/package-managers-comparison.md).
+Karşılaştırma: [docs/package-managers-comparison.md](docs/package-managers-comparison.md)
+· Nix/Guix: `concepts/nix-guix.yaml`.
 
 ## İmzalı katalog Releases
 

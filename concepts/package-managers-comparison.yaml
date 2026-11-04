@@ -4,8 +4,8 @@ title:
   tr: Paket yöneticisi karşılaştırma tabloları
   en: Package manager comparison tables
 summary:
-  tr: pacman / apt / dnf / rpm-dpkg / flatpak için yan yana sık işlemler.
-  en: Side-by-side common operations for pacman / apt / dnf / rpm-dpkg / flatpak.
+  tr: pacman / apt / dnf / zypper / apk / xbps / emerge / Nix / Guix / ostree yan yana.
+  en: Side-by-side pacman / apt / dnf / zypper / apk / xbps / emerge / Nix / Guix / ostree.
 difficulty: beginner
 tags:
   - packages
@@ -13,6 +13,8 @@ tags:
   - apt
   - dnf
   - comparison
+  - nix
+  - guix
 related_commands:
   - pacman
   - apt
@@ -21,84 +23,118 @@ related_commands:
   - rpm
   - flatpak
   - paru
+  - zypper
+  - apk
+  - emerge
+  - xbps-install
+  - xbps-query
+  - xbps-remove
+  - eopkg
+  - slackpkg
+  - nix
+  - guix
+  - opkg
+  - rpm-ostree
 related_concepts:
   - package-managers
   - packages
   - arch
   - path
+  - nix-guix
 see_also:
   - "docs/package-managers-comparison.md"
   - "Arch Wiki: pacman/Rosetta"
   - "https://wiki.archlinux.org/title/Pacman/Rosetta"
+  - "concepts/nix-guix.yaml"
 body:
   tr: |
     Aynı iş farklı dağıtımlarda farklı komutlarla yapılır. Aşağıdaki tablolar **sık
     okuma/kurulum** yollarını özetler; bayrak uydurma yok. Ayrıntılı Markdown:
     `docs/package-managers-comparison.md`. Arch satırları Nova tercihine göre önde.
 
-    ### Sistem güncelle / senkron
+    ### Sistem güncelle / kur / ara (çekirdek + genişleme)
 
-    | Amaç | Arch (pacman) | Debian/Ubuntu (apt) | Fedora/RHEL (dnf) |
-    |------|---------------|---------------------|-------------------|
-    | DB yenile + yükselt | `pacman -Syu` | `apt update && apt upgrade` | `dnf upgrade` |
-    | Yalnız indeks | (Syu içinde) | `apt update` | `dnf check-update` |
-    | Paket kur | `pacman -S ad` | `apt install ad` | `dnf install ad` |
-    | Kaldır (+deps sık) | `pacman -Rns ad` | `apt purge ad` | `dnf remove ad` |
-    | Ara | `pacman -Ss q` | `apt search q` | `dnf search q` |
+    | Amaç | Arch (pacman) | Debian (apt) | Fedora (dnf) | openSUSE (zypper) | Alpine (apk) | Void (xbps) |
+    |------|---------------|--------------|--------------|-------------------|--------------|-------------|
+    | Yenile + yükselt | `pacman -Syu` | `apt update && apt upgrade` | `dnf upgrade` | Leap: `zypper update` / TW: `zypper dup` | `apk update && apk upgrade` | `xbps-install -Su` |
+    | Kur | `pacman -S ad` | `apt install ad` | `dnf install ad` | `zypper install ad` | `apk add ad` | `xbps-install ad` |
+    | Kaldır | `pacman -Rns ad` | `apt purge ad` | `dnf remove ad` | `zypper remove ad` | `apk del ad` | `xbps-remove ad` |
+    | Ara | `pacman -Ss q` | `apt search q` | `dnf search q` | `zypper search q` | `apk search q` | `xbps-query -Rs q` |
+
+    Gentoo: `emerge --sync` + `emerge -uDN @world` / `emerge --ask ad`.  
+    Solus: `eopkg upgrade` / `eopkg install`. Slackware: `slackpkg update` / `install`.  
+    OpenWrt: `opkg update` / `opkg install` (flash alanı!).  
+    Atomik Fedora: `rpm-ostree upgrade` / `rpm-ostree install` (reboot).
 
     ### Sorgulama (yerel)
 
-    | Amaç | pacman | dpkg/apt | rpm/dnf |
-    |------|--------|----------|---------|
-    | Kurulu mu? | `pacman -Q ad` | `dpkg -l ad` | `rpm -q ad` |
-    | Dosya → paket | `pacman -Qo yol` | `dpkg -S yol` | `rpm -qf yol` |
-    | Paket → dosyalar | `pacman -Ql ad` | `dpkg -L ad` | `rpm -ql ad` |
+    | Amaç | pacman | dpkg/apt | rpm/dnf | xbps | apk |
+    |------|--------|----------|---------|------|-----|
+    | Kurulu mu? | `pacman -Q ad` | `dpkg -l ad` | `rpm -q ad` | `xbps-query ad` | `apk info -e ad` |
+    | Dosya → paket | `pacman -Qo yol` | `dpkg -S yol` | `rpm -qf yol` | `xbps-query -o yol` | `apk info -W yol` |
 
-    ### Katmanlar
+    ### Deklaratif / profil
 
-    - **pacman** — Arch resmi depolar; AUR ayrı (`paru` vb., draft/dikkat).
-    - **apt + dpkg** — yüksek seviye apt, düşük seviye dpkg.
-    - **dnf + rpm** — yüksek seviye dnf, düşük seviye rpm.
-    - **flatpak** — dağıtımdan bağımsız sandbox uygulamalar (`flatpak install` / `run`).
+    | Amaç | Nix (modern) | Guix |
+    |------|--------------|------|
+    | Ara | `nix search nixpkgs q` | `guix search q` |
+    | Profil kur | `nix profile install nixpkgs#ad` | `guix install ad` |
+    | Geçici kabuk | `nix shell` / `nix develop` | `guix shell` |
+    | Sistem uygula | `nixos-rebuild switch` (NixOS) | `guix system …` (Guix System) |
 
-    **Kural:** Bilinmeyen paket adı **uydurulmaz**; `packages.*` alanı omit/`draft`.
-    CI yıkıcı kurulum çalıştırmaz. Nova Arch host’ta `packages.arch` / pacman notunu önce tutar.
+    Eski `nix-env` / klasik `nix-shell` modern CLI ile **karıştırılmaz** — bkz. `nix-guix`.
+
+    **Kural:** Bilinmeyen paket adı **uydurulmaz**. Yeni PM kayıtları çoğunlukla `draft`.
+    Nova Arch host’ta pacman notunu önce tutar.
   en: |
     The same job uses different commands per distro. Tables below summarize **common
     update/install/query** paths — no invented flags. Longer Markdown:
     `docs/package-managers-comparison.md`. Arch rows first per Nova preference.
 
-    ### System update / sync
+    ### System update / install / search (core + expansion)
 
-    | Goal | Arch (pacman) | Debian/Ubuntu (apt) | Fedora/RHEL (dnf) |
-    |------|---------------|---------------------|-------------------|
-    | Refresh + upgrade | `pacman -Syu` | `apt update && apt upgrade` | `dnf upgrade` |
-    | Index only | (inside Syu) | `apt update` | `dnf check-update` |
-    | Install | `pacman -S name` | `apt install name` | `dnf install name` |
-    | Remove (+deps common) | `pacman -Rns name` | `apt purge name` | `dnf remove name` |
-    | Search | `pacman -Ss q` | `apt search q` | `dnf search q` |
+    | Goal | Arch (pacman) | Debian (apt) | Fedora (dnf) | openSUSE (zypper) | Alpine (apk) | Void (xbps) |
+    |------|---------------|--------------|--------------|-------------------|--------------|-------------|
+    | Refresh + upgrade | `pacman -Syu` | `apt update && apt upgrade` | `dnf upgrade` | Leap: `zypper update` / TW: `zypper dup` | `apk update && apk upgrade` | `xbps-install -Su` |
+    | Install | `pacman -S name` | `apt install name` | `dnf install name` | `zypper install name` | `apk add name` | `xbps-install name` |
+    | Remove | `pacman -Rns name` | `apt purge name` | `dnf remove name` | `zypper remove name` | `apk del name` | `xbps-remove name` |
+    | Search | `pacman -Ss q` | `apt search q` | `dnf search q` | `zypper search q` | `apk search q` | `xbps-query -Rs q` |
+
+    Gentoo: `emerge --sync` + `emerge -uDN @world` / `emerge --ask name`.  
+    Solus: `eopkg upgrade` / `eopkg install`. Slackware: `slackpkg update` / `install`.  
+    OpenWrt: `opkg update` / `opkg install` (watch flash!).  
+    Atomic Fedora: `rpm-ostree upgrade` / `rpm-ostree install` (reboot).
 
     ### Local queries
 
-    | Goal | pacman | dpkg/apt | rpm/dnf |
-    |------|--------|----------|---------|
-    | Installed? | `pacman -Q name` | `dpkg -l name` | `rpm -q name` |
-    | File → package | `pacman -Qo path` | `dpkg -S path` | `rpm -qf path` |
-    | Package → files | `pacman -Ql name` | `dpkg -L name` | `rpm -ql name` |
+    | Goal | pacman | dpkg/apt | rpm/dnf | xbps | apk |
+    |------|--------|----------|---------|------|-----|
+    | Installed? | `pacman -Q name` | `dpkg -l name` | `rpm -q name` | `xbps-query name` | `apk info -e name` |
+    | File → package | `pacman -Qo path` | `dpkg -S path` | `rpm -qf path` | `xbps-query -o path` | `apk info -W path` |
 
-    ### Layers
+    ### Declarative / profiles
 
-    - **pacman** — official Arch repos; AUR is separate (`paru`, etc., draft/care).
-    - **apt + dpkg** — high-level apt, low-level dpkg.
-    - **dnf + rpm** — high-level dnf, low-level rpm.
-    - **flatpak** — distro-agnostic sandboxed apps (`flatpak install` / `run`).
+    | Goal | Nix (modern) | Guix |
+    |------|--------------|------|
+    | Search | `nix search nixpkgs q` | `guix search q` |
+    | Profile install | `nix profile install nixpkgs#name` | `guix install name` |
+    | Ephemeral shell | `nix shell` / `nix develop` | `guix shell` |
+    | Apply system | `nixos-rebuild switch` (NixOS) | `guix system …` (Guix System) |
 
-    **Rule:** unknown package names are **not invented**; omit `packages.*` or use
-    `draft`. CI does not run destructive installs. On Arch hosts Nova keeps
-    `packages.arch` / pacman notes first.
+    Do **not** mix legacy `nix-env` / classic `nix-shell` with the modern CLI —
+    see `nix-guix`.
+
+    **Rule:** unknown package names are **not invented**. New PM records are mostly
+    `draft`. On Arch hosts Nova keeps pacman notes first.
 verification:
-  status: reviewed
+  status: draft
   sources:
     - "https://wiki.archlinux.org/title/Pacman/Rosetta"
-    - "man pacman / man apt / man dnf"
-  notes: "Comparison tables agent-authored from Rosetta + man; not verified."
+    - "https://en.opensuse.org/SDB:Zypper_manual"
+    - "https://wiki.alpinelinux.org/wiki/Alpine_Package_Keeper"
+    - "https://docs.voidlinux.org/xbps/"
+    - "https://wiki.gentoo.org/wiki/Emerge"
+    - "https://nixos.org/manual/nix/stable/"
+    - "https://guix.gnu.org/manual/en/html_node/"
+    - "https://coreos.github.io/rpm-ostree/"
+  notes: "Faz 4 comparison expansion; draft pending human review."

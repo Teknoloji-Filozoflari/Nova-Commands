@@ -1,0 +1,87 @@
+schema_version: 2
+id: nix-env
+name: nix-env
+kind: package_manager
+category: packages
+summary:
+  tr: Eski Nix profil aracı (geçiş / miras).
+  en: Legacy Nix profile tool (transition / heritage).
+description:
+  tr: nix-env kullanıcı profillerine paket ekler/kaldırır. Güncel Nix’te `nix profile` tercih edilir;
+    yeni dokümantasyonda birincil yol olarak sunulmaz. Eski rehberlerle modern CLI’yi karıştırmayın.
+  en: nix-env adds/removes packages in user profiles. Prefer `nix profile` on modern Nix; it is not the
+    primary path in current docs. Do not mix old guides with the modern CLI.
+tags:
+- packages
+- nix
+- legacy
+risk: caution
+requires_elevated: false
+platforms:
+- linux
+- macos
+operating_systems:
+- linux
+- macos
+package_refs:
+- manager: nix
+  package: nix
+  distributions:
+  - nixos
+install_notes:
+  tr: Nix ile gelir. Yeni kurulumlar için `nix profile` kullanın.
+  en: Ships with Nix. Prefer `nix profile` for new installs.
+flags:
+- flag: -iA
+  meaning:
+    tr: Öznitelik yoluyla kur (eski).
+    en: Install by attribute (legacy).
+  verified: false
+- flag: -e
+  meaning:
+    tr: Paketi kaldır.
+    en: Uninstall package.
+  verified: false
+- flag: -q
+  meaning:
+    tr: Kurulu paketleri sorgu.
+    en: Query installed packages.
+  verified: false
+- flag: -u
+  meaning:
+    tr: Yükselt.
+    en: Upgrade.
+  verified: false
+examples:
+- title:
+    tr: Öznitelik kur (eski)
+    en: Install by attr (legacy)
+  command: nix-env -iA nixpkgs.curl
+  explanation:
+    tr: Eski profil yolu — mümkünse `nix profile install` kullanın.
+    en: Legacy profile path — prefer `nix profile install` when possible.
+  risk: caution
+  requires_elevated: false
+related:
+- nix
+- nix-shell
+- nix-collect-garbage
+intent:
+  tr:
+  - nix-env
+  - eski nix profil
+  en:
+  - nix-env
+  - legacy nix profile
+verification:
+  status: draft
+  sources:
+  - https://nixos.org/manual/nix/stable/command-ref/nix-env.html
+  - https://nix.dev/manual/nix/stable/command-ref/nix-env.html
+  notes: Legacy tooling; modern workflow is `nix profile`. Kept separate per master brief. Draft.
+nova:
+  concepts:
+  - packages
+  - package-managers
+  - package-managers-comparison
+  - nix-guix

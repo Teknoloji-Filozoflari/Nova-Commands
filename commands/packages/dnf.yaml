@@ -66,10 +66,11 @@ examples:
   risk: dangerous
   requires_elevated: true
 related:
-- yum
 - rpm
 - pacman
 - apt
+- zypper
+- rpm-ostree
 intent:
   tr:
   - fedora paket kur
@@ -87,3 +88,4 @@ nova:
   concepts:
   - packages
   - package-managers
+  - package-managers-comparison

@@ -1,0 +1,88 @@
+schema_version: 2
+id: xbps-remove
+name: xbps-remove
+kind: package_manager
+category: packages
+summary:
+  tr: Void Linux XBPS kaldırma aracı.
+  en: Void Linux XBPS remove tool.
+description:
+  tr: xbps-remove paketleri ve isteğe bağlı olarak bağımlılıkları / yetimleri kaldırır. Yıkıcı olabilir;
+    `-o` ile yetim temizliği dikkat ister.
+  en: xbps-remove removes packages and optionally dependencies/orphans. It can be destructive; orphan
+    cleanup with `-o` needs care.
+tags:
+- packages
+- void
+- xbps
+risk: dangerous
+requires_elevated: true
+platforms:
+- linux
+operating_systems:
+- linux
+package_refs:
+- manager: xbps
+  package: xbps
+  distributions:
+  - void
+install_notes:
+  tr: Void tabanında xbps ile gelir.
+  en: Ships with xbps on Void.
+flags:
+- flag: -R
+  meaning:
+    tr: Özyinelemeli bağımlılıkları kaldır.
+    en: Recursively remove dependencies.
+  verified: false
+- flag: -o
+  meaning:
+    tr: Yetim paketleri kaldır.
+    en: Remove orphaned packages.
+  verified: false
+- flag: -y
+  meaning:
+    tr: Onayları kabul et.
+    en: Assume yes.
+  verified: false
+examples:
+- title:
+    tr: Kaldır
+    en: Remove
+  command: sudo xbps-remove curl
+  explanation:
+    tr: curl paketini kaldırır.
+    en: Removes the curl package.
+  risk: dangerous
+  requires_elevated: true
+- title:
+    tr: Yetimleri temizle
+    en: Remove orphans
+  command: sudo xbps-remove -o
+  explanation:
+    tr: Kullanılmayan bağımlılıkları temizler — listeyi kontrol edin.
+    en: Removes unused deps — review the list.
+  risk: dangerous
+  requires_elevated: true
+related:
+- xbps-install
+- xbps-query
+- pacman
+intent:
+  tr:
+  - xbps kaldır
+  - void paket sil
+  en:
+  - xbps-remove
+  - void remove package
+verification:
+  status: draft
+  sources:
+  - https://docs.voidlinux.org/xbps/
+  - https://man.voidlinux.org/xbps-remove.1
+  notes: Agent-authored Faz 4 draft from official docs; not human-verified.
+nova:
+  concepts:
+  - packages
+  - package-managers
+  - package-managers-comparison

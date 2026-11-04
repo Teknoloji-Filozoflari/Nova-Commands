@@ -1,0 +1,142 @@
+schema_version: 2
+id: guix
+name: guix
+kind: package_manager
+category: packages
+summary:
+  tr: GNU Guix paket ve sistem yöneticisi.
+  en: GNU Guix package and system manager.
+description:
+  tr: GNU Guix, Nix’ten esinlenen ama GNU ekosistemine özgü deklaratif paket yöneticisidir. Kullanıcı
+    profilleri (`guix package` / `guix install`), `guix shell`, `guix pull`, `guix time-machine` ve Guix
+    System için `guix system` aynı CLI altındadır.
+  en: GNU Guix is a declarative package manager inspired by Nix but rooted in the GNU ecosystem. User
+    profiles (`guix package` / `guix install`), `guix shell`, `guix pull`, `guix time-machine`, and `guix
+    system` for Guix System share one CLI.
+tags:
+- packages
+- guix
+- declarative
+risk: dangerous
+requires_elevated: true
+platforms:
+- linux
+operating_systems:
+- linux
+package_refs:
+- manager: guix
+  package: guix
+  distributions:
+  - guix-system
+install_notes:
+  tr: Guix System’de tabandır; diğer Linux’lara da kurulabilir. Arch host’ta sistem PM pacman’dır; Guix
+    yan yana olabilir.
+  en: Base on Guix System; also installable on other Linux. On Arch hosts pacman is the system PM; Guix
+    may coexist.
+flags:
+- flag: install
+  meaning:
+    tr: Paketi kullanıcı profiline kur.
+    en: Install into user profile.
+  verified: false
+- flag: remove
+  meaning:
+    tr: Profilinden kaldır.
+    en: Remove from profile.
+  verified: false
+- flag: search
+  meaning:
+    tr: Paket ara.
+    en: Search packages.
+  verified: false
+- flag: shell
+  meaning:
+    tr: Geçici ortam.
+    en: Ephemeral environment.
+  verified: false
+- flag: pull
+  meaning:
+    tr: Kanalları güncelle.
+    en: Update channels.
+  verified: false
+- flag: system
+  meaning:
+    tr: Guix System işlemleri.
+    en: Guix System operations.
+  verified: false
+- flag: time-machine
+  meaning:
+    tr: Geçmiş kanal durumuna git.
+    en: Travel to past channel state.
+  verified: false
+- flag: package
+  meaning:
+    tr: Klasik profil yönetimi.
+    en: Classic profile management.
+  verified: false
+examples:
+- title:
+    tr: Kur
+    en: Install
+  command: guix install curl
+  explanation:
+    tr: Kullanıcı profiline curl ekler.
+    en: Adds curl to the user profile.
+  risk: caution
+  requires_elevated: false
+- title:
+    tr: Ara
+    en: Search
+  command: guix search ripgrep
+  explanation:
+    tr: Paket arar.
+    en: Searches packages.
+  risk: safe
+  requires_elevated: false
+- title:
+    tr: Kabuk
+    en: Shell
+  command: guix shell python
+  explanation:
+    tr: Geçici ortam açar.
+    en: Opens an ephemeral environment.
+  risk: safe
+  requires_elevated: false
+- title:
+    tr: Kanal çek
+    en: Pull channels
+  command: guix pull
+  explanation:
+    tr: Guix kanallarını günceller.
+    en: Updates Guix channels.
+  risk: caution
+  requires_elevated: false
+related:
+- nix
+- nixos-rebuild
+- pacman
+- emerge
+intent:
+  tr:
+  - guix kur
+  - guix shell
+  - guix pull
+  en:
+  - guix install
+  - guix shell
+  - guix pull
+verification:
+  status: draft
+  sources:
+  - https://guix.gnu.org/manual/en/html_node/
+  - https://guix.gnu.org/manual/en/html_node/Package-Management.html
+  - https://guix.gnu.org/manual/en/html_node/Invoking-guix-shell.html
+  notes: Agent-authored Faz 4 draft from official docs; not human-verified.
+nova:
+  concepts:
+  - packages
+  - package-managers
+  - package-managers-comparison
+  - nix-guix
+  ui_priority: 65
+  favorite_eligible: true

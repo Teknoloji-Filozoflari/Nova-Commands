@@ -1,0 +1,73 @@
+schema_version: 2
+id: installpkg
+name: installpkg
+kind: package_manager
+category: packages
+summary:
+  tr: Slackware düşük seviye paket kurucu.
+  en: Slackware low-level package installer.
+description:
+  tr: installpkg yerel .tgz/.txz paket dosyasını kurar. Bağımlılık çözümlemez; günlük işlerde slackpkg
+    tercih edilir.
+  en: installpkg installs a local .tgz/.txz package file. It does not resolve dependencies; prefer slackpkg
+    for everyday work.
+tags:
+- packages
+- slackware
+risk: dangerous
+requires_elevated: true
+platforms:
+- linux
+operating_systems:
+- linux
+package_refs:
+- manager: slackpkg
+  package: pkgtools
+  distributions:
+  - slackware
+install_notes:
+  tr: Slackware pkgtools parçasıdır.
+  en: Part of Slackware pkgtools.
+flags:
+- flag: --warn
+  meaning:
+    tr: Çakışmaları uyar, yazma.
+    en: Warn on conflicts; do not write.
+  verified: false
+- flag: --root
+  meaning:
+    tr: Alternatif kök dizin.
+    en: Alternate root directory.
+  verified: false
+examples:
+- title:
+    tr: Yerel paket kur
+    en: Install local package
+  command: sudo installpkg package-name.txz
+  explanation:
+    tr: Yerel Slackware paketini kurar.
+    en: Installs a local Slackware package.
+  risk: dangerous
+  requires_elevated: true
+related:
+- slackpkg
+- removepkg
+- upgradepkg
+intent:
+  tr:
+  - installpkg
+  - slackware txz kur
+  en:
+  - installpkg
+  - slackware install txz
+verification:
+  status: draft
+  sources:
+  - http://www.slackware.com/config/packages.php
+  - https://manpages.org/installpkg
+  notes: Agent-authored Faz 4 draft from official docs; not human-verified.
+nova:
+  concepts:
+  - packages
+  - package-managers
+  - package-managers-comparison

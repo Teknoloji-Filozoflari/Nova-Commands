@@ -1,0 +1,107 @@
+schema_version: 2
+id: slackpkg
+name: slackpkg
+kind: package_manager
+category: packages
+summary:
+  tr: Slackware resmi paket aracı.
+  en: Slackware official package tool.
+description:
+  tr: slackpkg, Slackware resmi depolarından paket indirme/kurma/güncelleme için yüksek seviye araçtır.
+    Düşük seviye installpkg/removepkg/upgradepkg ile birlikte çalışır.
+  en: slackpkg is the high-level tool for fetching/installing/upgrading from official Slackware repos.
+    It works alongside low-level installpkg/removepkg/upgradepkg.
+tags:
+- packages
+- slackware
+risk: dangerous
+requires_elevated: true
+platforms:
+- linux
+operating_systems:
+- linux
+package_refs:
+- manager: slackpkg
+  package: slackpkg
+  distributions:
+  - slackware
+install_notes:
+  tr: Slackware’de resmi araçtır. Arch için pacman kullanın.
+  en: Official on Slackware. On Arch use pacman.
+flags:
+- flag: update
+  meaning:
+    tr: Paket listesini yenile.
+    en: Refresh package lists.
+  verified: false
+- flag: install
+  meaning:
+    tr: Paket kur.
+    en: Install packages.
+  verified: false
+- flag: upgrade-all
+  meaning:
+    tr: Tüm yükseltmeleri uygula.
+    en: Apply all upgrades.
+  verified: false
+- flag: search
+  meaning:
+    tr: Ara.
+    en: Search packages.
+  verified: false
+- flag: remove
+  meaning:
+    tr: Kaldır.
+    en: Remove packages.
+  verified: false
+examples:
+- title:
+    tr: Liste yenile
+    en: Update lists
+  command: sudo slackpkg update
+  explanation:
+    tr: Resmi depo listesini yeniler.
+    en: Refreshes official package lists.
+  risk: caution
+  requires_elevated: true
+- title:
+    tr: Kur
+    en: Install
+  command: sudo slackpkg install curl
+  explanation:
+    tr: curl kurar (isim eşlemesine dikkat).
+    en: Installs curl (mind name matching).
+  risk: caution
+  requires_elevated: true
+- title:
+    tr: Tümünü yükselt
+    en: Upgrade all
+  command: sudo slackpkg upgrade-all
+  explanation:
+    tr: Mevcut yükseltmeleri uygular — dikkatli onaylayın.
+    en: Applies pending upgrades — confirm carefully.
+  risk: dangerous
+  requires_elevated: true
+related:
+- installpkg
+- removepkg
+- upgradepkg
+- pacman
+intent:
+  tr:
+  - slackware kur
+  - slackpkg güncelle
+  en:
+  - slackpkg install
+  - slackware upgrade
+verification:
+  status: draft
+  sources:
+  - http://www.slackware.com/config/packages.php
+  - https://docs.slackware.com/slackware:beginners_guide
+  notes: Agent-authored Faz 4 draft from official docs; not human-verified.
+nova:
+  concepts:
+  - packages
+  - package-managers
+  - package-managers-comparison

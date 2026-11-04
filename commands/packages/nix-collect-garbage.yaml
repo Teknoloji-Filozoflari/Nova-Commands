@@ -1,0 +1,84 @@
+schema_version: 2
+id: nix-collect-garbage
+name: nix-collect-garbage
+kind: package_manager
+category: packages
+summary:
+  tr: Nix store çöp toplama.
+  en: Nix store garbage collection.
+description:
+  tr: nix-collect-garbage ulaşılmaz Nix store yollarını temizler. `-d` eski nesilleri de siler; geri alınması
+    zor alan açar.
+  en: nix-collect-garbage deletes unreachable Nix store paths. `-d` also deletes old generations; frees
+    space that is hard to undo.
+tags:
+- packages
+- nix
+risk: caution
+requires_elevated: false
+platforms:
+- linux
+- macos
+operating_systems:
+- linux
+- macos
+package_refs:
+- manager: nix
+  package: nix
+  distributions:
+  - nixos
+install_notes:
+  tr: Nix kurulumuyla gelir.
+  en: Ships with Nix.
+flags:
+- flag: -d
+  meaning:
+    tr: Eski nesilleri de sil.
+    en: Also delete old generations.
+  verified: false
+- flag: --delete-older-than
+  meaning:
+    tr: Belirli yaştan eskiyi sil.
+    en: Delete older than duration.
+  verified: false
+examples:
+- title:
+    tr: Çöp topla
+    en: Collect garbage
+  command: nix-collect-garbage
+  explanation:
+    tr: Ulaşılmaz store yollarını temizler.
+    en: Deletes unreachable store paths.
+  risk: caution
+  requires_elevated: false
+- title:
+    tr: Nesillerle temizle
+    en: Delete old generations
+  command: sudo nix-collect-garbage -d
+  explanation:
+    tr: Eski nesilleri de siler — geri alma seçenekleri azalır.
+    en: Also deletes old generations — fewer rollback options.
+  risk: dangerous
+  requires_elevated: true
+related:
+- nix
+- nix-env
+- nixos-rebuild
+intent:
+  tr:
+  - nix çöp
+  - nix store temizle
+  en:
+  - nix-collect-garbage
+  - nix gc
+verification:
+  status: draft
+  sources:
+  - https://nixos.org/manual/nix/stable/command-ref/nix-collect-garbage.html
+  notes: Agent-authored Faz 4 draft from official docs; not human-verified.
+nova:
+  concepts:
+  - packages
+  - package-managers
+  - package-managers-comparison
+  - nix-guix

@@ -1,0 +1,116 @@
+schema_version: 2
+id: rpm-ostree
+name: rpm-ostree
+kind: package_manager
+category: packages
+summary:
+  tr: rpm-ostree atomik/ostree sistem yönetimi.
+  en: rpm-ostree atomic/ostree system management.
+description:
+  tr: rpm-ostree, Fedora Silverblue/Kinoite/IoT gibi ostree tabanlı değişmez sistemlerde paket katmanı
+    ve yükseltmeleri yönetir. Klasik `dnf install` ile aynı model değildir; değişiklikler genelde yeniden
+    boot ister.
+  en: rpm-ostree manages package layers and upgrades on ostree-based immutable systems such as Fedora
+    Silverblue/Kinoite/IoT. It is not the same model as classic `dnf install`; changes often need a reboot.
+tags:
+- packages
+- fedora
+- ostree
+- immutable
+risk: dangerous
+requires_elevated: true
+platforms:
+- linux
+operating_systems:
+- linux
+package_refs:
+- manager: rpm-ostree
+  package: rpm-ostree
+  distributions:
+  - fedora-silverblue
+  - fedora-kinoite
+  - fedora-iot
+install_notes:
+  tr: Silverblue/Kinoite/IoT tabanında gelir. Klasik Fedora Workstation için dnf kullanın. Arch için pacman.
+  en: Ships on Silverblue/Kinoite/IoT. Use dnf on classic Fedora Workstation. On Arch use pacman.
+flags:
+- flag: status
+  meaning:
+    tr: Dağıtım/katman durumunu göster.
+    en: Show deployment/layer status.
+  verified: false
+- flag: upgrade
+  meaning:
+    tr: Sistem görüntüsünü yükselt.
+    en: Upgrade the system image.
+  verified: false
+- flag: install
+  meaning:
+    tr: Katman olarak paket ekle.
+    en: Layer packages onto the image.
+  verified: false
+- flag: uninstall
+  meaning:
+    tr: Katman paketini kaldır.
+    en: Remove a layered package.
+  verified: false
+- flag: rebase
+  meaning:
+    tr: Başka bir görüntü/ref’e geç.
+    en: Rebase to another image/ref.
+  verified: false
+examples:
+- title:
+    tr: Durum
+    en: Status
+  command: rpm-ostree status
+  explanation:
+    tr: Aktif/pending dağıtımları gösterir.
+    en: Shows active/pending deployments.
+  risk: safe
+  requires_elevated: false
+- title:
+    tr: Yükselt
+    en: Upgrade
+  command: rpm-ostree upgrade
+  explanation:
+    tr: Yeni görüntü indirir; genelde reboot gerekir.
+    en: Downloads a new image; reboot usually required.
+  risk: dangerous
+  requires_elevated: true
+- title:
+    tr: Katman kur
+    en: Layer install
+  command: rpm-ostree install vim
+  explanation:
+    tr: Paketi sistem katmanına ekler — reboot planlayın.
+    en: Layers a package onto the system — plan a reboot.
+  risk: dangerous
+  requires_elevated: true
+related:
+- dnf
+- rpm
+- nixos-rebuild
+- flatpak
+intent:
+  tr:
+  - silverblue yükselt
+  - rpm-ostree kur
+  - ostree durum
+  en:
+  - rpm-ostree upgrade
+  - silverblue install
+  - ostree status
+verification:
+  status: draft
+  sources:
+  - https://coreos.github.io/rpm-ostree/
+  - https://docs.fedoraproject.org/en-US/fedora-silverblue/troubleshooting/
+  - https://docs.fedoraproject.org/en-US/fedora-silverblue/getting-started/
+  notes: Agent-authored Faz 4 draft from official docs; not human-verified.
+nova:
+  concepts:
+  - packages
+  - package-managers
+  - package-managers-comparison
+  - nix-guix
