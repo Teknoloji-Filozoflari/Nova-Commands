@@ -1,0 +1,107 @@
+schema_version: 2
+id: nginx
+name: nginx
+kind: administrative_tool
+category: system
+summary:
+  tr: HTTP reverse proxy / web sunucu.
+  en: HTTP reverse proxy / web server.
+description:
+  tr: Yüksek performanslı web sunucu ve reverse proxy. Yapılandırma testi (-t) güvenli; reload servis
+    yöneticisi üzerinden yapılır.
+  en: High-performance web server and reverse proxy. Config test (-t) is safe; reload via the service
+    manager.
+tags:
+- web
+- proxy
+- server
+- http
+risk: caution
+requires_elevated: true
+platforms:
+- linux
+- macos
+- bsd
+operating_systems:
+- linux
+- macos
+- freebsd
+flags:
+- flag: -t
+  meaning:
+    tr: Yapılandırmayı test et.
+    en: Test configuration.
+  verified: false
+- flag: -T
+  meaning:
+    tr: Test + dump config.
+    en: Test and dump config.
+  verified: false
+- flag: -s
+  meaning:
+    tr: Sinyal (reload/stop).
+    en: Signal (reload/stop).
+  verified: false
+examples:
+- title:
+    tr: Config test
+    en: Config test
+  command: nginx -t
+  explanation:
+    tr: Yapılandırma sözdizimini test eder (yazmaz).
+    en: Tests config syntax (does not write).
+  risk: safe
+  requires_elevated: true
+- title:
+    tr: Sürüm
+    en: Version
+  command: nginx -v
+  explanation:
+    tr: nginx sürümü.
+    en: nginx version.
+  risk: safe
+intent:
+  tr:
+  - nginx
+  - reverse proxy
+  - web sunucu
+  en:
+  - nginx
+  - reverse proxy
+  - web server
+verification:
+  status: draft
+  sources:
+  - https://nginx.org/en/docs/
+  - https://nginx.org/en/docs/switches.html
+  notes: Agent-authored Faz 7 draft from official docs; not human-verified.
+related:
+- caddy
+- systemctl
+- curl
+- ss
+package_refs:
+- manager: pacman
+  package: nginx
+  distributions:
+  - arch
+- manager: apt
+  package: nginx
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: nginx
+  distributions:
+  - fedora
+packages:
+  arch: nginx
+  debian: nginx
+  ubuntu: nginx
+  fedora: nginx
+nova:
+  favorite_eligible: true
+  ui_priority: 60
+  concepts:
+  - reverse-proxy
+  - networking

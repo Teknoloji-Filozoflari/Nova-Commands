@@ -1,0 +1,91 @@
+schema_version: 2
+id: rclone
+name: rclone
+kind: executable
+category: backup
+summary:
+  tr: Bulut depolama senkron aracı.
+  en: Cloud storage sync tool.
+description:
+  tr: S3/Drive/SFTP vb. uzak depolara kopyalar/senkronlar. Kimlik bilgileri rclone.conf’tadır — örneklerde
+    gerçek key yok.
+  en: Copies/syncs to remote storage (S3/Drive/SFTP/…). Credentials live in rclone.conf — no real keys
+    in examples.
+tags:
+- backup
+- cloud
+- sync
+- storage
+risk: dangerous
+requires_elevated: false
+platforms:
+- linux
+- macos
+- windows
+operating_systems:
+- linux
+- macos
+- windows
+flags: []
+examples:
+- title:
+    tr: Sürüm
+    en: Version
+  command: rclone version
+  explanation:
+    tr: rclone sürümü.
+    en: rclone version.
+  risk: safe
+- title:
+    tr: Uzak listesi
+    en: List remotes
+  command: rclone listremotes
+  explanation:
+    tr: Yapılandırılmış uzak adları (içerik/secret göstermez).
+    en: Configured remote names (does not show secrets).
+  risk: safe
+intent:
+  tr:
+  - rclone
+  - bulut senkron
+  - s3 kopyala
+  en:
+  - rclone
+  - cloud sync
+  - copy s3
+verification:
+  status: draft
+  sources:
+  - https://rclone.org/docs/
+  - https://rclone.org/commands/
+  notes: Agent-authored Faz 7 draft from official docs; not human-verified.
+related:
+- restic
+- borg
+- rsync
+- aws
+package_refs:
+- manager: pacman
+  package: rclone
+  distributions:
+  - arch
+- manager: apt
+  package: rclone
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: rclone
+  distributions:
+  - fedora
+packages:
+  arch: rclone
+  debian: rclone
+  ubuntu: rclone
+  fedora: rclone
+nova:
+  favorite_eligible: true
+  ui_priority: 60
+  concepts:
+  - backup
+  - storage

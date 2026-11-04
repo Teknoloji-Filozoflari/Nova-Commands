@@ -1,0 +1,102 @@
+schema_version: 2
+id: kubectl
+name: kubectl
+kind: remote_cli
+category: containers
+summary:
+  tr: Kubernetes küme CLI.
+  en: Kubernetes cluster CLI.
+description:
+  tr: Kubernetes API ile kaynak yönetir. kubeconfig bağlamına bağlıdır; yanlış bağlam üretim kümesini
+    etkileyebilir. Örnekler salt okuma odaklı.
+  en: Manages resources via the Kubernetes API. Depends on kubeconfig context; wrong context can affect
+    production. Examples favor read-only ops.
+tags:
+- kubernetes
+- containers
+- devops
+- orchestration
+risk: dangerous
+requires_elevated: false
+platforms:
+- linux
+- macos
+- windows
+operating_systems:
+- linux
+- macos
+- windows
+flags:
+- flag: get
+  meaning:
+    tr: Kaynak listele.
+    en: List resources.
+  verified: false
+- flag: describe
+  meaning:
+    tr: Ayrıntılı durum.
+    en: Detailed status.
+  verified: false
+- flag: -n
+  meaning:
+    tr: Namespace.
+    en: Namespace.
+  verified: false
+examples:
+- title:
+    tr: Sürüm
+    en: Version
+  command: kubectl version --client
+  explanation:
+    tr: İstemci sürümü (küme gerekmez).
+    en: Client version (no cluster required).
+  risk: safe
+- title:
+    tr: Pod’lar
+    en: Pods
+  command: kubectl get pods -A
+  explanation:
+    tr: Tüm namespace’lerde pod’lar (küme erişimi gerekir).
+    en: Pods across namespaces (needs cluster access).
+  risk: caution
+- title:
+    tr: Bağlamlar
+    en: Contexts
+  command: kubectl config get-contexts
+  explanation:
+    tr: kubeconfig bağlamlarını listeler.
+    en: Lists kubeconfig contexts.
+  risk: safe
+intent:
+  tr:
+  - kubectl
+  - kubernetes pod listele
+  - k8s
+  en:
+  - kubectl
+  - list kubernetes pods
+  - k8s
+verification:
+  status: draft
+  sources:
+  - https://kubernetes.io/docs/reference/kubectl/
+  - https://kubernetes.io/docs/reference/kubectl/quick-reference/
+  notes: Agent-authored Faz 7 draft from official docs; not human-verified.
+related:
+- helm
+- crictl
+- nerdctl
+- docker
+package_refs:
+- manager: pacman
+  package: kubectl
+  distributions:
+  - arch
+packages:
+  arch: kubectl
+nova:
+  favorite_eligible: true
+  ui_priority: 60
+  concepts:
+  - containers
+  - kubernetes

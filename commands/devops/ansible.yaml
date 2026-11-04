@@ -1,0 +1,87 @@
+schema_version: 2
+id: ansible
+name: ansible
+kind: remote_cli
+category: devops
+summary:
+  tr: Ansible otomasyon motoru.
+  en: Ansible automation engine.
+description:
+  tr: SSH/WinRM üzerinden yapılandırma otomasyonu. Playbook çalıştırmak uzak sistemleri değiştirir — örnekler
+    sürüm/inventory odaklı. `ansible-playbook` ayrı binary olabilir.
+  en: Configuration automation over SSH/WinRM. Running playbooks mutates remote systems — examples focus
+    on version/inventory. `ansible-playbook` may be a separate binary.
+tags:
+- ansible
+- automation
+- devops
+- iac
+risk: dangerous
+requires_elevated: false
+platforms:
+- linux
+- macos
+operating_systems:
+- linux
+- macos
+flags: []
+examples:
+- title:
+    tr: Sürüm
+    en: Version
+  command: ansible --version
+  explanation:
+    tr: Ansible sürüm ve yollar.
+    en: Ansible version and paths.
+  risk: safe
+- title:
+    tr: Inventory list
+    en: Inventory list
+  command: ansible-inventory --list
+  explanation:
+    tr: Yapılandırılmış envanteri JSON olarak listeler.
+    en: Lists configured inventory as JSON.
+  risk: safe
+intent:
+  tr:
+  - ansible
+  - playbook
+  - otomasyon
+  en:
+  - ansible
+  - playbook
+  - automation
+verification:
+  status: draft
+  sources:
+  - https://docs.ansible.com/
+  - https://docs.ansible.com/ansible/latest/command_guide/index.html
+  notes: Agent-authored Faz 7 draft from official docs; not human-verified.
+related:
+- terraform
+- ssh
+- systemctl
+package_refs:
+- manager: pacman
+  package: ansible
+  distributions:
+  - arch
+- manager: apt
+  package: ansible
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: ansible
+  distributions:
+  - fedora
+packages:
+  arch: ansible
+  debian: ansible
+  ubuntu: ansible
+  fedora: ansible
+nova:
+  favorite_eligible: true
+  ui_priority: 60
+  concepts:
+  - infrastructure-as-code

@@ -1,0 +1,64 @@
+schema_version: 2
+id: crictl
+name: crictl
+kind: executable
+category: containers
+summary:
+  tr: CRI runtime hata ayıklama CLI.
+  en: CRI runtime debugging CLI.
+description:
+  tr: Kubernetes CRI (containerd/CRI-O) için düşük seviye teşhis aracı. Günlük pod yönetimi için kubectl
+    tercih edilir.
+  en: Low-level diagnostics for Kubernetes CRI (containerd/CRI-O). Prefer kubectl for day-to-day pod management.
+tags:
+- containers
+- kubernetes
+- cri
+- devops
+risk: caution
+requires_elevated: false
+platforms:
+- linux
+operating_systems:
+- linux
+flags: []
+examples:
+- title:
+    tr: Pod’lar
+    en: Pods
+  command: crictl pods
+  explanation:
+    tr: CRI pod’larını listeler (kubelet/runtime erişimi gerekir).
+    en: Lists CRI pods (needs kubelet/runtime access).
+  risk: caution
+- title:
+    tr: Konteynerler
+    en: Containers
+  command: crictl ps
+  explanation:
+    tr: Çalışan CRI konteynerleri.
+    en: Running CRI containers.
+  risk: safe
+intent:
+  tr:
+  - crictl
+  - cri teşhis
+  en:
+  - crictl
+  - cri debug
+verification:
+  status: draft
+  sources:
+  - https://github.com/kubernetes-sigs/cri-tools
+  - https://kubernetes.io/docs/tasks/debug/debug-cluster/crictl/
+  notes: Agent-authored Faz 7 draft from official docs; not human-verified.
+related:
+- kubectl
+- nerdctl
+- docker
+nova:
+  favorite_eligible: true
+  ui_priority: 60
+  concepts:
+  - containers
+  - kubernetes

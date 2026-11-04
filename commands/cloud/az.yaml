@@ -1,0 +1,66 @@
+schema_version: 2
+id: az
+name: az
+kind: remote_cli
+category: cloud
+summary:
+  tr: Azure CLI.
+  en: Azure CLI.
+description:
+  tr: Microsoft Azure yönetim CLI. Gerçek tenant/abonelik gizli bilgisi örneklerde yok.
+  en: Microsoft Azure management CLI. No real tenant/subscription secrets in examples.
+tags:
+- cloud
+- azure
+- devops
+risk: dangerous
+requires_elevated: false
+platforms:
+- linux
+- macos
+- windows
+operating_systems:
+- linux
+- macos
+- windows
+flags: []
+examples:
+- title:
+    tr: Sürüm
+    en: Version
+  command: az version
+  explanation:
+    tr: Azure CLI sürüm JSON’u.
+    en: Azure CLI version JSON.
+  risk: safe
+- title:
+    tr: Hesap göster
+    en: Show account
+  command: az account show
+  explanation:
+    tr: Aktif abonelik özeti (oturum açıkken).
+    en: Active subscription summary (when logged in).
+  risk: caution
+intent:
+  tr:
+  - azure cli
+  - az account
+  en:
+  - azure cli
+  - az account
+verification:
+  status: draft
+  sources:
+  - https://learn.microsoft.com/cli/azure/
+  - https://learn.microsoft.com/cli/azure/get-started-with-azure-cli
+  notes: Agent-authored Faz 7 draft from official docs; not human-verified.
+related:
+- aws
+- gcloud
+- terraform
+nova:
+  favorite_eligible: true
+  ui_priority: 60
+  concepts:
+  - cloud
+  - infrastructure-as-code

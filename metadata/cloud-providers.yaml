@@ -1,5 +1,3 @@
-# Auto-seeded Faz 1 platform registry. Status is skeleton|draft only.
-# Do not mark verified without human review.
 schema_version: 1
 kind: nova-commands-cloud-provider-registry
 cloud_providers:
@@ -12,13 +10,13 @@ cloud_providers:
     en: Amazon Web Services cloud provider metadata entry (CLI skeleton).
   cli_names:
   - aws
-  status: skeleton
-  support_level: planned
+  status: draft
+  support_level: partial
   documentation:
   - https://docs.aws.amazon.com/cli/
   notes:
-    tr: Gerçek API anahtarı veya gizli kimlik içeren örnek kullanılmaz.
-    en: Examples must never include real API tokens or secrets.
+    tr: 'Faz 7: ilgili CLI komut kaydı draft (gerçek secret örneği yok).'
+    en: 'Faz 7: matching CLI command record is draft (no real secret examples).'
 - id: azure
   name:
     tr: Microsoft Azure
@@ -28,13 +26,13 @@ cloud_providers:
     en: Microsoft Azure cloud provider metadata entry (CLI skeleton).
   cli_names:
   - az
-  status: skeleton
-  support_level: planned
+  status: draft
+  support_level: partial
   documentation:
   - https://learn.microsoft.com/cli/azure/
   notes:
-    tr: Gerçek API anahtarı veya gizli kimlik içeren örnek kullanılmaz.
-    en: Examples must never include real API tokens or secrets.
+    tr: 'Faz 7: ilgili CLI komut kaydı draft (gerçek secret örneği yok).'
+    en: 'Faz 7: matching CLI command record is draft (no real secret examples).'
 - id: gcp
   name:
     tr: Google Cloud
@@ -44,13 +42,13 @@ cloud_providers:
     en: Google Cloud cloud provider metadata entry (CLI skeleton).
   cli_names:
   - gcloud
-  status: skeleton
-  support_level: planned
+  status: draft
+  support_level: partial
   documentation:
   - https://cloud.google.com/sdk/docs
   notes:
-    tr: Gerçek API anahtarı veya gizli kimlik içeren örnek kullanılmaz.
-    en: Examples must never include real API tokens or secrets.
+    tr: 'Faz 7: ilgili CLI komut kaydı draft (gerçek secret örneği yok).'
+    en: 'Faz 7: matching CLI command record is draft (no real secret examples).'
 - id: oci
   name:
     tr: Oracle Cloud Infrastructure

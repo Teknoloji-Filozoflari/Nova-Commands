@@ -1,0 +1,81 @@
+schema_version: 2
+id: virsh
+name: virsh
+kind: administrative_tool
+category: virtualization
+summary:
+  tr: libvirt yönetim kabuğu.
+  en: libvirt management shell.
+description:
+  tr: KVM/QEMU ve diğer libvirt hipervizörlerini yönetir. Domain oluşturma/silme yıkıcı olabilir; örnekler
+    liste/durum odaklı.
+  en: Manages KVM/QEMU and other libvirt hypervisors. Create/destroy can be destructive; examples focus
+    on list/status.
+tags:
+- virtualization
+- kvm
+- libvirt
+- server
+risk: dangerous
+requires_elevated: true
+platforms:
+- linux
+operating_systems:
+- linux
+flags: []
+examples:
+- title:
+    tr: Domain listesi
+    en: List domains
+  command: virsh list --all
+  explanation:
+    tr: Tüm sanal makineleri listeler (libvirt erişimi).
+    en: Lists all VMs (needs libvirt access).
+  risk: safe
+  requires_elevated: true
+- title:
+    tr: Node bilgisi
+    en: Node info
+  command: virsh nodeinfo
+  explanation:
+    tr: Hipervizör düğüm özeti.
+    en: Hypervisor node summary.
+  risk: safe
+  requires_elevated: true
+intent:
+  tr:
+  - virsh
+  - sanal makine listele
+  - kvm
+  en:
+  - virsh
+  - list vms
+  - kvm
+verification:
+  status: draft
+  sources:
+  - https://libvirt.org/manpages/virsh.html
+  - https://libvirt.org/docs.html
+  notes: Agent-authored Faz 7 draft from official docs; not human-verified.
+related:
+- qemu-img
+- systemctl
+package_refs:
+- manager: pacman
+  package: libvirt
+  distributions:
+  - arch
+- manager: apt
+  package: libvirt-clients
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: libvirt-client
+  distributions:
+  - fedora
+nova:
+  favorite_eligible: true
+  ui_priority: 60
+  concepts:
+  - virtualization

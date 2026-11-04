@@ -1,0 +1,57 @@
+id: cloud
+kind: nova-commands-concept
+title:
+  tr: Bulut sağlayıcı CLI’leri
+  en: Cloud provider CLIs
+summary:
+  tr: aws, az, gcloud — kontrol düzlemi araçları; gerçek API anahtarı yok.
+  en: aws, az, gcloud — control-plane tools; no real API keys.
+difficulty: intermediate
+tags:
+  - cloud
+  - aws
+  - azure
+  - gcp
+related_commands:
+  - aws
+  - az
+  - gcloud
+  - terraform
+  - rclone
+related_concepts:
+  - infrastructure-as-code
+  - kubernetes
+  - backup
+see_also:
+  - "https://docs.aws.amazon.com/cli/"
+  - "https://learn.microsoft.com/cli/azure/"
+  - "https://cloud.google.com/sdk/docs"
+body:
+  tr: |
+    Bulut CLI’leri (`aws`, `az`, `gcloud`) sağlayıcı **kontrol düzlemine**
+    konuşur. Yerel `ip`/`systemctl` ile aynı şey değildirler.
+
+    **Kimlik:** Profil/ortam değişkeni/managed identity kullanın. Banka
+    örneklerinde access key, secret, session token veya service-account JSON
+    **yoktur**.
+
+    **IaC ilişkisi:** Terraform gibi araçlar aynı API’leri kod ile yönetir;
+    CLI ad-hoc işlem ve teşhis içindir. Maliyet/yetki riski yüksektir —
+    yanlış bölge veya hesap pahalı kaynak yaratabilir. Kayıtlar `draft`.
+  en: |
+    Cloud CLIs (`aws`, `az`, `gcloud`) talk to provider **control planes**.
+    They are not the same as local `ip`/`systemctl`.
+
+    **Identity:** Use profiles/env vars/managed identity. Catalog examples
+    never include access keys, secrets, session tokens, or service-account JSON.
+
+    **IaC link:** Tools like Terraform manage the same APIs as code; CLIs are
+    for ad-hoc ops and diagnostics. Cost/permission risk is high — a wrong
+    region or account can create expensive resources. Records stay `draft`.
+verification:
+  status: draft
+  sources:
+    - "https://docs.aws.amazon.com/cli/"
+    - "https://learn.microsoft.com/cli/azure/"
+    - "https://cloud.google.com/sdk/docs"
+  notes: "Agent-authored Faz 7 teaching draft; not human-verified."

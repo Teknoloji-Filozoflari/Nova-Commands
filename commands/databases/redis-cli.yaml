@@ -1,0 +1,80 @@
+schema_version: 2
+id: redis-cli
+name: redis-cli
+kind: executable
+category: databases
+summary:
+  tr: Redis komut satırı istemcisi.
+  en: Redis command-line client.
+description:
+  tr: Redis sunucusuna komut gönderir. AUTH/parola örneklerinde gerçek sır kullanmayın.
+  en: Sends commands to a Redis server. Never put real secrets in AUTH examples.
+tags:
+- database
+- redis
+- cache
+- server
+risk: caution
+requires_elevated: false
+platforms:
+- linux
+- macos
+- windows
+operating_systems:
+- linux
+- macos
+- windows
+flags: []
+examples:
+- title:
+    tr: Ping
+    en: Ping
+  command: redis-cli PING
+  explanation:
+    tr: Yerel Redis’e PING (çalışıyorsa PONG).
+    en: PING local Redis (PONG if running).
+  risk: caution
+- title:
+    tr: Bilgi
+    en: Info
+  command: redis-cli INFO server
+  explanation:
+    tr: Sunucu INFO bölümü (bağlantı gerekir).
+    en: Server INFO section (needs connection).
+  risk: caution
+intent:
+  tr:
+  - redis-cli
+  - redis ping
+  en:
+  - redis-cli
+  - redis ping
+verification:
+  status: draft
+  sources:
+  - https://redis.io/docs/latest/develop/tools/cli/
+  - https://redis.io/docs/latest/commands/
+  notes: Agent-authored Faz 7 draft from official docs; not human-verified.
+related:
+- mysql
+- psql
+- sqlite3
+package_refs:
+- manager: pacman
+  package: redis
+  distributions:
+  - arch
+- manager: apt
+  package: redis-tools
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: redis
+  distributions:
+  - fedora
+nova:
+  favorite_eligible: true
+  ui_priority: 60
+  concepts:
+  - databases

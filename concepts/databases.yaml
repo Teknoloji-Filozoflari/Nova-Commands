@@ -1,0 +1,58 @@
+id: databases
+kind: nova-commands-concept
+title:
+  tr: Veritabanı istemci CLI’leri
+  en: Database client CLIs
+summary:
+  tr: mysql, redis-cli, psql — sunucu kurulumu değil; parola argv’de olmaz.
+  en: mysql, redis-cli, psql — clients not server installs; no passwords on argv.
+difficulty: beginner
+tags:
+  - database
+  - mysql
+  - redis
+  - postgres
+related_commands:
+  - mysql
+  - redis-cli
+  - psql
+  - sqlite3
+related_concepts:
+  - json-data
+  - networking
+  - permissions
+see_also:
+  - "https://dev.mysql.com/doc/refman/8.4/en/mysql.html"
+  - "https://redis.io/docs/latest/develop/tools/cli/"
+  - "https://www.postgresql.org/docs/current/app-psql.html"
+body:
+  tr: |
+    Bu bankadaki veritabanı kayıtları **istemci CLI** odaklıdır; MySQL/Redis
+    sunucusunu kuran paket scriptleri değildir.
+
+    **Alışkanlıklar:**
+    - Parolayı komut satırına (`-pSECRET`) yazmayın — history ve `ps` sızdırır.
+    - Önce `--version` / `--help` ile aracı doğrulayın.
+    - Üretimde salt okuma sorguları bile veri sızdırabilir (`caution`).
+
+    **psql** (PostgreSQL) ve **sqlite3** zaten development kategorisinde;
+    **mysql** / **redis-cli** Faz 7’de `databases/` altına eklendi. Hepsi `draft`
+    başlar; `verified` insan incelemesi ister.
+  en: |
+    Database records in this bank are **client CLIs**, not package scripts that
+    install MySQL/Redis servers.
+
+    **Habits:**
+    - Do not put passwords on argv (`-pSECRET`) — history and `ps` leak them.
+    - Confirm the tool with `--version` / `--help` first.
+    - Even read-only queries can leak data in production (`caution`).
+
+    **psql** (PostgreSQL) and **sqlite3** already live under development;
+    **mysql** / **redis-cli** were added under `databases/` in Faz 7. All start
+    as `draft`; `verified` needs human review.
+verification:
+  status: draft
+  sources:
+    - "https://dev.mysql.com/doc/refman/8.4/en/mysql.html"
+    - "https://redis.io/docs/latest/develop/tools/cli/"
+  notes: "Agent-authored Faz 7 teaching draft; not human-verified."

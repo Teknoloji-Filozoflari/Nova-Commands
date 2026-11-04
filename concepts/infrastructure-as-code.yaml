@@ -1,0 +1,70 @@
+id: infrastructure-as-code
+kind: nova-commands-concept
+title:
+  tr: Altyapı kodu (IaC) ve otomasyon
+  en: Infrastructure as code (IaC) and automation
+summary:
+  tr: Terraform ve Ansible farkı; bulut CLI’ler ve gizli kimlik kuralları.
+  en: Terraform vs Ansible; cloud CLIs and secret-handling rules.
+difficulty: intermediate
+tags:
+  - iac
+  - terraform
+  - ansible
+  - devops
+  - cloud
+related_commands:
+  - terraform
+  - ansible
+  - aws
+  - az
+  - gcloud
+  - kubectl
+  - gh
+related_concepts:
+  - cloud
+  - kubernetes
+  - containers
+see_also:
+  - "https://developer.hashicorp.com/terraform/intro"
+  - "https://docs.ansible.com/"
+body:
+  tr: |
+    **IaC** altyapıyı tekrarlanabilir kod olarak tanımlar.
+
+    **Kaba ayrım:**
+    - **Terraform** — sağlayıcı API’leriyle kaynak oluşturma/plan/apply
+      (OpenTofu ayrı bir araçtır; bu fazda ayrı kayıt yok).
+    - **Ansible** — yapılandırma/otomasyon (çoğunlukla SSH); state modeli farklıdır.
+    - **aws / az / gcloud** — bulut kontrol düzlemi CLI’leri; Terraform’un yerine
+      geçmezler, onu tamamlarlar.
+
+    **Gizli bilgi:** Access key, session token, service-account JSON veya
+    `gh` PAT örnek YAML’lara **yazılmaz**. `version`, `plan`/`validate`,
+    `auth status` gibi güvenli okumalar tercih edilir.
+
+    `apply` / `destroy` / playbook koşuları uzak sistemleri değiştirir —
+    risk `dangerous` olabilir. Kayıtlar `draft`.
+  en: |
+    **IaC** defines infrastructure as repeatable code.
+
+    **Rough split:**
+    - **Terraform** — create/plan/apply resources via provider APIs
+      (OpenTofu is a separate tool; no separate record in this phase).
+    - **Ansible** — configuration/automation (often over SSH); different state model.
+    - **aws / az / gcloud** — cloud control-plane CLIs; they complement Terraform,
+      they do not replace it.
+
+    **Secrets:** Never put access keys, session tokens, service-account JSON, or
+    `gh` PATs in example YAML. Prefer safe reads like `version`, `plan`/`validate`,
+    and `auth status`.
+
+    `apply` / `destroy` / playbook runs mutate remote systems — risk may be
+    `dangerous`. Records stay `draft`.
+verification:
+  status: draft
+  sources:
+    - "https://developer.hashicorp.com/terraform/intro"
+    - "https://docs.ansible.com/"
+    - "https://docs.aws.amazon.com/cli/"
+  notes: "Agent-authored Faz 7 teaching draft; not human-verified."

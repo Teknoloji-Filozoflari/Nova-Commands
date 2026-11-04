@@ -28,8 +28,8 @@ server_platforms:
     en: KVM server / infrastructure platform registry entry.
   platform_kind: hypervisor
   vendor_cli: false
-  status: skeleton
-  support_level: planned
+  status: draft
+  support_level: partial
   documentation:
   - https://www.linux-kvm.org/page/Documents
   operating_systems:
@@ -43,8 +43,8 @@ server_platforms:
     en: QEMU server / infrastructure platform registry entry.
   platform_kind: hypervisor
   vendor_cli: false
-  status: skeleton
-  support_level: planned
+  status: draft
+  support_level: partial
   documentation:
   - https://www.qemu.org/docs/master/
   operating_systems:
@@ -60,8 +60,8 @@ server_platforms:
     en: libvirt server / infrastructure platform registry entry.
   platform_kind: hypervisor
   vendor_cli: false
-  status: skeleton
-  support_level: planned
+  status: draft
+  support_level: partial
   documentation:
   - https://libvirt.org/docs.html
   operating_systems:
@@ -345,8 +345,8 @@ server_platforms:
     en: Docker Engine server / infrastructure platform registry entry.
   platform_kind: container-runtime
   vendor_cli: false
-  status: skeleton
-  support_level: planned
+  status: draft
+  support_level: partial
   documentation:
   - https://docs.docker.com/engine/
   operating_systems:
@@ -362,8 +362,8 @@ server_platforms:
     en: Kubernetes server / infrastructure platform registry entry.
   platform_kind: orchestration
   vendor_cli: false
-  status: skeleton
-  support_level: planned
+  status: draft
+  support_level: partial
   documentation:
   - https://kubernetes.io/docs/
   operating_systems:

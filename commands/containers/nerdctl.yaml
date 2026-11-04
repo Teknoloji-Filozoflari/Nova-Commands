@@ -1,0 +1,75 @@
+schema_version: 2
+id: nerdctl
+name: nerdctl
+kind: executable
+category: containers
+summary:
+  tr: containerd için Docker uyumlu CLI.
+  en: Docker-compatible CLI for containerd.
+description:
+  tr: nerdctl, containerd üzerinde Docker-benzeri komutlar sunar. Docker Engine ile aynı daemon değildir;
+    Kubernetes node’larında sık görülür.
+  en: nerdctl provides Docker-like commands on containerd. Not the same daemon as Docker Engine; common
+    on Kubernetes nodes.
+tags:
+- containers
+- containerd
+- devops
+risk: dangerous
+requires_elevated: false
+platforms:
+- linux
+operating_systems:
+- linux
+flags: []
+examples:
+- title:
+    tr: Çalışanlar
+    en: Running
+  command: nerdctl ps
+  explanation:
+    tr: containerd üzerinden çalışan konteynerler.
+    en: Running containers via containerd.
+  risk: safe
+- title:
+    tr: İmajlar
+    en: Images
+  command: nerdctl images
+  explanation:
+    tr: Yerel imaj listesi.
+    en: Local image list.
+  risk: safe
+intent:
+  tr:
+  - nerdctl
+  - containerd konteyner
+  en:
+  - nerdctl
+  - containerd containers
+verification:
+  status: draft
+  sources:
+  - https://github.com/containerd/nerdctl
+  - https://github.com/containerd/nerdctl/blob/main/docs/command-reference.md
+  notes: Agent-authored Faz 7 draft from official docs; not human-verified.
+related:
+- docker
+- podman
+- crictl
+- kubectl
+package_refs:
+- manager: pacman
+  package: nerdctl
+  distributions:
+  - arch
+packages:
+  arch: nerdctl
+install_notes:
+  tr: 'Arch: pacman -S nerdctl. Diğer dağıtımlarda paket adı/kurulum yolu değişebilir.'
+  en: 'Arch: pacman -S nerdctl. Other distros may use different package names/paths.'
+nova:
+  favorite_eligible: true
+  ui_priority: 60
+  concepts:
+  - containers
+  - kubernetes

@@ -1,0 +1,68 @@
+schema_version: 2
+id: gcloud
+name: gcloud
+kind: remote_cli
+category: cloud
+summary:
+  tr: Google Cloud CLI.
+  en: Google Cloud CLI.
+description:
+  tr: Google Cloud SDK komut satırı. API anahtarı/service-account JSON örneklerde yok.
+  en: Google Cloud SDK command line. No API keys or service-account JSON in examples.
+tags:
+- cloud
+- gcp
+- devops
+risk: dangerous
+requires_elevated: false
+platforms:
+- linux
+- macos
+- windows
+operating_systems:
+- linux
+- macos
+- windows
+flags: []
+examples:
+- title:
+    tr: Sürüm
+    en: Version
+  command: gcloud version
+  explanation:
+    tr: gcloud bileşen sürümleri.
+    en: gcloud component versions.
+  risk: safe
+- title:
+    tr: Config list
+    en: Config list
+  command: gcloud config list
+  explanation:
+    tr: Aktif proje/bölge ayarları (secret değil).
+    en: Active project/region settings (not secrets).
+  risk: caution
+intent:
+  tr:
+  - gcloud
+  - gcp cli
+  - google cloud
+  en:
+  - gcloud
+  - gcp cli
+  - google cloud
+verification:
+  status: draft
+  sources:
+  - https://cloud.google.com/sdk/docs
+  - https://cloud.google.com/sdk/gcloud/reference
+  notes: Agent-authored Faz 7 draft from official docs; not human-verified.
+related:
+- aws
+- az
+- terraform
+nova:
+  favorite_eligible: true
+  ui_priority: 60
+  concepts:
+  - cloud
+  - infrastructure-as-code

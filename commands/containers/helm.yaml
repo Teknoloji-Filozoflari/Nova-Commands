@@ -1,0 +1,78 @@
+schema_version: 2
+id: helm
+name: helm
+kind: remote_cli
+category: containers
+summary:
+  tr: Kubernetes paket yöneticisi.
+  en: Kubernetes package manager.
+description:
+  tr: Chart’larla Kubernetes uygulamalarını paketler/kurar. Küme yazma işlemleri caution/dangerous; örnekler
+    sürüm ve liste odaklı.
+  en: Packages/installs Kubernetes apps via charts. Cluster-mutating ops are caution/dangerous; examples
+    focus on version/list.
+tags:
+- kubernetes
+- helm
+- devops
+- packages
+risk: dangerous
+requires_elevated: false
+platforms:
+- linux
+- macos
+- windows
+operating_systems:
+- linux
+- macos
+- windows
+flags: []
+examples:
+- title:
+    tr: Sürüm
+    en: Version
+  command: helm version
+  explanation:
+    tr: Helm istemci sürümü.
+    en: Helm client version.
+  risk: safe
+- title:
+    tr: Release listesi
+    en: List releases
+  command: helm list -A
+  explanation:
+    tr: Tüm namespace release’leri (küme erişimi).
+    en: Releases across namespaces (needs cluster access).
+  risk: caution
+intent:
+  tr:
+  - helm
+  - chart kur
+  - kubernetes paket
+  en:
+  - helm
+  - install chart
+  - kubernetes package
+verification:
+  status: draft
+  sources:
+  - https://helm.sh/docs/
+  - https://helm.sh/docs/helm/helm/
+  notes: Agent-authored Faz 7 draft from official docs; not human-verified.
+related:
+- kubectl
+- terraform
+package_refs:
+- manager: pacman
+  package: helm
+  distributions:
+  - arch
+packages:
+  arch: helm
+nova:
+  favorite_eligible: true
+  ui_priority: 60
+  concepts:
+  - containers
+  - kubernetes
+  - infrastructure-as-code

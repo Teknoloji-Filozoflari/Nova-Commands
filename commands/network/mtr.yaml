@@ -1,0 +1,93 @@
+schema_version: 2
+id: mtr
+name: mtr
+kind: executable
+category: network
+summary:
+  tr: Birleşik traceroute + ping.
+  en: Combined traceroute + ping.
+description:
+  tr: Yol üzerindeki kayıp/gecikmeyi sürekli günceller. traceroute + ping birleşimi.
+  en: Continuously updates loss/latency along a path. Combines traceroute and ping.
+tags:
+- network
+- diagnostics
+- latency
+risk: safe
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+operating_systems:
+- linux
+- macos
+flags:
+- flag: -r
+  meaning:
+    tr: Rapor modu (bir kez).
+    en: Report mode (one shot).
+  verified: false
+- flag: -c
+  meaning:
+    tr: Döngü sayısı.
+    en: Cycle count.
+  verified: false
+- flag: -n
+  meaning:
+    tr: DNS çözme.
+    en: No DNS resolution.
+  verified: false
+examples:
+- title:
+    tr: Rapor
+    en: Report
+  command: mtr -rn -c 5 example.com
+  explanation:
+    tr: 5 döngülük metin raporu (DNS çözmez).
+    en: 5-cycle text report (no DNS).
+  risk: safe
+intent:
+  tr:
+  - yol izle
+  - mtr
+  - gecikme
+  en:
+  - trace path
+  - mtr
+  - latency
+verification:
+  status: draft
+  sources:
+  - https://www.bitwizard.nl/mtr/
+  - https://github.com/traviscross/mtr
+  notes: Agent-authored Faz 7 draft from official docs; not human-verified.
+related:
+- traceroute
+- ping
+- dig
+package_refs:
+- manager: pacman
+  package: mtr
+  distributions:
+  - arch
+- manager: apt
+  package: mtr
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: mtr
+  distributions:
+  - fedora
+packages:
+  arch: mtr
+  debian: mtr
+  ubuntu: mtr
+  fedora: mtr
+nova:
+  favorite_eligible: true
+  ui_priority: 60
+  concepts:
+  - networking
+  - networking-basics

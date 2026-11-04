@@ -1,0 +1,88 @@
+schema_version: 2
+id: restic
+name: restic
+kind: executable
+category: backup
+summary:
+  tr: Şifreli artımlı yedekleme.
+  en: Encrypted incremental backups.
+description:
+  tr: Deduplicate/şifreli yedekler. Repo parolası ve backend kimlik bilgileri gizli tutulmalı; örneklerde
+    gerçek secret yok.
+  en: Deduplicated encrypted backups. Keep repo password and backend credentials secret; examples contain
+    no real secrets.
+tags:
+- backup
+- encryption
+- server
+risk: dangerous
+requires_elevated: false
+platforms:
+- linux
+- macos
+- windows
+- bsd
+operating_systems:
+- linux
+- macos
+- windows
+flags: []
+examples:
+- title:
+    tr: Sürüm
+    en: Version
+  command: restic version
+  explanation:
+    tr: restic sürümü.
+    en: restic version.
+  risk: safe
+- title:
+    tr: Snapshots (placeholder)
+    en: Snapshots (placeholder)
+  command: restic -r /path/to/repo snapshots
+  explanation:
+    tr: Repo snapshot listesi (RESTIC_PASSWORD gerekir; yol yer tutucu).
+    en: Lists repo snapshots (needs RESTIC_PASSWORD; path is placeholder).
+  risk: caution
+intent:
+  tr:
+  - restic yedek
+  - şifreli yedek
+  en:
+  - restic backup
+  - encrypted backup
+verification:
+  status: draft
+  sources:
+  - https://restic.readthedocs.io/
+  - https://restic.readthedocs.io/en/stable/010_introduction.html
+  notes: Agent-authored Faz 7 draft from official docs; not human-verified.
+related:
+- borg
+- rclone
+- rsync
+package_refs:
+- manager: pacman
+  package: restic
+  distributions:
+  - arch
+- manager: apt
+  package: restic
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: restic
+  distributions:
+  - fedora
+packages:
+  arch: restic
+  debian: restic
+  ubuntu: restic
+  fedora: restic
+nova:
+  favorite_eligible: true
+  ui_priority: 60
+  concepts:
+  - backup
+  - storage

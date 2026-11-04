@@ -1,0 +1,60 @@
+id: reverse-proxy
+kind: nova-commands-concept
+title:
+  tr: Reverse proxy ve web sunucular
+  en: Reverse proxies and web servers
+summary:
+  tr: nginx ve Caddy rolleri; TLS ve config test alışkanlıkları.
+  en: Roles of nginx and Caddy; TLS and config-test habits.
+difficulty: intermediate
+tags:
+  - nginx
+  - caddy
+  - proxy
+  - http
+  - tls
+related_commands:
+  - nginx
+  - caddy
+  - curl
+  - openssl
+  - ss
+  - systemctl
+related_concepts:
+  - networking
+  - networking-basics
+  - firewalls
+see_also:
+  - "https://nginx.org/en/docs/"
+  - "https://caddyserver.com/docs/"
+body:
+  tr: |
+    Bir **reverse proxy**, istemci isteklerini arka uç servislere iletir
+    (TLS sonlandırma, yük dengeleme, yol yönlendirme).
+
+    **nginx** olgun, yapılandırma dosyası odaklı bir web sunucu/proxy’dir.
+    Değişiklikten önce `nginx -t` ile sözdizimi testi alışkanlık olmalıdır.
+
+    **Caddy** otomatik ACME/HTTPS ile öne çıkar; `caddy validate` config’i
+    kontrol eder. Her iki araç da yanlış config ile hizmeti düşürebilir.
+
+    Firewall ve SELinux/AppArmor kuralları port 80/443 erişimini etkiler —
+    proxy kaydı firewall kaydı değildir. Örnekler `draft`.
+  en: |
+    A **reverse proxy** forwards client requests to upstream services
+    (TLS termination, load balancing, path routing).
+
+    **nginx** is a mature, config-file-centric web server/proxy. Habit: run
+    `nginx -t` before reloading.
+
+    **Caddy** emphasizes automatic ACME/HTTPS; `caddy validate` checks config.
+    Either tool can take a service down with a bad config.
+
+    Firewall and SELinux/AppArmor rules affect ports 80/443 — a proxy record is
+    not a firewall record. Examples stay `draft`.
+verification:
+  status: draft
+  sources:
+    - "https://nginx.org/en/docs/"
+    - "https://caddyserver.com/docs/"
+  notes: "Agent-authored Faz 7 teaching draft; not human-verified."

@@ -1,0 +1,76 @@
+schema_version: 2
+id: ethtool
+name: ethtool
+kind: executable
+category: network
+summary:
+  tr: NIC bağlantı/ayar sorgusu.
+  en: NIC link/settings query.
+description:
+  tr: Linux ağ kartı hız/duplex/offload bilgisi. Çoğu yazma işlemi elevated ister; örnekler salt okuma.
+  en: Linux NIC speed/duplex/offload info. Most write ops need elevated; examples are read-only.
+tags:
+- network
+- hardware
+- linux
+- server
+risk: caution
+requires_elevated: true
+platforms:
+- linux
+operating_systems:
+- linux
+flags: []
+examples:
+- title:
+    tr: Link durumu
+    en: Link status
+  command: ethtool eth0
+  explanation:
+    tr: eth0 için link hızı/duplex (arayüz adı sisteme göre değişir).
+    en: Link speed/duplex for eth0 (iface name varies).
+  risk: safe
+  requires_elevated: true
+intent:
+  tr:
+  - nic durumu
+  - ethtool
+  - link hızı
+  en:
+  - nic status
+  - ethtool
+  - link speed
+verification:
+  status: draft
+  sources:
+  - https://www.kernel.org/pub/software/network/ethtool/
+  - https://man7.org/linux/man-pages/man8/ethtool.8.html
+  notes: Agent-authored Faz 7 draft from official docs; not human-verified.
+related:
+- ip
+- ss
+- nmcli
+package_refs:
+- manager: pacman
+  package: ethtool
+  distributions:
+  - arch
+- manager: apt
+  package: ethtool
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: ethtool
+  distributions:
+  - fedora
+packages:
+  arch: ethtool
+  debian: ethtool
+  ubuntu: ethtool
+  fedora: ethtool
+nova:
+  favorite_eligible: true
+  ui_priority: 60
+  concepts:
+  - networking
