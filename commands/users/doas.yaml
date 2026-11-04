@@ -1,0 +1,75 @@
+schema_version: 2
+id: doas
+name: doas
+kind: executable
+category: users
+summary:
+  tr: OpenBSD sade yetki yükseltme (sudo alternatifi).
+  en: OpenBSD minimal privilege elevation (sudo alternative).
+description:
+  tr: '`doas`, OpenBSD’te `doas.conf` politikasıyla komut çalıştırır. Linux/macOS `sudo` ayrı kayıttır;
+    eş anlamlı değildir. FreeBSD’de port olarak bulunabilir ama bu banka OpenBSD odaklıdır. Yanlış kural
+    kilitleyebilir.'
+  en: doas runs commands under doas.conf policy on OpenBSD. Linux/macOS sudo is a separate record — not
+    a synonym. May exist as a FreeBSD port but this bank is OpenBSD-first. Bad rules can lock you out.
+tags:
+- bsd
+- openbsd
+- privilege
+- security
+risk: dangerous
+requires_elevated: false
+platforms:
+- bsd
+- openbsd
+operating_systems:
+- openbsd
+flags:
+- flag: -s
+  meaning:
+    tr: Kabuk aç.
+    en: Launch a shell.
+  verified: false
+- flag: -u
+  meaning:
+    tr: Hedef kullanıcı.
+    en: Target user.
+  verified: false
+- flag: -n
+  meaning:
+    tr: Etkileşimsiz (başarısız olabilir).
+    en: Non-interactive (may fail).
+  verified: false
+examples:
+- title:
+    tr: Kimlik
+    en: Identity
+  command: doas -n id
+  explanation:
+    tr: Politika izin veriyorsa id çalıştırır (etkileşimsiz).
+    en: Runs id if policy allows (non-interactive).
+  risk: caution
+  platforms:
+  - bsd
+  - openbsd
+related:
+- sudo
+- rcctl
+intent:
+  tr:
+  - doas
+  - openbsd sudo
+  - yetki yükselt
+  en:
+  - doas
+  - openbsd sudo
+  - privilege elevation
+verification:
+  status: draft
+  sources:
+  - https://man.openbsd.org/doas.1
+  - https://man.openbsd.org/doas.conf.5
+  notes: Agent-authored Faz 6 draft from official docs; not human-verified.
+nova:
+  concepts:
+  - permissions

@@ -1,0 +1,88 @@
+schema_version: 2
+id: zfs
+name: zfs
+kind: administrative_tool
+category: disks
+summary:
+  tr: ZFS veri kümesi / anlık görüntü yönetimi (FreeBSD).
+  en: ZFS dataset / snapshot management (FreeBSD).
+description:
+  tr: '`zfs`, veri kümeleri, anlık görüntüler ve özellikleri yönetir. `zpool` havuz katmanıdır. `list`
+    güvenli; `destroy` yıkıcıdır — örneklerde yok. systemd veya Linux LVM ile karıştırılmaz.'
+  en: zfs manages datasets, snapshots, and properties. zpool is the pool layer. list is safe; destroy
+    is destructive — omitted. Not systemd or Linux LVM.
+tags:
+- bsd
+- freebsd
+- zfs
+- storage
+risk: dangerous
+requires_elevated: true
+platforms:
+- bsd
+- freebsd
+operating_systems:
+- freebsd
+flags:
+- flag: list
+  meaning:
+    tr: Veri kümelerini listele.
+    en: List datasets.
+  verified: false
+- flag: get
+  meaning:
+    tr: Özellik oku.
+    en: Get property.
+  verified: false
+- flag: snapshot
+  meaning:
+    tr: Anlık görüntü (yazma).
+    en: Snapshot (writes).
+  verified: false
+examples:
+- title:
+    tr: Veri kümeleri
+    en: List datasets
+  command: zfs list
+  explanation:
+    tr: ZFS veri kümelerini listeler.
+    en: Lists ZFS datasets.
+  risk: safe
+  requires_elevated: false
+  platforms:
+  - bsd
+  - freebsd
+- title:
+    tr: Mountpoint özelliği
+    en: Mountpoint property
+  command: zfs get mountpoint 2>/dev/null | head
+  explanation:
+    tr: mountpoint özelliklerinin başını basar.
+    en: Prints the head of mountpoint properties.
+  risk: safe
+  requires_elevated: false
+  platforms:
+  - bsd
+  - freebsd
+related:
+- zpool
+- df
+- mount
+intent:
+  tr:
+  - zfs list
+  - zfs snapshot
+  - freebsd zfs
+  en:
+  - zfs list
+  - zfs snapshot
+  - freebsd zfs
+verification:
+  status: draft
+  sources:
+  - https://man.freebsd.org/cgi/man.cgi?query=zfs&sektion=8
+  - https://docs.freebsd.org/en/books/handbook/zfs/
+  notes: Agent-authored Faz 6 draft from official docs; not human-verified.
+nova:
+  concepts:
+  - storage

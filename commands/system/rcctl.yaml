@@ -1,0 +1,94 @@
+schema_version: 2
+id: rcctl
+name: rcctl
+kind: administrative_tool
+category: system
+summary:
+  tr: OpenBSD rc.d servis denetimi (systemd / FreeBSD service değil).
+  en: OpenBSD rc.d service control (not systemd / FreeBSD service).
+description:
+  tr: '`rcctl`, OpenBSD’te rc.d servislerini yönetir. FreeBSD `service`/`sysrc` ve Linux `systemctl` ayrı
+    modellerdir — **eş anlamlı değildir**. `get`/`ls` güvenli sorgu; `enable`/`start` yapılandırmayı değiştirir.'
+  en: rcctl manages OpenBSD rc.d services. FreeBSD service/sysrc and Linux systemctl are separate models
+    — **not synonyms**. get/ls are safe queries; enable/start change configuration.
+tags:
+- bsd
+- openbsd
+- rc
+- services
+risk: dangerous
+requires_elevated: true
+platforms:
+- bsd
+- openbsd
+operating_systems:
+- openbsd
+flags:
+- flag: get
+  meaning:
+    tr: Servis değişkenini oku.
+    en: Get service variable.
+  verified: false
+- flag: ls
+  meaning:
+    tr: Servisleri listele.
+    en: List services.
+  verified: false
+- flag: check
+  meaning:
+    tr: Çalışıyor mu kontrol et.
+    en: Check if running.
+  verified: false
+- flag: enable
+  meaning:
+    tr: Açılışta etkinleştir.
+    en: Enable at boot.
+  verified: false
+examples:
+- title:
+    tr: sshd ayarını oku
+    en: Get sshd setting
+  command: rcctl get sshd
+  explanation:
+    tr: sshd rc değişkenlerini basar.
+    en: Prints sshd rc variables.
+  risk: safe
+  requires_elevated: false
+  platforms:
+  - bsd
+  - openbsd
+- title:
+    tr: Çalışan servisler
+    en: Running services
+  command: rcctl ls started
+  explanation:
+    tr: Başlatılmış servisleri listeler.
+    en: Lists started services.
+  risk: safe
+  requires_elevated: false
+  platforms:
+  - bsd
+  - openbsd
+related:
+- service
+- sysrc
+- systemctl
+- pkg_add
+intent:
+  tr:
+  - rcctl
+  - openbsd servis
+  - rc.d
+  en:
+  - rcctl
+  - openbsd service
+  - rc.d
+verification:
+  status: draft
+  sources:
+  - https://man.openbsd.org/rcctl.8
+  - https://www.openbsd.org/faq/faq10.html
+  notes: Agent-authored Faz 6 draft from official docs; not human-verified.
+nova:
+  concepts:
+  - systemd

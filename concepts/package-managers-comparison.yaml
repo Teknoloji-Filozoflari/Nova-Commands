@@ -4,8 +4,8 @@ title:
   tr: Paket yöneticisi karşılaştırma tabloları
   en: Package manager comparison tables
 summary:
-  tr: Linux PM’ler + WinGet / Homebrew / MacPorts yan yana (çoğu draft).
-  en: Linux PMs plus WinGet / Homebrew / MacPorts side-by-side (mostly draft).
+  tr: Linux + Win/macOS + BSD PM’ler yan yana (çoğu draft).
+  en: Linux + Win/macOS + BSD PMs side-by-side (mostly draft).
 difficulty: beginner
 tags:
   - packages
@@ -38,6 +38,11 @@ related_commands:
   - brew
   - port
   - winget
+  - pkg
+  - ports
+  - pkg_add
+  - pkgin
+  - pkgsrc
 related_concepts:
   - package-managers
   - packages
@@ -97,6 +102,16 @@ body:
 
     OS güncellemesi macOS’ta `softwareupdate` — `brew upgrade` değildir. `brew` ≠ `port`.
 
+    ### BSD (Faz 6 draft)
+
+    | Amaç | FreeBSD pkg | OpenBSD pkg_add | NetBSD pkgin |
+    |------|-------------|-----------------|--------------|
+    | Ara | `pkg search` | `pkg_info -Q` | `pkgin search` |
+    | Liste / bilgi | `pkg info` | `pkg_info` | `pkgin list` |
+    | İndeks güncelle | `pkg update` | (FAQ) | `pkgin update` |
+
+    FreeBSD Ports / pkgsrc **kaynak ağaçlarıdır** (ayrı kayıt). DragonFly `pkg` ≠ FreeBSD `pkg`.
+
     **Kural:** Bilinmeyen paket adı **uydurulmaz**. Yeni PM kayıtları çoğunlukla `draft`.
     Nova Arch host’ta pacman notunu önce tutar.
   en: |
@@ -147,20 +162,31 @@ body:
 
     OS updates on macOS use `softwareupdate` — not `brew upgrade`. `brew` ≠ `port`.
 
+    ### BSD (Faz 6 draft)
+
+    | Goal | FreeBSD pkg | OpenBSD pkg_add | NetBSD pkgin |
+    |------|-------------|-----------------|--------------|
+    | Search | `pkg search` | `pkg_info -Q` | `pkgin search` |
+    | List / info | `pkg info` | `pkg_info` | `pkgin list` |
+    | Update index | `pkg update` | (see FAQ) | `pkgin update` |
+
+    FreeBSD Ports / pkgsrc are **source trees** (separate records). DragonFly `pkg` ≠ FreeBSD `pkg`.
+
     **Rule:** unknown package names are **not invented**. New PM records are mostly
     `draft`. On Arch hosts Nova keeps pacman notes first.
 verification:
   status: draft
   sources:
     - "https://wiki.archlinux.org/title/Pacman/Rosetta"
-    - "https://en.opensuse.org/SDB:Zypper_manual"
     - "https://wiki.alpinelinux.org/wiki/Alpine_Package_Keeper"
     - "https://docs.voidlinux.org/xbps/"
-    - "https://wiki.gentoo.org/wiki/Emerge"
     - "https://nixos.org/manual/nix/stable/"
-    - "https://guix.gnu.org/manual/en/html_node/"
-    - "https://coreos.github.io/rpm-ostree/"
     - "https://learn.microsoft.com/windows/package-manager/winget/"
     - "https://docs.brew.sh/"
     - "https://guide.macports.org/"
-  notes: "Faz 4–5 comparison expansion; draft pending human review."
+    - "https://docs.freebsd.org/en/books/handbook/ports/"
+    - "https://www.openbsd.org/faq/faq15.html"
+    - "https://www.netbsd.org/docs/pkgsrc/"
+    - "https://en.opensuse.org/SDB:Zypper_manual"
+    - "https://guix.gnu.org/manual/en/html_node/"
+  notes: "Faz 4–6 comparison expansion; draft pending human review."

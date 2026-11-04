@@ -1,0 +1,57 @@
+schema_version: 2
+id: jexec
+name: jexec
+kind: administrative_tool
+category: containers
+summary:
+  tr: FreeBSD jail içinde komut çalıştırır.
+  en: Execute a command inside a FreeBSD jail.
+description:
+  tr: '`jexec`, seçili jail içinde komut/kabuk çalıştırır. `docker exec` değildir. Yanlış jail kimliği
+    zararlı olabilir; önce `jls` ile kimlik doğrulayın. Örnekler salt yardım/kimlik odaklıdır.'
+  en: jexec runs a command/shell inside a selected jail. Not docker exec. A wrong jail id can be harmful;
+    confirm with jls first. Examples stay help/identity oriented.
+tags:
+- bsd
+- freebsd
+- jails
+- containers
+risk: dangerous
+requires_elevated: true
+platforms:
+- bsd
+- freebsd
+operating_systems:
+- freebsd
+flags: []
+examples:
+- title:
+    tr: Yardım
+    en: Help
+  command: jexec 2>&1 | head
+  explanation:
+    tr: Kullanım özetini basmaya çalışır (jail seçmeden).
+    en: Attempts to print usage summary (without selecting a jail).
+  risk: safe
+  requires_elevated: false
+  platforms:
+  - bsd
+  - freebsd
+related:
+- jls
+intent:
+  tr:
+  - jexec
+  - freebsd jail komut
+  en:
+  - jexec
+  - freebsd jail exec
+verification:
+  status: draft
+  sources:
+  - https://man.freebsd.org/cgi/man.cgi?query=jexec&sektion=8
+  - https://docs.freebsd.org/en/books/handbook/jails/
+  notes: Agent-authored Faz 6 draft from official docs; not human-verified.
+nova:
+  concepts:
+  - containers

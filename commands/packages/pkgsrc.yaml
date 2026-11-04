@@ -1,0 +1,78 @@
+schema_version: 2
+id: pkgsrc
+name: pkgsrc
+kind: package_manager
+category: packages
+summary:
+  tr: NetBSD pkgsrc kaynak paket koleksiyonu.
+  en: NetBSD pkgsrc source package collection.
+description:
+  tr: pkgsrc, NetBSD kökenli taşınabilir kaynak paket ağacıdır (`bmake` ile). İkili `pkgin` ön yüzü ayrıdır.
+    FreeBSD Ports ve OpenBSD ports ile aynı değildir. Yıkıcı kurulum örnekleri yok — yalnızca bilgi/arama
+    odaklı.
+  en: pkgsrc is a portable NetBSD-origin source package tree (via bmake). Binary pkgin frontend is separate.
+    Not the same as FreeBSD Ports or OpenBSD ports. No destructive install examples — info/search oriented
+    only.
+tags:
+- bsd
+- netbsd
+- pkgsrc
+- packages
+risk: caution
+requires_elevated: false
+platforms:
+- bsd
+- netbsd
+operating_systems:
+- netbsd
+package_refs:
+- manager: pkgsrc
+  package: pkgsrc
+  distributions:
+  - netbsd-release
+flags: []
+examples:
+- title:
+    tr: Ağaç var mı
+    en: Check tree present
+  command: test -d /usr/pkgsrc && echo pkgsrc-tree-ok
+  explanation:
+    tr: pkgsrc kökünün varlığını kontrol eder.
+    en: Checks whether the pkgsrc root exists.
+  risk: safe
+  platforms:
+  - bsd
+  - netbsd
+- title:
+    tr: Kategori listele
+    en: List category
+  command: ls /usr/pkgsrc/www 2>/dev/null | head
+  explanation:
+    tr: Örnek kategori içeriğinin başını listeler (ağaç yoksa boş).
+    en: Lists the head of a sample category (empty if no tree).
+  risk: safe
+  platforms:
+  - bsd
+  - netbsd
+related:
+- pkgin
+- ports
+- pkg
+intent:
+  tr:
+  - pkgsrc
+  - netbsd kaynak paket
+  en:
+  - pkgsrc
+  - netbsd source packages
+verification:
+  status: draft
+  sources:
+  - https://www.netbsd.org/docs/pkgsrc/
+  - https://www.netbsd.org/docs/pkgsrc/getting.html
+  notes: Agent-authored Faz 6 draft from official docs; not human-verified.
+nova:
+  concepts:
+  - packages
+  - package-managers
+  - package-managers-comparison

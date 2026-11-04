@@ -1,0 +1,72 @@
+schema_version: 2
+id: newsyslog
+name: newsyslog
+kind: administrative_tool
+category: system
+summary:
+  tr: BSD günlük döndürme (newsyslog.conf).
+  en: BSD log rotation (newsyslog.conf).
+description:
+  tr: '`newsyslog`, FreeBSD/OpenBSD/NetBSD’te günlük dosyalarını döndürür. Linux `logrotate` ayrı araçtır.
+    `-n` / `-v` ile kuru deneme tercih edilir; gerçek döndürme yazma yapar.'
+  en: newsyslog rotates log files on FreeBSD/OpenBSD/NetBSD. Linux logrotate is a separate tool. Prefer
+    -n/-v dry runs; real rotation writes.
+tags:
+- bsd
+- logs
+- rotation
+risk: caution
+requires_elevated: true
+platforms:
+- bsd
+- freebsd
+- openbsd
+- netbsd
+operating_systems:
+- freebsd
+- openbsd
+- netbsd
+flags:
+- flag: -n
+  meaning:
+    tr: Kuru çalıştır (yazma).
+    en: Dry-run (no rotate).
+  verified: false
+- flag: -v
+  meaning:
+    tr: Ayrıntılı.
+    en: Verbose.
+  verified: false
+- flag: -r
+  meaning:
+    tr: Kök dışı çalışma notu.
+    en: Non-root run note.
+  verified: false
+examples:
+- title:
+    tr: Kuru döndürme
+    en: Dry-run rotation
+  command: newsyslog -n -v | head
+  explanation:
+    tr: Ne döndürüleceğini gösterir; dosya yazmaz.
+    en: Shows what would rotate without writing files.
+  risk: safe
+  requires_elevated: true
+  platforms:
+  - bsd
+  - freebsd
+related:
+- service
+intent:
+  tr:
+  - newsyslog
+  - bsd log döndür
+  en:
+  - newsyslog
+  - bsd log rotate
+verification:
+  status: draft
+  sources:
+  - https://man.freebsd.org/cgi/man.cgi?query=newsyslog&sektion=8
+  - https://man.openbsd.org/newsyslog.8
+  notes: Agent-authored Faz 6 draft from official docs; not human-verified.

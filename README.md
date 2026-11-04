@@ -65,6 +65,10 @@ Nix/Guix, OpenWrt (`opkg`), atomik Fedora (`rpm-ostree`).
 Faz 5 (`draft`): **Windows** (PowerShell 7+ / Windows PowerShell 5.1 / cmd.exe
 ayrımı, WinGet, UAC notları) ve **macOS** (Homebrew/MacPorts, launchd, diskutil,
 networksetup, softwareupdate, …; BSD vs GNU araç notları).
+Faz 6 (`draft`): **BSD** (FreeBSD `pkg`/Ports/`service`/`sysrc`/jails/ZFS;
+OpenBSD `pkg_add`/`rcctl`/`doas`/`pfctl`; NetBSD `pkgin`/`pkgsrc`; shared
+`ifconfig`/`newsyslog`; systemd ile eşitlenmez). illumos/Solaris/AIX yalnız
+genişletilebilirlik metadata’sı.
 Paket notlarında **Arch / pacman tercihi** (Nova tercihleri ile uyumlu).
 Karşılaştırma: [docs/package-managers-comparison.md](docs/package-managers-comparison.md)
 · Nix/Guix: `concepts/nix-guix.yaml`.

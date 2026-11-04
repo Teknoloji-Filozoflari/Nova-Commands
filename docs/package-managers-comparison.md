@@ -78,6 +78,24 @@ Notes:
 - MacPorts `port` is a separate record from `brew` — do not treat as aliases.
 - On Arch hosts, **pacman remains** the preferred system package manager.
 
+## BSD family (Faz 6 draft)
+
+Similar CLI names are **not** interchangeable across BSD systems.
+
+| Goal / Amaç | FreeBSD (`pkg`) | FreeBSD Ports | OpenBSD (`pkg_add`) | NetBSD (`pkgin`) | NetBSD pkgsrc |
+|-------------|-----------------|---------------|---------------------|------------------|---------------|
+| Search | `pkg search name` | `make search name=…` in `/usr/ports` | `pkg_info -Q name` | `pkgin search name` | browse `/usr/pkgsrc` |
+| Info / list | `pkg info` | `make describe` | `pkg_info` | `pkgin list` | tree inspect |
+| Install (elevated) | `pkg install name` | `make install` (not exemplified) | `pkg_add name` | `pkgin install name` | `bmake` in tree (not exemplified) |
+| Upgrade / update | `pkg upgrade` / `pkg update` | Ports tree update (separate) | `pkg_add -u` | `pkgin update` | cvs/git tree update |
+
+Notes:
+
+- FreeBSD **`pkg` ≠** OpenBSD **`pkg_add` ≠** NetBSD **`pkgin` ≠** DragonFly **`pkg`** (registry-only note).
+- FreeBSD **Ports** (`ports` record) ≠ binary **`pkg`**; pkgsrc ≠ pkgin.
+- Base updates on FreeBSD use **`freebsd-update`** — not `pkg upgrade`.
+- On Arch hosts, **pacman remains** the preferred system package manager.
+
 ## Flatpak (cross-distro apps)
 
 | Goal | Command |

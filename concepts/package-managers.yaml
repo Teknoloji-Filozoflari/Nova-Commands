@@ -4,8 +4,8 @@ title:
   tr: Paket yöneticileri
   en: Package managers
 summary:
-  tr: Linux PM’leri (pacman önce), Nix/Guix, WinGet/Homebrew/MacPorts notları.
-  en: Linux PMs (pacman first), Nix/Guix, plus WinGet/Homebrew/MacPorts notes.
+  tr: Linux PM’leri (pacman önce), Nix/Guix, Win/macOS ve BSD PM notları.
+  en: Linux PMs (pacman first), Nix/Guix, Win/macOS, and BSD PM notes.
 difficulty: beginner
 tags:
   - packages
@@ -35,6 +35,11 @@ related_commands:
   - brew
   - port
   - winget
+  - pkg
+  - ports
+  - pkg_add
+  - pkgin
+  - pkgsrc
 related_concepts:
   - packages
   - arch
@@ -77,6 +82,10 @@ body:
     MacPorts (`port`) ayrı kayıtlardır. `softwareupdate` OS güncellemesidir — `brew upgrade`
     ile karıştırılmaz. Arch host’ta sistem PM olarak pacman önceliklidir.
 
+    **BSD (Faz 6, draft):** FreeBSD `pkg` ≠ Ports (`ports`); OpenBSD `pkg_add`; NetBSD
+    `pkgin` ≠ `pkgsrc`; DragonFly `pkg` FreeBSD `pkg` ile aynı değildir. `freebsd-update`
+    taban güncellemesidir — `pkg upgrade` değildir.
+
     **Nova tercihi:** Arch host’ta kurulum ipuçlarında **pacman / `packages.arch` önce**.
     CI yıkıcı kurulum çalıştırmaz. `verification: verified` yalnızca insan incelemesi sonrası.
   en: |
@@ -107,6 +116,10 @@ body:
     MacPorts (`port`) are separate records. `softwareupdate` is OS update — not
     `brew upgrade`. On Arch hosts pacman remains the preferred system PM.
 
+    **BSD (Faz 6, draft):** FreeBSD `pkg` ≠ Ports (`ports`); OpenBSD `pkg_add`; NetBSD
+    `pkgin` ≠ `pkgsrc`; DragonFly `pkg` is not FreeBSD `pkg`. `freebsd-update` is base
+    update — not `pkg upgrade`.
+
     **Nova preference:** On Arch hosts prefer **pacman / `packages.arch` first**.
     CI does not run destructive installs. `verification: verified` only after human review.
 verification:
@@ -114,14 +127,14 @@ verification:
   sources:
     - "https://wiki.archlinux.org/title/Pacman"
     - "https://wiki.archlinux.org/title/Pacman/Rosetta"
-    - "https://en.opensuse.org/SDB:Zypper_manual"
-    - "https://wiki.alpinelinux.org/wiki/Alpine_Package_Keeper"
     - "https://nixos.org/manual/nix/stable/"
-    - "https://guix.gnu.org/manual/en/html_node/"
-    - "https://coreos.github.io/rpm-ostree/"
-    - "https://openwrt.org/docs/guide-user/additional-software/opkg"
     - "https://learn.microsoft.com/windows/package-manager/winget/"
     - "https://docs.brew.sh/"
     - "https://guide.macports.org/"
+    - "https://docs.freebsd.org/en/books/handbook/ports/"
+    - "https://www.openbsd.org/faq/faq15.html"
+    - "https://www.netbsd.org/docs/pkgsrc/"
+    - "https://wiki.alpinelinux.org/wiki/Alpine_Package_Keeper"
+    - "https://guix.gnu.org/manual/en/html_node/"
     - "docs/package-managers-comparison.md"
-  notes: "Faz 4–5 expansion; draft pending human review of PM coverage."
+  notes: "Faz 4–6 expansion; draft pending human review of PM coverage."

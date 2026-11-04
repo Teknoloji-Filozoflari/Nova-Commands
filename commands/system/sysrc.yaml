@@ -1,0 +1,83 @@
+schema_version: 2
+id: sysrc
+name: sysrc
+kind: administrative_tool
+category: system
+summary:
+  tr: FreeBSD rc.conf güvenli okuma/yazma yardımcısı.
+  en: FreeBSD rc.conf safe get/set helper.
+description:
+  tr: '`sysrc`, FreeBSD `/etc/rc.conf` değerlerini okur/yazar. `service` ile birlikte rc tabanlı servis
+    modelinin parçasıdır — **systemd değildir**. Yanlış yazma önyüklemeyi bozabilir; önce sorgu örnekleri.'
+  en: sysrc reads/writes FreeBSD /etc/rc.conf values. Together with service it is part of the rc-based
+    service model — **not systemd**. Bad writes can break boot; prefer query examples first.
+tags:
+- bsd
+- freebsd
+- rc
+- services
+risk: dangerous
+requires_elevated: true
+platforms:
+- bsd
+- freebsd
+operating_systems:
+- freebsd
+flags:
+- flag: -a
+  meaning:
+    tr: Tüm ayarları listele.
+    en: List all settings.
+  verified: false
+- flag: -n
+  meaning:
+    tr: Yalnız değer.
+    en: Value only.
+  verified: false
+examples:
+- title:
+    tr: Değer oku
+    en: Read value
+  command: sysrc sshd_enable
+  explanation:
+    tr: sshd_enable rc.conf değerini basar.
+    en: Prints the sshd_enable rc.conf value.
+  risk: safe
+  requires_elevated: false
+  platforms:
+  - bsd
+  - freebsd
+- title:
+    tr: Tümünü listele (özet)
+    en: List all (summary)
+  command: sysrc -a | head
+  explanation:
+    tr: rc.conf değişkenlerinin başını listeler.
+    en: Lists the head of rc.conf variables.
+  risk: safe
+  requires_elevated: false
+  platforms:
+  - bsd
+  - freebsd
+related:
+- service
+- rcctl
+- systemctl
+intent:
+  tr:
+  - sysrc
+  - rc.conf
+  - freebsd servis ayar
+  en:
+  - sysrc
+  - rc.conf
+  - freebsd service config
+verification:
+  status: draft
+  sources:
+  - https://man.freebsd.org/cgi/man.cgi?query=sysrc&sektion=8
+  - https://docs.freebsd.org/en/books/handbook/config/#configtuning-rcng
+  notes: Agent-authored Faz 6 draft from official docs; not human-verified.
+nova:
+  concepts:
+  - systemd

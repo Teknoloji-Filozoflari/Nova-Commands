@@ -1,0 +1,100 @@
+schema_version: 2
+id: netstat-bsd
+name: netstat
+kind: executable
+category: network
+aliases:
+- netstat
+summary:
+  tr: BSD netstat — soket ve yönlendirme tablosu.
+  en: BSD netstat — sockets and routing table.
+description:
+  tr: 'BSD `netstat`, soket/yönlendirme istatistiklerini gösterir. Windows `netstat` kaydı (id: netstat)
+    ayrıdır — bu kayıt BSD ailesi içindir. Linux `ss` modern alternatiftir. `-an` / `-r` salt okuma.'
+  en: 'BSD netstat shows socket/routing statistics. The Windows netstat record (id: netstat) is separate
+    — this record is for the BSD family. Linux ss is the modern alternative. -an / -r are read-only.'
+tags:
+- bsd
+- network
+- sockets
+risk: safe
+requires_elevated: false
+platforms:
+- bsd
+- freebsd
+- openbsd
+- netbsd
+- dragonflybsd
+operating_systems:
+- freebsd
+- openbsd
+- netbsd
+- dragonflybsd
+flags:
+- flag: -a
+  meaning:
+    tr: Tüm soketler.
+    en: All sockets.
+  verified: false
+- flag: -n
+  meaning:
+    tr: Sayısal adres/port.
+    en: Numeric addresses/ports.
+  verified: false
+- flag: -r
+  meaning:
+    tr: Yönlendirme tablosu.
+    en: Routing table.
+  verified: false
+- flag: -s
+  meaning:
+    tr: İstatistikler.
+    en: Statistics.
+  verified: false
+examples:
+- title:
+    tr: Dinleyen soketler
+    en: Listening sockets
+  command: netstat -an | head
+  explanation:
+    tr: Soket tablosunun başını basar.
+    en: Prints the head of the socket table.
+  risk: safe
+  platforms:
+  - bsd
+  - freebsd
+- title:
+    tr: Yönlendirme tablosu
+    en: Routing table
+  command: netstat -rn
+  explanation:
+    tr: Sayısal yönlendirme tablosunu gösterir.
+    en: Shows the numeric routing table.
+  risk: safe
+  platforms:
+  - bsd
+  - freebsd
+related:
+- netstat
+- ss
+- ifconfig
+- get-nettcpconnection
+intent:
+  tr:
+  - netstat bsd
+  - bsd dinleyen port
+  - yönlendirme tablosu
+  en:
+  - bsd netstat
+  - bsd listening ports
+  - routing table
+verification:
+  status: draft
+  sources:
+  - https://man.freebsd.org/cgi/man.cgi?query=netstat&sektion=1
+  - https://man.openbsd.org/netstat.1
+  notes: Agent-authored Faz 6 draft from official docs; not human-verified.
+nova:
+  concepts:
+  - networking
+  - networking-basics

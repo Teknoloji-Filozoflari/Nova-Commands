@@ -1,0 +1,95 @@
+schema_version: 2
+id: pkg_add
+name: pkg_add
+kind: package_manager
+category: packages
+summary:
+  tr: OpenBSD paket kurucu (pkg_* ailesi).
+  en: OpenBSD package installer (pkg_* family).
+description:
+  tr: OpenBSD `pkg_add`, resmi paketleri kurar. FreeBSD `pkg` ve NetBSD `pkgin` ile aynı değildir. Sorgu
+    için `pkg_info`, kaldırma için `pkg_delete` ayrı araçlardır; bu kayıt kurulum odaklıdır. Salt okuma
+    örnekleri tercih edilir.
+  en: OpenBSD pkg_add installs official packages. Not the same as FreeBSD pkg or NetBSD pkgin. Query via
+    pkg_info, removal via pkg_delete — separate tools; this record is install-oriented. Prefer read-only
+    examples.
+tags:
+- bsd
+- openbsd
+- packages
+risk: caution
+requires_elevated: true
+platforms:
+- bsd
+- openbsd
+operating_systems:
+- openbsd
+package_refs:
+- manager: openbsd-pkg
+  package: pkg_add
+  distributions:
+  - openbsd-release
+flags:
+- flag: -n
+  meaning:
+    tr: Kuru çalıştır / göster.
+    en: Dry-run / show.
+  verified: false
+- flag: -v
+  meaning:
+    tr: Ayrıntılı.
+    en: Verbose.
+  verified: false
+- flag: -u
+  meaning:
+    tr: Güncelle.
+    en: Update.
+  verified: false
+examples:
+- title:
+    tr: Paket bilgisi (pkg_info)
+    en: Package info (pkg_info)
+  command: pkg_info -Q nginx
+  explanation:
+    tr: Depoda nginx geçen paket adlarını sorar (kurmaz).
+    en: Queries package names matching nginx (does not install).
+  risk: safe
+  platforms:
+  - bsd
+  - openbsd
+- title:
+    tr: Kuru kurulum denemesi
+    en: Dry-run install
+  command: pkg_add -n nginx
+  explanation:
+    tr: Ne yapılacağını gösterir; yazmaz (ortama göre değişir).
+    en: Shows what would be done without writing (environment-dependent).
+  risk: safe
+  requires_elevated: true
+  platforms:
+  - bsd
+  - openbsd
+related:
+- pkg
+- pkgin
+- rcctl
+intent:
+  tr:
+  - pkg_add
+  - openbsd paket
+  - pkg_info
+  en:
+  - pkg_add
+  - openbsd package
+  - pkg_info
+verification:
+  status: draft
+  sources:
+  - https://www.openbsd.org/faq/faq15.html
+  - https://man.openbsd.org/pkg_add.1
+  notes: Agent-authored Faz 6 draft from official docs; not human-verified.
+nova:
+  concepts:
+  - packages
+  - package-managers
+  - package-managers-comparison

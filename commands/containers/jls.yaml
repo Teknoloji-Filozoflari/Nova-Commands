@@ -1,0 +1,67 @@
+schema_version: 2
+id: jls
+name: jls
+kind: administrative_tool
+category: containers
+summary:
+  tr: FreeBSD jail listesi.
+  en: List FreeBSD jails.
+description:
+  tr: '`jls`, çalışan FreeBSD jail’lerini listeler. Linux konteynerleri (Docker/Podman) veya zone’lar
+    değildir. `jexec` ile birlikte jail yönetiminin salt okuma yüzüdür.'
+  en: jls lists running FreeBSD jails. Not Linux containers (Docker/Podman) or zones. With jexec it is
+    the read-oriented face of jail management.
+tags:
+- bsd
+- freebsd
+- jails
+- containers
+risk: safe
+requires_elevated: false
+platforms:
+- bsd
+- freebsd
+operating_systems:
+- freebsd
+flags:
+- flag: -v
+  meaning:
+    tr: Ayrıntılı.
+    en: Verbose.
+  verified: false
+- flag: -n
+  meaning:
+    tr: İsimleri sayısal göster.
+    en: Show names numerically.
+  verified: false
+examples:
+- title:
+    tr: Jail listesi
+    en: List jails
+  command: jls
+  explanation:
+    tr: Çalışan jail’leri tablo olarak basar.
+    en: Prints running jails as a table.
+  risk: safe
+  platforms:
+  - bsd
+  - freebsd
+related:
+- jexec
+- docker
+intent:
+  tr:
+  - jls
+  - freebsd jail listele
+  en:
+  - jls
+  - list freebsd jails
+verification:
+  status: draft
+  sources:
+  - https://man.freebsd.org/cgi/man.cgi?query=jls&sektion=8
+  - https://docs.freebsd.org/en/books/handbook/jails/
+  notes: Agent-authored Faz 6 draft from official docs; not human-verified.
+nova:
+  concepts:
+  - containers

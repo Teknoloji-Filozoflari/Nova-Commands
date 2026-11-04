@@ -1,5 +1,3 @@
-# Auto-seeded Faz 1 platform registry. Status is skeleton|draft only.
-# Do not mark verified without human review.
 schema_version: 1
 kind: nova-commands-package-manager-registry
 package_managers:
@@ -689,8 +687,8 @@ package_managers:
   operating_systems:
   - freebsd
   repository_model: central-repos
-  status: skeleton
-  support_level: planned
+  status: draft
+  support_level: partial
   documentation:
   - https://docs.freebsd.org/en/books/handbook/ports/#pkgng-intro
   cli_names:
@@ -710,8 +708,8 @@ package_managers:
   operating_systems:
   - freebsd
   repository_model: ports-tree
-  status: skeleton
-  support_level: experimental
+  status: draft
+  support_level: partial
   documentation:
   - https://docs.freebsd.org/en/books/handbook/ports/
   cli_names:
@@ -731,8 +729,8 @@ package_managers:
   operating_systems:
   - openbsd
   repository_model: central-repos
-  status: skeleton
-  support_level: planned
+  status: draft
+  support_level: partial
   documentation:
   - https://www.openbsd.org/faq/faq15.html
   cli_names:
@@ -754,8 +752,8 @@ package_managers:
   operating_systems:
   - netbsd
   repository_model: central-repos
-  status: skeleton
-  support_level: planned
+  status: draft
+  support_level: partial
   documentation:
   - https://www.netbsd.org/docs/pkgsrc/using.html
   cli_names:
@@ -777,8 +775,8 @@ package_managers:
   - linux
   - macos
   repository_model: ports-tree
-  status: skeleton
-  support_level: experimental
+  status: draft
+  support_level: partial
   documentation:
   - https://www.netbsd.org/docs/pkgsrc/
   cli_names:
@@ -798,8 +796,8 @@ package_managers:
   operating_systems:
   - dragonflybsd
   repository_model: central-repos
-  status: skeleton
-  support_level: planned
+  status: draft
+  support_level: partial
   documentation:
   - https://www.dragonflybsd.org/docs/handbook/pkgsrc/
   cli_names:
