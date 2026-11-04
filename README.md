@@ -80,7 +80,9 @@ Terraform/Ansible/`gh`; yeni kategoriler `virtualization`/`backup`/
 `databases`/`cloud`/`devops`.
 Faz 8 (`draft`): **`tasks/`** (çok platform niyet tarifleri) + **`profiles/`**
 (linux/debian/fedora/arch/windows/freebsd sunucu, homelab, docker-host,
-kubernetes, web/db/nas/virt). Katalog hash hâlâ commands+concepts (indeks Faz 9).
+kubernetes, web/db/nas/virt).
+Faz 9: tasks/profiles `catalog.json` / `search-index.json` / `manifest.json`
+içinde indekslenir; `content_sha256` commands+concepts+tasks+profiles kapsar.
 Paket notlarında **Arch / pacman tercihi** (Nova tercihleri ile uyumlu).
 Karşılaştırma: [docs/package-managers-comparison.md](docs/package-managers-comparison.md)
 · Nix/Guix: `concepts/nix-guix.yaml`

@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://raw.githubusercontent.com/Teknoloji-Filozoflari/Nova-Commands/main/schema/profile.schema.json",
   "title": "Nova-Commands profile entry",
-  "description": "Server / homelab / role profiles under profiles/. Guiding reference collections — not auto-executed scripts. Catalog indexing of profiles is Faz 9; Faz 8 validates the tree.",
+  "description": "Server / homelab / role profiles under profiles/. Guiding reference collections — not auto-executed scripts. Indexed into catalog/search-index/manifest by scripts/build_catalog.py (Faz 9).",
   "type": "object",
   "additionalProperties": false,
   "required": ["id", "name", "summary", "verification"],

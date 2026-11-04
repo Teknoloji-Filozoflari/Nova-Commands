@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Simple offline search over the curated bank (commands + concepts).
+"""Simple offline search over the curated bank (commands + concepts + tasks + profiles).
 
 Prefer metadata/search-index.json when present; else scan YAML.
 Does not search the local PATH — that is Nova's discovery side.
@@ -16,6 +16,31 @@ import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 INDEX_PATH = ROOT / "metadata" / "search-index.json"
+
+ENTRY_TYPES = ("command", "concept", "task", "profile")
+
+
+def _task_platforms(task: dict) -> list[str]:
+    out: list[str] = []
+    for impl in task.get("implementations") or []:
+        if not isinstance(impl, dict):
+            continue
+        for key in ("platforms", "operating_systems"):
+            for item in impl.get(key) or []:
+                if isinstance(item, str):
+                    out.append(item)
+    return sorted(set(out))
+
+
+def _task_commands(task: dict) -> list[str]:
+    out: list[str] = []
+    for impl in task.get("implementations") or []:
+        if not isinstance(impl, dict):
+            continue
+        for cmd in impl.get("commands") or []:
+            if isinstance(cmd, str):
+                out.append(cmd)
+    return sorted(set(out))
 
 
 def load_entries() -> list[dict]:
@@ -49,16 +74,53 @@ def load_entries() -> list[dict]:
                 "summary": c.get("summary") or {},
             }
         )
+    tasks_dir = ROOT / "tasks"
+    if tasks_dir.is_dir():
+        for path in sorted(tasks_dir.glob("*.yaml")):
+            t = yaml.safe_load(path.read_text(encoding="utf-8"))
+            entries.append(
+                {
+                    "type": "task",
+                    "id": t["id"],
+                    "name": t.get("name") or {},
+                    "category": t.get("category"),
+                    "platforms": _task_platforms(t),
+                    "tags": t.get("tags") or [],
+                    "summary": t.get("summary") or {},
+                    "intent": t.get("intent") or {},
+                    "related_commands": _task_commands(t),
+                }
+            )
+    profiles_dir = ROOT / "profiles"
+    if profiles_dir.is_dir():
+        for path in sorted(profiles_dir.glob("*.yaml")):
+            p = yaml.safe_load(path.read_text(encoding="utf-8"))
+            entries.append(
+                {
+                    "type": "profile",
+                    "id": p["id"],
+                    "name": p.get("name") or {},
+                    "tags": p.get("tags") or [],
+                    "summary": p.get("summary") or {},
+                    "operating_systems": p.get("operating_systems") or [],
+                    "related_commands": p.get("related_commands") or [],
+                    "related_tasks": p.get("related_tasks") or [],
+                }
+            )
     return entries
 
 
-def score(entry: dict, query: str, lang: str) -> int:
+def score(entry: dict, query: str, lang: str, prefer_os: str | None) -> int:
     q = query.lower().strip()
     if not q:
         return 0
     s = 0
     eid = entry.get("id", "").lower()
-    name = (entry.get("name") or entry.get("id") or "").lower()
+    name_field = entry.get("name")
+    if isinstance(name_field, dict):
+        name = (name_field.get(lang) or name_field.get("en") or eid).lower()
+    else:
+        name = (name_field or eid).lower()
     if eid == q or name == q:
         s += 100
     if q in eid or q in name:
@@ -81,9 +143,47 @@ def score(entry: dict, query: str, lang: str) -> int:
     for concept in entry.get("concepts") or []:
         if q in concept:
             s += 8
-    if entry.get("type") == "concept":
+    for related in entry.get("related_commands") or []:
+        if q in related.lower():
+            s += 6
+    for related in entry.get("related_tasks") or []:
+        if q in related.lower():
+            s += 6
+    et = entry.get("type")
+    if et == "concept":
         s += 1  # slight boost so concepts surface for topical queries
+    elif et == "task":
+        s += 2  # intent records should rank for natural-language goals
+    elif et == "profile":
+        s += 1
+    if prefer_os:
+        platforms = {
+            *(entry.get("platforms") or []),
+            *(entry.get("operating_systems") or []),
+        }
+        if prefer_os in platforms:
+            s += 20
     return s
+
+
+def _display_label(entry: dict, lang: str) -> str:
+    et = entry.get("type", "?")
+    if et == "command":
+        summary = (entry.get("summary") or {}).get(lang, "")
+        return (
+            f"cmd  {entry['id']:24s}  "
+            f"[{entry.get('category')}/{entry.get('risk')}]  {summary}"
+        )
+    if et == "task":
+        name = (entry.get("name") or {}).get(lang, "")
+        summary = (entry.get("summary") or {}).get(lang, "")
+        return f"task  {entry['id']:24s}  [{entry.get('category')}]  {name or summary}"
+    if et == "profile":
+        name = (entry.get("name") or {}).get(lang, "")
+        summary = (entry.get("summary") or {}).get(lang, "")
+        return f"profile  {entry['id']:20s}  {name or summary}"
+    title = (entry.get("title") or entry.get("summary") or {}).get(lang, "")
+    return f"concept  {entry['id']:20s}  {title}"
 
 
 def main() -> int:
@@ -93,8 +193,15 @@ def main() -> int:
     parser.add_argument("--limit", type=int, default=10)
     parser.add_argument(
         "--type",
-        choices=["all", "command", "concept"],
+        choices=["all", *ENTRY_TYPES],
         default="all",
+    )
+    parser.add_argument(
+        "--os",
+        dest="prefer_os",
+        default=None,
+        help="Boost entries matching this operating_system / platform id "
+        "(e.g. linux, windows, macos, freebsd)",
     )
     args = parser.parse_args()
 
@@ -102,7 +209,7 @@ def main() -> int:
     for entry in load_entries():
         if args.type != "all" and entry.get("type") != args.type:
             continue
-        sc = score(entry, args.query, args.lang)
+        sc = score(entry, args.query, args.lang, args.prefer_os)
         if sc:
             ranked.append((sc, entry))
     ranked.sort(key=lambda x: (-x[0], x[1].get("type", ""), x[1]["id"]))
@@ -110,18 +217,7 @@ def main() -> int:
         print("no hits", file=sys.stderr)
         return 1
     for sc, entry in ranked[: args.limit]:
-        et = entry.get("type", "?")
-        if et == "command":
-            summary = (entry.get("summary") or {}).get(args.lang, "")
-            print(
-                f"{sc:3d}  cmd  {entry['id']:24s}  "
-                f"[{entry.get('category')}/{entry.get('risk')}]  {summary}"
-            )
-        else:
-            title = (entry.get("title") or entry.get("summary") or {}).get(
-                args.lang, ""
-            )
-            print(f"{sc:3d}  concept  {entry['id']:20s}  {title}")
+        print(f"{sc:3d}  {_display_label(entry, args.lang)}")
     return 0
 
 

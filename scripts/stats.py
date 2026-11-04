@@ -25,12 +25,24 @@ def main() -> None:
         if (data.get("nova") or {}).get("concepts"):
             with_concepts += 1
     concept_files = sorted((ROOT / "concepts").glob("*.yaml"))
+    task_files = sorted((ROOT / "tasks").glob("*.yaml")) if (ROOT / "tasks").is_dir() else []
+    profile_files = (
+        sorted((ROOT / "profiles").glob("*.yaml")) if (ROOT / "profiles").is_dir() else []
+    )
     print(f"commands: {len(files)}")
     print(f"commands with nova.concepts: {with_concepts}")
     print(f"concept articles: {len(concept_files)}")
     for path in concept_files:
         data = yaml.safe_load(path.read_text(encoding="utf-8"))
         print(f"  - {data['id']} [{data['verification']['status']}/{data['difficulty']}]")
+    print(f"tasks: {len(task_files)}")
+    for path in task_files:
+        data = yaml.safe_load(path.read_text(encoding="utf-8"))
+        print(f"  - {data['id']} [{data['verification']['status']}/{data.get('category')}]")
+    print(f"profiles: {len(profile_files)}")
+    for path in profile_files:
+        data = yaml.safe_load(path.read_text(encoding="utf-8"))
+        print(f"  - {data['id']} [{data['verification']['status']}]")
     print("by category:")
     for k, v in sorted(cats.items()):
         print(f"  {k}: {v}")

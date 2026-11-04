@@ -41,11 +41,18 @@ def test_build_catalog_shape_and_sha() -> None:
     assert cat["kind"] == "nova-commands-bank"
     assert cat["command_count"] == len(cat["commands"])
     assert cat["concept_count"] == len(cat["concepts"])
+    assert cat["task_count"] == len(cat["tasks"])
+    assert cat["profile_count"] == len(cat["profiles"])
     assert cat["command_count"] >= 50
     assert cat["concept_count"] >= 7
+    assert cat["task_count"] >= 10
+    assert cat["profile_count"] >= 8
     assert len(cat["content_sha256"]) == 64
     ids = [c["id"] for c in cat["commands"]]
     assert len(ids) == len(set(ids))
+    task_ids = [t["id"] for t in cat["tasks"]]
+    assert len(task_ids) == len(set(task_ids))
+    assert not (set(task_ids) & set(ids))
     # Live bank is schema v2
     for cmd in cat["commands"]:
         assert cmd.get("schema_version") == 2
@@ -67,8 +74,17 @@ def test_build_catalog_shape_and_sha() -> None:
     idx = json.loads(search.read_text(encoding="utf-8"))
     assert man["schema_version"] == 2
     assert man["kind"] == "nova-commands-manifest"
+    assert man["task_count"] == cat["task_count"]
+    assert man["profile_count"] == cat["profile_count"]
+    assert man["operating_system_count"] >= 1
+    assert man["package_manager_count"] >= 1
     assert idx["schema_version"] == 2
     assert idx["kind"] == "nova-commands-search-index"
+    assert idx["task_count"] == cat["task_count"]
+    assert idx["profile_count"] == cat["profile_count"]
+    types = {e["type"] for e in idx["entries"]}
+    assert {"command", "concept", "task", "profile"} <= types
+    assert idx["entry_count"] == len(idx["entries"])
     assert man["content_sha256"] == cat["content_sha256"] == idx["content_sha256"]
 
 
@@ -387,11 +403,38 @@ def test_profile_ids_and_refs() -> None:
             assert tid in task_ids, (path, tid)
 
 
-def test_catalog_hash_excludes_tasks_profiles() -> None:
-    """Faz 8: content_sha256 remains commands+concepts only (Faz 9 indexes)."""
+def test_catalog_indexes_tasks_profiles() -> None:
+    """Faz 9: tasks/profiles are in catalog + content_sha256 payload."""
+    import hashlib
+
     run(BUILD)
     cat = json.loads((ROOT / "metadata" / "catalog.json").read_text(encoding="utf-8"))
-    assert "tasks" not in cat
-    assert "profiles" not in cat
+    assert isinstance(cat.get("tasks"), list) and cat["tasks"]
+    assert isinstance(cat.get("profiles"), list) and cat["profiles"]
     assert cat["command_count"] >= 200
-    assert "task_count" not in cat
+    assert cat["task_count"] == len(cat["tasks"]) >= 10
+    assert cat["profile_count"] == len(cat["profiles"]) >= 8
+
+    def digest(commands, concepts, tasks, profiles) -> str:
+        payload = {
+            "schema_version": 2,
+            "kind": "nova-commands-bank",
+            "commands": commands,
+            "concepts": concepts,
+            "tasks": tasks,
+            "profiles": profiles,
+        }
+        raw = json.dumps(
+            payload,
+            ensure_ascii=False,
+            sort_keys=True,
+            separators=(",", ":"),
+            default=str,
+        ).encode("utf-8")
+        return hashlib.sha256(raw).hexdigest()
+
+    cmds_only = digest(cat["commands"], cat["concepts"], [], [])
+    assert cat["content_sha256"] != cmds_only
+    assert cat["content_sha256"] == digest(
+        cat["commands"], cat["concepts"], cat["tasks"], cat["profiles"]
+    )

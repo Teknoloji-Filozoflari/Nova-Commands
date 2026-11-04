@@ -73,9 +73,9 @@ CI must pass: validate → build → pytest → committed `content_sha256` match
 3. Keep `verification.status: draft` until human review. Do not invent
    command ids or secret-bearing examples.
 4. Run `python3 scripts/validate_tasks_profiles.py --require` (also wired into
-   `validate_catalog.py`). Catalog `content_sha256` still covers
-   commands+concepts only until Faz 9 indexes tasks/profiles — rebuild catalog
-   only if you also changed commands or concepts.
+   `validate_catalog.py`), then `python3 scripts/build_catalog.py` so
+   `catalog.json` / `search-index.json` / `manifest.json` pick up
+   `task_count` / `profile_count` (included in `content_sha256`).
 
 ## Propose a category
 

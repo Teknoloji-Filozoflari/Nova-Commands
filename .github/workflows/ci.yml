@@ -75,6 +75,17 @@ jobs:
           assert len(ids) == len(set(ids))
           assert cat["command_count"] == len(ids)
           assert cat["concept_count"] == len(cat["concepts"])
+          assert cat.get("task_count", 0) == len(cat.get("tasks") or [])
+          assert cat.get("profile_count", 0) == len(cat.get("profiles") or [])
+          assert man.get("task_count", 0) == cat.get("task_count", 0)
+          assert man.get("profile_count", 0) == cat.get("profile_count", 0)
+          assert idx.get("task_count", 0) == cat.get("task_count", 0)
+          assert idx.get("profile_count", 0) == cat.get("profile_count", 0)
+          entry_types = {e.get("type") for e in idx.get("entries") or []}
+          if cat.get("task_count"):
+              assert "task" in entry_types
+          if cat.get("profile_count"):
+              assert "profile" in entry_types
           assert len(cat["content_sha256"]) == 64
           assert man["content_sha256"] == cat["content_sha256"] == idx["content_sha256"]
           assert cat["content_sha256"] == committed, (
@@ -93,6 +104,7 @@ jobs:
           )
           print(
               f"catalog ok: {len(ids)} commands, {cat['concept_count']} concepts, "
+              f"{cat.get('task_count', 0)} tasks, {cat.get('profile_count', 0)} profiles, "
               f"sha={cat['content_sha256'][:12]}… "
               f"(verified commands={verified_cmds}, concepts={verified_concepts})"
           )
