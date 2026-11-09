@@ -1,6 +1,6 @@
 # Roadmap — Nova-Commands
 
-Status reflects **merged `main` after [#23](https://github.com/Teknoloji-Filozoflari/Nova-Commands/pull/23)** (Faz 10 CI/security).  
+Status reflects **merged `main` after [#30](https://github.com/Teknoloji-Filozoflari/Nova-Commands/pull/30)** (IA fill) plus trust-audit honesty fixes.  
 Do not treat registry rows or `draft` YAML as “full platform support.”
 
 ## Cross-platform expansion (master §22)
@@ -25,15 +25,15 @@ Do not treat registry rows or `draft` YAML as “full platform support.”
 | Metric | Value |
 |--------|------:|
 | Commands | 256 |
-| Concepts | 20 |
-| Tasks | 21 (`draft`) |
+| Concepts | 20 (reviewed **1** / draft **19**) |
+| Tasks | 26 (`draft`) |
 | Profiles | 13 (`draft`) |
-| Search entries | 310 |
+| Search entries | 315 |
 | OS registry | 11 |
 | Package managers | 60 |
 | Catalog `schema_version` | 2 |
-| verified / reviewed / draft | 26 / 105 / 125 |
-| `content_sha256` | `7b24390eb92de6cda76b330d61fd34dcdb304afe27c1595355621717b653bf54` |
+| commands verified / reviewed / draft | 26 / 105 / 125 |
+| `content_sha256` | `e17437d67113603c4e7e7cd46b7b5ad1ebb1043d032b4a38b651c3cd189b8169` |
 
 ## Done (honest)
 
@@ -49,13 +49,14 @@ Do not treat registry rows or `draft` YAML as “full platform support.”
 | Item | Notes |
 |------|--------|
 | Production signed `catalog-v*` Release | Needs maintainer `MINISIGN_SECRET_KEY` + tag; workflow dry-runs until then |
-| Nova re-vendor of `7b24390e…` | Separate Nova PR after this bank lands on consumers |
+| Nova re-vendor after trust-audit digest bump | Separate Nova PR when `content_sha256` changes |
 | Mass `verified` promotions | Human review only — CI never auto-verifies |
+| Concept human spot-check → selective `reviewed`/`verified` | Agent-authored articles stay `draft` until maintainer review |
 | illumos / Solaris / AIX **command banks** | Metadata skeletons only |
 | Full vendor appliance CLIs | Proxmox `qm`, RouterOS, Cisco IOS, … not claimed |
 | OpenTofu / Pulumi / Nomad / full observability CLIs | Not in bank yet |
 | Local discovery implementation | Contract only in this repo; Nova owns runtime |
-| Soft safety notices | e.g. some `rm`/`fdisk` destructive examples still lack optional `warnings[]` (hard wipe-class gates already enforced) |
+| Soft safety notices | Destructive `rm`/`fdisk`/`parted`/`userdel` examples now carry bilingual `warnings[]`; wipe-class hard gates unchanged |
 
 ## Near-term priorities
 

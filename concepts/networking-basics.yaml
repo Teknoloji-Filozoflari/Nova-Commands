@@ -77,7 +77,7 @@ body:
     listeners — catalog may mark it `draft`/`caution`. Firewall tooling needs care;
     never invent rules or flags.
 verification:
-  status: reviewed
+  status: draft
   sources:
     - "man ip-address / man ss"
     - "man systemd-resolved / resolvectl"

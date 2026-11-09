@@ -76,7 +76,7 @@ body:
     **Choosing:** Follow the distro default for new automation (Arch/nft or firewalld;
     Ubuntu/ufw; Fedora/firewalld). Two managers writing at once causes fights.
 verification:
-  status: reviewed
+  status: draft
   sources:
     - "man 8 nft"
     - "man 1 firewall-cmd"

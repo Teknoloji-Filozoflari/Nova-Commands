@@ -69,6 +69,9 @@ examples:
     en: Removes home too — destructive.
   risk: destructive
   requires_elevated: true
+  warnings:
+  - tr: "'-r' ev dizinini ve posta kutusunu da siler; yedek yoksa veri kaybı kalıcıdır."
+    en: "'-r' also deletes the home directory and mail spool; without a backup, data loss is permanent."
 related:
 - useradd
 - usermod

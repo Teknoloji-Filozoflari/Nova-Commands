@@ -6,13 +6,21 @@ Dates are UTC merge days when known. Digests are `metadata/manifest.json`
 
 ## Unreleased
 
-- Komut Rehberi IA content fill (Nova #58): start-safe concept `related_commands`,
-  task safe examples + bank-sourced explanations, profile↔task wiring for orphan
-  network/SSH tasks, five new tasks from existing bank examples
-  (`find-files`, `compress-archive`, `extract-archive`, `list-hardware`,
-  `clone-git-repo`), plus `metadata/start-curriculum.yaml`.
+- Beginner trust audit: demote agent-authored concept articles that lacked
+  human review proof (`reviewed` → `draft`); keep `storage` as the sole
+  concept still `reviewed` (`last_reviewed` present). Add bilingual
+  `warnings[]` on destructive `fdisk` / `parted` / `rm` / `userdel`
+  examples (soft security notices cleared). Sync live-catalog counts in
+  README / README.tr / ROADMAP / PLATFORM_SUPPORT after #30.
   Bank: **256** commands · **20** concepts · **26** tasks · **13** profiles;
-  `content_sha256=ee1e5d186bdc7885cd18b945446a2d34673c7f7499d08f7da165fc011d5ae4db`.
+  concepts reviewed **1** / draft **19**;
+  `content_sha256=e17437d67113603c4e7e7cd46b7b5ad1ebb1043d032b4a38b651c3cd189b8169`.
+  No `draft`→`reviewed`/`verified` promotions; no new desktop profiles;
+  examples not executed.
+- Komut Rehberi IA content fill (Nova #58 / [#30](https://github.com/Teknoloji-Filozoflari/Nova-Commands/pull/30)):
+  start-safe concept `related_commands`, task safe examples + bank-sourced
+  explanations, profile↔task wiring, five new tasks, `metadata/start-curriculum.yaml`.
+  Prior digest `ee1e5d186bdc7885cd18b945446a2d34673c7f7499d08f7da165fc011d5ae4db`.
 - Faz 11 documentation: `README.tr.md`, `docs/ROADMAP.md`,
   `docs/SECURITY_MODEL.md`; PLATFORM_SUPPORT / SCHEMA_MIGRATION_V2 / README
   aligned with post-#23 `main`. No catalog YAML or digest change intended.

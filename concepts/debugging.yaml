@@ -71,7 +71,7 @@ body:
     Catalog CI does not run these tools “to prove” entries; content is checked
     against man/`--help` and careful examples. Do not share traces that contain secrets.
 verification:
-  status: reviewed
+  status: draft
   sources:
     - "man 1 strace"
     - "man 8 lsof"

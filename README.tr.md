@@ -28,23 +28,25 @@ YAML bankası  →  doğrula + derle  →  katalog / arama / manifest  →  Nova
 
 ---
 
-## Canlı katalog (post–[#23](https://github.com/Teknoloji-Filozoflari/Nova-Commands/pull/23))
+## Canlı katalog (post–[#30](https://github.com/Teknoloji-Filozoflari/Nova-Commands/pull/30))
 
 Sayılar üretilmiş `metadata/manifest.json` / `search-index.json` ile uyumludur —
-pazarlama hedefi değildir.
+pazarlama hedefi değildir. Güven denetimi sonrası özette uyarı/`status`
+dürüstlüğü digest’i güncelleyebilir.
 
 | Metrik | Değer |
 |--------|------:|
 | Komut | **256** |
 | Konsept makalesi | **20** |
-| Görev (`tasks/`) | **21** (hepsi `draft`) |
+| Görev (`tasks/`) | **26** (hepsi `draft`) |
 | Profil (`profiles/`) | **13** (hepsi `draft`) |
-| Arama girdisi | **310** |
+| Arama girdisi | **315** |
 | OS kaydı | **11** |
 | Paket yöneticisi kaydı | **60** |
 | `schema_version` | **2** |
-| `verification` | verified **26** / reviewed **105** / draft **125** |
-| `content_sha256` | `7b24390eb92de6cda76b330d61fd34dcdb304afe27c1595355621717b653bf54` |
+| `verification` (komut) | verified **26** / reviewed **105** / draft **125** |
+| `verification` (konsept) | reviewed **1** / draft **19** (sahte `verified` yok) |
+| `content_sha256` | `e17437d67113603c4e7e7cd46b7b5ad1ebb1043d032b4a38b651c3cd189b8169` |
 
 ```mermaid
 pie title Komut verification.status (256)
@@ -225,7 +227,7 @@ flowchart LR
 | Windows / macOS | Draft komut bankaları + shell/PM kayıtları | Toplu `verified` iddiası yok |
 | BSD | FreeBSD / OpenBSD / NetBSD draft bankalar | DragonFly / illumos / Solaris / AIX çoğunlukla iskelet |
 | Sunucu / DevOps | Ağ, K8s istemcileri, libvirt, yedek, bulut CLI, IaC (`draft`) | Kategori var; derinlik değişir |
-| Görevler / profiller | 21 + 13, hepsi `draft` | Yol gösterici — **otomatik çalıştırılmaz** |
+| Görevler / profiller | 26 + 13, hepsi `draft` | Yol gösterici — **otomatik çalıştırılmaz** |
 
 Karşılaştırma: [docs/package-managers-comparison.md](docs/package-managers-comparison.md) ·
 Platform: [docs/PLATFORM_SUPPORT.md](docs/PLATFORM_SUPPORT.md) ·

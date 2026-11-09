@@ -80,6 +80,9 @@ examples:
     tr: Tek bir dosyayı siler.
     en: Removes a single file.
   risk: destructive
+  warnings:
+  - tr: Geri dönüşüm kutusu yoktur; silinen dosya genellikle kurtarılamaz.
+    en: There is no trash; deleted files are usually unrecoverable.
 - title:
     tr: Dizin sil (dikkat)
     en: Remove directory (careful)
@@ -88,6 +91,9 @@ examples:
     tr: Onaylayarak dizini siler. -rf kullanmadan önce iki kez düşünün.
     en: Recursively removes with prompts. Think twice before -rf.
   risk: destructive
+  warnings:
+  - tr: Özyinelemeli silme kalıcıdır; `-rf` kullanmadan önce yolu iki kez kontrol edin.
+    en: Recursive delete is permanent; double-check the path before using `-rf`.
 related:
 - mv
 intent:

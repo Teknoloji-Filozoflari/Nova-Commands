@@ -72,7 +72,7 @@ body:
     Destructive examples in this bank are labeled `dangerous`/`destructive`; do not
     run destructive commands just to validate catalog entries.
 verification:
-  status: reviewed
+  status: draft
   sources:
     - "man bash (REDIRECTION, PIPES)"
     - "POSIX shell redirection"

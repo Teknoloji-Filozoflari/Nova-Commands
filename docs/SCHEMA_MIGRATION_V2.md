@@ -97,8 +97,9 @@ must **not** change `verification.status`.
    failure keep the last good catalog ([catalog-signing.md](catalog-signing.md)).
 6. **No silent verify:** Publishing never promotes `draft` → `verified`.
 
-Current bank digest (post-#23):  
-`content_sha256=7b24390eb92de6cda76b330d61fd34dcdb304afe27c1595355621717b653bf54`.
+Historical post-#23 digest (Faz 10 era, 21 tasks):  
+`content_sha256=7b24390eb92de6cda76b330d61fd34dcdb304afe27c1595355621717b653bf54`.  
+Live pin: always read `metadata/manifest.json` (post-#30 bank + later honesty fixes).
 
 ## Rollback / dual-read notes
 

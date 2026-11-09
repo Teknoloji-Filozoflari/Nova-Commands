@@ -68,7 +68,7 @@ body:
     **Nova dual concept:** The curated bank is not the same as “commands found on PATH”;
     presence on PATH does not verify bank content.
 verification:
-  status: reviewed
+  status: draft
   sources:
     - "POSIX.1 shell command language (overview)"
     - "man bash (INVOCATION, SHELL GRAMMAR)"
