@@ -30,21 +30,22 @@ YAML bank  →  validate + build  →  catalog / search / manifest  →  Nova UI
 
 ---
 
-## Live catalog (after [#23](https://github.com/Teknoloji-Filozoflari/Nova-Commands/pull/23))
+## Live catalog (after [#30](https://github.com/Teknoloji-Filozoflari/Nova-Commands/pull/30))
 
 Counts from committed `metadata/manifest.json` / `search-index.json` — not marketing
-targets.
+targets. Trust-audit follow-up may bump the digest when warnings/status honesty land.
 
 | Metric | Value |
 |--------|------:|
 | Commands | **256** |
 | Concepts | **20** |
-| Tasks / profiles | **21** / **13** (all `draft`) |
-| Search entries | **310** |
+| Tasks / profiles | **26** / **13** (all `draft`) |
+| Search entries | **315** |
 | OS / package-manager registry rows | **11** / **60** |
 | `schema_version` | **2** |
-| verification | verified **26** / reviewed **105** / draft **125** |
-| `content_sha256` | `7b24390eb92de6cda76b330d61fd34dcdb304afe27c1595355621717b653bf54` |
+| verification (commands) | verified **26** / reviewed **105** / draft **125** |
+| verification (concepts) | reviewed **1** / draft **19** (no fake `verified`) |
+| `content_sha256` | `e17437d67113603c4e7e7cd46b7b5ad1ebb1043d032b4a38b651c3cd189b8169` |
 
 ```mermaid
 pie title Command verification.status (256)
@@ -225,7 +226,7 @@ flowchart LR
 | Windows / macOS | Draft command banks + shell/PM registry rows | Not claimed `verified` en masse |
 | BSD | FreeBSD / OpenBSD / NetBSD draft banks | DragonFly / illumos / Solaris / AIX mostly skeleton |
 | Server / DevOps | Network, K8s clients, libvirt, backup, cloud CLI, IaC (`draft`) | Categories exist; depth varies |
-| Tasks / profiles | 21 + 13, all `draft` | Guiding recipes — **not** auto-executed |
+| Tasks / profiles | 26 + 13, all `draft` | Guiding recipes — **not** auto-executed |
 
 Compare: [docs/package-managers-comparison.md](docs/package-managers-comparison.md) ·
 Platform: [docs/PLATFORM_SUPPORT.md](docs/PLATFORM_SUPPORT.md) ·

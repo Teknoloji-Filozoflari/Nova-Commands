@@ -87,7 +87,7 @@ body:
     **Not BSD:** FreeBSD `service`/`sysrc`, OpenBSD `rcctl`, and macOS `launchctl`
     are not systemd units — separate records (Faz 5–6).
 verification:
-  status: reviewed
+  status: draft
   sources:
     - "man systemd"
     - "man systemctl"

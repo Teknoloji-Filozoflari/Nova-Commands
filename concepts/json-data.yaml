@@ -67,7 +67,7 @@ body:
     **Pipeline habit:** producer → filter → consumer. Keep intermediates with `tee`;
     do not leak secrets into logs.
 verification:
-  status: reviewed
+  status: draft
   sources:
     - "https://jqlang.github.io/jq/manual/"
     - "https://www.sqlite.org/cli.html"

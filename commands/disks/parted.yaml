@@ -91,6 +91,9 @@ examples:
       Placeholder disk. Wrong device wrecks the partition table. Confirm with `parted -l` / `lsblk` first. This example does not pass scripted destroy commands.
   risk: destructive
   requires_elevated: true
+  warnings:
+  - tr: Yanlış cihaz seçimi bölüm tablosunu bozar; önce `parted -l` / `lsblk` ile doğrula.
+    en: Wrong device wrecks the partition table; confirm with `parted -l` / `lsblk` first.
 related:
 - fdisk
 - lsblk

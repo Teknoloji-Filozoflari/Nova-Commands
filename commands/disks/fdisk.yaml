@@ -64,6 +64,9 @@ examples:
     en: Wrong device = data loss; confirm with -l first.
   risk: destructive
   requires_elevated: true
+  warnings:
+  - tr: Yanlış cihaz seçimi veriyi kalıcı olarak siler; önce `fdisk -l` / `lsblk` ile doğrula.
+    en: Wrong device permanently destroys data; confirm with `fdisk -l` / `lsblk` first.
 related:
 - lsblk
 - blkid

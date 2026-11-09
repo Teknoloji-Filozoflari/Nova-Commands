@@ -61,7 +61,7 @@ body:
     (`kind: nova-local-commands`) and must not inherit bank `verified` status.
     See `docs/local-discovery-contract.md`.
 verification:
-  status: reviewed
+  status: draft
   sources:
     - "man environ / POSIX PATH"
     - "man bash (COMMAND EXECUTION)"

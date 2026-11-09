@@ -26,9 +26,9 @@ registry id is still **not** proof of local install or full coverage. See
 | Cloud providers | 6 | aws, azure, gcp, oci, digitalocean, hetzner |
 | Execution environments | 11 | WSL, Termux, container, … |
 | Architectures | 8 | |
-| Commands / concepts / tasks / profiles | 256 / 20 / 21 / 13 | tasks+profiles all `draft` |
-| Search entries | 310 | |
-| `content_sha256` | `7b24390e…` | see `metadata/manifest.json` |
+| Commands / concepts / tasks / profiles | 256 / 20 / 26 / 13 | tasks+profiles all `draft`; concepts mostly `draft` |
+| Search entries | 315 | |
+| `content_sha256` | `e17437d6…` | full digest in `metadata/manifest.json` |
 
 ## Dual concept (unchanged)
 
