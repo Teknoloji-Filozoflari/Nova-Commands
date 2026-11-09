@@ -26,6 +26,9 @@ implementations:
     risk: safe
     shell: bash
     privilege: none
+    explanation:
+      tr: Çalışan konteynerler.
+      en: Running containers.
   platforms:
   - linux
   - macos
@@ -40,6 +43,9 @@ implementations:
     risk: safe
     shell: bash
     privilege: none
+    explanation:
+      tr: Çalışan konteynerler.
+      en: Running containers.
   platforms:
   - linux
   shells:
@@ -52,6 +58,9 @@ implementations:
     risk: safe
     shell: bash
     privilege: none
+    explanation:
+      tr: containerd üzerinden çalışan konteynerler.
+      en: Running containers via containerd.
   platforms:
   - linux
   shells:

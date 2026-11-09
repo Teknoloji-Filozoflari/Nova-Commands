@@ -1,0 +1,70 @@
+schema_version: 2
+kind: task
+id: clone-git-repo
+name:
+  tr: Git deposu klonla
+  en: Clone a git repo
+summary:
+  tr: Uzak Git deposunu yerel dizine klonla (mevcut git örneği).
+  en: Clone a remote Git repository locally (existing git example).
+category: development
+intent:
+  tr:
+  - git clone
+  - repo indir
+  - depo klonla
+  en:
+  - git clone
+  - clone repository
+implementations:
+- id: git-clone
+  commands:
+  - git
+  examples:
+  - command: git status
+    risk: safe
+    shell: bash
+    privilege: user
+    title:
+      tr: Durum
+      en: Status
+    explanation:
+      tr: Çalışma ağacı durumu.
+      en: Working tree status.
+  - command: git log --oneline -n 10
+    risk: safe
+    shell: bash
+    privilege: user
+    title:
+      tr: Kısa log
+      en: Oneline log
+    explanation:
+      tr: Son 10 commit.
+      en: Last 10 commits.
+  - command: git clone https://github.com/Teknoloji-Filozoflari/Nova-Commands.git
+    risk: caution
+    shell: bash
+    privilege: user
+    title:
+      tr: Klon
+      en: Clone
+    explanation:
+      tr: Depoyu klonlar.
+      en: Clones the repository.
+  platforms:
+  - linux
+  - macos
+  - bsd
+  - windows
+  shells:
+  - bash
+related_commands:
+- git
+tags:
+- development
+- git
+verification:
+  status: draft
+  sources:
+  - commands/development/git.yaml
+  notes: Agent-authored IA gap fill from existing command bank; not human-verified.

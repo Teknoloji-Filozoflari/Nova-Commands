@@ -30,11 +30,27 @@ related_commands:
 - nft
 - ufw
 - ssh
+- dig
+- host
+- resolvectl
+- ping
+- curl
+- mtr
+- traceroute
+- wget
+- ifconfig
+- networksetup
+- ipconfig
+- nmcli
 related_tasks:
 - update-system
 - install-package
 - list-running-services
 - show-local-ip
+- check-dns
+- check-internet-connectivity
+- show-public-ip
+- inspect-network-interfaces
 tags:
 - server
 - arch

@@ -27,6 +27,9 @@ implementations:
     risk: safe
     shell: bash
     privilege: none
+    explanation:
+      tr: Yönlendirme tablosu.
+      en: Routing table.
   operating_systems:
   - linux
   platforms:
@@ -42,6 +45,9 @@ implementations:
     risk: safe
     shell: bash
     privilege: none
+    explanation:
+      tr: Sayısal yönlendirme tablosunu gösterir.
+      en: Shows the numeric routing table.
   platforms:
   - macos
   - bsd
@@ -56,6 +62,9 @@ implementations:
     risk: safe
     shell: cmd
     privilege: none
+    explanation:
+      tr: IPv4/IPv6 yönlendirme tablosunu basar.
+      en: Prints the IPv4/IPv6 routing table.
   operating_systems:
   - windows
   platforms:

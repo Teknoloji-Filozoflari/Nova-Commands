@@ -19,11 +19,34 @@ implementations:
 - id: unix-du
   commands:
   - du
+  - df
   examples:
+  - title:
+      tr: Özet
+      en: Summary
+    command: df -h
+    explanation:
+      tr: Disk doluluğu.
+      en: Disk usage summary.
+    risk: safe
+    shell: bash
+    privilege: none
+  - command: du -sh ~/Downloads
+    risk: safe
+    title:
+      tr: Dizin toplamı
+      en: Dir total
+    explanation:
+      tr: Downloads boyutunu özetler.
+      en: Summarizes Downloads size.
+    privilege: none
   - command: du -sh /* 2>/dev/null | sort -h
     risk: caution
     shell: bash
     privilege: none
+    explanation:
+      tr: Downloads boyutunu özetler.
+      en: Summarizes Downloads size.
   platforms:
   - linux
   - macos

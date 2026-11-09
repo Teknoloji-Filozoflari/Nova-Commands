@@ -22,10 +22,23 @@ implementations:
   commands:
   - pacman
   examples:
+  - command: pacman -Ss ripgrep
+    risk: safe
+    title:
+      tr: Ara
+      en: Search
+    explanation:
+      tr: Depoda ripgrep arar.
+      en: Searches repos for ripgrep.
+    privilege: none
+    requires_elevated: false
   - command: sudo pacman -S package-name
     risk: caution
     shell: bash
     privilege: elevated
+    explanation:
+      tr: curl paketini kurar.
+      en: Installs curl.
   platforms:
   - linux
   shells:
@@ -40,6 +53,9 @@ implementations:
     risk: caution
     shell: bash
     privilege: elevated
+    explanation:
+      tr: curl kurar.
+      en: Installs curl.
   platforms:
   - linux
   shells:
@@ -55,6 +71,9 @@ implementations:
     risk: caution
     shell: bash
     privilege: elevated
+    explanation:
+      tr: curl kurar.
+      en: Installs curl.
   platforms:
   - linux
   shells:
@@ -65,6 +84,15 @@ implementations:
   commands:
   - brew
   examples:
+  - command: brew search ripgrep
+    risk: safe
+    title:
+      tr: Ara
+      en: Search
+    explanation:
+      tr: ripgrep formül/cask arar.
+      en: Searches formulae/casks for ripgrep.
+    privilege: none
   - command: brew install package-name
     risk: caution
     shell: zsh
@@ -79,6 +107,16 @@ implementations:
   commands:
   - winget
   examples:
+  - command: winget search vscode
+    risk: safe
+    title:
+      tr: Ara
+      en: Search
+    explanation:
+      tr: vscode ile eşleşen paketleri arar.
+      en: Searches packages matching vscode.
+    shell: powershell
+    privilege: none
   - command: winget install --id Vendor.Package
     risk: caution
     shell: powershell

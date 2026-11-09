@@ -26,6 +26,9 @@ implementations:
     risk: safe
     shell: bash
     privilege: none
+    explanation:
+      tr: sshd birim durumunu gösterir (izinler dağıtıma göre).
+      en: Shows sshd unit status (unit name varies).
   operating_systems:
   - linux
   platforms:
@@ -40,6 +43,9 @@ implementations:
     risk: safe
     shell: bash
     privilege: none
+    explanation:
+      tr: rc.conf ile etkinleştirilmiş servisleri listeler.
+      en: Lists services enabled via rc.conf.
   operating_systems:
   - freebsd
   - netbsd
@@ -56,6 +62,9 @@ implementations:
     risk: safe
     shell: ksh
     privilege: none
+    explanation:
+      tr: Başlatılmış servisleri listeler.
+      en: Lists started services.
   operating_systems:
   - openbsd
   platforms:
@@ -70,6 +79,9 @@ implementations:
     risk: safe
     shell: powershell
     privilege: none
+    explanation:
+      tr: Yerel servisleri listeler.
+      en: Lists local services.
   operating_systems:
   - windows
   platforms:
@@ -84,6 +96,9 @@ implementations:
     risk: safe
     shell: zsh
     privilege: none
+    explanation:
+      tr: GUI etki alanı özetini basmaya çalışır (ortama göre değişir).
+      en: Attempts to print GUI domain summary (varies by environment).
   operating_systems:
   - macos
   platforms:

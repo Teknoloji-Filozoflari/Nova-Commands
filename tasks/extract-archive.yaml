@@ -1,0 +1,54 @@
+schema_version: 2
+kind: task
+id: extract-archive
+name:
+  tr: Arşiv çıkar
+  en: Extract archive
+summary:
+  tr: tar.gz arşivini çıkar (mevcut tar örneği).
+  en: Extract a tar.gz archive (existing tar example).
+category: archives
+intent:
+  tr:
+  - arşiv aç
+  - tar çıkar
+  - extract
+  en:
+  - extract archive
+  - untar
+  - unzip tar.gz
+implementations:
+- id: tar-xzf
+  commands:
+  - tar
+  examples:
+  - command: tar -xzf project.tar.gz
+    risk: caution
+    shell: bash
+    privilege: user
+    title:
+      tr: Çıkar gzip
+      en: Extract gzip
+    explanation:
+      tr: tar.gz arşivini çıkarır.
+      en: Extracts a tar.gz archive.
+  platforms:
+  - linux
+  - macos
+  - bsd
+  shells:
+  - bash
+related_commands:
+- tar
+- gzip
+- unzip
+related_tasks:
+- compress-archive
+tags:
+- archives
+verification:
+  status: draft
+  sources:
+  - man 1 tar
+  - commands/archives/tar.yaml
+  notes: Agent-authored IA gap fill from existing command bank; not human-verified.

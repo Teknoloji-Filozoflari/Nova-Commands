@@ -26,6 +26,9 @@ implementations:
     risk: safe
     shell: bash
     privilege: none
+    explanation:
+      tr: Geniş süreç tablosu.
+      en: Wide process table.
   platforms:
   - linux
   - macos
@@ -40,6 +43,9 @@ implementations:
     risk: safe
     shell: powershell
     privilege: none
+    explanation:
+      tr: CPU’ya göre ilk 10 süreç.
+      en: Top 10 processes by CPU.
   operating_systems:
   - windows
   platforms:

@@ -26,6 +26,9 @@ implementations:
     risk: safe
     shell: bash
     privilege: none
+    explanation:
+      tr: Ağ arayüzlerini listeler.
+      en: Lists network interfaces.
   operating_systems:
   - linux
   platforms:
@@ -40,6 +43,9 @@ implementations:
     risk: safe
     shell: zsh
     privilege: none
+    explanation:
+      tr: Donanım portlarını listeler (salt okuma).
+      en: Lists hardware ports (read-only).
   operating_systems:
   - macos
   platforms:
@@ -54,6 +60,9 @@ implementations:
     risk: safe
     shell: cmd
     privilege: none
+    explanation:
+      tr: Tüm arabirimler için ayrıntılı IP/DNS bilgisini basar.
+      en: Prints detailed IP/DNS info for all interfaces.
   operating_systems:
   - windows
   platforms:

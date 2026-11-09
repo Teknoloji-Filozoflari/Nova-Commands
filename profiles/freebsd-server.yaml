@@ -24,11 +24,31 @@ related_commands:
 - pfctl
 - ifconfig
 - ssh
+- dig
+- host
+- resolvectl
+- ping
+- curl
+- mtr
+- traceroute
+- ip
+- networksetup
+- ipconfig
+- nmcli
+- route
+- netstat-bsd
+- netsh
+- wget
 related_tasks:
 - update-system
 - list-running-services
 - check-firewall-status
 - show-local-ip
+- check-dns
+- check-internet-connectivity
+- inspect-network-interfaces
+- inspect-routing-table
+- show-public-ip
 tags:
 - server
 - freebsd

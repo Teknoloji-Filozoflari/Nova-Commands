@@ -22,10 +22,22 @@ implementations:
   commands:
   - rsync
   examples:
+  - command: rsync -avn ./src/ ./dst/
+    risk: safe
+    title:
+      tr: Kuru koşu
+      en: Dry run
+    explanation:
+      tr: Ne kopyalanacağını silmeden gösterir.
+      en: Shows what would copy without writing.
+    privilege: user
   - command: rsync -aHAX --info=progress2 /path/to/src/ /path/to/backup/
     risk: caution
     shell: bash
     privilege: user
+    explanation:
+      tr: Dizin içeriğini arşiv modunda eşitler.
+      en: Syncs directory contents in archive mode.
   platforms:
   - linux
   - macos
@@ -36,6 +48,15 @@ implementations:
   commands:
   - restic
   examples:
+  - command: restic version
+    risk: safe
+    title:
+      tr: Sürüm
+      en: Version
+    explanation:
+      tr: restic sürümü.
+      en: restic version.
+    privilege: none
   - command: restic -r /path/to/repo backup /path/to/data
     risk: caution
     shell: bash
@@ -54,10 +75,22 @@ implementations:
   commands:
   - borg
   examples:
+  - command: borg --version
+    risk: safe
+    title:
+      tr: Sürüm
+      en: Version
+    explanation:
+      tr: Borg sürümü.
+      en: Borg version.
+    privilege: none
   - command: borg create /path/to/repo::'{hostname}-{now}' /path/to/data
     risk: caution
     shell: bash
     privilege: user
+    explanation:
+      tr: Depo parolası/ortam değişkeni örneğe yazılmaz.
+      en: Repo password/env vars are omitted from examples.
   platforms:
   - linux
   - macos

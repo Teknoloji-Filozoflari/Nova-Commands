@@ -26,6 +26,9 @@ implementations:
     risk: safe
     shell: bash
     privilege: none
+    explanation:
+      tr: nginx biriminin son 50 satırı.
+      en: Last 50 lines for nginx unit.
   operating_systems:
   - linux
   platforms:
@@ -40,6 +43,9 @@ implementations:
     risk: safe
     shell: powershell
     privilege: none
+    explanation:
+      tr: System kanalından son 20 olayı getirir.
+      en: Fetches the latest 20 System-channel events.
   operating_systems:
   - windows
   platforms:
@@ -54,6 +60,9 @@ implementations:
     risk: safe
     shell: zsh
     privilege: none
+    explanation:
+      tr: Son 2 dakikalık kompakt günlükten kuyruk alır.
+      en: Tails a compact log from the last 2 minutes.
   operating_systems:
   - macos
   platforms:
@@ -68,6 +77,9 @@ implementations:
     risk: safe
     shell: bash
     privilege: none
+    explanation:
+      tr: Son çekirdek mesajları.
+      en: Recent kernel messages.
   platforms:
   - linux
   - macos

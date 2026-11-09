@@ -26,6 +26,7 @@ related_commands:
   - apk
   - emerge
   - xbps-install
+  - xbps-query
   - eopkg
   - slackpkg
   - nix

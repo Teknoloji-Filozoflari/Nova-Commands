@@ -1,0 +1,61 @@
+schema_version: 2
+kind: task
+id: find-files
+name:
+  tr: Dosya bul
+  en: Find files
+summary:
+  tr: İsim veya tür ile dosya/dizin ara (find salt okuma örnekleri).
+  en: Search files/dirs by name or type (read-only find examples).
+category: search
+intent:
+  tr:
+  - dosya bul
+  - find isim
+  - boş dizin bul
+  en:
+  - find files
+  - find by name
+  - find empty dirs
+implementations:
+- id: unix-find
+  commands:
+  - find
+  examples:
+  - command: find ~ -name "*.pdf"
+    risk: safe
+    shell: bash
+    privilege: none
+    title:
+      tr: İsme göre ara
+      en: Search by name
+    explanation:
+      tr: Ev dizininde PDF arar.
+      en: Finds PDFs under home.
+  - command: find . -type d -empty
+    risk: safe
+    shell: bash
+    privilege: none
+    title:
+      tr: Boş dizinler
+      en: Empty dirs
+    explanation:
+      tr: Boş dizinleri listeler.
+      en: Lists empty directories.
+  platforms:
+  - linux
+  - macos
+  - bsd
+  shells:
+  - bash
+related_commands:
+- find
+tags:
+- search
+- filesystem
+verification:
+  status: draft
+  sources:
+  - man 1 find
+  - commands/search/find.yaml
+  notes: Agent-authored IA gap fill from existing command bank; not human-verified.

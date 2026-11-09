@@ -28,11 +28,27 @@ related_commands:
 - firewall-cmd
 - ss
 - ip
+- dig
+- host
+- resolvectl
+- ping
+- curl
+- mtr
+- traceroute
+- wget
+- ifconfig
+- networksetup
+- ipconfig
+- nmcli
 related_tasks:
 - update-system
 - install-package
 - list-running-services
 - check-firewall-status
+- check-dns
+- check-internet-connectivity
+- show-public-ip
+- inspect-network-interfaces
 tags:
 - server
 - fedora

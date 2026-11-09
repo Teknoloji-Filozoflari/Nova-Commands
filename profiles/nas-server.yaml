@@ -30,11 +30,18 @@ related_commands:
 - borg
 - rclone
 - zfs
+- tar
+- gzip
+- unzip
+- find
 related_tasks:
 - check-disk-space
 - inspect-disk-usage
 - backup-directory
 - connect-ssh
+- compress-archive
+- extract-archive
+- find-files
 tags:
 - nas
 - storage

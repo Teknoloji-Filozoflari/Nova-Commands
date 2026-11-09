@@ -26,6 +26,9 @@ implementations:
     risk: caution
     shell: bash
     privilege: user
+    explanation:
+      tr: Tek dosyayı uzak /tmp’ye kopyalar.
+      en: Copies one file to remote /tmp.
   platforms:
   - linux
   - macos
@@ -38,10 +41,23 @@ implementations:
   - rsync
   - ssh
   examples:
+  - title:
+      tr: Kuru koşu
+      en: Dry run
+    command: rsync -avn ./src/ ./dst/
+    explanation:
+      tr: Ne kopyalanacağını silmeden gösterir.
+      en: Shows what would copy without writing.
+    risk: safe
+    shell: bash
+    privilege: user
   - command: rsync -avz -e ssh ./dir/ user@server.example:~/dir/
     risk: caution
     shell: bash
     privilege: user
+    explanation:
+      tr: Uzak yedek; --delete kullanmadan önce dry-run.
+      en: Remote backup; dry-run before --delete.
   platforms:
   - linux
   - macos

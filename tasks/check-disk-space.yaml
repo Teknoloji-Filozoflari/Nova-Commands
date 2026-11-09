@@ -26,6 +26,9 @@ implementations:
     risk: safe
     shell: bash
     privilege: none
+    explanation:
+      tr: Disk doluluğu.
+      en: Disk usage summary.
   platforms:
   - linux
   - macos
@@ -40,6 +43,9 @@ implementations:
     risk: safe
     shell: powershell
     privilege: none
+    explanation:
+      tr: Sürücü harfi, dosya sistemi ve boş alanı listeler.
+      en: Lists drive letter, filesystem, and free space.
   operating_systems:
   - windows
   platforms:

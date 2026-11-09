@@ -48,6 +48,9 @@ implementations:
     risk: safe
     shell: bash
     privilege: none
+    explanation:
+      tr: Yanıt başlıklarını basar.
+      en: Prints response headers.
   platforms:
   - linux
   - macos
