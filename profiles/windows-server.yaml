@@ -30,6 +30,17 @@ related_commands:
 - netsh
 - ipconfig
 - sc
+- dig
+- host
+- resolvectl
+- ip
+- ifconfig
+- networksetup
+- nmcli
+- route
+- netstat-bsd
+- curl
+- wget
 related_tasks:
 - show-local-ip
 - check-open-ports
@@ -38,6 +49,10 @@ related_tasks:
 - inspect-system-logs
 - update-system
 - check-firewall-status
+- check-dns
+- inspect-network-interfaces
+- inspect-routing-table
+- show-public-ip
 tags:
 - server
 - windows

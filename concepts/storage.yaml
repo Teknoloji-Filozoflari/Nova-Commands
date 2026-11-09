@@ -30,6 +30,8 @@ related_commands:
   - mkfs.fat
   - wipefs
   - fsck
+  - get-volume
+  - get-disk
 related_concepts:
   - files
   - permissions

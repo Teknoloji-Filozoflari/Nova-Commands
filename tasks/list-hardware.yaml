@@ -1,0 +1,74 @@
+schema_version: 2
+kind: task
+id: list-hardware
+name:
+  tr: Donanımı listele
+  en: List hardware
+summary:
+  tr: CPU / PCI / USB envanterini salt okuma komutlarla göster.
+  en: Show CPU / PCI / USB inventory with read-only commands.
+category: hardware
+intent:
+  tr:
+  - donanım listele
+  - cpu bilgisi
+  - pci usb
+  en:
+  - list hardware
+  - cpu info
+  - pci usb
+implementations:
+- id: linux-hw
+  commands:
+  - lscpu
+  - lspci
+  - lsusb
+  examples:
+  - command: lscpu
+    risk: safe
+    shell: bash
+    privilege: none
+    title:
+      tr: CPU bilgisi
+      en: CPU info
+    explanation:
+      tr: İşlemci özeti.
+      en: CPU summary.
+  - command: lspci -nn
+    risk: safe
+    shell: bash
+    privilege: none
+    title:
+      tr: PCI listesi
+      en: PCI list
+    explanation:
+      tr: Aygıt + ID.
+      en: Devices + IDs.
+  - command: lsusb
+    risk: safe
+    shell: bash
+    privilege: none
+    title:
+      tr: USB listesi
+      en: USB list
+    explanation:
+      tr: Bağlı USB aygıtlar.
+      en: Connected USB devices.
+  platforms:
+  - linux
+  shells:
+  - bash
+related_commands:
+- lscpu
+- lspci
+- lsusb
+tags:
+- hardware
+- inventory
+verification:
+  status: draft
+  sources:
+  - commands/hardware/lscpu.yaml
+  - commands/hardware/lspci.yaml
+  - commands/hardware/lsusb.yaml
+  notes: Agent-authored IA gap fill from existing command bank; not human-verified.

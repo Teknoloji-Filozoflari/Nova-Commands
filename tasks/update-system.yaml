@@ -26,6 +26,9 @@ implementations:
     risk: caution
     shell: bash
     privilege: elevated
+    explanation:
+      tr: Tüm paketleri yükseltir.
+      en: Upgrades all packages.
   operating_systems:
   - linux
   platforms:
@@ -47,6 +50,9 @@ implementations:
     risk: caution
     shell: bash
     privilege: elevated
+    explanation:
+      tr: İndeksleri yeniler ve yükseltir.
+      en: Refreshes indexes and upgrades.
   operating_systems:
   - linux
   platforms:
@@ -66,6 +72,9 @@ implementations:
     risk: caution
     shell: bash
     privilege: elevated
+    explanation:
+      tr: Sistem paketlerini yükseltir.
+      en: Upgrades system packages.
   operating_systems:
   - linux
   platforms:
@@ -101,6 +110,9 @@ implementations:
     risk: safe
     shell: zsh
     privilege: none
+    explanation:
+      tr: Bekleyen güncellemeleri listeler (kurmaz).
+      en: Lists pending updates (does not install).
   operating_systems:
   - macos
   platforms:

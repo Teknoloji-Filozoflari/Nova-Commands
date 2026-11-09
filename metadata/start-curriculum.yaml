@@ -1,0 +1,31 @@
+schema_version: 2
+kind: nova-commands-start-curriculum
+id: start-learning
+summary:
+  tr: 'Başlangıç öğrenme sırası: beginner/rehber konseptleri ve yalnızca safe/caution komutlar.'
+  en: 'Start learning order: guide concepts; only safe/caution commands survive filtering.'
+notes:
+  tr: 'Nova #58 `start_learning_command_ids` ile aynı konsept sırası. dangerous/destructive related_commands
+    Başlangıçta düşer; bu yüzden safe related eklemek NC tarafında kritik.'
+  en: 'Same concept order as Nova #58 `start_learning_command_ids`. dangerous/destructive related_commands
+    are dropped on Start; adding safe relateds is the NC lever.'
+concept_order:
+- terminal-basics
+- path
+- shell-pipes-redirection
+- permissions
+- networking-basics
+- json-data
+- package-managers
+- storage
+- systemd
+- debugging
+risk_filter:
+- safe
+- caution
+verification:
+  status: draft
+  sources:
+  - https://github.com/Teknoloji-Filozoflari/Nova/pull/58
+  - 'internal gap list: nova-commands-ia-gaps.md'
+  notes: Mirrors Nova PATH_ORDER; not yet consumed by Nova UI (documentation + future wire).

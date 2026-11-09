@@ -26,6 +26,9 @@ implementations:
     risk: safe
     shell: bash
     privilege: elevated
+    explanation:
+      tr: Aktif kuralları ve varsayılanları gösterir.
+      en: Shows active rules and defaults.
   platforms:
   - linux
   shells:
@@ -38,6 +41,9 @@ implementations:
     risk: safe
     shell: bash
     privilege: none
+    explanation:
+      tr: Çalışıyorsa running yazar.
+      en: Prints running when active.
   platforms:
   - linux
   shells:
@@ -50,6 +56,9 @@ implementations:
     risk: safe
     shell: bash
     privilege: elevated
+    explanation:
+      tr: PF durum özetini gösterir.
+      en: Shows PF status summary.
   platforms:
   - bsd
   - macos

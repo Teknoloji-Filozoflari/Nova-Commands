@@ -27,6 +27,26 @@ related_commands:
 - ssh
 - ufw
 - systemctl
+- dig
+- host
+- resolvectl
+- ping
+- curl
+- mtr
+- traceroute
+- ip
+- ifconfig
+- networksetup
+- ipconfig
+- nmcli
+- wget
+- scp
+- sftp
+- git
+- find
+- lscpu
+- lspci
+- lsusb
 related_tasks:
 - inspect-container
 - check-container-logs
@@ -34,6 +54,14 @@ related_tasks:
 - connect-ssh
 - check-firewall-status
 - update-system
+- check-dns
+- check-internet-connectivity
+- inspect-network-interfaces
+- show-public-ip
+- transfer-files-ssh
+- clone-git-repo
+- find-files
+- list-hardware
 tags:
 - homelab
 - server

@@ -1,0 +1,54 @@
+schema_version: 2
+kind: task
+id: compress-archive
+name:
+  tr: Arşiv oluştur
+  en: Create archive
+summary:
+  tr: Dizinden tar.gz arşivi oluştur (mevcut tar örneği).
+  en: Create a tar.gz archive from a directory (existing tar example).
+category: archives
+intent:
+  tr:
+  - arşiv oluştur
+  - tar.gz yap
+  - sıkıştır
+  en:
+  - create archive
+  - make tar.gz
+  - compress folder
+implementations:
+- id: tar-czf
+  commands:
+  - tar
+  examples:
+  - command: tar -czf backup.tar.gz notes/
+    risk: caution
+    shell: bash
+    privilege: user
+    title:
+      tr: Oluştur
+      en: Create
+    explanation:
+      tr: notes/ dizininden sıkıştırılmış arşiv.
+      en: Creates compressed archive from notes/.
+  platforms:
+  - linux
+  - macos
+  - bsd
+  shells:
+  - bash
+related_commands:
+- tar
+- gzip
+related_tasks:
+- extract-archive
+tags:
+- archives
+- backup
+verification:
+  status: draft
+  sources:
+  - man 1 tar
+  - commands/archives/tar.yaml
+  notes: Agent-authored IA gap fill from existing command bank; not human-verified.

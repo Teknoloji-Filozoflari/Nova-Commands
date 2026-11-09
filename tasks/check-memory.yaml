@@ -26,6 +26,9 @@ implementations:
     risk: safe
     shell: bash
     privilege: none
+    explanation:
+      tr: RAM/swap özeti.
+      en: RAM/swap summary.
   operating_systems:
   - linux
   platforms:
@@ -40,6 +43,9 @@ implementations:
     risk: safe
     shell: bash
     privilege: none
+    explanation:
+      tr: 2 sn arayla 5 örnek.
+      en: 5 samples every 2s.
   platforms:
   - linux
   - macos
@@ -55,6 +61,9 @@ implementations:
     risk: safe
     shell: powershell
     privilege: none
+    explanation:
+      tr: Ürün adı, OS sürümü ve işlemci özetini seçer.
+      en: Selects product name, OS version, and CPU summary.
   operating_systems:
   - windows
   platforms:

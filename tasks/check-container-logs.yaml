@@ -26,6 +26,9 @@ implementations:
     risk: safe
     shell: bash
     privilege: none
+    explanation:
+      tr: Konteyner günlüklerini takip eder.
+      en: Follows container logs.
   platforms:
   - linux
   - macos

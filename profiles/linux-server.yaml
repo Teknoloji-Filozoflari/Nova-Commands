@@ -35,6 +35,28 @@ related_commands:
 - pacman
 - apt
 - dnf
+- dig
+- host
+- resolvectl
+- ping
+- curl
+- mtr
+- traceroute
+- ifconfig
+- networksetup
+- ipconfig
+- nmcli
+- route
+- netstat-bsd
+- netsh
+- wget
+- scp
+- rsync
+- sftp
+- find
+- lscpu
+- lspci
+- lsusb
 related_tasks:
 - show-local-ip
 - check-disk-space
@@ -46,6 +68,14 @@ related_tasks:
 - check-open-ports
 - check-memory
 - list-running-processes
+- check-dns
+- check-internet-connectivity
+- inspect-network-interfaces
+- inspect-routing-table
+- show-public-ip
+- transfer-files-ssh
+- find-files
+- list-hardware
 tags:
 - server
 - linux

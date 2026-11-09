@@ -6,6 +6,13 @@ Dates are UTC merge days when known. Digests are `metadata/manifest.json`
 
 ## Unreleased
 
+- Komut Rehberi IA content fill (Nova #58): start-safe concept `related_commands`,
+  task safe examples + bank-sourced explanations, profile↔task wiring for orphan
+  network/SSH tasks, five new tasks from existing bank examples
+  (`find-files`, `compress-archive`, `extract-archive`, `list-hardware`,
+  `clone-git-repo`), plus `metadata/start-curriculum.yaml`.
+  Bank: **256** commands · **20** concepts · **26** tasks · **13** profiles;
+  `content_sha256=ee1e5d186bdc7885cd18b945446a2d34673c7f7499d08f7da165fc011d5ae4db`.
 - Faz 11 documentation: `README.tr.md`, `docs/ROADMAP.md`,
   `docs/SECURITY_MODEL.md`; PLATFORM_SUPPORT / SCHEMA_MIGRATION_V2 / README
   aligned with post-#23 `main`. No catalog YAML or digest change intended.
