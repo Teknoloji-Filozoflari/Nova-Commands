@@ -1,0 +1,88 @@
+schema_version: 2
+kind: task
+id: security-check-docker
+name:
+  tr: 6) Docker / konteyner yüzeyi
+  en: 6) Docker / container surface
+summary:
+  tr: Çalışan konteynerler, yayınlanan portlar, privileged bayrakları — yoksa na.
+  en: Running containers, published ports, privileged flags — na if absent.
+description:
+  tr: |-
+    Neden: docker.sock / privileged / host network host ile eşdeğer risk taşıyabilir.
+
+    Kontrol listesi durumları (Nova yerel): unchecked / ok / review / na.
+    Örnekler belgeleme içindir — otomatik çalışmaz.
+
+    İsteğe bağlı düzeltme: Gereksiz privileged kaldırın; compose/stack yedeği alın; rolling restart ile doğrulayın. Kör docker rm -f üretimde tehlikeli.
+  en: |-
+    Why: docker.sock / privileged / host network can equal host-level risk.
+
+    Checklist states (Nova local): unchecked / ok / review / na.
+    Examples are documentation only — never auto-run.
+
+    Optional fix: Remove unnecessary privileged; backup compose/stack; verify with rolling restart. Blind docker rm -f is dangerous in prod.
+category: containers
+tags:
+- security
+- checklist
+- docker
+- containers
+intent:
+  tr:
+  - güvenlik kontrol 6
+  - sunucu güvenlik kontrolü
+  - 6) Docker / konteyner yüzeyi
+  en:
+  - security check 6
+  - server security checklist
+  - 6) Docker / container surface
+implementations:
+- id: linux-docker
+  platforms:
+  - linux
+  shells:
+  - bash
+  commands:
+  - docker
+  - systemctl
+  examples:
+  - command: systemctl is-active docker 2>/dev/null || echo 'docker inactive/na'
+    risk: safe
+    shell: bash
+    privilege: none
+    explanation:
+      tr: Docker yok/kapalıysa checklist na.
+      en: If Docker absent/stopped, mark checklist na.
+  - command: docker ps --format 'table {{.Names}}\t{{.Image}}\t{{.Ports}}\t{{.Status}}'
+    risk: safe
+    shell: bash
+    privilege: user
+    explanation:
+      tr: 'Çalışan konteyner + portlar. Şüpheli: beklenmeyen 0.0.0.0 publish.'
+      en: 'Running containers + ports. Suspicious: unexpected 0.0.0.0 publish.'
+  - command: docker ps -q | xargs -r docker inspect --format '{{.Name}} privileged={{.HostConfig.Privileged}}
+      networkMode={{.HostConfig.NetworkMode}}'
+    risk: safe
+    shell: bash
+    privilege: user
+    explanation:
+      tr: Privileged/host network bayrakları.
+      en: Privileged/host-network flags.
+related_commands:
+- docker
+- docker-compose
+- podman
+- systemctl
+verification:
+  status: draft
+  sources:
+  - docker --help
+  - https://docs.docker.com/engine/reference/commandline/ps/
+  - man 1 systemctl
+  notes: NV-103 sequential security checklist stage 6; read-only diagnostics; not human-verified.
+related_tasks:
+- inspect-container
+- check-container-logs
+- security-check-users-sudo
+- security-check-reverse-proxy-tls

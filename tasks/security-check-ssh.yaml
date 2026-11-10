@@ -1,0 +1,89 @@
+schema_version: 2
+kind: task
+id: security-check-ssh
+name:
+  tr: 3) SSH yüzeyi
+  en: 3) SSH surface
+summary:
+  tr: sshd durumu ve etkili ayarlar — salt okunur; parola auth’u kör kapatma yok.
+  en: sshd status and effective settings — read-only; no blind password-auth disable.
+description:
+  tr: |-
+    Neden: SSH kilidi host’a erişimi keser; önce ikinci oturum ve yedek config gerekir.
+
+    Kontrol listesi durumları (Nova yerel): unchecked / ok / review / na.
+    Örnekler belgeleme içindir — otomatik çalışmaz.
+
+    İsteğe bağlı düzeltme: Yedek: cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak. Değişiklikten sonra sshd -t, systemctl reload, ikinci oturumda doğrula; bozulursa bak’tan geri al. PasswordAuthentication kapatmadan önce anahtar girişini kanıtla.
+  en: |-
+    Why: Locking SSH out cuts host access; need a second session and config backup first.
+
+    Checklist states (Nova local): unchecked / ok / review / na.
+    Examples are documentation only — never auto-run.
+
+    Optional fix: Backup: cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak. After edits: sshd -t, systemctl reload, verify in a second session; restore from bak on failure. Prove key login before disabling PasswordAuthentication.
+category: security
+tags:
+- security
+- checklist
+- ssh
+intent:
+  tr:
+  - güvenlik kontrol 3
+  - sunucu güvenlik kontrolü
+  - 3) SSH yüzeyi
+  en:
+  - security check 3
+  - server security checklist
+  - 3) SSH surface
+implementations:
+- id: linux-sshd
+  platforms:
+  - linux
+  shells:
+  - bash
+  commands:
+  - systemctl
+  - sshd
+  - ss
+  - journalctl
+  examples:
+  - command: systemctl is-active sshd || systemctl is-active ssh
+    risk: safe
+    shell: bash
+    privilege: none
+    explanation:
+      tr: 'Birim adı dağıtıma göre ssh/sshd. Sağlıklı: active. Şüpheli: failed + beklenmeyen restart döngüsü.'
+      en: 'Unit name is ssh/sshd by distro. Healthy: active. Suspicious: failed + unexpected restart loop.'
+  - command: sudo sshd -t && sudo sshd -T | grep -Ei 'passwordauthentication|permitrootlogin|pubkeyauthentication|port
+      '
+    risk: safe
+    shell: bash
+    privilege: elevated
+    explanation:
+      tr: Config test + etkili ayar dökümü (yazmaz).
+      en: Config test + effective settings dump (non-writing).
+  - command: ss -tlnp | grep -E ':22\s|:2222\s' || true
+    risk: safe
+    shell: bash
+    privilege: none
+    explanation:
+      tr: Dinleyen SSH portları (yerel). Port taraması değildir.
+      en: Listening SSH ports (local). Not a port scan.
+related_commands:
+- sshd
+- ssh
+- systemctl
+- journalctl
+- ss
+verification:
+  status: draft
+  sources:
+  - man 8 sshd
+  - man 5 sshd_config
+  - man 1 systemctl
+  notes: NV-103 sequential security checklist stage 3; read-only diagnostics; not human-verified.
+related_tasks:
+- connect-ssh
+- security-check-updates
+- security-check-firewall-ports

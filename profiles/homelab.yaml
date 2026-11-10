@@ -5,8 +5,8 @@ name:
   tr: Homelab sunucu
   en: Homelab server
 summary:
-  tr: 'Ev laboratuvarı: Docker, reverse proxy, yedek, SSH ve temel ağ.'
-  en: 'Home lab: Docker, reverse proxy, backup, SSH, and basic networking.'
+  tr: 'Ev laboratuvarı: Docker, reverse proxy, yedek, SSH, ağ + Sunucu güvenlik kontrolü aşamaları.'
+  en: 'Home lab: Docker, reverse proxy, backup, SSH, networking + Server security checklist stages.'
 verification:
   status: draft
   sources:
@@ -62,7 +62,18 @@ related_tasks:
 - clone-git-repo
 - find-files
 - list-hardware
+- security-check-os-accounts
+- security-check-updates
+- security-check-ssh
+- security-check-firewall-ports
+- security-check-users-sudo
+- security-check-docker
+- security-check-reverse-proxy-tls
+- security-check-dns-vpn
+- security-check-backup-restore
+- security-check-logs-incident
 tags:
 - homelab
 - server
 - self-hosted
+- security-checklist

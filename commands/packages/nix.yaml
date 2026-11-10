@@ -121,10 +121,14 @@ intent:
   - nix kur
   - nix flake
   - nix search
+  - nix profile
+  - nixos değil
   en:
   - nix profile install
   - nix flake
   - nix search
+  - nix profile
+  - not nixos
 verification:
   status: draft
   sources:
@@ -140,3 +144,6 @@ nova:
   - nix-guix
   ui_priority: 70
   favorite_eligible: true
+purpose:
+  tr: Nix paket yöneticisi — NixOS değildir; macOS/Linux’ta da çalışır.
+  en: Nix package manager — not NixOS; also runs on other Linux and macOS.

@@ -99,9 +99,13 @@ intent:
   tr:
   - rpm sorgu
   - rpm paket
+  - rpm -qa
+  - rpm dosya sahibi
   en:
   - rpm query
   - rpm package
+  - rpm -qa
+  - rpm file owner
 verification:
   status: reviewed
   sources:
@@ -113,3 +117,6 @@ nova:
   - packages
   - package-managers
   - package-managers-comparison
+purpose:
+  tr: RPM paket sorgusu (dnf alt katmanı).
+  en: RPM package queries (layer under dnf).

@@ -75,9 +75,12 @@ intent:
   tr:
   - fedora paket kur
   - dnf güncelle
+  - dnf search
+  - fedora güncelle
   en:
   - dnf install
   - fedora upgrade
+  - dnf search
 verification:
   status: reviewed
   sources:
@@ -89,3 +92,6 @@ nova:
   - packages
   - package-managers
   - package-managers-comparison
+purpose:
+  tr: Fedora/RHEL ailesi paket yöneticisi.
+  en: Fedora/RHEL-family package manager.

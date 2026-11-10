@@ -1,0 +1,121 @@
+schema_version: 2
+id: tmux
+name: tmux
+kind: executable
+category: shell
+summary:
+  tr: Terminal çoklayıcı (oturum/pencere/panel).
+  en: Terminal multiplexer (sessions/windows/panes).
+description:
+  tr: Kalıcı terminal oturumları; SSH kopsa bile iş sürer. Sunucu bakımında screen alternatifidir.
+  en: Persistent terminal sessions that survive SSH drops. Common screen alternative for server work.
+tags:
+- shell
+- sessions
+- server
+risk: safe
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+operating_systems:
+- linux
+- macos
+package_refs:
+- manager: pacman
+  package: tmux
+  distributions:
+  - arch
+- manager: apt
+  package: tmux
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: tmux
+  distributions:
+  - fedora
+- manager: homebrew
+  package: tmux
+packages:
+  arch: tmux
+  debian: tmux
+  ubuntu: tmux
+  fedora: tmux
+install_notes:
+  tr: 'Arch: pacman -S tmux'
+  en: 'Arch: pacman -S tmux'
+flags:
+- flag: -V
+  meaning:
+    tr: Sürüm yazdır.
+    en: Print version.
+  verified: false
+- flag: -L
+  meaning:
+    tr: Soket adı.
+    en: Socket name.
+  verified: false
+  takes_value: true
+  value_name: socket-name
+- flag: -f
+  meaning:
+    tr: Yapılandırma dosyası.
+    en: Config file.
+  verified: false
+  takes_value: true
+  value_name: file
+examples:
+- title:
+    tr: Yeni oturum
+    en: New session
+  command: tmux new -s ops
+  explanation:
+    tr: ops adlı oturum açar.
+    en: Creates session named ops.
+  risk: safe
+  privilege: user
+- title:
+    tr: Listele
+    en: List
+  command: tmux ls
+  explanation:
+    tr: Oturumları listeler.
+    en: Lists sessions.
+  risk: safe
+  privilege: none
+- title:
+    tr: Bağlan
+    en: Attach
+  command: tmux attach -t ops
+  explanation:
+    tr: ops oturumuna bağlanır.
+    en: Attaches to session ops.
+  risk: safe
+  privilege: user
+related:
+- ssh
+- bash
+- zsh
+intent:
+  tr:
+  - tmux oturum
+  - terminal çoklayıcı
+  - ssh kalıcı
+  en:
+  - tmux session
+  - terminal multiplexer
+  - persistent ssh
+verification:
+  status: draft
+  sources:
+  - tmux -V
+  - tmux --help
+  - man 1 tmux
+  notes: Agent-authored 2026-11-10 from tmux usage/help.
+nova:
+  favorite_eligible: true
+  ui_priority: 75
+  concepts:
+  - terminal-basics

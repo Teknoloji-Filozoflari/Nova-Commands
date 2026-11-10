@@ -1,0 +1,104 @@
+schema_version: 2
+id: last
+name: last
+kind: executable
+category: users
+summary:
+  tr: Son oturum açma kayıtlarını gösterir.
+  en: Show recent login history.
+description:
+  tr: wtmp (veya eşdeğeri) üzerinden geçmiş oturumları listeler. Başarısız denemeler için lastb ayrıdır.
+  en: Lists past logins from wtmp (or equivalent). Failed attempts use lastb separately.
+tags:
+- users
+- sessions
+- security
+- audit
+risk: safe
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+operating_systems:
+- linux
+- macos
+package_refs:
+- manager: pacman
+  package: util-linux
+  distributions:
+  - arch
+- manager: apt
+  package: util-linux
+  distributions:
+  - debian
+  - ubuntu
+flags:
+- flag: -n
+  meaning:
+    tr: Kaç satır.
+    en: How many lines.
+  verified: false
+  long: --limit
+  takes_value: true
+  value_name: number
+- flag: -a
+  meaning:
+    tr: Host adını sonda göster.
+    en: Display hostname in last column.
+  verified: false
+  long: --hostlast
+- flag: -i
+  meaning:
+    tr: IP sayısal göster.
+    en: Show IP in numeric form.
+  verified: false
+  long: --ip
+- flag: -F
+  meaning:
+    tr: Tam zaman damgaları.
+    en: Full login/logout timestamps.
+  verified: false
+  long: --fulltimes
+examples:
+- title:
+    tr: Son 20
+    en: Last 20
+  command: last -n 20
+  explanation:
+    tr: Son 20 oturum kaydı.
+    en: Last 20 login records.
+  risk: safe
+  privilege: none
+- title:
+    tr: Kullanıcı
+    en: User
+  command: last alice
+  explanation:
+    tr: alice oturum geçmişi.
+    en: Login history for alice.
+  risk: safe
+  privilege: none
+related:
+- who
+- journalctl
+- id
+intent:
+  tr:
+  - son girişler
+  - login geçmişi
+  - last
+  en:
+  - recent logins
+  - login history
+  - last
+verification:
+  status: draft
+  sources:
+  - last --help
+  - man 1 last
+  notes: Agent-authored 2026-11-10 from last --help.
+nova:
+  concepts:
+  - permissions
+  - debugging

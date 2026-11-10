@@ -7,8 +7,10 @@ summary:
   tr: Ağ aygıtları, adresler ve rotaları yönetir.
   en: Show and manipulate routing, devices, and tunnels.
 description:
-  tr: Eski ifconfig yerine modern iproute2 aracı.
-  en: Modern iproute2 tool replacing much of ifconfig.
+  tr: iproute2 ailesi. Okuma alt komutları (addr/link/route) genellikle root istemez; addr add/del ve
+    link set yazma işlemleri tehlikelidir ve dağıtıma özgü kalıcılık (netplan/NetworkManager) ister.
+  en: iproute2 family. Read subcommands (addr/link/route) usually need no root; addr add/del and link
+    set are dangerous and persistence is distro-specific (netplan/NetworkManager).
 tags:
 - network
 risk: dangerous
@@ -39,16 +41,47 @@ package_refs:
 install_notes:
   tr: 'Arch: pacman -S iproute2'
   en: 'Arch: pacman -S iproute2'
-flags: []
+flags:
+- flag: addr
+  meaning:
+    tr: Adres nesneleri (alt komut).
+    en: Address objects (subcommand).
+  verified: false
+- flag: link
+  meaning:
+    tr: Ağ aygıtları (alt komut).
+    en: Network devices (subcommand).
+  verified: false
+- flag: route
+  meaning:
+    tr: Yönlendirme tablosu (alt komut).
+    en: Routing table (subcommand).
+  verified: false
+- flag: -br
+  meaning:
+    tr: Kısa özet çıktı.
+    en: Brief output.
+  verified: false
+- flag: '-4'
+  meaning:
+    tr: Yalnız IPv4.
+    en: IPv4 only.
+  verified: false
+- flag: '-6'
+  meaning:
+    tr: Yalnız IPv6.
+    en: IPv6 only.
+  verified: false
 examples:
 - title:
     tr: Adresler
     en: Addresses
-  command: ip addr
+  command: ip -br addr
   explanation:
-    tr: Arayüz adreslerini listeler.
-    en: Lists interface addresses.
+    tr: Kısa arayüz/adres özeti.
+    en: Brief interface/address summary.
   risk: safe
+  privilege: none
   requires_elevated: false
 - title:
     tr: Rota
@@ -58,33 +91,45 @@ examples:
     tr: Yönlendirme tablosu.
     en: Routing table.
   risk: safe
+  privilege: none
   requires_elevated: false
 - title:
-    tr: Link durumu
-    en: Link state
+    tr: Link
+    en: Link
   command: ip link
   explanation:
-    tr: Ağ arayüzlerini listeler.
-    en: Lists network interfaces.
+    tr: Ağ arayüzleri.
+    en: Network interfaces.
   risk: safe
+  privilege: none
   requires_elevated: false
 related:
 - ss
 - ping
+- nmcli
+- ifconfig
 intent:
   tr:
   - ip adresi gör
   - ağ arayüzü
+  - rota tablosu
+  - iproute2
   en:
   - show ip address
   - list interfaces
+  - routing table
+  - iproute2
 verification:
   status: reviewed
   sources:
   - man 8 ip
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-bootstrap
+  notes: Flags marked unverified 2026-11-10; sourced from man 8 ip knowledge.
 nova:
   concepts:
   - networking
   - networking-basics
+purpose:
+  tr: 'Linux ağ yığınına bakış: adres, link, rota (iproute2).'
+  en: 'Inspect the Linux network stack: address, link, route (iproute2).'

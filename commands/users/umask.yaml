@@ -1,0 +1,99 @@
+schema_version: 2
+id: umask
+name: umask
+kind: shell_builtin
+category: users
+summary:
+  tr: Dosya oluşturma izin maskesi.
+  en: File-creation mode mask.
+description:
+  tr: Yeni dosya/dizinlerin varsayılan izinlerinden çıkarılacak bitleri ayarlar veya gösterir. bash yerleşiğidir;
+    harici ikili olmayabilir.
+  en: Sets or displays bits cleared from default modes of new files/directories. A shell builtin; may
+    be absent from PATH discovery.
+purpose:
+  tr: Güvenli varsayılan izinleri anlamak; 0022/0077 farkını öğretmek.
+  en: Teach safe default permissions; contrast 0022 vs 0077.
+tags:
+- permissions
+- shell
+- security
+risk: caution
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+operating_systems:
+- linux
+- macos
+shells:
+- bash
+- zsh
+- sh
+flags:
+- flag: -S
+  meaning:
+    tr: Sembolik çıktı.
+    en: Symbolic output.
+  verified: false
+- flag: -p
+  meaning:
+    tr: Yeniden kullanılabilir çıktı biçimi.
+    en: Reusable output form.
+  verified: false
+examples:
+- title:
+    tr: Göster
+    en: Show
+  command: umask
+  explanation:
+    tr: Sekizlik maskeyi yazdırır.
+    en: Prints octal mask.
+  risk: safe
+  privilege: none
+- title:
+    tr: Sembolik
+    en: Symbolic
+  command: umask -S
+  explanation:
+    tr: u=rwx,g=rx,o=rx gibi sembolik yazar.
+    en: Prints symbolic form like u=rwx,g=rx,o=rx.
+  risk: safe
+  privilege: none
+- title:
+    tr: Sıkı maske
+    en: Strict mask
+  command: umask 077
+  explanation:
+    tr: Yeni dosyalarda grup/other kapalı (oturum).
+    en: New files deny group/other (session).
+  risk: caution
+  privilege: user
+  warnings:
+  - tr: Yalnız geçerli kabuk oturumunu etkiler; kalıcı için profil dosyası gerekir.
+    en: Affects only this shell session; persist via shell profile.
+related:
+- chmod
+- bash
+- stat
+intent:
+  tr:
+  - umask gör
+  - varsayılan izin
+  - dosya maskesi
+  en:
+  - show umask
+  - default permissions
+  - file creation mask
+verification:
+  status: draft
+  sources:
+  - bash help umask
+  - man 2 umask
+  notes: Agent-authored 2026-11-10 from bash help umask.
+nova:
+  concepts:
+  - permissions
+  - terminal-basics
+  - shell-builtin

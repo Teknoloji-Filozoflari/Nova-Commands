@@ -36,23 +36,23 @@ dürüstlüğü digest’i güncelleyebilir.
 
 | Metrik | Değer |
 |--------|------:|
-| Komut | **256** |
-| Konsept makalesi | **20** |
-| Görev (`tasks/`) | **26** (hepsi `draft`) |
-| Profil (`profiles/`) | **13** (hepsi `draft`) |
-| Arama girdisi | **315** |
+| Komut | **267** |
+| Konsept makalesi | **21** |
+| Görev (`tasks/`) | **36** (hepsi `draft`) |
+| Profil (`profiles/`) | **14** (hepsi `draft`) |
+| Arama girdisi | **338** |
 | OS kaydı | **11** |
 | Paket yöneticisi kaydı | **60** |
 | `schema_version` | **2** |
-| `verification` (komut) | verified **26** / reviewed **105** / draft **125** |
-| `verification` (konsept) | reviewed **1** / draft **19** (sahte `verified` yok) |
-| `content_sha256` | `e17437d67113603c4e7e7cd46b7b5ad1ebb1043d032b4a38b651c3cd189b8169` |
+| `verification` (komut) | verified **26** / reviewed **105** / draft **136** |
+| `verification` (konsept) | reviewed **1** / draft **20** (sahte `verified` yok) |
+| `content_sha256` | `406fe04002c47c592009c71f6d9dbb1f0ec7c9faa6c19165f58bebe29265b716` |
 
 ```mermaid
-pie title Komut verification.status (256)
+pie title Komut verification.status (267)
   "verified" : 26
   "reviewed" : 105
-  "draft" : 125
+  "draft" : 136
 ```
 
 Kayıt defterinde bir OS/PM id’si olması, o platformda her komutun doğrulandığı

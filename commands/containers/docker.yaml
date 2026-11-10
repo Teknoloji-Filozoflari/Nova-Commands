@@ -7,14 +7,18 @@ summary:
   tr: Docker konteyner CLI.
   en: Docker container CLI.
 description:
-  tr: Docker Engine ile konteyner ve imaj yönetimi. Paket adı dağıtıma göre değişir.
-  en: Manage containers/images with Docker Engine. Package names vary by distro.
+  tr: Docker Engine CLI. docker grubundaki kullanıcı root’a yakın güçtedir. Paket adları dağıtıma göre
+    değişir; Arch’ta pacman -S docker.
+  en: Docker Engine CLI. Membership in the docker group is near-root power. Package names vary by distro;
+    on Arch use pacman -S docker.
 tags:
 - containers
 risk: dangerous
 requires_elevated: false
 platforms:
 - linux
+- macos
+- windows
 operating_systems:
 - linux
 packages:
@@ -88,17 +92,22 @@ examples:
     en: Stops a running container.
   risk: caution
 related:
-- podman
 - docker-compose
+- podman
+- nerdctl
+- systemctl
+- journalctl
 intent:
   tr:
-  - docker konteyner
   - docker ps
+  - konteyner listele
   - docker imaj
+  - konteyner log
   en:
-  - docker containers
   - docker ps
+  - list containers
   - docker images
+  - container logs
 verification:
   status: draft
   sources:
@@ -107,3 +116,36 @@ verification:
 nova:
   concepts:
   - containers
+purpose:
+  tr: Konteyner/imaj gözlemi ve yönetimi; güvenlik kontrolünde ps/images/inspect salt okunur.
+  en: Container/image observation and management; security checks prefer read-only ps/images/inspect.
+flags:
+- flag: ps
+  meaning:
+    tr: Konteyner listele (alt komut).
+    en: List containers (subcommand).
+  verified: false
+- flag: images
+  meaning:
+    tr: İmaj listele (alt komut).
+    en: List images (subcommand).
+  verified: false
+- flag: inspect
+  meaning:
+    tr: Nesne JSON ayrıntısı (alt komut).
+    en: Object JSON details (subcommand).
+  verified: false
+- flag: logs
+  meaning:
+    tr: Konteyner günlükleri (alt komut).
+    en: Container logs (subcommand).
+  verified: false
+- flag: -a
+  meaning:
+    tr: 'ps: durmuşlar dahil.'
+    en: 'ps: include stopped.'
+  verified: false
+security:
+  notes:
+    tr: Privileged/host-network konteynerler host’u zayıflatır; publish edilen portları gözden geçirin.
+    en: Privileged/host-network containers weaken the host; review published ports.

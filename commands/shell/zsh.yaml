@@ -1,0 +1,119 @@
+schema_version: 2
+id: zsh
+name: zsh
+kind: executable
+category: shell
+summary:
+  tr: Z shell — güçlü etkileşimli kabuk.
+  en: Z shell — powerful interactive shell.
+description:
+  tr: macOS’ta varsayılan etkileşimli kabuk (Catalina+). Linux’ta pacman/apt/dnf ile kurulur. Bash ile
+    sözdizimi benzer ama tamamlanma/ayarlar farklıdır; betikleri karıştırmayın.
+  en: Default interactive shell on macOS (Catalina+). Installable on Linux via pacman/apt/dnf. Bash-like
+    syntax but completion/config differ — do not mix scripts blindly.
+purpose:
+  tr: Etkileşimli günlük kullanım ve zsh betikleri; macOS admin işleri için birincil kabuk.
+  en: Daily interactive use and zsh scripts; primary shell for many macOS admin tasks.
+tags:
+- shell
+- zsh
+- macos
+risk: safe
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+operating_systems:
+- linux
+- macos
+shells:
+- zsh
+package_refs:
+- manager: pacman
+  package: zsh
+  distributions:
+  - arch
+- manager: apt
+  package: zsh
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: zsh
+  distributions:
+  - fedora
+- manager: homebrew
+  package: zsh
+packages:
+  arch: zsh
+  debian: zsh
+  ubuntu: zsh
+  fedora: zsh
+install_notes:
+  tr: 'Arch: pacman -S zsh. macOS’ta genellikle /bin/zsh vardır.'
+  en: 'Arch: pacman -S zsh. macOS usually ships /bin/zsh.'
+flags:
+- flag: -l
+  meaning:
+    tr: Login kabuğu.
+    en: Login shell.
+  verified: false
+- flag: -c
+  meaning:
+    tr: Dizeyi komut olarak çalıştır.
+    en: Run commands from a string.
+  verified: false
+  takes_value: true
+  value_name: string
+- flag: -i
+  meaning:
+    tr: Etkileşimli kabuk zorla.
+    en: Force interactive shell.
+  verified: false
+examples:
+- title:
+    tr: Sürüm
+    en: Version
+  command: zsh --version
+  explanation:
+    tr: Kurulu zsh sürümü.
+    en: Installed zsh version.
+  risk: safe
+  privilege: none
+- title:
+    tr: Komut dizesi
+    en: Command string
+  command: zsh -c 'echo $ZSH_VERSION'
+  explanation:
+    tr: Sürüm değişkenini yazdırır.
+    en: Prints the version variable.
+  risk: safe
+  privilege: none
+related:
+- bash
+- cd
+- export
+- history
+intent:
+  tr:
+  - zsh kabuğu
+  - macos kabuk
+  - z shell
+  en:
+  - zsh shell
+  - macos shell
+  - z shell
+verification:
+  status: draft
+  sources:
+  - man 1 zsh
+  - https://zsh.sourceforge.io/Doc/
+  notes: Agent-authored 2026-11-10; zsh binary absent on builder — flags unverified.
+nova:
+  favorite_eligible: true
+  ui_priority: 85
+  concepts:
+  - terminal-basics
+  - shell-builtin
+  - path

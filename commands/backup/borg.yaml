@@ -22,7 +22,27 @@ platforms:
 operating_systems:
 - linux
 - macos
-flags: []
+flags:
+- flag: list
+  meaning:
+    tr: Arşiv/repo listele (alt komut).
+    en: List archives/repo (subcommand).
+  verified: false
+- flag: info
+  meaning:
+    tr: Repo/arşiv bilgisi (alt komut).
+    en: Repo/archive info (subcommand).
+  verified: false
+- flag: check
+  meaning:
+    tr: Bütünlük kontrolü (alt komut).
+    en: Integrity check (subcommand).
+  verified: false
+- flag: create
+  meaning:
+    tr: Yedek oluştur (alt komut).
+    en: Create archive (subcommand).
+  verified: false
 examples:
 - title:
     tr: Sürüm
@@ -43,10 +63,12 @@ examples:
 intent:
   tr:
   - borg yedek
-  - borgbackup
+  - borg list
+  - arşiv listele
   en:
   - borg backup
-  - borgbackup
+  - borg list
+  - list archives
 verification:
   status: draft
   sources:

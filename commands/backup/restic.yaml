@@ -26,7 +26,35 @@ operating_systems:
 - linux
 - macos
 - windows
-flags: []
+flags:
+- flag: -r
+  meaning:
+    tr: Repo yolu/URL.
+    en: Repository path/URL.
+  verified: false
+  long: --repo
+  takes_value: true
+  value_name: REPO
+- flag: snapshots
+  meaning:
+    tr: Snapshot listele (alt komut).
+    en: List snapshots (subcommand).
+  verified: false
+- flag: backup
+  meaning:
+    tr: Yedek al (alt komut).
+    en: Create backup (subcommand).
+  verified: false
+- flag: check
+  meaning:
+    tr: Repo bütünlüğü (alt komut).
+    en: Check repo integrity (subcommand).
+  verified: false
+- flag: restore
+  meaning:
+    tr: Geri yükle (alt komut).
+    en: Restore (subcommand).
+  verified: false
 examples:
 - title:
     tr: Sürüm
@@ -36,21 +64,36 @@ examples:
     tr: restic sürümü.
     en: restic version.
   risk: safe
+  privilege: none
 - title:
-    tr: Snapshots (placeholder)
-    en: Snapshots (placeholder)
+    tr: Snapshots
+    en: Snapshots
   command: restic -r /path/to/repo snapshots
   explanation:
     tr: Repo snapshot listesi (RESTIC_PASSWORD gerekir; yol yer tutucu).
-    en: Lists repo snapshots (needs RESTIC_PASSWORD; path is placeholder).
+    en: Lists repo snapshots (needs RESTIC_PASSWORD; path placeholder).
   risk: caution
+  privilege: user
+- title:
+    tr: Check
+    en: Check
+  command: restic -r /path/to/repo check
+  explanation:
+    tr: Repo bütünlük kontrolü (yazmaz; uzun sürebilir).
+    en: Repo integrity check (non-writing; may take time).
+  risk: caution
+  privilege: user
 intent:
   tr:
   - restic yedek
   - şifreli yedek
+  - snapshot listele
+  - yedek doğrula
   en:
   - restic backup
   - encrypted backup
+  - list snapshots
+  - verify backup
 verification:
   status: draft
   sources:

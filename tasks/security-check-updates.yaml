@@ -1,0 +1,149 @@
+schema_version: 2
+kind: task
+id: security-check-updates
+name:
+  tr: 2) Güncellemeler
+  en: 2) Updates
+summary:
+  tr: Bekleyen güvenlik güncellemelerini salt okunur kontrol et (yükseltme zorunlu değil).
+  en: Check pending security updates read-only (upgrade not required).
+description:
+  tr: |-
+    Neden: Eski paketler bilinen CVElerin kapısını açık bırakır; kör full-upgrade bakım penceresi ister.
+
+    Kontrol listesi durumları (Nova yerel): unchecked / ok / review / na.
+    Örnekler belgeleme içindir — otomatik çalışmaz.
+
+    İsteğe bağlı düzeltme: Bakım penceresinde ilgili PM ile yükselt; önce snapshot/backup. NixOS: nixos-rebuild test/switch ayrı kavram — Nix paket kurmak değildir.
+  en: |-
+    Why: Stale packages leave known CVEs open; blind full-upgrade needs a maintenance window.
+
+    Checklist states (Nova local): unchecked / ok / review / na.
+    Examples are documentation only — never auto-run.
+
+    Optional fix: Upgrade in a maintenance window with the matching PM; snapshot/backup first. NixOS: nixos-rebuild test/switch is not “install a package”.
+category: packages
+tags:
+- security
+- checklist
+- updates
+- packages
+intent:
+  tr:
+  - güvenlik kontrol 2
+  - sunucu güvenlik kontrolü
+  - 2) Güncellemeler
+  en:
+  - security check 2
+  - server security checklist
+  - 2) Updates
+implementations:
+- id: arch-check
+  platforms:
+  - linux
+  distributions:
+  - arch
+  shells:
+  - bash
+  commands:
+  - pacman
+  examples:
+  - command: checkupdates || pacman -Qu
+    risk: safe
+    shell: bash
+    privilege: none
+    explanation:
+      tr: 'Bekleyen yükseltmeler (checkupdates pacman-contrib). Sağlıklı: kısa/boş liste. Şüpheli: uzun
+        kritik listesi.'
+      en: 'Pending upgrades (checkupdates from pacman-contrib). Healthy: short/empty. Suspicious: long
+        critical list.'
+  notes:
+    tr: Kurulum/yükseltme yapmaz; Arch tercihli kontrol.
+    en: Does not install/upgrade; Arch-preferred check.
+- id: debian-check
+  platforms:
+  - linux
+  distributions:
+  - debian
+  - ubuntu
+  shells:
+  - bash
+  commands:
+  - apt
+  examples:
+  - command: apt list --upgradable 2>/dev/null | head
+    risk: safe
+    shell: bash
+    privilege: none
+    explanation:
+      tr: Yükseltilebilir paket önizlemesi (yazmaz).
+      en: Upgradable package preview (non-writing).
+- id: fedora-check
+  platforms:
+  - linux
+  distributions:
+  - fedora
+  shells:
+  - bash
+  commands:
+  - dnf
+  examples:
+  - command: dnf check-update
+    risk: safe
+    shell: bash
+    privilege: none
+    explanation:
+      tr: Güncelleme listesi; çıkış 100 = güncelleme var (dnf).
+      en: Update list; exit 100 means updates available (dnf).
+- id: windows-winget
+  platforms:
+  - windows
+  shells:
+  - powershell
+  commands:
+  - winget
+  examples:
+  - command: winget upgrade
+    risk: safe
+    shell: powershell
+    privilege: none
+    explanation:
+      tr: Yükseltilebilir kanat paketleri listeler (uygulamaz).
+      en: Lists upgradable WinGet packages (does not apply).
+- id: macos-softwareupdate
+  platforms:
+  - macos
+  shells:
+  - zsh
+  commands:
+  - softwareupdate
+  examples:
+  - command: softwareupdate --list
+    risk: safe
+    shell: zsh
+    privilege: none
+    explanation:
+      tr: Apple güncelleme listesi (indirmez).
+      en: Apple update list (does not download).
+related_commands:
+- pacman
+- apt
+- dnf
+- rpm
+- nixos-rebuild
+- softwareupdate
+- winget
+- freebsd-update
+verification:
+  status: draft
+  sources:
+  - man 8 pacman
+  - man 8 apt
+  - man 8 dnf
+  - softwareupdate --help
+  - winget upgrade -h
+  notes: NV-103 sequential security checklist stage 2; read-only diagnostics; not human-verified.
+related_tasks:
+- update-system
+- security-check-os-accounts
+- security-check-ssh

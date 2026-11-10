@@ -1,0 +1,87 @@
+schema_version: 2
+kind: task
+id: security-check-backup-restore
+name:
+  tr: 9) Yedek ve geri yükleme tatbikatı
+  en: 9) Backup and restore drill
+summary:
+  tr: Yedek var mı / okunabilir mi — gerçek restore’u kontrollü ortamda planla.
+  en: Do backups exist/read? Plan real restore in a controlled environment.
+description:
+  tr: |-
+    Neden: Alınmayan veya doğrulanmayan yedek felakette işe yaramaz; kör restore üretimi ezer.
+
+    Kontrol listesi durumları (Nova yerel): unchecked / ok / review / na.
+    Örnekler belgeleme içindir — otomatik çalışmaz.
+
+    İsteğe bağlı düzeltme: Drill: boş staging dizine restore → dosya örnekle → üretim yoluna basmadan hash karşılaştır. Başarısızsa yalnız staging’i sil; prod’a dokunma.
+  en: |-
+    Why: Missing/unverified backups fail in disasters; blind restore can wipe production.
+
+    Checklist states (Nova local): unchecked / ok / review / na.
+    Examples are documentation only — never auto-run.
+
+    Optional fix: Drill: restore to empty staging → sample files → compare hashes before touching prod. On failure, delete staging only; do not touch prod.
+category: backup
+tags:
+- security
+- checklist
+- backup
+intent:
+  tr:
+  - güvenlik kontrol 9
+  - sunucu güvenlik kontrolü
+  - 9) Yedek ve geri yükleme tatbikatı
+  en:
+  - security check 9
+  - server security checklist
+  - 9) Backup and restore drill
+implementations:
+- id: restic-check
+  platforms:
+  - linux
+  - macos
+  shells:
+  - bash
+  commands:
+  - restic
+  examples:
+  - command: restic version
+    risk: safe
+    shell: bash
+    privilege: none
+    explanation:
+      tr: Araç var mı. Yoksa na veya başka yedek yolunu kaydet.
+      en: Is the tool present? Else na or document another backup path.
+  - command: restic -r /path/to/repo snapshots
+    risk: caution
+    shell: bash
+    privilege: user
+    explanation:
+      tr: 'Snapshot listesi (parola gerekir; yol yer tutucu). Sağlıklı: taze snapshot.'
+      en: 'Snapshot list (needs password; path placeholder). Healthy: fresh snapshot.'
+  - command: restic -r /path/to/repo check
+    risk: caution
+    shell: bash
+    privilege: user
+    explanation:
+      tr: Repo bütünlüğü (uzun sürebilir; yazmaz).
+      en: Repo integrity (may be slow; non-writing).
+  notes:
+    tr: Örneklerde secret yok. Geri yüklemeyi önce boş dizine deneyin.
+    en: No secrets in examples. Trial-restore into an empty directory first.
+related_commands:
+- restic
+- borg
+- rclone
+- rsync
+verification:
+  status: draft
+  sources:
+  - https://restic.readthedocs.io/
+  - https://borgbackup.readthedocs.io/
+  notes: NV-103 sequential security checklist stage 9; read-only diagnostics; not human-verified.
+related_tasks:
+- backup-directory
+- security-check-dns-vpn
+- security-check-logs-incident

@@ -1,0 +1,78 @@
+schema_version: 2
+kind: profile
+id: server-security-checklist
+name:
+  tr: Sunucu güvenlik kontrolü
+  en: Server security checklist
+summary:
+  tr: Homelab/sunucu için 10 aşamalı salt okunur güvenlik kontrol sırası. Otomatik çalışmaz; durum Nova’da
+    yerel tutulur.
+  en: 10-stage read-only security check sequence for homelab/servers. Never auto-runs; states stay local
+    in Nova.
+description:
+  tr: 'Aşamalar: OS/hesap → güncellemeler → SSH → firewall/portlar → kullanıcılar/sudo → Docker → reverse
+    proxy/TLS → DNS/VPN → yedek/restore drill → loglar/olay. Durumlar: unchecked/ok/review/na. Port taraması/saldırı
+    adımı yok. Password auth/firewall kör kapatma yok.'
+  en: 'Stages: OS/accounts → updates → SSH → firewall/ports → users/sudo → Docker → reverse proxy/TLS
+    → DNS/VPN → backup/restore drill → logs/incident. States: unchecked/ok/review/na. No port-scan/attack
+    steps. No blind password-auth/firewall lockdown.'
+operating_systems:
+- linux
+- macos
+- windows
+server_platforms:
+- docker-engine
+related_commands:
+- uname
+- hostnamectl
+- who
+- last
+- id
+- pacman
+- apt
+- dnf
+- sshd
+- ssh
+- systemctl
+- ss
+- ufw
+- firewall-cmd
+- visudo
+- sudo
+- docker
+- nginx
+- caddy
+- openssl
+- resolvectl
+- dig
+- restic
+- borg
+- journalctl
+- get-service
+- get-nettcpconnection
+- winget
+- softwareupdate
+related_tasks:
+- security-check-os-accounts
+- security-check-updates
+- security-check-ssh
+- security-check-firewall-ports
+- security-check-users-sudo
+- security-check-docker
+- security-check-reverse-proxy-tls
+- security-check-dns-vpn
+- security-check-backup-restore
+- security-check-logs-incident
+tags:
+- security
+- checklist
+- homelab
+- server
+verification:
+  status: draft
+  sources:
+  - docs/SERVER_SECURITY_CHECKLIST.md
+  - concepts/server-security-checklist.yaml
+  - man 8 sshd
+  - man 1 journalctl
+  notes: NV-103 draft guide profile; Nova owns checklist UI state.

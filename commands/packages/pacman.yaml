@@ -105,9 +105,13 @@ intent:
   tr:
   - arch paket kur
   - pacman güncelle
+  - pacman ara
+  - paket sahibi
   en:
   - arch install package
   - pacman upgrade
+  - pacman search
+  - package owns file
 verification:
   status: reviewed
   sources:
@@ -124,3 +128,6 @@ nova:
   - package-managers
   - package-managers-comparison
   - nix-guix
+purpose:
+  tr: Arch Linux birincil paket yöneticisi (Nova tercihi).
+  en: Arch Linux primary package manager (Nova preference).

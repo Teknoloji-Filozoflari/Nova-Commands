@@ -1,0 +1,118 @@
+schema_version: 2
+id: file
+name: file
+kind: executable
+category: filesystem
+summary:
+  tr: Dosya türünü magic ile belirler.
+  en: Determine file type via magic.
+description:
+  tr: İçeriğe bakarak tür/MIME tahmin eder; uzantıya güvenmez. Güvenlik incelemesinde yanlış uzantılı
+    dosyaları ayırt eder.
+  en: Guesses type/MIME from content, not extension. Helps spot mislabeled files during review.
+tags:
+- files
+- forensics
+- mime
+risk: safe
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+operating_systems:
+- linux
+- macos
+package_refs:
+- manager: pacman
+  package: file
+  distributions:
+  - arch
+- manager: apt
+  package: file
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: file
+  distributions:
+  - fedora
+packages:
+  arch: file
+  debian: file
+  ubuntu: file
+  fedora: file
+install_notes:
+  tr: 'Arch: pacman -S file'
+  en: 'Arch: pacman -S file'
+flags:
+- flag: -b
+  meaning:
+    tr: Dosya adı öneki yok.
+    en: Do not prepend filenames.
+  verified: false
+  long: --brief
+- flag: -i
+  meaning:
+    tr: MIME türü.
+    en: Output MIME type strings.
+  verified: false
+  long: --mime
+- flag: -z
+  meaning:
+    tr: Sıkıştırılmış içeriğe bak.
+    en: Look inside compressed files.
+  verified: false
+  long: --uncompress
+examples:
+- title:
+    tr: Tür
+    en: Type
+  command: file /bin/ls
+  explanation:
+    tr: ELF/executable vb. yazar.
+    en: Prints ELF/executable etc.
+  risk: safe
+  privilege: none
+- title:
+    tr: MIME
+    en: MIME
+  command: file -i report.bin
+  explanation:
+    tr: MIME tipini yazar.
+    en: Prints MIME type.
+  risk: safe
+  privilege: none
+- title:
+    tr: Kısa
+    en: Brief
+  command: file -b script.sh
+  explanation:
+    tr: Yalnız tür satırı.
+    en: Type line only.
+  risk: safe
+  privilege: none
+related:
+- stat
+- ls
+- find
+intent:
+  tr:
+  - dosya türü
+  - mime bak
+  - file komutu
+  en:
+  - file type
+  - mime type
+  - file command
+verification:
+  status: draft
+  sources:
+  - file --help
+  - man 1 file
+  notes: Agent-authored 2026-11-10 from file --help.
+nova:
+  concepts:
+  - files
+  - terminal-basics
+  - debugging
