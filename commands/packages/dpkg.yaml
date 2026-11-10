@@ -92,9 +92,13 @@ intent:
   tr:
   - deb kur
   - dpkg sorgu
+  - dpkg -l
+  - paket kim sahip
   en:
   - install deb
   - dpkg query
+  - dpkg -l
+  - which package owns
 verification:
   status: reviewed
   sources:
@@ -106,3 +110,6 @@ nova:
   - packages
   - package-managers
   - package-managers-comparison
+purpose:
+  tr: Debian paket veritabanı sorgusu ve düşük seviye işlemler.
+  en: Debian package database queries and low-level operations.

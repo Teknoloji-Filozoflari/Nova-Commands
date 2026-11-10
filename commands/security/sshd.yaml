@@ -1,0 +1,123 @@
+schema_version: 2
+id: sshd
+name: sshd
+kind: executable
+category: security
+summary:
+  tr: OpenSSH sunucu süreci / yapılandırma testi.
+  en: OpenSSH server daemon / config test.
+description:
+  tr: Uzak kabuk sunucusu. Günlük kullanımda systemctl ile yönetilir; `sshd -t` / `sshd -T` salt okunur
+    yapılandırma testi/dökümü için (yazma yok).
+  en: Remote login server. Usually managed via systemctl; `sshd -t` / `sshd -T` are read-only config test/dump
+    (no writes).
+purpose:
+  tr: SSH güvenlik kontrolünde etkili ayarları okumak; PasswordAuthentication vb. kör kapatma yok.
+  en: Read effective SSH settings during security checks; no blind PasswordAuthentication disable.
+tags:
+- ssh
+- security
+- server
+risk: dangerous
+requires_elevated: true
+platforms:
+- linux
+- macos
+- bsd
+operating_systems:
+- linux
+- macos
+package_refs:
+- manager: pacman
+  package: openssh
+  distributions:
+  - arch
+- manager: apt
+  package: openssh-server
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: openssh-server
+  distributions:
+  - fedora
+packages:
+  arch: openssh
+  debian: openssh-server
+  ubuntu: openssh-server
+  fedora: openssh-server
+install_notes:
+  tr: 'Arch: pacman -S openssh — systemctl enable --now sshd'
+  en: 'Arch: pacman -S openssh — systemctl enable --now sshd'
+flags:
+- flag: -t
+  meaning:
+    tr: Yapılandırmayı test et (çık).
+    en: Test configuration and exit.
+  verified: false
+- flag: -T
+  meaning:
+    tr: Etkili yapılandırmayı yazdır.
+    en: Print effective configuration.
+  verified: false
+- flag: -f
+  meaning:
+    tr: Alternatif config dosyası.
+    en: Alternate config file.
+  verified: false
+  takes_value: true
+  value_name: config
+examples:
+- title:
+    tr: Config test
+    en: Config test
+  command: sudo sshd -t
+  explanation:
+    tr: sshd_config sözdizimini test eder.
+    en: Tests sshd_config syntax.
+  risk: safe
+  requires_elevated: true
+  privilege: elevated
+- title:
+    tr: Etkili ayarlar
+    en: Effective settings
+  command: sudo sshd -T | grep -Ei 'passwordauthentication|permitrootlogin|pubkeyauthentication'
+  explanation:
+    tr: Etkili kimlik ayarlarını salt okur.
+    en: Read-only dump of auth-related settings.
+  risk: safe
+  requires_elevated: true
+  privilege: elevated
+related:
+- ssh
+- ssh-keygen
+- systemctl
+- journalctl
+intent:
+  tr:
+  - sshd yapılandırma
+  - ssh sunucu test
+  - passwordauthentication
+  en:
+  - sshd config
+  - ssh server test
+  - passwordauthentication
+verification:
+  status: draft
+  sources:
+  - man 8 sshd
+  - man 5 sshd_config
+  - https://www.openssh.com/manual.html
+  notes: Agent-authored 2026-11-10; sshd absent on builder — flags unverified against local binary.
+security:
+  notes:
+    tr: PasswordAuthentication/k-firewall değişiklikleri kilitleyebilir; ikinci oturum + yedek şart. Bu
+      banka kör güvenlik sertleştirmesi önermez.
+    en: Changing PasswordAuthentication/firewall can lock you out; keep a second session + backup. This
+      bank does not prescribe blind hardening.
+nova:
+  concepts:
+  - ssh
+  - permissions
+  - networking-basics
+  ui_priority: 80

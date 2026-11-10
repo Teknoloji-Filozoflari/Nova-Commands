@@ -1,0 +1,91 @@
+schema_version: 2
+kind: task
+id: security-check-users-sudo
+name:
+  tr: 5) Kullanıcılar ve sudo
+  en: 5) Users and sudo
+summary:
+  tr: Kimler login/sudo hakkına sahip — salt okunur; sudoers’a kör yazma yok.
+  en: Who can login/sudo — read-only; no blind sudoers writes.
+description:
+  tr: |-
+    Neden: Gereksiz sudo/NOPASSWD yatay hareketi kolaylaştırır; bozuk sudoers kilitleyebilir.
+
+    Kontrol listesi durumları (Nova yerel): unchecked / ok / review / na.
+    Örnekler belgeleme içindir — otomatik çalışmaz.
+
+    İsteğe bağlı düzeltme: visudo ile düzenleyin; -c ile doğrulayın; ikinci root oturumu açık tutun. Hesap silme/userdel bu adımın parçası değil.
+  en: |-
+    Why: Unnecessary sudo/NOPASSWD eases lateral movement; broken sudoers can lock you out.
+
+    Checklist states (Nova local): unchecked / ok / review / na.
+    Examples are documentation only — never auto-run.
+
+    Optional fix: Edit with visudo; verify with -c; keep a second root session. Account deletion/userdel is out of scope here.
+category: security
+tags:
+- security
+- checklist
+- sudo
+- users
+intent:
+  tr:
+  - güvenlik kontrol 5
+  - sunucu güvenlik kontrolü
+  - 5) Kullanıcılar ve sudo
+  en:
+  - security check 5
+  - server security checklist
+  - 5) Users and sudo
+implementations:
+- id: linux-sudo
+  platforms:
+  - linux
+  shells:
+  - bash
+  commands:
+  - getent
+  - id
+  - sudo
+  - visudo
+  - last
+  examples:
+  - command: 'getent passwd | awk -F: ''$3>=1000 {print $1,$3}'''
+    risk: safe
+    shell: bash
+    privilege: none
+    explanation:
+      tr: İnsan kullanıcı adayları (UID≥1000; politika dağıtıma göre).
+      en: Human user candidates (UID≥1000; policy varies by distro).
+  - command: getent group sudo wheel | cat; sudo -l
+    risk: safe
+    shell: bash
+    privilege: user
+    explanation:
+      tr: 'sudo/wheel üyelikleri + kendi sudo hakları. Şüpheli: bilinmeyen NOPASSWD ALL.'
+      en: 'sudo/wheel membership + own sudo rights. Suspicious: unknown NOPASSWD ALL.'
+  - command: sudo visudo -c
+    risk: safe
+    shell: bash
+    privilege: elevated
+    explanation:
+      tr: sudoers sözdizimi kontrolü (yazmaz).
+      en: sudoers syntax check (non-writing).
+related_commands:
+- getent
+- id
+- groups
+- sudo
+- visudo
+- last
+- passwd
+verification:
+  status: draft
+  sources:
+  - man 1 getent
+  - man 8 visudo
+  - man 8 sudo
+  notes: NV-103 sequential security checklist stage 5; read-only diagnostics; not human-verified.
+related_tasks:
+- security-check-firewall-ports
+- security-check-docker

@@ -1,0 +1,123 @@
+schema_version: 2
+id: who
+name: who
+kind: executable
+category: users
+summary:
+  tr: Oturum açmış kullanıcıları listeler.
+  en: Show who is logged on.
+description:
+  tr: utmp üzerinden aktif oturumları gösterir. Güvenlik kontrolünde beklenmeyen oturumları ayırt etmek
+    için.
+  en: Shows active sessions via utmp. Useful in security checks to spot unexpected logins.
+tags:
+- users
+- sessions
+- security
+risk: safe
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+operating_systems:
+- linux
+- macos
+package_refs:
+- manager: pacman
+  package: coreutils
+  distributions:
+  - arch
+- manager: apt
+  package: coreutils
+  distributions:
+  - debian
+  - ubuntu
+packages:
+  arch: coreutils
+  debian: coreutils
+  ubuntu: coreutils
+flags:
+- flag: -a
+  meaning:
+    tr: Tüm ilgili alanlar.
+    en: Same as several detail options.
+  verified: false
+  long: --all
+  platforms:
+  - gnu
+- flag: -b
+  meaning:
+    tr: Son boot zamanı.
+    en: Time of last system boot.
+  verified: false
+  long: --boot
+  platforms:
+  - gnu
+- flag: -H
+  meaning:
+    tr: Sütun başlıkları.
+    en: Print column headings.
+  verified: false
+  long: --heading
+  platforms:
+  - gnu
+- flag: -q
+  meaning:
+    tr: Kullanıcı sayısı özeti.
+    en: Login name count summary.
+  verified: false
+  long: --count
+  platforms:
+  - gnu
+examples:
+- title:
+    tr: Oturumlar
+    en: Sessions
+  command: who
+  explanation:
+    tr: Aktif oturumları listeler.
+    en: Lists active sessions.
+  risk: safe
+  privilege: none
+- title:
+    tr: Başlıkla
+    en: With headings
+  command: who -H
+  explanation:
+    tr: Sütun başlıklı liste.
+    en: List with headings.
+  risk: safe
+  privilege: none
+- title:
+    tr: Boot
+    en: Boot
+  command: who -b
+  explanation:
+    tr: Son açılış zamanı.
+    en: Last boot time.
+  risk: safe
+  privilege: none
+related:
+- last
+- id
+- whoami
+intent:
+  tr:
+  - kim bağlı
+  - oturum listele
+  - who
+  en:
+  - who is logged in
+  - list sessions
+  - who
+verification:
+  status: draft
+  sources:
+  - who --help
+  - man 1 who
+  notes: Agent-authored 2026-11-10 from who --help (GNU).
+nova:
+  concepts:
+  - permissions
+  - terminal-basics

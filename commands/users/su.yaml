@@ -1,0 +1,96 @@
+schema_version: 2
+id: su
+name: su
+kind: executable
+category: users
+summary:
+  tr: Başka kullanıcı kimliğine geç.
+  en: Switch to another user id.
+description:
+  tr: Etkili UID/GID değiştirir. Modern sistemlerde etkileşimli root için sudo tercih edilir; su - login
+    çevresi kurar. Körü körüne root shell açmayın.
+  en: Changes effective UID/GID. Prefer sudo for interactive root on modern systems; su - builds a login
+    environment. Do not open root shells casually.
+tags:
+- users
+- privilege
+- security
+risk: dangerous
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+operating_systems:
+- linux
+- macos
+flags:
+- flag: -l
+  meaning:
+    tr: Login kabuğu.
+    en: Make the shell a login shell.
+  verified: false
+  long: --login
+- flag: -m
+  meaning:
+    tr: Ortamı koru.
+    en: Preserve environment.
+  verified: false
+  long: --preserve-environment
+- flag: -g
+  meaning:
+    tr: Birincil grup.
+    en: Specify primary group.
+  verified: false
+  long: --group
+  takes_value: true
+  value_name: group
+examples:
+- title:
+    tr: Login root
+    en: Login root
+  command: su -
+  explanation:
+    tr: Root login kabuğu (şifre ister).
+    en: Root login shell (prompts for password).
+  risk: dangerous
+  privilege: user
+  warnings:
+  - tr: Root oturumu tüm sistemi etkiler; iş bitince çıkın (exit).
+    en: Root session can affect the whole system; exit when done.
+- title:
+    tr: Kullanıcı
+    en: User
+  command: su - alice
+  explanation:
+    tr: alice login çevresi.
+    en: alice login environment.
+  risk: caution
+  privilege: user
+related:
+- sudo
+- doas
+- passwd
+- id
+intent:
+  tr:
+  - kullanıcı değiştir
+  - su root
+  - kimlik değiştir
+  en:
+  - switch user
+  - su root
+  - change user id
+verification:
+  status: draft
+  sources:
+  - su --help
+  - man 1 su
+  notes: Agent-authored 2026-11-10 from su --help.
+security:
+  notes:
+    tr: Parola argv’de olmaz. sudoers/doas politikası su’dan daha denetlenebilir.
+    en: Never put passwords on argv. sudoers/doas policy is more auditable than ad-hoc su.
+nova:
+  concepts:
+  - permissions

@@ -134,38 +134,8 @@ concepts:
       tr: Bulut
       en: Cloud
     article: cloud
-  - id: kubernetes
+  - id: server-security-checklist
     label:
-      tr: Kubernetes
-      en: Kubernetes
-    article: kubernetes
-  - id: virtualization
-    label:
-      tr: Sanallaştırma
-      en: Virtualization
-    article: virtualization
-  - id: infrastructure-as-code
-    label:
-      tr: Altyapı kodu (IaC)
-      en: Infrastructure as code
-    article: infrastructure-as-code
-  - id: reverse-proxy
-    label:
-      tr: Reverse proxy
-      en: Reverse proxy
-    article: reverse-proxy
-  - id: backup
-    label:
-      tr: Yedekleme
-      en: Backup
-    article: backup
-  - id: databases
-    label:
-      tr: Veritabanları
-      en: Databases
-    article: databases
-  - id: cloud
-    label:
-      tr: Bulut
-      en: Cloud
-    article: cloud
+      tr: Sunucu güvenlik kontrolü
+      en: Server security checklist
+    article: server-security-checklist

@@ -6,6 +6,14 @@ Dates are UTC merge days when known. Digests are `metadata/manifest.json`
 
 ## Unreleased
 
+- NV-103 Komut Rehberi content bank: coverage matrix
+  (`docs/COVERAGE_MATRIX.md`), high-priority command fills/enrichments
+  (shell/users/ops + git/openssl/ip/docker/systemctl/journalctl/PM/SSH),
+  sequential **Sunucu güvenlik kontrolü** (10 `security-check-*` tasks,
+  profile + concept + `docs/SERVER_SECURITY_CHECKLIST.md`). No schema bump;
+  new rows stay `draft` / enrichments keep prior status; examples not executed.
+  Bank: **267** commands · **21** concepts · **36** tasks · **14** profiles;
+  `content_sha256=406fe04002c47c592009c71f6d9dbb1f0ec7c9faa6c19165f58bebe29265b716`.
 - Beginner trust audit: demote agent-authored concept articles that lacked
   human review proof (`reviewed` → `draft`); keep `storage` as the sole
   concept still `reviewed` (`last_reviewed` present). Add bilingual

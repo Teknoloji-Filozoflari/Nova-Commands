@@ -1,0 +1,103 @@
+schema_version: 2
+id: timeout
+name: timeout
+kind: executable
+category: processes
+summary:
+  tr: Komutu süre dolunca sonlandır.
+  en: Run a command with a time limit.
+description:
+  tr: Belirtilen süre sonra sinyalle (varsayılan TERM) komutu durdurur. Takılan ağ/tanılama komutlarında
+    güvenli sınır.
+  en: Stops a command after a duration (default TERM). Useful bound for hanging network/diagnostics.
+tags:
+- process
+- automation
+risk: caution
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+operating_systems:
+- linux
+- macos
+package_refs:
+- manager: pacman
+  package: coreutils
+  distributions:
+  - arch
+- manager: apt
+  package: coreutils
+  distributions:
+  - debian
+  - ubuntu
+packages:
+  arch: coreutils
+  debian: coreutils
+  ubuntu: coreutils
+flags:
+- flag: -k
+  meaning:
+    tr: Sonra KILL gönder.
+    en: Also send KILL after duration.
+  verified: false
+  long: --kill-after
+  takes_value: true
+  value_name: DURATION
+- flag: -s
+  meaning:
+    tr: Gönderilecek sinyal.
+    en: Signal to send on timeout.
+  verified: false
+  long: --signal
+  takes_value: true
+  value_name: SIGNAL
+- flag: -v
+  meaning:
+    tr: Sinyal tanılama çıktısı.
+    en: Diagnose signals to stderr.
+  verified: false
+  long: --verbose
+examples:
+- title:
+    tr: 10 sn ping
+    en: 10s ping
+  command: timeout 10s ping -c 100 1.1.1.1
+  explanation:
+    tr: 10 saniye sonra ping’i keser.
+    en: Stops ping after 10 seconds.
+  risk: caution
+  privilege: none
+- title:
+    tr: KILL yedek
+    en: KILL follow-up
+  command: timeout -k 5s 30s curl -I https://example.com
+  explanation:
+    tr: 30s TERM, gerekirse 5s sonra KILL.
+    en: TERM at 30s, then KILL after 5s more.
+  risk: caution
+  privilege: none
+related:
+- kill
+- ping
+- curl
+intent:
+  tr:
+  - komut zaman aşımı
+  - timeout
+  - süre sınırı
+  en:
+  - command timeout
+  - time limit
+  - timeout
+verification:
+  status: draft
+  sources:
+  - timeout --help
+  - man 1 timeout
+  notes: Agent-authored 2026-11-10 from timeout --help (GNU coreutils).
+nova:
+  concepts:
+  - debugging
+  - terminal-basics

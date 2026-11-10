@@ -81,9 +81,13 @@ intent:
   tr:
   - ubuntu paket kur
   - apt güncelle
+  - apt search
+  - paket yükselt
   en:
   - apt install
   - ubuntu upgrade
+  - apt search
+  - upgrade packages
 verification:
   status: reviewed
   sources:
@@ -95,3 +99,6 @@ nova:
   - packages
   - package-managers
   - package-managers-comparison
+purpose:
+  tr: Debian/Ubuntu paket kurulum ve yükseltme (Arch’ta pacman kullanın).
+  en: Debian/Ubuntu package install/upgrade (use pacman on Arch).

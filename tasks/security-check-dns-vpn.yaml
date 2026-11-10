@@ -1,0 +1,101 @@
+schema_version: 2
+kind: task
+id: security-check-dns-vpn
+name:
+  tr: 8) DNS ve VPN yüzeyi
+  en: 8) DNS and VPN surface
+summary:
+  tr: Çözümleyici / DNS sağlığı; VPN araçları yoksa na (WireGuard bankası ayrı gap).
+  en: Resolver / DNS health; mark VPN na if tooling absent (WireGuard still a gap).
+description:
+  tr: |-
+    Neden: Zehirli/yanlış DNS yönlendirmeyi bozar; VPN kopması yönetim erişimini kesebilir.
+
+    Kontrol listesi durumları (Nova yerel): unchecked / ok / review / na.
+    Örnekler belgeleme içindir — otomatik çalışmaz.
+
+    İsteğe bağlı düzeltme: resolv/NetworkManager yedeği almadan kalıcı DNS değiştirmeyin. VPN kill-switch’i kör açmayın — yönetim yolunu test edin.
+  en: |-
+    Why: Poisoned/wrong DNS breaks routing; VPN failure can cut management access.
+
+    Checklist states (Nova local): unchecked / ok / review / na.
+    Examples are documentation only — never auto-run.
+
+    Optional fix: Do not persistently change DNS without backing up resolv/NetworkManager. Do not blind-enable VPN kill-switches — test management path.
+category: network
+tags:
+- security
+- checklist
+- dns
+- vpn
+intent:
+  tr:
+  - güvenlik kontrol 8
+  - sunucu güvenlik kontrolü
+  - 8) DNS ve VPN yüzeyi
+  en:
+  - security check 8
+  - server security checklist
+  - 8) DNS and VPN surface
+implementations:
+- id: linux-dns
+  platforms:
+  - linux
+  shells:
+  - bash
+  commands:
+  - resolvectl
+  - dig
+  - host
+  examples:
+  - command: resolvectl status 2>/dev/null | sed -n '1,80p' || cat /etc/resolv.conf
+    risk: safe
+    shell: bash
+    privilege: none
+    explanation:
+      tr: 'Etkili DNS sunucuları. Şüpheli: tanınmayan çözümleyici.'
+      en: 'Effective DNS servers. Suspicious: unknown resolvers.'
+  - command: dig +short example.com A || host example.com
+    risk: safe
+    shell: bash
+    privilege: none
+    explanation:
+      tr: Harici çözünürlük duman testi.
+      en: External resolution smoke test.
+  notes:
+    tr: 'VPN: wg/wg-quick henüz bankada gap; varsa yalnızca `wg show` salt okunur düşünün.'
+    en: 'VPN: wg/wg-quick still a bank gap; if present, prefer read-only `wg show`.'
+- id: macos-dns
+  platforms:
+  - macos
+  shells:
+  - zsh
+  commands:
+  - scutil
+  - dig
+  examples:
+  - command: scutil --dns | head -n 40
+    risk: safe
+    shell: zsh
+    privilege: none
+    explanation:
+      tr: macOS DNS yapılandırması özeti.
+      en: macOS DNS configuration summary.
+related_commands:
+- resolvectl
+- dig
+- host
+- nmcli
+- scutil
+verification:
+  status: draft
+  sources:
+  - man 1 resolvectl
+  - man 1 dig
+  - man 8 scutil
+  notes: NV-103 sequential security checklist stage 8; read-only diagnostics; not human-verified.
+related_tasks:
+- check-dns
+- check-internet-connectivity
+- security-check-reverse-proxy-tls
+- security-check-backup-restore

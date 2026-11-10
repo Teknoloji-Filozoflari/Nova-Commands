@@ -39,6 +39,7 @@ commands.
 | `windows-server` | PowerShell services / net / WinGet |
 | `freebsd-server` | pkg / service / sysrc / pfctl |
 | `homelab` / `docker-host` / `kubernetes` | Self-host + containers + k8s |
+| `server-security-checklist` | 10-stage read-only **Sunucu güvenlik kontrolü** (tasks `security-check-*`; Nova-local states) |
 | `web-server` / `database-server` / `nas-server` / `virtualization-host` | Role maps |
 
 ## Safety

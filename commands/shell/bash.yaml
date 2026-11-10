@@ -1,0 +1,131 @@
+schema_version: 2
+id: bash
+name: bash
+kind: executable
+category: shell
+summary:
+  tr: GNU Bourne-Again SHell.
+  en: GNU Bourne-Again SHell.
+description:
+  tr: Etkileşimli kabuk ve betik yorumlayıcısı. Yerleşikler (cd, umask, …) bash içinde çalışır; PATH keşfi
+    bash ikilisini bulsa da yerleşikleri ayrı görmeyebilir.
+  en: Interactive shell and script interpreter. Builtins (cd, umask, …) run inside bash; PATH discovery
+    may find the bash binary without listing builtins.
+purpose:
+  tr: POSIX uyumlu kabuk oturumu ve betik çalıştırma; login vs non-login farkını öğretir.
+  en: Run POSIX-friendly shell sessions and scripts; teach login vs non-login differences.
+tags:
+- shell
+- bash
+risk: safe
+requires_elevated: false
+platforms:
+- linux
+- macos
+- bsd
+operating_systems:
+- linux
+- macos
+shells:
+- bash
+package_refs:
+- manager: pacman
+  package: bash
+  distributions:
+  - arch
+- manager: apt
+  package: bash
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: bash
+  distributions:
+  - fedora
+packages:
+  arch: bash
+  debian: bash
+  ubuntu: bash
+  fedora: bash
+install_notes:
+  tr: 'Arch: pacman -S bash (genelde taban). macOS’ta sistem bash eski olabilir; güncel için brew.'
+  en: 'Arch: pacman -S bash (usually base). macOS system bash may be old; use brew for current.'
+flags:
+- flag: --login
+  meaning:
+    tr: Login kabuğu gibi başlat.
+    en: Start as a login shell.
+  verified: false
+- flag: -c
+  meaning:
+    tr: Dizeyi komut olarak çalıştır.
+    en: Run commands from a string.
+  verified: false
+  takes_value: true
+  value_name: string
+- flag: --norc
+  meaning:
+    tr: Etkileşimde ~/.bashrc okuma.
+    en: Do not read ~/.bashrc in interactive shells.
+  verified: false
+- flag: --posix
+  meaning:
+    tr: POSIX kipine geç.
+    en: Conform to POSIX mode.
+  verified: false
+examples:
+- title:
+    tr: Sürüm
+    en: Version
+  command: bash --version
+  explanation:
+    tr: Kurulu bash sürümü.
+    en: Installed bash version.
+  risk: safe
+  privilege: none
+- title:
+    tr: Komut dizesi
+    en: Command string
+  command: bash -c 'umask -S'
+  explanation:
+    tr: Geçici bash’te umask sembolik yazdırır.
+    en: Prints symbolic umask in a one-shot bash.
+  risk: safe
+  privilege: none
+- title:
+    tr: Login kabuğu
+    en: Login shell
+  command: bash --login
+  explanation:
+    tr: Profil dosyalarını login gibi okur.
+    en: Reads profile files as a login shell.
+  risk: caution
+  privilege: user
+related:
+- zsh
+- cd
+- export
+- history
+- umask
+intent:
+  tr:
+  - bash kabuğu
+  - bash betik
+  - login shell
+  en:
+  - bash shell
+  - bash script
+  - login shell
+verification:
+  status: draft
+  sources:
+  - bash --help
+  - man 1 bash
+  notes: Agent-authored 2026-11-10 from bash --help; not human-verified.
+nova:
+  favorite_eligible: true
+  ui_priority: 88
+  concepts:
+  - terminal-basics
+  - shell-builtin
+  - path

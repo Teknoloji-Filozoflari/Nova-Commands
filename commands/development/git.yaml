@@ -7,8 +7,10 @@ summary:
   tr: Dağıtık sürüm kontrol sistemi.
   en: Distributed version control system.
 description:
-  tr: Kaynak kod geçmişi, dallar ve uzaktan eşitleme.
-  en: Source history, branches, and remote synchronization.
+  tr: Dağıtık sürüm kontrolü. Alt komutlar (status, log, clone, diff, add, commit, push, pull) ayrı man
+    sayfalarına sahiptir. force-push ve reset --hard veri kaybettirebilir.
+  en: Distributed version control. Subcommands (status, log, clone, diff, add, commit, push, pull) have
+    their own manuals. force-push and reset --hard can discard work.
 tags:
 - git
 - vcs
@@ -49,42 +51,102 @@ install_notes:
     Arch: pacman -S git
     Debian/Ubuntu: apt install git
     Fedora: dnf install git
-flags: []
+flags:
+- flag: --version
+  meaning:
+    tr: Sürüm bilgisi.
+    en: Version information.
+  verified: true
+- flag: -C
+  meaning:
+    tr: Komutu başka dizinde çalıştır.
+    en: Run as if started in another directory.
+  verified: true
+  takes_value: true
+  value_name: path
+- flag: status
+  meaning:
+    tr: Çalışma ağacı durumu (alt komut).
+    en: Working tree status (subcommand).
+  verified: true
+- flag: log
+  meaning:
+    tr: Commit geçmişi (alt komut).
+    en: Commit history (subcommand).
+  verified: true
+- flag: clone
+  meaning:
+    tr: Depo kopyala (alt komut).
+    en: Clone a repository (subcommand).
+  verified: true
+- flag: diff
+  meaning:
+    tr: Değişiklikleri göster (alt komut).
+    en: Show changes (subcommand).
+  verified: true
 examples:
 - title:
     tr: Durum
     en: Status
   command: git status
   explanation:
-    tr: Çalışma ağacı durumu.
-    en: Working tree status.
+    tr: İzlenen/izlenmeyen değişiklikler.
+    en: Tracked/untracked changes.
   risk: safe
+  privilege: none
 - title:
     tr: Kısa log
     en: Oneline log
   command: git log --oneline -n 10
   explanation:
-    tr: Son 10 commit.
-    en: Last 10 commits.
+    tr: Son 10 commit özeti.
+    en: Last 10 commits summary.
   risk: safe
+  privilege: none
+- title:
+    tr: Diff
+    en: Diff
+  command: git diff
+  explanation:
+    tr: İndekslenmemiş farklar.
+    en: Unstaged differences.
+  risk: safe
+  privilege: none
 - title:
     tr: Klon
     en: Clone
   command: git clone https://github.com/Teknoloji-Filozoflari/Nova-Commands.git
   explanation:
-    tr: Depoyu klonlar.
-    en: Clones the repository.
+    tr: Depoyu yeni dizine klonlar (ağ).
+    en: Clones repo into a new directory (network).
   risk: caution
+  privilege: user
+- title:
+    tr: Dal listele
+    en: List branches
+  command: git branch -vv
+  explanation:
+    tr: Yerel dallar ve izleme bilgisi.
+    en: Local branches with tracking info.
+  risk: safe
+  privilege: none
 related:
 - diff
 - make
+- gh
 intent:
   tr:
   - git durum
   - commit geçmişi
+  - repo klonla
+  - git diff
+  - dal listele
   en:
   - git status
   - commit history
+  - clone repo
+  - git diff
+  - list branches
 verification:
   status: reviewed
   sources:
@@ -92,8 +154,16 @@ verification:
   - https://git-scm.com/docs
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-bootstrap
+  notes: ' Flags/examples expanded 2026-11-10 from git --help.'
 nova:
   favorite_eligible: true
   ui_priority: 92
   concepts:
   - terminal-basics
+purpose:
+  tr: Kaynak geçmişi, dal ve uzaktan eşitleme; günlük geliştirici iş akışı.
+  en: Source history, branches, and remotes for everyday development workflows.
+security:
+  notes:
+    tr: Token/şifreyi URL veya argv içine yazmayın; credential helper kullanın.
+    en: Do not put tokens/passwords in URLs or argv; use a credential helper.

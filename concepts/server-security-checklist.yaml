@@ -1,0 +1,130 @@
+id: server-security-checklist
+kind: nova-commands-concept
+title:
+  tr: Sunucu güvenlik kontrolü
+  en: Server security checklist
+summary:
+  tr: Homelab/sunucu için 10 aşamalı salt okunur güvenlik kontrol sırası.
+  en: 10-stage read-only security check sequence for homelab/servers.
+difficulty: intermediate
+tags:
+  - security
+  - checklist
+  - homelab
+  - server
+related_commands:
+  - uname
+  - who
+  - last
+  - pacman
+  - apt
+  - dnf
+  - sshd
+  - ssh
+  - systemctl
+  - ss
+  - ufw
+  - firewall-cmd
+  - visudo
+  - sudo
+  - docker
+  - nginx
+  - caddy
+  - openssl
+  - resolvectl
+  - dig
+  - restic
+  - borg
+  - journalctl
+related_concepts:
+  - firewalls
+  - permissions
+  - networking-basics
+  - reverse-proxy
+  - backup
+  - systemd
+see_also:
+  - docs/SERVER_SECURITY_CHECKLIST.md
+  - docs/COVERAGE_MATRIX.md
+  - profiles/server-security-checklist.yaml
+  - https://www.openssh.com/manual.html
+  - https://wiki.archlinux.org/title/Security
+body:
+  tr: |
+    Bu rehber **Komut Bilgi Bankası** içeriğidir; komutları otomatik çalıştırmaz.
+    Nova TUI yerel durum tutar: `unchecked` / `ok` / `review` / `na`.
+
+    Homelab profilindeki güvenlik işleri burada **sıralı 10 aşamaya** dönüştürülmüştür.
+    Her aşamanın tanılama komutları `tasks/security-check-*.yaml` içindedir.
+
+    ### Ortak kurallar
+    - Önce salt okunur teşhis; yazma isteğe bağlı ve uyarılı.
+    - Port tarama / saldırı adımı yok (`nmap` hedef tarama bu rehberde yok).
+    - Password auth veya firewall’ı **kör kapatma/açma yok** — ikinci oturum + yedek + doğrulama şart.
+    - Linux dağıtımları aynı değildir; Arch’ta pacman, Debian’da apt, Fedora’da dnf.
+    - **Nix ≠ NixOS**: paket CLI ile deklaratif sistem `nixos-rebuild` karıştırılmaz.
+
+    ### 10 aşama
+    1. **OS/hesap** — `uname`/`hostnamectl`/`who`/`id` (Windows: `Get-ComputerInfo`).
+    2. **Güncellemeler** — bekleyen paketler (yazmadan listele); yükseltme bakım penceresi ister.
+    3. **SSH** — `systemctl` + `sshd -t`/`-T` + yerel dinleyici; config yedeği olmadan sertleştirme yok.
+    4. **Firewall/portlar** — `ss -tulpn` + ufw/firewalld/pf/netsh durumu; kural silme yok.
+    5. **Kullanıcılar/sudo** — `getent`/`sudo -l`/`visudo -c`; sudoers’a kör yazma yok.
+    6. **Docker** — yoksa `na`; `ps`/`inspect` ile privileged/host-network.
+    7. **Reverse proxy/TLS** — `nginx -t` / `caddy validate` + `openssl s_client` tarihleri.
+    8. **DNS/VPN** — `resolvectl`/`dig`; VPN araçları bankada gap olabilir → `na` veya not.
+    9. **Yedek/restore drill** — `restic snapshots`/`check`; gerçek restore staging’de.
+    10. **Loglar/olay** — `journalctl -p err` + ssh birimi + `last`; log silme yok.
+
+    ### Sağlıklı vs şüpheli (özet)
+    - Sağlıklı: beklenen dinleyiciler, taze yedek, az error log, bilinen sudo üyeleri.
+    - Şüpheli: tanınmayan 0.0.0.0 publish, failed sshd döngüsü, NOPASSWD ALL, süresi dolmuş cert.
+
+    ### İsteğe bağlı düzeltme kalıbı
+    yedek → değişiklik → test (`sshd -t`, `nginx -t`, …) → doğrula → bozulursa geri al.
+
+    Bu makale **draft**’tır; resmi man/wiki kaynaklarına dayanır, insan `verified` değildir.
+  en: |
+    This guide is **command-bank content**; it never auto-runs commands.
+    Nova TUI keeps local states: `unchecked` / `ok` / `review` / `na`.
+
+    Homelab security chores are sequenced here as **10 stages**.
+    Per-stage diagnostics live in `tasks/security-check-*.yaml`.
+
+    ### Shared rules
+    - Read-only diagnostics first; writes are optional and warned.
+    - No port-scan/attack steps (no guided external `nmap` targets).
+    - No **blind** password-auth or firewall lockdown — second session + backup + verify.
+    - Linux distros differ; prefer pacman on Arch, apt on Debian, dnf on Fedora.
+    - **Nix ≠ NixOS**: do not reduce declarative `nixos-rebuild` to “install a package”.
+
+    ### 10 stages
+    1. **OS/accounts** — `uname`/`hostnamectl`/`who`/`id` (Windows: `Get-ComputerInfo`).
+    2. **Updates** — list pending packages without applying; upgrades need a window.
+    3. **SSH** — `systemctl` + `sshd -t`/`-T` + local listener; no hardening without config backup.
+    4. **Firewall/ports** — `ss -tulpn` + ufw/firewalld/pf/netsh status; no rule deletes.
+    5. **Users/sudo** — `getent`/`sudo -l`/`visudo -c`; no blind sudoers writes.
+    6. **Docker** — `na` if absent; `ps`/`inspect` for privileged/host-network.
+    7. **Reverse proxy/TLS** — `nginx -t` / `caddy validate` + `openssl s_client` dates.
+    8. **DNS/VPN** — `resolvectl`/`dig`; VPN tooling may still be a bank gap → `na` or notes.
+    9. **Backup/restore drill** — `restic snapshots`/`check`; real restore in staging.
+    10. **Logs/incident** — `journalctl -p err` + ssh unit + `last`; never wipe logs.
+
+    ### Healthy vs suspicious (short)
+    - Healthy: expected listeners, fresh backups, few errors, known sudo members.
+    - Suspicious: unknown 0.0.0.0 publishes, sshd fail loops, NOPASSWD ALL, expired certs.
+
+    ### Optional fix pattern
+    backup → change → test (`sshd -t`, `nginx -t`, …) → verify → roll back on failure.
+
+    This article is **draft**; based on official man/wiki sources, not human-`verified`.
+verification:
+  status: draft
+  sources:
+    - docs/SERVER_SECURITY_CHECKLIST.md
+    - man 8 sshd
+    - man 1 journalctl
+    - man 8 pacman
+    - https://wiki.archlinux.org/title/Security
+    - https://www.openssh.com/manual.html
+  notes: NV-103 agent-authored guide concept; checklist UI state is Nova-local.

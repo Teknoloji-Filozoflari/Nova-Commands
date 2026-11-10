@@ -1,0 +1,102 @@
+schema_version: 2
+kind: task
+id: security-check-logs-incident
+name:
+  tr: 10) Loglar ve olay müdahalesi
+  en: 10) Logs and incident response
+summary:
+  tr: Auth/servis hatalarını salt okunur tara; kanıtı not et — log silme yok.
+  en: Read-only sweep of auth/service errors; note evidence — no log deletion.
+description:
+  tr: |-
+    Neden: Erken log sinyalleri olayı küçültür; log silmek soruşturmayı bozar ve gizleyebilir.
+
+    Kontrol listesi durumları (Nova yerel): unchecked / ok / review / na.
+    Örnekler belgeleme içindir — otomatik çalışmaz.
+
+    İsteğe bağlı düzeltme: Kanıtı kopyalayın (journalctl > dosya). Servis restart yalnız kök neden anlaşıldıktan sonra. Log truncate/wipe yapmayın.
+  en: |-
+    Why: Early log signals shrink incidents; deleting logs harms investigation and may hide abuse.
+
+    Checklist states (Nova local): unchecked / ok / review / na.
+    Examples are documentation only — never auto-run.
+
+    Optional fix: Copy evidence (journalctl > file). Restart services only after root-cause hypothesis. Do not truncate/wipe logs.
+category: monitoring
+tags:
+- security
+- checklist
+- logs
+- incident
+intent:
+  tr:
+  - güvenlik kontrol 10
+  - sunucu güvenlik kontrolü
+  - 10) Loglar ve olay müdahalesi
+  en:
+  - security check 10
+  - server security checklist
+  - 10) Logs and incident response
+implementations:
+- id: linux-journal
+  platforms:
+  - linux
+  shells:
+  - bash
+  commands:
+  - journalctl
+  - last
+  - dmesg
+  examples:
+  - command: journalctl -p err -b --no-pager | tail -n 50
+    risk: safe
+    shell: bash
+    privilege: none
+    explanation:
+      tr: 'Bu boot error+. Sağlıklı: az/bilinen gürültü. Şüpheli: tekrarlayan auth/segfault.'
+      en: 'Current-boot errors+. Healthy: little/known noise. Suspicious: repeating auth/segfaults.'
+  - command: journalctl -u sshd -n 100 --no-pager 2>/dev/null || journalctl -u ssh -n 100 --no-pager
+    risk: safe
+    shell: bash
+    privilege: none
+    explanation:
+      tr: SSH auth gürültüsü / fail döngüsü.
+      en: SSH auth noise / fail loops.
+  - command: last -n 20
+    risk: safe
+    shell: bash
+    privilege: none
+    explanation:
+      tr: Son oturumlar.
+      en: Recent sessions.
+- id: windows-events
+  platforms:
+  - windows
+  shells:
+  - powershell
+  commands:
+  - get-winevent
+  examples:
+  - command: Get-WinEvent -LogName System -MaxEvents 20
+    risk: safe
+    shell: powershell
+    privilege: none
+    explanation:
+      tr: Son System olayları (silmez).
+      en: Recent System events (non-deleting).
+related_commands:
+- journalctl
+- dmesg
+- last
+- get-winevent
+- wevtutil
+verification:
+  status: draft
+  sources:
+  - man 1 journalctl
+  - man 1 last
+  - Get-Help Get-WinEvent
+  notes: NV-103 sequential security checklist stage 10; read-only diagnostics; not human-verified.
+related_tasks:
+- inspect-system-logs
+- security-check-backup-restore

@@ -1,0 +1,130 @@
+schema_version: 2
+kind: task
+id: security-check-os-accounts
+name:
+  tr: 1) OS ve hesap yüzeyi
+  en: 1) OS and account surface
+summary:
+  tr: Dağıtım/sürüm, hostname ve oturum yüzeyi — salt okunur kimlik tespiti.
+  en: Distro/version, hostname, and session surface — read-only identity.
+description:
+  tr: |-
+    Neden: Yanlış OS/sürüm varsayımı sonraki kontrolleri bozar; beklenmeyen oturumlar risk işaretidir.
+
+    Kontrol listesi durumları (Nova yerel): unchecked / ok / review / na.
+    Örnekler belgeleme içindir — otomatik çalışmaz.
+
+    İsteğe bağlı düzeltme: Yalnız envanter; hesap silme/ekleme bu adımda yok. Yanlış hostname için ikinci onay + dokümantasyon.
+  en: |-
+    Why: Wrong OS/version assumptions break later checks; unexpected sessions are risk signals.
+
+    Checklist states (Nova local): unchecked / ok / review / na.
+    Examples are documentation only — never auto-run.
+
+    Optional fix: Inventory only; no account add/delete here. Hostname changes need second confirmation + docs.
+category: security
+tags:
+- security
+- checklist
+- homelab
+- accounts
+intent:
+  tr:
+  - güvenlik kontrol 1
+  - sunucu güvenlik kontrolü
+  - 1) OS ve hesap yüzeyi
+  en:
+  - security check 1
+  - server security checklist
+  - 1) OS and account surface
+implementations:
+- id: linux-identity
+  platforms:
+  - linux
+  shells:
+  - bash
+  commands:
+  - uname
+  - hostnamectl
+  - whoami
+  - id
+  - who
+  examples:
+  - command: uname -a
+    risk: safe
+    shell: bash
+    privilege: none
+    explanation:
+      tr: 'Çekirdek/arch özeti. Sağlıklı: beklenen kernel. Şüpheli: tanınmayan host/rol.'
+      en: 'Kernel/arch summary. Healthy: expected kernel. Suspicious: unknown host/role.'
+  - command: hostnamectl; whoami; id; who
+    risk: safe
+    shell: bash
+    privilege: none
+    explanation:
+      tr: OS pretty name + kullanıcı + oturumlar.
+      en: OS pretty name + user + sessions.
+  notes:
+    tr: NixOS’ta hostnamectl systemd ile gelir; paket PM ayrıdır.
+    en: On NixOS hostnamectl comes with systemd; PM is separate.
+- id: windows-identity
+  platforms:
+  - windows
+  shells:
+  - powershell
+  operating_systems:
+  - windows
+  commands:
+  - get-computerinfo
+  - whoami
+  examples:
+  - command: Get-ComputerInfo | Select-Object WindowsProductName, OsVersion, CsName
+    risk: safe
+    shell: powershell
+    privilege: none
+    explanation:
+      tr: Ürün/sürüm/bilgisayar adı.
+      en: Product/version/computer name.
+  - command: whoami /all
+    risk: safe
+    shell: cmd
+    privilege: none
+    explanation:
+      tr: Kullanıcı ve grup üyelikleri.
+      en: User and group memberships.
+- id: macos-identity
+  platforms:
+  - macos
+  shells:
+  - zsh
+  commands:
+  - uname
+  - whoami
+  - id
+  - who
+  examples:
+  - command: uname -a; sw_vers; whoami; id; who
+    risk: safe
+    shell: zsh
+    privilege: none
+    explanation:
+      tr: Darwin + macOS sürüm + oturum.
+      en: Darwin + macOS version + sessions.
+related_commands:
+- uname
+- hostnamectl
+- whoami
+- id
+- who
+- last
+- get-computerinfo
+verification:
+  status: draft
+  sources:
+  - man 1 uname
+  - man 1 who
+  - man 1 hostnamectl
+  - Get-Help Get-ComputerInfo
+  notes: NV-103 sequential security checklist stage 1; read-only diagnostics; not human-verified.
+related_tasks:
+- security-check-updates

@@ -24,16 +24,16 @@ Do not treat registry rows or `draft` YAML as “full platform support.”
 
 | Metric | Value |
 |--------|------:|
-| Commands | 256 |
-| Concepts | 20 (reviewed **1** / draft **19**) |
-| Tasks | 26 (`draft`) |
-| Profiles | 13 (`draft`) |
-| Search entries | 315 |
+| Commands | 267 |
+| Concepts | 21 (reviewed **1** / draft **20**) |
+| Tasks | 36 (`draft`) |
+| Profiles | 14 (`draft`) |
+| Search entries | 338 |
 | OS registry | 11 |
 | Package managers | 60 |
 | Catalog `schema_version` | 2 |
-| commands verified / reviewed / draft | 26 / 105 / 125 |
-| `content_sha256` | `e17437d67113603c4e7e7cd46b7b5ad1ebb1043d032b4a38b651c3cd189b8169` |
+| commands verified / reviewed / draft | 26 / 105 / 136 |
+| `content_sha256` | `406fe04002c47c592009c71f6d9dbb1f0ec7c9faa6c19165f58bebe29265b716` |
 
 ## Done (honest)
 
@@ -65,6 +65,7 @@ Do not treat registry rows or `draft` YAML as “full platform support.”
 3. Nova client consume PR for schema v2 + tasks/profiles kinds (if not already)
 4. First signed `catalog-v*` Release when secret is configured
 5. Optional deepen: appliance CLIs, additional cloud/IaC tools — as sourced drafts only
+6. Close remaining gaps listed in [COVERAGE_MATRIX.md](COVERAGE_MATRIX.md) (VPN/`wg`, certbot, macOS/Windows admin depth) without inventing flags
 
 ## Docs map
 
@@ -76,6 +77,8 @@ Do not treat registry rows or `draft` YAML as “full platform support.”
 | [catalog-signing.md](catalog-signing.md) | Signed Releases |
 | [NOVA_INTEGRATION.md](NOVA_INTEGRATION.md) | Client consume contract |
 | [DATA_SCHEMA.md](DATA_SCHEMA.md) | Live schema policy |
+| [COVERAGE_MATRIX.md](COVERAGE_MATRIX.md) | Area×platform gaps (honest) |
+| [SERVER_SECURITY_CHECKLIST.md](SERVER_SECURITY_CHECKLIST.md) | 10-stage Sunucu güvenlik kontrolü |
 
 ## Non-goals
 

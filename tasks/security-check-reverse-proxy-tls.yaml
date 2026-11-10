@@ -1,0 +1,91 @@
+schema_version: 2
+kind: task
+id: security-check-reverse-proxy-tls
+name:
+  tr: 7) Reverse proxy ve TLS
+  en: 7) Reverse proxy and TLS
+summary:
+  tr: nginx/caddy config test + sertifika/TLS el sıkışma — reload zorunlu değil.
+  en: nginx/caddy config test + certificate/TLS handshake — reload not required.
+description:
+  tr: |-
+    Neden: Bozuk proxy/TLS hem kesinti hem güvenlik uyarısı üretir; süresi dolmuş sertifika yaygındır.
+
+    Kontrol listesi durumları (Nova yerel): unchecked / ok / review / na.
+    Örnekler belgeleme içindir — otomatik çalışmaz.
+
+    İsteğe bağlı düzeltme: Sertifika yenilemeden önce config + cert yedeği. nginx -t / caddy validate sonrası reload; bozulursa önceki config’e dön. Otomatik ACME bu bankada certbot kaydı olmadan varsayılmaz.
+  en: |-
+    Why: Broken proxy/TLS causes outages and warnings; expired certs are common.
+
+    Checklist states (Nova local): unchecked / ok / review / na.
+    Examples are documentation only — never auto-run.
+
+    Optional fix: Backup config + certs before renewal. After nginx -t / caddy validate, reload; roll back config on failure. ACME is not assumed without a certbot entry.
+category: security
+tags:
+- security
+- checklist
+- tls
+- proxy
+intent:
+  tr:
+  - güvenlik kontrol 7
+  - sunucu güvenlik kontrolü
+  - 7) Reverse proxy ve TLS
+  en:
+  - security check 7
+  - server security checklist
+  - 7) Reverse proxy and TLS
+implementations:
+- id: linux-proxy-tls
+  platforms:
+  - linux
+  shells:
+  - bash
+  commands:
+  - nginx
+  - caddy
+  - openssl
+  - curl
+  - systemctl
+  examples:
+  - command: nginx -t 2>/dev/null || caddy validate --config /etc/caddy/Caddyfile 2>/dev/null || echo
+      'proxy na'
+    risk: safe
+    shell: bash
+    privilege: none
+    explanation:
+      tr: Config test (yazmaz). Yoksa na.
+      en: Config test (non-writing). Else na.
+  - command: echo | openssl s_client -connect 127.0.0.1:443 -servername localhost 2>/dev/null | openssl
+      x509 -noout -dates -subject
+    risk: caution
+    shell: bash
+    privilege: none
+    explanation:
+      tr: 'Yerel 443 sertifika tarihleri. Şüpheli: notAfter geçmiş.'
+      en: 'Local :443 cert dates. Suspicious: notAfter in the past.'
+  - command: curl -fsSI https://localhost/ | head -n 15
+    risk: caution
+    shell: bash
+    privilege: none
+    explanation:
+      tr: Yerel HTTPS başlıkları (doğrulama hatası varsa inceleyin).
+      en: Local HTTPS headers (investigate verify failures).
+related_commands:
+- nginx
+- caddy
+- openssl
+- curl
+- systemctl
+verification:
+  status: draft
+  sources:
+  - nginx -h
+  - man 1 openssl
+  - https://caddyserver.com/docs/command-line
+  notes: NV-103 sequential security checklist stage 7; read-only diagnostics; not human-verified.
+related_tasks:
+- security-check-docker
+- security-check-dns-vpn

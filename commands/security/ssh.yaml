@@ -45,19 +45,38 @@ install_notes:
   en: 'Arch: pacman -S openssh'
 flags:
 - flag: -p
-  takes_value: true
-  value_name: port
   meaning:
     tr: Uzak port.
     en: Remote port.
   verified: true
-- flag: -i
   takes_value: true
-  value_name: identity
+  value_name: port
+- flag: -i
   meaning:
     tr: Kimlik dosyası (özel anahtar).
     en: Identity file (private key).
   verified: true
+  takes_value: true
+  value_name: identity
+- flag: -v
+  meaning:
+    tr: Ayrıntılı hata ayıklama.
+    en: Verbose debugging.
+  verified: false
+- flag: -L
+  meaning:
+    tr: Yerel port yönlendirme.
+    en: Local port forward.
+  verified: false
+  takes_value: true
+  value_name: bind
+- flag: -o
+  meaning:
+    tr: ssh_config seçeneği.
+    en: ssh_config option.
+  verified: false
+  takes_value: true
+  value_name: option
 examples:
 - title:
     tr: Bağlan
@@ -67,19 +86,43 @@ examples:
     tr: Uzak oturum açar.
     en: Opens a remote session.
   risk: caution
+  privilege: user
+- title:
+    tr: Port
+    en: Port
+  command: ssh -p 2222 user@host.example
+  explanation:
+    tr: 2222 portundan bağlanır.
+    en: Connects on port 2222.
+  risk: caution
+  privilege: user
+- title:
+    tr: Batch test
+    en: Batch test
+  command: ssh -o BatchMode=yes -o ConnectTimeout=5 user@host.example true
+  explanation:
+    tr: Etkileşimsiz bağlantı denemesi (anahtar yoksa fail).
+    en: Non-interactive connectivity probe (fails without key).
+  risk: caution
+  privilege: user
 related:
 - ssh-keygen
 - scp
 - sftp
 - ssh-copy-id
 - ssh-add
+- sshd
 intent:
   tr:
   - ssh ile bağlan
   - uzak sunucu
+  - ssh port
+  - anahtar ile ssh
   en:
   - ssh connect
   - remote shell
+  - ssh port
+  - ssh with key
 verification:
   status: reviewed
   sources:
@@ -92,3 +135,6 @@ nova:
   - networking
   - permissions
   - networking-basics
+purpose:
+  tr: Uzak sisteme şifreli oturum; anahtar tabanlı giriş tercih edilir.
+  en: Encrypted remote shell; prefer key-based login.

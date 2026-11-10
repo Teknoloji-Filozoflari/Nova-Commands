@@ -7,8 +7,10 @@ summary:
   tr: systemd günlüğünü sorgular.
   en: Query the systemd journal.
 description:
-  tr: Servis ve sistem loglarını journal’dan okur.
-  en: Reads service and system logs from the journal.
+  tr: Servis ve çekirdek loglarını journal’dan okur. -p err öncelik süzgesi yaygındır; çok geniş sorgular
+    gürültülü olabilir.
+  en: Reads service and kernel logs from the journal. -p err is a common priority filter; over-broad queries
+    can be noisy.
 tags:
 - monitoring
 - logs
@@ -40,42 +42,85 @@ package_refs:
   - fedora
 flags:
 - flag: -u
-  long: --unit
-  takes_value: true
-  value_name: UNIT
   meaning:
     tr: Birim süzgeci.
     en: Unit filter.
   verified: true
+  long: --unit
+  takes_value: true
+  value_name: UNIT
 - flag: -f
-  long: --follow
   meaning:
     tr: Canlı takip.
     en: Follow new entries.
   verified: true
+  long: --follow
 - flag: -n
-  long: --lines
-  takes_value: true
-  value_name: N
   meaning:
     tr: Son N satır.
     en: Last N lines.
   verified: true
+  long: --lines
+  takes_value: true
+  value_name: N
 - flag: -b
-  long: --boot
   meaning:
-    tr: Geçerli boot logları.
+    tr: Geçerli boot.
     en: Current boot logs.
   verified: true
+  long: --boot
+- flag: -p
+  meaning:
+    tr: Öncelik aralığı.
+    en: Priority range.
+  verified: true
+  long: --priority
+  takes_value: true
+  value_name: RANGE
+- flag: -S
+  meaning:
+    tr: Bu tarihten yeni.
+    en: Entries not older than date.
+  verified: true
+  long: --since
+  takes_value: true
+  value_name: DATE
+- flag: -g
+  meaning:
+    tr: MESSAGE grep.
+    en: MESSAGE grep.
+  verified: true
+  long: --grep
+  takes_value: true
+  value_name: PATTERN
 examples:
 - title:
     tr: Servis log
     en: Unit log
-  command: journalctl -u nginx -n 50
+  command: journalctl -u sshd -n 50 --no-pager
   explanation:
-    tr: nginx biriminin son 50 satırı.
-    en: Last 50 lines for nginx unit.
+    tr: sshd son 50 satır.
+    en: Last 50 sshd lines.
   risk: safe
+  privilege: none
+- title:
+    tr: Hatalar
+    en: Errors
+  command: journalctl -p err -b --no-pager
+  explanation:
+    tr: Bu boot’taki error+.
+    en: Errors+ for current boot.
+  risk: safe
+  privilege: none
+- title:
+    tr: Canlı
+    en: Follow
+  command: journalctl -f
+  explanation:
+    tr: Yeni kayıtları takip eder.
+    en: Follows new records.
+  risk: safe
+  privilege: none
 related:
 - systemctl
 - dmesg
@@ -83,9 +128,13 @@ intent:
   tr:
   - servis logları
   - journal oku
+  - systemd hata
+  - boot log
   en:
   - service logs
   - read journal
+  - systemd errors
+  - boot log
 verification:
   status: reviewed
   sources:
@@ -97,3 +146,6 @@ nova:
   - terminal-basics
   - systemd
   favorite_eligible: true
+purpose:
+  tr: systemd journal’dan salt okunur olay incelemesi; olay müdahalesinde ilk durak.
+  en: Read-only event inspection from the systemd journal; first stop in incident review.

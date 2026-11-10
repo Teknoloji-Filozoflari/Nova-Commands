@@ -1,0 +1,128 @@
+schema_version: 2
+kind: task
+id: security-check-firewall-ports
+name:
+  tr: 4) Güvenlik duvarı ve dinleyen portlar
+  en: 4) Firewall and listening ports
+summary:
+  tr: Yerel dinleyen portlar + firewall durumu — kural silme/ekleme yok; uzak tarama yok.
+  en: Local listening ports + firewall status — no rule add/delete; no remote scanning.
+description:
+  tr: |-
+    Neden: Gereksiz dinleyen servisler saldırı yüzeyi; yanlış firewall kuralı hizmeti keser.
+
+    Kontrol listesi durumları (Nova yerel): unchecked / ok / review / na.
+    Örnekler belgeleme içindir — otomatik çalışmaz.
+
+    İsteğe bağlı düzeltme: Kural eklemeden önce mevcut policy yedeği alın. ufw --force reset / geniş allow kör önerilmez. Değişiklik sonrası hizmeti doğrula; rollback için önceki ruleset.
+  en: |-
+    Why: Unnecessary listeners are attack surface; wrong firewall rules outage services.
+
+    Checklist states (Nova local): unchecked / ok / review / na.
+    Examples are documentation only — never auto-run.
+
+    Optional fix: Backup policy before adding rules. Blind ufw --force reset / wide allow is not recommended. Verify service after change; keep prior ruleset for rollback.
+category: security
+tags:
+- security
+- checklist
+- firewall
+- network
+intent:
+  tr:
+  - güvenlik kontrol 4
+  - sunucu güvenlik kontrolü
+  - 4) Güvenlik duvarı ve dinleyen portlar
+  en:
+  - security check 4
+  - server security checklist
+  - 4) Firewall and listening ports
+implementations:
+- id: linux-ss-ufw
+  platforms:
+  - linux
+  shells:
+  - bash
+  commands:
+  - ss
+  - ufw
+  - firewall-cmd
+  examples:
+  - command: ss -tulpn
+    risk: safe
+    shell: bash
+    privilege: none
+    explanation:
+      tr: 'Yerel dinleyiciler. Sağlıklı: bilinen servisler. Şüpheli: tanınmayan 0.0.0.0 dinleyiciler.'
+      en: 'Local listeners. Healthy: known services. Suspicious: unknown 0.0.0.0 listeners.'
+  - command: sudo ufw status verbose || firewall-cmd --state
+    risk: safe
+    shell: bash
+    privilege: elevated
+    explanation:
+      tr: Dağıtıma göre ufw veya firewalld. Yoksa na.
+      en: ufw or firewalld by distro. Else na.
+  notes:
+    tr: nmap ile dış tarama bu rehberde yok.
+    en: No external nmap scanning in this guide.
+- id: windows-net
+  platforms:
+  - windows
+  shells:
+  - powershell
+  commands:
+  - get-nettcpconnection
+  - netsh
+  examples:
+  - command: Get-NetTCPConnection -State Listen | Select-Object LocalAddress,LocalPort,OwningProcess
+    risk: safe
+    shell: powershell
+    privilege: none
+    explanation:
+      tr: Dinleyen TCP portları.
+      en: Listening TCP ports.
+  - command: netsh advfirewall show allprofiles
+    risk: safe
+    shell: cmd
+    privilege: none
+    explanation:
+      tr: Profil durumları (kural silmez).
+      en: Profile status (does not delete rules).
+- id: bsd-pf
+  platforms:
+  - bsd
+  - macos
+  shells:
+  - bash
+  commands:
+  - pfctl
+  - netstat-bsd
+  examples:
+  - command: sudo pfctl -s info
+    risk: safe
+    shell: bash
+    privilege: elevated
+    explanation:
+      tr: PF özeti (macOS/BSD).
+      en: PF summary (macOS/BSD).
+related_commands:
+- ss
+- ufw
+- firewall-cmd
+- nft
+- pfctl
+- netsh
+- get-nettcpconnection
+verification:
+  status: draft
+  sources:
+  - man 8 ss
+  - man 8 ufw
+  - man 1 firewall-cmd
+  - man 8 pfctl
+  notes: NV-103 sequential security checklist stage 4; read-only diagnostics; not human-verified.
+related_tasks:
+- check-firewall-status
+- check-open-ports
+- security-check-ssh
+- security-check-users-sudo

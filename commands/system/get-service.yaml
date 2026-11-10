@@ -14,6 +14,9 @@ description:
     işlemi yönetici (UAC) ister.
   en: Get-Service reports Windows service status via SCM. Not a systemctl alias. Use Start/Stop/Restart/Set-Service
     to change state; most write ops need Administrator (UAC).
+purpose:
+  tr: Windows servis durumunu salt okumak; değişiklik için Start/Stop/Set-Service.
+  en: Read Windows service status; use Start/Stop/Set-Service to change.
 tags:
 - powershell
 - windows
@@ -74,10 +77,14 @@ intent:
   - windows servis listele
   - get-service
   - servis durumu
+  - windows servis durumu
+  - scm sorgu
   en:
   - list windows services
   - get-service
   - service status
+  - windows service status
+  - scm query
 verification:
   status: draft
   sources:

@@ -44,23 +44,48 @@ install_notes:
 flags:
 - flag: status
   meaning:
-    tr: Birim durumunu göster (alt komut).
-    en: Show unit status (subcommand).
+    tr: Birim durumunu göster.
+    en: Show unit status.
   verified: true
 - flag: start
   meaning:
-    tr: Birimi başlat (alt komut).
-    en: Start unit (subcommand).
+    tr: Birimi başlat.
+    en: Start unit.
   verified: true
 - flag: stop
   meaning:
-    tr: Birimi durdur (alt komut).
-    en: Stop unit (subcommand).
+    tr: Birimi durdur.
+    en: Stop unit.
+  verified: true
+- flag: restart
+  meaning:
+    tr: Birimi yeniden başlat.
+    en: Restart unit.
+  verified: true
+- flag: is-active
+  meaning:
+    tr: active mi diye bak.
+    en: Check whether active.
+  verified: true
+- flag: is-enabled
+  meaning:
+    tr: boot’ta enable mi.
+    en: Check whether enabled on boot.
+  verified: true
+- flag: list-units
+  meaning:
+    tr: Bellekteki birimleri listele.
+    en: List units in memory.
   verified: true
 - flag: --user
   meaning:
     tr: Kullanıcı oturumu yöneticisi.
     en: Talk to user service manager.
+  verified: true
+- flag: --failed
+  meaning:
+    tr: 'list-units: başarısızlar.'
+    en: 'list-units: failed units.'
   verified: true
 examples:
 - title:
@@ -68,19 +93,39 @@ examples:
     en: Status
   command: systemctl status sshd
   explanation:
-    tr: sshd birim durumunu gösterir (izinler dağıtıma göre).
-    en: Shows sshd unit status (unit name varies).
+    tr: sshd birim durumu (ad dağıtıma göre ssh/sshd).
+    en: sshd unit status (name may be ssh/sshd).
   risk: safe
+  privilege: none
   requires_elevated: false
+- title:
+    tr: Başarısızlar
+    en: Failed
+  command: systemctl --failed
+  explanation:
+    tr: Başarısız birimler.
+    en: Failed units.
+  risk: safe
+  privilege: none
+- title:
+    tr: Enable mi
+    en: Enabled?
+  command: systemctl is-enabled sshd
+  explanation:
+    tr: enabled/disabled/static…
+    en: enabled/disabled/static…
+  risk: safe
+  privilege: none
 - title:
     tr: Yeniden başlat
     en: Restart
   command: sudo systemctl restart nginx
   explanation:
-    tr: nginx servisini yeniden başlatır.
-    en: Restarts the nginx service.
+    tr: nginx’i yeniden başlatır (kesinti).
+    en: Restarts nginx (brief outage).
   risk: dangerous
   requires_elevated: true
+  privilege: elevated
 related:
 - journalctl
 - systemd-analyze
@@ -91,9 +136,13 @@ intent:
   tr:
   - servis başlat
   - systemd durum
+  - failed birim
+  - servis enable
   en:
   - start service
   - systemd status
+  - failed units
+  - service enabled
 verification:
   status: reviewed
   sources:
@@ -104,3 +153,6 @@ nova:
   concepts:
   - systemd
   - terminal-basics
+purpose:
+  tr: systemd birim durumu ve yaşam döngüsü — servis güvenliği kontrolünün omurgası.
+  en: systemd unit status and lifecycle — backbone of service security checks.

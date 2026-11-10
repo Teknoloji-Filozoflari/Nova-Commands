@@ -1,0 +1,113 @@
+schema_version: 2
+id: visudo
+name: visudo
+kind: administrative_tool
+category: users
+summary:
+  tr: sudoers dosyasını güvenli düzenler.
+  en: Safely edit the sudoers file.
+description:
+  tr: sudoers sözdizimini kilitleyerek düzenler; bozuk kaydı engeller. Salt kontrol için -c kullanın.
+    Körü körüne NOPASSWD/ALL eklemeyin.
+  en: Edits sudoers with locking and syntax checks to avoid lockouts. Use -c for check-only. Do not casually
+    add NOPASSWD/ALL.
+tags:
+- sudo
+- security
+- users
+risk: dangerous
+requires_elevated: true
+platforms:
+- linux
+- macos
+- bsd
+operating_systems:
+- linux
+- macos
+package_refs:
+- manager: pacman
+  package: sudo
+  distributions:
+  - arch
+- manager: apt
+  package: sudo
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: sudo
+  distributions:
+  - fedora
+packages:
+  arch: sudo
+  debian: sudo
+  ubuntu: sudo
+  fedora: sudo
+flags:
+- flag: -c
+  meaning:
+    tr: Yalnız sözdizimi kontrolü.
+    en: Check-only mode.
+  verified: false
+  long: --check
+- flag: -f
+  meaning:
+    tr: Alternatif sudoers dosyası.
+    en: Specify sudoers file.
+  verified: false
+  long: --file
+  takes_value: true
+  value_name: sudoers
+- flag: -s
+  meaning:
+    tr: Katı sözdizimi.
+    en: Strict syntax checking.
+  verified: false
+  long: --strict
+examples:
+- title:
+    tr: Kontrol
+    en: Check
+  command: sudo visudo -c
+  explanation:
+    tr: sudoers sözdizimini doğrular (yazmaz).
+    en: Validates sudoers syntax (no write).
+  risk: safe
+  requires_elevated: true
+  privilege: elevated
+- title:
+    tr: Düzenle
+    en: Edit
+  command: sudo visudo
+  explanation:
+    tr: Varsayılan editörle sudoers açar.
+    en: Opens sudoers in the default editor.
+  risk: dangerous
+  requires_elevated: true
+  privilege: elevated
+  warnings:
+  - tr: Yedek/second oturum olmadan riskli değişiklik yapmayın; sözdizimi hatası kilitleyebilir.
+    en: Do not risk edits without a backup/second session; syntax errors can lock you out.
+related:
+- sudo
+- su
+- passwd
+intent:
+  tr:
+  - sudoers düzenle
+  - visudo kontrol
+  - sudo yetki
+  en:
+  - edit sudoers
+  - visudo check
+  - sudo privileges
+verification:
+  status: draft
+  sources:
+  - visudo --help
+  - man 8 visudo
+  notes: Agent-authored 2026-11-10 from visudo --help.
+nova:
+  concepts:
+  - permissions
+  ui_priority: 70
