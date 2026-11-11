@@ -46,13 +46,16 @@ CI must pass: validate → build → pytest → committed `content_sha256` match
    Live wipe examples (`dd of=/dev/…`, live `mkfs` / `wipefs -a`) need
    bilingual `warnings` under the example ([docs/safety.md](docs/safety.md)).
    `related` must reference existing command ids only.
-7. Run locally:
+7. Run locally in a **venv** (do not install into system Python):
 
    ```bash
-   python3 -m pip install -r requirements-dev.txt
-   python3 scripts/validate_catalog.py   # includes validate_security.py
-   python3 scripts/build_catalog.py
-   python3 -m pytest tests/
+   python3 -m venv .venv
+   source .venv/bin/activate          # Windows: .venv\Scripts\activate
+   python -m pip install -r requirements-dev.txt
+   python scripts/validate_catalog.py # schema v1+v2, security, platforms,
+                                      # tasks/profiles, generated catalog hashes
+   python scripts/build_catalog.py
+   python -m pytest tests/            # uses sys.executable for nested scripts
    ```
 
 8. Commit updated `metadata/catalog.json`, `search-index.json`, and
@@ -85,8 +88,8 @@ CI must pass: validate → build → pytest → committed `content_sha256` match
    reference collection (related commands + tasks). Not an executable runbook.
 3. Keep `verification.status: draft` until human review. Do not invent
    command ids or secret-bearing examples.
-4. Run `python3 scripts/validate_tasks_profiles.py --require` (also wired into
-   `validate_catalog.py`), then `python3 scripts/build_catalog.py` so
+4. Run `python scripts/validate_tasks_profiles.py --require` (also wired into
+   `validate_catalog.py`), then `python scripts/build_catalog.py` so
    `catalog.json` / `search-index.json` / `manifest.json` pick up
    `task_count` / `profile_count` (included in `content_sha256`).
 

@@ -45,11 +45,13 @@ Multi-tool user goals (`show-local-ip` with linux-ip / windows-powershell / wind
 ## Validation
 
 ```bash
-python3 scripts/validate_catalog.py           # live v2 bank + concepts + tasks/profiles + security
-python3 scripts/validate_security.py          # wipe/related/minisign gates (also via validate_catalog)
-python3 scripts/validate_tasks_profiles.py --require
-python3 scripts/validate_schema_v2.py         # schema load + fixtures
-python3 scripts/migrate_v1_to_v2.py --check
+# Use the project venv interpreter (see README Developer section).
+python scripts/validate_catalog.py            # live v2 bank + concepts + tasks/profiles + security + generated artifacts
+python scripts/validate_security.py           # wipe/related/minisign gates (also via validate_catalog)
+python scripts/validate_tasks_profiles.py --require
+python scripts/validate_schema_v2.py          # schema v1+v2 load + fixtures (fail on missing fields)
+python scripts/validate_generated_artifacts.py
+python scripts/migrate_v1_to_v2.py --check
 ```
 
 Fixtures under `fixtures/schema-v2/` stay `draft` and are **not** in the catalog hash.

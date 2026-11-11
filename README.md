@@ -237,12 +237,24 @@ Roadmap: [docs/ROADMAP.md](docs/ROADMAP.md)
 
 ## Developer
 
+Use a **project virtualenv** — do not install into system `/usr/bin/python3`.
+Deps live in [`requirements-dev.txt`](requirements-dev.txt) (`jsonschema`,
+`referencing`, `PyYAML`, `pytest`). CI installs the same file.
+
 ```bash
-python3 -m pip install -r requirements-dev.txt
-python3 scripts/validate_catalog.py
-python3 scripts/build_catalog.py
-python3 -m pytest tests/
+python3 -m venv .venv
+source .venv/bin/activate          # Windows: .venv\Scripts\activate
+python -m pip install -r requirements-dev.txt
+
+python scripts/validate_catalog.py # schema v1+v2, examples, tasks, profiles,
+                                   # platform registries, generated catalog
+python scripts/build_catalog.py    # catalog.json / search-index.json / manifest.json
+python -m pytest tests/            # launches validators via sys.executable
 ```
+
+After a no-op rebuild, `content_sha256` stays stable and `generated_at` is
+preserved so the working tree stays clean. Missing required schema fields fail
+closed — validators never invent values.
 
 New command / concept: [CONTRIBUTING.md](CONTRIBUTING.md) ·
 Nova wire-up: [docs/NOVA_INTEGRATION.md](docs/NOVA_INTEGRATION.md)

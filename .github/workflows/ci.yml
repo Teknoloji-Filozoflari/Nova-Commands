@@ -36,7 +36,7 @@ jobs:
       - name: Install validator dependencies
         run: python -m pip install -r requirements-dev.txt
 
-      - name: Schema + id + category + i18n + concepts + platform + security
+      - name: Schema + id + category + i18n + concepts + platform + security + generated catalog
         run: python scripts/validate_catalog.py
 
       - name: Unit tests
@@ -54,6 +54,14 @@ jobs:
       - name: Ensure catalog build is coherent and matches commit
         if: matrix.os == 'ubuntu-latest'
         run: python scripts/ci_check_rebuild_coherence.py
+
+      - name: Rebuild must not leave unexpected dirty diffs
+        if: matrix.os == 'ubuntu-latest'
+        shell: bash
+        run: |
+          set -euo pipefail
+          python scripts/validate_generated_artifacts.py
+          git diff --exit-code -- metadata/catalog.json metadata/manifest.json metadata/search-index.json
 
       - name: Community / contrib / signing files present
         if: matrix.os == 'ubuntu-latest'

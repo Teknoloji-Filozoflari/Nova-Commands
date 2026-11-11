@@ -7,10 +7,11 @@
 
 ## Kontrol listesi
 
-- [ ] `python3 scripts/validate_catalog.py` geçti
-- [ ] `python3 scripts/build_catalog.py` çalıştırıldı; `metadata/` commit’lendi
+- [ ] Proje venv + `pip install -r requirements-dev.txt` (sistem Python’a kurulum yok)
+- [ ] `python scripts/validate_catalog.py` geçti
+- [ ] `python scripts/build_catalog.py` çalıştırıldı; `metadata/` commit’lendi
 - [ ] Snapshot docs (README / PLATFORM_SUPPORT / ROADMAP / COVERAGE_MATRIX) counts + `content_sha256` bank ile eşleşiyor
-- [ ] `python3 -m pytest tests/` geçti
+- [ ] `python -m pytest tests/` geçti
 - [ ] Yeni/değişen komutlarda **tr + en** dolu
 - [ ] `verification.status: verified` **yalnız** insan incelemesi sonrası (AI taslağı `draft` / `reviewed`)
 - [ ] Bilinmeyen bayrak / paket adı uydurulmadı

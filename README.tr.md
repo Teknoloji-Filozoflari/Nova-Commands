@@ -238,12 +238,24 @@ Yol haritası: [docs/ROADMAP.md](docs/ROADMAP.md)
 
 ## Geliştirici
 
+**Proje sanal ortamı** kullanın — sistem `/usr/bin/python3` içine paket
+kurmayın. Bağımlılıklar [`requirements-dev.txt`](requirements-dev.txt)
+içinde (`jsonschema`, `referencing`, `PyYAML`, `pytest`). CI aynı dosyayı kurar.
+
 ```bash
-python3 -m pip install -r requirements-dev.txt
-python3 scripts/validate_catalog.py
-python3 scripts/build_catalog.py
-python3 -m pytest tests/
+python3 -m venv .venv
+source .venv/bin/activate          # Windows: .venv\Scripts\activate
+python -m pip install -r requirements-dev.txt
+
+python scripts/validate_catalog.py # şema v1+v2, örnekler, tasks, profiles,
+                                   # platform kayıtları, üretilmiş katalog
+python scripts/build_catalog.py    # catalog.json / search-index.json / manifest.json
+python -m pytest tests/            # doğrulayıcıları sys.executable ile çalıştırır
 ```
+
+İçerik değişmeden rebuild sonrası `content_sha256` sabit kalır ve
+`generated_at` korunur; çalışma ağacı temiz kalır. Eksik zorunlu alanlar
+başarısız olur — doğrulayıcılar değer uydurmaz.
 
 Yeni komut / konsept: [CONTRIBUTING.md](CONTRIBUTING.md) ·
 Nova: [docs/NOVA_INTEGRATION.md](docs/NOVA_INTEGRATION.md)
