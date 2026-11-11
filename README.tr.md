@@ -36,23 +36,23 @@ dürüstlüğü digest’i güncelleyebilir.
 
 | Metrik | Değer |
 |--------|------:|
-| Komut | **267** |
+| Komut | **270** |
 | Konsept makalesi | **21** |
 | Görev (`tasks/`) | **36** (hepsi `draft`) |
 | Profil (`profiles/`) | **14** (hepsi `draft`) |
-| Arama girdisi | **338** |
+| Arama girdisi | **341** |
 | OS kaydı | **11** |
 | Paket yöneticisi kaydı | **60** |
 | `schema_version` | **2** |
-| `verification` (komut) | verified **26** / reviewed **105** / draft **136** |
+| `verification` (komut) | verified **26** / reviewed **105** / draft **139** |
 | `verification` (konsept) | reviewed **1** / draft **20** (sahte `verified` yok) |
-| `content_sha256` | `92e6920cd8278b5685cf6d748769c1a22cc61bbd02924e5eee7267122d7e4a4b` |
+| `content_sha256` | `1a64dd48ee49d7d026627944d4f0b97b3e57b951858d727cf7eb814ad12c254a` |
 
 ```mermaid
-pie title Komut verification.status (267)
+pie title Komut verification.status (270)
   "verified" : 26
   "reviewed" : 105
-  "draft" : 136
+  "draft" : 139
 ```
 
 Kayıt defterinde bir OS/PM id’si olması, o platformda her komutun doğrulandığı

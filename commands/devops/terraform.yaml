@@ -84,6 +84,13 @@ package_refs:
   - arch
 packages:
   arch: terraform
+install_notes:
+  tr: |-
+    Arch’ta bilinen paket: pacman -S terraform. Diğer distrolarda HashiCorp/OpenTofu kanalları veya
+    upstream binary yaygındır — Linux filtresiz host’ta Arch’ı sessiz varsaymayın; paket adını doğrulayın.
+  en: |-
+    Known Arch package: pacman -S terraform. Other distros often use HashiCorp/OpenTofu channels or
+    upstream binaries — do not silently default to Arch when Linux is undifferenced; verify package name.
 nova:
   favorite_eligible: true
   ui_priority: 60

@@ -70,6 +70,13 @@ package_refs:
   - arch
 packages:
   arch: caddy
+install_notes:
+  tr: |-
+    Arch: pacman -S caddy. Diğer distrolarda paket/repo adı değişir (COPR, PPA, resmi binary) —
+    uydurma yok; kurulu yolu doğrulayın.
+  en: |-
+    Arch: pacman -S caddy. Other distros vary (COPR, PPA, official binary) — do not invent;
+    verify the installed path.
 nova:
   favorite_eligible: true
   ui_priority: 60

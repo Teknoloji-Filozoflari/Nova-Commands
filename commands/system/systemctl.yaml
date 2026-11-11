@@ -7,8 +7,10 @@ summary:
   tr: systemd birimlerini denetler.
   en: Control the systemd system and service manager.
 description:
-  tr: Servis başlatma/durdurma, durum ve boot birimleri için birincil araç.
-  en: Primary tool to start/stop services, check status, and manage boot units.
+  tr: systemd birimlerini başlatır/durdurur/sorgular. Alpine/Gentoo OpenRC (`rc-service`/`rc-status`)
+    ve Void runit (`sv`) ile **eşitlenmez** — yalnızca systemd host’larda birincil araçtır.
+  en: Starts/stops/queries systemd units. It is **not** equivalent to Alpine/Gentoo OpenRC
+    (rc-service/rc-status) or Void runit (sv) — primary only on systemd hosts.
 tags:
 - system
 - systemd
@@ -39,9 +41,19 @@ package_refs:
   package: systemd
   distributions:
   - fedora
+- manager: zypper
+  package: systemd
+  distributions:
+  - opensuse-leap
+  - opensuse-tumbleweed
+  - sles
 install_notes:
-  tr: 'Arch: pacman -S systemd (taban).'
-  en: 'Arch: pacman -S systemd (base).'
+  tr: |-
+    systemd tabanlı distrolarda (Arch/Debian/Fedora/openSUSE/NixOS) taban gelir.
+    Alpine/Gentoo OpenRC ve Void runit varsayılanında birincil araç değildir.
+  en: |-
+    Ships as base on systemd distros (Arch/Debian/Fedora/openSUSE/NixOS).
+    Not the primary tool on Alpine/Gentoo OpenRC or Void runit defaults.
 flags:
 - flag: status
   meaning:
@@ -137,6 +149,11 @@ related:
 - timedatectl
 - loginctl
 - bootctl
+- rc-status
+- rc-service
+- sv
+- service
+- rcctl
 intent:
   tr:
   - servis başlat

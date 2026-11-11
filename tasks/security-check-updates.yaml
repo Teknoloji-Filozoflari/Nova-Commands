@@ -14,8 +14,9 @@ description:
     Kontrol listesi durumları (Nova yerel): unchecked / ok / review / na.
     Örnekler belgeleme içindir — otomatik çalışmaz.
 
-    Platform dürüstlüğü: pacman ≠ apt ≠ dnf; freebsd-update (taban) ≠ pkg (paketler); Nix ≠ NixOS —
-    NixOS’ta birincil yol nixos-rebuild’tur, nix-env değildir.
+    Platform dürüstlüğü: pacman ≠ apt ≠ dnf ≠ zypper ≠ apk ≠ xbps ≠ emerge; freebsd-update (taban) ≠
+    pkg (paketler); Nix ≠ NixOS — NixOS’ta birincil yol nixos-rebuild’tur, nix-env değildir.
+    Linux filtresiz host’ta sessiz Arch/pacman varsayımı yok.
 
     İsteğe bağlı düzeltme: Bakım penceresinde ilgili PM ile yükselt; önce snapshot/backup.
   en: |-
@@ -24,8 +25,9 @@ description:
     Checklist states (Nova local): unchecked / ok / review / na.
     Examples are documentation only — never auto-run.
 
-    Platform honesty: pacman ≠ apt ≠ dnf; freebsd-update (base) ≠ pkg (packages); Nix ≠ NixOS —
-    on NixOS the primary path is nixos-rebuild, not nix-env.
+    Platform honesty: pacman ≠ apt ≠ dnf ≠ zypper ≠ apk ≠ xbps ≠ emerge; freebsd-update (base) ≠
+    pkg (packages); Nix ≠ NixOS — on NixOS the primary path is nixos-rebuild, not nix-env.
+    No silent Arch/pacman default when Linux is undifferenced.
 
     Optional fix: Upgrade in a maintenance window with the matching PM; snapshot/backup first.
 category: packages
@@ -89,6 +91,9 @@ implementations:
   - linux
   distributions:
   - fedora
+  - rhel
+  - rocky
+  - almalinux
   shells:
   - bash
   commands:
@@ -101,6 +106,76 @@ implementations:
     explanation:
       tr: Güncelleme listesi; çıkış 100 = güncelleme var (dnf).
       en: Update list; exit 100 means updates available (dnf).
+- id: opensuse-check
+  platforms:
+  - linux
+  distributions:
+  - opensuse-leap
+  - opensuse-tumbleweed
+  - sles
+  shells:
+  - bash
+  commands:
+  - zypper
+  examples:
+  - command: zypper list-updates
+    risk: safe
+    shell: bash
+    privilege: none
+    explanation:
+      tr: Bekleyen zypper güncellemelerini listeler (yazmaz). Tumbleweed dup ayrı yoldur.
+      en: Lists pending zypper updates (non-writing). Tumbleweed dup is a separate path.
+- id: alpine-check
+  platforms:
+  - linux
+  distributions:
+  - alpine
+  shells:
+  - bash
+  commands:
+  - apk
+  examples:
+  - command: apk version -l '<'
+    risk: safe
+    shell: bash
+    privilege: none
+    explanation:
+      tr: Kurulu paketlerde yükseltme adaylarını listeler (kurmaz).
+      en: Lists upgrade candidates among installed packages (does not install).
+- id: void-check
+  platforms:
+  - linux
+  distributions:
+  - void
+  shells:
+  - bash
+  commands:
+  - xbps-install
+  examples:
+  - command: xbps-install -un
+    risk: safe
+    shell: bash
+    privilege: none
+    explanation:
+      tr: 'Kuru çalıştırma: senkron/yükseltme adaylarını gösterir; kurmaz (-n).'
+      en: 'Dry run: shows sync/upgrade candidates; does not install (-n).'
+- id: gentoo-check
+  platforms:
+  - linux
+  distributions:
+  - gentoo
+  shells:
+  - bash
+  commands:
+  - emerge
+  examples:
+  - command: emerge -puDN @world
+    risk: safe
+    shell: bash
+    privilege: none
+    explanation:
+      tr: '@world için ne kurulacağını/derleneceğini önizler (-p); yazmaz.'
+      en: 'Pretend @world upgrade plan (-p); does not write.'
 - id: nixos-check
   platforms:
   - linux
@@ -191,6 +266,10 @@ related_commands:
 - apt
 - dnf
 - rpm
+- zypper
+- apk
+- xbps-install
+- emerge
 - nixos-rebuild
 - softwareupdate
 - winget
@@ -202,13 +281,16 @@ verification:
   - man 8 pacman
   - man 8 apt
   - man 8 dnf
+  - man 8 zypper
+  - https://wiki.alpinelinux.org/wiki/Alpine_Package_Keeper
+  - https://docs.voidlinux.org/xbps/
+  - https://wiki.gentoo.org/wiki/Portage
   - https://nixos.org/manual/nixos/stable/#sec-upgrading
   - softwareupdate --help
   - https://learn.microsoft.com/windows/package-manager/winget/list
   - https://man.freebsd.org/cgi/man.cgi?query=freebsd-update&sektion=8
   - https://man.freebsd.org/cgi/man.cgi?query=pkg&sektion=8
-  - https://wiki.nixos.org/wiki/Nixos-rebuild
-  notes: NV-119 content audit; stage 2 stays draft — not human-verified on live platforms.
+  notes: NV-121 multi-OS fill on NV-119 stage; still draft — not human-verified on live platforms.
 related_tasks:
 - update-system
 - security-check-os-accounts

@@ -86,6 +86,127 @@ implementations:
   - rhel
   - rocky
   - almalinux
+- id: opensuse-zypper
+  commands:
+  - zypper
+  examples:
+  - command: sudo zypper refresh && sudo zypper update
+    risk: caution
+    shell: bash
+    privilege: elevated
+    explanation:
+      tr: Leap/SLES yama yolu (update). Tumbleweed dağıtım yükseltmesi için dup ayrıdır.
+      en: Leap/SLES patch path (update). Tumbleweed distro upgrade uses dup separately.
+  operating_systems:
+  - linux
+  platforms:
+  - linux
+  shells:
+  - bash
+  distributions:
+  - opensuse-leap
+  - sles
+  notes:
+    tr: Tumbleweed için `sudo zypper dup` kullanın; Leap `update` ile karıştırmayın.
+    en: On Tumbleweed use `sudo zypper dup`; do not confuse with Leap `update`.
+- id: opensuse-tumbleweed-dup
+  commands:
+  - zypper
+  examples:
+  - command: sudo zypper refresh && sudo zypper dup
+    risk: dangerous
+    shell: bash
+    privilege: elevated
+    explanation:
+      tr: Tumbleweed dağıtım yükseltmesi (dup) — Leap update değildir.
+      en: Tumbleweed distribution upgrade (dup) — not Leap update.
+  operating_systems:
+  - linux
+  platforms:
+  - linux
+  shells:
+  - bash
+  distributions:
+  - opensuse-tumbleweed
+- id: alpine-apk
+  commands:
+  - apk
+  examples:
+  - command: sudo apk update && sudo apk upgrade
+    risk: caution
+    shell: bash
+    privilege: elevated
+    explanation:
+      tr: Alpine indekslerini yeniler ve paketleri yükseltir.
+      en: Refreshes Alpine indexes and upgrades packages.
+  operating_systems:
+  - linux
+  platforms:
+  - linux
+  shells:
+  - bash
+  distributions:
+  - alpine
+- id: void-xbps
+  commands:
+  - xbps-install
+  examples:
+  - command: sudo xbps-install -Su
+    risk: caution
+    shell: bash
+    privilege: elevated
+    explanation:
+      tr: Void XBPS senkron + yükseltme.
+      en: Void XBPS sync + upgrade.
+  operating_systems:
+  - linux
+  platforms:
+  - linux
+  shells:
+  - bash
+  distributions:
+  - void
+- id: gentoo-emerge
+  commands:
+  - emerge
+  examples:
+  - command: sudo emerge --sync && sudo emerge --ask -uDN @world
+    risk: dangerous
+    shell: bash
+    privilege: elevated
+    explanation:
+      tr: Portage senkron + @world yükseltme (uzun sürebilir).
+      en: Portage sync + @world upgrade (can take long).
+  operating_systems:
+  - linux
+  platforms:
+  - linux
+  shells:
+  - bash
+  distributions:
+  - gentoo
+- id: nixos-rebuild
+  commands:
+  - nixos-rebuild
+  examples:
+  - command: sudo nixos-rebuild switch
+    risk: dangerous
+    shell: bash
+    privilege: elevated
+    explanation:
+      tr: NixOS yapılandırmasını uygular (nix-env sistem güncellemesi değildir).
+      en: Applies NixOS configuration (not a nix-env system upgrade).
+  operating_systems:
+  - linux
+  platforms:
+  - linux
+  shells:
+  - bash
+  distributions:
+  - nixos
+  notes:
+    tr: Nix ≠ NixOS; channel/flake güncellemesi ayrı adımdır.
+    en: Nix ≠ NixOS; channel/flake update is a separate step.
 - id: freebsd-pkg
   commands:
   - pkg
@@ -139,13 +260,19 @@ verification:
   - man 8 pacman
   - man 8 apt
   - man 8 dnf
+  - man 8 zypper
+  - https://wiki.alpinelinux.org/wiki/Alpine_Package_Keeper
+  - https://docs.voidlinux.org/xbps/
+  - https://wiki.gentoo.org/wiki/Portage
+  - https://nixos.org/manual/nixos/stable/
   - https://docs.brew.sh/
   - https://learn.microsoft.com/windows/package-manager/winget/
-  notes: Agent-authored Faz 8 draft; not human-verified.
+  notes: NV-121 multi-OS fill; still draft — not human-verified.
 description:
-  tr: Arch'ta pacman tercih edilir. Windows/macOS güncelleme modelleri ayrıdır. Örnekler caution/elevated;
-    otomatik çalıştırılmaz.
-  en: Prefer pacman on Arch. Windows/macOS update models differ. Examples are caution/elevated; not auto-executed.
+  tr: Dağıtıma özgü PM kullanın; Linux’ta sessiz Arch/pacman varsayımı yok. Windows/macOS modelleri
+    ayrıdır. Örnekler caution/elevated; otomatik çalıştırılmaz.
+  en: Use the distro PM; no silent Arch/pacman default for undifferenced Linux. Windows/macOS models
+    differ. Examples are caution/elevated; not auto-executed.
 tags:
 - packages
 - update
@@ -161,5 +288,8 @@ related_commands:
 - softwareupdate
 - winget
 - freebsd-update
+- xbps-install
+- emerge
+- nixos-rebuild
 related_tasks:
 - install-package

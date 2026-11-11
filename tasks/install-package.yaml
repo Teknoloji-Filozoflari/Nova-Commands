@@ -80,6 +80,133 @@ implementations:
   - bash
   distributions:
   - fedora
+  - rhel
+  - rocky
+  - almalinux
+- id: opensuse-zypper
+  commands:
+  - zypper
+  examples:
+  - command: sudo zypper search package-name
+    risk: safe
+    shell: bash
+    privilege: none
+    explanation:
+      tr: openSUSE/SLES depolarında arar.
+      en: Searches openSUSE/SLES repositories.
+  - command: sudo zypper install package-name
+    risk: caution
+    shell: bash
+    privilege: elevated
+    explanation:
+      tr: Zypper ile paket kurar (pacman/apt değildir).
+      en: Installs a package with zypper (not pacman/apt).
+  platforms:
+  - linux
+  shells:
+  - bash
+  distributions:
+  - opensuse-leap
+  - opensuse-tumbleweed
+  - sles
+- id: alpine-apk
+  commands:
+  - apk
+  examples:
+  - command: apk search package-name
+    risk: safe
+    shell: bash
+    privilege: none
+    explanation:
+      tr: Alpine depolarında arar (Android APK değildir).
+      en: Searches Alpine repos (not Android APK).
+  - command: sudo apk add package-name
+    risk: caution
+    shell: bash
+    privilege: elevated
+    explanation:
+      tr: apk add ile kurar.
+      en: Installs with apk add.
+  platforms:
+  - linux
+  shells:
+  - bash
+  distributions:
+  - alpine
+- id: void-xbps
+  commands:
+  - xbps-install
+  - xbps-query
+  examples:
+  - command: xbps-query -Rs package-name
+    risk: safe
+    shell: bash
+    privilege: none
+    explanation:
+      tr: Void XBPS depolarında arar.
+      en: Searches Void XBPS repositories.
+  - command: sudo xbps-install package-name
+    risk: caution
+    shell: bash
+    privilege: elevated
+    explanation:
+      tr: XBPS ile kurar (pacman değildir).
+      en: Installs with XBPS (not pacman).
+  platforms:
+  - linux
+  shells:
+  - bash
+  distributions:
+  - void
+- id: gentoo-emerge
+  commands:
+  - emerge
+  examples:
+  - command: emerge --search package-name
+    risk: safe
+    shell: bash
+    privilege: none
+    explanation:
+      tr: Portage ağacında arar.
+      en: Searches the Portage tree.
+  - command: sudo emerge --ask package-name
+    risk: caution
+    shell: bash
+    privilege: elevated
+    explanation:
+      tr: Kaynak derleyerek kurmadan önce onay ister.
+      en: Asks before compiling/installing from source.
+  platforms:
+  - linux
+  shells:
+  - bash
+  distributions:
+  - gentoo
+  notes:
+    tr: emerge kaynak derler; ikili PM’ler gibi hızlı kurulum varsaymayın.
+    en: emerge builds from source; do not assume binary-PM speed.
+- id: nixos-declarative
+  commands:
+  - nixos-rebuild
+  examples:
+  - command: sudo nixos-rebuild dry-build
+    risk: caution
+    shell: bash
+    privilege: elevated
+    explanation:
+      tr: 'NixOS’ta sistem paketi genelde configuration.nix/flake ile eklenir; nix-env sistem PM değildir.
+        dry-build ne derleneceğini gösterir, switch yapmaz.'
+      en: 'On NixOS, system packages are usually added via configuration.nix/flake; nix-env is not the
+        system PM. dry-build shows what would build; does not switch.'
+  platforms:
+  - linux
+  shells:
+  - bash
+  distributions:
+  - nixos
+  notes:
+    tr: Nix ≠ NixOS; bu uygulama yalnız NixOS host içindir.
+    en: Nix ≠ NixOS; this implementation is for NixOS hosts only.
 - id: macos-brew
   commands:
   - brew
@@ -127,13 +254,46 @@ implementations:
   - windows
   shells:
   - powershell
+- id: freebsd-pkg
+  commands:
+  - pkg
+  examples:
+  - command: pkg search package-name
+    risk: safe
+    shell: bash
+    privilege: none
+    explanation:
+      tr: FreeBSD pkg depolarında arar.
+      en: Searches FreeBSD pkg repositories.
+  - command: sudo pkg install package-name
+    risk: caution
+    shell: bash
+    privilege: elevated
+    explanation:
+      tr: pkg ile kurar (Linux PM değildir).
+      en: Installs with pkg (not a Linux PM).
+  operating_systems:
+  - freebsd
+  platforms:
+  - bsd
+  shells:
+  - bash
+  distributions:
+  - freebsd-release
 verification:
   status: draft
   sources:
   - man 8 pacman
   - man 8 apt
+  - man 8 dnf
+  - man 8 zypper
+  - https://wiki.alpinelinux.org/wiki/Alpine_Package_Keeper
+  - https://docs.voidlinux.org/xbps/
+  - https://wiki.gentoo.org/wiki/Portage
+  - https://nixos.org/manual/nixos/stable/
   - https://docs.brew.sh/Manpage
-  notes: Agent-authored Faz 8 draft; not human-verified.
+  - https://man.freebsd.org/cgi/man.cgi?query=pkg&sektion=8
+  notes: NV-121 multi-OS fill; still draft — not human-verified.
 tags:
 - packages
 - install
@@ -146,5 +306,9 @@ related_commands:
 - pkg
 - zypper
 - apk
+- xbps-install
+- xbps-query
+- emerge
+- nixos-rebuild
 related_tasks:
 - update-system

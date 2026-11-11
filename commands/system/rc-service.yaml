@@ -1,0 +1,107 @@
+schema_version: 2
+id: rc-service
+name: rc-service
+kind: administrative_tool
+category: system
+summary:
+  tr: OpenRC servislerini denetler (systemctl değil).
+  en: Control OpenRC services (not systemctl).
+description:
+  tr: '`rc-service`, OpenRC init script’lerini status/start/stop/restart ile yönetir. Alpine ve Gentoo’da
+    yaygındır. Linux `systemctl`, Void `sv` ve BSD `service`/`rcctl` ile **eş anlamlı değildir**. `status`
+    salt okumadır; start/stop yükseltme ister ve hizmeti kesebilir.'
+  en: rc-service manages OpenRC init scripts via status/start/stop/restart. Common on Alpine and Gentoo.
+    It is **not** a synonym for Linux systemctl, Void sv, or BSD service/rcctl. status is read-only;
+    start/stop need elevation and can disrupt services.
+tags:
+- system
+- openrc
+- services
+- alpine
+- gentoo
+risk: dangerous
+learning_level: intermediate
+requires_elevated: true
+platforms:
+- linux
+operating_systems:
+- linux
+package_refs:
+- manager: apk
+  package: openrc
+  distributions:
+  - alpine
+- manager: portage
+  package: sys-apps/openrc
+  distributions:
+  - gentoo
+install_notes:
+  tr: OpenRC tabanında gelir. systemd host’ta systemctl kullanın; Void’ta sv.
+  en: Ships with OpenRC. On systemd hosts use systemctl; on Void use sv.
+flags:
+- flag: status
+  meaning:
+    tr: Servis durumunu sor.
+    en: Query service status.
+  verified: false
+- flag: start
+  meaning:
+    tr: Servisi başlat.
+    en: Start service.
+  verified: false
+- flag: stop
+  meaning:
+    tr: Servisi durdur.
+    en: Stop service.
+  verified: false
+- flag: restart
+  meaning:
+    tr: Servisi yeniden başlat.
+    en: Restart service.
+  verified: false
+examples:
+- title:
+    tr: sshd durumu
+    en: sshd status
+  command: rc-service sshd status
+  explanation:
+    tr: OpenRC sshd init durumunu sorar (systemctl status değildir).
+    en: Queries OpenRC sshd init status (not systemctl status).
+  risk: safe
+  difficulty: beginner
+  requires_elevated: false
+- title:
+    tr: Servisi başlat
+    en: Start service
+  command: sudo rc-service sshd start
+  explanation:
+    tr: OpenRC ile sshd’yi başlatır — hizmeti etkiler.
+    en: Starts sshd via OpenRC — affects the service.
+  risk: caution
+  difficulty: intermediate
+  requires_elevated: true
+related:
+- rc-status
+- systemctl
+- sv
+- service
+- rcctl
+intent:
+  tr:
+  - rc-service
+  - openrc başlat
+  - alpine servis
+  en:
+  - rc-service
+  - openrc start
+  - alpine service
+verification:
+  status: draft
+  sources:
+  - https://wiki.alpinelinux.org/wiki/OpenRC
+  - https://wiki.gentoo.org/wiki/OpenRC
+  - https://manpages.debian.org/testing/openrc/rc-service.8.en.html
+  notes: Agent-authored NV-121 draft from OpenRC/Alpine/Gentoo docs; not human-verified.
+nova:
+  concepts:
+  - systemd

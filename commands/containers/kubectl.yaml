@@ -96,8 +96,29 @@ package_refs:
   package: kubectl
   distributions:
   - arch
+- manager: apt
+  package: kubernetes-client
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: kubernetes-client
+  distributions:
+  - fedora
 packages:
   arch: kubectl
+  debian: kubernetes-client
+  ubuntu: kubernetes-client
+  fedora: kubernetes-client
+install_notes:
+  tr: |-
+    Paket adları kanala göre değişir. Arch: pacman -S kubectl.
+    Debian/Ubuntu/Fedora distro paketleri sıkça kubernetes-client.
+    Resmi Kubernetes sürüm depoları/binary ayrıdır — sessiz Arch varsayımı yok.
+  en: |-
+    Package names vary by channel. Arch: pacman -S kubectl.
+    Debian/Ubuntu/Fedora distro packages are often kubernetes-client.
+    Official Kubernetes versioned repos/binaries differ — no silent Arch default.
 nova:
   favorite_eligible: true
   ui_priority: 60
