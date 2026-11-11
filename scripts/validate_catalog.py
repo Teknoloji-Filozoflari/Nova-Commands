@@ -17,8 +17,10 @@ Checks (CI gate):
   - Concept articles under concepts/; id == filename; related_commands exist
   - Soft: platform registries (scripts/validate_platform_registries.py)
   - Soft: stub fixtures task/profile/compatibility (scripts/validate_schema_v2.py)
+    (loads both command schema v1 archive + live v2; fixtures fail on missing fields)
   - Hard when present: tasks/ + profiles/ (scripts/validate_tasks_profiles.py)
   - Hard: security / wipe-pattern / related / minisign gates (scripts/validate_security.py)
+  - Hard: generated catalog/manifest/search-index (scripts/validate_generated_artifacts.py)
 """
 
 from __future__ import annotations
@@ -45,6 +47,7 @@ PLATFORM_VALIDATE = ROOT / "scripts" / "validate_platform_registries.py"
 SCHEMA_V2_VALIDATE = ROOT / "scripts" / "validate_schema_v2.py"
 TASKS_PROFILES_VALIDATE = ROOT / "scripts" / "validate_tasks_profiles.py"
 SECURITY_VALIDATE = ROOT / "scripts" / "validate_security.py"
+GENERATED_VALIDATE = ROOT / "scripts" / "validate_generated_artifacts.py"
 META = ROOT / "metadata"
 
 RISK_RANK = {"safe": 0, "caution": 1, "dangerous": 2, "destructive": 3}
@@ -405,6 +408,16 @@ def main() -> int:
     if SECURITY_VALIDATE.is_file():
         proc = subprocess.run(
             [sys.executable, str(SECURITY_VALIDATE), "--commands-dir", str(commands_dir)],
+            cwd=ROOT,
+            check=False,
+        )
+        if proc.returncode != 0:
+            return proc.returncode
+
+    # Generated catalog artifacts (schema + matching content_sha256).
+    if GENERATED_VALIDATE.is_file():
+        proc = subprocess.run(
+            [sys.executable, str(GENERATED_VALIDATE)],
             cwd=ROOT,
             check=False,
         )

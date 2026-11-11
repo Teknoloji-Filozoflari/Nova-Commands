@@ -247,7 +247,21 @@ def main() -> int:
     tasks = load_tasks(args.tasks_dir)
     profiles = load_profiles(args.profiles_dir)
     digest = content_sha256(commands, concepts, tasks, profiles)
+    # Keep prior generated_at when content digest is unchanged so rebuilds stay
+    # byte-identical (tests/CI must not leave unexpected dirty diffs).
     generated_at = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    if args.out.is_file():
+        try:
+            prior = json.loads(args.out.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            prior = None
+        if (
+            isinstance(prior, dict)
+            and prior.get("content_sha256") == digest
+            and isinstance(prior.get("generated_at"), str)
+            and prior["generated_at"].strip()
+        ):
+            generated_at = prior["generated_at"]
 
     os_count = registry_count("operating-systems.yaml", "operating_systems")
     pm_count = registry_count("package-managers.yaml", "package_managers")

@@ -31,6 +31,8 @@ META = ROOT / "metadata"
 SCHEMA_FILES = [
     "command.schema.json",  # live v2
     "command.schema.v2.json",  # twin ($id differs)
+    "command.schema.v1.json",  # archived v1 — must still load / check_schema
+    "catalog.schema.json",
     "task.schema.json",
     "profile.schema.json",
     "compatibility.schema.json",

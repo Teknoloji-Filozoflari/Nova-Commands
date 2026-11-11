@@ -12,9 +12,12 @@ import yaml
 ROOT = Path(__file__).resolve().parents[1]
 VALIDATE = ROOT / "scripts" / "validate_catalog.py"
 BUILD = ROOT / "scripts" / "build_catalog.py"
+GENERATED_VALIDATE = ROOT / "scripts" / "validate_generated_artifacts.py"
 
 
 def run(script: Path, *args: str) -> subprocess.CompletedProcess[str]:
+    # Always launch validators with the active test interpreter (venv), never
+    # a hardcoded /usr/bin/python3 that may lack project deps.
     return subprocess.run(
         [sys.executable, str(script), *args],
         cwd=ROOT,
@@ -86,6 +89,9 @@ def test_build_catalog_shape_and_sha() -> None:
     assert {"command", "concept", "task", "profile"} <= types
     assert idx["entry_count"] == len(idx["entries"])
     assert man["content_sha256"] == cat["content_sha256"] == idx["content_sha256"]
+    gen = run(GENERATED_VALIDATE)
+    assert gen.returncode == 0, gen.stderr + gen.stdout
+    assert "OK:" in gen.stdout
 
 
 def test_content_sha_is_deterministic() -> None:
@@ -272,6 +278,7 @@ SCHEMA_V2_FILES = [
     "command.schema.json",
     "command.schema.v2.json",
     "command.schema.v1.json",
+    "catalog.schema.json",
     "task.schema.json",
     "profile.schema.json",
     "compatibility.schema.json",
@@ -596,3 +603,61 @@ def test_ci_helper_scripts_exist() -> None:
     assert (ROOT / "scripts" / "ci_check_committed_sha.py").is_file()
     assert (ROOT / "scripts" / "ci_check_rebuild_coherence.py").is_file()
     assert SECURITY_VALIDATE.is_file()
+    assert GENERATED_VALIDATE.is_file()
+
+
+def test_both_command_schema_versions_load() -> None:
+    """Archived v1 + live v2 must both be valid Draft 2020-12 schemas."""
+    from jsonschema import Draft202012Validator
+
+    for name in ("command.schema.v1.json", "command.schema.json", "command.schema.v2.json"):
+        doc = json.loads((ROOT / "schema" / name).read_text(encoding="utf-8"))
+        Draft202012Validator.check_schema(doc)
+
+
+def test_rebuild_leaves_clean_git_tree() -> None:
+    """After an idempotent rebuild, metadata/ must not show unexpected dirty diffs."""
+    before = subprocess.run(
+        ["git", "status", "--porcelain", "--", "metadata/"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    assert before.returncode == 0, before.stderr
+    assert before.stdout.strip() == "", (
+        "metadata/ already dirty before rebuild; commit or restore first:\n"
+        f"{before.stdout}"
+    )
+
+    proc = run(BUILD)
+    assert proc.returncode == 0, proc.stderr + proc.stdout
+
+    after = subprocess.run(
+        ["git", "status", "--porcelain", "--", "metadata/"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    assert after.returncode == 0, after.stderr
+    assert after.stdout.strip() == "", (
+        "rebuild left unexpected dirty diffs under metadata/ "
+        "(content_sha256 match should preserve generated_at):\n"
+        f"{after.stdout}"
+    )
+
+    # Hash triple still agrees after the clean rebuild.
+    gen = run(GENERATED_VALIDATE)
+    assert gen.returncode == 0, gen.stderr + gen.stdout
+
+
+def test_validation_scripts_use_sys_executable_not_usr_bin() -> None:
+    """Regression: nested validators must launch via sys.executable, not a fixed system path."""
+    system_py = "/usr/" + "bin/python3"
+    catalog_src = (ROOT / "scripts" / "validate_catalog.py").read_text(encoding="utf-8")
+    assert "sys.executable" in catalog_src
+    assert f'"{system_py}"' not in catalog_src
+    assert f"'{system_py}'" not in catalog_src
+    helper_src = Path(__file__).read_text(encoding="utf-8")
+    assert "[sys.executable, str(script)" in helper_src
