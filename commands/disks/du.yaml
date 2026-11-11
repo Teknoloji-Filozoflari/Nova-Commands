@@ -95,4 +95,8 @@ verification:
 nova:
   concepts:
   - storage
+  - linux-directory-structure
   favorite_eligible: true
+related_topics:
+- linux-directory-structure
+- storage

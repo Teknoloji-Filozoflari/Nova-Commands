@@ -112,7 +112,8 @@ verification:
   - man systemd-resolved / resolvectl
   - https://wiki.archlinux.org/title/Network_configuration
   notes: Agent-authored teaching article; needs maintainer spot-check before verified. NV-123 topic-guide
-    structure; agent-authored; needs human review before verified.
+    structure; agent-authored; needs human review before verified. PDF-depth networking examples added;
+    stays draft.
 format: topic-guide
 categories:
 - network
@@ -204,6 +205,47 @@ graded_examples:
   - bsd
   related_commands:
   - ping
+- title:
+    tr: Ping sınaması
+    en: Ping check
+  command: ping -c 3 127.0.0.1
+  explanation:
+    tr: Yerel döngüye 3 paket; ağ yığını ayakta mı bakın.
+    en: Three packets to loopback; checks the local stack.
+  difficulty: beginner
+  risk: safe
+  platforms:
+  - linux
+  - macos
+  - bsd
+  related_commands:
+  - ping
+- title:
+    tr: Adresler
+    en: Addresses
+  command: ip -br addr
+  explanation:
+    tr: Kısa arayüz/adres özeti (iproute2).
+    en: Brief interface/address summary (iproute2).
+  difficulty: beginner
+  risk: safe
+  platforms:
+  - linux
+  related_commands:
+  - ip
+- title:
+    tr: Dinleyen soketler
+    en: Listening sockets
+  command: ss -tuln | head
+  explanation:
+    tr: Dinleyen TCP/UDP soketlerine bakış (salt okuma).
+    en: Read-only peek at listening TCP/UDP sockets.
+  difficulty: intermediate
+  risk: safe
+  platforms:
+  - linux
+  related_commands:
+  - ss
 callouts:
 - kind: note
   text:
@@ -213,6 +255,11 @@ callouts:
   text:
     tr: Ağ tarama / saldırı adımları bu rehberde yoktur.
     en: Network scanning / attack steps are not part of this guide.
+- kind: tip
+  text:
+    tr: '''İnternet yok'' sırası: ping 127.0.0.1 → ping bilinen bir IP → DNS (dig/host) → ip route / ip
+      addr.'
+    en: 'No-internet order: ping 127.0.0.1 → ping a known IP → DNS (dig/host) → ip route / ip addr.'
 safe_exercises:
 - title:
     tr: Yerel arayüzleri okuyun

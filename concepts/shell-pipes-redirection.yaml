@@ -27,80 +27,85 @@ see_also:
 - man bash (REDIRECTION)
 - POSIX pipelines
 body:
-  tr: 'Her süreç üç standart akışla başlar: **stdin** (0), **stdout** (1), **stderr** (2).
-
-    Kabuk bunları dosyalara veya başka süreçlere bağlayabilir.
+  tr: '## Üç standart akış
 
 
-    **Yönlendirme:**
-
-    - `komut > dosya` — stdout’u dosyaya yazar (üzerine yazar).
-
-    - `komut >> dosya` — stdout’u dosyanın sonuna ekler.
-
-    - `komut < dosya` — stdin’i dosyadan okur.
-
-    - `komut 2> hata.log` — stderr’i ayırır; `2>&1` stderr’i stdout’a birleştirir.
+    Her süreç **stdin (0)**, **stdout (1)** ve **stderr (2)** ile başlar. Kabuk bunları dosyalara veya
+    başka süreçlere bağlar.
 
 
-    **Boru (`|`):** Sol komutun stdout’u sağ komutun stdin’ine bağlanır.
-
-    Örnek: `ps aux | grep ssh | head`. Boru hattında ara dosya gerekmez; bellek/buffer
-
-    ile akar. Hata mesajları (stderr) varsayılan olarak boruya girmez.
+    ## Yönlendirme
 
 
-    **`tee`:** stdout’u hem dosyaya hem sonraki boruya kopyalar (`… | tee out.txt | …`).
+    | Operatör | Anlamı |
+
+    |----------|--------|
+
+    | `>` | stdout’u dosyaya yazar (üzerine yazar) |
+
+    | `>>` | stdout’u sona ekler |
+
+    | `<` | stdin’i dosyadan okur |
+
+    | `2>` | stderr’i dosyaya yazar |
+
+    | `2>&1` | stderr’i stdout’a birleştirir |
 
 
-    **`xargs`:** stdin’deki satır/sözcükleri sonraki komutun argümanına çevirir
-
-    (`find … -print0 | xargs -0 …` boşluk/newline güvenliği için).
+    ## Boru (`|`)
 
 
-    **Dikkat:** `>` mevcut dosyayı sessizce bozar. Yanlışlıkla `>` yerine `>>`
+    Sol komutun stdout’u sağın stdin’ine bağlanır. Ara dosya gerekmez. stderr varsayılan olarak boruya
+    girmez.
 
-    veya önce yedek düşünün. Bu bankada yıkıcı örnekler `destructive` /
 
-    `dangerous` riskiyle işaretlenir; doğrulama için yıkıcı komutlar çalıştırılmaz.
+    Örnek: `cut -d: -f7 /etc/passwd | sort | uniq -c | sort -nr`
+
+
+    ## tee ve xargs
+
+
+    `tee` hem dosyaya hem boruya kopyalar. `xargs` stdin’i argümana çevirir.
 
     '
-  en: 'Processes start with three standard streams: **stdin** (0), **stdout** (1),
-
-    **stderr** (2). The shell can attach them to files or other processes.
+  en: '## Three standard streams
 
 
-    **Redirection:**
-
-    - `cmd > file` — write stdout (truncate/overwrite).
-
-    - `cmd >> file` — append stdout.
-
-    - `cmd < file` — read stdin from a file.
-
-    - `cmd 2> err.log` — capture stderr; `2>&1` merges stderr into stdout.
+    Processes start with **stdin (0)**, **stdout (1)**, and **stderr (2)**. The shell attaches them to
+    files or other processes.
 
 
-    **Pipe (`|`):** Connects the left command’s stdout to the right command’s stdin.
-
-    Example: `ps aux | grep ssh | head`. Data flows without intermediate files.
-
-    stderr does not enter the pipe by default.
+    ## Redirection
 
 
-    **`tee`:** Copies stdout both to a file and further down the pipeline.
+    | Operator | Meaning |
+
+    |----------|---------|
+
+    | `>` | write stdout (truncate) |
+
+    | `>>` | append stdout |
+
+    | `<` | read stdin from a file |
+
+    | `2>` | write stderr to a file |
+
+    | `2>&1` | merge stderr into stdout |
 
 
-    **`xargs`:** Turns stdin tokens into arguments for another command
-
-    (`find … -print0 | xargs -0 …` for whitespace-safe lists).
+    ## Pipes (`|`)
 
 
-    **Caution:** `>` silently overwrites files. Prefer `>>` or backups when unsure.
+    Connect left stdout to right stdin. No intermediate file. stderr does not enter the pipe by default.
 
-    Destructive examples in this bank are labeled `dangerous`/`destructive`; do not
 
-    run destructive commands just to validate catalog entries.
+    Example: `cut -d: -f7 /etc/passwd | sort | uniq -c | sort -nr`
+
+
+    ## tee and xargs
+
+
+    `tee` copies to a file and downstream. `xargs` turns stdin into arguments.
 
     '
 verification:
@@ -108,8 +113,7 @@ verification:
   sources:
   - man bash (REDIRECTION, PIPES)
   - POSIX shell redirection
-  notes: Agent-authored teaching article; needs maintainer spot-check before verified. NV-123 topic-guide
-    structure; agent-authored; needs human review before verified.
+  notes: PDF-depth pipes/redirection; original wording; stays draft.
 format: topic-guide
 categories:
 - shell
@@ -220,8 +224,8 @@ graded_examples:
     en: Write to file (careful)
   command: echo hello > /tmp/nova-guide-demo.txt
   explanation:
-    tr: '> hedefi üzerine yazar; mevcut dosyayı siler. Öğrenme için /tmp kullanın.'
-    en: '> overwrites the target; destroys existing content. Use /tmp while learning.'
+    tr: '''> hedefi üzerine yazar; mevcut dosyayı siler. Öğrenme için /tmp kullanın.'
+    en: '''> overwrites the target; destroys existing content. Use /tmp while learning.'
   difficulty: intermediate
   risk: caution
   related_commands:
@@ -229,6 +233,44 @@ graded_examples:
   warnings:
   - tr: '> mevcut dosyayı siler; kritik yollarda kullanmayın.'
     en: '> truncates existing files; avoid critical paths.'
+- title:
+    tr: Ekleme >>
+    en: Append >>
+  command: echo bir > /tmp/nova-a.txt; echo iki >> /tmp/nova-a.txt; cat /tmp/nova-a.txt
+  explanation:
+    tr: '> ilk satırı yazar; >> ikinciyi ekler.'
+    en: '> writes the first line; >> appends the second.'
+  difficulty: beginner
+  risk: caution
+  related_commands:
+  - echo
+  - cat
+- title:
+    tr: stderr ayır
+    en: Split stderr
+  command: ls /tmp /yok-xyz 2> /tmp/nova-err.txt; wc -l /tmp/nova-err.txt
+  explanation:
+    tr: Hata satırlarını ayrı dosyaya gönderir; stdout ekranda kalabilir.
+    en: Sends error lines to a separate file; stdout may still show.
+  difficulty: intermediate
+  risk: caution
+  related_commands:
+  - ls
+  - wc
+- title:
+    tr: passwd kabuk sayımı
+    en: Shell counts from passwd
+  command: 'cut -d: -f7 /etc/passwd | sort | uniq -c | sort -nr | head'
+  explanation:
+    tr: Sistemdeki kabuk yollarının kullanım sıklığına bakış (salt okuma).
+    en: Read-only view of shell-path frequencies on the system.
+  difficulty: intermediate
+  risk: safe
+  related_commands:
+  - cut
+  - sort
+  - uniq
+  - head
 callouts:
 - kind: warning
   text:
@@ -236,8 +278,12 @@ callouts:
     en: '>> appends; > overwrites. Wrong redirection loses data.'
 - kind: tip
   text:
-    tr: Önce komutu tek başına çalıştırıp çıktıyı görün; sonra boru ekleyin.
-    en: Run each stage alone first, then add the pipe.
+    tr: 'Boru hatlarını adım adım kurun: önce ilk komut, sonra | ekleyin.'
+    en: 'Build pipelines step by step: first command alone, then add |.'
+- kind: note
+  text:
+    tr: stderr varsayılan olarak boruya girmez; 2>&1 ile birleştirilir.
+    en: stderr does not enter pipes by default; merge with 2>&1.
 safe_exercises:
 - title:
     tr: /tmp üzerinde boru
@@ -249,6 +295,27 @@ safe_exercises:
   related_commands:
   - sort
   - uniq
+- title:
+    tr: '> vs >>'
+    en: '> vs >>'
+  prompt:
+    tr: /tmp’de > ve >> farkını iki echo ile gösterip cat ile doğrulayın.
+    en: Demonstrate > vs >> with two echoes in /tmp and verify with cat.
+  risk: caution
+  related_commands:
+  - echo
+  - cat
+- title:
+    tr: Zincir
+    en: Chain
+  prompt:
+    tr: mkdir -p /tmp/nova-pipe && cd /tmp/nova-pipe && pwd zincirini çalıştırın.
+    en: Run mkdir -p /tmp/nova-pipe && cd /tmp/nova-pipe && pwd.
+  risk: safe
+  related_commands:
+  - mkdir
+  - cd
+  - pwd
 next_steps:
 - id: text-processing
 - id: finding-files

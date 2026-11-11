@@ -83,6 +83,19 @@ verification:
   - man 1 chgrp
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-coverage
+  notes: PDF-depth teachable fields.
 nova:
   concepts:
   - permissions
+when_to_use:
+  tr: Yalnız grup sahipliğini değiştirmek (chown :grup alternatifi).
+  en: Change group ownership only (alternative to chown :group).
+syntax: chgrp [OPTION]... GROUP FILE...
+expected_effect:
+  tr: Grup alanını günceller; sahibi ve kip aynı kalır.
+  en: Updates the group field; owner and mode stay the same.
+common_mistakes:
+- tr: Üye olmadığınız gruba yazmayı beklemek.
+  en: Expecting write access to a group you do not belong to.
+related_topics:
+- permissions

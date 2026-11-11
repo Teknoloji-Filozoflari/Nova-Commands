@@ -19,72 +19,71 @@ related_commands:
 - echo
 related_concepts:
 - terminal-basics
+- linux-directory-structure
 - package-managers
 - shell-builtin
 see_also:
 - man environ / PATH
 - docs/local-discovery-contract.md (Nova local discovery)
 body:
-  tr: '**`PATH`**, kabuğun harici programları aradığı dizinlerin `:` ile ayrılmış
-
-    listesidir (ör. `/usr/local/bin:/usr/bin:/bin`). Bir komut adı yazdığınızda
-
-    kabuk önce yerleşik mi diye bakar; değilse `PATH` sırasıyla eşleşen çalıştırılabilir
-
-    dosyayı arar.
+  tr: '## PATH nedir?
 
 
-    **Görme / denetleme:**
-
-    - `echo "$PATH"` — arama yolları.
-
-    - `type ls` / `command -v ls` — kabuğun ne bulduğunu gösterir (yerleşik, alias, yol).
-
-    - `which ls` — sıkça ilk eşleşen yolu basar (kabuk/yerleşik farkları için `type` daha nettir).
+    `PATH`, kabuğun harici programları aradığı dizinlerin `:` ile ayrılmış listesidir. Yerleşikler önce
+    gelir; sonra PATH soldan sağa taranır.
 
 
-    **Güncelleme:** `export PATH="$HOME/.local/bin:$PATH"` oturuma ekler; kalıcılık için
-
-    kabuk başlangıç dosyalarına (`~/.bashrc`, `~/.zshrc`, …) yazılır. Yanlış `PATH`
-
-    “command not found” üretir veya istenmeyen ikiliyi seçtirir.
+    ## Görme
 
 
-    **Nova:** “Sistemimde bulunan komutlar” istemci tarafında PATH/keşif ile üretilir
+    - `echo "$PATH"` — arama yolları
 
-    (`kind: nova-local-commands`). Bu, kürate bankanın `verified` durumunu miras almaz.
+    - `which ls` — sıkça ilk eşleşen yol
 
-    Ayrıntı: `docs/local-discovery-contract.md`.
+    - `type ls` / `command -v ls` — yerleşik/alias/yol ayrımı (type bankada yok; kabuk yerleşiğidir)
+
+
+    ## Güncelleme
+
+
+    `export PATH="$HOME/.local/bin:$PATH"` oturuma ekler. Kalıcılık için `~/.bashrc` / `~/.zshrc`. Yanlış
+    PATH “command not found” üretir.
+
+
+    ## Nova
+
+
+    PATH keşfi kürate bankanın `verified` durumunu miras almaz.
 
     '
-  en: '**`PATH`** is a colon-separated list of directories where the shell searches for
-
-    external programs (e.g. `/usr/local/bin:/usr/bin:/bin`). On a bare name, the shell
-
-    checks builtins/aliases/functions first, then walks `PATH` for an executable.
+  en: '## What is PATH?
 
 
-    **Inspect:**
-
-    - `echo "$PATH"` — search directories.
-
-    - `type ls` / `command -v ls` — what the shell would run (builtin vs path).
-
-    - `which ls` — often prints the first matching path (`type` is clearer for builtins).
+    `PATH` is a colon-separated list of directories where the shell searches for external programs. Builtins
+    win first; then PATH is scanned left to right.
 
 
-    **Update:** `export PATH="$HOME/.local/bin:$PATH"` for the session; persist via shell
-
-    startup files (`~/.bashrc`, `~/.zshrc`, …). A broken `PATH` causes “command not found”
-
-    or picks the wrong binary.
+    ## Inspect
 
 
-    **Nova:** Local “commands on this system” come from client-side PATH discovery
+    - `echo "$PATH"` — search directories
 
-    (`kind: nova-local-commands`) and must not inherit bank `verified` status.
+    - `which ls` — often the first matching path
 
-    See `docs/local-discovery-contract.md`.
+    - `type ls` / `command -v ls` — builtin/alias/path (type is a shell builtin, not a bank row)
+
+
+    ## Update
+
+
+    `export PATH="$HOME/.local/bin:$PATH"` for the session. Persist via `~/.bashrc` / `~/.zshrc`. A broken
+    PATH yields “command not found”.
+
+
+    ## Nova
+
+
+    PATH discovery does not inherit bank `verified` status.
 
     '
 verification:
@@ -92,8 +91,7 @@ verification:
   sources:
   - man environ / POSIX PATH
   - man bash (COMMAND EXECUTION)
-  notes: Agent-authored teaching article; needs maintainer spot-check before verified. NV-123 topic-guide
-    structure; agent-authored; needs human review before verified.
+  notes: PDF-adjacent PATH depth; original wording; stays draft.
 format: topic-guide
 categories:
 - shell
@@ -171,11 +169,38 @@ graded_examples:
   risk: safe
   related_commands:
   - echo
+- title:
+    tr: env PATH satırı
+    en: env PATH line
+  command: env | grep -E "^PATH=" | head
+  explanation:
+    tr: Ortamda PATH’in nasıl göründüğüne bakış.
+    en: See how PATH appears in the environment.
+  difficulty: beginner
+  risk: safe
+  related_commands:
+  - env
+  - grep
+- title:
+    tr: which karşılaştırması
+    en: Compare which
+  command: which ls; which pwd || true
+  explanation:
+    tr: Harici ls yolu; pwd yerleşik olabilir.
+    en: External ls path; pwd may be a builtin.
+  difficulty: intermediate
+  risk: safe
+  related_commands:
+  - which
 callouts:
 - kind: caution
   text:
     tr: 'which ile type farklıdır: type kabuk yerleşiklerini de gösterir.'
     en: 'which differs from type: type also reveals shell builtins.'
+- kind: tip
+  text:
+    tr: İlk eşleşme kazanır. Aynı adlı iki ikili varsa PATH sırası kritiktir.
+    en: First match wins. PATH order matters when two binaries share a name.
 safe_exercises:
 - title:
     tr: İkili yolunu bulun
@@ -186,6 +211,18 @@ safe_exercises:
   risk: safe
   related_commands:
   - which
+- title:
+    tr: type vs which
+    en: type vs which
+  prompt:
+    tr: type ls; which ls; type cd çıktılarını yazıp farkı açıklayın.
+    en: Run type ls; which ls; type cd and explain the difference.
+  risk: safe
+  related_commands:
+  - which
+  - ls
+  - cd
 next_steps:
+- id: linux-directory-structure
 - id: shell-pipes-redirection
 - id: package-managers

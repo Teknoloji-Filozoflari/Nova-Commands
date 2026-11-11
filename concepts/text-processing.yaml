@@ -11,28 +11,57 @@ intro:
   tr: Metin dosyalarını okumak, süzmek ve dönüştürmek günlük CLI işinin çekirdeğidir.
   en: Reading, filtering, and transforming text files is core daily CLI work.
 body:
-  tr: 'Metin işleme, borularla birleşince güçlüdür. `cat` içeriği gösterir; `grep` desen arar;
-
-    `sed` ve `awk` satır dönüşümü yapar. GNU ile BSD araç bayrakları farklılık gösterebilir —
-
-    bankada platform etiketlerine bakın; uydurmayın.
+  tr: '## Görüntüleme
 
 
-    **Öğrenme sırası:** cat → head/tail → grep → cut/tr → sort/uniq → sed → awk.
+    Küçük dosya: `cat`. Uzun dosya: `less`. Baş/son: `head` / `tail`. Satır sayısı: `wc -l`.
 
 
-    **Uyarı:** `sed -i` yerinde düzenler; önce kopya veya `/tmp` üzerinde deneyin.'
-  en: 'Text processing is powerful when composed with pipes. `cat` shows content; `grep` matches
-
-    patterns; `sed` and `awk` transform lines. GNU vs BSD flag differences matter — check
-
-    platform tags in the bank; do not invent flags.
+    ## Arama
 
 
-    **Learning order:** cat → head/tail → grep → cut/tr → sort/uniq → sed → awk.
+    `grep -n desen dosya` satır numaralı arar. `-i` büyük/küçük harf duyarsız; `-c` sayar.
 
 
-    **Warning:** `sed -i` edits in place; practice on a copy or under `/tmp` first.'
+    ## Dönüştürme
+
+
+    `cut -d: -f1` alan keser. `sort` / `uniq -c` sıralar ve sayar. `sed ''s/a/b/''` basit değiştirir.
+    `awk` alan işlemeye yarar.
+
+
+    ## Sıra
+
+
+    cat → head/tail → grep → cut/tr → sort/uniq → sed → awk. `sed -i` yerinde düzenler — önce /tmp kopyası.
+
+    '
+  en: '## Viewing
+
+
+    Small files: `cat`. Long files: `less`. Head/tail: `head` / `tail`. Line counts: `wc -l`.
+
+
+    ## Searching
+
+
+    `grep -n pattern file` searches with line numbers. `-i` ignores case; `-c` counts.
+
+
+    ## Transforming
+
+
+    `cut -d: -f1` cuts fields. `sort` / `uniq -c` sort and count. `sed ''s/a/b/''` does simple substitution.
+    `awk` handles field processing.
+
+
+    ## Order
+
+
+    cat → head/tail → grep → cut/tr → sort/uniq → sed → awk. `sed -i` edits in place — practice on a /tmp
+    copy first.
+
+    '
 difficulty: beginner
 categories:
 - text
@@ -149,14 +178,73 @@ graded_examples:
 - title:
     tr: Desen ara
     en: Search pattern
-  command: grep -n pattern /etc/hosts
+  command: grep -n root /etc/passwd
   explanation:
-    tr: hosts dosyasında satır numaralı arama (salt okuma).
-    en: Line-numbered search in hosts (read-only).
+    tr: passwd içinde satır numaralı arama (salt okuma).
+    en: Line-numbered search in passwd (read-only).
   difficulty: beginner
   risk: safe
   related_commands:
   - grep
+- title:
+    tr: Baş ve son
+    en: Head and tail
+  command: head -n 3 /etc/passwd; tail -n 3 /etc/passwd
+  explanation:
+    tr: Aynı dosyanın ilk ve son üç satırı.
+    en: First and last three lines of the same file.
+  difficulty: beginner
+  risk: safe
+  related_commands:
+  - head
+  - tail
+- title:
+    tr: Satır say
+    en: Count lines
+  command: wc -l /etc/passwd
+  explanation:
+    tr: Kayıtlı kullanıcı satır sayısına pratik bakış.
+    en: Practical look at account line count.
+  difficulty: beginner
+  risk: safe
+  related_commands:
+  - wc
+- title:
+    tr: Alan kes
+    en: Cut fields
+  command: 'cut -d: -f1,7 /etc/passwd | head'
+  explanation:
+    tr: Kullanıcı adı ve kabuk alanlarını keser.
+    en: Cuts username and shell fields.
+  difficulty: intermediate
+  risk: safe
+  related_commands:
+  - cut
+  - head
+- title:
+    tr: sort | uniq
+    en: sort | uniq
+  command: printf 'b\na\nb\nc\n' | sort | uniq -c
+  explanation:
+    tr: Sıralayıp tekrarları sayar — boru hattı temeli.
+    en: Sorts then counts duplicates — pipeline basics.
+  difficulty: beginner
+  risk: safe
+  related_commands:
+  - sort
+  - uniq
+- title:
+    tr: Basit sed
+    en: Simple sed
+  command: echo 'kedi sever sut' | sed 's/kedi/Pamuk/'
+  explanation:
+    tr: İlk eşleşmeyi değiştirir; dosyaya yazmaz.
+    en: Replaces the first match; does not write a file.
+  difficulty: intermediate
+  risk: safe
+  related_commands:
+  - sed
+  - echo
 callouts:
 - kind: tip
   text:
@@ -166,16 +254,40 @@ callouts:
   text:
     tr: sed -i ve > yönlendirme veri kaybettirir.
     en: sed -i and > redirection can lose data.
+- kind: note
+  text:
+    tr: GNU ve BSD bayrakları farklı olabilir; bankadaki platform etiketlerine bakın.
+    en: GNU vs BSD flags may differ; check platform tags in the bank.
 safe_exercises:
 - title:
     tr: grep alıştırması
     en: grep practice
   prompt:
     tr: grep -n root /etc/passwd (salt okuma) çıktısını yorumlayın.
-    en: Interpret grep -n root /etc/passwd (read-only) output.
+    en: Interpret grep -n root /etc/passwd (read-only).
   risk: safe
   related_commands:
   - grep
+- title:
+    tr: cut + sort
+    en: cut + sort
+  prompt:
+    tr: 'cut -d: -f1,7 /etc/passwd | sort -t: -k2 | head çıktısının ne yaptığını yazın.'
+    en: 'Explain cut -d: -f1,7 /etc/passwd | sort -t: -k2 | head.'
+  risk: safe
+  related_commands:
+  - cut
+  - sort
+- title:
+    tr: sed denemesi
+    en: sed trial
+  prompt:
+    tr: echo 'kedi sever sut' | sed 's/kedi/Pamuk/' çalıştırıp sonucu açıklayın.
+    en: Run echo 'cat likes milk' | sed 's/cat/Pam/' and explain.
+  risk: safe
+  related_commands:
+  - sed
+  - echo
 next_steps:
 - id: shell-pipes-redirection
 - id: finding-files
@@ -205,4 +317,4 @@ verification:
   - man grep
   - man sed
   - man awk
-  notes: NV-123 new topic guide from bank + man-oriented teaching; PDF not available in env; not human-verified.
+  notes: PDF-depth text-processing; original wording; stays draft.

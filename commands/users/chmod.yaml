@@ -67,6 +67,24 @@ examples:
     tr: Yalnızca sahip okur/yazar (SSH anahtarı için tipik).
     en: Owner read/write only (typical for SSH keys).
   risk: caution
+- title:
+    tr: 755 betik/klasör
+    en: 755 script/dir
+  command: chmod 755 script.sh
+  explanation:
+    tr: rwxr-xr-x — sahip yazar; diğerleri okur/çalıştırır.
+    en: rwxr-xr-x — owner writes; others read/execute.
+  risk: caution
+  difficulty: beginner
+- title:
+    tr: go-w
+    en: go-w
+  command: chmod go-w file.txt
+  explanation:
+    tr: Grup ve diğerlerinden yazmayı kaldırır.
+    en: Removes write from group and others.
+  risk: caution
+  difficulty: intermediate
 related:
 - chown
 - ls
@@ -83,21 +101,24 @@ verification:
   - man 1 chmod
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-bootstrap
-  notes: NV-123 teachable fields (when/syntax/mistakes/topics).
+  notes: NV-123 teachable fields (when/syntax/mistakes/topics). PDF-depth teachable fields.
 nova:
   concepts:
   - permissions
 when_to_use:
-  tr: Dosya veya dizin izin bitlerini değiştirmek.
-  en: Change permission bits on files or directories.
+  tr: Dosya veya dizin izin bitlerini (rwx / oktal) değiştirmek.
+  en: Change permission bits (rwx / octal) on files or directories.
 syntax: chmod [OPTION]... MODE[,MODE]... FILE...
 expected_effect:
-  tr: Hedeflerin modunu günceller; içerikleri değiştirmez.
-  en: Updates modes on targets; does not change file contents.
+  tr: Hedeflerin kipini günceller; içerikleri değiştirmez. ls -l ile doğrulayın.
+  en: Updates modes on targets; does not change contents. Verify with ls -l.
 common_mistakes:
 - tr: chmod -R ile yanlışlıkla geniş ağacı açmak.
   en: Accidentally opening a wide tree with chmod -R.
 - tr: 777’yi “çözüm” sanmak.
   en: Treating 777 as a “fix”.
+- tr: Dizinde x bitini kaldırıp traverse’i kırmak.
+  en: Removing directory x and breaking traverse.
 related_topics:
 - permissions
+- linux-directory-structure

@@ -11,22 +11,60 @@ intro:
   tr: İsim, tür ve zamana göre dosya bulmak; geniş find ifadelerinde dikkat.
   en: Find files by name, type, and time; be careful with broad find expressions.
 body:
-  tr: '`find` ağaçta arar; `locate` (varsa) önceden indekslenmiş veritabanına bakar.
-
-    Başlarken `find . -name ''*.txt''` gibi dar kalıplar kullanın. `-delete` ve `-exec rm`
-
-    tehlikeli olabilir — bu rehberde salt listeleme tercih edilir.
+  tr: '## find ile ağaç araması
 
 
-    Windows’ta `Get-ChildItem -Recurse` benzer işi görür; bank kaydına bakın.'
-  en: '`find` walks trees; `locate` (when present) queries a prebuilt database.
-
-    Start with narrow patterns like `find . -name ''*.txt''`. `-delete` and `-exec rm`
-
-    can be dangerous — this guide prefers listing only.
+    `find` dizin ağacını gezer. Başlarken dar kalıplar kullanın: `find . -name ''*.txt''`, `find /tmp
+    -maxdepth 2 -type f`.
 
 
-    On Windows, `Get-ChildItem -Recurse` covers similar jobs; see the bank record.'
+    ## İsim, tür, zaman
+
+
+    `-name` / `-iname` isim; `-type f|d` tür; `-mtime -30` son 30 günde değişenler. Hata gürültüsü için
+    `2>/dev/null` (öğrenme) kullanılabilir.
+
+
+    ## locate
+
+
+    `locate` (varsa) indeks kullanır — hızlıdır ama güncel olmayabilir. `updatedb` root ister.
+
+
+    ## Güvenlik
+
+
+    `-delete` ve `-exec rm` tehlikelidir. Bu rehber salt listelemeyi öğretir. Windows’ta `Get-ChildItem
+    -Recurse` ayrı modeldir.
+
+    '
+  en: '## Searching with find
+
+
+    `find` walks a directory tree. Start narrow: `find . -name ''*.txt''`, `find /tmp -maxdepth 2 -type
+    f`.
+
+
+    ## Name, type, time
+
+
+    `-name` / `-iname` for names; `-type f|d` for type; `-mtime -30` for files changed in 30 days. You
+    may silence noise with `2>/dev/null` while learning.
+
+
+    ## locate
+
+
+    `locate` (when present) uses an index — fast, possibly stale. `updatedb` needs root.
+
+
+    ## Safety
+
+
+    `-delete` and `-exec rm` are dangerous. This guide teaches listing only. On Windows, `Get-ChildItem
+    -Recurse` is a different model.
+
+    '
 difficulty: beginner
 categories:
 - search
@@ -100,11 +138,66 @@ graded_examples:
   risk: safe
   related_commands:
   - find
+- title:
+    tr: Yalnız dizinler
+    en: Directories only
+  command: find ~ -maxdepth 1 -type d
+  explanation:
+    tr: Ev altında birinci seviye dizinleri listeler.
+    en: Lists first-level directories under home.
+  difficulty: beginner
+  risk: safe
+  related_commands:
+  - find
+- title:
+    tr: Yapılandırma adları
+    en: Config names
+  command: find /etc -maxdepth 1 -name '*.conf' 2>/dev/null | head
+  explanation:
+    tr: /etc üstündeki .conf adlarını salt okuma listeler.
+    en: Read-only list of top-level .conf names under /etc.
+  difficulty: beginner
+  risk: safe
+  related_commands:
+  - find
+  - head
+- title:
+    tr: Son 7 gün
+    en: Last 7 days
+  command: find ~ -maxdepth 2 -type f -mtime -7 2>/dev/null | head
+  explanation:
+    tr: Evde son 7 günde değişen dosyalara dar bakış.
+    en: Narrow peek at files changed in the last 7 days under home.
+  difficulty: intermediate
+  risk: safe
+  related_commands:
+  - find
+- title:
+    tr: which ile komut yolu
+    en: Command path via which
+  command: which find; which ls
+  explanation:
+    tr: Arama araçlarının PATH konumunu görün.
+    en: See PATH locations of search tools.
+  difficulty: beginner
+  risk: safe
+  related_commands:
+  - which
+  - find
+  - ls
 callouts:
 - kind: caution
   text:
     tr: Kökten (`/`) geniş find yavaş ve gürültülüdür; maxdepth kullanın.
     en: Broad find from `/` is slow and noisy; use maxdepth.
+- kind: tip
+  text:
+    tr: Önce find . -name 'kalıp' | head ile sınırlayın; sonra genişletin.
+    en: Start with find . -name 'pattern' | head; then widen.
+- kind: warning
+  text:
+    tr: -delete / -exec rm öğrenme aşamasında kullanmayın.
+    en: Do not use -delete / -exec rm while learning.
 safe_exercises:
 - title:
     tr: Dar find
@@ -115,9 +208,28 @@ safe_exercises:
   risk: safe
   related_commands:
   - find
+- title:
+    tr: conf listesi
+    en: conf list
+  prompt:
+    tr: find /etc -maxdepth 1 -name '*.conf' 2>/dev/null | head çıktısını yorumlayın.
+    en: Interpret find /etc -maxdepth 1 -name '*.conf' 2>/dev/null | head.
+  risk: safe
+  related_commands:
+  - find
+- title:
+    tr: Zaman filtresi
+    en: Time filter
+  prompt:
+    tr: find ~ -maxdepth 2 -type f -mtime -30 2>/dev/null | head — bu ay değişenler.
+    en: find ~ -maxdepth 2 -type f -mtime -30 2>/dev/null | head — changed this month.
+  risk: safe
+  related_commands:
+  - find
 next_steps:
 - id: text-processing
 - id: permissions
+- id: linux-directory-structure
 - id: storage
 related_commands:
 - find
@@ -136,4 +248,4 @@ verification:
   sources:
   - man find
   - man locate
-  notes: NV-123 new topic guide from bank + man-oriented teaching; PDF not available in env; not human-verified.
+  notes: PDF-depth examples for search topic; original wording; stays draft.

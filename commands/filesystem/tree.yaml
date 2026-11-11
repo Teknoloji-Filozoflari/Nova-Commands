@@ -41,14 +41,16 @@ package_refs:
   distributions:
   - fedora
 install_notes:
-  tr: |-
-    Arch: pacman -S tree
+  tr: 'Arch: pacman -S tree
+
     Debian/Ubuntu: apt install tree
-    Fedora: dnf install tree
-  en: |-
-    Arch: pacman -S tree
+
+    Fedora: dnf install tree'
+  en: 'Arch: pacman -S tree
+
     Debian/Ubuntu: apt install tree
-    Fedora: dnf install tree
+
+    Fedora: dnf install tree'
 flags:
 - flag: -L
   takes_value: true
@@ -91,4 +93,8 @@ nova:
   concepts:
   - files
   - terminal-basics
+  - linux-directory-structure
   favorite_eligible: true
+related_topics:
+- linux-directory-structure
+- terminal-basics

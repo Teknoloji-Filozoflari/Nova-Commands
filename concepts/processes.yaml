@@ -11,18 +11,61 @@ intro:
   tr: Çalışan süreçleri görmek ve güvenli şekilde sinyal göndermek.
   en: See running processes and send signals safely.
 body:
-  tr: '`ps` anlık liste; `top`/`htop` canlı görünüm. `kill` varsayılan SIGTERM gönderir;
-
-    `kill -9` (SIGKILL) son çaredir. Yanlış PID başka süreci öldürür.
+  tr: '## Süreç nedir?
 
 
-    Windows’ta `Get-Process` / `Stop-Process` ayrı modeldir — Linux alias’ı değildir.'
-  en: '`ps` is a snapshot; `top`/`htop` are live views. `kill` defaults to SIGTERM;
-
-    `kill -9` (SIGKILL) is a last resort. The wrong PID kills the wrong process.
+    Çalışan her program bir **süreçtir** ve bir **PID** taşır. Donma veya aşırı kaynak kullanımında süreci
+    bulup sinyal göndermeyi bilmek gerekir.
 
 
-    On Windows, `Get-Process` / `Stop-Process` are a different model — not Linux aliases.'
+    ## Listeleme
+
+
+    `ps` anlık görüntü verir (`ps aux`, `ps -ef`). `top` / `htop` canlı izler. `pgrep -l ad` ada göre
+    PID bulur.
+
+
+    ## Sinyaller
+
+
+    `kill PID` varsayılan SIGTERM (15) gönderir — nazikçe sonlandır. Olmazsa `kill -9 PID` (SIGKILL) son
+    çaredir. Yanlış PID başka süreci öldürür.
+
+
+    ## İş kontrolü
+
+
+    `komut &` arka plan; `jobs`, `bg`, `fg`; Ctrl+Z durdurur. Windows’ta Get-Process / Stop-Process ayrı
+    modeldir.
+
+    '
+  en: '## What is a process?
+
+
+    Every running program is a **process** with a **PID**. When something hangs or burns CPU, you need
+    to find it and signal it.
+
+
+    ## Listing
+
+
+    `ps` is a snapshot (`ps aux`, `ps -ef`). `top` / `htop` are live. `pgrep -l name` finds PIDs by name.
+
+
+    ## Signals
+
+
+    `kill PID` defaults to SIGTERM (15) — polite stop. If needed, `kill -9 PID` (SIGKILL) is last resort.
+    The wrong PID kills the wrong process.
+
+
+    ## Job control
+
+
+    `cmd &` backgrounds; `jobs`, `bg`, `fg`; Ctrl+Z suspends. On Windows, Get-Process / Stop-Process are
+    a different model.
+
+    '
 difficulty: beginner
 categories:
 - processes
@@ -114,11 +157,80 @@ graded_examples:
   - bsd
   related_commands:
   - ps
+- title:
+    tr: aux özeti
+    en: aux snapshot
+  command: ps aux | head
+  explanation:
+    tr: Geniş anlık liste; head ile sınırlayın.
+    en: Wide snapshot; limit with head.
+  difficulty: beginner
+  risk: safe
+  platforms:
+  - linux
+  - macos
+  - bsd
+  related_commands:
+  - ps
+  - head
+- title:
+    tr: Ada göre PID
+    en: PID by name
+  command: pgrep -l bash | head
+  explanation:
+    tr: bash ile eşleşen süreç ad/PID (ortama göre).
+    en: Name/PID matches for bash (environment-dependent).
+  difficulty: beginner
+  risk: safe
+  platforms:
+  - linux
+  - macos
+  - bsd
+  related_commands:
+  - pgrep
+- title:
+    tr: sleep ve jobs
+    en: sleep and jobs
+  command: sleep 30 & jobs
+  explanation:
+    tr: Kısa arka plan işi oluşturup jobs ile görün; sonra fg/kill ile temizleyin.
+    en: Start a short background job and list it with jobs; clean up with fg/kill.
+  difficulty: intermediate
+  risk: caution
+  platforms:
+  - linux
+  - macos
+  - bsd
+  related_commands:
+  - ps
+- title:
+    tr: Sinyal listesi
+    en: Signal list
+  command: kill -l | head
+  explanation:
+    tr: Bilinen sinyal adlarını gösterir; henüz kimseyi öldürmez.
+    en: Shows known signal names; kills nothing yet.
+  difficulty: intermediate
+  risk: safe
+  platforms:
+  - linux
+  - macos
+  - bsd
+  related_commands:
+  - kill
 callouts:
 - kind: warning
   text:
     tr: pkill kalıbı birden fazla sürece isabet edebilir.
     en: pkill patterns can hit multiple processes.
+- kind: tip
+  text:
+    tr: 'Donmuş süreç sırası: önce kill PID, olmazsa kill -9 PID. PID’yi pgrep veya ps ile bulun.'
+    en: 'Hung process order: kill PID first, then kill -9 PID. Find the PID with pgrep or ps.'
+- kind: caution
+  text:
+    tr: kill -9 son çaredir; süreç temiz kapanamayabilir.
+    en: kill -9 is last resort; the process may not shut down cleanly.
 safe_exercises:
 - title:
     tr: ps okuma
@@ -129,6 +241,25 @@ safe_exercises:
   risk: safe
   related_commands:
   - ps
+- title:
+    tr: Arka plan lab
+    en: Background lab
+  prompt:
+    tr: sleep 60 & çalıştırın; jobs ve ps ile bulun; kill ile sonlandırın (yalnız bu sleep).
+    en: Run sleep 60 &; find with jobs/ps; kill only that sleep.
+  risk: caution
+  related_commands:
+  - ps
+  - kill
+- title:
+    tr: top gözlemi
+    en: Observe top
+  prompt:
+    tr: top açıp en çok CPU kullanan satırı okuyun; q ile çıkın (sinyal göndermeyin).
+    en: Open top, read the top CPU row, quit with q (send no signals).
+  risk: safe
+  related_commands:
+  - top
 next_steps:
 - id: debugging
 - id: monitoring-and-logs
@@ -151,4 +282,4 @@ verification:
   sources:
   - man ps
   - man kill
-  notes: NV-123 new topic guide from bank + man-oriented teaching; PDF not available in env; not human-verified.
+  notes: PDF-depth process guide; original wording; stays draft.

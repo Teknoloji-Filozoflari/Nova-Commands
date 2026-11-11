@@ -44,9 +44,9 @@ PowerShell cmdlets are not Linux aliases.
 | Commands | **270** | +OpenRC `rc-status`/`rc-service` + Void `sv` (NV-121) |
 | Tasks | **36** | includes sequential `security-check-*` stages |
 | Profiles | **14** | includes `server-security-checklist` |
-| Concepts | **29** | NV-123 topic guides (21 upgraded + 8 new category guides) |
-| Search entries | **349** | `metadata/search-index.json` `entry_count` |
-| `content_sha256` | `eb15d7f851993865a70094a66d8d08df3f9f230738d24efcca5b4e86c9d31844` | must match catalog/manifest/search-index |
+| Concepts | **30** | PDF-depth pass (+ linux-directory-structure; 29→30 guides) |
+| Search entries | **350** | `metadata/search-index.json` `entry_count` |
+| `content_sha256` | `e6466b7f777fe49019c2cc7d6d4bcf279857d76a209e7ca68b7292f5f945ec06` | must match catalog/manifest/search-index |
 
 ### Historical (NV-103 teachable bank, before that merge)
 

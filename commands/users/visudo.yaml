@@ -107,8 +107,23 @@ verification:
   sources:
   - visudo --help
   - man 8 visudo
-  notes: Agent-authored 2026-11-10 from visudo --help.
+  notes: Agent-authored 2026-11-10 from visudo --help. PDF-depth teachable fields.
 nova:
   concepts:
   - permissions
   ui_priority: 70
+when_to_use:
+  tr: sudoers’ı sözdizimi denetimiyle düzenlemek veya kontrol etmek.
+  en: Edit or check sudoers with syntax validation.
+syntax: visudo [-c] [-f sudoers] [-s]
+expected_effect:
+  tr: -c yalnız kontrol eder; düzenleme modu kilitli güvenli kayıt yapar.
+  en: -c checks only; edit mode writes a locked, validated file.
+common_mistakes:
+- tr: sudoers’ı düz nano/vim ile düzenleyip sözdizimini bozmak.
+  en: Editing sudoers with plain nano/vim and breaking syntax.
+- tr: NOPASSWD ALL’ı “kolaylık” diye eklemek.
+  en: Adding NOPASSWD ALL for “convenience”.
+related_topics:
+- permissions
+- server-security-checklist
