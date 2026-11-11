@@ -14,14 +14,22 @@ description:
     Kontrol listesi durumları (Nova yerel): unchecked / ok / review / na.
     Örnekler belgeleme içindir — otomatik çalışmaz.
 
-    İsteğe bağlı düzeltme: Sertifika yenilemeden önce config + cert yedeği. nginx -t / caddy validate sonrası reload; bozulursa önceki config’e dön. Otomatik ACME bu bankada certbot kaydı olmadan varsayılmaz.
+    Platform dürüstlüğü: nginx/caddy + systemctl Linux odaklıdır. Windows/macOS/BSD’de proxy yoksa
+    openssl/curl ile yerel :443 denetimi yeter; IIS/ACME (certbot) bu bankada birinci sınıf değil.
+
+    İsteğe bağlı düzeltme: Sertifika yenilemeden önce config + cert yedeği. nginx -t / caddy validate
+    sonrası reload; bozulursa önceki config’e dön.
   en: |-
     Why: Broken proxy/TLS causes outages and warnings; expired certs are common.
 
     Checklist states (Nova local): unchecked / ok / review / na.
     Examples are documentation only — never auto-run.
 
-    Optional fix: Backup config + certs before renewal. After nginx -t / caddy validate, reload; roll back config on failure. ACME is not assumed without a certbot entry.
+    Platform honesty: nginx/caddy + systemctl is Linux-centred. On Windows/macOS/BSD, if no proxy is
+    present, local :443 checks via openssl/curl suffice; IIS/ACME (certbot) are not first-class here.
+
+    Optional fix: Backup config + certs before renewal. After nginx -t / caddy validate, reload; roll
+    back config on failure.
 category: security
 tags:
 - security
@@ -50,16 +58,14 @@ implementations:
   - curl
   - systemctl
   examples:
-  - command: nginx -t 2>/dev/null || caddy validate --config /etc/caddy/Caddyfile 2>/dev/null || echo
-      'proxy na'
+  - command: nginx -t 2>/dev/null || caddy validate --config /etc/caddy/Caddyfile 2>/dev/null || echo 'proxy na'
     risk: safe
     shell: bash
     privilege: none
     explanation:
       tr: Config test (yazmaz). Yoksa na.
       en: Config test (non-writing). Else na.
-  - command: echo | openssl s_client -connect 127.0.0.1:443 -servername localhost 2>/dev/null | openssl
-      x509 -noout -dates -subject
+  - command: echo | openssl s_client -connect 127.0.0.1:443 -servername localhost 2>/dev/null | openssl x509 -noout -dates -subject
     risk: caution
     shell: bash
     privilege: none
@@ -73,6 +79,84 @@ implementations:
     explanation:
       tr: Yerel HTTPS başlıkları (doğrulama hatası varsa inceleyin).
       en: Local HTTPS headers (investigate verify failures).
+- id: windows-tls
+  platforms:
+  - windows
+  shells:
+  - powershell
+  commands:
+  - openssl
+  - curl
+  examples:
+  - command: echo '' | openssl s_client -connect 127.0.0.1:443 -servername localhost 2>$null | openssl x509 -noout -dates -subject
+    risk: caution
+    shell: powershell
+    privilege: none
+    explanation:
+      tr: Yerel :443 sertifika tarihleri. IIS/certbot birinci sınıf değil; proxy yoksa na.
+      en: Local :443 cert dates. IIS/certbot not first-class; na if no listener.
+  - command: curl.exe -fsSI https://localhost/
+    risk: caution
+    shell: powershell
+    privilege: none
+    explanation:
+      tr: Yerel HTTPS başlık duman testi.
+      en: Local HTTPS header smoke test.
+- id: macos-proxy-tls
+  platforms:
+  - macos
+  shells:
+  - zsh
+  commands:
+  - nginx
+  - openssl
+  - curl
+  examples:
+  - command: nginx -t 2>/dev/null || echo 'proxy na'
+    risk: safe
+    shell: zsh
+    privilege: none
+    explanation:
+      tr: Homebrew/nginx varsa config test; yoksa na (systemctl yolu yok).
+      en: Config test if Homebrew/nginx present; else na (no systemctl path).
+  - command: echo | openssl s_client -connect 127.0.0.1:443 -servername localhost 2>/dev/null | openssl x509 -noout -dates -subject
+    risk: caution
+    shell: zsh
+    privilege: none
+    explanation:
+      tr: Yerel :443 sertifika tarihleri.
+      en: Local :443 cert dates.
+  - command: curl -fsSI https://localhost/ | head -n 15
+    risk: caution
+    shell: zsh
+    privilege: none
+    explanation:
+      tr: Yerel HTTPS başlıkları.
+      en: Local HTTPS headers.
+- id: bsd-tls
+  platforms:
+  - bsd
+  shells:
+  - bash
+  commands:
+  - openssl
+  - curl
+  - nginx
+  examples:
+  - command: nginx -t 2>/dev/null || echo 'proxy na'
+    risk: safe
+    shell: bash
+    privilege: none
+    explanation:
+      tr: pkg nginx varsa config test; yoksa na.
+      en: Config test if pkg nginx present; else na.
+  - command: echo | openssl s_client -connect 127.0.0.1:443 -servername localhost 2>/dev/null | openssl x509 -noout -dates -subject
+    risk: caution
+    shell: bash
+    privilege: none
+    explanation:
+      tr: Yerel :443 sertifika tarihleri.
+      en: Local :443 cert dates.
 related_commands:
 - nginx
 - caddy
@@ -85,7 +169,7 @@ verification:
   - nginx -h
   - man 1 openssl
   - https://caddyserver.com/docs/command-line
-  notes: NV-103 sequential security checklist stage 7; read-only diagnostics; not human-verified.
+  notes: NV-106 platform-split security checklist stage 7; read-only diagnostics; not human-verified.
 related_tasks:
 - security-check-docker
 - security-check-dns-vpn

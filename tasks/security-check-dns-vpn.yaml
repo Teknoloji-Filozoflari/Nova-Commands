@@ -14,14 +14,22 @@ description:
     Kontrol listesi durumları (Nova yerel): unchecked / ok / review / na.
     Örnekler belgeleme içindir — otomatik çalışmaz.
 
-    İsteğe bağlı düzeltme: resolv/NetworkManager yedeği almadan kalıcı DNS değiştirmeyin. VPN kill-switch’i kör açmayın — yönetim yolunu test edin.
+    Platform dürüstlüğü: Linux resolvectl;/etc/resolv.conf; macOS scutil --dns; Windows ipconfig /all;
+    BSD /etc/resolv.conf + dig. VPN (wg/wg-quick) bankada gap — varsa yalnız salt okunur düşünün.
+
+    İsteğe bağlı düzeltme: resolv/NetworkManager yedeği almadan kalıcı DNS değiştirmeyin. VPN
+    kill-switch’i kör açmayın — yönetim yolunu test edin.
   en: |-
     Why: Poisoned/wrong DNS breaks routing; VPN failure can cut management access.
 
     Checklist states (Nova local): unchecked / ok / review / na.
     Examples are documentation only — never auto-run.
 
-    Optional fix: Do not persistently change DNS without backing up resolv/NetworkManager. Do not blind-enable VPN kill-switches — test management path.
+    Platform honesty: Linux resolvectl;/etc/resolv.conf; macOS scutil --dns; Windows ipconfig /all;
+    BSD /etc/resolv.conf + dig. VPN (wg/wg-quick) remains a bank gap — prefer read-only if present.
+
+    Optional fix: Do not persistently change DNS without backing up resolv/NetworkManager. Do not
+    blind-enable VPN kill-switches — test management path.
 category: network
 tags:
 - security
@@ -79,21 +87,76 @@ implementations:
     shell: zsh
     privilege: none
     explanation:
-      tr: macOS DNS yapılandırması özeti.
-      en: macOS DNS configuration summary.
+      tr: macOS DNS yapılandırması özeti (resolvectl değildir).
+      en: macOS DNS configuration summary (not resolvectl).
+  - command: dig +short example.com A
+    risk: safe
+    shell: zsh
+    privilege: none
+    explanation:
+      tr: Harici çözünürlük duman testi.
+      en: External resolution smoke test.
+- id: windows-dns
+  platforms:
+  - windows
+  shells:
+  - powershell
+  commands:
+  - ipconfig
+  - dig
+  examples:
+  - command: ipconfig /all
+    risk: safe
+    shell: cmd
+    privilege: none
+    explanation:
+      tr: Arabirim DNS sunucuları (resolvectl/scutil değildir). /flushdns yazmaz ama dikkatli okuyun.
+      en: Per-interface DNS servers (not resolvectl/scutil). /flushdns is a write — do not use here.
+  - command: dig +short example.com A
+    risk: safe
+    shell: powershell
+    privilege: none
+    explanation:
+      tr: dig kuruluysa duman testi; yoksa na veya nslookup (bankada ayrı gap).
+      en: Smoke test when dig is installed; else na or nslookup (separate bank gap).
+- id: bsd-dns
+  platforms:
+  - bsd
+  shells:
+  - bash
+  commands:
+  - dig
+  - host
+  examples:
+  - command: cat /etc/resolv.conf
+    risk: safe
+    shell: bash
+    privilege: none
+    explanation:
+      tr: BSD çözümleyici dosyası (systemd-resolved varsayılmaz).
+      en: BSD resolver file (do not assume systemd-resolved).
+  - command: dig +short example.com A || host example.com
+    risk: safe
+    shell: bash
+    privilege: none
+    explanation:
+      tr: Harici çözünürlük duman testi.
+      en: External resolution smoke test.
 related_commands:
 - resolvectl
 - dig
 - host
 - nmcli
 - scutil
+- ipconfig
 verification:
   status: draft
   sources:
   - man 1 resolvectl
   - man 1 dig
   - man 8 scutil
-  notes: NV-103 sequential security checklist stage 8; read-only diagnostics; not human-verified.
+  - ipconfig /?
+  notes: NV-106 platform-split security checklist stage 8; read-only diagnostics; not human-verified.
 related_tasks:
 - check-dns
 - check-internet-connectivity

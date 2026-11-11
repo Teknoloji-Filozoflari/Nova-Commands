@@ -1,6 +1,6 @@
 # Nova-Commands coverage matrix (NV-103)
 
-Last updated: 2026-11-10  
+Last updated: 2026-11-11  
 Scope rule: common, useful, **source-cited** commands — not every binary on every OS.  
 Bank ≠ Store catalog ≠ local PATH discovery.
 
@@ -33,7 +33,7 @@ PowerShell cmdlets are not Linux aliases.
 | Storage / backup | R/D | R/D | R/D | — | D | D | D (zfs) |
 | Git / dev basics | R | R | R | — | D | D (xcode) | R |
 | Containers / proxy | D/R | D/R | D/R | — | — | — | D (jails) |
-| Server security checklist | **NEW** tasks+profile+concept | shared | shared | notes | partial | partial | partial |
+| Server security checklist | platform-split `security-check-*` | distro-aware | distro-aware | nixos-rebuild (≠ nix) | Win paths filled | macOS paths filled | BSD paths filled (Docker=na/jails gap) |
 
 ## Counts (pre → target this PR)
 

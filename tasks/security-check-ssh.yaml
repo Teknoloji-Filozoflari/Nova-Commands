@@ -14,14 +14,24 @@ description:
     Kontrol listesi durumları (Nova yerel): unchecked / ok / review / na.
     Örnekler belgeleme içindir — otomatik çalışmaz.
 
-    İsteğe bağlı düzeltme: Yedek: cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak. Değişiklikten sonra sshd -t, systemctl reload, ikinci oturumda doğrula; bozulursa bak’tan geri al. PasswordAuthentication kapatmadan önce anahtar girişini kanıtla.
+    Platform dürüstlüğü: Linux’ta systemctl birim adı ssh/sshd dağıtıma göre değişir; BSD’de
+    service/rc.d; macOS’ta Remote Login/launchd; Windows’ta OpenSSH Server Get-Service. Hepsi için
+    `sshd -T` etkili ayar dökümü (yazmaz) ortak kalabilir.
+
+    İsteğe bağlı düzeltme: Yedek config alın. Değişiklikten sonra sshd -t, servisi reload edin, ikinci
+    oturumda doğrulayın. PasswordAuthentication kapatmadan önce anahtar girişini kanıtlayın.
   en: |-
     Why: Locking SSH out cuts host access; need a second session and config backup first.
 
     Checklist states (Nova local): unchecked / ok / review / na.
     Examples are documentation only — never auto-run.
 
-    Optional fix: Backup: cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak. After edits: sshd -t, systemctl reload, verify in a second session; restore from bak on failure. Prove key login before disabling PasswordAuthentication.
+    Platform honesty: Linux systemctl unit is ssh/sshd by distro; BSD uses service/rc.d; macOS uses
+    Remote Login/launchd; Windows uses OpenSSH Server via Get-Service. Across them, `sshd -T` remains
+    a non-writing effective-settings dump when OpenSSH is installed.
+
+    Optional fix: Backup config. After edits: sshd -t, reload the service, verify in a second session.
+    Prove key login before disabling PasswordAuthentication.
 category: security
 tags:
 - security
@@ -55,8 +65,7 @@ implementations:
     explanation:
       tr: 'Birim adı dağıtıma göre ssh/sshd. Sağlıklı: active. Şüpheli: failed + beklenmeyen restart döngüsü.'
       en: 'Unit name is ssh/sshd by distro. Healthy: active. Suspicious: failed + unexpected restart loop.'
-  - command: sudo sshd -t && sudo sshd -T | grep -Ei 'passwordauthentication|permitrootlogin|pubkeyauthentication|port
-      '
+  - command: sudo sshd -t && sudo sshd -T | grep -Ei 'passwordauthentication|permitrootlogin|pubkeyauthentication|port '
     risk: safe
     shell: bash
     privilege: elevated
@@ -70,19 +79,121 @@ implementations:
     explanation:
       tr: Dinleyen SSH portları (yerel). Port taraması değildir.
       en: Listening SSH ports (local). Not a port scan.
+- id: windows-sshd
+  platforms:
+  - windows
+  shells:
+  - powershell
+  commands:
+  - get-service
+  - get-nettcpconnection
+  - sshd
+  examples:
+  - command: Get-Service sshd -ErrorAction SilentlyContinue
+    risk: safe
+    shell: powershell
+    privilege: none
+    explanation:
+      tr: Windows OpenSSH Server servisi. Yoksa checklist na (systemctl değildir).
+      en: Windows OpenSSH Server service. If absent, checklist na (not systemctl).
+  - command: Get-NetTCPConnection -State Listen | Where-Object { $_.LocalPort -in 22,2222 }
+    risk: safe
+    shell: powershell
+    privilege: none
+    explanation:
+      tr: Yerel SSH dinleyicileri.
+      en: Local SSH listeners.
+  - command: sshd -t; sshd -T | Select-String -Pattern 'passwordauthentication|permitrootlogin|pubkeyauthentication|port '
+    risk: safe
+    shell: powershell
+    privilege: elevated
+    explanation:
+      tr: OpenSSH kuruluduysa etkili ayar dökümü (yazmaz).
+      en: Effective settings dump when OpenSSH is installed (non-writing).
+- id: macos-sshd
+  platforms:
+  - macos
+  shells:
+  - zsh
+  commands:
+  - launchctl
+  - sshd
+  - lsof
+  examples:
+  - command: sudo launchctl print system/com.openssh.sshd 2>/dev/null | head -n 40 || echo 'remote-login-na'
+    risk: safe
+    shell: zsh
+    privilege: elevated
+    explanation:
+      tr: Remote Login / OpenSSH launchd işi. Kapalıysa na olabilir (systemctl değildir).
+      en: Remote Login / OpenSSH launchd job. May be na if disabled (not systemctl).
+  - command: sudo sshd -t && sudo sshd -T | grep -Ei 'passwordauthentication|permitrootlogin|pubkeyauthentication|port '
+    risk: safe
+    shell: zsh
+    privilege: elevated
+    explanation:
+      tr: Config test + etkili ayarlar.
+      en: Config test + effective settings.
+  - command: lsof -nP -iTCP:22 -sTCP:LISTEN || true
+    risk: safe
+    shell: zsh
+    privilege: none
+    explanation:
+      tr: Yerel :22 dinleyicisi (uzak tarama değil).
+      en: Local :22 listener (not a remote scan).
+- id: bsd-sshd
+  platforms:
+  - bsd
+  shells:
+  - bash
+  commands:
+  - service
+  - sshd
+  - netstat-bsd
+  examples:
+  - command: service sshd status
+    risk: safe
+    shell: bash
+    privilege: none
+    explanation:
+      tr: FreeBSD/NetBSD rc.d sshd durumu (systemctl/launchctl değildir). OpenBSD’de rcctl ayrıdır.
+      en: FreeBSD/NetBSD rc.d sshd status (not systemctl/launchctl). OpenBSD uses rcctl separately.
+  - command: sudo sshd -t && sudo sshd -T | grep -Ei 'passwordauthentication|permitrootlogin|pubkeyauthentication|port '
+    risk: safe
+    shell: bash
+    privilege: elevated
+    explanation:
+      tr: Config test + etkili ayarlar.
+      en: Config test + effective settings.
+  - command: netstat -an -p tcp | grep '\.22 '
+    risk: safe
+    shell: bash
+    privilege: none
+    explanation:
+      tr: Yerel :22 soketleri (BSD netstat).
+      en: Local :22 sockets (BSD netstat).
 related_commands:
 - sshd
 - ssh
 - systemctl
 - journalctl
 - ss
+- get-service
+- get-nettcpconnection
+- launchctl
+- service
+- lsof
+- netstat-bsd
 verification:
   status: draft
   sources:
   - man 8 sshd
   - man 5 sshd_config
   - man 1 systemctl
-  notes: NV-103 sequential security checklist stage 3; read-only diagnostics; not human-verified.
+  - Get-Help Get-Service
+  - man 1 launchctl
+  - https://man.freebsd.org/cgi/man.cgi?query=service&sektion=8
+  notes: NV-106 platform-split security checklist stage 3; read-only diagnostics; not human-verified.
 related_tasks:
 - connect-ssh
 - security-check-updates
