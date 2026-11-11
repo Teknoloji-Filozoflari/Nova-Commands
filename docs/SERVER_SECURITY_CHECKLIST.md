@@ -39,7 +39,7 @@ Each task documents: why, read-only diagnostic + privilege, **separate platform-
 | Stage | Linux | Windows | macOS | BSD |
 |-------|-------|---------|-------|-----|
 | OS/accounts | hostnamectl | Get-ComputerInfo | sw_vers | uname/who |
-| Updates | pacman/apt/dnf + NixOS `nixos-rebuild` | winget list | softwareupdate | pkg + freebsd-update |
+| Updates | pacman/apt/dnf + NixOS `dry-build` (no switch) | `winget list --upgrade-available` | softwareupdate --list | pkg + `freebsd-update fetch` (downloads; no `show`) |
 | SSH | systemctl + sshd -T | Get-Service sshd | launchctl + sshd | service + sshd |
 | Firewall/ports | ss + ufw **or** firewalld (split) | Get-NetTCPConnection + netsh | lsof + pfctl note | netstat + pfctl |
 | Users/sudo | getent/visudo | whoami groups (no sudo) | dscl + sudo | doas ≠ sudo |

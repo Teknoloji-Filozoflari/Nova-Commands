@@ -6,6 +6,14 @@ Dates are UTC merge days when known. Digests are `metadata/manifest.json`
 
 ## Unreleased
 
+- NV-119 security checklist content audit: replace invented
+  `freebsd-update show` with `fetch` (+ download warning); correct NixOS
+  `dry-build` wording (evaluate/show, does not build/switch); prefer
+  `winget list --upgrade-available` over bare `winget upgrade`; fix
+  misplaced macOS Docker notes. Task schema allows example `warnings[]`.
+  Add `tests/test_security_checklist.py` (never auto-run wording, platform
+  match/no-match, draft-only). No status promotions. Digest
+  `92e69b0cd8278b5685cf6d748769c1a22cc61bbd02924e5eee7267122d7e4a4b`.
 - NV-110 / NV-109: additive `learning_level` on commands (`beginner` \|
   `intermediate` \| `advanced` \| `unspecified`) and optional
   `examples[].difficulty` — pedagogy independent of `risk`. Missing

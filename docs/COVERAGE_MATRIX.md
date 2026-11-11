@@ -46,7 +46,7 @@ PowerShell cmdlets are not Linux aliases.
 | Profiles | **14** | includes `server-security-checklist` |
 | Concepts | **21** | includes `server-security-checklist` |
 | Search entries | **338** | `metadata/search-index.json` `entry_count` |
-| `content_sha256` | `a31207ef405b8319e4db0602f2bce599213a1fbf400055156b5139584108976f` | must match catalog/manifest/search-index |
+| `content_sha256` | `92e6920cd8278b5685cf6d748769c1a22cc61bbd02924e5eee7267122d7e4a4b` | must match catalog/manifest/search-index |
 
 ### Historical (NV-103 teachable bank, before that merge)
 

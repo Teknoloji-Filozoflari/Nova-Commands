@@ -5,8 +5,8 @@ name:
   tr: 2) Güncellemeler
   en: 2) Updates
 summary:
-  tr: Bekleyen güvenlik güncellemelerini salt okunur kontrol et (yükseltme zorunlu değil).
-  en: Check pending security updates read-only (upgrade not required).
+  tr: Bekleyen güvenlik güncellemelerini listele; yükseltme zorunlu değil (bazı yollar indirir/derleme planı gösterir).
+  en: List pending security updates; upgrade not required (some paths download or show build plans).
 description:
   tr: |-
     Neden: Eski paketler bilinen CVElerin kapısını açık bırakır; kör full-upgrade bakım penceresi ister.
@@ -116,8 +116,13 @@ implementations:
     shell: bash
     privilege: elevated
     explanation:
-      tr: NixOS yapılandırmasını derler/uygulamaz. nix-env veya düz Nix kurulum değildir.
-      en: Builds NixOS config without switching. Not nix-env or plain Nix package install.
+      tr: 'Ne derleneceğini/indirileceğini gösterir; derlemez, aktive etmez, switch yapmaz.
+        nix-env veya düz Nix kurulum değildir. Ağ/cache sorgusu olabilir.'
+      en: 'Shows what would be built/downloaded; does not build, activate, or switch.
+        Not nix-env or plain Nix package install. May query caches/network.'
+    warnings:
+    - tr: dry-build sistem neslini değiştirmez; yine de sudo ve olası ağ/cache sorgusu ister.
+      en: dry-build does not change the system generation; still needs sudo and may query caches/network.
   notes:
     tr: Nix ≠ NixOS; bu uygulama yalnız NixOS host içindir.
     en: Nix ≠ NixOS; this implementation is for NixOS hosts only.
@@ -129,13 +134,13 @@ implementations:
   commands:
   - winget
   examples:
-  - command: winget upgrade
+  - command: winget list --upgrade-available
     risk: safe
     shell: powershell
     privilege: none
     explanation:
-      tr: Yükseltilebilir WinGet paketlerini listeler (uygulamaz; --all yükseltir).
-      en: Lists upgradable WinGet packages (does not apply; --all would upgrade).
+      tr: 'Yükseltilebilir WinGet paketlerini listeler (yazmaz). `winget upgrade --all` uygular — kullanma.'
+      en: 'Lists packages with upgrades available (non-writing). `winget upgrade --all` applies updates — do not use here.'
 - id: macos-softwareupdate
   platforms:
   - macos
@@ -169,13 +174,18 @@ implementations:
     explanation:
       tr: pkg paketlerinde yükseltme adayları (taban sistemi değildir).
       en: pkg package upgrade candidates (not the FreeBSD base system).
-  - command: sudo freebsd-update fetch && sudo freebsd-update show | head
+  - command: sudo freebsd-update fetch
     risk: caution
     shell: bash
     privilege: elevated
     explanation:
-      tr: Taban yamalarını indirir ve özet gösterir; install uygulamaz. pkg upgrade değildir.
-      en: Fetches base patches and shows a summary; does not install. Not pkg upgrade.
+      tr: 'Taban yamalarını /var/db/freebsd-update altına indirir ve değişecek dosyaları listeler;
+        `install` uygulamaz. `show` komutu yoktur (showconfig ≠ yama özeti). pkg upgrade değildir.'
+      en: 'Downloads base patches into /var/db/freebsd-update and lists files that would change;
+        does not `install`. There is no `show` command (showconfig ≠ patch summary). Not pkg upgrade.'
+    warnings:
+    - tr: fetch ağdan indirir ve disk yazar; yalnızca listelemek değildir. install çalıştırmayın.
+      en: fetch downloads over the network and writes to disk; it is not list-only. Do not run install.
 related_commands:
 - pacman
 - apt
@@ -194,10 +204,11 @@ verification:
   - man 8 dnf
   - https://nixos.org/manual/nixos/stable/#sec-upgrading
   - softwareupdate --help
-  - winget upgrade -h
+  - https://learn.microsoft.com/windows/package-manager/winget/list
   - https://man.freebsd.org/cgi/man.cgi?query=freebsd-update&sektion=8
   - https://man.freebsd.org/cgi/man.cgi?query=pkg&sektion=8
-  notes: NV-106 platform-split security checklist stage 2; read-only/near-read diagnostics; not human-verified.
+  - https://wiki.nixos.org/wiki/Nixos-rebuild
+  notes: NV-119 content audit; stage 2 stays draft — not human-verified on live platforms.
 related_tasks:
 - update-system
 - security-check-os-accounts

@@ -138,8 +138,8 @@ implementations:
       tr: Privileged/host network bayrakları.
       en: Privileged/host-network flags.
   notes:
-    tr: BSD Docker genelde na; jails ayrı konu.
-    en: BSD Docker is usually na; jails are a separate topic.
+    tr: Docker Desktop CLI; systemctl/launchctl docker birimi varsayılmaz. Yoksa na.
+    en: Docker Desktop CLI; do not assume a systemctl/launchctl docker unit. Else na.
 related_commands:
 - docker
 - docker-compose

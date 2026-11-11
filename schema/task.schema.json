@@ -226,7 +226,15 @@
           "type": "string",
           "enum": ["none", "user", "elevated", "admin"]
         },
-        "requires_elevated": { "type": "boolean" }
+        "requires_elevated": { "type": "boolean" },
+        "warnings": {
+          "type": "array",
+          "description": "Optional bilingual operator warnings (download/build/mutate side effects).",
+          "maxItems": 8,
+          "items": {
+            "$ref": "#/$defs/localizedShort"
+          }
+        }
       }
     }
   }
