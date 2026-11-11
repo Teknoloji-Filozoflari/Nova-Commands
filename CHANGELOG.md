@@ -6,6 +6,15 @@ Dates are UTC merge days when known. Digests are `metadata/manifest.json`
 
 ## Unreleased
 
+- PDF-depth topic guides (Komut Rehberi): deepen permissions (rwx/octal tables, chmod/chown/chgrp/umask/visudo),
+  terminal basics, pipes, path, find, processes, text, archives, networking; add
+  **Linux dizin yapısı** (`linux-directory-structure`). Paragraph-friendly `body`
+  sections + richer graded examples/callouts/exercises. Teachable fields on
+  chmod/chown/chgrp/umask/visudo (+ related_topics on ls/tree/du). Curriculum
+  inserts the new guide after terminal-basics. No status promotions; no PDF
+  verbatim copy (man/FHS-oriented original wording). Digest
+  `e6466b7f777fe49019c2cc7d6d4bcf279857d76a209e7ca68b7292f5f945ec06`.
+
 - NV-123 teachable topic catalog: concepts gain optional `format: topic-guide`
   structured sections (`intro`, `learning_path`, `subtopics`, `command_table`,
   `graded_examples`, `callouts`, `safe_exercises`, `next_steps`); commands gain

@@ -62,6 +62,8 @@ examples:
   requires_elevated: true
 related:
 - chmod
+- chgrp
+- ls
 intent:
   tr:
   - dosya sahibi değiştir
@@ -75,6 +77,21 @@ verification:
   - man 1 chown
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-bootstrap
+  notes: PDF-depth teachable fields.
 nova:
   concepts:
   - permissions
+when_to_use:
+  tr: Dosya/dizin sahibi (ve isteğe bağlı grubu) değiştirmek; genelde root.
+  en: Change file/directory owner (and optional group); usually root.
+syntax: chown [OPTION]... [OWNER][:[GROUP]] FILE...
+expected_effect:
+  tr: Sahip/grup alanını günceller; kip bitlerini değiştirmez.
+  en: Updates owner/group fields; does not change mode bits.
+common_mistakes:
+- tr: chown -R ile sistem dizinlerini yanlışlıkla sahiplenmek.
+  en: Recursively reclaiming system dirs by mistake.
+- tr: Grup sözdizimini (kullanıcı:grup) karıştırmak.
+  en: Confusing user:group syntax.
+related_topics:
+- permissions

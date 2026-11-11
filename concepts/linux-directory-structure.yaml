@@ -1,0 +1,458 @@
+id: linux-directory-structure
+kind: nova-commands-concept
+format: topic-guide
+title:
+  tr: Linux dizin yapısı
+  en: Linux directory structure
+summary:
+  tr: FHS haritası — /, /etc, /home, /var, /usr, /tmp, /opt, /dev, /proc ve gezinme.
+  en: FHS map — /, /etc, /home, /var, /usr, /tmp, /opt, /dev, /proc, and navigation.
+difficulty: beginner
+categories:
+- filesystem
+platforms:
+- linux
+tags:
+- filesystem
+- fhs
+- directories
+- beginner
+related_commands:
+- pwd
+- ls
+- cd
+- tree
+- file
+- stat
+- find
+- du
+- df
+related_concepts:
+- terminal-basics
+- path
+- permissions
+- storage
+- finding-files
+see_also:
+- man hier
+- man 7 file-hierarchy
+- 'https://refspecs.linuxfoundation.org/FHS_3.0/fhs/index.html'
+- man pwd
+- man ls
+intro:
+  tr: Linux’ta her şey tek bir ağaçtır; kök `/` dir. Bu rehber önemli dizinleri, mutlak/göreli yolu ve güvenli keşif komutlarını öğretir.
+  en: On Linux everything hangs from one tree rooted at `/`. This guide teaches key directories, absolute/relative paths, and safe exploration commands.
+body:
+  tr: |
+    ## Tek ağaç, kök `/`
+
+    Windows’taki `C:`, `D:` sürücü harfleri yoktur. Diskler ve aygıtlar ağacın bir dalına **bağlanır** (`mount`). Önce haritayı öğrenin; sonra komutlarla güvenli şekilde dolaşın.
+
+    ## Önemli dizinler
+
+    | Dizin | İçeriği |
+    |-------|---------|
+    | `/` | Kök. Her şey bunun altındadır. |
+    | `/home` | Kullanıcı evleri (`/home/ayse`). Kişisel dosya ve ayarlar. |
+    | `/root` | root kullanıcısının evi ( `/home` altında değildir). |
+    | `/etc` | Sistem ve servis yapılandırması (`passwd`, `fstab`, `hostname` …). |
+    | `/bin`, `/sbin` | Temel kullanıcı ve yönetim komutları; birçok dağıtımda `/usr/bin` ve `/usr/sbin` bağlarıdır. |
+    | `/usr` | Kurulu programlar, kütüphaneler, belgeler (`bin`, `lib`, `share`). |
+    | `/var` | Değişen veri: günlükler (`/var/log`), önbellek, posta, veritabanı dosyaları. |
+    | `/tmp` | Geçici dosyalar; yeniden başlatmada silinebilir. |
+    | `/opt` | Üçüncü taraf / isteğe bağlı yazılımlar. |
+    | `/dev` | Aygıt düğümleri (`/dev/sda`, `/dev/tty`, `/dev/null`). |
+    | `/proc`, `/sys` | Çekirdek ve süreçlerin canlı görünümü; gerçek diskte yer tutmaz. |
+    | `/boot` | Önyükleyici ve çekirdek dosyaları. |
+    | `/mnt`, `/media` | Geçici bağlama noktaları (USB, ISO, …). |
+
+    Dağıtıma göre birleşme noktaları (usr-merge) değişebilir; emin değilseniz `ls -ld` ve `man hier` ile bakın.
+
+    ## Yol kavramları
+
+    | Gösterim | Anlamı |
+    |----------|--------|
+    | `/etc/passwd` | Mutlak yol — nerede olursanız olun aynı hedef. |
+    | `belgeler/not.txt` | Göreli yol — çalışma dizinine göre. |
+    | `.` | Bulunduğunuz dizin. |
+    | `..` | Bir üst dizin. |
+    | `~` | Ev dizininiz. |
+    | `cd -` | Bir önceki çalışma dizinine dönüş. |
+
+    ## Keşif komutları
+
+    `pwd` konumu yazar. `ls`, `ls -la`, `ls -lh` listeler. `cd` dizin değiştirir. `tree -L 2` (kuruluysa) ağacı çizer. `file` tür söyler; `stat` ayrıntı verir. `find` dar kalıpla arar; `du -sh` dizin özeti, `df -h` dosya sistemi doluluğu gösterir.
+
+    ## Güvenli pratik
+
+    Denemeleri `~/pratik` veya `/tmp` altında yapın. Sistem dizinlerinde (`/etc`, `/boot`, `/usr`) yazmayın; salt okuma ile keşfedin. `rm -rf /` veya yanlış boşluklu silme felakettir — bu rehber silme öğretmez.
+  en: |
+    ## One tree, root `/`
+
+    There are no Windows-style `C:` / `D:` drive letters. Disks and devices are **mounted** onto a branch of the tree. Learn the map first; then explore with safe commands.
+
+    ## Important directories
+
+    | Directory | Contents |
+    |-----------|----------|
+    | `/` | Root of everything. |
+    | `/home` | User homes (`/home/ada`). Personal files and settings. |
+    | `/root` | root’s home (not under `/home`). |
+    | `/etc` | System and service configuration (`passwd`, `fstab`, `hostname`, …). |
+    | `/bin`, `/sbin` | Essential user and admin commands; often merged into `/usr/bin` and `/usr/sbin`. |
+    | `/usr` | Installed programs, libraries, docs (`bin`, `lib`, `share`). |
+    | `/var` | Variable data: logs (`/var/log`), caches, mail, database files. |
+    | `/tmp` | Temporary files; may be cleared on reboot. |
+    | `/opt` | Optional / third-party software. |
+    | `/dev` | Device nodes (`/dev/sda`, `/dev/tty`, `/dev/null`). |
+    | `/proc`, `/sys` | Live kernel/process views; not real on-disk storage. |
+    | `/boot` | Bootloader and kernel files. |
+    | `/mnt`, `/media` | Temporary mount points (USB, ISO, …). |
+
+    Merge layouts (usr-merge) vary by distro; when unsure, check `ls -ld` and `man hier`.
+
+    ## Path concepts
+
+    | Form | Meaning |
+    |------|---------|
+    | `/etc/passwd` | Absolute — same target from anywhere. |
+    | `docs/note.txt` | Relative — from the working directory. |
+    | `.` | Current directory. |
+    | `..` | Parent directory. |
+    | `~` | Your home directory. |
+    | `cd -` | Return to the previous working directory. |
+
+    ## Exploration commands
+
+    `pwd` prints location. `ls`, `ls -la`, `ls -lh` list. `cd` changes directory. `tree -L 2` (if installed) draws a tree. `file` reports type; `stat` shows detail. `find` searches with narrow patterns; `du -sh` summarizes a directory; `df -h` shows filesystem free space.
+
+    ## Safe practice
+
+    Practice under `~/practice` or `/tmp`. Do not write into system dirs (`/etc`, `/boot`, `/usr`); explore read-only. This guide does not teach destructive deletes.
+verification:
+  status: draft
+  sources:
+  - man hier
+  - man 7 file-hierarchy
+  - https://refspecs.linuxfoundation.org/FHS_3.0/fhs/index.html
+  - man pwd
+  - man ls
+  - man du
+  notes: New topic guide mapped to PDF “Dizin Yapısı ve Gezinme”; original wording; FHS/man-oriented. Stays draft.
+learning_path:
+- ref: pwd
+  kind: command
+  note:
+    tr: Nerede olduğunuzu görün.
+    en: See where you are.
+- ref: ls
+  kind: command
+  note:
+    tr: Dizin içeriğini okuyun.
+    en: Read directory contents.
+- ref: cd
+  kind: command
+  note:
+    tr: Mutlak ve göreli gezinme.
+    en: Absolute and relative navigation.
+- ref: tree
+  kind: command
+  note:
+    tr: Ağacı görselleştirin (paket gerekebilir).
+    en: Visualize the tree (may need a package).
+- ref: file
+  kind: command
+  note:
+    tr: Dosya türünü içeriğe göre söyleyin.
+    en: Report file type from content.
+- ref: find
+  kind: command
+  note:
+    tr: Dar kalıpla arayın.
+    en: Search with a narrow pattern.
+- ref: du
+  kind: command
+  note:
+    tr: Dizin boyut özeti.
+    en: Directory size summary.
+- ref: df
+  kind: command
+  note:
+    tr: Dosya sistemi doluluğu.
+    en: Filesystem free space.
+subtopics:
+- id: fhs-map
+  title:
+    tr: FHS haritası
+    en: FHS map
+  summary:
+    tr: /, /etc, /home, /var, /usr, /tmp, /opt, /dev, /proc ne işe yarar?
+    en: What are /, /etc, /home, /var, /usr, /tmp, /opt, /dev, /proc for?
+  related_commands:
+  - ls
+  - pwd
+- id: path-forms
+  title:
+    tr: Mutlak ve göreli yol
+    en: Absolute and relative paths
+  summary:
+    tr: /, ., .., ~ ve cd - anlamları.
+    en: Meanings of /, ., .., ~, and cd -.
+  related_commands:
+  - cd
+  - pwd
+- id: listing
+  title:
+    tr: Listeleme ve ağaç
+    en: Listing and tree
+  summary:
+    tr: ls -la/-lh ve tree -L ile keşif.
+    en: Explore with ls -la/-lh and tree -L.
+  related_commands:
+  - ls
+  - tree
+- id: inspect
+  title:
+    tr: Tür ve meta veri
+    en: Type and metadata
+  summary:
+    tr: file ve stat ile dosyayı tanıyın.
+    en: Identify files with file and stat.
+  related_commands:
+  - file
+  - stat
+- id: size-search
+  title:
+    tr: Boyut ve arama
+    en: Size and search
+  summary:
+    tr: du/df özeti; find ile dar arama.
+    en: du/df summaries; narrow find searches.
+  related_commands:
+  - du
+  - df
+  - find
+command_table:
+- id: pwd
+  purpose:
+    tr: Çalışma dizinini yazdırır.
+    en: Print working directory.
+  learning_level: beginner
+- id: ls
+  purpose:
+    tr: Dizin içeriğini listeler (-l/-a/-h sık kullanılır).
+    en: List directory contents (-l/-a/-h common).
+  learning_level: beginner
+- id: cd
+  purpose:
+    tr: Çalışma dizinini değiştirir.
+    en: Change the working directory.
+  learning_level: beginner
+- id: tree
+  purpose:
+    tr: Dizin ağacını görsel listeler (ayrı paket olabilir).
+    en: List contents as a tree (may be a separate package).
+  learning_level: beginner
+- id: file
+  purpose:
+    tr: Dosya türünü içeriğine bakarak söyler.
+    en: Determine file type from contents.
+  learning_level: beginner
+- id: stat
+  purpose:
+    tr: Boyut, izin, sahip ve zaman damgalarını gösterir.
+    en: Show size, mode, owner, and timestamps.
+  learning_level: beginner
+- id: find
+  purpose:
+    tr: Ağaçta isim/tür ile dosya arar.
+    en: Search a tree by name/type.
+  learning_level: intermediate
+- id: du
+  purpose:
+    tr: Dizin disk kullanımını özetler.
+    en: Summarize directory disk usage.
+  learning_level: beginner
+- id: df
+  purpose:
+    tr: Dosya sistemi boş alanını gösterir.
+    en: Report filesystem disk space usage.
+  learning_level: beginner
+graded_examples:
+- title:
+    tr: Konum ve ev
+    en: Location and home
+  command: pwd; ls -la ~
+  explanation:
+    tr: Çalışma dizinini ve evinizdeki (gizli dahil) girdileri görün.
+    en: See the working directory and home entries including hidden ones.
+  difficulty: beginner
+  risk: safe
+  platforms:
+  - linux
+  related_commands:
+  - pwd
+  - ls
+- title:
+    tr: /etc’ye bak (yazmadan)
+    en: Peek at /etc (read-only)
+  command: ls -lh /etc | head
+  explanation:
+    tr: Yapılandırma dizininin üstünü okunur boyutlarla listeler; hiçbir dosyayı düzenlemez.
+    en: Lists the top of the config directory with human sizes; edits nothing.
+  difficulty: beginner
+  risk: safe
+  platforms:
+  - linux
+  related_commands:
+  - ls
+  - head
+- title:
+    tr: Üst dizin ve geri dönüş
+    en: Parent dir and return
+  command: cd /tmp && pwd && cd - && pwd
+  explanation:
+    tr: /tmp’ye gidip cd - ile önceki dizine dönün; - anlamını pekiştirir.
+    en: Go to /tmp then return with cd -; reinforces the dash meaning.
+  difficulty: beginner
+  risk: safe
+  platforms:
+  - linux
+  related_commands:
+  - cd
+  - pwd
+- title:
+    tr: Ağaç (kuruluysa)
+    en: Tree (if installed)
+  command: tree -L 2 /usr 2>/dev/null || ls -la /usr
+  explanation:
+    tr: tree yoksa ls yedek planıdır. /usr altında iki seviye keşif.
+    en: Falls back to ls if tree is missing. Two-level peek under /usr.
+  difficulty: beginner
+  risk: safe
+  platforms:
+  - linux
+  related_commands:
+  - tree
+  - ls
+- title:
+    tr: Tür ve stat
+    en: Type and stat
+  command: file /bin/ls; stat -c '%A %U %G %n' /etc/hostname 2>/dev/null || stat /etc/hostname
+  explanation:
+    tr: file uzantıya güvenmez; stat izin/sahip özetler. GNU -c yoksa düz stat kullanın.
+    en: file does not trust extensions; stat summarizes mode/owner. Use plain stat if GNU -c is absent.
+  difficulty: intermediate
+  risk: safe
+  platforms:
+  - linux
+  related_commands:
+  - file
+  - stat
+- title:
+    tr: Dar find + du
+    en: Narrow find + du
+  command: find /etc -maxdepth 1 -name '*.conf' 2>/dev/null | head; du -sh /var/log 2>/dev/null || du -sh /tmp
+  explanation:
+    tr: Kökten geniş tarama yok; maxdepth ile conf’lara bakın. du ile log/tmp özeti (izin hatası olabilir — normal).
+    en: No broad scan from root; list conf files with maxdepth. du summarizes log/tmp (permission errors are normal).
+  difficulty: intermediate
+  risk: safe
+  platforms:
+  - linux
+  related_commands:
+  - find
+  - du
+- title:
+    tr: df ile doluluk
+    en: Free space with df
+  command: df -h
+  explanation:
+    tr: Bağlı dosya sistemlerinin boyut ve kullanımını okunur biçimde gösterir.
+    en: Shows size and use of mounted filesystems in human-readable form.
+  difficulty: beginner
+  risk: safe
+  platforms:
+  - linux
+  related_commands:
+  - df
+callouts:
+- kind: tip
+  text:
+    tr: 'Önce harita, sonra komut: /etc yapılandırma, /var değişen veri, /home sizin alanınız, /tmp oyun alanı.'
+    en: 'Map first, commands second: /etc config, /var variable data, /home your space, /tmp playground.'
+- kind: tip
+  text:
+    tr: tree çoğu dağıtımda ayrı pakettir. Yoksa ls -R veya find . -maxdepth 2 kullanın.
+    en: tree is often a separate package. If missing, use ls -R or find . -maxdepth 2.
+- kind: warning
+  text:
+    tr: /etc, /boot, /usr altına yazmayın. Keşif salt okuma olsun. rm denemelerini yalnız ~/pratik veya /tmp’de yapın.
+    en: Do not write under /etc, /boot, or /usr. Keep exploration read-only. Practice rm only under ~/practice or /tmp.
+- kind: caution
+  text:
+    tr: /proc ve /sys sanalır; binlerce girdi vardır. ls /proc | head ile sınırlayın; rastgele yazmayın.
+    en: /proc and /sys are virtual and huge. Limit with ls /proc | head; never write at random.
+- kind: note
+  text:
+    tr: Bu rehber Linux FHS odaklıdır. macOS/BSD benzer hiyerarşi kullanır ama yollar birebir aynı değildir; Windows sürücü harfli ayrı modeldir.
+    en: This guide is Linux FHS-oriented. macOS/BSD are similar but not identical; Windows drive letters are a different model.
+safe_exercises:
+- title:
+    tr: Haritayı ezberleme
+    en: Learn the map
+  prompt:
+    tr: ls / çıktısında gördüğünüz her üst dizini (home, etc, var, usr, tmp, opt, dev, proc …) kendi cümlenizle bir cümlede açıklayın.
+    en: For each top-level name you see in ls / (home, etc, var, usr, tmp, opt, dev, proc, …) write one sentence explaining it.
+  risk: safe
+  related_commands:
+  - ls
+- title:
+    tr: Güvenli oyun alanı
+    en: Safe playground
+  prompt:
+    tr: mkdir -p ~/pratik/dizinler && cd ~/pratik/dizinler && pwd && ls -la. Tüm denemeleri burada tutun.
+    en: mkdir -p ~/practice/dirs && cd ~/practice/dirs && pwd && ls -la. Keep all experiments here.
+  risk: safe
+  related_commands:
+  - mkdir
+  - cd
+  - pwd
+  - ls
+- title:
+    tr: tree veya find
+    en: tree or find
+  prompt:
+    tr: tree -L 2 ~/pratik 2>/dev/null || find ~/pratik -maxdepth 2 -print. Çıktıyı yorumlayın.
+    en: tree -L 2 ~/practice 2>/dev/null || find ~/practice -maxdepth 2 -print. Interpret the output.
+  risk: safe
+  related_commands:
+  - tree
+  - find
+- title:
+    tr: du ve df
+    en: du and df
+  prompt:
+    tr: du -sh ~ /tmp; df -h. Ev ve /tmp özetini dosya sistemi doluluğuyla karşılaştırın (yazmadan).
+    en: du -sh ~ /tmp; df -h. Compare home and /tmp summaries with filesystem free space (read-only).
+  risk: safe
+  related_commands:
+  - du
+  - df
+next_steps:
+- id: path
+  note:
+    tr: Kabuk komutları PATH’te nasıl bulunur?
+    en: How does the shell find commands on PATH?
+- id: permissions
+  note:
+    tr: Dizinlerde x ve tipik kipler.
+    en: Directory x bit and common modes.
+- id: finding-files
+  note:
+    tr: Ağaçta isimle arama.
+    en: Search the tree by name.
+- id: storage
+  note:
+    tr: Bağlama noktaları ve diskler.
+    en: Mount points and disks.

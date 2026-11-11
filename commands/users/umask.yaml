@@ -95,9 +95,24 @@ verification:
   sources:
   - bash help umask
   - man 2 umask
-  notes: Agent-authored 2026-11-10 from bash help umask.
+  notes: Agent-authored 2026-11-10 from bash help umask. PDF-depth teachable fields.
 nova:
   concepts:
   - permissions
   - terminal-basics
   - shell-builtin
+when_to_use:
+  tr: Yeni dosya/dizinlerin varsayılan izin maskesini görmek veya oturumda ayarlamak.
+  en: Show or set the file-creation mode mask for new files/dirs.
+syntax: umask [-p] [-S] [mode]
+expected_effect:
+  tr: Maskeyi basar veya geçerli kabuk oturumu için ayarlar; mevcut dosyaları değiştirmez.
+  en: Prints or sets the mask for this shell session; does not change existing files.
+common_mistakes:
+- tr: umask’ı chmod sanmak (mevcut dosyayı değiştirmez).
+  en: Treating umask like chmod (it does not change existing files).
+- tr: Oturum umask’ını kalıcı sanmak.
+  en: Assuming a session umask persists forever.
+related_topics:
+- permissions
+- terminal-basics

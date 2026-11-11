@@ -1,145 +1,274 @@
 id: permissions
 kind: nova-commands-concept
+format: topic-guide
 title:
   tr: Kullanıcılar, gruplar ve izinler
   en: Users, groups, and permissions
 summary:
-  tr: id/chmod/chown/sudo ile kim neyi yapabilir — temel model.
-  en: Who can do what with id/chmod/chown/sudo — the basic model.
+  tr: Kimlik, rwx/oktal mantık, chmod/chown/chgrp/umask/visudo ve güvenli sudo.
+  en: Identity, rwx/octal logic, chmod/chown/chgrp/umask/visudo, and safe sudo.
 difficulty: beginner
-tags:
-- permissions
-- users
-- sudo
-- chmod
-related_commands:
-- id
-- whoami
-- stat
-- groups
-- chmod
-- chown
-- chgrp
-- sudo
-- passwd
-- useradd
-- usermod
-- getent
-related_concepts:
-- terminal-basics
-- path
-- files
-see_also:
-- man 1 chmod
-- man 8 sudo
-- 'Arch Wiki: Users and groups'
-body:
-  tr: 'Linux erişim modeli kabaca **kullanıcı + grup + diğerleri** ve her biri için
-
-    okuma/yazma/çalıştırma bitleridir. Modern sistemlerde ACL’ler de olabilir; bu
-
-    yazı klasik `chmod`/`chown` odaklıdır.
-
-
-    **Kimsin?** `id`, `whoami`, `groups` — sayısal uid/gid ve üyelikler.
-
-    **Dosya izni:** `ls -l`, `stat`, `chmod` (sembolik `u+x` veya sekizlik `755`).
-
-    **Sahiplik:** `chown kullanıcı:grup`; genelde root ister.
-
-    **Yükseltme:** `sudo` — yapılandırma `/etc/sudoers` (+ drop-in’ler); yanlışlıkla
-
-    geniş sudo tehlikelidir.
-
-
-    **Dizin vs dosya:** Dizinde `x` “içine girebilme”; dosyada `x` “çalıştırma”.
-
-    Paylaşılan dizinlerde `chmod`/sticky bit (`/tmp`) incelenir.
-
-
-    Bankada birçok kullanıcı/izin komutu `caution` veya `dangerous` işaretlidir;
-
-    örnekleri körü körüne kopyalamayın. `verified` durumu insan onayına bağlıdır.
-
-    '
-  en: 'Linux access is roughly **user + group + other** with read/write/execute bits.
-
-    ACLs exist on modern systems; this article focuses on classic `chmod`/`chown`.
-
-
-    **Who am I?** `id`, `whoami`, `groups` — numeric uid/gid and memberships.
-
-    **File mode:** `ls -l`, `stat`, `chmod` (symbolic `u+x` or octal `755`).
-
-    **Ownership:** `chown user:group`; usually needs root.
-
-    **Elevation:** `sudo` — config in `/etc/sudoers` (+ drop-ins); overly broad sudo
-
-    is dangerous.
-
-
-    **Directory vs file:** directory `x` means “traverse”; file `x` means “execute”.
-
-    Shared dirs involve sticky bits (e.g. `/tmp`).
-
-
-    Many user/permission entries in the bank are `caution` or `dangerous`; do not
-
-    copy examples blindly. `verified` still requires a human.
-
-    '
-verification:
-  status: draft
-  sources:
-  - man 1 chmod
-  - man 8 sudo
-  - https://wiki.archlinux.org/title/Users_and_groups
-  notes: Agent-authored; registry id already existed — article added this phase. NV-123 topic-guide structure;
-    agent-authored; needs human review before verified.
-format: topic-guide
 categories:
 - users
 platforms:
 - linux
 - macos
 - bsd
+tags:
+- permissions
+- users
+- sudo
+- chmod
+- umask
+related_commands:
+- whoami
+- id
+- groups
+- ls
+- stat
+- chmod
+- chown
+- chgrp
+- umask
+- sudo
+- visudo
+- passwd
+- useradd
+- usermod
+- getent
+related_concepts:
+- terminal-basics
+- linux-directory-structure
+- path
+- server-security-checklist
+see_also:
+- man 1 chmod
+- man 1 chown
+- man 1 chgrp
+- man 2 umask
+- man 8 sudo
+- man 8 visudo
+- 'Arch Wiki: Users and groups'
 intro:
-  tr: Unix izinleri kullanıcı/grup/diğer ve rwx bitleriyle dosya erişimini denetler.
-  en: Unix permissions control access via user/group/other and rwx bits.
+  tr: Linux çok kullanıcılıdır. Her dosyanın sahibi, grubu ve üç sınıf (u/g/o) için rwx bitleri vardır; chmod/chown/umask bu modeli yönetir.
+  en: Linux is multi-user. Every file has an owner, a group, and rwx bits for three classes (u/g/o); chmod/chown/umask manage that model.
+body:
+  tr: |
+    ## Kimlik: kimim?
+
+    Çok kullanıcılı sistemde önce kendinizi görün. `whoami` etkili kullanıcı adını basar. `id` uid, gid ve üye olduğunuz grupları listeler. `groups` yalnız grup adlarını verir.
+
+    Kullanıcı satırları `/etc/passwd` içindedir; parola özetleri `/etc/shadow` (yalnız root okur); gruplar `/etc/group` dosyasındadır. `getent passwd kullanıcı` bu kaynaklardan sorgu yapar.
+
+    ## İzin bitleri: r, w, x
+
+    Her sınıf için üç hak vardır:
+
+    | Hak | Anlam (dosya) | Anlam (dizin) | Sayı |
+    |-----|---------------|---------------|------|
+    | r | okuma | içeriği listeleme | 4 |
+    | w | yazma | oluşturma/silme (x ile) | 2 |
+    | x | çalıştırma | dizine girme / traverse | 1 |
+
+    Haklar toplanır: `rwx = 7`, `rw- = 6`, `r-x = 5`, `r-- = 4`, `--- = 0`. Üç hane sırasıyla **sahip · grup · diğerleri** içindir. Örnek: `755` → sahip 7, grup 5, diğerleri 5 → `rwxr-xr-x`.
+
+    `ls -l` sol sütunu okuyun: ilk karakter tür (`-` dosya, `d` dizin, `l` bağ); sonraki dokuz karakter üçer üçer u/g/o izinleridir.
+
+    ## Tipik oktal değerler
+
+    | Sayı | Gösterim | Tipik kullanım |
+    |------|----------|----------------|
+    | 755 | rwxr-xr-x | Çalıştırılabilir dosya ve klasörler (herkes çalıştırır/girer; yalnız sahip yazar) |
+    | 644 | rw-r--r-- | Normal dosyalar (herkes okur; yalnız sahip yazar) |
+    | 600 | rw------- | Özel dosyalar (SSH anahtarı gibi; yalnız sahip) |
+    | 700 | rwx------ | Özel klasörler |
+    | 777 | rwxrwxrwx | Herkese tam yetki — güvenlik açığıdır, kaçının |
+
+    ## chmod (sayısal ve sembolik)
+
+    `chmod` kip bitlerini değiştirir. Sayısal: `chmod 755 betik.sh`. Sembolik: `u` sahip, `g` grup, `o` diğer, `a` hepsi; `+` ekle, `-` kaldır, `=` ata.
+
+    Örnekler: `chmod u+x betik.sh`, `chmod go-w gizli.txt`, `chmod -R 750 proje/` (özyinelemeli — dar kapsam!). Betiği çalıştırmak için x gerekir: `chmod +x betik.sh` sonra `./betik.sh`. Dizinde x “içine girebilme” demektir.
+
+    ## chown, chgrp, umask, visudo
+
+    `chown` sahibi (ve istenirse grubu) değiştirir; genelde root ister: `sudo chown ayse dosya`, `sudo chown ayse:dev dosya`. `chgrp` yalnız grubu değiştirir. `umask` yeni dosya/dizinlerin varsayılan izinlerinden çıkarılacak maskeyi gösterir veya ayarlar (`umask`, `umask 022`). `visudo` sudoers’ı sözdizimi denetimiyle düzenler — düz metin editörü yerine bunu kullanın.
+
+    ## Yükseltme ve risk
+
+    `sudo` komutu geçici olarak başka kullanıcı (çoğunlukla root) olarak çalıştırır. Yanlış `chmod -R 777` veya kökte `chown -R` sistemi bozabilir. Bankada birçok izin komutu `caution` / `dangerous` işaretlidir; örnekleri körü körüne kopyalamayın.
+  en: |
+    ## Identity: who am I?
+
+    On a multi-user system, start with yourself. `whoami` prints the effective user name. `id` lists uid, gid, and group memberships. `groups` prints group names only.
+
+    Account lines live in `/etc/passwd`; password hashes in `/etc/shadow` (root-readable); groups in `/etc/group`. `getent passwd user` queries these sources.
+
+    ## Permission bits: r, w, x
+
+    Each class has three rights:
+
+    | Right | Meaning (file) | Meaning (directory) | Value |
+    |-------|----------------|---------------------|-------|
+    | r | read | list contents | 4 |
+    | w | write | create/remove (with x) | 2 |
+    | x | execute | enter / traverse | 1 |
+
+    Rights sum: `rwx = 7`, `rw- = 6`, `r-x = 5`, `r-- = 4`, `--- = 0`. The three digits are **owner · group · others**. Example: `755` → owner 7, group 5, others 5 → `rwxr-xr-x`.
+
+    Read `ls -l`: first character is type (`-` file, `d` dir, `l` link); the next nine are u/g/o permissions in threes.
+
+    ## Typical octal modes
+
+    | Mode | Symbolic | Typical use |
+    |------|----------|-------------|
+    | 755 | rwxr-xr-x | Executables and folders (everyone runs/enters; only owner writes) |
+    | 644 | rw-r--r-- | Normal files (everyone reads; only owner writes) |
+    | 600 | rw------- | Private files (SSH keys; owner only) |
+    | 700 | rwx------ | Private directories |
+    | 777 | rwxrwxrwx | World-writable — a security hole; avoid |
+
+    ## chmod (numeric and symbolic)
+
+    `chmod` changes mode bits. Numeric: `chmod 755 script.sh`. Symbolic: `u` owner, `g` group, `o` others, `a` all; `+` add, `-` remove, `=` set.
+
+    Examples: `chmod u+x script.sh`, `chmod go-w secret.txt`, `chmod -R 750 project/` (recursive — keep scope narrow!). Scripts need x: `chmod +x script.sh` then `./script.sh`. On directories, x means “can enter”.
+
+    ## chown, chgrp, umask, visudo
+
+    `chown` changes owner (and optionally group); usually needs root: `sudo chown ada file`, `sudo chown ada:dev file`. `chgrp` changes group only. `umask` shows or sets bits cleared from default modes of new files (`umask`, `umask 022`). `visudo` edits sudoers with syntax checking — use it instead of a plain editor.
+
+    ## Elevation and risk
+
+    `sudo` runs a command as another user (usually root). Blind `chmod -R 777` or `chown -R` on system roots can break the host. Many permission entries in the bank are `caution` / `dangerous`; do not copy examples blindly.
+verification:
+  status: draft
+  sources:
+  - man 1 chmod
+  - man 1 chown
+  - man 1 chgrp
+  - man 2 umask
+  - man 8 sudo
+  - man 8 visudo
+  - https://wiki.archlinux.org/title/Users_and_groups
+  notes: PDF-depth rewrite (original wording; man-verified patterns). Agent-authored; stays draft until human review.
 learning_path:
 - ref: whoami
   kind: command
+  note:
+    tr: Etkili kullanıcı adını görün.
+    en: See the effective user name.
 - ref: id
   kind: command
+  note:
+    tr: uid/gid ve grupları okuyun.
+    en: Read uid/gid and groups.
 - ref: ls
   kind: command
+  note:
+    tr: ls -l ile kip sütununu okuyun.
+    en: Read the mode column with ls -l.
 - ref: chmod
   kind: command
+  note:
+    tr: Sayısal ve sembolik kip.
+    en: Numeric and symbolic modes.
 - ref: chown
   kind: command
+  note:
+    tr: Sahip/grup değişimi (root).
+    en: Owner/group change (root).
+- ref: chgrp
+  kind: command
+  note:
+    tr: Yalnız grup.
+    en: Group only.
+- ref: umask
+  kind: command
+  note:
+    tr: Varsayılan oluşturma maskesi.
+    en: Default creation mask.
 - ref: sudo
   kind: command
+  note:
+    tr: Geçici yükseltme.
+    en: Temporary elevation.
+- ref: visudo
+  kind: command
+  note:
+    tr: sudoers’ı güvenli düzenleyin.
+    en: Edit sudoers safely.
 subtopics:
 - id: identity
   title:
     tr: Kimlik
     en: Identity
   summary:
-    tr: whoami / id ile kullanıcı ve grupları görün.
-    en: See user and groups with whoami / id.
+    tr: whoami, id, groups ile kullanıcı ve üyelikleri görün.
+    en: See user and memberships with whoami, id, groups.
   related_commands:
   - whoami
   - id
-- id: mode-bits
+  - groups
+- id: rwx-math
   title:
-    tr: Mod bitleri
-    en: Mode bits
+    tr: rwx ve oktal aritmetik
+    en: rwx and octal arithmetic
   summary:
-    tr: ls -l sol sütun; chmod sembolik veya oktal.
-    en: ls -l left column; chmod symbolic or octal.
+    tr: r=4 w=2 x=1; üç hane sahip/grup/diğer.
+    en: r=4 w=2 x=1; three digits owner/group/other.
   related_commands:
   - ls
+  - stat
   - chmod
+- id: common-modes
+  title:
+    tr: Tipik kipler (755/644/600/700)
+    en: Common modes (755/644/600/700)
+  summary:
+    tr: Günlük dosya ve dizinler için güvenli varsayılanlar; 777’den kaçının.
+    en: Safe defaults for everyday files and dirs; avoid 777.
+  related_commands:
+  - chmod
+- id: chmod-symbolic
+  title:
+    tr: chmod sembolik biçim
+    en: chmod symbolic form
+  summary:
+    tr: u/g/o/a ile + - =; örnek u+x, go-w.
+    en: u/g/o/a with + - =; e.g. u+x, go-w.
+  related_commands:
+  - chmod
+- id: ownership
+  title:
+    tr: Sahiplik (chown/chgrp)
+    en: Ownership (chown/chgrp)
+  summary:
+    tr: Sahip ve grup değişimi; çoğu zaman sudo gerekir.
+    en: Change owner and group; often needs sudo.
+  related_commands:
+  - chown
+  - chgrp
+- id: umask-defaults
+  title:
+    tr: umask varsayılanları
+    en: umask defaults
+  summary:
+    tr: Yeni dosya/dizinlerden çıkarılan bitler; oturum etkisi.
+    en: Bits cleared from new files/dirs; session-scoped.
+  related_commands:
+  - umask
+  - touch
+- id: sudo-visudo
+  title:
+    tr: sudo ve visudo
+    en: sudo and visudo
+  summary:
+    tr: Yükseltme ile sudoers’ı sözdizimi denetimli düzenleme.
+    en: Elevation and syntax-checked sudoers edits.
+  related_commands:
+  - sudo
+  - visudo
 command_table:
 - id: whoami
   purpose:
@@ -151,74 +280,285 @@ command_table:
     tr: Kullanıcı ve grup kimliklerini basar.
     en: Print user and group IDs.
   learning_level: beginner
+- id: groups
+  purpose:
+    tr: Üye olunan grupları listeler.
+    en: List group memberships.
+  learning_level: beginner
+- id: ls
+  purpose:
+    tr: İzin sütunu için ls -l / ls -ld.
+    en: ls -l / ls -ld for the mode column.
+  learning_level: beginner
+- id: stat
+  purpose:
+    tr: Kip, sahip ve zaman damgalarını ayrıntılı gösterir.
+    en: Detailed mode, owner, and timestamps.
+  learning_level: beginner
 - id: chmod
   purpose:
-    tr: Dosya kipini (izinlerini) değiştirir.
-    en: Change file mode bits.
+    tr: İzinleri sayısal veya sembolik (u/g/o/a) değiştirir.
+    en: Change permissions numerically or symbolically (u/g/o/a).
   learning_level: intermediate
 - id: chown
   purpose:
-    tr: Dosya sahibini değiştirir.
-    en: Change file owner and group.
+    tr: Dosya sahibini (ve isteğe bağlı grubu) değiştirir; genelde root.
+    en: Change file owner (and optional group); usually root.
   learning_level: intermediate
 - id: chgrp
   purpose:
     tr: Dosya grup sahipliğini değiştirir.
     en: Change group ownership of files.
   learning_level: intermediate
+- id: umask
+  purpose:
+    tr: Yeni dosyaların varsayılan izin maskesini gösterir veya ayarlar.
+    en: Show or set the file-creation mode mask.
+  learning_level: intermediate
 - id: sudo
   purpose:
     tr: Komutu başka kullanıcı olarak çalıştırır (genelde root).
     en: Execute a command as another user (usually root).
   learning_level: intermediate
+- id: visudo
+  purpose:
+    tr: sudoers’ı sözdizimi denetimiyle güvenle düzenler.
+    en: Safely edit sudoers with syntax checking.
+  learning_level: advanced
 - id: passwd
   purpose:
-    tr: Kullanıcı parola değiştirir.
+    tr: Kullanıcı parolasını değiştirir.
     en: Change user password.
+  learning_level: intermediate
+- id: getent
+  purpose:
+    tr: passwd/group veritabanından kayıt sorguar.
+    en: Query passwd/group databases.
   learning_level: intermediate
 graded_examples:
 - title:
-    tr: Kimim?
-    en: Who am I?
-  command: id
+    tr: Kimim ve hangi gruplardayım?
+    en: Who am I and which groups?
+  command: id; groups
   explanation:
-    tr: uid/gid ve grupları listeler.
-    en: Lists uid/gid and groups.
+    tr: uid/gid ve grup üyeliklerini birlikte okuyun; henüz hiçbir şeyi değiştirmeyin.
+    en: Read uid/gid and group memberships together; change nothing yet.
   difficulty: beginner
+  risk: safe
+  platforms:
+  - linux
+  - macos
+  - bsd
+  related_commands:
+  - id
+  - groups
+- title:
+    tr: Ev ve /tmp kiplerini oku
+    en: Read home and /tmp modes
+  command: ls -ld ~ /tmp
+  explanation:
+    tr: Sol sütundaki d ve rwx alanlarını yorumlayın; /tmp’de sticky bit (t) sık görülür.
+    en: Interpret the d and rwx fields; /tmp often shows the sticky bit (t).
+  difficulty: beginner
+  risk: safe
+  platforms:
+  - linux
+  - macos
+  - bsd
+  related_commands:
+  - ls
+- title:
+    tr: Özel dosya 600
+    en: Private file 600
+  command: touch /tmp/nova-private-demo && chmod 600 /tmp/nova-private-demo && ls -l /tmp/nova-private-demo
+  explanation:
+    tr: Sahibe rw; grup/diğer yok. Gerçek gizli dosyalarda (SSH anahtarı) aynı mantık.
+    en: Owner rw; none for group/other. Same idea for real secrets (SSH keys).
+  difficulty: beginner
+  risk: caution
+  platforms:
+  - linux
+  - macos
+  - bsd
+  related_commands:
+  - chmod
+  - touch
+  - ls
+- title:
+    tr: Betiğe u+x
+    en: Add u+x to a script
+  command: echo 'echo selam' > /tmp/nova-s.sh && chmod u+x /tmp/nova-s.sh && /tmp/nova-s.sh
+  explanation:
+    tr: Sembolik u+x sahip çalıştırmayı ekler; ardından doğrudan yol ile çalıştırın.
+    en: Symbolic u+x adds owner execute; then run via absolute path.
+  difficulty: beginner
+  risk: caution
+  platforms:
+  - linux
+  - macos
+  - bsd
+  related_commands:
+  - chmod
+  - echo
+- title:
+    tr: Normal dosya 644
+    en: Normal file 644
+  command: touch /tmp/nova-notes.txt && chmod 644 /tmp/nova-notes.txt && ls -l /tmp/nova-notes.txt
+  explanation:
+    tr: 'Tipik metin dosyası: herkes okur, yalnız sahip yazar (rw-r--r--).'
+    en: 'Typical text file: everyone reads, only owner writes (rw-r--r--).'
+  difficulty: beginner
+  risk: caution
+  platforms:
+  - linux
+  - macos
+  - bsd
+  related_commands:
+  - chmod
+- title:
+    tr: Klasör 755
+    en: Directory 755
+  command: mkdir -p /tmp/nova-demo-dir && chmod 755 /tmp/nova-demo-dir && ls -ld /tmp/nova-demo-dir
+  explanation:
+    tr: Herkes girebilir/listeleyebilir; yalnız sahip içerik yazar — klasörler için yaygın kip.
+    en: Everyone can enter/list; only owner writes content — common for directories.
+  difficulty: intermediate
+  risk: caution
+  platforms:
+  - linux
+  - macos
+  - bsd
+  related_commands:
+  - chmod
+  - mkdir
+- title:
+    tr: go-w ile yazmayı kapat
+    en: Drop write with go-w
+  command: chmod go-w /tmp/nova-notes.txt && ls -l /tmp/nova-notes.txt
+  explanation:
+    tr: Grup ve diğerlerinden yazmayı kaldırır; sayı ezberlemeden ince ayar.
+    en: Removes write from group and others; fine-tune without memorizing octal.
+  difficulty: intermediate
+  risk: caution
+  platforms:
+  - linux
+  - macos
+  - bsd
+  related_commands:
+  - chmod
+- title:
+    tr: umask gör
+    en: Show umask
+  command: umask; umask -S
+  explanation:
+    tr: Sekizlik ve sembolik maske. Yeni touch dosyalarının varsayılanını anlamak için bakın; kalıcı profil yazmayın.
+    en: Octal and symbolic mask. Use it to understand defaults for new touch files; do not edit profiles here.
+  difficulty: intermediate
+  risk: safe
+  platforms:
+  - linux
+  - macos
+  - bsd
+  related_commands:
+  - umask
+- title:
+    tr: visudo kontrol (yazmadan)
+    en: visudo check (no write)
+  command: sudo visudo -c
+  explanation:
+    tr: sudoers sözdizimini doğrular; dosyayı düzenlemez. Düzenleme için sudo visudo (ayrı, dikkatli oturum).
+    en: Validates sudoers syntax; does not edit. Use sudo visudo to edit (separate, careful session).
+  difficulty: advanced
+  risk: caution
+  platforms:
+  - linux
+  - macos
+  - bsd
+  related_commands:
+  - visudo
+  - sudo
+  warnings:
+  - tr: Gerçek sudoers düzenlemesini yedek/second oturum olmadan yapmayın.
+    en: Do not edit real sudoers without a backup/second session.
+callouts:
+- kind: tip
+  text:
+    tr: 'rwx aritmetiği: r=4, w=2, x=1. rwx=7, r-x=5, rw-=6, r--=4. Üç hane = sahip, grup, diğerleri.'
+    en: 'rwx math: r=4, w=2, x=1. rwx=7, r-x=5, rw-=6, r--=4. Three digits = owner, group, others.'
+- kind: tip
+  text:
+    tr: 'Betik çalıştırma: chmod +x betik.sh ardından ./betik.sh. Klasörde x = içine girebilme.'
+    en: 'Run a script: chmod +x script.sh then ./script.sh. On directories, x means enter/traverse.'
+- kind: warning
+  text:
+    tr: 777 (rwxrwxrwx) herkese tam yetki verir — güvenlik açığıdır, kaçının. “Çalışmıyor” diye 777 uygulamayın.
+    en: 777 (rwxrwxrwx) grants everyone full access — a security hole; avoid it. Do not “fix” breakage with 777.
+- kind: warning
+  text:
+    tr: chmod -R ve chown -R geri dönüşü zor hatalar üretebilir; önce dar kapsam, sonra ls -ld ile doğrulayın.
+    en: chmod -R and chown -R can cause hard-to-undo mistakes; keep scope narrow, then verify with ls -ld.
+- kind: caution
+  text:
+    tr: sudo her sorunu çözmez; yanlış sudo daha büyük zarar verir. sudoers için visudo kullanın.
+    en: sudo does not fix everything; wrong sudo causes larger damage. Use visudo for sudoers.
+- kind: note
+  text:
+    tr: macOS/BSD’de aynı rwx modeli vardır; bazı yönetim araçları ve yollar farklıdır. Windows ACL’leri (icacls) ayrı bir modeldir.
+    en: macOS/BSD share the rwx model; some admin tools and paths differ. Windows ACLs (icacls) are a different model.
+safe_exercises:
+- title:
+    tr: id ve ls -l okuma
+    en: Read id and ls -l
+  prompt:
+    tr: id; groups; ls -ld ~ /tmp çalıştırıp kip ve sahip alanlarını kendi cümlenizle açıklayın (değiştirmeyin).
+    en: Run id; groups; ls -ld ~ /tmp and explain mode/owner fields in your own words (do not change them).
   risk: safe
   related_commands:
   - id
+  - groups
+  - ls
 - title:
-    tr: Özel dosya modu
-    en: Private file mode
-  command: chmod 600 /tmp/nova-private-demo
-  explanation:
-    tr: Sahibe rw; gruba/diğerine yok. Önce dokunun; gerçek gizli dosyalarda dikkat.
-    en: Owner rw; none for group/other. Touch first; be careful with real secrets.
-  difficulty: intermediate
+    tr: 600 doğrulama
+    en: Verify 600
+  prompt:
+    tr: '/tmp içinde touch gizli-demo.txt; chmod 600; ls -l ile rw------- gördüğünüzü doğrulayın. İş bitince dosyayı silin.'
+    en: 'In /tmp, touch a demo file; chmod 600; confirm rw------- with ls -l. Delete the file when done.'
   risk: caution
   related_commands:
   - chmod
-callouts:
-- kind: warning
-  text:
-    tr: chmod -R ve chown -R geri dönüşü zor hatalar üretebilir; önce dar kapsam.
-    en: chmod -R and chown -R can cause hard-to-undo mistakes; keep scope narrow first.
-- kind: caution
-  text:
-    tr: sudo her sorunu çözmez; yanlış sudo daha büyük zarar verir.
-    en: sudo does not fix everything; wrong sudo causes larger damage.
-safe_exercises:
+  - touch
+  - ls
 - title:
-    tr: id ve ls -l
-    en: id and ls -l
+    tr: İlk çalıştırılabilir
+    en: First executable
   prompt:
-    tr: id; ls -ld ~ /tmp çıktılarını okuyun (değiştirmeyin).
-    en: Run id; ls -ld ~ /tmp and read the modes (do not change).
+    tr: '/tmp içinde echo ''echo selam'' > s.sh; chmod u+x s.sh; ./s.sh (veya /tmp/s.sh) ile çalıştırın.'
+    en: 'In /tmp, echo ''echo hi'' > s.sh; chmod u+x s.sh; run ./s.sh (or /tmp/s.sh).'
+  risk: caution
+  related_commands:
+  - chmod
+  - echo
+- title:
+    tr: umask gözlemi
+    en: Observe umask
+  prompt:
+    tr: umask ve umask -S çıktısını not edin. touch ile /tmp’de bir dosya oluşturup ls -l ile varsayılan kipi umask ile ilişkilendirin (umask değerini kalıcı değiştirmeyin).
+    en: Note umask and umask -S. Create a /tmp file with touch and relate its ls -l mode to umask (do not persist umask changes).
   risk: safe
   related_commands:
-  - id
+  - umask
+  - touch
   - ls
 next_steps:
+- id: linux-directory-structure
+  note:
+    tr: Dizin ağacında izinlerin nerede kritik olduğunu görün.
+    en: See where permissions matter in the directory tree.
 - id: processes
+  note:
+    tr: Süreçler hangi kullanıcıyla çalışır?
+    en: Which user do processes run as?
 - id: server-security-checklist
+  note:
+    tr: Sunucu hesap ve sudo kontrolleri.
+    en: Server account and sudo checks.

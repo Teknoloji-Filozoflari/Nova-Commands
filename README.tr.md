@@ -37,16 +37,16 @@ dürüstlüğü digest’i güncelleyebilir.
 | Metrik | Değer |
 |--------|------:|
 | Komut | **270** |
-| Konsept makalesi | **29** |
+| Konsept makalesi | **30** |
 | Görev (`tasks/`) | **36** (hepsi `draft`) |
 | Profil (`profiles/`) | **14** (hepsi `draft`) |
-| Arama girdisi | **349** |
+| Arama girdisi | **350** |
 | OS kaydı | **11** |
 | Paket yöneticisi kaydı | **60** |
 | `schema_version` | **2** |
 | `verification` (komut) | verified **26** / reviewed **105** / draft **139** |
 | `verification` (konsept) | reviewed **1** / draft **28** (sahte `verified` yok) |
-| `content_sha256` | `eb15d7f851993865a70094a66d8d08df3f9f230738d24efcca5b4e86c9d31844` |
+| `content_sha256` | `e6466b7f777fe49019c2cc7d6d4bcf279857d76a209e7ca68b7292f5f945ec06` |
 
 ```mermaid
 pie title Komut verification.status (270)

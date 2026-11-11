@@ -11,18 +11,50 @@ intro:
   tr: Arşivlemek ve açmak; yanlış -C veya üzerine yazma veri kaybettirir.
   en: Archive and extract; wrong -C or overwrites can lose data.
 body:
-  tr: '`tar -czf` sıkıştırılmış arşiv oluşturur; `tar -tzf` içeriği listeler; `tar -xzf` çıkarır.
-
-    Önce listeleyin (`-t`), sonra çıkarın. `unzip -l` benzer şekilde listeler.
+  tr: '## tar temeli
 
 
-    Windows’ta Expand-Archive / tar (bsdtar) farklılıkları için bank kayıtlarına bakın.'
-  en: '`tar -czf` creates a compressed archive; `tar -tzf` lists; `tar -xzf` extracts.
-
-    List first (`-t`), then extract. `unzip -l` likewise lists.
+    `tar -czf arsiv.tar.gz dizin` oluşturur. `tar -tzf arsiv.tar.gz` listeler. `tar -xzf arsiv.tar.gz`
+    çıkarır.
 
 
-    On Windows, see bank records for Expand-Archive / tar (bsdtar) differences.'
+    Sıra: önce `-t` ile listeleyin, sonra çıkarın. `-C /tmp` hedef dizin seçer.
+
+
+    ## gzip / xz / zip
+
+
+    `gzip` / `gunzip` tek dosya; `xz` benzer. `zip -r` / `unzip -l` ZIP dünyası içindir.
+
+
+    ## Risk
+
+
+    Çıkarma üzerine yazabilir. Öğrenme için `/tmp` veya `~/pratik` kullanın.
+
+    '
+  en: '## tar basics
+
+
+    `tar -czf archive.tar.gz dir` creates. `tar -tzf archive.tar.gz` lists. `tar -xzf archive.tar.gz`
+    extracts.
+
+
+    Order: list with `-t` first, then extract. `-C /tmp` chooses the target directory.
+
+
+    ## gzip / xz / zip
+
+
+    `gzip` / `gunzip` for single files; `xz` similar. `zip -r` / `unzip -l` for ZIP.
+
+
+    ## Risk
+
+
+    Extraction can overwrite. Practice under `/tmp` or `~/practice`.
+
+    '
 difficulty: beginner
 categories:
 - archives
@@ -87,31 +119,71 @@ command_table:
   learning_level: beginner
 graded_examples:
 - title:
+    tr: Oluştur ve listele
+    en: Create and list
+  command: mkdir -p /tmp/nova-arc/demo && echo x > /tmp/nova-arc/demo/a.txt && tar -czf /tmp/nova-arc/demo.tar.gz
+    -C /tmp/nova-arc demo && tar -tzf /tmp/nova-arc/demo.tar.gz
+  explanation:
+    tr: Küçük bir ağaç arşivleyip üyeleri listeler.
+    en: Archives a tiny tree and lists members.
+  difficulty: beginner
+  risk: caution
+  related_commands:
+  - tar
+  - mkdir
+- title:
     tr: İçerik listele
     en: List contents
-  command: tar -tzf archive.tar.gz | head
+  command: tar -tzf /tmp/nova-arc/demo.tar.gz | head
   explanation:
-    tr: Arşiv üyelerini listeler (dosya varsa).
-    en: Lists archive members (when the file exists).
+    tr: Var olan demo arşivini açmadan listeler.
+    en: Lists the demo archive without extracting.
   difficulty: beginner
   risk: safe
   related_commands:
   - tar
+- title:
+    tr: /tmp içine çıkar
+    en: Extract into /tmp
+  command: mkdir -p /tmp/nova-arc/out && tar -xzf /tmp/nova-arc/demo.tar.gz -C /tmp/nova-arc/out && ls
+    /tmp/nova-arc/out
+  explanation:
+    tr: -C ile hedef seçerek çıkarır; ev dizinine dağılmaz.
+    en: Extracts with an explicit -C target; does not litter home.
+  difficulty: intermediate
+  risk: caution
+  related_commands:
+  - tar
+  - ls
 callouts:
 - kind: caution
   text:
     tr: Çıkarma mevcut dosyaların üzerine yazabilir.
     en: Extraction can overwrite existing files.
+- kind: tip
+  text:
+    tr: Önce tar -tzf ile bakın; sonra -xzf.
+    en: List with tar -tzf first; then -xzf.
 safe_exercises:
 - title:
     tr: Listele önce
     en: List first
   prompt:
-    tr: Elinizde bir .tar.gz varsa tar -tzf ile listeleyin; çıkarmayın.
-    en: If you have a .tar.gz, list with tar -tzf; do not extract yet.
-  risk: safe
+    tr: Bir .tar.gz oluşturup tar -tzf ile listeleyin; çıkarmadan önce üyeleri okuyun.
+    en: Create a .tar.gz and list with tar -tzf; read members before extracting.
+  risk: caution
   related_commands:
   - tar
+- title:
+    tr: Güvenli çıkarım
+    en: Safe extract
+  prompt:
+    tr: tar -xzf ... -C /tmp/hedef ile çıkarın; ls ile doğrulayın.
+    en: Extract with tar -xzf ... -C /tmp/target; verify with ls.
+  risk: caution
+  related_commands:
+  - tar
+  - ls
 next_steps:
 - id: backup
 - id: storage
@@ -132,4 +204,4 @@ verification:
   sources:
   - man tar
   - man gzip
-  notes: NV-123 new topic guide from bank + man-oriented teaching; PDF not available in env; not human-verified.
+  notes: PDF-depth archives; original wording; stays draft.

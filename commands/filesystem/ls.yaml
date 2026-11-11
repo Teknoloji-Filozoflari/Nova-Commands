@@ -140,6 +140,8 @@ nova:
   concepts:
   - files
   - terminal-basics
+  - linux-directory-structure
+  - permissions
 when_to_use:
   tr: Bir dizinde ne olduğunu hızlıca görmek; gizli dosyalar veya ayrıntılı izinler için bayrak ekleyin.
   en: Quickly see what is in a directory; add flags for hidden files or detailed permissions.
@@ -156,3 +158,4 @@ related_topics:
 - terminal-basics
 - finding-files
 - permissions
+- linux-directory-structure

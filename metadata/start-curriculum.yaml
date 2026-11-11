@@ -13,6 +13,7 @@ notes:
     bank + man oriented.'
 concept_order:
 - terminal-basics
+- linux-directory-structure
 - path
 - shell-pipes-redirection
 - text-processing
@@ -39,4 +40,4 @@ verification:
   - https://github.com/Teknoloji-Filozoflari/Nova/pull/58
   - 'internal gap list: nova-commands-ia-gaps.md'
   - NV-123 teachable topic guides
-  notes: Mirrors Nova PATH_ORDER; not yet consumed by Nova UI (documentation + future wire).
+  notes: Mirrors Nova PATH_ORDER; PDF-depth curriculum includes linux-directory-structure.

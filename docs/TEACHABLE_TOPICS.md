@@ -82,3 +82,13 @@ path (safe/caution filtered on the Nova side).
 
 See also: [NOVA_INTEGRATION.md](./NOVA_INTEGRATION.md),
 [DATA_SCHEMA.md](./DATA_SCHEMA.md), [COVERAGE_MATRIX.md](./COVERAGE_MATRIX.md).
+
+
+## PDF-depth pass (follow-up)
+
+`Linux_Komutlari_Rehberi.pdf` was analyzed for pedagogy (section map, tables,
+graded examples, tip/risk callouts). Guides were **rewritten in original
+wording** (no verbatim PDF copy) and checked against man/FHS-oriented sources.
+New guide: `linux-directory-structure`. Permissions now include rwx arithmetic,
+755/644/600/700/777 table, and chmod/chown/chgrp/umask/visudo examples.
+Start curriculum places the directory guide immediately after `terminal-basics`.

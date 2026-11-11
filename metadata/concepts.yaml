@@ -52,6 +52,11 @@ concepts:
     tr: Terminal temelleri
     en: Terminal basics
   article: terminal-basics
+- id: linux-directory-structure
+  label:
+    tr: Linux dizin yapısı
+    en: Linux directory structure
+  article: linux-directory-structure
 - id: shell-pipes-redirection
   label:
     tr: Borular ve yönlendirme
