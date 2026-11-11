@@ -13,6 +13,7 @@ tags:
 - users
 - password
 risk: dangerous
+learning_level: intermediate
 requires_elevated: false
 platforms:
 - linux
@@ -75,6 +76,7 @@ examples:
     tr: Etkileşimli parola değişimi.
     en: Interactive password change.
   risk: caution
+  difficulty: intermediate
 - title:
     tr: Durum
     en: Status
@@ -83,6 +85,7 @@ examples:
     tr: alice parola durumu (root gerekebilir).
     en: alice password status (may need root).
   risk: safe
+  difficulty: beginner
 - title:
     tr: Başka kullanıcı
     en: Other user
@@ -91,6 +94,7 @@ examples:
     tr: Root olarak alice parolasını ayarlar.
     en: Root sets alice's password.
   risk: dangerous
+  difficulty: intermediate
   requires_elevated: true
 related:
 - useradd

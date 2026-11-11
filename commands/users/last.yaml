@@ -15,6 +15,7 @@ tags:
 - security
 - audit
 risk: safe
+learning_level: beginner
 requires_elevated: false
 platforms:
 - linux

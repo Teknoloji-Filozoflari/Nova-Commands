@@ -13,6 +13,19 @@ Validators ensure an example’s `risk` is not *lower* than a more severe
 command-level expectation when the example clearly escalates (ordering check
 on known severity ranks).
 
+## Learning level (not risk)
+
+| Level | Use |
+|-------|-----|
+| `beginner` | Few conceptual prerequisites; early terminal literacy |
+| `intermediate` | Needs pipes/permissions/services/packages/network models |
+| `advanced` | Deep systems, low-level, or complex orchestration |
+| `unspecified` | Unclear — omit in YAML; catalog build emits this explicitly |
+
+`learning_level` is **independent** of `risk`. Do not mark a command `advanced`
+because it is `destructive`. Optional `examples[].difficulty` labels pedagogy
+when examples span easy→advanced; never substitute risk for missing difficulty.
+
 ## Elevated privileges
 
 `requires_elevated: true` means typical *useful* invocations need root/sudo

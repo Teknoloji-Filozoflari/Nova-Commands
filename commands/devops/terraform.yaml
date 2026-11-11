@@ -17,6 +17,7 @@ tags:
 - devops
 - cloud
 risk: dangerous
+learning_level: advanced
 requires_elevated: false
 platforms:
 - linux
@@ -36,6 +37,7 @@ examples:
     tr: Terraform sürümü.
     en: Terraform version.
   risk: safe
+  difficulty: beginner
 - title:
     tr: Validate
     en: Validate
@@ -44,6 +46,7 @@ examples:
     tr: Çalışma dizinindeki yapılandırmayı doğrular (uygulamaz).
     en: Validates config in the working directory (does not apply).
   risk: safe
+  difficulty: beginner
 - title:
     tr: Plan
     en: Plan
@@ -52,6 +55,7 @@ examples:
     tr: Değişiklik planı (uygulamaz). Provider kimliği gerekir.
     en: Change plan (does not apply). Needs provider credentials.
   risk: caution
+  difficulty: intermediate
 intent:
   tr:
   - terraform

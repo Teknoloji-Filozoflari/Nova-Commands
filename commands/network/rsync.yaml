@@ -15,6 +15,7 @@ tags:
 - backup
 - copy
 risk: dangerous
+learning_level: intermediate
 requires_elevated: false
 platforms:
 - linux
@@ -88,6 +89,7 @@ examples:
     tr: Ne kopyalanacağını silmeden gösterir.
     en: Shows what would copy without writing.
   risk: safe
+  difficulty: beginner
 - title:
     tr: Yerel kopya
     en: Local copy
@@ -96,6 +98,7 @@ examples:
     tr: Dizin içeriğini arşiv modunda eşitler.
     en: Syncs directory contents in archive mode.
   risk: caution
+  difficulty: intermediate
 - title:
     tr: SSH ile
     en: Over SSH
@@ -104,6 +107,7 @@ examples:
     tr: Uzak yedek; --delete kullanmadan önce dry-run.
     en: Remote backup; dry-run before --delete.
   risk: dangerous
+  difficulty: intermediate
 related:
 - scp
 - cp

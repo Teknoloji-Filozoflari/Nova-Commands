@@ -15,6 +15,7 @@ tags:
 - containers
 - docker
 risk: dangerous
+learning_level: intermediate
 requires_elevated: false
 platforms:
 - linux
@@ -63,6 +64,7 @@ examples:
     tr: Eklenti sözdizimi; dizininde compose.yaml olmalı.
     en: Plugin syntax; needs compose.yaml in cwd.
   risk: dangerous
+  difficulty: intermediate
 - title:
     tr: Durum
     en: Status
@@ -71,6 +73,7 @@ examples:
     tr: Proje konteynerleri.
     en: Project containers.
   risk: safe
+  difficulty: beginner
 - title:
     tr: Yık
     en: Tear down
@@ -79,6 +82,7 @@ examples:
     tr: Kapsayıcıları durdurur; volume politikasına dikkat.
     en: Stops containers; mind volume policy.
   risk: dangerous
+  difficulty: intermediate
 related:
 - docker
 - podman

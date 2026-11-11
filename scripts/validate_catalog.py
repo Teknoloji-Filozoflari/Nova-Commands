@@ -10,6 +10,8 @@ Checks (CI gate):
   - verification.status rules (verified requires sources + last_reviewed)
   - Flag verified=true only allowed when command verification is reviewed|verified
   - Risk consistency helpers; related must not self-ref
+  - learning_level (optional; independent of risk; missing → unspecified at build)
+  - examples[].difficulty (optional pedagogy label; not derived from risk)
   - i18n consistency: every localized object has non-empty tr and en
   - nova.concepts / concept related_* reference known registry or article ids
   - Concept articles under concepts/; id == filename; related_commands exist
@@ -46,6 +48,8 @@ SECURITY_VALIDATE = ROOT / "scripts" / "validate_security.py"
 META = ROOT / "metadata"
 
 RISK_RANK = {"safe": 0, "caution": 1, "dangerous": 2, "destructive": 3}
+LEARNING_LEVELS = frozenset({"beginner", "intermediate", "advanced", "unspecified"})
+EXAMPLE_DIFFICULTIES = frozenset({"beginner", "intermediate", "advanced"})
 
 # Shells allowed by schema enum that are short/legacy names (not all in shells.yaml).
 LEGACY_SHELL_NAMES = frozenset({"any", "sh", "bash", "zsh", "fish"})
@@ -253,6 +257,8 @@ def main() -> int:
         cmd_risk = raw.get("risk")
         cmd_rank = RISK_RANK.get(cmd_risk, 0)
         for i, ex in enumerate(raw.get("examples") or []):
+            if not isinstance(ex, dict):
+                continue
             ex_risk = ex.get("risk")
             ex_rank = RISK_RANK.get(ex_risk, 0)
             if cmd_rank == 0 and ex_rank >= 3:
@@ -260,6 +266,22 @@ def main() -> int:
                     f"{rel}: examples[{i}].risk is destructive but command risk is safe "
                     "(raise command.risk or lower example risk)"
                 )
+            ex_diff = ex.get("difficulty")
+            if ex_diff is not None and ex_diff not in EXAMPLE_DIFFICULTIES:
+                errors.append(
+                    f"{rel}: examples[{i}].difficulty invalid {ex_diff!r} "
+                    "(expected beginner|intermediate|advanced; do not use risk labels)"
+                )
+
+        # learning_level is optional; missing means unspecified at catalog build.
+        # Never derive from risk — only validate explicit values here.
+        learning = raw.get("learning_level")
+        if learning is not None and learning not in LEARNING_LEVELS:
+            errors.append(
+                f"{rel}: learning_level invalid {learning!r} "
+                "(expected beginner|intermediate|advanced|unspecified; "
+                "independent of risk)"
+            )
 
         for rid in raw.get("related") or []:
             if rid == cid:

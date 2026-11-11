@@ -17,6 +17,7 @@ tags:
 - system
 - inventory
 risk: safe
+learning_level: beginner
 requires_elevated: false
 platforms:
 - windows

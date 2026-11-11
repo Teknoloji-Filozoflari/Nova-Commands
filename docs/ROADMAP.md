@@ -33,7 +33,7 @@ Do not treat registry rows or `draft` YAML as “full platform support.”
 | Package managers | 60 |
 | Catalog `schema_version` | 2 |
 | commands verified / reviewed / draft | 26 / 105 / 136 |
-| `content_sha256` | `406fe04002c47c592009c71f6d9dbb1f0ec7c9faa6c19165f58bebe29265b716` |
+| `content_sha256` | `a31207ef405b8319e4db0602f2bce599213a1fbf400055156b5139584108976f` |
 
 ## Done (honest)
 

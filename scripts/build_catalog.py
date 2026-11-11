@@ -25,6 +25,34 @@ OUT_MANIFEST = META / "manifest.json"
 
 CATALOG_SCHEMA_VERSION = 2
 
+# Pedagogical level — independent of risk. Missing source → explicit unspecified.
+LEARNING_LEVELS = frozenset({"beginner", "intermediate", "advanced", "unspecified"})
+EXAMPLE_DIFFICULTIES = frozenset({"beginner", "intermediate", "advanced"})
+
+
+def normalize_learning_level(command: dict) -> dict:
+    """Ensure learning_level is explicit; never derive from risk."""
+    level = command.get("learning_level")
+    if level is None or level == "":
+        command["learning_level"] = "unspecified"
+    elif level not in LEARNING_LEVELS:
+        raise SystemExit(
+            f"command {command.get('id')!r}: invalid learning_level {level!r}"
+        )
+    # Example difficulty stays optional; do not invent from example risk.
+    for i, ex in enumerate(command.get("examples") or []):
+        if not isinstance(ex, dict):
+            continue
+        diff = ex.get("difficulty")
+        if diff is None or diff == "":
+            continue
+        if diff not in EXAMPLE_DIFFICULTIES:
+            raise SystemExit(
+                f"command {command.get('id')!r}: examples[{i}].difficulty "
+                f"invalid {diff!r}"
+            )
+    return command
+
 
 def load_yaml_dir_commands(commands_dir: Path) -> list[dict]:
     items: list[dict] = []
@@ -32,7 +60,7 @@ def load_yaml_dir_commands(commands_dir: Path) -> list[dict]:
         data = yaml.safe_load(path.read_text(encoding="utf-8"))
         if not isinstance(data, dict):
             raise SystemExit(f"{path}: root must be mapping")
-        items.append(data)
+        items.append(normalize_learning_level(data))
     items.sort(key=lambda c: c.get("id", ""))
     return items
 
@@ -142,6 +170,7 @@ def build_search_index(
                 "category": c.get("category"),
                 "kind": c.get("kind"),
                 "risk": c.get("risk"),
+                "learning_level": c.get("learning_level", "unspecified"),
                 "platforms": c.get("platforms") or [],
                 "verification": (c.get("verification") or {}).get("status"),
                 "tags": c.get("tags") or [],

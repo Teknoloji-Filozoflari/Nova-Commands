@@ -14,6 +14,7 @@ tags:
 - dns
 - systemd
 risk: caution
+learning_level: intermediate
 requires_elevated: false
 platforms:
 - linux
@@ -66,6 +67,7 @@ examples:
     tr: Resolver ve arayüz DNS özeti.
     en: Resolver and per-link DNS summary.
   risk: safe
+  difficulty: beginner
 - title:
     tr: Sorgu
     en: Query
@@ -74,6 +76,7 @@ examples:
     tr: resolved üzerinden ad çözümler.
     en: Resolves via systemd-resolved.
   risk: safe
+  difficulty: beginner
 - title:
     tr: Flush
     en: Flush cache
@@ -82,6 +85,7 @@ examples:
     tr: DNS önbelleğini temizler.
     en: Flushes DNS caches.
   risk: caution
+  difficulty: intermediate
 related:
 - dig
 - host

@@ -9,6 +9,7 @@
 
 - [ ] `python3 scripts/validate_catalog.py` geçti
 - [ ] `python3 scripts/build_catalog.py` çalıştırıldı; `metadata/` commit’lendi
+- [ ] Snapshot docs (README / PLATFORM_SUPPORT / ROADMAP / COVERAGE_MATRIX) counts + `content_sha256` bank ile eşleşiyor
 - [ ] `python3 -m pytest tests/` geçti
 - [ ] Yeni/değişen komutlarda **tr + en** dolu
 - [ ] `verification.status: verified` **yalnız** insan incelemesi sonrası (AI taslağı `draft` / `reviewed`)

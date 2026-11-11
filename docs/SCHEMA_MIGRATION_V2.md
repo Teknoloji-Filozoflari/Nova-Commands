@@ -78,6 +78,15 @@ After [#22](https://github.com/Teknoloji-Filozoflari/Nova-Commands/pull/22) /
 | Command YAML | Still v2; Faz 10 may add optional `examples[].warnings` |
 
 Faz 4–8 **added content** under schema v2; they did not introduce a schema v3.
+
+### Additive pedagogy fields (still schema v2)
+
+| Field | Notes |
+|-------|-------|
+| `learning_level` | Optional on commands; `beginner` \| `intermediate` \| `advanced` \| `unspecified`. Independent of `risk`. Build emits `unspecified` when missing. |
+| `examples[].difficulty` | Optional; `beginner` \| `intermediate` \| `advanced` when examples span easy→advanced. Not derived from example `risk`. |
+
+No catalog `schema_version` bump — consumers should tolerate unknown additive keys (see [NOVA_INTEGRATION.md](NOVA_INTEGRATION.md)).
 Re-running `migrate_v1_to_v2.py` on an already-v2 tree remains idempotent and
 must **not** change `verification.status`.
 

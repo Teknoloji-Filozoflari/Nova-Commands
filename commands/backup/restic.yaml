@@ -16,6 +16,7 @@ tags:
 - encryption
 - server
 risk: dangerous
+learning_level: intermediate
 requires_elevated: false
 platforms:
 - linux
@@ -64,6 +65,7 @@ examples:
     tr: restic sürümü.
     en: restic version.
   risk: safe
+  difficulty: beginner
   privilege: none
 - title:
     tr: Snapshots
@@ -73,6 +75,7 @@ examples:
     tr: Repo snapshot listesi (RESTIC_PASSWORD gerekir; yol yer tutucu).
     en: Lists repo snapshots (needs RESTIC_PASSWORD; path placeholder).
   risk: caution
+  difficulty: intermediate
   privilege: user
 - title:
     tr: Check
@@ -82,6 +85,7 @@ examples:
     tr: Repo bütünlük kontrolü (yazmaz; uzun sürebilir).
     en: Repo integrity check (non-writing; may take time).
   risk: caution
+  difficulty: intermediate
   privilege: user
 intent:
   tr:

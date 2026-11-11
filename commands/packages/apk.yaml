@@ -15,6 +15,7 @@ tags:
 - packages
 - alpine
 risk: dangerous
+learning_level: intermediate
 requires_elevated: true
 platforms:
 - linux
@@ -68,6 +69,7 @@ examples:
     tr: İndeksleri yeniler ve paketleri yükseltir.
     en: Refreshes indexes and upgrades packages.
   risk: dangerous
+  difficulty: intermediate
   requires_elevated: true
 - title:
     tr: Kur
@@ -77,6 +79,7 @@ examples:
     tr: curl kurar.
     en: Installs curl.
   risk: caution
+  difficulty: intermediate
   requires_elevated: true
 - title:
     tr: Ara
@@ -86,6 +89,7 @@ examples:
     tr: Depoda ara.
     en: Search repositories.
   risk: safe
+  difficulty: beginner
   requires_elevated: false
 - title:
     tr: Bilgi
@@ -95,6 +99,7 @@ examples:
     tr: curl kurulu mu kontrol eder.
     en: Checks whether curl is installed.
   risk: safe
+  difficulty: beginner
   requires_elevated: false
 related:
 - pacman

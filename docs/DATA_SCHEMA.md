@@ -27,6 +27,14 @@ See [SCHEMA_MIGRATION_V2.md](SCHEMA_MIGRATION_V2.md) for the field map and `migr
 - **`implementations`**: optional per-command variants (tasks use `task.schema.json`).
 - Examples may carry `shell`, `platforms`, `privilege`, and optional bilingual
   `warnings` (required by `validate_security.py` for live wipe-class patterns).
+- **`learning_level`** (optional on commands): `beginner` \| `intermediate` \|
+  `advanced` \| `unspecified`. Pedagogical complexity / prerequisites — **not**
+  security risk. Omit when unclear; `build_catalog.py` normalizes missing →
+  `unspecified`. Never derive from `risk` (e.g. `rm` can be `beginner` +
+  `destructive`).
+- **`examples[].difficulty`** (optional): `beginner` \| `intermediate` \|
+  `advanced` when examples span easy→advanced. Do **not** rank examples by
+  `risk` when difficulty is missing.
 
 ## Tasks vs commands
 

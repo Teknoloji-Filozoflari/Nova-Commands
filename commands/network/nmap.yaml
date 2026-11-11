@@ -17,6 +17,7 @@ tags:
 - scanning
 - server
 risk: caution
+learning_level: advanced
 requires_elevated: false
 platforms:
 - linux

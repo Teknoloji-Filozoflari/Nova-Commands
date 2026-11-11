@@ -13,6 +13,7 @@ tags:
 - packages
 - debian
 risk: dangerous
+learning_level: intermediate
 requires_elevated: true
 platforms:
 - linux
@@ -64,6 +65,7 @@ examples:
     tr: curl ile eşleşen kurulu paketler.
     en: Installed packages matching curl*.
   risk: safe
+  difficulty: beginner
   requires_elevated: false
 - title:
     tr: Dosya sahibi
@@ -73,6 +75,7 @@ examples:
     tr: Dosyayı sağlayan paket.
     en: Package that owns a file.
   risk: safe
+  difficulty: beginner
   requires_elevated: false
 - title:
     tr: deb kur
@@ -82,6 +85,7 @@ examples:
     tr: Bağımlılık kırılırsa apt -f install gerekir.
     en: May need apt -f install for deps.
   risk: dangerous
+  difficulty: intermediate
   requires_elevated: true
 related:
 - apt

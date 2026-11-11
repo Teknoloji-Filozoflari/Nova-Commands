@@ -14,6 +14,7 @@ tags:
 - storage
 - image
 risk: destructive
+learning_level: intermediate
 requires_elevated: true
 platforms:
 - linux
@@ -79,6 +80,7 @@ examples:
     tr: 10 MiB sıfır dosyası; /tmp güvenli hedef.
     en: 10 MiB zero file; safe /tmp target.
   risk: caution
+  difficulty: intermediate
   requires_elevated: false
 - title:
     tr: ISO yaz (UYARI)
@@ -88,6 +90,7 @@ examples:
     tr: Yanlış of= tüm diski siler; önce lsblk.
     en: Wrong of= wipes a disk; verify with lsblk.
   risk: destructive
+  difficulty: advanced
   requires_elevated: true
   warnings:
     - tr: Yanlış aygıt seçimi veriyi kalıcı olarak siler; önce lsblk/diskutil ile doğrula.

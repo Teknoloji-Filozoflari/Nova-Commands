@@ -13,6 +13,7 @@ tags:
 - system
 - systemd
 risk: caution
+learning_level: beginner
 requires_elevated: true
 platforms:
 - linux

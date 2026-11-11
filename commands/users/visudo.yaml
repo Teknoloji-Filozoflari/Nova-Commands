@@ -16,6 +16,7 @@ tags:
 - security
 - users
 risk: dangerous
+learning_level: advanced
 requires_elevated: true
 platforms:
 - linux

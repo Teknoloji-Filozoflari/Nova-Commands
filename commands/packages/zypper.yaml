@@ -19,6 +19,7 @@ tags:
 - suse
 - rpm
 risk: dangerous
+learning_level: intermediate
 requires_elevated: true
 platforms:
 - linux
@@ -75,6 +76,7 @@ examples:
     tr: Depo metadata’sını yeniler.
     en: Refreshes repository metadata.
   risk: caution
+  difficulty: intermediate
   requires_elevated: true
 - title:
     tr: Kur
@@ -84,6 +86,7 @@ examples:
     tr: curl paketini kurar.
     en: Installs the curl package.
   risk: caution
+  difficulty: intermediate
   requires_elevated: true
 - title:
     tr: Leap güncelle
@@ -93,6 +96,7 @@ examples:
     tr: Leap’te paket güncellemesi (dup değil).
     en: Package updates on Leap (not dup).
   risk: dangerous
+  difficulty: intermediate
   requires_elevated: true
 - title:
     tr: Tumbleweed dup
@@ -102,6 +106,7 @@ examples:
     tr: Tumbleweed dağıtım yükseltmesi — dikkatli kullanın.
     en: Tumbleweed distribution upgrade — use carefully.
   risk: dangerous
+  difficulty: advanced
   requires_elevated: true
 - title:
     tr: Ara
@@ -111,6 +116,7 @@ examples:
     tr: Depoda ripgrep arar.
     en: Searches repos for ripgrep.
   risk: safe
+  difficulty: beginner
   requires_elevated: false
 related:
 - rpm

@@ -15,6 +15,7 @@ tags:
 - scripting
 - language
 risk: caution
+learning_level: intermediate
 requires_elevated: false
 platforms:
 - linux
@@ -83,6 +84,7 @@ examples:
     tr: Kurulu Python sürümü.
     en: Installed Python version.
   risk: safe
+  difficulty: beginner
 - title:
     tr: Modül çalıştır
     en: Run module
@@ -91,6 +93,7 @@ examples:
     tr: Basit HTTP dosya sunucusu (ağ açar).
     en: Simple HTTP file server (opens a network port).
   risk: caution
+  difficulty: intermediate
 - title:
     tr: Tek satır
     en: One-liner
@@ -99,6 +102,7 @@ examples:
     tr: Kısa ifade çalıştırır.
     en: Runs a short expression.
   risk: safe
+  difficulty: beginner
 related:
 - jq
 - make

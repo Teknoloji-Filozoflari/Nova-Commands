@@ -16,6 +16,7 @@ tags:
 - disks
 - apfs
 risk: destructive
+learning_level: intermediate
 requires_elevated: false
 platforms:
 - macos

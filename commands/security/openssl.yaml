@@ -16,6 +16,7 @@ tags:
 - crypto
 - certificates
 risk: caution
+learning_level: intermediate
 requires_elevated: false
 platforms:
 - linux
@@ -106,6 +107,7 @@ examples:
     tr: Kurulu OpenSSL sürümü.
     en: Installed OpenSSL version.
   risk: safe
+  difficulty: beginner
   privilege: none
 - title:
     tr: Sertifika gör
@@ -115,6 +117,7 @@ examples:
     tr: PEM sertifikadan konu ve tarihler.
     en: Subject and dates from a PEM cert.
   risk: safe
+  difficulty: intermediate
   privilege: none
 - title:
     tr: SHA-256
@@ -124,6 +127,7 @@ examples:
     tr: Dosya özeti.
     en: File digest.
   risk: safe
+  difficulty: intermediate
   privilege: none
 - title:
     tr: TLS el sıkışma
@@ -133,6 +137,7 @@ examples:
     tr: 'Uzak TLS zincirini gösterir (ağ). Beklenen: certificate chain + Verify return code.'
     en: Shows remote TLS chain (network). Expect certificate chain + Verify return code.
   risk: caution
+  difficulty: advanced
   privilege: none
 related:
 - ssh-keygen

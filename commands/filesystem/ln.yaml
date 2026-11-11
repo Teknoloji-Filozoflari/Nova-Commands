@@ -13,6 +13,7 @@ tags:
 - files
 - symlink
 risk: caution
+learning_level: intermediate
 requires_elevated: false
 platforms:
 - linux

@@ -57,7 +57,14 @@ CI must pass: validate → build → pytest → committed `content_sha256` match
 
 8. Commit updated `metadata/catalog.json`, `search-index.json`, and
    `manifest.json` (CI checks `content_sha256` against a rebuild).
-9. Open a pull request.
+9. If bank counts or the digest changed, refresh the **current-status**
+   snapshot tables in `README.md`, `README.tr.md`,
+   `docs/PLATFORM_SUPPORT.md`, `docs/ROADMAP.md`, and
+   `docs/COVERAGE_MATRIX.md` (search `entry_count`, command/concept/task/
+   profile counts, and `content_sha256`). Keep historical “was N”
+   wording clearly historical — never as the live figure.
+   `tests/test_doc_snapshot_counts.py` fails when these drift.
+10. Open a pull request.
 
 ## Add a concept article
 
@@ -107,6 +114,7 @@ open a **Translation** issue for large sweeps.
 | `summary` / `description` | Both `tr` and `en` |
 | `category` | One of the taxonomy slugs |
 | `risk` | `safe` \| `caution` \| `dangerous` \| `destructive` |
+| `learning_level` | Optional pedagogy: `beginner` \| `intermediate` \| `advanced` (omit → `unspecified` at build; **not** risk) |
 | `requires_elevated` | Boolean for typical useful use |
 | `platforms` | Non-empty (`linux`, `macos`, `bsd`, `windows`, …) |
 | `examples` | ≥1; each with `risk` |
@@ -124,6 +132,9 @@ open a **Translation** issue for large sweeps.
 
 Example `risk` must be ≥ command-level `risk` when the example is riskier
 (validator enforces ordering).
+
+Optional `examples[].difficulty` (`beginner` \| `intermediate` \| `advanced`)
+when examples span easy→advanced. Do not invent difficulty from example risk.
 
 ## Verification policy
 
