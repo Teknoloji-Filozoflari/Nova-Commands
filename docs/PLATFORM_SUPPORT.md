@@ -27,8 +27,8 @@ registry id is still **not** proof of local install or full coverage. See
 | Execution environments | 11 | WSL, Termux, container, … |
 | Architectures | 8 | |
 | Commands / concepts / tasks / profiles | 267 / 21 / 36 / 14 | tasks+profiles all `draft`; concepts mostly `draft` |
-| Search entries | 315 | |
-| `content_sha256` | `406fe040…` | full digest in `metadata/manifest.json` |
+| Search entries | 338 | `entry_count` in `metadata/search-index.json` (= commands+concepts+tasks+profiles) |
+| `content_sha256` | `a31207ef…` | full digest in `metadata/manifest.json` |
 
 ## Dual concept (unchanged)
 

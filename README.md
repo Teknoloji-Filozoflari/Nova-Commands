@@ -45,7 +45,7 @@ targets. Trust-audit follow-up may bump the digest when warnings/status honesty 
 | `schema_version` | **2** |
 | verification (commands) | verified **26** / reviewed **105** / draft **136** |
 | verification (concepts) | reviewed **1** / draft **20** (no fake `verified`) |
-| `content_sha256` | `406fe04002c47c592009c71f6d9dbb1f0ec7c9faa6c19165f58bebe29265b716` |
+| `content_sha256` | `a31207ef405b8319e4db0602f2bce599213a1fbf400055156b5139584108976f` |
 
 ```mermaid
 pie title Command verification.status (267)

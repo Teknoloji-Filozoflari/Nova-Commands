@@ -2,7 +2,9 @@
 
 Last updated: 2026-11-11  
 Scope rule: common, useful, **source-cited** commands — not every binary on every OS.  
-Bank ≠ Store catalog ≠ local PATH discovery.
+Bank ≠ Store catalog ≠ local PATH discovery.  
+Counts below must match committed `metadata/search-index.json` / `manifest.json`
+(see `tests/test_doc_snapshot_counts.py`).
 
 ## Legend
 
@@ -35,17 +37,22 @@ PowerShell cmdlets are not Linux aliases.
 | Containers / proxy | D/R | D/R | D/R | — | — | — | D (jails) |
 | Server security checklist | platform-split `security-check-*` | distro-aware | distro-aware | nixos-rebuild (≠ nix) | Win paths filled | macOS paths filled | BSD paths filled (Docker=na/jails gap) |
 
-## Counts (pre → target this PR)
+## Counts (committed catalog — current)
 
-| Kind | Before (main) | After this PR |
-|------|---------------|---------------|
-| Commands | 256 | **267** (+11 high-priority drafts; several reviewed rows enriched) |
-| Tasks | 26 | **36** (+10 sequential `security-check-*` stages) |
-| Profiles | 13 | **14** (+`server-security-checklist`; homelab linked) |
-| Concepts | 20 | **21** (+`server-security-checklist`) |
-| Search entries | 315 | **338** |
-| Coverage doc | absent | this file + in-repo `docs/COVERAGE_MATRIX.md` |
-| `content_sha256` | `e17437d6…` | `406fe04002c47c592009c71f6d9dbb1f0ec7c9faa6c19165f58bebe29265b716` |
+| Kind | Count | Notes |
+|------|------:|-------|
+| Commands | **267** | |
+| Tasks | **36** | includes sequential `security-check-*` stages |
+| Profiles | **14** | includes `server-security-checklist` |
+| Concepts | **21** | includes `server-security-checklist` |
+| Search entries | **338** | `metadata/search-index.json` `entry_count` |
+| `content_sha256` | `a31207ef405b8319e4db0602f2bce599213a1fbf400055156b5139584108976f` | must match catalog/manifest/search-index |
+
+### Historical (NV-103 teachable bank, before that merge)
+
+On pre–NV-103 `main` the bank was commands **256** / tasks **26** / profiles **13** /
+concepts **20** / search **315**, digest `e17437d6…`. Treat **315** as history only —
+not a current-status figure.
 
 ## High-priority gaps still remaining after this PR
 
