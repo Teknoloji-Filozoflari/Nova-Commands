@@ -7,9 +7,10 @@ summary:
   tr: systemd günlüğünü sorgular.
   en: Query the systemd journal.
 description:
-  tr: Servis ve çekirdek loglarını journal’dan okur. -p err öncelik süzgesi yaygındır; çok geniş sorgular
-    gürültülü olabilir.
-  en: Reads service and kernel logs from the journal. -p err is a common priority filter; over-broad queries
+  tr: Servis ve çekirdek loglarını systemd journal’dan okur. OpenRC/syslog dosya yolları (`/var/log/messages`)
+    ve macOS `log` ile **eşitlenmez**. -p err öncelik süzgesi yaygındır; çok geniş sorgular gürültülü olabilir.
+  en: Reads service and kernel logs from the systemd journal. It is **not** equivalent to OpenRC/syslog
+    file paths (/var/log/messages) or macOS log. -p err is a common priority filter; over-broad queries
     can be noisy.
 tags:
 - monitoring
@@ -41,6 +42,15 @@ package_refs:
   package: systemd
   distributions:
   - fedora
+- manager: zypper
+  package: systemd
+  distributions:
+  - opensuse-leap
+  - opensuse-tumbleweed
+  - sles
+install_notes:
+  tr: systemd journal gerektirir. Alpine/Void/Gentoo OpenRC varsayılanında journalctl varsaymayın.
+  en: Requires systemd journal. Do not assume journalctl on Alpine/Void/Gentoo OpenRC defaults.
 flags:
 - flag: -u
   meaning:

@@ -14,9 +14,10 @@ description:
     Kontrol listesi durumları (Nova yerel): unchecked / ok / review / na.
     Örnekler belgeleme içindir — otomatik çalışmaz.
 
-    Platform dürüstlüğü: ufw Debian/Ubuntu ailesi; firewalld Fedora/RHEL ailesi; pf BSD; Windows
-    netsh/advfirewall. macOS’ta Application Firewall (socketfilterfw) ayrıdır — bu bankada henüz yok;
-    pfctl macOS’ta da vardır ama çoğu masaüstünde kapalı olabilir.
+    Platform dürüstlüğü: ufw Debian/Ubuntu ailesi; firewalld Fedora/RHEL/openSUSE ailesi; nftables
+    düşük seviye (Alpine/Void/Gentoo ve sarmalayıcısız host’lar); pf BSD; Windows netsh/advfirewall.
+    macOS’ta Application Firewall (socketfilterfw) ayrıdır — bu bankada henüz yok; pfctl macOS’ta da
+    vardır ama çoğu masaüstünde kapalı olabilir.
 
     İsteğe bağlı düzeltme: Kural eklemeden önce mevcut policy yedeği alın. ufw --force reset / geniş
     allow kör önerilmez. Değişiklik sonrası hizmeti doğrula; rollback için önceki ruleset.
@@ -26,9 +27,10 @@ description:
     Checklist states (Nova local): unchecked / ok / review / na.
     Examples are documentation only — never auto-run.
 
-    Platform honesty: ufw is Debian/Ubuntu-family; firewalld is Fedora/RHEL-family; pf is BSD;
-    Windows uses netsh/advfirewall. macOS Application Firewall (socketfilterfw) is separate and not
-    yet in this bank; pfctl exists on macOS but is often inactive on desktops.
+    Platform honesty: ufw is Debian/Ubuntu-family; firewalld is Fedora/RHEL/openSUSE-family;
+    nftables is lower-level (Alpine/Void/Gentoo and unwrapped hosts); pf is BSD; Windows uses
+    netsh/advfirewall. macOS Application Firewall (socketfilterfw) is separate and not yet in this
+    bank; pfctl exists on macOS but is often inactive on desktops.
 
     Optional fix: Backup policy before adding rules. Blind ufw --force reset / wide allow is not
     recommended. Verify service after change; keep prior ruleset for rollback.
@@ -89,6 +91,12 @@ implementations:
   - linux
   distributions:
   - fedora
+  - rhel
+  - rocky
+  - almalinux
+  - opensuse-leap
+  - opensuse-tumbleweed
+  - sles
   shells:
   - bash
   commands:
@@ -99,8 +107,28 @@ implementations:
     shell: bash
     privilege: none
     explanation:
-      tr: firewalld durumu (Fedora/RHEL ailesi). ufw değildir.
-      en: firewalld state (Fedora/RHEL family). Not ufw.
+      tr: firewalld durumu (Fedora/RHEL/openSUSE ailesi). ufw değildir.
+      en: firewalld state (Fedora/RHEL/openSUSE family). Not ufw.
+- id: linux-nft
+  platforms:
+  - linux
+  distributions:
+  - alpine
+  - void
+  - gentoo
+  - arch
+  shells:
+  - bash
+  commands:
+  - nft
+  examples:
+  - command: sudo nft list ruleset
+    risk: safe
+    shell: bash
+    privilege: elevated
+    explanation:
+      tr: 'nftables kuralları (salt okuma). ufw/firewalld sarmalayıcısı varsa önce onları kullanın.'
+      en: 'nftables ruleset (read-only). If ufw/firewalld wraps the host, prefer those first.'
 - id: windows-net
   platforms:
   - windows

@@ -39,17 +39,33 @@ package_refs:
   package: nftables
   distributions:
   - fedora
+- manager: zypper
+  package: nftables
+  distributions:
+  - opensuse-leap
+  - opensuse-tumbleweed
+- manager: apk
+  package: nftables
+  distributions:
+  - alpine
+- manager: xbps
+  package: nftables
+  distributions:
+  - void
 install_notes:
   tr: |-
     Arch: pacman -S nftables
     Debian/Ubuntu: apt install nftables
+    openSUSE: zypper in nftables. Alpine: apk add nftables. Void: xbps-install nftables.
+    ufw/firewalld sarmalayıcısı varsa önce onları tercih edin.
     Fedora: dnf install nftables
     systemctl ile nftables servisi distroya göre değişir.
   en: |-
     Arch: pacman -S nftables
     Debian/Ubuntu: apt install nftables
     Fedora: dnf install nftables
-    nftables systemd unit varies by distro.
+    openSUSE: zypper in nftables. Alpine: apk add nftables. Void: xbps-install nftables.
+    Prefer ufw/firewalld when those wrap the host. nftables unit varies by distro.
 flags:
 - flag: list
   meaning:

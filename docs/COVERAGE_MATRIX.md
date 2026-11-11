@@ -1,10 +1,11 @@
-# Nova-Commands coverage matrix (NV-103)
+# Nova-Commands coverage matrix (NV-103 / NV-121)
 
 Last updated: 2026-11-11  
 Scope rule: common, useful, **source-cited** commands — not every binary on every OS.  
 Bank ≠ Store catalog ≠ local PATH discovery.  
 Counts below must match committed `metadata/search-index.json` / `manifest.json`
 (see `tests/test_doc_snapshot_counts.py`).
+NV-121 expands honest multi-distro task/command tags (no invented package names; draft stays draft).
 
 ## Legend
 
@@ -21,32 +22,30 @@ PowerShell cmdlets are not Linux aliases.
 
 ## Area × platform (honest snapshot)
 
-| Area | Linux (Arch-first) | Debian/Ubuntu | Fedora/RHEL | Nix/NixOS | Windows | macOS | BSD |
-|------|--------------------|---------------|-------------|-----------|---------|-------|-----|
-| Shell fundamentals | R + new drafts | R | R | — | D (PS/cmd) | R/D (zsh) | R |
-| Files / search / text | V/R | V/R | V/R | — | D (Get-*) | R (BSD utils differ) | R |
-| Users / perms / process | V/R | V/R | V/R | — | D (icacls/…) | D (dscl) | R (doas) |
-| systemd / services / logs | R | R | R | NixOS via nixos-rebuild | D (Get-Service/…) | D (launchctl) | D (service/rcctl) |
-| apt / dpkg | — | R | — | — | — | — | — |
-| pacman | R (preferred) | — | — | — | — | — | — |
-| dnf / rpm | — | — | R | — | — | — | — |
-| Nix (+ NixOS distinct) | R/D + concept | R/D | R/D | R/D | — | R/D (nix) | — |
-| Network / SSH / TLS | R | R | R | — | D | D | D |
-| Storage / backup | R/D | R/D | R/D | — | D | D | D (zfs) |
-| Git / dev basics | R | R | R | — | D | D (xcode) | R |
-| Containers / proxy | D/R | D/R | D/R | — | — | — | D (jails) |
-| Server security checklist | platform-split `security-check-*` | distro-aware | distro-aware | nixos-rebuild (≠ nix) | Win paths filled | macOS paths filled | BSD paths filled (Docker=na/jails gap) |
+| Area | Arch | Debian/Ubuntu | Fedora/RHEL | openSUSE | Alpine | NixOS | Void | Gentoo | Windows | macOS | BSD |
+|------|------|---------------|-------------|----------|--------|-------|------|--------|---------|-------|-----|
+| Shell fundamentals | R + drafts | R | R | R (shared GNU) | R/D (busybox notes thin) | R (shared) | R/D | R/D | D (PS/cmd) | R/D (zsh) | R |
+| Files / search / text | V/R | V/R | V/R | V/R | V/R (utils may be busybox) | V/R | V/R | V/R | D (Get-*) | R (BSD utils) | R |
+| Users / perms / process | V/R | V/R | V/R | V/R | V/R | V/R | V/R | V/R | D (icacls/…) | D (dscl) | R (doas) |
+| Services / logs | R systemd | R systemd | R systemd | R systemd | D OpenRC (`rc-status`) | R systemd + nixos-rebuild | D runit (`sv`) | D OpenRC | D (Get-Service/…) | D (launchctl) | D (service/rcctl) |
+| Packages / updates | R pacman | R apt | R dnf | D zypper | D apk | D nixos-rebuild (≠ nix) | D xbps | D emerge | D winget | D brew/softwareupdate | D pkg |
+| Network / SSH / TLS | R | R | R | R | R/D | R/D | R/D | R/D | D | D | D |
+| Firewall | D nft/ufw optional | D ufw | D firewalld | D firewalld | D nft | D nft/systemd | D nft | D nft | D netsh | D pfctl | D pfctl |
+| Storage / backup | R/D | R/D | R/D | R/D | D thin | D thin | D thin | D thin | D | D | D (zfs) |
+| Git / dev basics | R | R | R | R | R/D | R/D | R/D | R/D | D | D (xcode) | R |
+| Containers / proxy | D/R | D (`docker.io`) | D/R | D | D | — | — | — | — | — | D (jails) |
+| Server security checklist | pacman path | apt path | dnf path | zypper path | apk path | nixos-rebuild | xbps path | emerge path | Win paths | macOS paths | BSD paths |
 
 ## Counts (committed catalog — current)
 
 | Kind | Count | Notes |
 |------|------:|-------|
-| Commands | **267** | |
+| Commands | **270** | +OpenRC `rc-status`/`rc-service` + Void `sv` (NV-121) |
 | Tasks | **36** | includes sequential `security-check-*` stages |
 | Profiles | **14** | includes `server-security-checklist` |
 | Concepts | **21** | includes `server-security-checklist` |
-| Search entries | **338** | `metadata/search-index.json` `entry_count` |
-| `content_sha256` | `92e6920cd8278b5685cf6d748769c1a22cc61bbd02924e5eee7267122d7e4a4b` | must match catalog/manifest/search-index |
+| Search entries | **341** | `metadata/search-index.json` `entry_count` |
+| `content_sha256` | `1a64dd48ee49d7d026627944d4f0b97b3e57b951858d727cf7eb814ad12c254a` | must match catalog/manifest/search-index |
 
 ### Historical (NV-103 teachable bank, before that merge)
 
@@ -68,6 +67,10 @@ Honest remainder (not an infinite encyclopedia):
 8. **Appliance CLIs** — Proxmox `qm`, RouterOS, etc. explicitly not claimed.
 9. **illumos/Solaris/AIX** — registry skeletons only.
 10. **certbot / ACME / fail2ban** — common homelab tools not yet first-class (TLS stage uses openssl/nginx/caddy).
+11. **OpenRC/runit depth** — `rc-status`/`rc-service`/`sv` are new drafts; enable/add runlevels and logging daemons still thin.
+12. **Non-systemd log ecosystems** — `/var/log/messages` path documented; distro-specific syslog/busybox `logread` (OpenWrt) not first-class.
+13. **helm / nerdctl / terraform / aws / caddy package_refs** — Arch-known only with honesty notes; no invented multi-distro package names.
+14. **Guix System / Solus / Slackware / OpenWrt task implementations** — PM commands exist; everyday tasks rarely tag those distros yet.
 
 ## Security checklist states (Nova local UI)
 

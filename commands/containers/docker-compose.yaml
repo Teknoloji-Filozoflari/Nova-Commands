@@ -30,15 +30,15 @@ package_refs:
   - arch
 install_notes:
   tr: |-
-    Arch: pacman -S docker-compose
-    Debian/Ubuntu: paket adı dağıtıma göre değişir (unknown — docker-compose-plugin / docker-compose v1)
-    Fedora: sıkça docker-compose-plugin (docker.com) — doğrulayın.
-    Modern kullanım: docker compose (boşluklu eklenti).
+    Arch: pacman -S docker-compose (bilinen distro paketi).
+    Debian/Ubuntu/Fedora: paket adı dağıtıma göre değişir (docker-compose-plugin / v1) — uydurma yok;
+    kurulu adı doğrulayın. Modern kullanım: `docker compose` (boşluklu eklenti).
+    Linux filtresiz host’ta Arch’ı sessiz varsaymayın.
   en: |-
-    Arch: pacman -S docker-compose
-    Debian/Ubuntu: package name varies (unknown — docker-compose-plugin / v1)
-    Fedora: often docker-compose-plugin from docker.com — verify.
-    Modern usage: docker compose (space) plugin.
+    Arch: pacman -S docker-compose (known distro package).
+    Debian/Ubuntu/Fedora: package name varies (docker-compose-plugin / v1) — do not invent;
+    verify the installed name. Modern usage: `docker compose` (space) plugin.
+    Do not silently default to Arch when Linux is undifferenced.
 flags:
 - flag: up
   meaning:

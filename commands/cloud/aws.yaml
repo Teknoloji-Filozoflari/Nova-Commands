@@ -68,6 +68,13 @@ package_refs:
   package: aws-cli
   distributions:
   - arch
+install_notes:
+  tr: |-
+    Arch: pacman -S aws-cli (v1/v2 paket adı sürüme göre değişebilir). pipx/vendor installer ve distro
+    paketleri ayrıdır — sessiz Arch varsayımı yok.
+  en: |-
+    Arch: pacman -S aws-cli (v1/v2 package name may vary). pipx/vendor installers and distro packages
+    differ — no silent Arch default.
 nova:
   favorite_eligible: true
   ui_priority: 60

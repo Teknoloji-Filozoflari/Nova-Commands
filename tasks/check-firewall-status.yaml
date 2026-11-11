@@ -27,12 +27,20 @@ implementations:
     shell: bash
     privilege: elevated
     explanation:
-      tr: Aktif kuralları ve varsayılanları gösterir.
-      en: Shows active rules and defaults.
+      tr: Aktif kuralları ve varsayılanları gösterir (Debian/Ubuntu ailesi).
+      en: Shows active rules and defaults (Debian/Ubuntu family).
   platforms:
   - linux
   shells:
   - bash
+  distributions:
+  - debian
+  - ubuntu
+  - linux-mint
+  - pop-os
+  notes:
+    tr: Kurulu değilse na — firewalld/nft ile karıştırma.
+    en: If absent, na — do not treat as firewalld/nft.
 - id: linux-firewalld
   commands:
   - firewall-cmd
@@ -42,12 +50,45 @@ implementations:
     shell: bash
     privilege: none
     explanation:
-      tr: Çalışıyorsa running yazar.
-      en: Prints running when active.
+      tr: Çalışıyorsa running yazar (Fedora/RHEL/openSUSE ailesi).
+      en: Prints running when active (Fedora/RHEL/openSUSE family).
   platforms:
   - linux
   shells:
   - bash
+  distributions:
+  - fedora
+  - rhel
+  - rocky
+  - almalinux
+  - opensuse-leap
+  - opensuse-tumbleweed
+  - sles
+- id: linux-nft
+  commands:
+  - nft
+  examples:
+  - command: sudo nft list ruleset
+    risk: safe
+    shell: bash
+    privilege: elevated
+    explanation:
+      tr: nftables kurallarını listeler (ufw/firewalld sarmalayıcısı değilse ham tablo).
+      en: Lists nftables ruleset (raw tables when not wrapped by ufw/firewalld).
+  platforms:
+  - linux
+  shells:
+  - bash
+  distributions:
+  - alpine
+  - void
+  - gentoo
+  - arch
+  - debian
+  - fedora
+  notes:
+    tr: Birçok distroda düşük seviye araçtır; ufw/firewalld varsa önce onları tercih edin.
+    en: Low-level on many distros; prefer ufw/firewalld when those are the host firewall.
 - id: bsd-pfctl
   commands:
   - pfctl
@@ -83,8 +124,9 @@ verification:
   sources:
   - man 8 ufw
   - man 1 firewall-cmd
+  - man 8 nft
   - man 8 pfctl
-  notes: Agent-authored Faz 8 draft; not human-verified.
+  notes: NV-121 multi-OS fill; still draft — not human-verified.
 tags:
 - firewall
 - security

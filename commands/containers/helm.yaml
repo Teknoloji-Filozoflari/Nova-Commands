@@ -69,6 +69,13 @@ package_refs:
   - arch
 packages:
   arch: helm
+install_notes:
+  tr: |-
+    Arch: pacman -S helm. Diğer distrolarda resmi Helm binary veya sürüm depoları yaygındır —
+    Linux filtresiz host’ta Arch’ı sessiz varsaymayın.
+  en: |-
+    Arch: pacman -S helm. Other distros often use the official Helm binary or versioned repos —
+    do not silently default to Arch when Linux is undifferenced.
 nova:
   favorite_eligible: true
   ui_priority: 60

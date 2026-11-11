@@ -22,27 +22,49 @@ platforms:
 - windows
 operating_systems:
 - linux
+- macos
+- windows
 packages:
   arch: docker
+  debian: docker.io
+  ubuntu: docker.io
   fedora: docker-ce
 package_refs:
 - manager: pacman
   package: docker
   distributions:
   - arch
+- manager: apt
+  package: docker.io
+  distributions:
+  - debian
+  - ubuntu
 - manager: dnf
   package: docker-ce
   distributions:
   - fedora
+- manager: zypper
+  package: docker
+  distributions:
+  - opensuse-leap
+  - opensuse-tumbleweed
+- manager: apk
+  package: docker
+  distributions:
+  - alpine
 install_notes:
   tr: |-
     Arch: pacman -S docker — sonra systemctl enable --now docker; kullanıcıyı docker grubuna ekleyin.
-    Debian/Ubuntu paket adları dağıtıma göre değişir (unknown — dokümantasyona bakın).
-    Fedora sıkça docker-ce (docker.com repo).
+    Debian/Ubuntu distro paketi sıkça docker.io; Docker Inc. reposu docker-ce kullanır — karıştırmayın.
+    Fedora sıkça docker-ce (docker.com repo) veya moby-engine — kurulu paketi doğrulayın.
+    openSUSE: zypper in docker. Alpine: apk add docker (OpenRC servis yolu ayrıdır).
+    Sessiz Arch varsayımı yok: Linux filtresiz host’ta önce distro PM’sini seçin.
   en: |-
     Arch: pacman -S docker — then systemctl enable --now docker; add user to docker group.
-    Debian/Ubuntu package names vary (unknown — see distro docs).
-    Fedora often docker-ce from docker.com.
+    Debian/Ubuntu distro package is often docker.io; Docker Inc. repos use docker-ce — do not confuse.
+    Fedora often docker-ce (docker.com) or moby-engine — verify the installed package.
+    openSUSE: zypper in docker. Alpine: apk add docker (OpenRC service path differs).
+    No silent Arch default: pick the host distro PM when Linux is undifferenced.
 examples:
 - title:
     tr: ps

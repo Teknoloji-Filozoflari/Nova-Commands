@@ -1,0 +1,101 @@
+schema_version: 2
+id: sv
+name: sv
+kind: administrative_tool
+category: system
+summary:
+  tr: Void Linux runit servis denetimi (systemd / OpenRC değil).
+  en: Void Linux runit service control (not systemd / OpenRC).
+description:
+  tr: '`sv`, runit gözetimindeki servisleri status/up/down/restart ile yönetir. Void Linux’ta birincil
+    servis aracıdır. `systemctl`, OpenRC `rc-service`/`rc-status` ve BSD `service`/`rcctl` ile **eşitlenmez**.
+    `status` salt okumadır; up/down hizmeti değiştirir.'
+  en: sv controls runit-supervised services via status/up/down/restart. It is the primary service tool
+    on Void Linux. It is **not** equivalent to systemctl, OpenRC rc-service/rc-status, or BSD service/rcctl.
+    status is read-only; up/down change service state.
+tags:
+- system
+- runit
+- void
+- services
+risk: dangerous
+learning_level: intermediate
+requires_elevated: true
+platforms:
+- linux
+operating_systems:
+- linux
+package_refs:
+- manager: xbps
+  package: runit
+  distributions:
+  - void
+install_notes:
+  tr: Void runit tabanında gelir. systemd veya OpenRC host’larda birincil araç değildir.
+  en: Ships with Void runit. Not the primary tool on systemd or OpenRC hosts.
+flags:
+- flag: status
+  meaning:
+    tr: Servis durumunu göster.
+    en: Show service status.
+  verified: false
+- flag: up
+  meaning:
+    tr: Servisi başlat / ayakta tut.
+    en: Start / keep service up.
+  verified: false
+- flag: down
+  meaning:
+    tr: Servisi durdur.
+    en: Stop service.
+  verified: false
+- flag: restart
+  meaning:
+    tr: Servisi yeniden başlat.
+    en: Restart service.
+  verified: false
+examples:
+- title:
+    tr: Servis durumu
+    en: Service status
+  command: sv status /var/service/sshd
+  explanation:
+    tr: runit sshd servis durumunu gösterir (systemctl değildir).
+    en: Shows runit sshd service status (not systemctl).
+  risk: safe
+  difficulty: beginner
+  requires_elevated: false
+- title:
+    tr: Servisi yeniden başlat
+    en: Restart service
+  command: sudo sv restart /var/service/sshd
+  explanation:
+    tr: runit gözetimindeki sshd’yi yeniden başlatır.
+    en: Restarts runit-supervised sshd.
+  risk: caution
+  difficulty: intermediate
+  requires_elevated: true
+related:
+- rc-status
+- rc-service
+- systemctl
+- service
+- rcctl
+intent:
+  tr:
+  - sv status
+  - void servis
+  - runit
+  en:
+  - sv status
+  - void service
+  - runit
+verification:
+  status: draft
+  sources:
+  - https://docs.voidlinux.org/config/services/index.html
+  - https://man.voidlinux.org/sv.8
+  notes: Agent-authored NV-121 draft from Void docs; not human-verified.
+nova:
+  concepts:
+  - systemd

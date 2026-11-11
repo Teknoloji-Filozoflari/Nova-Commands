@@ -65,8 +65,12 @@ package_refs:
 packages:
   arch: nerdctl
 install_notes:
-  tr: 'Arch: pacman -S nerdctl. Diğer dağıtımlarda paket adı/kurulum yolu değişebilir.'
-  en: 'Arch: pacman -S nerdctl. Other distros may use different package names/paths.'
+  tr: |-
+    Arch: pacman -S nerdctl (bilinen distro paketi). Diğer dağıtımlarda paket adı/kurulum yolu değişebilir —
+    sessiz Arch varsayımı yok; doğrulayın.
+  en: |-
+    Arch: pacman -S nerdctl (known distro package). Other distros may differ in package name/path —
+    no silent Arch default; verify.
 nova:
   favorite_eligible: true
   ui_priority: 60

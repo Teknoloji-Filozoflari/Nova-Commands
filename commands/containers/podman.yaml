@@ -37,15 +37,31 @@ package_refs:
   package: podman
   distributions:
   - fedora
+  - rhel
+  - rocky
+  - almalinux
+- manager: zypper
+  package: podman
+  distributions:
+  - opensuse-leap
+  - opensuse-tumbleweed
+- manager: apk
+  package: podman
+  distributions:
+  - alpine
 install_notes:
   tr: |-
     Arch: pacman -S podman
-    Fedora: dnf install podman
+    Fedora/RHEL: dnf install podman
     Debian/Ubuntu: apt install podman
+    openSUSE: zypper in podman
+    Alpine: apk add podman
   en: |-
     Arch: pacman -S podman
-    Fedora: dnf install podman
+    Fedora/RHEL: dnf install podman
     Debian/Ubuntu: apt install podman
+    openSUSE: zypper in podman
+    Alpine: apk add podman
 examples:
 - title:
     tr: Çalışanlar

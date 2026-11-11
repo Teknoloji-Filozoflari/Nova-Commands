@@ -27,14 +27,60 @@ implementations:
     shell: bash
     privilege: none
     explanation:
-      tr: nginx biriminin son 50 satırı.
-      en: Last 50 lines for nginx unit.
+      tr: systemd journal son satırları (OpenRC/syslog yolu değildir).
+      en: Recent systemd journal lines (not OpenRC/syslog path).
   operating_systems:
   - linux
   platforms:
   - linux
   shells:
   - bash
+  distributions:
+  - arch
+  - debian
+  - ubuntu
+  - fedora
+  - rhel
+  - rocky
+  - almalinux
+  - opensuse-leap
+  - opensuse-tumbleweed
+  - nixos
+  notes:
+    tr: journalctl systemd ister. Alpine/Void/Gentoo OpenRC varsayılanında ayrı uygulama kullanın.
+    en: journalctl needs systemd. On Alpine/Void/Gentoo OpenRC defaults use the other implementation.
+- id: linux-syslog-file
+  commands:
+  - tail
+  - dmesg
+  examples:
+  - command: tail -n 50 /var/log/messages
+    risk: safe
+    shell: bash
+    privilege: none
+    explanation:
+      tr: Klasik syslog dosyasından son satırlar (yol distroya göre değişebilir).
+      en: Last lines from a classic syslog file (path may vary by distro).
+  - command: dmesg | tail -n 40
+    risk: safe
+    shell: bash
+    privilege: none
+    explanation:
+      tr: Çekirdek halka tamponu — journalctl değildir.
+      en: Kernel ring buffer — not journalctl.
+  operating_systems:
+  - linux
+  platforms:
+  - linux
+  shells:
+  - bash
+  distributions:
+  - alpine
+  - void
+  - gentoo
+  notes:
+    tr: '/var/log/messages veya /var/log/syslog yoksa na; journalctl varsaymayın.'
+    en: 'If /var/log/messages or /var/log/syslog is absent, mark na; do not assume journalctl.'
 - id: windows-winevent
   commands:
   - get-winevent
@@ -61,8 +107,8 @@ implementations:
     shell: zsh
     privilege: none
     explanation:
-      tr: Son 2 dakikalık kompakt günlükten kuyruk alır.
-      en: Tails a compact log from the last 2 minutes.
+      tr: Son 5 dakikalık kompakt günlükten kuyruk alır.
+      en: Tails a compact log from the last 5 minutes.
   operating_systems:
   - macos
   platforms:
@@ -92,7 +138,8 @@ verification:
   - man 1 journalctl
   - man 1 log
   - man 1 dmesg
-  notes: Agent-authored Faz 8 draft; not human-verified.
+  - man 1 tail
+  notes: NV-121 multi-OS fill; still draft — not human-verified.
 tags:
 - logs
 - journal

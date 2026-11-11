@@ -40,13 +40,24 @@ package_refs:
   package: firewalld
   distributions:
   - fedora
+  - rhel
+  - rocky
+  - almalinux
+- manager: zypper
+  package: firewalld
+  distributions:
+  - opensuse-leap
+  - opensuse-tumbleweed
+  - sles
 install_notes:
   tr: |-
-    Arch: pacman -S firewalld — systemctl enable --now firewalld
-    Fedora’da sık varsayılan; Debian/Ubuntu’da isteğe bağlı.
+    Fedora/RHEL/openSUSE ailesinde sık varsayılan firewall.
+    Arch: pacman -S firewalld — systemctl enable --now firewalld.
+    Debian/Ubuntu’da isteğe bağlı; ufw daha yaygındır — karıştırmayın.
   en: |-
-    Arch: pacman -S firewalld — systemctl enable --now firewalld
-    Often default on Fedora; optional on Debian/Ubuntu.
+    Often the default firewall on Fedora/RHEL/openSUSE families.
+    Arch: pacman -S firewalld — systemctl enable --now firewalld.
+    Optional on Debian/Ubuntu where ufw is more common — do not confuse them.
 flags:
 - flag: --state
   meaning:

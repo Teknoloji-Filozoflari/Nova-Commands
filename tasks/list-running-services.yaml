@@ -27,14 +27,77 @@ implementations:
     shell: bash
     privilege: none
     explanation:
-      tr: sshd birim durumunu gösterir (izinler dağıtıma göre).
-      en: Shows sshd unit status (unit name varies).
+      tr: Çalışan systemd servis birimlerini listeler (OpenRC/runit değildir).
+      en: Lists running systemd service units (not OpenRC/runit).
   operating_systems:
   - linux
   platforms:
   - linux
   shells:
   - bash
+  distributions:
+  - arch
+  - endeavouros
+  - manjaro
+  - debian
+  - ubuntu
+  - fedora
+  - rhel
+  - rocky
+  - almalinux
+  - opensuse-leap
+  - opensuse-tumbleweed
+  - nixos
+  notes:
+    tr: systemd host’lar içindir. Alpine/Gentoo OpenRC ve Void runit ayrı uygulamalardır.
+    en: For systemd hosts. Alpine/Gentoo OpenRC and Void runit are separate implementations.
+- id: alpine-gentoo-openrc
+  commands:
+  - rc-status
+  - rc-service
+  examples:
+  - command: rc-status
+    risk: safe
+    shell: bash
+    privilege: none
+    explanation:
+      tr: OpenRC runlevel servis durumunu listeler (systemctl değildir).
+      en: Lists OpenRC runlevel service status (not systemctl).
+  operating_systems:
+  - linux
+  platforms:
+  - linux
+  shells:
+  - bash
+  distributions:
+  - alpine
+  - gentoo
+- id: void-runit
+  commands:
+  - sv
+  examples:
+  - command: ls /var/service
+    risk: safe
+    shell: bash
+    privilege: none
+    explanation:
+      tr: Void’ta etkin runit servis bağlarını listeler; durum için sv status kullanın.
+      en: Lists enabled Void runit service links; use sv status for state.
+  - command: sv status /var/service/*
+    risk: safe
+    shell: bash
+    privilege: none
+    explanation:
+      tr: Etkin runit servislerinin durumunu sorar.
+      en: Queries status of enabled runit services.
+  operating_systems:
+  - linux
+  platforms:
+  - linux
+  shells:
+  - bash
+  distributions:
+  - void
 - id: bsd-service
   commands:
   - service
@@ -109,18 +172,26 @@ verification:
   status: draft
   sources:
   - man 1 systemctl
+  - https://wiki.alpinelinux.org/wiki/OpenRC
+  - https://wiki.gentoo.org/wiki/OpenRC
+  - https://docs.voidlinux.org/config/services/index.html
   - man 8 service
   - man 8 rcctl
   - https://learn.microsoft.com/powershell/module/microsoft.powershell.management/get-service
-  notes: Agent-authored Faz 8 draft; not human-verified.
+  notes: NV-121 multi-OS fill; still draft — not human-verified.
 description:
-  tr: 'Servis modelleri eşitlenmez: systemctl ≠ service ≠ Get-Service ≠ launchctl.'
-  en: 'Service models are not equated: systemctl ≠ service ≠ Get-Service ≠ launchctl.'
+  tr: 'Servis modelleri eşitlenmez: systemctl ≠ rc-status/rc-service ≠ sv ≠ service ≠ Get-Service ≠ launchctl.'
+  en: 'Service models are not equated: systemctl ≠ rc-status/rc-service ≠ sv ≠ service ≠ Get-Service ≠ launchctl.'
 tags:
 - services
 - systemd
+- openrc
+- runit
 related_commands:
 - systemctl
+- rc-status
+- rc-service
+- sv
 - service
 - rcctl
 - get-service
