@@ -22,6 +22,7 @@ tags:
 - windows
 - services
 risk: safe
+learning_level: intermediate
 requires_elevated: false
 platforms:
 - windows

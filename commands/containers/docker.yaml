@@ -14,6 +14,7 @@ description:
 tags:
 - containers
 risk: dangerous
+learning_level: intermediate
 requires_elevated: false
 platforms:
 - linux
@@ -51,6 +52,7 @@ examples:
     tr: Çalışan konteynerler.
     en: Running containers.
   risk: safe
+  difficulty: beginner
 - title:
     tr: Tüm konteynerler
     en: All containers
@@ -59,6 +61,7 @@ examples:
     tr: Durmuş olanlar dahil listeler.
     en: Lists containers including stopped.
   risk: safe
+  difficulty: beginner
 - title:
     tr: İmajlar
     en: Images
@@ -67,6 +70,7 @@ examples:
     tr: Yerel imaj listesi.
     en: Local image list.
   risk: safe
+  difficulty: beginner
 - title:
     tr: Loglar
     en: Logs
@@ -75,6 +79,7 @@ examples:
     tr: Konteyner günlüklerini takip eder.
     en: Follows container logs.
   risk: safe
+  difficulty: beginner
 - title:
     tr: Çalıştır
     en: Run
@@ -83,6 +88,7 @@ examples:
     tr: Geçici Alpine kabuğu; --rm çıkınca siler. İmaj çeker (ağ).
     en: Ephemeral Alpine shell; --rm removes on exit. May pull (network).
   risk: caution
+  difficulty: intermediate
 - title:
     tr: Durdur
     en: Stop
@@ -91,6 +97,7 @@ examples:
     tr: Çalışan konteyneri durdurur.
     en: Stops a running container.
   risk: caution
+  difficulty: intermediate
 related:
 - docker-compose
 - podman

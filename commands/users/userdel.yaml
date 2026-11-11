@@ -13,6 +13,7 @@ tags:
 - users
 - accounts
 risk: destructive
+learning_level: intermediate
 requires_elevated: true
 platforms:
 - linux

@@ -13,6 +13,7 @@ tags:
 - users
 - permissions
 risk: dangerous
+learning_level: intermediate
 requires_elevated: true
 platforms:
 - linux

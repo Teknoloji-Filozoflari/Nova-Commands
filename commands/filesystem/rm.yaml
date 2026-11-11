@@ -13,6 +13,7 @@ tags:
 - files
 - delete
 risk: destructive
+learning_level: beginner
 requires_elevated: false
 platforms:
 - linux

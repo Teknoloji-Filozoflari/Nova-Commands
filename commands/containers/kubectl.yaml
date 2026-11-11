@@ -17,6 +17,7 @@ tags:
 - devops
 - orchestration
 risk: dangerous
+learning_level: advanced
 requires_elevated: false
 platforms:
 - linux
@@ -51,6 +52,7 @@ examples:
     tr: İstemci sürümü (küme gerekmez).
     en: Client version (no cluster required).
   risk: safe
+  difficulty: beginner
 - title:
     tr: Pod’lar
     en: Pods
@@ -59,6 +61,7 @@ examples:
     tr: Tüm namespace’lerde pod’lar (küme erişimi gerekir).
     en: Pods across namespaces (needs cluster access).
   risk: caution
+  difficulty: intermediate
 - title:
     tr: Bağlamlar
     en: Contexts
@@ -67,6 +70,7 @@ examples:
     tr: kubeconfig bağlamlarını listeler.
     en: Lists kubeconfig contexts.
   risk: safe
+  difficulty: beginner
 intent:
   tr:
   - kubectl

@@ -12,6 +12,7 @@ description:
 tags:
 - archive
 risk: caution
+learning_level: beginner
 requires_elevated: false
 platforms:
 - linux

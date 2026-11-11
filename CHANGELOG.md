@@ -6,6 +6,13 @@ Dates are UTC merge days when known. Digests are `metadata/manifest.json`
 
 ## Unreleased
 
+- NV-110 / NV-109: additive `learning_level` on commands (`beginner` \|
+  `intermediate` \| `advanced` \| `unspecified`) and optional
+  `examples[].difficulty` — pedagogy independent of `risk`. Missing
+  `learning_level` normalizes to `unspecified` at catalog build (no silent
+  map from risk). Schema stays **v2** (compatible additive fields). Curated
+  population leaves niche tools unspecified; `rm` stays `beginner` +
+  `destructive`. Digest bumped on rebuild.
 - NV-103 Komut Rehberi content bank: coverage matrix
   (`docs/COVERAGE_MATRIX.md`), high-priority command fills/enrichments
   (shell/users/ops + git/openssl/ip/docker/systemctl/journalctl/PM/SSH),

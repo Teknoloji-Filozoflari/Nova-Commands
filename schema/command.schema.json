@@ -114,12 +114,22 @@
     },
     "risk": {
       "type": "string",
-      "description": "Inherent danger class of typical use. destructive > dangerous > caution > safe.",
+      "description": "Inherent danger class of typical use. destructive > dangerous > caution > safe. Independent of learning_level — never derive one from the other.",
       "enum": [
         "safe",
         "caution",
         "dangerous",
         "destructive"
+      ]
+    },
+    "learning_level": {
+      "type": "string",
+      "description": "Pedagogical complexity / conceptual prerequisites (beginner|intermediate|advanced). Independent of risk/caution. Prefer omitting when unclear; build/catalog normalizes missing to unspecified. Never invent advanced from destructive risk.",
+      "enum": [
+        "beginner",
+        "intermediate",
+        "advanced",
+        "unspecified"
       ]
     },
     "requires_elevated": {
@@ -676,11 +686,21 @@
         },
         "risk": {
           "type": "string",
+          "description": "Example danger class. Independent of difficulty — do not rank or label examples by risk when difficulty is missing.",
           "enum": [
             "safe",
             "caution",
             "dangerous",
             "destructive"
+          ]
+        },
+        "difficulty": {
+          "type": "string",
+          "description": "Optional pedagogical difficulty for this example (beginner|intermediate|advanced). Use when examples span easy→advanced. Do not infer from example risk.",
+          "enum": [
+            "beginner",
+            "intermediate",
+            "advanced"
           ]
         },
         "requires_elevated": {

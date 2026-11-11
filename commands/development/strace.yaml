@@ -15,6 +15,7 @@ tags:
 - syscall
 - trace
 risk: caution
+learning_level: advanced
 requires_elevated: false
 platforms:
 - linux

@@ -465,6 +465,106 @@ def test_example_schema_allows_warnings() -> None:
     assert "warnings" in v2["$defs"]["example"]["properties"]
 
 
+def test_learning_level_schema_independent_of_risk() -> None:
+    """learning_level is optional pedagogy; risk stays the danger enum."""
+    live = json.loads((ROOT / "schema" / "command.schema.json").read_text())
+    v2 = json.loads((ROOT / "schema" / "command.schema.v2.json").read_text())
+    for schema in (live, v2):
+        ll = schema["properties"]["learning_level"]
+        assert set(ll["enum"]) == {
+            "beginner",
+            "intermediate",
+            "advanced",
+            "unspecified",
+        }
+        assert "learning_level" not in schema["required"]
+        assert "risk" in schema["required"]
+        assert set(schema["properties"]["risk"]["enum"]) == {
+            "safe",
+            "caution",
+            "dangerous",
+            "destructive",
+        }
+        diff = schema["$defs"]["example"]["properties"]["difficulty"]
+        assert set(diff["enum"]) == {"beginner", "intermediate", "advanced"}
+        assert "difficulty" not in schema["$defs"]["example"]["required"]
+
+
+def test_learning_level_missing_becomes_unspecified_not_from_risk() -> None:
+    """Build must emit explicit unspecified; never map destructive → advanced."""
+    import importlib.util
+
+    spec = importlib.util.spec_from_file_location("build_catalog", BUILD)
+    assert spec and spec.loader
+    build_catalog = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(build_catalog)
+    normalize = build_catalog.normalize_learning_level
+
+    destructive = {
+        "id": "fake-wipe",
+        "risk": "destructive",
+        "examples": [{"risk": "destructive"}],
+    }
+    safe = {"id": "fake-ls", "risk": "safe", "examples": [{"risk": "safe"}]}
+    assert normalize(destructive)["learning_level"] == "unspecified"
+    assert normalize(safe)["learning_level"] == "unspecified"
+    # explicit values preserved; still independent of risk
+    tagged = {
+        "id": "rm-like",
+        "risk": "destructive",
+        "learning_level": "beginner",
+        "examples": [{"risk": "destructive", "difficulty": "beginner"}],
+    }
+    assert normalize(dict(tagged))["learning_level"] == "beginner"
+
+    # Invalid learning_level fails closed (risk-like value rejected)
+    bad = {"id": "x", "risk": "safe", "learning_level": "dangerous"}
+    try:
+        normalize(bad)
+        raise AssertionError("expected SystemExit for risk-like learning_level")
+    except SystemExit:
+        pass
+
+    # Catalog rebuild always has explicit learning_level on every command
+    run(BUILD)
+    cat = json.loads((ROOT / "metadata" / "catalog.json").read_text(encoding="utf-8"))
+    allowed = {"beginner", "intermediate", "advanced", "unspecified"}
+    for cmd in cat["commands"]:
+        assert cmd.get("learning_level") in allowed, cmd["id"]
+        # risk markers unchanged enum
+        assert cmd["risk"] in {"safe", "caution", "dangerous", "destructive"}
+    idx = json.loads(
+        (ROOT / "metadata" / "search-index.json").read_text(encoding="utf-8")
+    )
+    for entry in idx["entries"]:
+        if entry["type"] == "command":
+            assert entry.get("learning_level") in allowed, entry["id"]
+
+    # Honesty: at least one destructive beginner (risk ≠ learning)
+    assert any(
+        c["risk"] == "destructive" and c["learning_level"] == "beginner"
+        for c in cat["commands"]
+    )
+    # And some commands remain explicitly unspecified
+    assert any(c["learning_level"] == "unspecified" for c in cat["commands"])
+
+
+def test_example_difficulty_not_required_and_not_risk() -> None:
+    for path in (ROOT / "commands").glob("*/*.yaml"):
+        data = yaml.safe_load(path.read_text(encoding="utf-8"))
+        for i, ex in enumerate(data.get("examples") or []):
+            diff = ex.get("difficulty")
+            if diff is not None:
+                assert diff in {"beginner", "intermediate", "advanced"}, (path, i)
+                # difficulty uses pedagogy labels, not risk vocabulary
+                assert diff not in {
+                    "safe",
+                    "caution",
+                    "dangerous",
+                    "destructive",
+                }, (path, i)
+
+
 def test_related_refs_resolve() -> None:
     cmd_ids = {
         yaml.safe_load(p.read_text(encoding="utf-8"))["id"]

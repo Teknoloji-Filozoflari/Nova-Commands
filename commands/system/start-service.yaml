@@ -17,6 +17,7 @@ tags:
 - services
 - admin
 risk: caution
+learning_level: intermediate
 requires_elevated: true
 platforms:
 - windows

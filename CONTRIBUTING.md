@@ -107,6 +107,7 @@ open a **Translation** issue for large sweeps.
 | `summary` / `description` | Both `tr` and `en` |
 | `category` | One of the taxonomy slugs |
 | `risk` | `safe` \| `caution` \| `dangerous` \| `destructive` |
+| `learning_level` | Optional pedagogy: `beginner` \| `intermediate` \| `advanced` (omit → `unspecified` at build; **not** risk) |
 | `requires_elevated` | Boolean for typical useful use |
 | `platforms` | Non-empty (`linux`, `macos`, `bsd`, `windows`, …) |
 | `examples` | ≥1; each with `risk` |
@@ -124,6 +125,9 @@ open a **Translation** issue for large sweeps.
 
 Example `risk` must be ≥ command-level `risk` when the example is riskier
 (validator enforces ordering).
+
+Optional `examples[].difficulty` (`beginner` \| `intermediate` \| `advanced`)
+when examples span easy→advanced. Do not invent difficulty from example risk.
 
 ## Verification policy
 

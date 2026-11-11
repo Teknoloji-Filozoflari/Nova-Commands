@@ -14,6 +14,7 @@ tags:
 - fedora
 - rhel
 risk: dangerous
+learning_level: intermediate
 requires_elevated: true
 platforms:
 - linux
@@ -70,6 +71,7 @@ examples:
     tr: Paket sürümü veya not installed.
     en: Version or not installed.
   risk: safe
+  difficulty: beginner
   requires_elevated: false
 - title:
     tr: Dosya sahibi
@@ -79,6 +81,7 @@ examples:
     tr: Dosyayı sağlayan RPM.
     en: RPM that owns a file.
   risk: safe
+  difficulty: beginner
   requires_elevated: false
 - title:
     tr: rpm kur
@@ -88,6 +91,7 @@ examples:
     tr: Bağımlılıklar için dnf kullanın.
     en: Prefer dnf for dependencies.
   risk: dangerous
+  difficulty: intermediate
   requires_elevated: true
 related:
 - dnf

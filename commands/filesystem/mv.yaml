@@ -14,6 +14,7 @@ tags:
 - move
 - rename
 risk: caution
+learning_level: beginner
 requires_elevated: false
 platforms:
 - linux

@@ -14,6 +14,7 @@ tags:
 - nftables
 - network
 risk: destructive
+learning_level: advanced
 requires_elevated: true
 platforms:
 - linux

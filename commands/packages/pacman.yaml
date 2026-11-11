@@ -13,6 +13,7 @@ tags:
 - packages
 - arch
 risk: dangerous
+learning_level: intermediate
 requires_elevated: true
 platforms:
 - linux
@@ -63,6 +64,7 @@ examples:
     tr: Tüm paketleri yükseltir.
     en: Upgrades all packages.
   risk: dangerous
+  difficulty: intermediate
   requires_elevated: true
 - title:
     tr: Kur
@@ -72,6 +74,7 @@ examples:
     tr: curl paketini kurar.
     en: Installs curl.
   risk: caution
+  difficulty: intermediate
   requires_elevated: true
 - title:
     tr: Ara
@@ -81,6 +84,7 @@ examples:
     tr: Depoda ripgrep arar.
     en: Searches repos for ripgrep.
   risk: safe
+  difficulty: beginner
   requires_elevated: false
 - title:
     tr: Dosya sahibi
@@ -90,6 +94,7 @@ examples:
     tr: Dosyayı hangi paket sağlıyor.
     en: Which package owns a file.
   risk: safe
+  difficulty: beginner
   requires_elevated: false
 related:
 - paru

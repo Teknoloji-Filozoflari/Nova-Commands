@@ -19,6 +19,7 @@ tags:
 - shell
 - security
 risk: caution
+learning_level: intermediate
 requires_elevated: false
 platforms:
 - linux
@@ -51,6 +52,7 @@ examples:
     tr: Sekizlik maskeyi yazdırır.
     en: Prints octal mask.
   risk: safe
+  difficulty: beginner
   privilege: none
 - title:
     tr: Sembolik
@@ -60,6 +62,7 @@ examples:
     tr: u=rwx,g=rx,o=rx gibi sembolik yazar.
     en: Prints symbolic form like u=rwx,g=rx,o=rx.
   risk: safe
+  difficulty: beginner
   privilege: none
 - title:
     tr: Sıkı maske
@@ -69,6 +72,7 @@ examples:
     tr: Yeni dosyalarda grup/other kapalı (oturum).
     en: New files deny group/other (session).
   risk: caution
+  difficulty: intermediate
   privilege: user
   warnings:
   - tr: Yalnız geçerli kabuk oturumunu etkiler; kalıcı için profil dosyası gerekir.

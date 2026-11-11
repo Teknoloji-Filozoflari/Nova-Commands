@@ -66,6 +66,7 @@ treat it as equivalent to a verified Release.
 |------------|--------|
 | `summary` / `description` / concept `body` | Locale from Nova settings (`tr` / `en`) |
 | `risk` + example `risk` | Warning badges / confirm gates |
+| `learning_level` (+ example `difficulty`) | Pedagogy / learning filters — **independent of risk**; missing → `unspecified` |
 | `requires_elevated` | Sudo affordance |
 | `packages` + `install_notes` | Install hints — **Arch/pacman first** on Arch hosts (legacy keys kept) |
 | `package_refs` | Preferred PM-registry install mapping (`manager` + `package`) |
@@ -92,7 +93,7 @@ strict decoder.
 1. Accept catalog / manifest / search-index `schema_version: **2**`.
 2. Re-vendor / re-pin `content_sha256` after this bank merges (digest changes).
 3. Prefer `package_refs` for install hints; keep reading legacy `packages.*` during transition.
-4. Tolerate additive fields (`kind`, `operating_systems`, `package_refs`, example `shell` / `privilege`). Ignore unknown keys rather than failing the whole bank load.
+4. Tolerate additive fields (`kind`, `operating_systems`, `package_refs`, `learning_level`, example `shell` / `privilege` / `difficulty`). Ignore unknown keys rather than failing the whole bank load.
 5. Do **not** treat `platforms` containing only linux/macos/bsd as a regression — Windows content arrives in later fazes; the schema merely allows `windows`.
 
 Dual-concept (bank ≠ local PATH discovery) is unchanged — see [dual-concept.md](./dual-concept.md).
