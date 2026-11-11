@@ -11935,8 +11935,10 @@
       },
       "category": "backup",
       "platforms": [
+        "bsd",
         "linux",
-        "macos"
+        "macos",
+        "windows"
       ],
       "verification": "draft",
       "tags": [
@@ -11973,8 +11975,10 @@
       },
       "category": "network",
       "platforms": [
+        "bsd",
         "linux",
-        "macos"
+        "macos",
+        "windows"
       ],
       "verification": "draft",
       "tags": [
@@ -12002,6 +12006,7 @@
       "related_commands": [
         "dig",
         "host",
+        "ipconfig",
         "resolvectl",
         "scutil"
       ]
@@ -12015,7 +12020,9 @@
       },
       "category": "containers",
       "platforms": [
-        "linux"
+        "linux",
+        "macos",
+        "windows"
       ],
       "verification": "draft",
       "tags": [
@@ -12042,6 +12049,7 @@
       },
       "related_commands": [
         "docker",
+        "get-service",
         "systemctl"
       ]
     },
@@ -12085,6 +12093,7 @@
       "related_commands": [
         "firewall-cmd",
         "get-nettcpconnection",
+        "lsof",
         "netsh",
         "netstat-bsd",
         "pfctl",
@@ -12101,7 +12110,9 @@
       },
       "category": "monitoring",
       "platforms": [
+        "bsd",
         "linux",
+        "macos",
         "windows"
       ],
       "verification": "draft",
@@ -12131,7 +12142,9 @@
         "dmesg",
         "get-winevent",
         "journalctl",
-        "last"
+        "last",
+        "log",
+        "newsyslog"
       ]
     },
     {
@@ -12143,6 +12156,7 @@
       },
       "category": "security",
       "platforms": [
+        "bsd",
         "linux",
         "macos",
         "windows"
@@ -12188,7 +12202,10 @@
       },
       "category": "security",
       "platforms": [
-        "linux"
+        "bsd",
+        "linux",
+        "macos",
+        "windows"
       ],
       "verification": "draft",
       "tags": [
@@ -12230,7 +12247,10 @@
       },
       "category": "security",
       "platforms": [
-        "linux"
+        "bsd",
+        "linux",
+        "macos",
+        "windows"
       ],
       "verification": "draft",
       "tags": [
@@ -12255,7 +12275,13 @@
         ]
       },
       "related_commands": [
+        "get-nettcpconnection",
+        "get-service",
         "journalctl",
+        "launchctl",
+        "lsof",
+        "netstat-bsd",
+        "service",
         "ss",
         "sshd",
         "systemctl"
@@ -12270,6 +12296,7 @@
       },
       "category": "packages",
       "platforms": [
+        "bsd",
         "linux",
         "macos",
         "windows"
@@ -12300,7 +12327,10 @@
       "related_commands": [
         "apt",
         "dnf",
+        "freebsd-update",
+        "nixos-rebuild",
         "pacman",
+        "pkg",
         "softwareupdate",
         "winget"
       ]
@@ -12314,7 +12344,10 @@
       },
       "category": "security",
       "platforms": [
-        "linux"
+        "bsd",
+        "linux",
+        "macos",
+        "windows"
       ],
       "verification": "draft",
       "tags": [
@@ -12340,11 +12373,16 @@
         ]
       },
       "related_commands": [
+        "doas",
+        "dscl",
         "getent",
+        "icacls",
         "id",
         "last",
         "sudo",
-        "visudo"
+        "visudo",
+        "who",
+        "whoami"
       ]
     },
     {
@@ -12524,8 +12562,8 @@
       ]
     }
   ],
-  "content_sha256": "406fe04002c47c592009c71f6d9dbb1f0ec7c9faa6c19165f58bebe29265b716",
-  "generated_at": "2026-11-10T21:03:47Z",
+  "content_sha256": "7e0d800c25da0490bc6a9815e861e0f76474bac725d402ffdda9d0f3e047167d",
+  "generated_at": "2026-11-11T14:13:08Z",
   "command_count": 267,
   "concept_count": 21,
   "task_count": 36,

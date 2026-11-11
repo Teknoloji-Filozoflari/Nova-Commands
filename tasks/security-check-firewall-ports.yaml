@@ -14,14 +14,24 @@ description:
     Kontrol listesi durumları (Nova yerel): unchecked / ok / review / na.
     Örnekler belgeleme içindir — otomatik çalışmaz.
 
-    İsteğe bağlı düzeltme: Kural eklemeden önce mevcut policy yedeği alın. ufw --force reset / geniş allow kör önerilmez. Değişiklik sonrası hizmeti doğrula; rollback için önceki ruleset.
+    Platform dürüstlüğü: ufw Debian/Ubuntu ailesi; firewalld Fedora/RHEL ailesi; pf BSD; Windows
+    netsh/advfirewall. macOS’ta Application Firewall (socketfilterfw) ayrıdır — bu bankada henüz yok;
+    pfctl macOS’ta da vardır ama çoğu masaüstünde kapalı olabilir.
+
+    İsteğe bağlı düzeltme: Kural eklemeden önce mevcut policy yedeği alın. ufw --force reset / geniş
+    allow kör önerilmez. Değişiklik sonrası hizmeti doğrula; rollback için önceki ruleset.
   en: |-
     Why: Unnecessary listeners are attack surface; wrong firewall rules outage services.
 
     Checklist states (Nova local): unchecked / ok / review / na.
     Examples are documentation only — never auto-run.
 
-    Optional fix: Backup policy before adding rules. Blind ufw --force reset / wide allow is not recommended. Verify service after change; keep prior ruleset for rollback.
+    Platform honesty: ufw is Debian/Ubuntu-family; firewalld is Fedora/RHEL-family; pf is BSD;
+    Windows uses netsh/advfirewall. macOS Application Firewall (socketfilterfw) is separate and not
+    yet in this bank; pfctl exists on macOS but is often inactive on desktops.
+
+    Optional fix: Backup policy before adding rules. Blind ufw --force reset / wide allow is not
+    recommended. Verify service after change; keep prior ruleset for rollback.
 category: security
 tags:
 - security
@@ -38,15 +48,13 @@ intent:
   - server security checklist
   - 4) Firewall and listening ports
 implementations:
-- id: linux-ss-ufw
+- id: linux-ss
   platforms:
   - linux
   shells:
   - bash
   commands:
   - ss
-  - ufw
-  - firewall-cmd
   examples:
   - command: ss -tulpn
     risk: safe
@@ -55,16 +63,44 @@ implementations:
     explanation:
       tr: 'Yerel dinleyiciler. Sağlıklı: bilinen servisler. Şüpheli: tanınmayan 0.0.0.0 dinleyiciler.'
       en: 'Local listeners. Healthy: known services. Suspicious: unknown 0.0.0.0 listeners.'
-  - command: sudo ufw status verbose || firewall-cmd --state
+  notes:
+    tr: nmap ile dış tarama bu rehberde yok.
+    en: No external nmap scanning in this guide.
+- id: linux-ufw
+  platforms:
+  - linux
+  distributions:
+  - debian
+  - ubuntu
+  shells:
+  - bash
+  commands:
+  - ufw
+  examples:
+  - command: sudo ufw status verbose
     risk: safe
     shell: bash
     privilege: elevated
     explanation:
-      tr: Dağıtıma göre ufw veya firewalld. Yoksa na.
-      en: ufw or firewalld by distro. Else na.
-  notes:
-    tr: nmap ile dış tarama bu rehberde yok.
-    en: No external nmap scanning in this guide.
+      tr: ufw durumu (Debian/Ubuntu ailesi). Kurulu değilse na — firewalld ile karıştırma.
+      en: ufw status (Debian/Ubuntu family). If absent, na — do not treat as firewalld.
+- id: linux-firewalld
+  platforms:
+  - linux
+  distributions:
+  - fedora
+  shells:
+  - bash
+  commands:
+  - firewall-cmd
+  examples:
+  - command: firewall-cmd --state
+    risk: safe
+    shell: bash
+    privilege: none
+    explanation:
+      tr: firewalld durumu (Fedora/RHEL ailesi). ufw değildir.
+      en: firewalld state (Fedora/RHEL family). Not ufw.
 - id: windows-net
   platforms:
   - windows
@@ -79,32 +115,61 @@ implementations:
     shell: powershell
     privilege: none
     explanation:
-      tr: Dinleyen TCP portları.
-      en: Listening TCP ports.
+      tr: Dinleyen TCP portları (ufw/ss değildir).
+      en: Listening TCP ports (not ufw/ss).
   - command: netsh advfirewall show allprofiles
     risk: safe
     shell: cmd
     privilege: none
     explanation:
-      tr: Profil durumları (kural silmez).
-      en: Profile status (does not delete rules).
+      tr: Windows Defender Firewall profil durumları (kural silmez).
+      en: Windows Defender Firewall profile status (does not delete rules).
 - id: bsd-pf
   platforms:
   - bsd
-  - macos
   shells:
   - bash
   commands:
   - pfctl
   - netstat-bsd
   examples:
+  - command: netstat -an -p tcp | head -n 40
+    risk: safe
+    shell: bash
+    privilege: none
+    explanation:
+      tr: BSD netstat ile yerel soket özeti (Linux ss değildir).
+      en: BSD netstat local socket summary (not Linux ss).
   - command: sudo pfctl -s info
     risk: safe
     shell: bash
     privilege: elevated
     explanation:
-      tr: PF özeti (macOS/BSD).
-      en: PF summary (macOS/BSD).
+      tr: PF özeti (FreeBSD/OpenBSD). ufw/firewalld değildir.
+      en: PF summary (FreeBSD/OpenBSD). Not ufw/firewalld.
+- id: macos-listeners
+  platforms:
+  - macos
+  shells:
+  - zsh
+  commands:
+  - lsof
+  - pfctl
+  examples:
+  - command: lsof -nP -iTCP -sTCP:LISTEN
+    risk: safe
+    shell: zsh
+    privilege: none
+    explanation:
+      tr: macOS dinleyen TCP soketleri.
+      en: macOS listening TCP sockets.
+  - command: sudo pfctl -s info
+    risk: safe
+    shell: zsh
+    privilege: elevated
+    explanation:
+      tr: pf özeti (varsa). Application Firewall (socketfilterfw) ayrıdır ve bu bankada henüz yok; na olabilir.
+      en: pf summary if present. Application Firewall (socketfilterfw) is separate and not yet in this bank; may be na.
 related_commands:
 - ss
 - ufw
@@ -113,6 +178,8 @@ related_commands:
 - pfctl
 - netsh
 - get-nettcpconnection
+- lsof
+- netstat-bsd
 verification:
   status: draft
   sources:
@@ -120,7 +187,9 @@ verification:
   - man 8 ufw
   - man 1 firewall-cmd
   - man 8 pfctl
-  notes: NV-103 sequential security checklist stage 4; read-only diagnostics; not human-verified.
+  - man 8 lsof
+  - https://learn.microsoft.com/windows/security/operating-system-security/network-security/windows-firewall/
+  notes: NV-106 platform-split security checklist stage 4; read-only diagnostics; not human-verified.
 related_tasks:
 - check-firewall-status
 - check-open-ports

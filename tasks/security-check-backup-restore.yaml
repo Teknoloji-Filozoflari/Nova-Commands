@@ -14,14 +14,24 @@ description:
     Kontrol listesi durumları (Nova yerel): unchecked / ok / review / na.
     Örnekler belgeleme içindir — otomatik çalışmaz.
 
-    İsteğe bağlı düzeltme: Drill: boş staging dizine restore → dosya örnekle → üretim yoluna basmadan hash karşılaştır. Başarısızsa yalnız staging’i sil; prod’a dokunma.
+    Platform dürüstlüğü: restic CLI Linux/macOS/Windows/BSD’de aynıdır; yol/kimlik bilgisi OS’e göre
+    değişir. Windows wbadmin/VSS bu bankada birinci sınıf değil — restic yoksa na veya kendi yolunu
+    belgeleyin. Örneklerde secret yok.
+
+    İsteğe bağlı düzeltme: Drill: boş staging dizine restore → dosya örnekle → üretim yoluna basmadan
+    hash karşılaştır. Başarısızsa yalnız staging’i sil; prod’a dokunma.
   en: |-
     Why: Missing/unverified backups fail in disasters; blind restore can wipe production.
 
     Checklist states (Nova local): unchecked / ok / review / na.
     Examples are documentation only — never auto-run.
 
-    Optional fix: Drill: restore to empty staging → sample files → compare hashes before touching prod. On failure, delete staging only; do not touch prod.
+    Platform honesty: the restic CLI is the same on Linux/macOS/Windows/BSD; paths/credentials differ
+    by OS. Windows wbadmin/VSS are not first-class here — if restic is absent, mark na or document
+    your path. No secrets in examples.
+
+    Optional fix: Drill: restore to empty staging → sample files → compare hashes before touching
+    prod. On failure, delete staging only; do not touch prod.
 category: backup
 tags:
 - security
@@ -37,10 +47,11 @@ intent:
   - server security checklist
   - 9) Backup and restore drill
 implementations:
-- id: restic-check
+- id: restic-unix
   platforms:
   - linux
   - macos
+  - bsd
   shells:
   - bash
   commands:
@@ -70,6 +81,35 @@ implementations:
   notes:
     tr: Örneklerde secret yok. Geri yüklemeyi önce boş dizine deneyin.
     en: No secrets in examples. Trial-restore into an empty directory first.
+- id: restic-windows
+  platforms:
+  - windows
+  shells:
+  - powershell
+  commands:
+  - restic
+  examples:
+  - command: restic version
+    risk: safe
+    shell: powershell
+    privilege: none
+    explanation:
+      tr: restic PATH’te mi. Yoksa na; wbadmin/VSS bu bankada birinci sınıf değil.
+      en: Is restic on PATH? Else na; wbadmin/VSS are not first-class in this bank.
+  - command: restic -r C:\path\to\repo snapshots
+    risk: caution
+    shell: powershell
+    privilege: user
+    explanation:
+      tr: Snapshot listesi (parola gerekir; yol yer tutucu).
+      en: Snapshot list (needs password; path placeholder).
+  - command: restic -r C:\path\to\repo check
+    risk: caution
+    shell: powershell
+    privilege: user
+    explanation:
+      tr: Repo bütünlüğü (yazmaz).
+      en: Repo integrity (non-writing).
 related_commands:
 - restic
 - borg
@@ -80,7 +120,7 @@ verification:
   sources:
   - https://restic.readthedocs.io/
   - https://borgbackup.readthedocs.io/
-  notes: NV-103 sequential security checklist stage 9; read-only diagnostics; not human-verified.
+  notes: NV-106 platform-split security checklist stage 9; read-only diagnostics; not human-verified.
 related_tasks:
 - backup-directory
 - security-check-dns-vpn

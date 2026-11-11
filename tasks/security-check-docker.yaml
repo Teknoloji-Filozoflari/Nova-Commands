@@ -14,14 +14,24 @@ description:
     Kontrol listesi durumları (Nova yerel): unchecked / ok / review / na.
     Örnekler belgeleme içindir — otomatik çalışmaz.
 
-    İsteğe bağlı düzeltme: Gereksiz privileged kaldırın; compose/stack yedeği alın; rolling restart ile doğrulayın. Kör docker rm -f üretimde tehlikeli.
+    Platform dürüstlüğü: Linux’ta docker.service (systemctl); Windows/macOS’ta Docker Desktop /
+    engine CLI aynı `docker ps` yüzeyi ama servis modeli farklı. BSD jails ≠ Docker — bu aşamada
+    Docker yoksa na; jail denetimi ayrı gap.
+
+    İsteğe bağlı düzeltme: Gereksiz privileged kaldırın; compose/stack yedeği alın; rolling restart
+    ile doğrulayın. Kör docker rm -f üretimde tehlikeli.
   en: |-
     Why: docker.sock / privileged / host network can equal host-level risk.
 
     Checklist states (Nova local): unchecked / ok / review / na.
     Examples are documentation only — never auto-run.
 
-    Optional fix: Remove unnecessary privileged; backup compose/stack; verify with rolling restart. Blind docker rm -f is dangerous in prod.
+    Platform honesty: Linux uses docker.service (systemctl); Windows/macOS Docker Desktop share the
+    same `docker ps` CLI but a different service model. BSD jails ≠ Docker — mark na when Docker is
+    absent; jail checks are a separate gap.
+
+    Optional fix: Remove unnecessary privileged; backup compose/stack; verify with rolling restart.
+    Blind docker rm -f is dangerous in prod.
 category: containers
 tags:
 - security
@@ -61,26 +71,89 @@ implementations:
     explanation:
       tr: 'Çalışan konteyner + portlar. Şüpheli: beklenmeyen 0.0.0.0 publish.'
       en: 'Running containers + ports. Suspicious: unexpected 0.0.0.0 publish.'
-  - command: docker ps -q | xargs -r docker inspect --format '{{.Name}} privileged={{.HostConfig.Privileged}}
-      networkMode={{.HostConfig.NetworkMode}}'
+  - command: docker ps -q | xargs -r docker inspect --format '{{.Name}} privileged={{.HostConfig.Privileged}} networkMode={{.HostConfig.NetworkMode}}'
     risk: safe
     shell: bash
     privilege: user
     explanation:
       tr: Privileged/host network bayrakları.
       en: Privileged/host-network flags.
+- id: windows-docker
+  platforms:
+  - windows
+  shells:
+  - powershell
+  commands:
+  - docker
+  - get-service
+  examples:
+  - command: Get-Service *docker* -ErrorAction SilentlyContinue; docker version 2>$null; if (-not $?) { 'docker-na' }
+    risk: safe
+    shell: powershell
+    privilege: none
+    explanation:
+      tr: Docker Desktop/engine var mı (systemctl yoktur). Yoksa na.
+      en: Is Docker Desktop/engine present (no systemctl)? Else na.
+  - command: docker ps --format "table {{.Names}}\t{{.Image}}\t{{.Ports}}\t{{.Status}}"
+    risk: safe
+    shell: powershell
+    privilege: user
+    explanation:
+      tr: Çalışan konteyner + yayınlanan portlar.
+      en: Running containers + published ports.
+  - command: docker ps -q | ForEach-Object { docker inspect --format '{{.Name}} privileged={{.HostConfig.Privileged}} networkMode={{.HostConfig.NetworkMode}}' $_ }
+    risk: safe
+    shell: powershell
+    privilege: user
+    explanation:
+      tr: Privileged/host network bayrakları.
+      en: Privileged/host-network flags.
+- id: macos-docker
+  platforms:
+  - macos
+  shells:
+  - zsh
+  commands:
+  - docker
+  examples:
+  - command: docker version 2>/dev/null || echo 'docker-na'
+    risk: safe
+    shell: zsh
+    privilege: none
+    explanation:
+      tr: Docker Desktop CLI. Yoksa na (systemctl/launchctl docker birimi varsayılmaz).
+      en: Docker Desktop CLI. Else na (do not assume a systemctl/launchctl docker unit).
+  - command: docker ps --format 'table {{.Names}}\t{{.Image}}\t{{.Ports}}\t{{.Status}}'
+    risk: safe
+    shell: zsh
+    privilege: user
+    explanation:
+      tr: Çalışan konteyner + portlar.
+      en: Running containers + ports.
+  - command: docker ps -q | xargs -n1 docker inspect --format '{{.Name}} privileged={{.HostConfig.Privileged}} networkMode={{.HostConfig.NetworkMode}}'
+    risk: safe
+    shell: zsh
+    privilege: user
+    explanation:
+      tr: Privileged/host network bayrakları.
+      en: Privileged/host-network flags.
+  notes:
+    tr: BSD Docker genelde na; jails ayrı konu.
+    en: BSD Docker is usually na; jails are a separate topic.
 related_commands:
 - docker
 - docker-compose
 - podman
 - systemctl
+- get-service
 verification:
   status: draft
   sources:
   - docker --help
   - https://docs.docker.com/engine/reference/commandline/ps/
   - man 1 systemctl
-  notes: NV-103 sequential security checklist stage 6; read-only diagnostics; not human-verified.
+  - Get-Help Get-Service
+  notes: NV-106 platform-split security checklist stage 6; read-only diagnostics; not human-verified. BSD/jails intentionally na/gap.
 related_tasks:
 - inspect-container
 - check-container-logs

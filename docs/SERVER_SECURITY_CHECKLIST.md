@@ -32,14 +32,31 @@ States are **not** stored in this bank; Nova keeps them per host locally.
 | 9 | `security-check-backup-restore` | Snapshot list + integrity + staging restore |
 | 10 | `security-check-logs-incident` | journal/auth errors; no log wipe |
 
-Each task documents: why, read-only diagnostic + privilege, platforms, healthy vs suspicious notes, outage risk, optional fix with backup/verify/rollback, official sources, `verification.status`.
+Each task documents: why, read-only diagnostic + privilege, **separate platform-tagged implementations**, healthy vs suspicious notes, outage risk, optional fix with backup/verify/rollback, official sources, `verification.status`.
+
+## Platform honesty (NV-106)
+
+| Stage | Linux | Windows | macOS | BSD |
+|-------|-------|---------|-------|-----|
+| OS/accounts | hostnamectl | Get-ComputerInfo | sw_vers | uname/who |
+| Updates | pacman/apt/dnf + NixOS `nixos-rebuild` | winget list | softwareupdate | pkg + freebsd-update |
+| SSH | systemctl + sshd -T | Get-Service sshd | launchctl + sshd | service + sshd |
+| Firewall/ports | ss + ufw **or** firewalld (split) | Get-NetTCPConnection + netsh | lsof + pfctl note | netstat + pfctl |
+| Users/sudo | getent/visudo | whoami groups (no sudo) | dscl + sudo | doas ≠ sudo |
+| Docker | systemctl + docker | Docker Desktop CLI | Docker Desktop CLI | **na** (jails ≠ Docker) |
+| Proxy/TLS | nginx/caddy + openssl | openssl/curl (:443) | nginx?/openssl | nginx?/openssl |
+| DNS/VPN | resolvectl | ipconfig /all | scutil --dns | resolv.conf + dig |
+| Backup | restic | restic (wbadmin gap) | restic | restic |
+| Logs | journalctl | Get-WinEvent | `log show` | dmesg/last/newsyslog |
+
+Still missing / intentional gaps: WireGuard/`wg` bank, macOS Application Firewall (`socketfilterfw`), Windows `Get-LocalUser`/`wbadmin`, OpenBSD `rcctl` depth, certbot/fail2ban, BSD jails checklist.
 
 ## Hard non-goals
 
 - No remote port scans or “attack” steps
 - No blind `PasswordAuthentication no` / firewall open/close without warnings and a second session
 - No secret-bearing examples
-- Distro honesty: pacman ≠ apt ≠ dnf; Nix ≠ NixOS
+- Distro honesty: pacman ≠ apt ≠ dnf; ufw ≠ firewalld ≠ pf ≠ netsh; Nix ≠ NixOS; doas ≠ sudo
 
 ## Related
 

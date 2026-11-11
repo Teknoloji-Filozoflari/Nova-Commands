@@ -14,14 +14,22 @@ description:
     Kontrol listesi durumları (Nova yerel): unchecked / ok / review / na.
     Örnekler belgeleme içindir — otomatik çalışmaz.
 
-    İsteğe bağlı düzeltme: Kanıtı kopyalayın (journalctl > dosya). Servis restart yalnız kök neden anlaşıldıktan sonra. Log truncate/wipe yapmayın.
+    Platform dürüstlüğü: Linux journalctl; Windows Get-WinEvent; macOS unified `log show`; BSD
+    dmesg/last (+ newsyslog yapılandırması — truncate yok). journalctl ≠ log ≠ WinEvent.
+
+    İsteğe bağlı düzeltme: Kanıtı kopyalayın. Servis restart yalnız kök neden anlaşıldıktan sonra.
+    Log truncate/wipe yapmayın.
   en: |-
     Why: Early log signals shrink incidents; deleting logs harms investigation and may hide abuse.
 
     Checklist states (Nova local): unchecked / ok / review / na.
     Examples are documentation only — never auto-run.
 
-    Optional fix: Copy evidence (journalctl > file). Restart services only after root-cause hypothesis. Do not truncate/wipe logs.
+    Platform honesty: Linux journalctl; Windows Get-WinEvent; macOS unified `log show`; BSD dmesg/last
+    (+ newsyslog config — no truncate). journalctl ≠ log ≠ WinEvent.
+
+    Optional fix: Copy evidence. Restart services only after a root-cause hypothesis. Do not
+    truncate/wipe logs.
 category: monitoring
 tags:
 - security
@@ -82,21 +90,87 @@ implementations:
     shell: powershell
     privilege: none
     explanation:
-      tr: Son System olayları (silmez).
-      en: Recent System events (non-deleting).
+      tr: Son System olayları (silmez; journalctl değildir).
+      en: Recent System events (non-deleting; not journalctl).
+  - command: Get-WinEvent -LogName Security -MaxEvents 20 -ErrorAction SilentlyContinue
+    risk: safe
+    shell: powershell
+    privilege: elevated
+    explanation:
+      tr: Security log örneği (izin yoksa na/review).
+      en: Security log sample (na/review if access denied).
+- id: macos-log
+  platforms:
+  - macos
+  shells:
+  - zsh
+  commands:
+  - log
+  - last
+  - dmesg
+  examples:
+  - command: log show --last 10m --style compact --predicate 'eventMessage CONTAINS "error"' | tail -n 50
+    risk: safe
+    shell: zsh
+    privilege: none
+    explanation:
+      tr: Unified logging hata örnekleri (journalctl değildir).
+      en: Unified logging error sample (not journalctl).
+  - command: last -n 20
+    risk: safe
+    shell: zsh
+    privilege: none
+    explanation:
+      tr: Son oturumlar.
+      en: Recent sessions.
+- id: bsd-logs
+  platforms:
+  - bsd
+  shells:
+  - bash
+  commands:
+  - dmesg
+  - last
+  - newsyslog
+  examples:
+  - command: dmesg | tail -n 40
+    risk: safe
+    shell: bash
+    privilege: none
+    explanation:
+      tr: Çekirdek mesaj kuyruğu (journalctl yoktur).
+      en: Kernel message tail (no journalctl).
+  - command: last -n 20
+    risk: safe
+    shell: bash
+    privilege: none
+    explanation:
+      tr: Son oturumlar.
+      en: Recent sessions.
+  - command: newsyslog -n 2>/dev/null || echo 'newsyslog-check-na'
+    risk: safe
+    shell: bash
+    privilege: none
+    explanation:
+      tr: newsyslog yapılandırma kontrolü (rotate/truncate çalıştırmaz; -n dry-run benzeri).
+      en: newsyslog config check (does not rotate/truncate; -n is dry-run-like).
 related_commands:
 - journalctl
 - dmesg
 - last
 - get-winevent
 - wevtutil
+- log
+- newsyslog
 verification:
   status: draft
   sources:
   - man 1 journalctl
   - man 1 last
   - Get-Help Get-WinEvent
-  notes: NV-103 sequential security checklist stage 10; read-only diagnostics; not human-verified.
+  - man 1 log
+  - man 8 newsyslog
+  notes: NV-106 platform-split security checklist stage 10; read-only diagnostics; not human-verified.
 related_tasks:
 - inspect-system-logs
 - security-check-backup-restore

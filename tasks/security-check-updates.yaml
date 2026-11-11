@@ -14,14 +14,20 @@ description:
     Kontrol listesi durumları (Nova yerel): unchecked / ok / review / na.
     Örnekler belgeleme içindir — otomatik çalışmaz.
 
-    İsteğe bağlı düzeltme: Bakım penceresinde ilgili PM ile yükselt; önce snapshot/backup. NixOS: nixos-rebuild test/switch ayrı kavram — Nix paket kurmak değildir.
+    Platform dürüstlüğü: pacman ≠ apt ≠ dnf; freebsd-update (taban) ≠ pkg (paketler); Nix ≠ NixOS —
+    NixOS’ta birincil yol nixos-rebuild’tur, nix-env değildir.
+
+    İsteğe bağlı düzeltme: Bakım penceresinde ilgili PM ile yükselt; önce snapshot/backup.
   en: |-
     Why: Stale packages leave known CVEs open; blind full-upgrade needs a maintenance window.
 
     Checklist states (Nova local): unchecked / ok / review / na.
     Examples are documentation only — never auto-run.
 
-    Optional fix: Upgrade in a maintenance window with the matching PM; snapshot/backup first. NixOS: nixos-rebuild test/switch is not “install a package”.
+    Platform honesty: pacman ≠ apt ≠ dnf; freebsd-update (base) ≠ pkg (packages); Nix ≠ NixOS —
+    on NixOS the primary path is nixos-rebuild, not nix-env.
+
+    Optional fix: Upgrade in a maintenance window with the matching PM; snapshot/backup first.
 category: packages
 tags:
 - security
@@ -95,6 +101,26 @@ implementations:
     explanation:
       tr: Güncelleme listesi; çıkış 100 = güncelleme var (dnf).
       en: Update list; exit 100 means updates available (dnf).
+- id: nixos-check
+  platforms:
+  - linux
+  distributions:
+  - nixos
+  shells:
+  - bash
+  commands:
+  - nixos-rebuild
+  examples:
+  - command: sudo nixos-rebuild dry-build
+    risk: caution
+    shell: bash
+    privilege: elevated
+    explanation:
+      tr: NixOS yapılandırmasını derler/uygulamaz. nix-env veya düz Nix kurulum değildir.
+      en: Builds NixOS config without switching. Not nix-env or plain Nix package install.
+  notes:
+    tr: Nix ≠ NixOS; bu uygulama yalnız NixOS host içindir.
+    en: Nix ≠ NixOS; this implementation is for NixOS hosts only.
 - id: windows-winget
   platforms:
   - windows
@@ -108,8 +134,8 @@ implementations:
     shell: powershell
     privilege: none
     explanation:
-      tr: Yükseltilebilir kanat paketleri listeler (uygulamaz).
-      en: Lists upgradable WinGet packages (does not apply).
+      tr: Yükseltilebilir WinGet paketlerini listeler (uygulamaz; --all yükseltir).
+      en: Lists upgradable WinGet packages (does not apply; --all would upgrade).
 - id: macos-softwareupdate
   platforms:
   - macos
@@ -125,6 +151,31 @@ implementations:
     explanation:
       tr: Apple güncelleme listesi (indirmez).
       en: Apple update list (does not download).
+- id: freebsd-check
+  platforms:
+  - bsd
+  distributions:
+  - freebsd-release
+  shells:
+  - bash
+  commands:
+  - pkg
+  - freebsd-update
+  examples:
+  - command: pkg version -l '<'
+    risk: safe
+    shell: bash
+    privilege: none
+    explanation:
+      tr: pkg paketlerinde yükseltme adayları (taban sistemi değildir).
+      en: pkg package upgrade candidates (not the FreeBSD base system).
+  - command: sudo freebsd-update fetch && sudo freebsd-update show | head
+    risk: caution
+    shell: bash
+    privilege: elevated
+    explanation:
+      tr: Taban yamalarını indirir ve özet gösterir; install uygulamaz. pkg upgrade değildir.
+      en: Fetches base patches and shows a summary; does not install. Not pkg upgrade.
 related_commands:
 - pacman
 - apt
@@ -134,15 +185,19 @@ related_commands:
 - softwareupdate
 - winget
 - freebsd-update
+- pkg
 verification:
   status: draft
   sources:
   - man 8 pacman
   - man 8 apt
   - man 8 dnf
+  - https://nixos.org/manual/nixos/stable/#sec-upgrading
   - softwareupdate --help
   - winget upgrade -h
-  notes: NV-103 sequential security checklist stage 2; read-only diagnostics; not human-verified.
+  - https://man.freebsd.org/cgi/man.cgi?query=freebsd-update&sektion=8
+  - https://man.freebsd.org/cgi/man.cgi?query=pkg&sektion=8
+  notes: NV-106 platform-split security checklist stage 2; read-only/near-read diagnostics; not human-verified.
 related_tasks:
 - update-system
 - security-check-os-accounts
