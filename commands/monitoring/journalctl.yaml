@@ -8,7 +8,8 @@ summary:
   en: Query the systemd journal.
 description:
   tr: Servis ve çekirdek loglarını systemd journal’dan okur. OpenRC/syslog dosya yolları (`/var/log/messages`)
-    ve macOS `log` ile **eşitlenmez**. -p err öncelik süzgesi yaygındır; çok geniş sorgular gürültülü olabilir.
+    ve macOS `log` ile **eşitlenmez**. -p err öncelik süzgesi yaygındır; çok geniş sorgular gürültülü
+    olabilir.
   en: Reads service and kernel logs from the systemd journal. It is **not** equivalent to OpenRC/syslog
     file paths (/var/log/messages) or macOS log. -p err is a common priority filter; over-broad queries
     can be noisy.
@@ -114,6 +115,7 @@ examples:
     en: Last 50 sshd lines.
   risk: safe
   privilege: none
+  difficulty: beginner
 - title:
     tr: Hatalar
     en: Errors
@@ -152,6 +154,7 @@ verification:
   - man 1 journalctl
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-bootstrap
+  notes: NV-123 teachable fields (when/syntax/mistakes/topics).
 nova:
   concepts:
   - terminal-basics
@@ -160,3 +163,16 @@ nova:
 purpose:
   tr: systemd journal’dan salt okunur olay incelemesi; olay müdahalesinde ilk durak.
   en: Read-only event inspection from the systemd journal; first stop in incident review.
+when_to_use:
+  tr: systemd journal günlüklerini okumak.
+  en: Read systemd journal logs.
+syntax: journalctl [OPTIONS...] [MATCHES...]
+expected_effect:
+  tr: Seçilen günlük satırlarını basar; servisleri değiştirmez.
+  en: Prints selected log lines; does not change services.
+common_mistakes:
+- tr: Non-systemd distroda journalctl aramak.
+  en: Looking for journalctl on non-systemd distros.
+related_topics:
+- monitoring-and-logs
+- systemd

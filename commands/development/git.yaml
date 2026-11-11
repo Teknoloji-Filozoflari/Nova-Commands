@@ -44,14 +44,16 @@ package_refs:
   distributions:
   - fedora
 install_notes:
-  tr: |-
-    Arch: pacman -S git
+  tr: 'Arch: pacman -S git
+
     Debian/Ubuntu: apt install git
-    Fedora: dnf install git
-  en: |-
-    Arch: pacman -S git
+
+    Fedora: dnf install git'
+  en: 'Arch: pacman -S git
+
     Debian/Ubuntu: apt install git
-    Fedora: dnf install git
+
+    Fedora: dnf install git'
 flags:
 - flag: --version
   meaning:
@@ -160,7 +162,7 @@ verification:
   - https://git-scm.com/docs
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-bootstrap
-  notes: ' Flags/examples expanded 2026-11-10 from git --help.'
+  notes: Flags/examples expanded 2026-11-10 from git --help. NV-123 teachable fields (when/syntax/mistakes/topics).
 nova:
   favorite_eligible: true
   ui_priority: 92
@@ -173,3 +175,15 @@ security:
   notes:
     tr: Token/şifreyi URL veya argv içine yazmayın; credential helper kullanın.
     en: Do not put tokens/passwords in URLs or argv; use a credential helper.
+when_to_use:
+  tr: 'Kaynak kontrolü: durum, geçmiş, commit, dal işlemleri.'
+  en: 'Source control: status, history, commit, branch operations.'
+syntax: git <command> [<args>]
+expected_effect:
+  tr: status/log okur; commit/push deposu değiştirir.
+  en: status/log read; commit/push change the repository.
+common_mistakes:
+- tr: force push’u paylaşılmış dallarda “düzeltme” sanmak.
+  en: Treating force-push as a fix on shared branches.
+related_topics:
+- development-basics

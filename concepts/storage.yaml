@@ -8,95 +8,225 @@ summary:
   en: Block devices, mounts, usage, and high-care disk tools.
 difficulty: intermediate
 tags:
-  - disks
-  - storage
-  - filesystem
+- disks
+- storage
+- filesystem
 related_commands:
+- lsblk
+- df
+- du
+- mount
+- umount
+- findmnt
+- blkid
+- fdisk
+- parted
+- dd
+- sync
+- mkfs
+- mkfs.ext4
+- mkfs.xfs
+- mkfs.btrfs
+- mkfs.fat
+- wipefs
+- fsck
+- get-volume
+- get-disk
+related_concepts:
+- files
+- permissions
+- terminal-basics
+see_also:
+- man lsblk / man mount / man mkfs
+- 'Arch Wiki: File systems / fstab / Parted'
+body:
+  tr: "Disk ve dosya sistemi işleri **yanlış aygıt adıyla yıkıcı** olabilir. Önce okuma\naraçlarıyla haritayı\
+    \ çıkarın.\n\n**Keşif (genelde güvenli):**\n- `lsblk -f` — ağaç, dosya sistemi, UUID/LABEL.\n- `df\
+    \ -h` — bağlı dosya sistemlerinde boş alan.\n- `du -sh yol` — dizin boyutu.\n- `findmnt` / `mount`\
+    \ — ne nereye bağlı.\n- `blkid` — UUID ve tür (çoğu zaman root ile daha dolu).\n\n**Bağlama:** `mount`\
+    \ / `umount` (veya fstab / systemd `.mount`). Yanlış `umount`\naçık dosyaları bozabilir; meşgulse\
+    \ `lsof` / `fuser` ile bakın.\n\n**Yüksek risk (yer tutucu aygıt; asla kopyala-yapıştır):**\n- `fdisk`\
+    \ / `parted` — bölüm tablosu; `parted -l` önce okuyun.\n- `dd` — ham kopya; yanlış `of=` diski siler.\n\
+    - `mkfs` / `mkfs.ext4` / `mkfs.xfs` / `mkfs.btrfs` / `mkfs.fat` — FS oluşturur;\n  mümkünse `-n` /\
+    \ `-N` / `--help` ile başlayın (Arch: ilgili `*-progs` /\n  `dosfstools` / `util-linux` paketleri).\n\
+    - `wipefs` — imza silme; önce listeleyin, silmede `-n` kuru koşu kullanın.\n- `fsck` — onarım; bağlı\
+    \ FS’te tehlikeli; `-N` plan, `-M` bağlıları atlar.\n\n**`sync`:** Bellekteki yazıları diske iter;\
+    \ kapatma/çıkarma öncesi kullanılır.\nDoğrulama için asla rastgele disklere `dd`/`mkfs` çalıştırmayın;\
+    \ `verified`\nyalnız insan incelemesi sonrası (keşif araçlarının bir kısmı Faz 15’te\nverified’a yükseltildi).\n"
+  en: "Disk and filesystem operations are **destructive on the wrong device**. Start with\nread-only discovery.\n\
+    \n**Discovery (usually safe):**\n- `lsblk -f` — tree, filesystem, UUID/LABEL.\n- `df -h` — free space\
+    \ on mounted filesystems.\n- `du -sh path` — directory size.\n- `findmnt` / `mount` — what is mounted\
+    \ where.\n- `blkid` — UUID/type (often richer as root).\n\n**Mounting:** `mount` / `umount` (or fstab\
+    \ / systemd `.mount`). A busy `umount` can\nfail; inspect with `lsof` / `fuser`.\n\n**High risk (placeholder\
+    \ devices; never copy-paste blindly):**\n- `fdisk` / `parted` — partition tables; read with `parted\
+    \ -l` first.\n- `dd` — raw copy; wrong `of=` wipes a disk.\n- `mkfs` / `mkfs.ext4` / `mkfs.xfs` /\
+    \ `mkfs.btrfs` / `mkfs.fat` — create\n  filesystems; start with `-n` / `-N` / `--help` when available\
+    \ (Arch packages:\n  matching `*-progs` / `dosfstools` / `util-linux`).\n- `wipefs` — signature wipe;\
+    \ list first, use `-n` for dry-run before erase.\n- `fsck` — repair; dangerous on mounted FS; `-N`\
+    \ plan, `-M` skips mounted.\n\n**`sync`:** Flushes buffered writes; used before unmount/shutdown.\n\
+    Never run `dd`/`mkfs` against arbitrary disks to “validate” catalog entries;\n`verified` is for human\
+    \ review only (some discovery tools graduated in phase 15).\n"
+verification:
+  status: reviewed
+  sources:
+  - man lsblk / man mount / man mkfs / man wipefs
+  - https://wiki.archlinux.org/title/File_systems
+  last_reviewed: '2026-11-02'
+  notes: Updated for mkfs/parted/wipefs/fsck coverage; no destructive runs. NV-123 topic-guide structure;
+    agent-authored; needs human review before verified.
+format: topic-guide
+categories:
+- disks
+- filesystem
+platforms:
+- linux
+- macos
+- bsd
+- windows
+intro: &id001
+  tr: Disk kullanımı, bağlama ve dosya sistemleri — yıkıcı mkfs örnekleri rehber dışı bırakılır.
+  en: Disk usage, mounts, and filesystems — destructive mkfs practice stays out of exercises.
+learning_path:
+- ref: lsblk
+  kind: command
+- ref: df
+  kind: command
+- ref: du
+  kind: command
+- ref: mount
+  kind: command
+- ref: umount
+  kind: command
+- ref: findmnt
+  kind: command
+- ref: blkid
+  kind: command
+- ref: fdisk
+  kind: command
+command_table:
+- id: lsblk
+  purpose:
+    tr: Blok aygıtları ağaç olarak listeler.
+    en: List block devices.
+  learning_level: intermediate
+- id: df
+  purpose:
+    tr: Dosya sistemi disk kullanımı.
+    en: Report file system disk space usage.
+  learning_level: beginner
+- id: du
+  purpose:
+    tr: Dizin disk kullanımını tahmin eder.
+    en: Estimate file space usage.
+  learning_level: beginner
+- id: mount
+  purpose:
+    tr: Dosya sistemi bağlar.
+    en: Mount a filesystem.
+  learning_level: intermediate
+- id: umount
+  purpose:
+    tr: Dosya sistemi bağlantısını kaldırır.
+    en: Unmount filesystems.
+  learning_level: intermediate
+- id: findmnt
+  purpose:
+    tr: Bağlı dosya sistemlerini listeler.
+    en: List mounted filesystems (libmount).
+  learning_level: intermediate
+- id: blkid
+  purpose:
+    tr: Blok aygıt özniteliklerini basar.
+    en: Print block device attributes.
+  learning_level: intermediate
+- id: fdisk
+  purpose:
+    tr: Disk bölüm tablosu düzenleyici.
+    en: Manipulate disk partition tables.
+  learning_level: intermediate
+- id: parted
+  purpose:
+    tr: GNU Parted — bölüm tablosu düzenleyici (yıkıcı).
+    en: GNU Parted — partition table manipulator (destructive).
+  learning_level: intermediate
+- id: dd
+  purpose:
+    tr: Blok düzeyinde kopyalama/dönüştürme.
+    en: Convert and copy files at block level.
+  learning_level: intermediate
+- id: sync
+  purpose:
+    tr: Önbellekteki yazıları diske boşaltır.
+    en: Flush filesystem write caches to disk.
+  learning_level: intermediate
+- id: mkfs
+  purpose:
+    tr: Dosya sistemi oluşturma ön yüzü (yıkıcı).
+    en: Frontend to build a Linux filesystem (destructive).
+  learning_level: intermediate
+- id: mkfs.ext4
+  purpose:
+    tr: ext4 dosya sistemi oluşturur (yıkıcı).
+    en: Create an ext4 filesystem (destructive).
+  learning_level: intermediate
+- id: mkfs.xfs
+  purpose:
+    tr: XFS dosya sistemi oluşturur (yıkıcı).
+    en: Construct an XFS filesystem (destructive).
+  learning_level: intermediate
+- id: mkfs.btrfs
+  purpose:
+    tr: Btrfs dosya sistemi oluşturur (yıkıcı).
+    en: Create a Btrfs filesystem (destructive).
+  learning_level: intermediate
+- id: mkfs.fat
+  purpose:
+    tr: FAT/VFAT dosya sistemi oluşturur (yıkıcı).
+    en: Create a FAT/VFAT filesystem (destructive).
+  learning_level: intermediate
+subtopics:
+- id: overview
+  title:
+    tr: Genel bakış
+    en: Overview
+  summary: *id001
+  related_commands:
   - lsblk
   - df
   - du
   - mount
   - umount
   - findmnt
-  - blkid
-  - fdisk
-  - parted
-  - dd
-  - sync
-  - mkfs
-  - mkfs.ext4
-  - mkfs.xfs
-  - mkfs.btrfs
-  - mkfs.fat
-  - wipefs
-  - fsck
-  - get-volume
-  - get-disk
-related_concepts:
-  - files
-  - permissions
-  - terminal-basics
-see_also:
-  - "man lsblk / man mount / man mkfs"
-  - "Arch Wiki: File systems / fstab / Parted"
-body:
-  tr: |
-    Disk ve dosya sistemi işleri **yanlış aygıt adıyla yıkıcı** olabilir. Önce okuma
-    araçlarıyla haritayı çıkarın.
-
-    **Keşif (genelde güvenli):**
-    - `lsblk -f` — ağaç, dosya sistemi, UUID/LABEL.
-    - `df -h` — bağlı dosya sistemlerinde boş alan.
-    - `du -sh yol` — dizin boyutu.
-    - `findmnt` / `mount` — ne nereye bağlı.
-    - `blkid` — UUID ve tür (çoğu zaman root ile daha dolu).
-
-    **Bağlama:** `mount` / `umount` (veya fstab / systemd `.mount`). Yanlış `umount`
-    açık dosyaları bozabilir; meşgulse `lsof` / `fuser` ile bakın.
-
-    **Yüksek risk (yer tutucu aygıt; asla kopyala-yapıştır):**
-    - `fdisk` / `parted` — bölüm tablosu; `parted -l` önce okuyun.
-    - `dd` — ham kopya; yanlış `of=` diski siler.
-    - `mkfs` / `mkfs.ext4` / `mkfs.xfs` / `mkfs.btrfs` / `mkfs.fat` — FS oluşturur;
-      mümkünse `-n` / `-N` / `--help` ile başlayın (Arch: ilgili `*-progs` /
-      `dosfstools` / `util-linux` paketleri).
-    - `wipefs` — imza silme; önce listeleyin, silmede `-n` kuru koşu kullanın.
-    - `fsck` — onarım; bağlı FS’te tehlikeli; `-N` plan, `-M` bağlıları atlar.
-
-    **`sync`:** Bellekteki yazıları diske iter; kapatma/çıkarma öncesi kullanılır.
-    Doğrulama için asla rastgele disklere `dd`/`mkfs` çalıştırmayın; `verified`
-    yalnız insan incelemesi sonrası (keşif araçlarının bir kısmı Faz 15’te
-    verified’a yükseltildi).
-  en: |
-    Disk and filesystem operations are **destructive on the wrong device**. Start with
-    read-only discovery.
-
-    **Discovery (usually safe):**
-    - `lsblk -f` — tree, filesystem, UUID/LABEL.
-    - `df -h` — free space on mounted filesystems.
-    - `du -sh path` — directory size.
-    - `findmnt` / `mount` — what is mounted where.
-    - `blkid` — UUID/type (often richer as root).
-
-    **Mounting:** `mount` / `umount` (or fstab / systemd `.mount`). A busy `umount` can
-    fail; inspect with `lsof` / `fuser`.
-
-    **High risk (placeholder devices; never copy-paste blindly):**
-    - `fdisk` / `parted` — partition tables; read with `parted -l` first.
-    - `dd` — raw copy; wrong `of=` wipes a disk.
-    - `mkfs` / `mkfs.ext4` / `mkfs.xfs` / `mkfs.btrfs` / `mkfs.fat` — create
-      filesystems; start with `-n` / `-N` / `--help` when available (Arch packages:
-      matching `*-progs` / `dosfstools` / `util-linux`).
-    - `wipefs` — signature wipe; list first, use `-n` for dry-run before erase.
-    - `fsck` — repair; dangerous on mounted FS; `-N` plan, `-M` skips mounted.
-
-    **`sync`:** Flushes buffered writes; used before unmount/shutdown.
-    Never run `dd`/`mkfs` against arbitrary disks to “validate” catalog entries;
-    `verified` is for human review only (some discovery tools graduated in phase 15).
-verification:
-  status: reviewed
-  sources:
-    - "man lsblk / man mount / man mkfs / man wipefs"
-    - "https://wiki.archlinux.org/title/File_systems"
-  last_reviewed: "2026-11-02"
-  notes: "Updated for mkfs/parted/wipefs/fsck coverage; no destructive runs."
+graded_examples:
+- title:
+    tr: Ağaç
+    en: Tree
+  command: lsblk -f
+  explanation:
+    tr: Aygıtlar + FS; format/mkfs öncesi doğrulama için ilk adım.
+    en: Devices + filesystems; first step before any format/mkfs.
+  difficulty: beginner
+  risk: safe
+  related_commands:
+  - lsblk
+callouts:
+- kind: note
+  text:
+    tr: Örnekler bank kayıtlarından gelir; man/--help ile doğrulanmadan verified yapılmaz.
+    en: Examples come from bank records; not verified without man/--help review.
+safe_exercises:
+- title:
+    tr: Salt okuma keşif
+    en: Read-only exploration
+  prompt:
+    tr: Bu konudaki bir safe/caution komutun beginner örneğini okuyun; çalıştırmadan önce risk rozetine
+      bakın.
+    en: Read a beginner example of a safe/caution command in this topic; check the risk badge before running.
+  risk: safe
+  related_commands:
+  - lsblk
+  - df
+  - du
+next_steps:
+- id: backup
+- id: archives-compression

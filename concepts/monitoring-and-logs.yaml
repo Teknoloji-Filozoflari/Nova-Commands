@@ -1,0 +1,153 @@
+id: monitoring-and-logs
+kind: nova-commands-concept
+format: topic-guide
+title:
+  tr: İzleme ve günlükler
+  en: Monitoring and logs
+summary:
+  tr: journalctl, syslog dosyaları ve kaynak kullanımı; non-systemd dürüst ayrımı.
+  en: journalctl, syslog files, and resource usage; honest non-systemd split.
+intro:
+  tr: Günlük okuma ve kaynak izleme; Alpine/Void/Gentoo’da journalctl varsayılan değildir.
+  en: Log reading and resource monitoring; journalctl is not the default on Alpine/Void/Gentoo.
+body:
+  tr: 'systemd distrolarında `journalctl` birincil günlük aracıdır. OpenRC/runit dünyasında
+
+    `/var/log/messages` veya servis logları kullanılır — bank görevleri bunu ayırır.
+
+    `top`/`free`/`df` çapraz platformda kaynak görünümü verir (bayrak farklarıyla).'
+  en: 'On systemd distros, `journalctl` is the primary log tool. In OpenRC/runit worlds,
+
+    `/var/log/messages` or service logs apply — bank tasks split this honestly.
+
+    `top`/`free`/`df` give cross-platform resource views (with flag differences).'
+difficulty: intermediate
+categories:
+- monitoring
+- system
+platforms:
+- linux
+- macos
+- bsd
+- windows
+tags:
+- logs
+- journalctl
+- monitoring
+learning_path:
+- ref: journalctl
+  kind: command
+- ref: dmesg
+  kind: command
+- ref: top
+  kind: command
+- ref: free
+  kind: command
+- ref: df
+  kind: command
+- ref: uptime
+  kind: command
+subtopics:
+- id: journal
+  title:
+    tr: journalctl
+    en: journalctl
+  summary:
+    tr: Yalnızca systemd aileleri.
+    en: systemd families only.
+  related_commands:
+  - journalctl
+- id: resources
+  title:
+    tr: Kaynaklar
+    en: Resources
+  summary:
+    tr: CPU/RAM/disk okuma.
+    en: CPU/RAM/disk reads.
+  related_commands:
+  - top
+  - free
+  - df
+command_table:
+- id: journalctl
+  purpose:
+    tr: systemd günlüğünü sorgular.
+    en: Query the systemd journal.
+  learning_level: intermediate
+- id: dmesg
+  purpose:
+    tr: Çekirdek mesaj halkasını yazdırır.
+    en: Print or control the kernel ring buffer.
+  learning_level: intermediate
+- id: top
+  purpose:
+    tr: Canlı süreç izleyici.
+    en: Dynamic real-time process viewer.
+  learning_level: beginner
+- id: free
+  purpose:
+    tr: Bellek kullanımını gösterir.
+    en: Display amount of free and used memory.
+  learning_level: beginner
+- id: df
+  purpose:
+    tr: Dosya sistemi disk kullanımı.
+    en: Report file system disk space usage.
+  learning_level: beginner
+- id: uptime
+  purpose:
+    tr: Çalışma süresi ve yük ortalaması.
+    en: Tell how long the system has been running.
+  learning_level: beginner
+graded_examples:
+- title:
+    tr: Son boot günlükleri
+    en: Recent boot logs
+  command: journalctl -b -n 20 --no-pager
+  explanation:
+    tr: Bu açılıştan 20 satır (systemd).
+    en: 20 lines from this boot (systemd).
+  difficulty: beginner
+  risk: safe
+  platforms:
+  - linux
+  related_commands:
+  - journalctl
+callouts:
+- kind: note
+  text:
+    tr: journalctl yoksa hata normaldir; syslog yoluna bakın.
+    en: Missing journalctl is normal on some distros; use syslog paths.
+safe_exercises:
+- title:
+    tr: df -h
+    en: df -h
+  prompt:
+    tr: df -h çıktısını okuyun; bir dosya sistemi % kullanımını not edin.
+    en: Read df -h; note one filesystem percent used.
+  risk: safe
+  related_commands:
+  - df
+next_steps:
+- id: systemd
+- id: debugging
+- id: server-security-checklist
+related_commands:
+- journalctl
+- dmesg
+- top
+- free
+- df
+related_concepts:
+- systemd
+- debugging
+- processes
+see_also:
+- man journalctl
+- man df
+verification:
+  status: draft
+  sources:
+  - man journalctl
+  - man df
+  notes: NV-123 new topic guide from bank + man-oriented teaching; PDF not available in env; not human-verified.

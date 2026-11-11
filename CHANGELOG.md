@@ -6,6 +6,13 @@ Dates are UTC merge days when known. Digests are `metadata/manifest.json`
 
 ## Unreleased
 
+- NV-123 teachable topic catalog: concepts gain optional `format: topic-guide`
+  structured sections (`intro`, `learning_path`, `subtopics`, `command_table`,
+  `graded_examples`, `callouts`, `safe_exercises`, `next_steps`); commands gain
+  optional `when_to_use` / `syntax` / `expected_effect` / `common_mistakes` /
+  `related_topics`. Eight new category topic guides; existing articles upgraded;
+  start-curriculum expanded. No status promotions; PDF not in env (bank + man
+  oriented). See `docs/TEACHABLE_TOPICS.md`. Digest bumped on rebuild.
 - NV-119 security checklist content audit: replace invented
   `freebsd-update show` with `fetch` (+ download warning); correct NixOS
   `dry-build` wording (evaluate/show, does not build/switch); prefer

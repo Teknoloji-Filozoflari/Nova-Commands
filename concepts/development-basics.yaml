@@ -1,0 +1,150 @@
+id: development-basics
+kind: nova-commands-concept
+format: topic-guide
+title:
+  tr: Geliştirme temelleri
+  en: Development basics
+summary:
+  tr: git, derleyiciler ve dil araçlarına giriş; OS SDK’leri ayrı.
+  en: Intro to git, compilers, and language tools; OS SDKs are separate.
+intro:
+  tr: Kaynak kontrolü ve yapı araçları; xcode-select gibi platform SDK’leri notlarla.
+  en: Source control and build tools; platform SDKs like xcode-select noted separately.
+body:
+  tr: '`git status` / `git log` okuma ile başlayın. `diff` ve `patch` yama işler.
+
+    `make` / `gcc` / `python3` dil ve yapı ekosistemine köprüdür. macOS’ta `xcode-select`
+
+    ayrı bir bank kaydıdır.'
+  en: 'Start with read-oriented `git status` / `git log`. `diff` and `patch` handle patches.
+
+    `make` / `gcc` / `python3` bridge into language/build ecosystems. On macOS, `xcode-select`
+
+    is a separate bank record.'
+difficulty: beginner
+categories:
+- development
+platforms:
+- linux
+- macos
+- bsd
+- windows
+tags:
+- git
+- development
+- build
+learning_path:
+- ref: git
+  kind: command
+- ref: make
+  kind: command
+- ref: gcc
+  kind: command
+- ref: python3
+  kind: command
+- ref: diff
+  kind: command
+- ref: patch
+  kind: command
+subtopics:
+- id: git-read
+  title:
+    tr: git okuma
+    en: git reading
+  summary:
+    tr: status/log/diff.
+    en: status/log/diff.
+  related_commands:
+  - git
+  - diff
+- id: build
+  title:
+    tr: Derleme
+    en: Build
+  summary:
+    tr: make/gcc giriş.
+    en: make/gcc intro.
+  related_commands:
+  - make
+  - gcc
+command_table:
+- id: git
+  purpose:
+    tr: Dağıtık sürüm kontrol sistemi.
+    en: Distributed version control system.
+  learning_level: intermediate
+- id: make
+  purpose:
+    tr: Makefile’dan derleme hedefleri çalıştırır.
+    en: GNU make utility to maintain groups of programs.
+  learning_level: intermediate
+- id: gcc
+  purpose:
+    tr: GNU C/C++ derleyici sürücüsü.
+    en: GNU C/C++ compiler driver.
+  learning_level: intermediate
+- id: python3
+  purpose:
+    tr: Python 3 yorumlayıcısı.
+    en: Python 3 interpreter.
+  learning_level: intermediate
+- id: diff
+  purpose:
+    tr: Dosyaları satır satır karşılaştırır.
+    en: Compare files line by line.
+  learning_level: intermediate
+- id: patch
+  purpose:
+    tr: diff çıktısını dosyalara uygular.
+    en: Applies diff output to files.
+  learning_level: intermediate
+graded_examples:
+- title:
+    tr: git status
+    en: git status
+  command: git status
+  explanation:
+    tr: Çalışma ağacı durumunu gösterir (repo içinde).
+    en: Shows working tree status (inside a repo).
+  difficulty: beginner
+  risk: safe
+  related_commands:
+  - git
+callouts:
+- kind: tip
+  text:
+    tr: Önce salt okuma git komutlarını öğrenin; force push sonra.
+    en: Learn read-only git commands first; force-push later.
+safe_exercises:
+- title:
+    tr: status
+    en: status
+  prompt:
+    tr: Bir git reposunda git status ve git log -1 okuyun.
+    en: In a git repo, read git status and git log -1.
+  risk: safe
+  related_commands:
+  - git
+next_steps:
+- id: debugging
+- id: infrastructure-as-code
+related_commands:
+- git
+- make
+- gcc
+- python3
+- diff
+- patch
+related_concepts:
+- debugging
+- json-data
+- text-processing
+see_also:
+- man git
+- man make
+verification:
+  status: draft
+  sources:
+  - man git
+  - man make
+  notes: NV-123 new topic guide from bank + man-oriented teaching; PDF not available in env; not human-verified.

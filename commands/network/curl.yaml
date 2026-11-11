@@ -42,14 +42,16 @@ package_refs:
   distributions:
   - fedora
 install_notes:
-  tr: |-
-    Arch: pacman -S curl
+  tr: 'Arch: pacman -S curl
+
     Debian/Ubuntu: apt install curl
-    Fedora: dnf install curl
-  en: |-
-    Arch: pacman -S curl
+
+    Fedora: dnf install curl'
+  en: 'Arch: pacman -S curl
+
     Debian/Ubuntu: apt install curl
-    Fedora: dnf install curl
+
+    Fedora: dnf install curl'
 flags:
 - flag: -I
   long: --head
@@ -92,6 +94,7 @@ examples:
     tr: Yanıt başlıklarını basar.
     en: Prints response headers.
   risk: safe
+  difficulty: beginner
 related:
 - wget
 intent:
@@ -108,9 +111,22 @@ verification:
   - https://curl.se/docs/manual.html
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-bootstrap
+  notes: NV-123 teachable fields (when/syntax/mistakes/topics).
 nova:
   favorite_eligible: true
   ui_priority: 88
   concepts:
   - networking
   - networking-basics
+when_to_use:
+  tr: HTTP(S) ve diğer URL’lere istemci isteği atmak.
+  en: Make client requests to HTTP(S) and other URLs.
+syntax: curl [options...] URL...
+expected_effect:
+  tr: Yanıt gövdesini stdout’a yazar (bayraklarla başlık/dosya).
+  en: Writes the response body to stdout (headers/file via flags).
+common_mistakes:
+- tr: Hassas URL/token’ları shell history’ye bırakmak.
+  en: Leaving sensitive URLs/tokens in shell history.
+related_topics:
+- networking-basics

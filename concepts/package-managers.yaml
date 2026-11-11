@@ -8,134 +8,286 @@ summary:
   en: Linux PMs (pacman first), Nix/Guix, Win/macOS, and BSD PM notes.
 difficulty: beginner
 tags:
-  - packages
-  - pacman
-  - apt
-  - dnf
-  - nix
-  - guix
+- packages
+- pacman
+- apt
+- dnf
+- nix
+- guix
 related_commands:
-  - pacman
-  - apt
-  - dnf
-  - dpkg
-  - rpm
-  - flatpak
-  - paru
-  - zypper
-  - apk
-  - emerge
-  - xbps-install
-  - xbps-query
-  - eopkg
-  - slackpkg
-  - nix
-  - guix
-  - opkg
-  - rpm-ostree
-  - brew
-  - port
-  - winget
-  - pkg
-  - ports
-  - pkg_add
-  - pkgin
-  - pkgsrc
+- pacman
+- apt
+- dnf
+- dpkg
+- rpm
+- flatpak
+- paru
+- zypper
+- apk
+- emerge
+- xbps-install
+- xbps-query
+- eopkg
+- slackpkg
+- nix
+- guix
+- opkg
+- rpm-ostree
+- brew
+- port
+- winget
+- pkg
+- ports
+- pkg_add
+- pkgin
+- pkgsrc
 related_concepts:
-  - packages
-  - arch
-  - path
-  - package-managers-comparison
-  - nix-guix
+- packages
+- arch
+- path
+- package-managers-comparison
+- nix-guix
 see_also:
-  - "Arch Wiki: pacman"
-  - "man apt / man dnf"
-  - "docs/package-managers-comparison.md"
-  - "concepts/package-managers-comparison.yaml"
-  - "concepts/nix-guix.yaml"
+- 'Arch Wiki: pacman'
+- man apt / man dnf
+- docs/package-managers-comparison.md
+- concepts/package-managers-comparison.yaml
+- concepts/nix-guix.yaml
 body:
-  tr: |
-    Dağıtımlar yazılıımı *paket* olarak kurar. Aynı komut farklı paket adında olabilir;
-    bilinmeyen ad **uydurulmaz** (omit / `draft`).
-
-    **Birinci sınıf yöneticiler (çekirdek):**
-    - **Arch — pacman:** `pacman -Syu` sistem güncellemesi; `pacman -S paket` kurulum;
-      `pacman -Ss anahtar` arama. AUR yardımcıları (ör. `paru`) resmi depoda olmayabilir.
-    - **Debian/Ubuntu — apt (+ dpkg):** `apt update` / `apt install`; düşük seviye `dpkg`.
-    - **Fedora/RHEL — dnf (+ rpm):** `dnf install` / `dnf upgrade`; `rpm -q` sorguları.
-
-    **Genişleyen Linux PM’ler (Faz 4, çoğu draft):**
-    - **openSUSE/SUSE — zypper** (Leap `update` ≠ Tumbleweed `dup`)
-    - **Alpine — apk** (Android APK ile karıştırma)
-    - **Gentoo — emerge / Portage** (kaynak derleme, USE / `@world`)
-    - **Void — xbps-install / query / remove**
-    - **Solus — eopkg** · **Slackware — slackpkg** (+ installpkg/removepkg/upgradepkg)
-    - **OpenWrt — opkg** (gömülü; flash alanı)
-    - **Atomik Fedora — rpm-ostree** (klasik dnf modeli değil; genelde reboot)
-
-    **Deklaratif ekosistemler:** Nix (NixOS + diğer Linux/macOS) ve GNU Guix —
-    ayrı makale: `concepts/nix-guix.yaml`. Eski `nix-env` ile modern `nix profile`
-    karıştırılmaz.
-
-    **Flatpak:** Dağıtımdan bağımsız uygulama sandboxes; çekirdek toolchain yerine geçmez.
-
-    **Windows / macOS (Faz 5, draft):** WinGet (`winget`); macOS’ta Homebrew (`brew`) ve
-    MacPorts (`port`) ayrı kayıtlardır. `softwareupdate` OS güncellemesidir — `brew upgrade`
-    ile karıştırılmaz. Arch host’ta sistem PM olarak pacman önceliklidir.
-
-    **BSD (Faz 6, draft):** FreeBSD `pkg` ≠ Ports (`ports`); OpenBSD `pkg_add`; NetBSD
-    `pkgin` ≠ `pkgsrc`; DragonFly `pkg` FreeBSD `pkg` ile aynı değildir. `freebsd-update`
-    taban güncellemesidir — `pkg upgrade` değildir.
-
-    **Nova tercihi:** Arch host’ta kurulum ipuçlarında **pacman / `packages.arch` önce**.
-    CI yıkıcı kurulum çalıştırmaz. `verification: verified` yalnızca insan incelemesi sonrası.
-  en: |
-    Distros install software as *packages*. The same command may live in differently
-    named packages; unknown names are **not invented** (omit / `draft`).
-
-    **First-class managers (core):**
-    - **Arch — pacman:** `pacman -Syu` full upgrade; `pacman -S pkg` install;
-      `pacman -Ss keyword` search. AUR helpers (e.g. `paru`) may be unofficial.
-    - **Debian/Ubuntu — apt (+ dpkg):** `apt update` / `apt install`; lower-level `dpkg`.
-    - **Fedora/RHEL — dnf (+ rpm):** `dnf install` / `dnf upgrade`; `rpm -q` queries.
-
-    **Broader Linux PMs (Faz 4, mostly draft):**
-    - **openSUSE/SUSE — zypper** (Leap `update` ≠ Tumbleweed `dup`)
-    - **Alpine — apk** (not Android APK)
-    - **Gentoo — emerge / Portage** (source builds, USE / `@world`)
-    - **Void — xbps-install / query / remove**
-    - **Solus — eopkg** · **Slackware — slackpkg** (+ installpkg/removepkg/upgradepkg)
-    - **OpenWrt — opkg** (embedded; watch flash space)
-    - **Atomic Fedora — rpm-ostree** (not classic dnf; reboot often required)
-
-    **Declarative ecosystems:** Nix (NixOS + other Linux/macOS) and GNU Guix —
-    see `concepts/nix-guix.yaml`. Do not mix legacy `nix-env` with modern `nix profile`.
-
-    **Flatpak:** Distro-agnostic sandboxed apps; does not replace the base toolchain.
-
-    **Windows / macOS (Faz 5, draft):** WinGet (`winget`); on macOS Homebrew (`brew`) and
-    MacPorts (`port`) are separate records. `softwareupdate` is OS update — not
-    `brew upgrade`. On Arch hosts pacman remains the preferred system PM.
-
-    **BSD (Faz 6, draft):** FreeBSD `pkg` ≠ Ports (`ports`); OpenBSD `pkg_add`; NetBSD
-    `pkgin` ≠ `pkgsrc`; DragonFly `pkg` is not FreeBSD `pkg`. `freebsd-update` is base
-    update — not `pkg upgrade`.
-
-    **Nova preference:** On Arch hosts prefer **pacman / `packages.arch` first**.
-    CI does not run destructive installs. `verification: verified` only after human review.
+  tr: "Dağıtımlar yazılıımı *paket* olarak kurar. Aynı komut farklı paket adında olabilir;\nbilinmeyen\
+    \ ad **uydurulmaz** (omit / `draft`).\n\n**Birinci sınıf yöneticiler (çekirdek):**\n- **Arch — pacman:**\
+    \ `pacman -Syu` sistem güncellemesi; `pacman -S paket` kurulum;\n  `pacman -Ss anahtar` arama. AUR\
+    \ yardımcıları (ör. `paru`) resmi depoda olmayabilir.\n- **Debian/Ubuntu — apt (+ dpkg):** `apt update`\
+    \ / `apt install`; düşük seviye `dpkg`.\n- **Fedora/RHEL — dnf (+ rpm):** `dnf install` / `dnf upgrade`;\
+    \ `rpm -q` sorguları.\n\n**Genişleyen Linux PM’ler (Faz 4, çoğu draft):**\n- **openSUSE/SUSE — zypper**\
+    \ (Leap `update` ≠ Tumbleweed `dup`)\n- **Alpine — apk** (Android APK ile karıştırma)\n- **Gentoo\
+    \ — emerge / Portage** (kaynak derleme, USE / `@world`)\n- **Void — xbps-install / query / remove**\n\
+    - **Solus — eopkg** · **Slackware — slackpkg** (+ installpkg/removepkg/upgradepkg)\n- **OpenWrt —\
+    \ opkg** (gömülü; flash alanı)\n- **Atomik Fedora — rpm-ostree** (klasik dnf modeli değil; genelde\
+    \ reboot)\n\n**Deklaratif ekosistemler:** Nix (NixOS + diğer Linux/macOS) ve GNU Guix —\nayrı makale:\
+    \ `concepts/nix-guix.yaml`. Eski `nix-env` ile modern `nix profile`\nkarıştırılmaz.\n\n**Flatpak:**\
+    \ Dağıtımdan bağımsız uygulama sandboxes; çekirdek toolchain yerine geçmez.\n\n**Windows / macOS (Faz\
+    \ 5, draft):** WinGet (`winget`); macOS’ta Homebrew (`brew`) ve\nMacPorts (`port`) ayrı kayıtlardır.\
+    \ `softwareupdate` OS güncellemesidir — `brew upgrade`\nile karıştırılmaz. Arch host’ta sistem PM\
+    \ olarak pacman önceliklidir.\n\n**BSD (Faz 6, draft):** FreeBSD `pkg` ≠ Ports (`ports`); OpenBSD\
+    \ `pkg_add`; NetBSD\n`pkgin` ≠ `pkgsrc`; DragonFly `pkg` FreeBSD `pkg` ile aynı değildir. `freebsd-update`\n\
+    taban güncellemesidir — `pkg upgrade` değildir.\n\n**Nova tercihi:** Arch host’ta kurulum ipuçlarında\
+    \ **pacman / `packages.arch` önce**.\nCI yıkıcı kurulum çalıştırmaz. `verification: verified` yalnızca\
+    \ insan incelemesi sonrası.\n"
+  en: "Distros install software as *packages*. The same command may live in differently\nnamed packages;\
+    \ unknown names are **not invented** (omit / `draft`).\n\n**First-class managers (core):**\n- **Arch\
+    \ — pacman:** `pacman -Syu` full upgrade; `pacman -S pkg` install;\n  `pacman -Ss keyword` search.\
+    \ AUR helpers (e.g. `paru`) may be unofficial.\n- **Debian/Ubuntu — apt (+ dpkg):** `apt update` /\
+    \ `apt install`; lower-level `dpkg`.\n- **Fedora/RHEL — dnf (+ rpm):** `dnf install` / `dnf upgrade`;\
+    \ `rpm -q` queries.\n\n**Broader Linux PMs (Faz 4, mostly draft):**\n- **openSUSE/SUSE — zypper**\
+    \ (Leap `update` ≠ Tumbleweed `dup`)\n- **Alpine — apk** (not Android APK)\n- **Gentoo — emerge /\
+    \ Portage** (source builds, USE / `@world`)\n- **Void — xbps-install / query / remove**\n- **Solus\
+    \ — eopkg** · **Slackware — slackpkg** (+ installpkg/removepkg/upgradepkg)\n- **OpenWrt — opkg** (embedded;\
+    \ watch flash space)\n- **Atomic Fedora — rpm-ostree** (not classic dnf; reboot often required)\n\n\
+    **Declarative ecosystems:** Nix (NixOS + other Linux/macOS) and GNU Guix —\nsee `concepts/nix-guix.yaml`.\
+    \ Do not mix legacy `nix-env` with modern `nix profile`.\n\n**Flatpak:** Distro-agnostic sandboxed\
+    \ apps; does not replace the base toolchain.\n\n**Windows / macOS (Faz 5, draft):** WinGet (`winget`);\
+    \ on macOS Homebrew (`brew`) and\nMacPorts (`port`) are separate records. `softwareupdate` is OS update\
+    \ — not\n`brew upgrade`. On Arch hosts pacman remains the preferred system PM.\n\n**BSD (Faz 6, draft):**\
+    \ FreeBSD `pkg` ≠ Ports (`ports`); OpenBSD `pkg_add`; NetBSD\n`pkgin` ≠ `pkgsrc`; DragonFly `pkg`\
+    \ is not FreeBSD `pkg`. `freebsd-update` is base\nupdate — not `pkg upgrade`.\n\n**Nova preference:**\
+    \ On Arch hosts prefer **pacman / `packages.arch` first**.\nCI does not run destructive installs.\
+    \ `verification: verified` only after human review.\n"
 verification:
   status: draft
   sources:
-    - "https://wiki.archlinux.org/title/Pacman"
-    - "https://wiki.archlinux.org/title/Pacman/Rosetta"
-    - "https://nixos.org/manual/nix/stable/"
-    - "https://learn.microsoft.com/windows/package-manager/winget/"
-    - "https://docs.brew.sh/"
-    - "https://guide.macports.org/"
-    - "https://docs.freebsd.org/en/books/handbook/ports/"
-    - "https://www.openbsd.org/faq/faq15.html"
-    - "https://www.netbsd.org/docs/pkgsrc/"
-    - "https://wiki.alpinelinux.org/wiki/Alpine_Package_Keeper"
-    - "https://guix.gnu.org/manual/en/html_node/"
-    - "docs/package-managers-comparison.md"
-  notes: "Faz 4–6 expansion; draft pending human review of PM coverage."
+  - https://wiki.archlinux.org/title/Pacman
+  - https://wiki.archlinux.org/title/Pacman/Rosetta
+  - https://nixos.org/manual/nix/stable/
+  - https://learn.microsoft.com/windows/package-manager/winget/
+  - https://docs.brew.sh/
+  - https://guide.macports.org/
+  - https://docs.freebsd.org/en/books/handbook/ports/
+  - https://www.openbsd.org/faq/faq15.html
+  - https://www.netbsd.org/docs/pkgsrc/
+  - https://wiki.alpinelinux.org/wiki/Alpine_Package_Keeper
+  - https://guix.gnu.org/manual/en/html_node/
+  - docs/package-managers-comparison.md
+  notes: Faz 4–6 expansion; draft pending human review of PM coverage. NV-123 topic-guide structure; agent-authored;
+    needs human review before verified.
+format: topic-guide
+categories:
+- packages
+platforms:
+- linux
+- macos
+- bsd
+- windows
+distributions:
+- arch
+- debian
+- ubuntu
+- fedora
+- rhel
+- opensuse-leap
+- opensuse-tumbleweed
+- alpine
+- void
+- gentoo
+- nixos
+intro:
+  tr: Her distro ailesinin kendi paket yöneticisi vardır; isimleri ve bayrakları uydurulmaz. Sessiz Arch
+    varsayılanı yok.
+  en: Each distro family has its own package manager; names and flags are not invented. No silent Arch
+    default.
+learning_path:
+- ref: pacman
+  kind: command
+- ref: apt
+  kind: command
+- ref: dnf
+  kind: command
+- ref: zypper
+  kind: command
+- ref: apk
+  kind: command
+- ref: xbps-install
+  kind: command
+- ref: emerge
+  kind: command
+- ref: nix
+  kind: command
+- ref: brew
+  kind: command
+- ref: winget
+  kind: command
+subtopics:
+- id: linux-families
+  title:
+    tr: Linux aileleri
+    en: Linux families
+  summary:
+    tr: pacman / apt / dnf / zypper / apk / xbps / emerge / nixos-rebuild ayrı modellerdir.
+    en: pacman / apt / dnf / zypper / apk / xbps / emerge / nixos-rebuild are distinct models.
+  related_commands:
+  - pacman
+  - apt
+  - dnf
+  - zypper
+  - apk
+- id: declarative
+  title:
+    tr: Deklaratif
+    en: Declarative
+  summary:
+    tr: Nix/Guix ve NixOS rebuild klasik dnf/apt değildir.
+    en: Nix/Guix and NixOS rebuild are not classic dnf/apt.
+  related_commands:
+  - nix
+command_table:
+- id: pacman
+  purpose:
+    tr: Arch Linux paket yöneticisi.
+    en: Arch Linux package manager.
+  learning_level: intermediate
+- id: apt
+  purpose:
+    tr: Debian/Ubuntu yüksek seviye paket aracı.
+    en: Debian/Ubuntu high-level package tool.
+  learning_level: intermediate
+- id: dnf
+  purpose:
+    tr: Fedora/RHEL paket yöneticisi.
+    en: Fedora/RHEL package manager.
+  learning_level: intermediate
+- id: zypper
+  purpose:
+    tr: openSUSE/SUSE paket yöneticisi.
+    en: openSUSE/SUSE package manager.
+  learning_level: intermediate
+- id: apk
+  purpose:
+    tr: Alpine Linux paket yöneticisi (apk).
+    en: Alpine Linux package manager (apk).
+  learning_level: intermediate
+- id: xbps-install
+  purpose:
+    tr: Void Linux XBPS kurulum aracı.
+    en: Void Linux XBPS install tool.
+  learning_level: unspecified
+- id: emerge
+  purpose:
+    tr: Gentoo Portage paket kurucu (emerge).
+    en: Gentoo Portage package tool (emerge).
+  learning_level: unspecified
+- id: nix
+  purpose:
+    tr: Nix paket yöneticisi (modern CLI).
+    en: Nix package manager (modern CLI).
+  learning_level: unspecified
+- id: guix
+  purpose:
+    tr: GNU Guix paket ve sistem yöneticisi.
+    en: GNU Guix package and system manager.
+  learning_level: unspecified
+- id: brew
+  purpose:
+    tr: Homebrew paket yöneticisi (macOS).
+    en: Homebrew package manager (macOS).
+  learning_level: intermediate
+- id: winget
+  purpose:
+    tr: Windows Paket Yöneticisi (WinGet) CLI.
+    en: Windows Package Manager (WinGet) CLI.
+  learning_level: intermediate
+- id: pkg
+  purpose:
+    tr: FreeBSD ikili paket yöneticisi (pkgng).
+    en: FreeBSD binary package manager (pkgng).
+  learning_level: intermediate
+graded_examples:
+- title:
+    tr: Arch arama
+    en: Arch search
+  command: pacman -Ss curl
+  explanation:
+    tr: Arch deposunda curl arar (kurmaz).
+    en: Searches Arch repos for curl (does not install).
+  difficulty: beginner
+  risk: safe
+  platforms:
+  - linux
+  related_commands:
+  - pacman
+- title:
+    tr: Debian güncelleme listesi
+    en: Debian update lists
+  command: sudo apt update
+  explanation:
+    tr: Paket indekslerini yeniler; yükseltme yapmaz.
+    en: Refreshes package indexes; does not upgrade.
+  difficulty: beginner
+  risk: caution
+  platforms:
+  - linux
+  related_commands:
+  - apt
+callouts:
+- kind: warning
+  text:
+    tr: Bilinmeyen paket adını uydurmayın; omit veya draft bırakın.
+    en: Do not invent unknown package names; omit or leave draft.
+- kind: note
+  text:
+    tr: Leap zypper update ≠ Tumbleweed zypper dup.
+    en: Leap zypper update ≠ Tumbleweed zypper dup.
+safe_exercises:
+- title:
+    tr: Salt okuma sorgu
+    en: Read-only query
+  prompt:
+    tr: Kendi distro PM’inizle bir paketi arayın/sorgulayın (kurmadan).
+    en: Search/query one package with your distro PM (do not install).
+  risk: safe
+  related_commands:
+  - pacman
+  - apt
+  - dnf
+next_steps:
+- id: package-managers-comparison
+- id: nix-guix

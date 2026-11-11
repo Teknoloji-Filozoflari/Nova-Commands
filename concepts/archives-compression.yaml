@@ -1,0 +1,135 @@
+id: archives-compression
+kind: nova-commands-concept
+format: topic-guide
+title:
+  tr: Arşiv ve sıkıştırma
+  en: Archives and compression
+summary:
+  tr: tar, gzip, xz, zip — oluşturma ve çıkarma; üzerine yazmaya dikkat.
+  en: tar, gzip, xz, zip — create and extract; watch overwrites.
+intro:
+  tr: Arşivlemek ve açmak; yanlış -C veya üzerine yazma veri kaybettirir.
+  en: Archive and extract; wrong -C or overwrites can lose data.
+body:
+  tr: '`tar -czf` sıkıştırılmış arşiv oluşturur; `tar -tzf` içeriği listeler; `tar -xzf` çıkarır.
+
+    Önce listeleyin (`-t`), sonra çıkarın. `unzip -l` benzer şekilde listeler.
+
+
+    Windows’ta Expand-Archive / tar (bsdtar) farklılıkları için bank kayıtlarına bakın.'
+  en: '`tar -czf` creates a compressed archive; `tar -tzf` lists; `tar -xzf` extracts.
+
+    List first (`-t`), then extract. `unzip -l` likewise lists.
+
+
+    On Windows, see bank records for Expand-Archive / tar (bsdtar) differences.'
+difficulty: beginner
+categories:
+- archives
+platforms:
+- linux
+- macos
+- bsd
+- windows
+tags:
+- tar
+- gzip
+- zip
+learning_path:
+- ref: tar
+  kind: command
+- ref: gzip
+  kind: command
+- ref: xz
+  kind: command
+- ref: unzip
+  kind: command
+subtopics:
+- id: list
+  title:
+    tr: Listele
+    en: List
+  summary:
+    tr: Açmadan içeriği görün.
+    en: See contents without extracting.
+  related_commands:
+  - tar
+  - unzip
+- id: extract
+  title:
+    tr: Çıkar
+    en: Extract
+  summary:
+    tr: Hedef dizini bilinçli seçin.
+    en: Choose the target directory deliberately.
+  related_commands:
+  - tar
+command_table:
+- id: tar
+  purpose:
+    tr: Tar arşivlerini oluşturur veya çıkarır.
+    en: Create or extract tape archives.
+  learning_level: beginner
+- id: gzip
+  purpose:
+    tr: Dosyaları gzip ile sıkıştırır veya açar.
+    en: Compress or expand files with gzip.
+  learning_level: beginner
+- id: xz
+  purpose:
+    tr: XZ sıkıştırma aracı.
+    en: Compress or decompress .xz files.
+  learning_level: beginner
+- id: unzip
+  purpose:
+    tr: ZIP arşivlerini çıkarır.
+    en: Extract ZIP archives.
+  learning_level: beginner
+graded_examples:
+- title:
+    tr: İçerik listele
+    en: List contents
+  command: tar -tzf archive.tar.gz | head
+  explanation:
+    tr: Arşiv üyelerini listeler (dosya varsa).
+    en: Lists archive members (when the file exists).
+  difficulty: beginner
+  risk: safe
+  related_commands:
+  - tar
+callouts:
+- kind: caution
+  text:
+    tr: Çıkarma mevcut dosyaların üzerine yazabilir.
+    en: Extraction can overwrite existing files.
+safe_exercises:
+- title:
+    tr: Listele önce
+    en: List first
+  prompt:
+    tr: Elinizde bir .tar.gz varsa tar -tzf ile listeleyin; çıkarmayın.
+    en: If you have a .tar.gz, list with tar -tzf; do not extract yet.
+  risk: safe
+  related_commands:
+  - tar
+next_steps:
+- id: backup
+- id: storage
+related_commands:
+- tar
+- gzip
+- xz
+- unzip
+related_concepts:
+- backup
+- storage
+- finding-files
+see_also:
+- man tar
+- man gzip
+verification:
+  status: draft
+  sources:
+  - man tar
+  - man gzip
+  notes: NV-123 new topic guide from bank + man-oriented teaching; PDF not available in env; not human-verified.

@@ -189,6 +189,73 @@ def test_concept_articles_match_registry() -> None:
         assert data["body"]["tr"].strip() and data["body"]["en"].strip()
 
 
+def test_topic_guides_have_structured_sections() -> None:
+    """NV-123: topic-guide format exposes learning structure for Nova TUI."""
+    guides = []
+    for path in (ROOT / "concepts").glob("*.yaml"):
+        data = yaml.safe_load(path.read_text(encoding="utf-8"))
+        if data.get("format") != "topic-guide":
+            continue
+        guides.append(data)
+        assert data.get("intro") or data.get("body")
+        # At least one navigational section beyond freeform body
+        structured = any(
+            data.get(key)
+            for key in (
+                "learning_path",
+                "subtopics",
+                "command_table",
+                "graded_examples",
+                "callouts",
+                "safe_exercises",
+                "next_steps",
+            )
+        )
+        assert structured, path
+        for ex in data.get("safe_exercises") or []:
+            assert ex.get("risk") in ("safe", "caution"), path
+    assert len(guides) >= 20
+
+
+def test_teachable_command_fields_schema_and_seed() -> None:
+    """Optional when/syntax/mistakes/topics are additive on schema v2."""
+    live = json.loads((ROOT / "schema" / "command.schema.json").read_text())
+    v2 = json.loads((ROOT / "schema" / "command.schema.v2.json").read_text())
+    for schema in (live, v2):
+        props = schema["properties"]
+        for key in (
+            "when_to_use",
+            "syntax",
+            "expected_effect",
+            "common_mistakes",
+            "related_topics",
+        ):
+            assert key in props
+    concept = json.loads((ROOT / "schema" / "concept.schema.json").read_text())
+    for key in (
+        "format",
+        "intro",
+        "learning_path",
+        "subtopics",
+        "command_table",
+        "graded_examples",
+        "callouts",
+        "safe_exercises",
+        "next_steps",
+    ):
+        assert key in concept["properties"]
+
+    seeded = 0
+    for path in (ROOT / "commands").glob("*/*.yaml"):
+        data = yaml.safe_load(path.read_text(encoding="utf-8"))
+        if data.get("when_to_use") or data.get("syntax") or data.get("common_mistakes"):
+            seeded += 1
+            # learning_level must not be used as an excuse to skip explanation
+            if data.get("learning_level") == "beginner":
+                assert data.get("summary", {}).get("en")
+    assert seeded >= 15
+
+
 def test_i18n_summary_description_present() -> None:
     for path in (ROOT / "commands").glob("*/*.yaml"):
         data = yaml.safe_load(path.read_text(encoding="utf-8"))

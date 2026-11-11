@@ -13,8 +13,10 @@ Checks (CI gate):
   - learning_level (optional; independent of risk; missing → unspecified at build)
   - examples[].difficulty (optional pedagogy label; not derived from risk)
   - i18n consistency: every localized object has non-empty tr and en
-  - nova.concepts / concept related_* reference known registry or article ids
-  - Concept articles under concepts/; id == filename; related_commands exist
+  - nova.concepts / related_topics / concept related_* reference known registry or article ids
+  - Concept/topic-guide articles under concepts/; id == filename; related_commands exist
+  - Topic-guide structured refs (learning_path, command_table, graded_examples, …) resolve
+  - safe_exercises.risk is only safe|caution
   - Soft: platform registries (scripts/validate_platform_registries.py)
   - Soft: stub fixtures task/profile/compatibility (scripts/validate_schema_v2.py)
     (loads both command schema v1 archive + live v2; fixtures fail on missing fields)
@@ -135,6 +137,13 @@ def check_i18n_command(errors: list[str], rel: Path, raw: dict) -> None:
         check_localized(
             errors, rel, f"examples[{i}].explanation", ex.get("explanation")
         )
+
+    for optional in ("when_to_use", "expected_effect", "purpose"):
+        if optional in raw and raw[optional] is not None:
+            check_localized(errors, rel, optional, raw.get(optional), required=False)
+
+    for i, mistake in enumerate(raw.get("common_mistakes") or []):
+        check_localized(errors, rel, f"common_mistakes[{i}]", mistake)
 
 
 def main() -> int:
@@ -297,6 +306,12 @@ def main() -> int:
                     f"{rel}: nova.concepts unknown id {concept!r} "
                     "(add to metadata/concepts.yaml)"
                 )
+        for topic in raw.get("related_topics") or []:
+            if topic not in known_concept_ids:
+                errors.append(
+                    f"{rel}: related_topics unknown id {topic!r} "
+                    "(add to metadata/concepts.yaml)"
+                )
 
     # --- concepts articles ---
     concept_files = (
@@ -326,6 +341,8 @@ def main() -> int:
         check_localized(errors, rel, "title", raw.get("title"))
         check_localized(errors, rel, "summary", raw.get("summary"))
         check_localized(errors, rel, "body", raw.get("body"))
+        if raw.get("intro") is not None:
+            check_localized(errors, rel, "intro", raw.get("intro"), required=False)
 
         cid = raw.get("id")
         if cid != path.stem:
@@ -359,6 +376,116 @@ def main() -> int:
                     errors.append(
                         f"{rel}: related_concepts unknown id {xid!r}"
                     )
+
+        # Topic-guide structured sections (all optional; omit empty).
+        for i, step in enumerate(raw.get("learning_path") or []):
+            if not isinstance(step, dict):
+                continue
+            ref = step.get("ref")
+            kind = step.get("kind")
+            if kind == "command" and ref not in seen_ids:
+                errors.append(
+                    f"{rel}: learning_path[{i}].ref unknown command id {ref!r}"
+                )
+            if kind == "concept" and ref not in known_concept_ids:
+                errors.append(
+                    f"{rel}: learning_path[{i}].ref unknown concept id {ref!r}"
+                )
+            if step.get("note") is not None:
+                check_localized(
+                    errors, rel, f"learning_path[{i}].note", step.get("note")
+                )
+
+        for i, sub in enumerate(raw.get("subtopics") or []):
+            if not isinstance(sub, dict):
+                continue
+            check_localized(errors, rel, f"subtopics[{i}].title", sub.get("title"))
+            check_localized(
+                errors, rel, f"subtopics[{i}].summary", sub.get("summary")
+            )
+            for rid in sub.get("related_commands") or []:
+                if rid not in seen_ids:
+                    errors.append(
+                        f"{rel}: subtopics[{i}].related_commands unknown "
+                        f"command id {rid!r}"
+                    )
+
+        for i, row in enumerate(raw.get("command_table") or []):
+            if not isinstance(row, dict):
+                continue
+            rid = row.get("id")
+            if rid not in seen_ids:
+                errors.append(
+                    f"{rel}: command_table[{i}].id unknown command id {rid!r}"
+                )
+            check_localized(
+                errors, rel, f"command_table[{i}].purpose", row.get("purpose")
+            )
+
+        for i, ex in enumerate(raw.get("graded_examples") or []):
+            if not isinstance(ex, dict):
+                continue
+            check_localized(
+                errors, rel, f"graded_examples[{i}].title", ex.get("title")
+            )
+            check_localized(
+                errors,
+                rel,
+                f"graded_examples[{i}].explanation",
+                ex.get("explanation"),
+            )
+            for rid in ex.get("related_commands") or []:
+                if rid not in seen_ids:
+                    errors.append(
+                        f"{rel}: graded_examples[{i}].related_commands "
+                        f"unknown command id {rid!r}"
+                    )
+
+        for i, callout in enumerate(raw.get("callouts") or []):
+            if not isinstance(callout, dict):
+                continue
+            check_localized(
+                errors, rel, f"callouts[{i}].text", callout.get("text")
+            )
+
+        for i, exer in enumerate(raw.get("safe_exercises") or []):
+            if not isinstance(exer, dict):
+                continue
+            check_localized(
+                errors, rel, f"safe_exercises[{i}].title", exer.get("title")
+            )
+            check_localized(
+                errors, rel, f"safe_exercises[{i}].prompt", exer.get("prompt")
+            )
+            risk = exer.get("risk")
+            if risk not in (None, "safe", "caution"):
+                errors.append(
+                    f"{rel}: safe_exercises[{i}].risk must be safe|caution "
+                    f"(got {risk!r})"
+                )
+            for rid in exer.get("related_commands") or []:
+                if rid not in seen_ids:
+                    errors.append(
+                        f"{rel}: safe_exercises[{i}].related_commands "
+                        f"unknown command id {rid!r}"
+                    )
+
+        for i, step in enumerate(raw.get("next_steps") or []):
+            if not isinstance(step, dict):
+                continue
+            nid = step.get("id")
+            if nid not in known_concept_ids:
+                errors.append(
+                    f"{rel}: next_steps[{i}].id unknown concept id {nid!r}"
+                )
+            if step.get("note") is not None:
+                check_localized(
+                    errors, rel, f"next_steps[{i}].note", step.get("note")
+                )
+
+        for dist in raw.get("distributions") or []:
+            if distro_ids and dist not in distro_ids:
+                errors.append(f"{rel}: distributions unknown id {dist!r}")
 
     # Registry articles field must point at existing files when set
     for cid, meta in concept_registry.items():

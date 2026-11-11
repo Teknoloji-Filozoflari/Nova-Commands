@@ -95,6 +95,7 @@ verification:
   - man 8 apt
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-bootstrap
+  notes: NV-123 teachable fields (when/syntax/mistakes/topics).
 nova:
   concepts:
   - packages
@@ -103,3 +104,15 @@ nova:
 purpose:
   tr: Debian/Ubuntu paket kurulum ve yükseltme (Arch’ta pacman kullanın).
   en: Debian/Ubuntu package install/upgrade (use pacman on Arch).
+when_to_use:
+  tr: Debian/Ubuntu paket indeksi ve kurulum işlemleri.
+  en: Debian/Ubuntu package index and install operations.
+syntax: apt [options] command
+expected_effect:
+  tr: update indeksleri yeniler; install/upgrade paketleri değiştirir.
+  en: update refreshes indexes; install/upgrade change packages.
+common_mistakes:
+- tr: apt update ile upgrade’i aynı sanmak.
+  en: Treating apt update as the same as upgrade.
+related_topics:
+- package-managers

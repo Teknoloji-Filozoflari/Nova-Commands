@@ -1,0 +1,208 @@
+id: text-processing
+kind: nova-commands-concept
+format: topic-guide
+title:
+  tr: Metin işleme
+  en: Text processing
+summary:
+  tr: cat, grep, sed, awk ve satır araçlarıyla metin süzme.
+  en: Filter text with cat, grep, sed, awk, and line tools.
+intro:
+  tr: Metin dosyalarını okumak, süzmek ve dönüştürmek günlük CLI işinin çekirdeğidir.
+  en: Reading, filtering, and transforming text files is core daily CLI work.
+body:
+  tr: 'Metin işleme, borularla birleşince güçlüdür. `cat` içeriği gösterir; `grep` desen arar;
+
+    `sed` ve `awk` satır dönüşümü yapar. GNU ile BSD araç bayrakları farklılık gösterebilir —
+
+    bankada platform etiketlerine bakın; uydurmayın.
+
+
+    **Öğrenme sırası:** cat → head/tail → grep → cut/tr → sort/uniq → sed → awk.
+
+
+    **Uyarı:** `sed -i` yerinde düzenler; önce kopya veya `/tmp` üzerinde deneyin.'
+  en: 'Text processing is powerful when composed with pipes. `cat` shows content; `grep` matches
+
+    patterns; `sed` and `awk` transform lines. GNU vs BSD flag differences matter — check
+
+    platform tags in the bank; do not invent flags.
+
+
+    **Learning order:** cat → head/tail → grep → cut/tr → sort/uniq → sed → awk.
+
+
+    **Warning:** `sed -i` edits in place; practice on a copy or under `/tmp` first.'
+difficulty: beginner
+categories:
+- text
+platforms:
+- linux
+- macos
+- bsd
+tags:
+- text
+- grep
+- sed
+- awk
+learning_path:
+- ref: cat
+  kind: command
+- ref: grep
+  kind: command
+- ref: sed
+  kind: command
+- ref: awk
+  kind: command
+- ref: cut
+  kind: command
+- ref: head
+  kind: command
+- ref: tail
+  kind: command
+- ref: wc
+  kind: command
+subtopics:
+- id: view
+  title:
+    tr: Görüntüleme
+    en: Viewing
+  summary:
+    tr: cat/head/tail ile bakın.
+    en: View with cat/head/tail.
+  related_commands:
+  - cat
+  - head
+  - tail
+- id: match
+  title:
+    tr: Eşleştirme
+    en: Matching
+  summary:
+    tr: grep ile desen.
+    en: Patterns with grep.
+  related_commands:
+  - grep
+- id: transform
+  title:
+    tr: Dönüştürme
+    en: Transform
+  summary:
+    tr: sed/awk/cut/tr.
+    en: sed/awk/cut/tr.
+  related_commands:
+  - sed
+  - awk
+  - cut
+command_table:
+- id: cat
+  purpose:
+    tr: Dosyaları birleştirip yazar.
+    en: Concatenate and print files.
+  learning_level: beginner
+- id: grep
+  purpose:
+    tr: Metinde desen arar.
+    en: Print lines matching a pattern.
+  learning_level: beginner
+- id: sed
+  purpose:
+    tr: Akış düzenleyici.
+    en: Stream editor.
+  learning_level: intermediate
+- id: awk
+  purpose:
+    tr: Desen tarama ve metin işleme dili.
+    en: Pattern scanning and text processing language.
+  learning_level: intermediate
+- id: cut
+  purpose:
+    tr: Satırlardan alan veya bayt keser.
+    en: Remove sections from each line.
+  learning_level: beginner
+- id: head
+  purpose:
+    tr: Dosyanın başını gösterir.
+    en: Show the start of files.
+  learning_level: beginner
+- id: tail
+  purpose:
+    tr: Dosyanın sonunu gösterir.
+    en: Show the end of files.
+  learning_level: beginner
+- id: wc
+  purpose:
+    tr: Satır, kelime ve bayt sayar.
+    en: Count lines, words, and bytes.
+  learning_level: beginner
+- id: sort
+  purpose:
+    tr: Satırları sıralar.
+    en: Sort lines of text.
+  learning_level: beginner
+- id: uniq
+  purpose:
+    tr: Ardışık yinelenen satırları bildirir veya süzgeçler.
+    en: Report or omit repeated adjacent lines.
+  learning_level: beginner
+graded_examples:
+- title:
+    tr: Desen ara
+    en: Search pattern
+  command: grep -n pattern /etc/hosts
+  explanation:
+    tr: hosts dosyasında satır numaralı arama (salt okuma).
+    en: Line-numbered search in hosts (read-only).
+  difficulty: beginner
+  risk: safe
+  related_commands:
+  - grep
+callouts:
+- kind: tip
+  text:
+    tr: Önce grep -n ile bulun; sonra sed planlayın.
+    en: Find with grep -n first; then plan sed.
+- kind: warning
+  text:
+    tr: sed -i ve > yönlendirme veri kaybettirir.
+    en: sed -i and > redirection can lose data.
+safe_exercises:
+- title:
+    tr: grep alıştırması
+    en: grep practice
+  prompt:
+    tr: grep -n root /etc/passwd (salt okuma) çıktısını yorumlayın.
+    en: Interpret grep -n root /etc/passwd (read-only) output.
+  risk: safe
+  related_commands:
+  - grep
+next_steps:
+- id: shell-pipes-redirection
+- id: finding-files
+- id: json-data
+related_commands:
+- cat
+- grep
+- sed
+- awk
+- cut
+- head
+- tail
+- wc
+- sort
+- uniq
+related_concepts:
+- shell-pipes-redirection
+- json-data
+- finding-files
+see_also:
+- man grep
+- man sed
+- man awk
+verification:
+  status: draft
+  sources:
+  - man grep
+  - man sed
+  - man awk
+  notes: NV-123 new topic guide from bank + man-oriented teaching; PDF not available in env; not human-verified.

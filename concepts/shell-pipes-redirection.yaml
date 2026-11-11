@@ -8,72 +8,247 @@ summary:
   en: stdin/stdout/stderr, `>`, `>>`, `<`, and `|` pipelines.
 difficulty: beginner
 tags:
-  - shell
-  - pipes
-  - io
+- shell
+- pipes
+- io
 related_commands:
-  - cat
-  - tee
-  - grep
-  - sort
-  - head
-  - tail
-  - cut
-  - xargs
+- cat
+- tee
+- grep
+- sort
+- head
+- tail
+- cut
+- xargs
 related_concepts:
-  - terminal-basics
-  - shell-builtin
+- terminal-basics
+- shell-builtin
 see_also:
-  - "man bash (REDIRECTION)"
-  - "POSIX pipelines"
+- man bash (REDIRECTION)
+- POSIX pipelines
 body:
-  tr: |
-    Her süreç üç standart akışla başlar: **stdin** (0), **stdout** (1), **stderr** (2).
+  tr: 'Her süreç üç standart akışla başlar: **stdin** (0), **stdout** (1), **stderr** (2).
+
     Kabuk bunları dosyalara veya başka süreçlere bağlayabilir.
 
+
     **Yönlendirme:**
+
     - `komut > dosya` — stdout’u dosyaya yazar (üzerine yazar).
+
     - `komut >> dosya` — stdout’u dosyanın sonuna ekler.
+
     - `komut < dosya` — stdin’i dosyadan okur.
+
     - `komut 2> hata.log` — stderr’i ayırır; `2>&1` stderr’i stdout’a birleştirir.
 
+
     **Boru (`|`):** Sol komutun stdout’u sağ komutun stdin’ine bağlanır.
+
     Örnek: `ps aux | grep ssh | head`. Boru hattında ara dosya gerekmez; bellek/buffer
+
     ile akar. Hata mesajları (stderr) varsayılan olarak boruya girmez.
+
 
     **`tee`:** stdout’u hem dosyaya hem sonraki boruya kopyalar (`… | tee out.txt | …`).
 
+
     **`xargs`:** stdin’deki satır/sözcükleri sonraki komutun argümanına çevirir
+
     (`find … -print0 | xargs -0 …` boşluk/newline güvenliği için).
 
+
     **Dikkat:** `>` mevcut dosyayı sessizce bozar. Yanlışlıkla `>` yerine `>>`
+
     veya önce yedek düşünün. Bu bankada yıkıcı örnekler `destructive` /
+
     `dangerous` riskiyle işaretlenir; doğrulama için yıkıcı komutlar çalıştırılmaz.
-  en: |
-    Processes start with three standard streams: **stdin** (0), **stdout** (1),
+
+    '
+  en: 'Processes start with three standard streams: **stdin** (0), **stdout** (1),
+
     **stderr** (2). The shell can attach them to files or other processes.
 
+
     **Redirection:**
+
     - `cmd > file` — write stdout (truncate/overwrite).
+
     - `cmd >> file` — append stdout.
+
     - `cmd < file` — read stdin from a file.
+
     - `cmd 2> err.log` — capture stderr; `2>&1` merges stderr into stdout.
 
+
     **Pipe (`|`):** Connects the left command’s stdout to the right command’s stdin.
+
     Example: `ps aux | grep ssh | head`. Data flows without intermediate files.
+
     stderr does not enter the pipe by default.
+
 
     **`tee`:** Copies stdout both to a file and further down the pipeline.
 
+
     **`xargs`:** Turns stdin tokens into arguments for another command
+
     (`find … -print0 | xargs -0 …` for whitespace-safe lists).
 
+
     **Caution:** `>` silently overwrites files. Prefer `>>` or backups when unsure.
+
     Destructive examples in this bank are labeled `dangerous`/`destructive`; do not
+
     run destructive commands just to validate catalog entries.
+
+    '
 verification:
   status: draft
   sources:
-    - "man bash (REDIRECTION, PIPES)"
-    - "POSIX shell redirection"
-  notes: "Agent-authored teaching article; needs maintainer spot-check before verified."
+  - man bash (REDIRECTION, PIPES)
+  - POSIX shell redirection
+  notes: Agent-authored teaching article; needs maintainer spot-check before verified. NV-123 topic-guide
+    structure; agent-authored; needs human review before verified.
+format: topic-guide
+categories:
+- shell
+- text
+platforms:
+- linux
+- macos
+- bsd
+intro:
+  tr: Borular (|) ve yönlendirme (>, >>, <, 2>) komutları birleştirir; veri akışını kontrol eder.
+  en: Pipes (|) and redirection (>, >>, <, 2>) compose commands and control data flow.
+learning_path:
+- ref: echo
+  kind: command
+- ref: cat
+  kind: command
+- ref: grep
+  kind: command
+- ref: head
+  kind: command
+- ref: tail
+  kind: command
+- ref: wc
+  kind: command
+- ref: sort
+  kind: command
+- ref: uniq
+  kind: command
+subtopics:
+- id: stdout-stderr
+  title:
+    tr: stdout / stderr
+    en: stdout / stderr
+  summary:
+    tr: '> stdout; 2> stderr; | bir sürecin stdout’unu diğerinin stdin’ine bağlar.'
+    en: '> is stdout; 2> stderr; | connects stdout of one process to stdin of the next.'
+  related_commands:
+  - echo
+  - cat
+- id: filters
+  title:
+    tr: Filtreler
+    en: Filters
+  summary:
+    tr: grep/head/tail/wc/sort/uniq sık boru halkalarıdır.
+    en: grep/head/tail/wc/sort/uniq are common pipe stages.
+  related_commands:
+  - grep
+  - head
+  - tail
+  - wc
+command_table:
+- id: cat
+  purpose:
+    tr: Dosyaları birleştirip yazar.
+    en: Concatenate and print files.
+  learning_level: beginner
+- id: grep
+  purpose:
+    tr: Metinde desen arar.
+    en: Print lines matching a pattern.
+  learning_level: beginner
+- id: head
+  purpose:
+    tr: Dosyanın başını gösterir.
+    en: Show the start of files.
+  learning_level: beginner
+- id: tail
+  purpose:
+    tr: Dosyanın sonunu gösterir.
+    en: Show the end of files.
+  learning_level: beginner
+- id: wc
+  purpose:
+    tr: Satır, kelime ve bayt sayar.
+    en: Count lines, words, and bytes.
+  learning_level: beginner
+- id: sort
+  purpose:
+    tr: Satırları sıralar.
+    en: Sort lines of text.
+  learning_level: beginner
+- id: uniq
+  purpose:
+    tr: Ardışık yinelenen satırları bildirir veya süzgeçler.
+    en: Report or omit repeated adjacent lines.
+  learning_level: beginner
+- id: tee
+  purpose:
+    tr: Çıktıyı hem dosyaya hem stdout’a yazar.
+    en: Write output to files and stdout.
+  learning_level: beginner
+graded_examples:
+- title:
+    tr: Basit boru
+    en: Simple pipe
+  command: printf "b\na\nb\n" | sort | uniq -c
+  explanation:
+    tr: Satırları sıralar ve tekrarları sayar.
+    en: Sorts lines and counts duplicates.
+  difficulty: beginner
+  risk: safe
+  related_commands:
+  - sort
+  - uniq
+- title:
+    tr: Dosyaya yaz (dikkat)
+    en: Write to file (careful)
+  command: echo hello > /tmp/nova-guide-demo.txt
+  explanation:
+    tr: '> hedefi üzerine yazar; mevcut dosyayı siler. Öğrenme için /tmp kullanın.'
+    en: '> overwrites the target; destroys existing content. Use /tmp while learning.'
+  difficulty: intermediate
+  risk: caution
+  related_commands:
+  - echo
+  warnings:
+  - tr: '> mevcut dosyayı siler; kritik yollarda kullanmayın.'
+    en: '> truncates existing files; avoid critical paths.'
+callouts:
+- kind: warning
+  text:
+    tr: '>> ekler; > üzerine yazar. Yanlış yönlendirme veri kaybettirir.'
+    en: '>> appends; > overwrites. Wrong redirection loses data.'
+- kind: tip
+  text:
+    tr: Önce komutu tek başına çalıştırıp çıktıyı görün; sonra boru ekleyin.
+    en: Run each stage alone first, then add the pipe.
+safe_exercises:
+- title:
+    tr: /tmp üzerinde boru
+    en: Pipe on /tmp
+  prompt:
+    tr: echo -e "x\ny\nx" > /tmp/t.txt; sort /tmp/t.txt | uniq -c
+    en: echo -e "x\ny\nx" > /tmp/t.txt; sort /tmp/t.txt | uniq -c
+  risk: caution
+  related_commands:
+  - sort
+  - uniq
+next_steps:
+- id: text-processing
+- id: finding-files

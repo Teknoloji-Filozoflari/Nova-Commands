@@ -8,68 +8,268 @@ summary:
   en: Shell, prompt, command line, and exit statuses.
 difficulty: beginner
 tags:
-  - shell
-  - beginner
-  - cli
+- shell
+- beginner
+- cli
 related_commands:
-  - pwd
-  - ls
-  - cd
-  - echo
-  - history
+- pwd
+- ls
+- cd
+- echo
+- history
 related_concepts:
-  - path
-  - shell-pipes-redirection
-  - shell-builtin
+- path
+- shell-pipes-redirection
+- shell-builtin
 see_also:
-  - "POSIX shell overview"
-  - "man bash / man zsh (interactive shells)"
+- POSIX shell overview
+- man bash / man zsh (interactive shells)
 body:
-  tr: |
-    Terminal, metin tabanlı bir arayüzdür; yazdığınız satırı bir *kabuk* (bash, zsh, fish, …)
+  tr: 'Terminal, metin tabanlı bir arayüzdür; yazdığınız satırı bir *kabuk* (bash, zsh, fish, …)
+
     yorumlar. Tipik bir satır: `komut [bayraklar…] [argümanlar…]`.
 
+
     **İstem (prompt):** Kabuk hazır olduğunu gösterir; satırı Enter ile gönderirsiniz.
+
     Çoğu Linux sisteminde varsayılan etkileşimli kabuk bash veya zsh’dir; betikler için
+
     `#!/bin/sh` sıkça POSIX uyumlu bir kabuğu hedefler.
 
+
     **Argümanlar ve tırnak:** Boşluk içeren yolları tırnak içine alın
+
     (`cd "My Documents"`). Tek tırnak çoğu kabukta genişletmeyi kapatır; çift tırnak
+
     değişkenleri genişletebilir.
 
+
     **Çıkış kodu:** Başarılı komutlar genelde `0` döner; sıfır dışı hata demektir.
+
     Son komutun kodunu `echo $?` ile görebilirsiniz. Betiklerde `set -e` hataları
+
     erken durdurmak için kullanılır (kabuğa göre nüansları vardır).
 
+
     **Yardım:** `man komut`, `komut --help` (GNU araçlarında yaygındır), `info` (bazı
+
     GNU paketleri). Bu bankadaki komut kayıtları man/`--help` ile çapraz kontrol
+
     edilmeden `verified` yapılmamalıdır.
 
+
     **Nova ayrımı:** Bilgi bankası (kürate YAML) ile “sistemimde bulunan komutlar”
+
     (PATH keşfi) farklıdır; PATH’te olmak doğrulanmış içerik anlamına gelmez.
-  en: |
-    A terminal is a text interface; a *shell* (bash, zsh, fish, …) interprets each line.
+
+    '
+  en: 'A terminal is a text interface; a *shell* (bash, zsh, fish, …) interprets each line.
+
     Typical form: `command [flags…] [arguments…]`.
 
+
     **Prompt:** Shows the shell is ready; press Enter to run the line. Interactive
+
     defaults are often bash or zsh; scripts frequently use `#!/bin/sh` for a
+
     POSIX-oriented shell.
 
+
     **Arguments and quoting:** Quote paths with spaces (`cd "My Documents"`). Single
+
     quotes usually disable expansion; double quotes may expand variables.
 
+
     **Exit status:** Success is usually `0`; non-zero means failure. Inspect the last
+
     status with `echo $?`. Scripts may use `set -e` to stop early on errors (shell-specific
+
     nuances apply).
 
+
     **Help:** `man command`, `command --help` (common on GNU tools), and sometimes `info`.
+
     Catalog entries must not be marked `verified` without checking man/`--help`.
 
+
     **Nova dual concept:** The curated bank is not the same as “commands found on PATH”;
+
     presence on PATH does not verify bank content.
+
+    '
 verification:
   status: draft
   sources:
-    - "POSIX.1 shell command language (overview)"
-    - "man bash (INVOCATION, SHELL GRAMMAR)"
-  notes: "Agent-authored teaching article; needs maintainer spot-check before verified."
+  - POSIX.1 shell command language (overview)
+  - man bash (INVOCATION, SHELL GRAMMAR)
+  notes: Agent-authored teaching article; needs maintainer spot-check before verified. NV-123 topic-guide
+    structure; agent-authored; needs human review before verified.
+format: topic-guide
+categories:
+- shell
+- filesystem
+platforms:
+- linux
+- macos
+- bsd
+intro:
+  tr: Terminal, kabuk istemi, komut satırı biçimi ve çıkış kodları — Komut Rehberi’ne giriş.
+  en: Terminal, shell prompt, command-line form, and exit statuses — entry to the Command Guide.
+learning_path:
+- ref: pwd
+  kind: command
+  note:
+    tr: Nerede olduğunuzu görün.
+    en: See where you are.
+- ref: ls
+  kind: command
+  note:
+    tr: Dizin içeriğini okuyun.
+    en: Read directory contents.
+- ref: cd
+  kind: command
+  note:
+    tr: Dizin değiştirin (tırnak!).
+    en: Change directory (quote paths!).
+- ref: echo
+  kind: command
+  note:
+    tr: Metin ve değişkenleri yazdırın.
+    en: Print text and variables.
+- ref: history
+  kind: command
+  note:
+    tr: Önceki satırları gözden geçirin.
+    en: Review previous lines.
+subtopics:
+- id: prompt-and-line
+  title:
+    tr: İstem ve satır
+    en: Prompt and line
+  summary:
+    tr: Kabuk hazır olduğunu gösterir; Enter satırı gönderir.
+    en: Shell shows readiness; Enter sends the line.
+  related_commands:
+  - echo
+  - history
+- id: exit-status
+  title:
+    tr: Çıkış kodu
+    en: Exit status
+  summary:
+    tr: 0 başarı; sıfır dışı hata. echo $? ile bakın.
+    en: 0 is success; non-zero is failure. Check with echo $?.
+  related_commands:
+  - echo
+- id: help
+  title:
+    tr: Yardım
+    en: Help
+  summary:
+    tr: man ve --help bank doğrulamasından önce kaynak kabul edilir.
+    en: man and --help are sources before bank verification.
+  related_commands:
+  - ls
+command_table:
+- id: pwd
+  purpose:
+    tr: Çalışma dizinini yazdırır.
+    en: Print working directory.
+  learning_level: beginner
+- id: ls
+  purpose:
+    tr: Dizin içeriğini listeler.
+    en: List directory contents.
+  learning_level: beginner
+- id: cd
+  purpose:
+    tr: Çalışma dizinini değiştirir (kabuk yerleşiği).
+    en: Change the shell working directory (builtin).
+  learning_level: beginner
+- id: echo
+  purpose:
+    tr: Argümanları yazar.
+    en: Display a line of text.
+  learning_level: beginner
+- id: history
+  purpose:
+    tr: Komut geçmişini listeler (yerleşik).
+    en: Display command history (builtin).
+  learning_level: beginner
+graded_examples:
+- title:
+    tr: Konum + liste
+    en: Location + list
+  command: pwd && ls
+  explanation:
+    tr: Çalışma dizinini yazdırır ve içeriği listeler.
+    en: Prints the working directory and lists its contents.
+  difficulty: beginner
+  risk: safe
+  platforms:
+  - linux
+  - macos
+  - bsd
+  related_commands:
+  - pwd
+  - ls
+- title:
+    tr: Gizli dosyalar
+    en: Hidden files
+  command: ls -la
+  explanation:
+    tr: Uzun biçim ve gizli girdiler (nokta ile başlayanlar).
+    en: Long format including hidden (dot) entries.
+  difficulty: beginner
+  risk: safe
+  platforms:
+  - linux
+  - macos
+  - bsd
+  related_commands:
+  - ls
+- title:
+    tr: Son çıkış kodu
+    en: Last exit status
+  command: false; echo $?
+  explanation:
+    tr: false başarısız olur; $? genelde 1 gösterir.
+    en: false fails; $? usually shows 1.
+  difficulty: intermediate
+  risk: safe
+  platforms:
+  - linux
+  - macos
+  - bsd
+  related_commands:
+  - echo
+callouts:
+- kind: tip
+  text:
+    tr: 'Boşluk içeren yolları tırnaklayın: cd "My Documents".'
+    en: 'Quote paths with spaces: cd "My Documents".'
+- kind: warning
+  text:
+    tr: PATH’te görünmek bank doğrulaması değildir; draft rozeti korunur.
+    en: Being on PATH is not bank verification; keep the draft badge honest.
+safe_exercises:
+- title:
+    tr: Ev dizinini keşfet
+    en: Explore home
+  prompt:
+    tr: pwd, ls -la ~ ve cd /tmp; pwd çalıştırın; sonra geri dönün.
+    en: Run pwd, ls -la ~, then cd /tmp; pwd; then return home.
+  risk: safe
+  related_commands:
+  - pwd
+  - ls
+  - cd
+next_steps:
+- id: path
+  note:
+    tr: PATH nasıl aranır?
+    en: How PATH lookup works
+- id: shell-pipes-redirection
+  note:
+    tr: Borular ve yönlendirme
+    en: Pipes and redirection

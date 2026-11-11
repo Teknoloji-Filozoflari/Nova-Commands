@@ -62,7 +62,39 @@
     },
     "purpose": {
       "$ref": "#/$defs/localizedLong",
-      "description": "Optional longer purpose statement beyond summary/description."
+      "description": "Optional longer purpose statement beyond summary/description. Prefer short summary for TUI; use purpose only when needed."
+    },
+    "when_to_use": {
+      "$ref": "#/$defs/localizedLong",
+      "description": "Optional 'when to use' teaching note. Omit when empty; do not duplicate summary."
+    },
+    "syntax": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "description": "Optional compact invocation pattern (e.g. 'ls [OPTION]... [FILE]...'). Prefer man SYNOPSIS; do not invent flags."
+    },
+    "expected_effect": {
+      "$ref": "#/$defs/localizedLong",
+      "description": "Optional typical effect/output note for beginners. Omit when examples already explain clearly."
+    },
+    "common_mistakes": {
+      "type": "array",
+      "maxItems": 12,
+      "description": "Optional bilingual common mistakes. Omit empty; prefer curated mistakes over duplicating every example warning.",
+      "items": {
+        "$ref": "#/$defs/localizedShort"
+      }
+    },
+    "related_topics": {
+      "type": "array",
+      "maxItems": 8,
+      "uniqueItems": true,
+      "description": "Optional concept/topic-guide ids (metadata/concepts.yaml). Complements nova.concepts.",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9][a-z0-9-]*$"
+      }
     },
     "category": {
       "type": "string",

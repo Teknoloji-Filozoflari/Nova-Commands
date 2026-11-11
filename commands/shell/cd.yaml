@@ -35,6 +35,7 @@ examples:
     tr: Ev dizinine gider.
     en: Changes to home.
   risk: safe
+  difficulty: beginner
 - title:
     tr: Üst dizin
     en: Parent
@@ -59,9 +60,24 @@ verification:
   - man bash
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-bootstrap
-  notes: Builtin — local discovery may not see a path.
+  notes: Builtin — local discovery may not see a path. NV-123 teachable fields (when/syntax/mistakes/topics).
 nova:
   concepts:
   - shell-builtin
   - terminal-basics
   - path
+when_to_use:
+  tr: Çalışma dizinini değiştirmek (kabuk yerleşiği).
+  en: Change the working directory (shell builtin).
+syntax: cd [DIR]
+expected_effect:
+  tr: Kabuğun çalışma dizinini değiştirir; başarısızlıkta konum aynı kalır.
+  en: Changes the shell working directory; on failure the location stays the same.
+common_mistakes:
+- tr: Boşluklu yolları tırnaksız vermek.
+  en: Passing paths with spaces without quotes.
+- tr: cd’yi alt kabukta çalıştırıp üst kabuğun değişmesini beklemek.
+  en: Running cd in a subshell and expecting the parent shell to move.
+related_topics:
+- terminal-basics
+- path

@@ -83,6 +83,21 @@ verification:
   - man 1 chmod
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-bootstrap
+  notes: NV-123 teachable fields (when/syntax/mistakes/topics).
 nova:
   concepts:
   - permissions
+when_to_use:
+  tr: Dosya veya dizin izin bitlerini değiştirmek.
+  en: Change permission bits on files or directories.
+syntax: chmod [OPTION]... MODE[,MODE]... FILE...
+expected_effect:
+  tr: Hedeflerin modunu günceller; içerikleri değiştirmez.
+  en: Updates modes on targets; does not change file contents.
+common_mistakes:
+- tr: chmod -R ile yanlışlıkla geniş ağacı açmak.
+  en: Accidentally opening a wide tree with chmod -R.
+- tr: 777’yi “çözüm” sanmak.
+  en: Treating 777 as a “fix”.
+related_topics:
+- permissions

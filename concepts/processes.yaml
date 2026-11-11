@@ -1,0 +1,154 @@
+id: processes
+kind: nova-commands-concept
+format: topic-guide
+title:
+  tr: Süreçler
+  en: Processes
+summary:
+  tr: ps, top, kill ve süreç gözlemi; sinyallerde dikkat.
+  en: ps, top, kill, and process inspection; be careful with signals.
+intro:
+  tr: Çalışan süreçleri görmek ve güvenli şekilde sinyal göndermek.
+  en: See running processes and send signals safely.
+body:
+  tr: '`ps` anlık liste; `top`/`htop` canlı görünüm. `kill` varsayılan SIGTERM gönderir;
+
+    `kill -9` (SIGKILL) son çaredir. Yanlış PID başka süreci öldürür.
+
+
+    Windows’ta `Get-Process` / `Stop-Process` ayrı modeldir — Linux alias’ı değildir.'
+  en: '`ps` is a snapshot; `top`/`htop` are live views. `kill` defaults to SIGTERM;
+
+    `kill -9` (SIGKILL) is a last resort. The wrong PID kills the wrong process.
+
+
+    On Windows, `Get-Process` / `Stop-Process` are a different model — not Linux aliases.'
+difficulty: beginner
+categories:
+- processes
+platforms:
+- linux
+- macos
+- bsd
+- windows
+tags:
+- ps
+- top
+- kill
+learning_path:
+- ref: ps
+  kind: command
+- ref: top
+  kind: command
+- ref: htop
+  kind: command
+- ref: kill
+  kind: command
+- ref: pgrep
+  kind: command
+- ref: pkill
+  kind: command
+subtopics:
+- id: list
+  title:
+    tr: Listeleme
+    en: Listing
+  summary:
+    tr: ps aux / ps -ef platforma göre.
+    en: ps aux / ps -ef by platform.
+  related_commands:
+  - ps
+- id: signals
+  title:
+    tr: Sinyaller
+    en: Signals
+  summary:
+    tr: Önce TERM; KILL son çare.
+    en: TERM first; KILL last.
+  related_commands:
+  - kill
+command_table:
+- id: ps
+  purpose:
+    tr: Anlık süreç listesi.
+    en: Report a snapshot of processes.
+  learning_level: beginner
+- id: top
+  purpose:
+    tr: Canlı süreç izleyici.
+    en: Dynamic real-time process viewer.
+  learning_level: beginner
+- id: htop
+  purpose:
+    tr: Etkileşimli süreç görüntüleyici.
+    en: Interactive process viewer.
+  learning_level: beginner
+- id: kill
+  purpose:
+    tr: Sürece sinyal gönderir.
+    en: Send a signal to a process.
+  learning_level: intermediate
+- id: pgrep
+  purpose:
+    tr: Ada göre süreç PID’lerini bulur.
+    en: Find process IDs by name.
+  learning_level: beginner
+- id: pkill
+  purpose:
+    tr: Ada göre süreçlere sinyal gönderir.
+    en: Signals processes by name pattern.
+  learning_level: intermediate
+graded_examples:
+- title:
+    tr: Kendi süreçleriniz
+    en: Your processes
+  command: ps -u "$USER"
+  explanation:
+    tr: Kullanıcı süreçlerini listeler (POSIX tarzı).
+    en: Lists user processes (POSIX-style).
+  difficulty: beginner
+  risk: safe
+  platforms:
+  - linux
+  - macos
+  - bsd
+  related_commands:
+  - ps
+callouts:
+- kind: warning
+  text:
+    tr: pkill kalıbı birden fazla sürece isabet edebilir.
+    en: pkill patterns can hit multiple processes.
+safe_exercises:
+- title:
+    tr: ps okuma
+    en: Read ps
+  prompt:
+    tr: ps -u "$USER" | head çıktısını yorumlayın; kill etmeyin.
+    en: Interpret ps -u "$USER" | head; do not kill anything.
+  risk: safe
+  related_commands:
+  - ps
+next_steps:
+- id: debugging
+- id: monitoring-and-logs
+related_commands:
+- ps
+- top
+- htop
+- kill
+- pgrep
+- pkill
+related_concepts:
+- debugging
+- permissions
+- monitoring-and-logs
+see_also:
+- man ps
+- man kill
+verification:
+  status: draft
+  sources:
+  - man ps
+  - man kill
+  notes: NV-123 new topic guide from bank + man-oriented teaching; PDF not available in env; not human-verified.

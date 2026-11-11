@@ -8,61 +8,184 @@ summary:
   en: Where shells look for commands; `which`, `type`, `command -v`.
 difficulty: beginner
 tags:
-  - shell
-  - path
-  - environment
+- shell
+- path
+- environment
 related_commands:
-  - which
-  - whereis
-  - env
-  - export
-  - echo
+- which
+- whereis
+- env
+- export
+- echo
 related_concepts:
-  - terminal-basics
-  - package-managers
-  - shell-builtin
+- terminal-basics
+- package-managers
+- shell-builtin
 see_also:
-  - "man environ / PATH"
-  - "docs/local-discovery-contract.md (Nova local discovery)"
+- man environ / PATH
+- docs/local-discovery-contract.md (Nova local discovery)
 body:
-  tr: |
-    **`PATH`**, kabuğun harici programları aradığı dizinlerin `:` ile ayrılmış
+  tr: '**`PATH`**, kabuğun harici programları aradığı dizinlerin `:` ile ayrılmış
+
     listesidir (ör. `/usr/local/bin:/usr/bin:/bin`). Bir komut adı yazdığınızda
+
     kabuk önce yerleşik mi diye bakar; değilse `PATH` sırasıyla eşleşen çalıştırılabilir
+
     dosyayı arar.
 
+
     **Görme / denetleme:**
+
     - `echo "$PATH"` — arama yolları.
+
     - `type ls` / `command -v ls` — kabuğun ne bulduğunu gösterir (yerleşik, alias, yol).
+
     - `which ls` — sıkça ilk eşleşen yolu basar (kabuk/yerleşik farkları için `type` daha nettir).
 
+
     **Güncelleme:** `export PATH="$HOME/.local/bin:$PATH"` oturuma ekler; kalıcılık için
+
     kabuk başlangıç dosyalarına (`~/.bashrc`, `~/.zshrc`, …) yazılır. Yanlış `PATH`
+
     “command not found” üretir veya istenmeyen ikiliyi seçtirir.
 
+
     **Nova:** “Sistemimde bulunan komutlar” istemci tarafında PATH/keşif ile üretilir
+
     (`kind: nova-local-commands`). Bu, kürate bankanın `verified` durumunu miras almaz.
+
     Ayrıntı: `docs/local-discovery-contract.md`.
-  en: |
-    **`PATH`** is a colon-separated list of directories where the shell searches for
+
+    '
+  en: '**`PATH`** is a colon-separated list of directories where the shell searches for
+
     external programs (e.g. `/usr/local/bin:/usr/bin:/bin`). On a bare name, the shell
+
     checks builtins/aliases/functions first, then walks `PATH` for an executable.
 
+
     **Inspect:**
+
     - `echo "$PATH"` — search directories.
+
     - `type ls` / `command -v ls` — what the shell would run (builtin vs path).
+
     - `which ls` — often prints the first matching path (`type` is clearer for builtins).
 
+
     **Update:** `export PATH="$HOME/.local/bin:$PATH"` for the session; persist via shell
+
     startup files (`~/.bashrc`, `~/.zshrc`, …). A broken `PATH` causes “command not found”
+
     or picks the wrong binary.
 
+
     **Nova:** Local “commands on this system” come from client-side PATH discovery
+
     (`kind: nova-local-commands`) and must not inherit bank `verified` status.
+
     See `docs/local-discovery-contract.md`.
+
+    '
 verification:
   status: draft
   sources:
-    - "man environ / POSIX PATH"
-    - "man bash (COMMAND EXECUTION)"
-  notes: "Agent-authored teaching article; needs maintainer spot-check before verified."
+  - man environ / POSIX PATH
+  - man bash (COMMAND EXECUTION)
+  notes: Agent-authored teaching article; needs maintainer spot-check before verified. NV-123 topic-guide
+    structure; agent-authored; needs human review before verified.
+format: topic-guide
+categories:
+- shell
+platforms:
+- linux
+- macos
+- bsd
+- windows
+intro:
+  tr: Kabuk komutları PATH üzerindeki dizinlerde arar; hangi ikili çalıştığını bilmek kritiktir.
+  en: Shells look up commands on PATH; knowing which binary runs is critical.
+learning_path:
+- ref: which
+  kind: command
+- ref: env
+  kind: command
+- ref: export
+  kind: command
+subtopics:
+- id: lookup-order
+  title:
+    tr: Arama sırası
+    en: Lookup order
+  summary:
+    tr: Soldan sağa PATH girdileri; ilk eşleşme kazanır.
+    en: Left-to-right PATH entries; first match wins.
+  related_commands:
+  - which
+- id: env-export
+  title:
+    tr: Ortam değişkenleri
+    en: Environment variables
+  summary:
+    tr: 'export ile alt süreçlere aktarılır; Windows’ta set / $env: farklıdır.'
+    en: 'export passes to children; Windows set / $env: differ.'
+  related_commands:
+  - env
+  - export
+command_table:
+- id: which
+  purpose:
+    tr: Komutun PATH üzerindeki konumunu gösterir.
+    en: Locate a command on PATH.
+  learning_level: beginner
+- id: env
+  purpose:
+    tr: Ortamı gösterir veya değiştirerek komut çalıştırır.
+    en: Show environment or run a command in a modified environment.
+  learning_level: beginner
+- id: export
+  purpose:
+    tr: Değişkeni ortamda dışa aktarır (yerleşik).
+    en: Set export attribute for shell variables (builtin).
+  learning_level: beginner
+graded_examples:
+- title:
+    tr: which ile konum
+    en: Locate with which
+  command: which ls
+  explanation:
+    tr: ls ikilisinin yolunu basar (ortama göre).
+    en: Prints the path of the ls binary (environment-dependent).
+  difficulty: beginner
+  risk: safe
+  related_commands:
+  - which
+- title:
+    tr: PATH yazdır
+    en: Print PATH
+  command: echo "$PATH"
+  explanation:
+    tr: Arama yollarını iki nokta ile ayırarak gösterir.
+    en: Shows search paths separated by colons.
+  difficulty: beginner
+  risk: safe
+  related_commands:
+  - echo
+callouts:
+- kind: caution
+  text:
+    tr: 'which ile type farklıdır: type kabuk yerleşiklerini de gösterir.'
+    en: 'which differs from type: type also reveals shell builtins.'
+safe_exercises:
+- title:
+    tr: İkili yolunu bulun
+    en: Find a binary path
+  prompt:
+    tr: which python3 (veya py) ile echo "$PATH" çıktılarını karşılaştırın.
+    en: Compare which python3 (or py) with echo "$PATH".
+  risk: safe
+  related_commands:
+  - which
+next_steps:
+- id: shell-pipes-redirection
+- id: package-managers

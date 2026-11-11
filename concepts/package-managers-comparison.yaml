@@ -8,185 +8,284 @@ summary:
   en: Linux + Win/macOS + BSD PMs side-by-side (mostly draft).
 difficulty: beginner
 tags:
-  - packages
-  - pacman
-  - apt
-  - dnf
-  - comparison
-  - nix
-  - guix
+- packages
+- pacman
+- apt
+- dnf
+- comparison
+- nix
+- guix
 related_commands:
+- pacman
+- apt
+- dnf
+- dpkg
+- rpm
+- flatpak
+- paru
+- zypper
+- apk
+- emerge
+- xbps-install
+- xbps-query
+- xbps-remove
+- eopkg
+- slackpkg
+- nix
+- guix
+- opkg
+- rpm-ostree
+- brew
+- port
+- winget
+- pkg
+- ports
+- pkg_add
+- pkgin
+- pkgsrc
+related_concepts:
+- package-managers
+- packages
+- arch
+- path
+- nix-guix
+see_also:
+- docs/package-managers-comparison.md
+- 'Arch Wiki: pacman/Rosetta'
+- https://wiki.archlinux.org/title/Pacman/Rosetta
+- concepts/nix-guix.yaml
+body:
+  tr: "Aynı iş farklı dağıtımlarda farklı komutlarla yapılır. Aşağıdaki tablolar **sık\nokuma/kurulum**\
+    \ yollarını özetler; bayrak uydurma yok. Ayrıntılı Markdown:\n`docs/package-managers-comparison.md`.\
+    \ Arch satırları Nova tercihine göre önde.\n\n### Sistem güncelle / kur / ara (çekirdek + genişleme)\n\
+    \n| Amaç | Arch (pacman) | Debian (apt) | Fedora (dnf) | openSUSE (zypper) | Alpine (apk) | Void (xbps)\
+    \ |\n|------|---------------|--------------|--------------|-------------------|--------------|-------------|\n\
+    | Yenile + yükselt | `pacman -Syu` | `apt update && apt upgrade` | `dnf upgrade` | Leap: `zypper update`\
+    \ / TW: `zypper dup` | `apk update && apk upgrade` | `xbps-install -Su` |\n| Kur | `pacman -S ad`\
+    \ | `apt install ad` | `dnf install ad` | `zypper install ad` | `apk add ad` | `xbps-install ad` |\n\
+    | Kaldır | `pacman -Rns ad` | `apt purge ad` | `dnf remove ad` | `zypper remove ad` | `apk del ad`\
+    \ | `xbps-remove ad` |\n| Ara | `pacman -Ss q` | `apt search q` | `dnf search q` | `zypper search\
+    \ q` | `apk search q` | `xbps-query -Rs q` |\n\nGentoo: `emerge --sync` + `emerge -uDN @world` / `emerge\
+    \ --ask ad`.  \nSolus: `eopkg upgrade` / `eopkg install`. Slackware: `slackpkg update` / `install`.\
+    \  \nOpenWrt: `opkg update` / `opkg install` (flash alanı!).  \nAtomik Fedora: `rpm-ostree upgrade`\
+    \ / `rpm-ostree install` (reboot).\n\n### Sorgulama (yerel)\n\n| Amaç | pacman | dpkg/apt | rpm/dnf\
+    \ | xbps | apk |\n|------|--------|----------|---------|------|-----|\n| Kurulu mu? | `pacman -Q ad`\
+    \ | `dpkg -l ad` | `rpm -q ad` | `xbps-query ad` | `apk info -e ad` |\n| Dosya → paket | `pacman -Qo\
+    \ yol` | `dpkg -S yol` | `rpm -qf yol` | `xbps-query -o yol` | `apk info -W yol` |\n\n### Deklaratif\
+    \ / profil\n\n| Amaç | Nix (modern) | Guix |\n|------|--------------|------|\n| Ara | `nix search\
+    \ nixpkgs q` | `guix search q` |\n| Profil kur | `nix profile install nixpkgs#ad` | `guix install\
+    \ ad` |\n| Geçici kabuk | `nix shell` / `nix develop` | `guix shell` |\n| Sistem uygula | `nixos-rebuild\
+    \ switch` (NixOS) | `guix system …` (Guix System) |\n\nEski `nix-env` / klasik `nix-shell` modern\
+    \ CLI ile **karıştırılmaz** — bkz. `nix-guix`.\n\n### Windows / macOS (Faz 5 draft)\n\n| Amaç | WinGet\
+    \ | Homebrew | MacPorts |\n|------|--------|----------|----------|\n| Ara | `winget search` | `brew\
+    \ search` | `port search` |\n| Kur | `winget install` | `brew install` | `sudo port install` |\n|\
+    \ Liste | `winget list` | `brew list` | `port installed` |\n\nOS güncellemesi macOS’ta `softwareupdate`\
+    \ — `brew upgrade` değildir. `brew` ≠ `port`.\n\n### BSD (Faz 6 draft)\n\n| Amaç | FreeBSD pkg | OpenBSD\
+    \ pkg_add | NetBSD pkgin |\n|------|-------------|-----------------|--------------|\n| Ara | `pkg\
+    \ search` | `pkg_info -Q` | `pkgin search` |\n| Liste / bilgi | `pkg info` | `pkg_info` | `pkgin list`\
+    \ |\n| İndeks güncelle | `pkg update` | (FAQ) | `pkgin update` |\n\nFreeBSD Ports / pkgsrc **kaynak\
+    \ ağaçlarıdır** (ayrı kayıt). DragonFly `pkg` ≠ FreeBSD `pkg`.\n\n**Kural:** Bilinmeyen paket adı\
+    \ **uydurulmaz**. Yeni PM kayıtları çoğunlukla `draft`.\nNova Arch host’ta pacman notunu önce tutar.\n"
+  en: "The same job uses different commands per distro. Tables below summarize **common\nupdate/install/query**\
+    \ paths — no invented flags. Longer Markdown:\n`docs/package-managers-comparison.md`. Arch rows first\
+    \ per Nova preference.\n\n### System update / install / search (core + expansion)\n\n| Goal | Arch\
+    \ (pacman) | Debian (apt) | Fedora (dnf) | openSUSE (zypper) | Alpine (apk) | Void (xbps) |\n|------|---------------|--------------|--------------|-------------------|--------------|-------------|\n\
+    | Refresh + upgrade | `pacman -Syu` | `apt update && apt upgrade` | `dnf upgrade` | Leap: `zypper\
+    \ update` / TW: `zypper dup` | `apk update && apk upgrade` | `xbps-install -Su` |\n| Install | `pacman\
+    \ -S name` | `apt install name` | `dnf install name` | `zypper install name` | `apk add name` | `xbps-install\
+    \ name` |\n| Remove | `pacman -Rns name` | `apt purge name` | `dnf remove name` | `zypper remove name`\
+    \ | `apk del name` | `xbps-remove name` |\n| Search | `pacman -Ss q` | `apt search q` | `dnf search\
+    \ q` | `zypper search q` | `apk search q` | `xbps-query -Rs q` |\n\nGentoo: `emerge --sync` + `emerge\
+    \ -uDN @world` / `emerge --ask name`.  \nSolus: `eopkg upgrade` / `eopkg install`. Slackware: `slackpkg\
+    \ update` / `install`.  \nOpenWrt: `opkg update` / `opkg install` (watch flash!).  \nAtomic Fedora:\
+    \ `rpm-ostree upgrade` / `rpm-ostree install` (reboot).\n\n### Local queries\n\n| Goal | pacman |\
+    \ dpkg/apt | rpm/dnf | xbps | apk |\n|------|--------|----------|---------|------|-----|\n| Installed?\
+    \ | `pacman -Q name` | `dpkg -l name` | `rpm -q name` | `xbps-query name` | `apk info -e name` |\n\
+    | File → package | `pacman -Qo path` | `dpkg -S path` | `rpm -qf path` | `xbps-query -o path` | `apk\
+    \ info -W path` |\n\n### Declarative / profiles\n\n| Goal | Nix (modern) | Guix |\n|------|--------------|------|\n\
+    | Search | `nix search nixpkgs q` | `guix search q` |\n| Profile install | `nix profile install nixpkgs#name`\
+    \ | `guix install name` |\n| Ephemeral shell | `nix shell` / `nix develop` | `guix shell` |\n| Apply\
+    \ system | `nixos-rebuild switch` (NixOS) | `guix system …` (Guix System) |\n\nDo **not** mix legacy\
+    \ `nix-env` / classic `nix-shell` with the modern CLI —\nsee `nix-guix`.\n\n### Windows / macOS (Faz\
+    \ 5 draft)\n\n| Goal | WinGet | Homebrew | MacPorts |\n|------|--------|----------|----------|\n|\
+    \ Search | `winget search` | `brew search` | `port search` |\n| Install | `winget install` | `brew\
+    \ install` | `sudo port install` |\n| List | `winget list` | `brew list` | `port installed` |\n\n\
+    OS updates on macOS use `softwareupdate` — not `brew upgrade`. `brew` ≠ `port`.\n\n### BSD (Faz 6\
+    \ draft)\n\n| Goal | FreeBSD pkg | OpenBSD pkg_add | NetBSD pkgin |\n|------|-------------|-----------------|--------------|\n\
+    | Search | `pkg search` | `pkg_info -Q` | `pkgin search` |\n| List / info | `pkg info` | `pkg_info`\
+    \ | `pkgin list` |\n| Update index | `pkg update` | (see FAQ) | `pkgin update` |\n\nFreeBSD Ports\
+    \ / pkgsrc are **source trees** (separate records). DragonFly `pkg` ≠ FreeBSD `pkg`.\n\n**Rule:**\
+    \ unknown package names are **not invented**. New PM records are mostly\n`draft`. On Arch hosts Nova\
+    \ keeps pacman notes first.\n"
+verification:
+  status: draft
+  sources:
+  - https://wiki.archlinux.org/title/Pacman/Rosetta
+  - https://wiki.alpinelinux.org/wiki/Alpine_Package_Keeper
+  - https://docs.voidlinux.org/xbps/
+  - https://nixos.org/manual/nix/stable/
+  - https://learn.microsoft.com/windows/package-manager/winget/
+  - https://docs.brew.sh/
+  - https://guide.macports.org/
+  - https://docs.freebsd.org/en/books/handbook/ports/
+  - https://www.openbsd.org/faq/faq15.html
+  - https://www.netbsd.org/docs/pkgsrc/
+  - https://en.opensuse.org/SDB:Zypper_manual
+  - https://guix.gnu.org/manual/en/html_node/
+  notes: Faz 4–6 comparison expansion; draft pending human review. NV-123 topic-guide structure; agent-authored;
+    needs human review before verified.
+format: topic-guide
+categories:
+- packages
+platforms:
+- linux
+- macos
+- bsd
+- windows
+intro: &id001
+  tr: PM’leri yan yana karşılaştırma; aileleri karıştırmayın.
+  en: Side-by-side PM comparison; do not mix families.
+learning_path:
+- ref: pacman
+  kind: command
+- ref: apt
+  kind: command
+- ref: dnf
+  kind: command
+- ref: dpkg
+  kind: command
+- ref: rpm
+  kind: command
+- ref: flatpak
+  kind: command
+- ref: paru
+  kind: command
+- ref: zypper
+  kind: command
+command_table:
+- id: pacman
+  purpose:
+    tr: Arch Linux paket yöneticisi.
+    en: Arch Linux package manager.
+  learning_level: intermediate
+- id: apt
+  purpose:
+    tr: Debian/Ubuntu yüksek seviye paket aracı.
+    en: Debian/Ubuntu high-level package tool.
+  learning_level: intermediate
+- id: dnf
+  purpose:
+    tr: Fedora/RHEL paket yöneticisi.
+    en: Fedora/RHEL package manager.
+  learning_level: intermediate
+- id: dpkg
+  purpose:
+    tr: Debian paket yöneticisinin düşük seviye aracı.
+    en: Debian package manager low-level tool.
+  learning_level: intermediate
+- id: rpm
+  purpose:
+    tr: RPM paket yöneticisi (düşük seviye).
+    en: RPM package manager (low-level).
+  learning_level: intermediate
+- id: flatpak
+  purpose:
+    tr: Uygulama dağıtımı için Flatpak CLI.
+    en: Flatpak application deployment CLI.
+  learning_level: intermediate
+- id: paru
+  purpose:
+    tr: AUR yardımcı pacman sarmalayıcı.
+    en: AUR helper wrapping pacman.
+  learning_level: unspecified
+- id: zypper
+  purpose:
+    tr: openSUSE/SUSE paket yöneticisi.
+    en: openSUSE/SUSE package manager.
+  learning_level: intermediate
+- id: apk
+  purpose:
+    tr: Alpine Linux paket yöneticisi (apk).
+    en: Alpine Linux package manager (apk).
+  learning_level: intermediate
+- id: emerge
+  purpose:
+    tr: Gentoo Portage paket kurucu (emerge).
+    en: Gentoo Portage package tool (emerge).
+  learning_level: unspecified
+- id: xbps-install
+  purpose:
+    tr: Void Linux XBPS kurulum aracı.
+    en: Void Linux XBPS install tool.
+  learning_level: unspecified
+- id: xbps-query
+  purpose:
+    tr: Void Linux XBPS sorgu aracı.
+    en: Void Linux XBPS query tool.
+  learning_level: unspecified
+- id: xbps-remove
+  purpose:
+    tr: Void Linux XBPS kaldırma aracı.
+    en: Void Linux XBPS remove tool.
+  learning_level: unspecified
+- id: eopkg
+  purpose:
+    tr: Solus paket yöneticisi (eopkg).
+    en: Solus package manager (eopkg).
+  learning_level: unspecified
+- id: slackpkg
+  purpose:
+    tr: Slackware resmi paket aracı.
+    en: Slackware official package tool.
+  learning_level: unspecified
+- id: nix
+  purpose:
+    tr: Nix paket yöneticisi (modern CLI).
+    en: Nix package manager (modern CLI).
+  learning_level: unspecified
+subtopics:
+- id: overview
+  title:
+    tr: Genel bakış
+    en: Overview
+  summary: *id001
+  related_commands:
   - pacman
   - apt
   - dnf
   - dpkg
   - rpm
   - flatpak
-  - paru
-  - zypper
-  - apk
-  - emerge
-  - xbps-install
-  - xbps-query
-  - xbps-remove
-  - eopkg
-  - slackpkg
-  - nix
-  - guix
-  - opkg
-  - rpm-ostree
-  - brew
-  - port
-  - winget
-  - pkg
-  - ports
-  - pkg_add
-  - pkgin
-  - pkgsrc
-related_concepts:
-  - package-managers
-  - packages
-  - arch
-  - path
-  - nix-guix
-see_also:
-  - "docs/package-managers-comparison.md"
-  - "Arch Wiki: pacman/Rosetta"
-  - "https://wiki.archlinux.org/title/Pacman/Rosetta"
-  - "concepts/nix-guix.yaml"
-body:
-  tr: |
-    Aynı iş farklı dağıtımlarda farklı komutlarla yapılır. Aşağıdaki tablolar **sık
-    okuma/kurulum** yollarını özetler; bayrak uydurma yok. Ayrıntılı Markdown:
-    `docs/package-managers-comparison.md`. Arch satırları Nova tercihine göre önde.
-
-    ### Sistem güncelle / kur / ara (çekirdek + genişleme)
-
-    | Amaç | Arch (pacman) | Debian (apt) | Fedora (dnf) | openSUSE (zypper) | Alpine (apk) | Void (xbps) |
-    |------|---------------|--------------|--------------|-------------------|--------------|-------------|
-    | Yenile + yükselt | `pacman -Syu` | `apt update && apt upgrade` | `dnf upgrade` | Leap: `zypper update` / TW: `zypper dup` | `apk update && apk upgrade` | `xbps-install -Su` |
-    | Kur | `pacman -S ad` | `apt install ad` | `dnf install ad` | `zypper install ad` | `apk add ad` | `xbps-install ad` |
-    | Kaldır | `pacman -Rns ad` | `apt purge ad` | `dnf remove ad` | `zypper remove ad` | `apk del ad` | `xbps-remove ad` |
-    | Ara | `pacman -Ss q` | `apt search q` | `dnf search q` | `zypper search q` | `apk search q` | `xbps-query -Rs q` |
-
-    Gentoo: `emerge --sync` + `emerge -uDN @world` / `emerge --ask ad`.  
-    Solus: `eopkg upgrade` / `eopkg install`. Slackware: `slackpkg update` / `install`.  
-    OpenWrt: `opkg update` / `opkg install` (flash alanı!).  
-    Atomik Fedora: `rpm-ostree upgrade` / `rpm-ostree install` (reboot).
-
-    ### Sorgulama (yerel)
-
-    | Amaç | pacman | dpkg/apt | rpm/dnf | xbps | apk |
-    |------|--------|----------|---------|------|-----|
-    | Kurulu mu? | `pacman -Q ad` | `dpkg -l ad` | `rpm -q ad` | `xbps-query ad` | `apk info -e ad` |
-    | Dosya → paket | `pacman -Qo yol` | `dpkg -S yol` | `rpm -qf yol` | `xbps-query -o yol` | `apk info -W yol` |
-
-    ### Deklaratif / profil
-
-    | Amaç | Nix (modern) | Guix |
-    |------|--------------|------|
-    | Ara | `nix search nixpkgs q` | `guix search q` |
-    | Profil kur | `nix profile install nixpkgs#ad` | `guix install ad` |
-    | Geçici kabuk | `nix shell` / `nix develop` | `guix shell` |
-    | Sistem uygula | `nixos-rebuild switch` (NixOS) | `guix system …` (Guix System) |
-
-    Eski `nix-env` / klasik `nix-shell` modern CLI ile **karıştırılmaz** — bkz. `nix-guix`.
-
-    ### Windows / macOS (Faz 5 draft)
-
-    | Amaç | WinGet | Homebrew | MacPorts |
-    |------|--------|----------|----------|
-    | Ara | `winget search` | `brew search` | `port search` |
-    | Kur | `winget install` | `brew install` | `sudo port install` |
-    | Liste | `winget list` | `brew list` | `port installed` |
-
-    OS güncellemesi macOS’ta `softwareupdate` — `brew upgrade` değildir. `brew` ≠ `port`.
-
-    ### BSD (Faz 6 draft)
-
-    | Amaç | FreeBSD pkg | OpenBSD pkg_add | NetBSD pkgin |
-    |------|-------------|-----------------|--------------|
-    | Ara | `pkg search` | `pkg_info -Q` | `pkgin search` |
-    | Liste / bilgi | `pkg info` | `pkg_info` | `pkgin list` |
-    | İndeks güncelle | `pkg update` | (FAQ) | `pkgin update` |
-
-    FreeBSD Ports / pkgsrc **kaynak ağaçlarıdır** (ayrı kayıt). DragonFly `pkg` ≠ FreeBSD `pkg`.
-
-    **Kural:** Bilinmeyen paket adı **uydurulmaz**. Yeni PM kayıtları çoğunlukla `draft`.
-    Nova Arch host’ta pacman notunu önce tutar.
-  en: |
-    The same job uses different commands per distro. Tables below summarize **common
-    update/install/query** paths — no invented flags. Longer Markdown:
-    `docs/package-managers-comparison.md`. Arch rows first per Nova preference.
-
-    ### System update / install / search (core + expansion)
-
-    | Goal | Arch (pacman) | Debian (apt) | Fedora (dnf) | openSUSE (zypper) | Alpine (apk) | Void (xbps) |
-    |------|---------------|--------------|--------------|-------------------|--------------|-------------|
-    | Refresh + upgrade | `pacman -Syu` | `apt update && apt upgrade` | `dnf upgrade` | Leap: `zypper update` / TW: `zypper dup` | `apk update && apk upgrade` | `xbps-install -Su` |
-    | Install | `pacman -S name` | `apt install name` | `dnf install name` | `zypper install name` | `apk add name` | `xbps-install name` |
-    | Remove | `pacman -Rns name` | `apt purge name` | `dnf remove name` | `zypper remove name` | `apk del name` | `xbps-remove name` |
-    | Search | `pacman -Ss q` | `apt search q` | `dnf search q` | `zypper search q` | `apk search q` | `xbps-query -Rs q` |
-
-    Gentoo: `emerge --sync` + `emerge -uDN @world` / `emerge --ask name`.  
-    Solus: `eopkg upgrade` / `eopkg install`. Slackware: `slackpkg update` / `install`.  
-    OpenWrt: `opkg update` / `opkg install` (watch flash!).  
-    Atomic Fedora: `rpm-ostree upgrade` / `rpm-ostree install` (reboot).
-
-    ### Local queries
-
-    | Goal | pacman | dpkg/apt | rpm/dnf | xbps | apk |
-    |------|--------|----------|---------|------|-----|
-    | Installed? | `pacman -Q name` | `dpkg -l name` | `rpm -q name` | `xbps-query name` | `apk info -e name` |
-    | File → package | `pacman -Qo path` | `dpkg -S path` | `rpm -qf path` | `xbps-query -o path` | `apk info -W path` |
-
-    ### Declarative / profiles
-
-    | Goal | Nix (modern) | Guix |
-    |------|--------------|------|
-    | Search | `nix search nixpkgs q` | `guix search q` |
-    | Profile install | `nix profile install nixpkgs#name` | `guix install name` |
-    | Ephemeral shell | `nix shell` / `nix develop` | `guix shell` |
-    | Apply system | `nixos-rebuild switch` (NixOS) | `guix system …` (Guix System) |
-
-    Do **not** mix legacy `nix-env` / classic `nix-shell` with the modern CLI —
-    see `nix-guix`.
-
-    ### Windows / macOS (Faz 5 draft)
-
-    | Goal | WinGet | Homebrew | MacPorts |
-    |------|--------|----------|----------|
-    | Search | `winget search` | `brew search` | `port search` |
-    | Install | `winget install` | `brew install` | `sudo port install` |
-    | List | `winget list` | `brew list` | `port installed` |
-
-    OS updates on macOS use `softwareupdate` — not `brew upgrade`. `brew` ≠ `port`.
-
-    ### BSD (Faz 6 draft)
-
-    | Goal | FreeBSD pkg | OpenBSD pkg_add | NetBSD pkgin |
-    |------|-------------|-----------------|--------------|
-    | Search | `pkg search` | `pkg_info -Q` | `pkgin search` |
-    | List / info | `pkg info` | `pkg_info` | `pkgin list` |
-    | Update index | `pkg update` | (see FAQ) | `pkgin update` |
-
-    FreeBSD Ports / pkgsrc are **source trees** (separate records). DragonFly `pkg` ≠ FreeBSD `pkg`.
-
-    **Rule:** unknown package names are **not invented**. New PM records are mostly
-    `draft`. On Arch hosts Nova keeps pacman notes first.
-verification:
-  status: draft
-  sources:
-    - "https://wiki.archlinux.org/title/Pacman/Rosetta"
-    - "https://wiki.alpinelinux.org/wiki/Alpine_Package_Keeper"
-    - "https://docs.voidlinux.org/xbps/"
-    - "https://nixos.org/manual/nix/stable/"
-    - "https://learn.microsoft.com/windows/package-manager/winget/"
-    - "https://docs.brew.sh/"
-    - "https://guide.macports.org/"
-    - "https://docs.freebsd.org/en/books/handbook/ports/"
-    - "https://www.openbsd.org/faq/faq15.html"
-    - "https://www.netbsd.org/docs/pkgsrc/"
-    - "https://en.opensuse.org/SDB:Zypper_manual"
-    - "https://guix.gnu.org/manual/en/html_node/"
-  notes: "Faz 4–6 comparison expansion; draft pending human review."
+graded_examples:
+- title:
+    tr: Kur
+    en: Install
+  command: sudo pacman -S curl
+  explanation:
+    tr: curl paketini kurar.
+    en: Installs curl.
+  difficulty: intermediate
+  risk: caution
+  related_commands:
+  - pacman
+callouts:
+- kind: note
+  text:
+    tr: Örnekler bank kayıtlarından gelir; man/--help ile doğrulanmadan verified yapılmaz.
+    en: Examples come from bank records; not verified without man/--help review.
+safe_exercises:
+- title:
+    tr: Salt okuma keşif
+    en: Read-only exploration
+  prompt:
+    tr: Bu konudaki bir safe/caution komutun beginner örneğini okuyun; çalıştırmadan önce risk rozetine
+      bakın.
+    en: Read a beginner example of a safe/caution command in this topic; check the risk badge before running.
+  risk: safe
+  related_commands:
+  - pacman
+  - apt
+  - dnf
+next_steps:
+- id: package-managers
+- id: nix-guix

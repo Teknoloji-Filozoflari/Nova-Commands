@@ -8,59 +8,184 @@ summary:
   en: kubectl/Helm/CRI tools — cluster model distinct from Docker Engine alone.
 difficulty: intermediate
 tags:
-  - kubernetes
-  - containers
-  - devops
-  - orchestration
+- kubernetes
+- containers
+- devops
+- orchestration
 related_commands:
+- kubectl
+- helm
+- crictl
+- nerdctl
+- docker
+- podman
+related_concepts:
+- containers
+- infrastructure-as-code
+- networking
+see_also:
+- https://kubernetes.io/docs/concepts/overview/
+- https://helm.sh/docs/
+body:
+  tr: '**Kubernetes** konteyner iş yüklerini bir küme API’si üzerinden yönetir.
+
+    Günlük kullanıcı arayüzü çoğu zaman **kubectl**’tir; paket/uygulama dağıtımı
+
+    için **Helm** chart’ları kullanılır.
+
+
+    **Katmanlar (karıştırmayın):**
+
+    - **Docker Engine / Podman** — tek düğümde konteyner çalıştırma.
+
+    - **containerd + nerdctl/crictl** — CRI runtime teşhisi (kubelet altı).
+
+    - **kubectl** — küme API’si (Deployment, Service, Pod, …).
+
+
+    **Güvenlik:** Yanlış kubeconfig bağlamı üretim kümesini etkileyebilir.
+
+    Bu bankadaki örnekler çoğunlukla `version` / `get` / `list` odaklıdır;
+
+    `apply`/`delete` yıkıcı olabilir. Gerçek cluster credential’ları YAML’a
+
+    yazılmaz.
+
+
+    Kayıtlar `draft` kalır; `verified` yalnız insan incelemesi sonrası.
+
+    '
+  en: '**Kubernetes** manages container workloads through a cluster API.
+
+    Day-to-day UX is often **kubectl**; app packaging frequently uses **Helm**
+
+    charts.
+
+
+    **Do not conflate layers:**
+
+    - **Docker Engine / Podman** — run containers on a node.
+
+    - **containerd + nerdctl/crictl** — CRI runtime diagnostics under kubelet.
+
+    - **kubectl** — cluster API (Deployments, Services, Pods, …).
+
+
+    **Safety:** A wrong kubeconfig context can hit production. Catalog examples
+
+    favor `version` / `get` / `list`; `apply`/`delete` can be destructive.
+
+    Real cluster credentials never belong in YAML examples.
+
+
+    Records stay `draft` until human review marks `verified`.
+
+    '
+verification:
+  status: draft
+  sources:
+  - https://kubernetes.io/docs/concepts/overview/
+  - https://helm.sh/docs/
+  notes: Agent-authored Faz 7 teaching draft; not human-verified. NV-123 topic-guide structure; agent-authored;
+    needs human review before verified.
+format: topic-guide
+categories:
+- containers
+- devops
+platforms:
+- linux
+- macos
+- windows
+intro: &id001
+  tr: kubectl ile küme kaynaklarını okuma; helm paket adları distroya göre uydurulmaz.
+  en: Read cluster resources with kubectl; helm package names are not invented per distro.
+learning_path:
+- ref: kubectl
+  kind: command
+- ref: helm
+  kind: command
+- ref: crictl
+  kind: command
+- ref: nerdctl
+  kind: command
+- ref: docker
+  kind: command
+- ref: podman
+  kind: command
+command_table:
+- id: kubectl
+  purpose:
+    tr: Kubernetes küme CLI.
+    en: Kubernetes cluster CLI.
+  learning_level: advanced
+- id: helm
+  purpose:
+    tr: Kubernetes paket yöneticisi.
+    en: Kubernetes package manager.
+  learning_level: unspecified
+- id: crictl
+  purpose:
+    tr: CRI runtime hata ayıklama CLI.
+    en: CRI runtime debugging CLI.
+  learning_level: unspecified
+- id: nerdctl
+  purpose:
+    tr: containerd için Docker uyumlu CLI.
+    en: Docker-compatible CLI for containerd.
+  learning_level: unspecified
+- id: docker
+  purpose:
+    tr: Docker konteyner CLI.
+    en: Docker container CLI.
+  learning_level: intermediate
+- id: podman
+  purpose:
+    tr: Demonssuz konteyner motoru.
+    en: Daemonless container engine.
+  learning_level: intermediate
+subtopics:
+- id: overview
+  title:
+    tr: Genel bakış
+    en: Overview
+  summary: *id001
+  related_commands:
   - kubectl
   - helm
   - crictl
   - nerdctl
   - docker
   - podman
-related_concepts:
-  - containers
-  - infrastructure-as-code
-  - networking
-see_also:
-  - "https://kubernetes.io/docs/concepts/overview/"
-  - "https://helm.sh/docs/"
-body:
-  tr: |
-    **Kubernetes** konteyner iş yüklerini bir küme API’si üzerinden yönetir.
-    Günlük kullanıcı arayüzü çoğu zaman **kubectl**’tir; paket/uygulama dağıtımı
-    için **Helm** chart’ları kullanılır.
-
-    **Katmanlar (karıştırmayın):**
-    - **Docker Engine / Podman** — tek düğümde konteyner çalıştırma.
-    - **containerd + nerdctl/crictl** — CRI runtime teşhisi (kubelet altı).
-    - **kubectl** — küme API’si (Deployment, Service, Pod, …).
-
-    **Güvenlik:** Yanlış kubeconfig bağlamı üretim kümesini etkileyebilir.
-    Bu bankadaki örnekler çoğunlukla `version` / `get` / `list` odaklıdır;
-    `apply`/`delete` yıkıcı olabilir. Gerçek cluster credential’ları YAML’a
-    yazılmaz.
-
-    Kayıtlar `draft` kalır; `verified` yalnız insan incelemesi sonrası.
-  en: |
-    **Kubernetes** manages container workloads through a cluster API.
-    Day-to-day UX is often **kubectl**; app packaging frequently uses **Helm**
-    charts.
-
-    **Do not conflate layers:**
-    - **Docker Engine / Podman** — run containers on a node.
-    - **containerd + nerdctl/crictl** — CRI runtime diagnostics under kubelet.
-    - **kubectl** — cluster API (Deployments, Services, Pods, …).
-
-    **Safety:** A wrong kubeconfig context can hit production. Catalog examples
-    favor `version` / `get` / `list`; `apply`/`delete` can be destructive.
-    Real cluster credentials never belong in YAML examples.
-
-    Records stay `draft` until human review marks `verified`.
-verification:
-  status: draft
-  sources:
-    - "https://kubernetes.io/docs/concepts/overview/"
-    - "https://helm.sh/docs/"
-  notes: "Agent-authored Faz 7 teaching draft; not human-verified."
+graded_examples:
+- title:
+    tr: Sürüm
+    en: Version
+  command: kubectl version --client
+  explanation:
+    tr: İstemci sürümü (küme gerekmez).
+    en: Client version (no cluster required).
+  difficulty: beginner
+  risk: safe
+  related_commands:
+  - kubectl
+callouts:
+- kind: note
+  text:
+    tr: Örnekler bank kayıtlarından gelir; man/--help ile doğrulanmadan verified yapılmaz.
+    en: Examples come from bank records; not verified without man/--help review.
+safe_exercises:
+- title:
+    tr: Salt okuma keşif
+    en: Read-only exploration
+  prompt:
+    tr: Bu konudaki bir safe/caution komutun beginner örneğini okuyun; çalıştırmadan önce risk rozetine
+      bakın.
+    en: Read a beginner example of a safe/caution command in this topic; check the risk badge before running.
+  risk: safe
+  related_commands:
+  - kubectl
+  - helm
+  - crictl
+next_steps:
+- id: containers-basics
+- id: infrastructure-as-code

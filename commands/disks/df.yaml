@@ -58,6 +58,7 @@ examples:
     tr: Disk doluluğu.
     en: Disk usage summary.
   risk: safe
+  difficulty: beginner
 related:
 - du
 - lsblk
@@ -74,8 +75,21 @@ verification:
   - man 1 df (GNU coreutils)
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-phase15
-  notes: Flag -h/--human-readable confirmed; read-only space report.
+  notes: Flag -h/--human-readable confirmed; read-only space report. NV-123 teachable fields (when/syntax/mistakes/topics).
 nova:
   concepts:
   - storage
   favorite_eligible: true
+when_to_use:
+  tr: Dosya sistemi doluluk oranını görmek.
+  en: See filesystem free/used space.
+syntax: df [OPTION]... [FILE]...
+expected_effect:
+  tr: Bağlı dosya sistemlerinin kullanımını tablo basar.
+  en: Prints a table of mounted filesystem usage.
+common_mistakes:
+- tr: df ile du’yu karıştırmak (cihaz vs dizin ağacı).
+  en: Confusing df with du (device vs directory tree).
+related_topics:
+- storage
+- monitoring-and-logs

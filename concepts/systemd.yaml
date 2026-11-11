@@ -8,88 +8,266 @@ summary:
   en: Units, targets, and service control with systemctl and journalctl.
 difficulty: intermediate
 tags:
-  - systemd
-  - services
-  - boot
+- systemd
+- services
+- boot
 related_commands:
+- systemctl
+- journalctl
+- hostnamectl
+- timedatectl
+- loginctl
+- systemd-analyze
+- bootctl
+- service
+- sysrc
+- rcctl
+- launchctl
+related_concepts:
+- terminal-basics
+- permissions
+see_also:
+- man systemd
+- man systemctl
+- 'Arch Wiki: systemd'
+body:
+  tr: '**systemd**, birçok Linux dağıtımında init/PID 1 ve servis yöneticisidir. Yapılandırma
+
+    birimleri (unit) `.service`, `.timer`, `.socket`, `.mount`, `.target` gibi türlerdedir.
+
+
+    **Sık birim türleri:**
+
+    - `.service` — uzun yaşayan süreç / oneshot görev.
+
+    - `.target` — bir grup birimi senkronlamak (ör. `multi-user.target`).
+
+    - `.timer` — cron benzeri zamanlama (systemd zamanlayıcıları).
+
+
+    **systemctl (yaygın okuma/yazma):**
+
+    - `systemctl status birim` — durum (çoğu zaman sudo gerekmez).
+
+    - `systemctl start|stop|restart birim` — çalışma anı (genelde root).
+
+    - `systemctl enable|disable birim` — boot’ta etkinleştirme.
+
+    - `systemctl daemon-reload` — unit dosyası değişince.
+
+
+    **Günlükler:** `journalctl -u birim -e` son logları gösterir; `-f` takip eder.
+
+    Kalıcı journal dağıtıma göre `/var/log/journal` altında olabilir.
+
+
+    **İlgili ctl araçları:** `hostnamectl`, `timedatectl`, `loginctl`,
+
+    `systemd-analyze blame` (boot süresi analizi), `bootctl` (systemd-boot; her
+
+    kurulumda yok).
+
+
+    **Risk:** Yanlış `stop`/`disable` uzaktan erişimi veya ağı kesebilir; bankada
+
+    birçok systemd işlemi `dangerous` / `requires_elevated: true` işaretlidir.
+
+    Unit dosyası yolları ve distro varsayılanları değişebilir — uydurma bayrak yok.
+
+
+    **BSD değil:** FreeBSD `service`/`sysrc`, OpenBSD `rcctl` ve macOS `launchctl`
+
+    systemd birimleri değildir — ayrı kayıtlardır (Faz 5–6).
+
+    '
+  en: '**systemd** is init/PID 1 and the service manager on many Linux distributions.
+
+    Configuration lives in units: `.service`, `.timer`, `.socket`, `.mount`, `.target`, …
+
+
+    **Common unit types:**
+
+    - `.service` — long-running process or oneshot job.
+
+    - `.target` — synchronization point (e.g. `multi-user.target`).
+
+    - `.timer` — calendar/monotonic scheduling (systemd timers).
+
+
+    **systemctl (common):**
+
+    - `systemctl status unit` — status (often without sudo).
+
+    - `systemctl start|stop|restart unit` — runtime control (usually root).
+
+    - `systemctl enable|disable unit` — boot enablement.
+
+    - `systemctl daemon-reload` — after editing unit files.
+
+
+    **Logs:** `journalctl -u unit -e` shows recent logs; `-f` follows.
+
+    Persistent journals may live under `/var/log/journal` depending on distro config.
+
+
+    **Related ctl tools:** `hostnamectl`, `timedatectl`, `loginctl`,
+
+    `systemd-analyze blame` (boot timing), `bootctl` (systemd-boot; not everywhere).
+
+
+    **Risk:** Mistaken `stop`/`disable` can cut remote access or networking; many
+
+    entries are `dangerous` / `requires_elevated`. Unit paths and defaults vary —
+
+    never invent flags or package names.
+
+
+    **Not BSD:** FreeBSD `service`/`sysrc`, OpenBSD `rcctl`, and macOS `launchctl`
+
+    are not systemd units — separate records (Faz 5–6).
+
+    '
+verification:
+  status: draft
+  sources:
+  - man systemd
+  - man systemctl
+  - https://wiki.archlinux.org/title/Systemd
+  notes: Agent-authored teaching article; needs maintainer spot-check before verified. NV-123 topic-guide
+    structure; agent-authored; needs human review before verified.
+format: topic-guide
+categories:
+- system
+platforms:
+- linux
+distributions:
+- arch
+- debian
+- ubuntu
+- fedora
+- rhel
+- opensuse-leap
+- opensuse-tumbleweed
+- nixos
+intro: &id001
+  tr: systemd birimlerini durumlandırma ve günlükler; Alpine/Void/Gentoo OpenRC/runit ayrıdır.
+  en: Inspect systemd units and journals; Alpine/Void/Gentoo use OpenRC/runit instead.
+learning_path:
+- ref: systemctl
+  kind: command
+- ref: journalctl
+  kind: command
+- ref: hostnamectl
+  kind: command
+- ref: timedatectl
+  kind: command
+- ref: loginctl
+  kind: command
+- ref: systemd-analyze
+  kind: command
+- ref: bootctl
+  kind: command
+- ref: service
+  kind: command
+command_table:
+- id: systemctl
+  purpose:
+    tr: systemd birimlerini denetler.
+    en: Control the systemd system and service manager.
+  learning_level: intermediate
+- id: journalctl
+  purpose:
+    tr: systemd günlüğünü sorgular.
+    en: Query the systemd journal.
+  learning_level: intermediate
+- id: hostnamectl
+  purpose:
+    tr: Hostname ve ilgili ayarları yönetir.
+    en: Query or change system hostname settings.
+  learning_level: beginner
+- id: timedatectl
+  purpose:
+    tr: Sistem saati ve zaman dilimini denetler.
+    en: Control system time and timezone.
+  learning_level: intermediate
+- id: loginctl
+  purpose:
+    tr: systemd oturum ve kullanıcı denetimi.
+    en: Control systemd-logind sessions and users.
+  learning_level: intermediate
+- id: systemd-analyze
+  purpose:
+    tr: systemd önyükleme ve birim çözümlemesi.
+    en: Analyze systemd boot and unit structure.
+  learning_level: advanced
+- id: bootctl
+  purpose:
+    tr: systemd-boot ve EFI önyükleme denetimi.
+    en: Control firmware and systemd-boot entries.
+  learning_level: advanced
+- id: service
+  purpose:
+    tr: FreeBSD/NetBSD rc.d servis denetimi (systemd değil).
+    en: FreeBSD/NetBSD rc.d service control (not systemd).
+  learning_level: intermediate
+- id: sysrc
+  purpose:
+    tr: FreeBSD rc.conf güvenli okuma/yazma yardımcısı.
+    en: FreeBSD rc.conf safe get/set helper.
+  learning_level: unspecified
+- id: rcctl
+  purpose:
+    tr: OpenBSD rc.d servis denetimi (systemd / FreeBSD service değil).
+    en: OpenBSD rc.d service control (not systemd / FreeBSD service).
+  learning_level: unspecified
+- id: launchctl
+  purpose:
+    tr: launchd iş yükü denetimi (macOS servisleri).
+    en: launchd job control (macOS services).
+  learning_level: intermediate
+subtopics:
+- id: overview
+  title:
+    tr: Genel bakış
+    en: Overview
+  summary: *id001
+  related_commands:
   - systemctl
   - journalctl
   - hostnamectl
   - timedatectl
   - loginctl
   - systemd-analyze
-  - bootctl
-  - service
-  - sysrc
-  - rcctl
-  - launchctl
-related_concepts:
-  - terminal-basics
-  - permissions
-see_also:
-  - "man systemd"
-  - "man systemctl"
-  - "Arch Wiki: systemd"
-body:
-  tr: |
-    **systemd**, birçok Linux dağıtımında init/PID 1 ve servis yöneticisidir. Yapılandırma
-    birimleri (unit) `.service`, `.timer`, `.socket`, `.mount`, `.target` gibi türlerdedir.
-
-    **Sık birim türleri:**
-    - `.service` — uzun yaşayan süreç / oneshot görev.
-    - `.target` — bir grup birimi senkronlamak (ör. `multi-user.target`).
-    - `.timer` — cron benzeri zamanlama (systemd zamanlayıcıları).
-
-    **systemctl (yaygın okuma/yazma):**
-    - `systemctl status birim` — durum (çoğu zaman sudo gerekmez).
-    - `systemctl start|stop|restart birim` — çalışma anı (genelde root).
-    - `systemctl enable|disable birim` — boot’ta etkinleştirme.
-    - `systemctl daemon-reload` — unit dosyası değişince.
-
-    **Günlükler:** `journalctl -u birim -e` son logları gösterir; `-f` takip eder.
-    Kalıcı journal dağıtıma göre `/var/log/journal` altında olabilir.
-
-    **İlgili ctl araçları:** `hostnamectl`, `timedatectl`, `loginctl`,
-    `systemd-analyze blame` (boot süresi analizi), `bootctl` (systemd-boot; her
-    kurulumda yok).
-
-    **Risk:** Yanlış `stop`/`disable` uzaktan erişimi veya ağı kesebilir; bankada
-    birçok systemd işlemi `dangerous` / `requires_elevated: true` işaretlidir.
-    Unit dosyası yolları ve distro varsayılanları değişebilir — uydurma bayrak yok.
-
-    **BSD değil:** FreeBSD `service`/`sysrc`, OpenBSD `rcctl` ve macOS `launchctl`
-    systemd birimleri değildir — ayrı kayıtlardır (Faz 5–6).
-  en: |
-    **systemd** is init/PID 1 and the service manager on many Linux distributions.
-    Configuration lives in units: `.service`, `.timer`, `.socket`, `.mount`, `.target`, …
-
-    **Common unit types:**
-    - `.service` — long-running process or oneshot job.
-    - `.target` — synchronization point (e.g. `multi-user.target`).
-    - `.timer` — calendar/monotonic scheduling (systemd timers).
-
-    **systemctl (common):**
-    - `systemctl status unit` — status (often without sudo).
-    - `systemctl start|stop|restart unit` — runtime control (usually root).
-    - `systemctl enable|disable unit` — boot enablement.
-    - `systemctl daemon-reload` — after editing unit files.
-
-    **Logs:** `journalctl -u unit -e` shows recent logs; `-f` follows.
-    Persistent journals may live under `/var/log/journal` depending on distro config.
-
-    **Related ctl tools:** `hostnamectl`, `timedatectl`, `loginctl`,
-    `systemd-analyze blame` (boot timing), `bootctl` (systemd-boot; not everywhere).
-
-    **Risk:** Mistaken `stop`/`disable` can cut remote access or networking; many
-    entries are `dangerous` / `requires_elevated`. Unit paths and defaults vary —
-    never invent flags or package names.
-
-    **Not BSD:** FreeBSD `service`/`sysrc`, OpenBSD `rcctl`, and macOS `launchctl`
-    are not systemd units — separate records (Faz 5–6).
-verification:
-  status: draft
-  sources:
-    - "man systemd"
-    - "man systemctl"
-    - "https://wiki.archlinux.org/title/Systemd"
-  notes: "Agent-authored teaching article; needs maintainer spot-check before verified."
+graded_examples:
+- title:
+    tr: Durum
+    en: Status
+  command: systemctl status sshd
+  explanation:
+    tr: sshd birim durumu (ad dağıtıma göre ssh/sshd).
+    en: sshd unit status (name may be ssh/sshd).
+  difficulty: beginner
+  risk: safe
+  related_commands:
+  - systemctl
+callouts:
+- kind: note
+  text:
+    tr: Örnekler bank kayıtlarından gelir; man/--help ile doğrulanmadan verified yapılmaz.
+    en: Examples come from bank records; not verified without man/--help review.
+safe_exercises:
+- title:
+    tr: Salt okuma keşif
+    en: Read-only exploration
+  prompt:
+    tr: Bu konudaki bir safe/caution komutun beginner örneğini okuyun; çalıştırmadan önce risk rozetine
+      bakın.
+    en: Read a beginner example of a safe/caution command in this topic; check the risk badge before running.
+  risk: safe
+  related_commands:
+  - systemctl
+  - journalctl
+  - hostnamectl
+next_steps:
+- id: monitoring-and-logs
+- id: server-security-checklist

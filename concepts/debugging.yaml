@@ -8,72 +8,212 @@ summary:
   en: Approaching “why did it fail?” with strace, lsof, logs, and process tools.
 difficulty: intermediate
 tags:
-  - debug
-  - strace
-  - processes
-  - logs
+- debug
+- strace
+- processes
+- logs
 related_commands:
+- strace
+- lsof
+- ps
+- pgrep
+- journalctl
+- dmesg
+- top
+related_concepts:
+- systemd
+- permissions
+- terminal-basics
+- path
+see_also:
+- man 1 strace
+- man 8 lsof
+- man 1 journalctl
+body:
+  tr: 'Bir komut “çalışmıyor” dediğinde katmanları ayırın: **bulunamıyor mu** (PATH),
+
+    **izin mi**, **bağımlılık/kütüphane mi**, **ağ mı**, **yapılandırma mı**?
+
+
+    **Hızlı sıra:**
+
+    1. `command -v` / `type` — ikili var mı?
+
+    2. `ls -l` / `id` — izin ve kullanıcı.
+
+    3. `journalctl -u … -e` veya uygulama logu.
+
+    4. `lsof -i` / `ss` — port ve dosya tutamaçları.
+
+    5. `strace -e openat,network …` — kernel sınırında ne reddediliyor?
+
+
+    **strace:** `openat`/`connect` hataları (`ENOENT`, `EACCES`, `ECONNREFUSED`)
+
+    sık ipucu verir. `-f` çocuk süreçleri takip eder; gürültülüdür — `-e` ile süzün.
+
+    ptrace kısıtları (Yama/container) yüzünden sudo gerekebilir.
+
+
+    **lsof / ss:** “kim dinliyor?” ve “dosya kilitli mi?”.
+
+    **ps/pgrep/pkill:** süreç seçimi; `pkill` yanlış desende tehlikeli.
+
+
+    Banka CI’si bu araçları “kanıt için” çalıştırmaz; girdiler man/`--help` ve
+
+    dikkatli örneklerle doğrulanır. Gizli veri içeren izleri paylaşmayın.
+
+    '
+  en: 'When a command “doesn’t work”, separate layers: **not found** (PATH),
+
+    **permissions**, **library/deps**, **network**, or **config**?
+
+
+    **Quick order:**
+
+    1. `command -v` / `type` — is the binary there?
+
+    2. `ls -l` / `id` — permissions and user.
+
+    3. `journalctl -u … -e` or app logs.
+
+    4. `lsof -i` / `ss` — ports and file handles.
+
+    5. `strace -e openat,network …` — what does the kernel refuse?
+
+
+    **strace:** `openat`/`connect` failures (`ENOENT`, `EACCES`, `ECONNREFUSED`)
+
+    are strong hints. `-f` follows children; it is noisy — filter with `-e`.
+
+    ptrace restrictions (hardening/containers) may require sudo.
+
+
+    **lsof / ss:** “who is listening?” and “is the file busy?”.
+
+    **ps/pgrep/pkill:** process selection; `pkill` is dangerous with a bad pattern.
+
+
+    Catalog CI does not run these tools “to prove” entries; content is checked
+
+    against man/`--help` and careful examples. Do not share traces that contain secrets.
+
+    '
+verification:
+  status: draft
+  sources:
+  - man 1 strace
+  - man 8 lsof
+  - man 1 journalctl
+  notes: Agent-authored teaching article; not verified. NV-123 topic-guide structure; agent-authored;
+    needs human review before verified.
+format: topic-guide
+categories:
+- processes
+- development
+- monitoring
+platforms:
+- linux
+- macos
+- bsd
+intro: &id001
+  tr: Süreç, strace/dtruss tarzı izleme ve günlüklerle hata ayıklama giriş.
+  en: Intro to process inspection, tracing-style tools, and logs for debugging.
+learning_path:
+- ref: strace
+  kind: command
+- ref: lsof
+  kind: command
+- ref: ps
+  kind: command
+- ref: pgrep
+  kind: command
+- ref: journalctl
+  kind: command
+- ref: dmesg
+  kind: command
+- ref: top
+  kind: command
+command_table:
+- id: strace
+  purpose:
+    tr: Sistem çağrılarını izler.
+    en: Traces system calls.
+  learning_level: advanced
+- id: lsof
+  purpose:
+    tr: Açık dosyaları ve soketleri listeler.
+    en: List open files and sockets.
+  learning_level: intermediate
+- id: ps
+  purpose:
+    tr: Anlık süreç listesi.
+    en: Report a snapshot of processes.
+  learning_level: beginner
+- id: pgrep
+  purpose:
+    tr: Ada göre süreç PID’lerini bulur.
+    en: Find process IDs by name.
+  learning_level: beginner
+- id: journalctl
+  purpose:
+    tr: systemd günlüğünü sorgular.
+    en: Query the systemd journal.
+  learning_level: intermediate
+- id: dmesg
+  purpose:
+    tr: Çekirdek mesaj halkasını yazdırır.
+    en: Print or control the kernel ring buffer.
+  learning_level: intermediate
+- id: top
+  purpose:
+    tr: Canlı süreç izleyici.
+    en: Dynamic real-time process viewer.
+  learning_level: beginner
+subtopics:
+- id: overview
+  title:
+    tr: Genel bakış
+    en: Overview
+  summary: *id001
+  related_commands:
   - strace
   - lsof
   - ps
   - pgrep
   - journalctl
   - dmesg
-  - top
-related_concepts:
-  - systemd
-  - permissions
-  - terminal-basics
-  - path
-see_also:
-  - "man 1 strace"
-  - "man 8 lsof"
-  - "man 1 journalctl"
-body:
-  tr: |
-    Bir komut “çalışmıyor” dediğinde katmanları ayırın: **bulunamıyor mu** (PATH),
-    **izin mi**, **bağımlılık/kütüphane mi**, **ağ mı**, **yapılandırma mı**?
-
-    **Hızlı sıra:**
-    1. `command -v` / `type` — ikili var mı?
-    2. `ls -l` / `id` — izin ve kullanıcı.
-    3. `journalctl -u … -e` veya uygulama logu.
-    4. `lsof -i` / `ss` — port ve dosya tutamaçları.
-    5. `strace -e openat,network …` — kernel sınırında ne reddediliyor?
-
-    **strace:** `openat`/`connect` hataları (`ENOENT`, `EACCES`, `ECONNREFUSED`)
-    sık ipucu verir. `-f` çocuk süreçleri takip eder; gürültülüdür — `-e` ile süzün.
-    ptrace kısıtları (Yama/container) yüzünden sudo gerekebilir.
-
-    **lsof / ss:** “kim dinliyor?” ve “dosya kilitli mi?”.
-    **ps/pgrep/pkill:** süreç seçimi; `pkill` yanlış desende tehlikeli.
-
-    Banka CI’si bu araçları “kanıt için” çalıştırmaz; girdiler man/`--help` ve
-    dikkatli örneklerle doğrulanır. Gizli veri içeren izleri paylaşmayın.
-  en: |
-    When a command “doesn’t work”, separate layers: **not found** (PATH),
-    **permissions**, **library/deps**, **network**, or **config**?
-
-    **Quick order:**
-    1. `command -v` / `type` — is the binary there?
-    2. `ls -l` / `id` — permissions and user.
-    3. `journalctl -u … -e` or app logs.
-    4. `lsof -i` / `ss` — ports and file handles.
-    5. `strace -e openat,network …` — what does the kernel refuse?
-
-    **strace:** `openat`/`connect` failures (`ENOENT`, `EACCES`, `ECONNREFUSED`)
-    are strong hints. `-f` follows children; it is noisy — filter with `-e`.
-    ptrace restrictions (hardening/containers) may require sudo.
-
-    **lsof / ss:** “who is listening?” and “is the file busy?”.
-    **ps/pgrep/pkill:** process selection; `pkill` is dangerous with a bad pattern.
-
-    Catalog CI does not run these tools “to prove” entries; content is checked
-    against man/`--help` and careful examples. Do not share traces that contain secrets.
-verification:
-  status: draft
-  sources:
-    - "man 1 strace"
-    - "man 8 lsof"
-    - "man 1 journalctl"
-  notes: "Agent-authored teaching article; not verified."
+graded_examples:
+- title:
+    tr: Komutu izle
+    en: Trace command
+  command: strace -e openat ls /tmp
+  explanation:
+    tr: ls’in openat çağrılarını gösterir.
+    en: Shows openat calls made by ls.
+  difficulty: beginner
+  risk: safe
+  related_commands:
+  - strace
+callouts:
+- kind: note
+  text:
+    tr: Örnekler bank kayıtlarından gelir; man/--help ile doğrulanmadan verified yapılmaz.
+    en: Examples come from bank records; not verified without man/--help review.
+safe_exercises:
+- title:
+    tr: Salt okuma keşif
+    en: Read-only exploration
+  prompt:
+    tr: Bu konudaki bir safe/caution komutun beginner örneğini okuyun; çalıştırmadan önce risk rozetine
+      bakın.
+    en: Read a beginner example of a safe/caution command in this topic; check the risk badge before running.
+  risk: safe
+  related_commands:
+  - strace
+  - lsof
+  - ps
+next_steps:
+- id: processes
+- id: monitoring-and-logs

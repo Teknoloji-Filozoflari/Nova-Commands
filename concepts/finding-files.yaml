@@ -1,0 +1,139 @@
+id: finding-files
+kind: nova-commands-concept
+format: topic-guide
+title:
+  tr: Dosya arama
+  en: Finding files
+summary:
+  tr: find, locate, fd ve isim/yol arama kalıpları.
+  en: find, locate, fd, and name/path search patterns.
+intro:
+  tr: İsim, tür ve zamana göre dosya bulmak; geniş find ifadelerinde dikkat.
+  en: Find files by name, type, and time; be careful with broad find expressions.
+body:
+  tr: '`find` ağaçta arar; `locate` (varsa) önceden indekslenmiş veritabanına bakar.
+
+    Başlarken `find . -name ''*.txt''` gibi dar kalıplar kullanın. `-delete` ve `-exec rm`
+
+    tehlikeli olabilir — bu rehberde salt listeleme tercih edilir.
+
+
+    Windows’ta `Get-ChildItem -Recurse` benzer işi görür; bank kaydına bakın.'
+  en: '`find` walks trees; `locate` (when present) queries a prebuilt database.
+
+    Start with narrow patterns like `find . -name ''*.txt''`. `-delete` and `-exec rm`
+
+    can be dangerous — this guide prefers listing only.
+
+
+    On Windows, `Get-ChildItem -Recurse` covers similar jobs; see the bank record.'
+difficulty: beginner
+categories:
+- search
+- filesystem
+platforms:
+- linux
+- macos
+- bsd
+tags:
+- find
+- search
+- files
+learning_path:
+- ref: find
+  kind: command
+- ref: locate
+  kind: command
+- ref: which
+  kind: command
+- ref: ls
+  kind: command
+subtopics:
+- id: by-name
+  title:
+    tr: İsme göre
+    en: By name
+  summary:
+    tr: find -name / -iname.
+    en: find -name / -iname.
+  related_commands:
+  - find
+- id: index
+  title:
+    tr: İndeks
+    en: Index
+  summary:
+    tr: locate hızlıdır ama güncel olmayabilir.
+    en: locate is fast but may be stale.
+  related_commands:
+  - locate
+command_table:
+- id: find
+  purpose:
+    tr: Dizin ağacında dosya arar.
+    en: Search for files in a directory hierarchy.
+  learning_level: intermediate
+- id: locate
+  purpose:
+    tr: Önceden indekslenmiş dosya adı araması.
+    en: Find files by name via a prebuilt database.
+  learning_level: beginner
+- id: which
+  purpose:
+    tr: Komutun PATH üzerindeki konumunu gösterir.
+    en: Locate a command on PATH.
+  learning_level: beginner
+- id: ls
+  purpose:
+    tr: Dizin içeriğini listeler.
+    en: List directory contents.
+  learning_level: beginner
+graded_examples:
+- title:
+    tr: İsim kalıbı
+    en: Name pattern
+  command: find /tmp -maxdepth 2 -type f -name '*.txt'
+  explanation:
+    tr: /tmp altında sığ .txt dosyalarını listeler.
+    en: Lists shallow .txt files under /tmp.
+  difficulty: beginner
+  risk: safe
+  related_commands:
+  - find
+callouts:
+- kind: caution
+  text:
+    tr: Kökten (`/`) geniş find yavaş ve gürültülüdür; maxdepth kullanın.
+    en: Broad find from `/` is slow and noisy; use maxdepth.
+safe_exercises:
+- title:
+    tr: Dar find
+    en: Narrow find
+  prompt:
+    tr: find ~ -maxdepth 1 -type d çıktısını okuyun.
+    en: Read find ~ -maxdepth 1 -type d output.
+  risk: safe
+  related_commands:
+  - find
+next_steps:
+- id: text-processing
+- id: permissions
+- id: storage
+related_commands:
+- find
+- locate
+- which
+- ls
+related_concepts:
+- permissions
+- text-processing
+- storage
+see_also:
+- man find
+- man locate
+verification:
+  status: draft
+  sources:
+  - man find
+  - man locate
+  notes: NV-123 new topic guide from bank + man-oriented teaching; PDF not available in env; not human-verified.

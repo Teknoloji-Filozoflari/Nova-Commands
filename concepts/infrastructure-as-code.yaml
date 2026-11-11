@@ -8,63 +8,154 @@ summary:
   en: Terraform vs Ansible; cloud CLIs and secret-handling rules.
 difficulty: intermediate
 tags:
-  - iac
-  - terraform
-  - ansible
-  - devops
-  - cloud
+- iac
+- terraform
+- ansible
+- devops
+- cloud
 related_commands:
+- terraform
+- ansible
+- aws
+- az
+- gcloud
+- kubectl
+- gh
+related_concepts:
+- cloud
+- kubernetes
+- containers
+see_also:
+- https://developer.hashicorp.com/terraform/intro
+- https://docs.ansible.com/
+body:
+  tr: "**IaC** altyapıyı tekrarlanabilir kod olarak tanımlar.\n\n**Kaba ayrım:**\n- **Terraform** — sağlayıcı\
+    \ API’leriyle kaynak oluşturma/plan/apply\n  (OpenTofu ayrı bir araçtır; bu fazda ayrı kayıt yok).\n\
+    - **Ansible** — yapılandırma/otomasyon (çoğunlukla SSH); state modeli farklıdır.\n- **aws / az / gcloud**\
+    \ — bulut kontrol düzlemi CLI’leri; Terraform’un yerine\n  geçmezler, onu tamamlarlar.\n\n**Gizli\
+    \ bilgi:** Access key, session token, service-account JSON veya\n`gh` PAT örnek YAML’lara **yazılmaz**.\
+    \ `version`, `plan`/`validate`,\n`auth status` gibi güvenli okumalar tercih edilir.\n\n`apply` / `destroy`\
+    \ / playbook koşuları uzak sistemleri değiştirir —\nrisk `dangerous` olabilir. Kayıtlar `draft`.\n"
+  en: "**IaC** defines infrastructure as repeatable code.\n\n**Rough split:**\n- **Terraform** — create/plan/apply\
+    \ resources via provider APIs\n  (OpenTofu is a separate tool; no separate record in this phase).\n\
+    - **Ansible** — configuration/automation (often over SSH); different state model.\n- **aws / az /\
+    \ gcloud** — cloud control-plane CLIs; they complement Terraform,\n  they do not replace it.\n\n**Secrets:**\
+    \ Never put access keys, session tokens, service-account JSON, or\n`gh` PATs in example YAML. Prefer\
+    \ safe reads like `version`, `plan`/`validate`,\nand `auth status`.\n\n`apply` / `destroy` / playbook\
+    \ runs mutate remote systems — risk may be\n`dangerous`. Records stay `draft`.\n"
+verification:
+  status: draft
+  sources:
+  - https://developer.hashicorp.com/terraform/intro
+  - https://docs.ansible.com/
+  - https://docs.aws.amazon.com/cli/
+  notes: Agent-authored Faz 7 teaching draft; not human-verified. NV-123 topic-guide structure; agent-authored;
+    needs human review before verified.
+format: topic-guide
+categories:
+- devops
+- cloud
+platforms:
+- linux
+- macos
+- windows
+intro: &id001
+  tr: Terraform/Ansible tarzı IaC giriş; bayraklar kaynaklı draft kalır.
+  en: Intro to Terraform/Ansible-style IaC; flags stay sourced drafts.
+learning_path:
+- ref: terraform
+  kind: command
+- ref: ansible
+  kind: command
+- ref: aws
+  kind: command
+- ref: az
+  kind: command
+- ref: gcloud
+  kind: command
+- ref: kubectl
+  kind: command
+- ref: gh
+  kind: command
+command_table:
+- id: terraform
+  purpose:
+    tr: HashiCorp Terraform (IaC).
+    en: HashiCorp Terraform (IaC).
+  learning_level: advanced
+- id: ansible
+  purpose:
+    tr: Ansible otomasyon motoru.
+    en: Ansible automation engine.
+  learning_level: intermediate
+- id: aws
+  purpose:
+    tr: AWS Command Line Interface.
+    en: AWS Command Line Interface.
+  learning_level: unspecified
+- id: az
+  purpose:
+    tr: Azure CLI.
+    en: Azure CLI.
+  learning_level: unspecified
+- id: gcloud
+  purpose:
+    tr: Google Cloud CLI.
+    en: Google Cloud CLI.
+  learning_level: unspecified
+- id: kubectl
+  purpose:
+    tr: Kubernetes küme CLI.
+    en: Kubernetes cluster CLI.
+  learning_level: advanced
+- id: gh
+  purpose:
+    tr: GitHub resmi CLI.
+    en: Official GitHub CLI.
+  learning_level: intermediate
+subtopics:
+- id: overview
+  title:
+    tr: Genel bakış
+    en: Overview
+  summary: *id001
+  related_commands:
   - terraform
   - ansible
   - aws
   - az
   - gcloud
   - kubectl
-  - gh
-related_concepts:
-  - cloud
-  - kubernetes
-  - containers
-see_also:
-  - "https://developer.hashicorp.com/terraform/intro"
-  - "https://docs.ansible.com/"
-body:
-  tr: |
-    **IaC** altyapıyı tekrarlanabilir kod olarak tanımlar.
-
-    **Kaba ayrım:**
-    - **Terraform** — sağlayıcı API’leriyle kaynak oluşturma/plan/apply
-      (OpenTofu ayrı bir araçtır; bu fazda ayrı kayıt yok).
-    - **Ansible** — yapılandırma/otomasyon (çoğunlukla SSH); state modeli farklıdır.
-    - **aws / az / gcloud** — bulut kontrol düzlemi CLI’leri; Terraform’un yerine
-      geçmezler, onu tamamlarlar.
-
-    **Gizli bilgi:** Access key, session token, service-account JSON veya
-    `gh` PAT örnek YAML’lara **yazılmaz**. `version`, `plan`/`validate`,
-    `auth status` gibi güvenli okumalar tercih edilir.
-
-    `apply` / `destroy` / playbook koşuları uzak sistemleri değiştirir —
-    risk `dangerous` olabilir. Kayıtlar `draft`.
-  en: |
-    **IaC** defines infrastructure as repeatable code.
-
-    **Rough split:**
-    - **Terraform** — create/plan/apply resources via provider APIs
-      (OpenTofu is a separate tool; no separate record in this phase).
-    - **Ansible** — configuration/automation (often over SSH); different state model.
-    - **aws / az / gcloud** — cloud control-plane CLIs; they complement Terraform,
-      they do not replace it.
-
-    **Secrets:** Never put access keys, session tokens, service-account JSON, or
-    `gh` PATs in example YAML. Prefer safe reads like `version`, `plan`/`validate`,
-    and `auth status`.
-
-    `apply` / `destroy` / playbook runs mutate remote systems — risk may be
-    `dangerous`. Records stay `draft`.
-verification:
-  status: draft
-  sources:
-    - "https://developer.hashicorp.com/terraform/intro"
-    - "https://docs.ansible.com/"
-    - "https://docs.aws.amazon.com/cli/"
-  notes: "Agent-authored Faz 7 teaching draft; not human-verified."
+graded_examples:
+- title:
+    tr: Sürüm
+    en: Version
+  command: terraform version
+  explanation:
+    tr: Terraform sürümü.
+    en: Terraform version.
+  difficulty: beginner
+  risk: safe
+  related_commands:
+  - terraform
+callouts:
+- kind: note
+  text:
+    tr: Örnekler bank kayıtlarından gelir; man/--help ile doğrulanmadan verified yapılmaz.
+    en: Examples come from bank records; not verified without man/--help review.
+safe_exercises:
+- title:
+    tr: Salt okuma keşif
+    en: Read-only exploration
+  prompt:
+    tr: Bu konudaki bir safe/caution komutun beginner örneğini okuyun; çalıştırmadan önce risk rozetine
+      bakın.
+    en: Read a beginner example of a safe/caution command in this topic; check the risk badge before running.
+  risk: safe
+  related_commands:
+  - terraform
+  - ansible
+  - aws
+next_steps:
+- id: cloud
+- id: kubernetes

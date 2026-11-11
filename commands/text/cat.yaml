@@ -59,6 +59,7 @@ examples:
     tr: os-release içeriğini basar.
     en: Prints os-release.
   risk: safe
+  difficulty: beginner
 related:
 - less
 - head
@@ -76,9 +77,22 @@ verification:
   - man 1 cat (GNU coreutils)
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-phase15
-  notes: Flag -n/--number and safe read example confirmed.
+  notes: Flag -n/--number and safe read example confirmed. NV-123 teachable fields (when/syntax/mistakes/topics).
 nova:
   concepts:
   - files
   - shell-pipes-redirection
   favorite_eligible: true
+when_to_use:
+  tr: Dosya içeriğini birleştirip göstermek.
+  en: Concatenate and display file contents.
+syntax: cat [OPTION]... [FILE]...
+expected_effect:
+  tr: Dosya içeriklerini stdout’a yazar.
+  en: Writes file contents to stdout.
+common_mistakes:
+- tr: Büyük ikili dosyaları cat ile terminale dökmek.
+  en: Dumping large binary files to the terminal with cat.
+related_topics:
+- text-processing
+- shell-pipes-redirection

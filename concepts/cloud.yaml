@@ -8,50 +8,157 @@ summary:
   en: aws, az, gcloud — control-plane tools; no real API keys.
 difficulty: intermediate
 tags:
-  - cloud
-  - aws
-  - azure
-  - gcp
+- cloud
+- aws
+- azure
+- gcp
 related_commands:
+- aws
+- az
+- gcloud
+- terraform
+- rclone
+related_concepts:
+- infrastructure-as-code
+- kubernetes
+- backup
+see_also:
+- https://docs.aws.amazon.com/cli/
+- https://learn.microsoft.com/cli/azure/
+- https://cloud.google.com/sdk/docs
+body:
+  tr: 'Bulut CLI’leri (`aws`, `az`, `gcloud`) sağlayıcı **kontrol düzlemine**
+
+    konuşur. Yerel `ip`/`systemctl` ile aynı şey değildirler.
+
+
+    **Kimlik:** Profil/ortam değişkeni/managed identity kullanın. Banka
+
+    örneklerinde access key, secret, session token veya service-account JSON
+
+    **yoktur**.
+
+
+    **IaC ilişkisi:** Terraform gibi araçlar aynı API’leri kod ile yönetir;
+
+    CLI ad-hoc işlem ve teşhis içindir. Maliyet/yetki riski yüksektir —
+
+    yanlış bölge veya hesap pahalı kaynak yaratabilir. Kayıtlar `draft`.
+
+    '
+  en: 'Cloud CLIs (`aws`, `az`, `gcloud`) talk to provider **control planes**.
+
+    They are not the same as local `ip`/`systemctl`.
+
+
+    **Identity:** Use profiles/env vars/managed identity. Catalog examples
+
+    never include access keys, secrets, session tokens, or service-account JSON.
+
+
+    **IaC link:** Tools like Terraform manage the same APIs as code; CLIs are
+
+    for ad-hoc ops and diagnostics. Cost/permission risk is high — a wrong
+
+    region or account can create expensive resources. Records stay `draft`.
+
+    '
+verification:
+  status: draft
+  sources:
+  - https://docs.aws.amazon.com/cli/
+  - https://learn.microsoft.com/cli/azure/
+  - https://cloud.google.com/sdk/docs
+  notes: Agent-authored Faz 7 teaching draft; not human-verified. NV-123 topic-guide structure; agent-authored;
+    needs human review before verified.
+format: topic-guide
+categories:
+- cloud
+platforms:
+- linux
+- macos
+- windows
+intro: &id001
+  tr: Bulut CLI’ler (ör. aws) kaynaklı draft; paket adları distrolar arası uydurulmaz.
+  en: Cloud CLIs (e.g. aws) stay sourced drafts; package names are not invented across distros.
+learning_path:
+- ref: aws
+  kind: command
+- ref: az
+  kind: command
+- ref: gcloud
+  kind: command
+- ref: terraform
+  kind: command
+- ref: rclone
+  kind: command
+command_table:
+- id: aws
+  purpose:
+    tr: AWS Command Line Interface.
+    en: AWS Command Line Interface.
+  learning_level: unspecified
+- id: az
+  purpose:
+    tr: Azure CLI.
+    en: Azure CLI.
+  learning_level: unspecified
+- id: gcloud
+  purpose:
+    tr: Google Cloud CLI.
+    en: Google Cloud CLI.
+  learning_level: unspecified
+- id: terraform
+  purpose:
+    tr: HashiCorp Terraform (IaC).
+    en: HashiCorp Terraform (IaC).
+  learning_level: advanced
+- id: rclone
+  purpose:
+    tr: Bulut depolama senkron aracı.
+    en: Cloud storage sync tool.
+  learning_level: unspecified
+subtopics:
+- id: overview
+  title:
+    tr: Genel bakış
+    en: Overview
+  summary: *id001
+  related_commands:
   - aws
   - az
   - gcloud
   - terraform
   - rclone
-related_concepts:
-  - infrastructure-as-code
-  - kubernetes
-  - backup
-see_also:
-  - "https://docs.aws.amazon.com/cli/"
-  - "https://learn.microsoft.com/cli/azure/"
-  - "https://cloud.google.com/sdk/docs"
-body:
-  tr: |
-    Bulut CLI’leri (`aws`, `az`, `gcloud`) sağlayıcı **kontrol düzlemine**
-    konuşur. Yerel `ip`/`systemctl` ile aynı şey değildirler.
-
-    **Kimlik:** Profil/ortam değişkeni/managed identity kullanın. Banka
-    örneklerinde access key, secret, session token veya service-account JSON
-    **yoktur**.
-
-    **IaC ilişkisi:** Terraform gibi araçlar aynı API’leri kod ile yönetir;
-    CLI ad-hoc işlem ve teşhis içindir. Maliyet/yetki riski yüksektir —
-    yanlış bölge veya hesap pahalı kaynak yaratabilir. Kayıtlar `draft`.
-  en: |
-    Cloud CLIs (`aws`, `az`, `gcloud`) talk to provider **control planes**.
-    They are not the same as local `ip`/`systemctl`.
-
-    **Identity:** Use profiles/env vars/managed identity. Catalog examples
-    never include access keys, secrets, session tokens, or service-account JSON.
-
-    **IaC link:** Tools like Terraform manage the same APIs as code; CLIs are
-    for ad-hoc ops and diagnostics. Cost/permission risk is high — a wrong
-    region or account can create expensive resources. Records stay `draft`.
-verification:
-  status: draft
-  sources:
-    - "https://docs.aws.amazon.com/cli/"
-    - "https://learn.microsoft.com/cli/azure/"
-    - "https://cloud.google.com/sdk/docs"
-  notes: "Agent-authored Faz 7 teaching draft; not human-verified."
+graded_examples:
+- title:
+    tr: Sürüm
+    en: Version
+  command: aws --version
+  explanation:
+    tr: AWS CLI sürümü.
+    en: AWS CLI version.
+  difficulty: beginner
+  risk: safe
+  related_commands:
+  - aws
+callouts:
+- kind: note
+  text:
+    tr: Örnekler bank kayıtlarından gelir; man/--help ile doğrulanmadan verified yapılmaz.
+    en: Examples come from bank records; not verified without man/--help review.
+safe_exercises:
+- title:
+    tr: Salt okuma keşif
+    en: Read-only exploration
+  prompt:
+    tr: Bu konudaki bir safe/caution komutun beginner örneğini okuyun; çalıştırmadan önce risk rozetine
+      bakın.
+    en: Read a beginner example of a safe/caution command in this topic; check the risk badge before running.
+  risk: safe
+  related_commands:
+  - aws
+  - az
+  - gcloud
+next_steps:
+- id: infrastructure-as-code

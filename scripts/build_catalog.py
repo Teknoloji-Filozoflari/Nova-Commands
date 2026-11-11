@@ -162,6 +162,10 @@ def build_search_index(
 ) -> dict:
     entries = []
     for c in commands:
+        concepts_ids = list((c.get("nova") or {}).get("concepts") or [])
+        for topic in c.get("related_topics") or []:
+            if isinstance(topic, str) and topic not in concepts_ids:
+                concepts_ids.append(topic)
         entries.append(
             {
                 "type": "command",
@@ -176,7 +180,7 @@ def build_search_index(
                 "tags": c.get("tags") or [],
                 "summary": c.get("summary") or {},
                 "intent": c.get("intent") or {},
-                "concepts": (c.get("nova") or {}).get("concepts") or [],
+                "concepts": concepts_ids,
             }
         )
     for concept in concepts:
@@ -185,6 +189,9 @@ def build_search_index(
                 "type": "concept",
                 "id": concept["id"],
                 "difficulty": concept.get("difficulty"),
+                "format": concept.get("format") or "article",
+                "categories": concept.get("categories") or [],
+                "platforms": concept.get("platforms") or [],
                 "tags": concept.get("tags") or [],
                 "title": concept.get("title") or {},
                 "summary": concept.get("summary") or {},

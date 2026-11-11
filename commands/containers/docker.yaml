@@ -53,18 +53,24 @@ package_refs:
   distributions:
   - alpine
 install_notes:
-  tr: |-
-    Arch: pacman -S docker — sonra systemctl enable --now docker; kullanıcıyı docker grubuna ekleyin.
+  tr: 'Arch: pacman -S docker — sonra systemctl enable --now docker; kullanıcıyı docker grubuna ekleyin.
+
     Debian/Ubuntu distro paketi sıkça docker.io; Docker Inc. reposu docker-ce kullanır — karıştırmayın.
+
     Fedora sıkça docker-ce (docker.com repo) veya moby-engine — kurulu paketi doğrulayın.
+
     openSUSE: zypper in docker. Alpine: apk add docker (OpenRC servis yolu ayrıdır).
-    Sessiz Arch varsayımı yok: Linux filtresiz host’ta önce distro PM’sini seçin.
-  en: |-
-    Arch: pacman -S docker — then systemctl enable --now docker; add user to docker group.
+
+    Sessiz Arch varsayımı yok: Linux filtresiz host’ta önce distro PM’sini seçin.'
+  en: 'Arch: pacman -S docker — then systemctl enable --now docker; add user to docker group.
+
     Debian/Ubuntu distro package is often docker.io; Docker Inc. repos use docker-ce — do not confuse.
+
     Fedora often docker-ce (docker.com) or moby-engine — verify the installed package.
+
     openSUSE: zypper in docker. Alpine: apk add docker (OpenRC service path differs).
-    No silent Arch default: pick the host distro PM when Linux is undifferenced.
+
+    No silent Arch default: pick the host distro PM when Linux is undifferenced.'
 examples:
 - title:
     tr: ps
@@ -141,7 +147,7 @@ verification:
   status: draft
   sources:
   - https://docs.docker.com/engine/reference/commandline/cli/
-  notes: debian/ubuntu package intentionally omitted as unknown.
+  notes: debian/ubuntu package intentionally omitted as unknown. NV-123 teachable fields (when/syntax/mistakes/topics).
 nova:
   concepts:
   - containers
@@ -178,3 +184,15 @@ security:
   notes:
     tr: Privileged/host-network konteynerler host’u zayıflatır; publish edilen portları gözden geçirin.
     en: Privileged/host-network containers weaken the host; review published ports.
+when_to_use:
+  tr: Docker runtime ile konteyner listeleme/log/inceleme (ve yönetim).
+  en: List/log/inspect (and manage) containers with the Docker runtime.
+syntax: docker [OPTIONS] COMMAND
+expected_effect:
+  tr: ps/logs/inspect okur; run/rm konteyner yaşam döngüsünü değiştirir.
+  en: ps/logs/inspect read; run/rm change container lifecycle.
+common_mistakes:
+- tr: podman ile bayrakların birebir aynı olduğunu sanmak.
+  en: Assuming flags are identical to podman.
+related_topics:
+- containers-basics

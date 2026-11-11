@@ -8,67 +8,217 @@ summary:
   en: Who can do what with id/chmod/chown/sudo — the basic model.
 difficulty: beginner
 tags:
-  - permissions
-  - users
-  - sudo
-  - chmod
+- permissions
+- users
+- sudo
+- chmod
 related_commands:
-  - id
-  - whoami
-  - stat
-  - groups
-  - chmod
-  - chown
-  - chgrp
-  - sudo
-  - passwd
-  - useradd
-  - usermod
-  - getent
+- id
+- whoami
+- stat
+- groups
+- chmod
+- chown
+- chgrp
+- sudo
+- passwd
+- useradd
+- usermod
+- getent
 related_concepts:
-  - terminal-basics
-  - path
-  - files
+- terminal-basics
+- path
+- files
 see_also:
-  - "man 1 chmod"
-  - "man 8 sudo"
-  - "Arch Wiki: Users and groups"
+- man 1 chmod
+- man 8 sudo
+- 'Arch Wiki: Users and groups'
 body:
-  tr: |
-    Linux erişim modeli kabaca **kullanıcı + grup + diğerleri** ve her biri için
+  tr: 'Linux erişim modeli kabaca **kullanıcı + grup + diğerleri** ve her biri için
+
     okuma/yazma/çalıştırma bitleridir. Modern sistemlerde ACL’ler de olabilir; bu
+
     yazı klasik `chmod`/`chown` odaklıdır.
 
+
     **Kimsin?** `id`, `whoami`, `groups` — sayısal uid/gid ve üyelikler.
+
     **Dosya izni:** `ls -l`, `stat`, `chmod` (sembolik `u+x` veya sekizlik `755`).
+
     **Sahiplik:** `chown kullanıcı:grup`; genelde root ister.
+
     **Yükseltme:** `sudo` — yapılandırma `/etc/sudoers` (+ drop-in’ler); yanlışlıkla
+
     geniş sudo tehlikelidir.
 
+
     **Dizin vs dosya:** Dizinde `x` “içine girebilme”; dosyada `x` “çalıştırma”.
+
     Paylaşılan dizinlerde `chmod`/sticky bit (`/tmp`) incelenir.
 
+
     Bankada birçok kullanıcı/izin komutu `caution` veya `dangerous` işaretlidir;
+
     örnekleri körü körüne kopyalamayın. `verified` durumu insan onayına bağlıdır.
-  en: |
-    Linux access is roughly **user + group + other** with read/write/execute bits.
+
+    '
+  en: 'Linux access is roughly **user + group + other** with read/write/execute bits.
+
     ACLs exist on modern systems; this article focuses on classic `chmod`/`chown`.
 
+
     **Who am I?** `id`, `whoami`, `groups` — numeric uid/gid and memberships.
+
     **File mode:** `ls -l`, `stat`, `chmod` (symbolic `u+x` or octal `755`).
+
     **Ownership:** `chown user:group`; usually needs root.
+
     **Elevation:** `sudo` — config in `/etc/sudoers` (+ drop-ins); overly broad sudo
+
     is dangerous.
 
+
     **Directory vs file:** directory `x` means “traverse”; file `x` means “execute”.
+
     Shared dirs involve sticky bits (e.g. `/tmp`).
 
+
     Many user/permission entries in the bank are `caution` or `dangerous`; do not
+
     copy examples blindly. `verified` still requires a human.
+
+    '
 verification:
   status: draft
   sources:
-    - "man 1 chmod"
-    - "man 8 sudo"
-    - "https://wiki.archlinux.org/title/Users_and_groups"
-  notes: "Agent-authored; registry id already existed — article added this phase."
+  - man 1 chmod
+  - man 8 sudo
+  - https://wiki.archlinux.org/title/Users_and_groups
+  notes: Agent-authored; registry id already existed — article added this phase. NV-123 topic-guide structure;
+    agent-authored; needs human review before verified.
+format: topic-guide
+categories:
+- users
+platforms:
+- linux
+- macos
+- bsd
+intro:
+  tr: Unix izinleri kullanıcı/grup/diğer ve rwx bitleriyle dosya erişimini denetler.
+  en: Unix permissions control access via user/group/other and rwx bits.
+learning_path:
+- ref: whoami
+  kind: command
+- ref: id
+  kind: command
+- ref: ls
+  kind: command
+- ref: chmod
+  kind: command
+- ref: chown
+  kind: command
+- ref: sudo
+  kind: command
+subtopics:
+- id: identity
+  title:
+    tr: Kimlik
+    en: Identity
+  summary:
+    tr: whoami / id ile kullanıcı ve grupları görün.
+    en: See user and groups with whoami / id.
+  related_commands:
+  - whoami
+  - id
+- id: mode-bits
+  title:
+    tr: Mod bitleri
+    en: Mode bits
+  summary:
+    tr: ls -l sol sütun; chmod sembolik veya oktal.
+    en: ls -l left column; chmod symbolic or octal.
+  related_commands:
+  - ls
+  - chmod
+command_table:
+- id: whoami
+  purpose:
+    tr: Geçerli etkili kullanıcı adını basar.
+    en: Print effective user name.
+  learning_level: beginner
+- id: id
+  purpose:
+    tr: Kullanıcı ve grup kimliklerini basar.
+    en: Print user and group IDs.
+  learning_level: beginner
+- id: chmod
+  purpose:
+    tr: Dosya kipini (izinlerini) değiştirir.
+    en: Change file mode bits.
+  learning_level: intermediate
+- id: chown
+  purpose:
+    tr: Dosya sahibini değiştirir.
+    en: Change file owner and group.
+  learning_level: intermediate
+- id: chgrp
+  purpose:
+    tr: Dosya grup sahipliğini değiştirir.
+    en: Change group ownership of files.
+  learning_level: intermediate
+- id: sudo
+  purpose:
+    tr: Komutu başka kullanıcı olarak çalıştırır (genelde root).
+    en: Execute a command as another user (usually root).
+  learning_level: intermediate
+- id: passwd
+  purpose:
+    tr: Kullanıcı parola değiştirir.
+    en: Change user password.
+  learning_level: intermediate
+graded_examples:
+- title:
+    tr: Kimim?
+    en: Who am I?
+  command: id
+  explanation:
+    tr: uid/gid ve grupları listeler.
+    en: Lists uid/gid and groups.
+  difficulty: beginner
+  risk: safe
+  related_commands:
+  - id
+- title:
+    tr: Özel dosya modu
+    en: Private file mode
+  command: chmod 600 /tmp/nova-private-demo
+  explanation:
+    tr: Sahibe rw; gruba/diğerine yok. Önce dokunun; gerçek gizli dosyalarda dikkat.
+    en: Owner rw; none for group/other. Touch first; be careful with real secrets.
+  difficulty: intermediate
+  risk: caution
+  related_commands:
+  - chmod
+callouts:
+- kind: warning
+  text:
+    tr: chmod -R ve chown -R geri dönüşü zor hatalar üretebilir; önce dar kapsam.
+    en: chmod -R and chown -R can cause hard-to-undo mistakes; keep scope narrow first.
+- kind: caution
+  text:
+    tr: sudo her sorunu çözmez; yanlış sudo daha büyük zarar verir.
+    en: sudo does not fix everything; wrong sudo causes larger damage.
+safe_exercises:
+- title:
+    tr: id ve ls -l
+    en: id and ls -l
+  prompt:
+    tr: id; ls -ld ~ /tmp çıktılarını okuyun (değiştirmeyin).
+    en: Run id; ls -ld ~ /tmp and read the modes (do not change).
+  risk: safe
+  related_commands:
+  - id
+  - ls
+next_steps:
+- id: processes
+- id: server-security-checklist

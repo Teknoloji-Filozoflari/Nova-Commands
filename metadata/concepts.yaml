@@ -1,141 +1,179 @@
-# Named concepts: short labels for UI grouping + ids used by concepts/*.yaml articles.
-# Articles under concepts/ are the learnable bodies; this file is the registry.
 schema_version: 1
 concepts:
-  - id: files
-    label:
-      tr: Dosya işlemleri
-      en: File operations
-  - id: packages
-    label:
-      tr: Paketler
-      en: Packages
-  - id: arch
-    label:
-      tr: Arch Linux
-      en: Arch Linux
-  - id: shell-builtin
-    label:
-      tr: Kabuk yerleşikleri
-      en: Shell builtins
-  - id: systemd
-    label:
-      tr: systemd
-      en: systemd
-    article: systemd
-  - id: networking
-    label:
-      tr: Ağ ve bağlantı
-      en: Networking
-  - id: dns
-    label:
-      tr: DNS
-      en: DNS
-  - id: ssh
-    label:
-      tr: SSH
-      en: SSH
-  - id: storage
-    label:
-      tr: Depolama ve disk
-      en: Storage and disks
-    article: storage
-  - id: permissions
-    label:
-      tr: Kullanıcılar ve izinler
-      en: Users and permissions
-    article: permissions
-  - id: containers
-    label:
-      tr: Konteynerler
-      en: Containers
-  - id: terminal-basics
-    label:
-      tr: Terminal temelleri
-      en: Terminal basics
-    article: terminal-basics
-  - id: shell-pipes-redirection
-    label:
-      tr: Borular ve yönlendirme
-      en: Pipes and redirection
-    article: shell-pipes-redirection
-  - id: path
-    label:
-      tr: PATH
-      en: PATH
-    article: path
-  - id: networking-basics
-    label:
-      tr: Ağ temelleri
-      en: Networking basics
-    article: networking-basics
-  - id: package-managers
-    label:
-      tr: Paket yöneticileri
-      en: Package managers
-    article: package-managers
-  - id: package-managers-comparison
-    label:
-      tr: Paket yöneticisi karşılaştırması
-      en: Package manager comparison
-    article: package-managers-comparison
-  - id: nix-guix
-    label:
-      tr: Nix ve Guix
-      en: Nix and Guix
-    article: nix-guix
-  - id: firewalls
-    label:
-      tr: Güvenlik duvarları
-      en: Firewalls
-    article: firewalls
-  - id: json-data
-    label:
-      tr: JSON ve yapılandırılmış veri
-      en: JSON and structured data
-    article: json-data
-  - id: debugging
-    label:
-      tr: Hata ayıklama
-      en: Debugging
-    article: debugging
-  - id: kubernetes
-    label:
-      tr: Kubernetes
-      en: Kubernetes
-    article: kubernetes
-  - id: virtualization
-    label:
-      tr: Sanallaştırma
-      en: Virtualization
-    article: virtualization
-  - id: infrastructure-as-code
-    label:
-      tr: Altyapı kodu (IaC)
-      en: Infrastructure as code
-    article: infrastructure-as-code
-  - id: reverse-proxy
-    label:
-      tr: Reverse proxy
-      en: Reverse proxy
-    article: reverse-proxy
-  - id: backup
-    label:
-      tr: Yedekleme
-      en: Backup
-    article: backup
-  - id: databases
-    label:
-      tr: Veritabanları
-      en: Databases
-    article: databases
-  - id: cloud
-    label:
-      tr: Bulut
-      en: Cloud
-    article: cloud
-  - id: server-security-checklist
-    label:
-      tr: Sunucu güvenlik kontrolü
-      en: Server security checklist
-    article: server-security-checklist
+- id: files
+  label:
+    tr: Dosya işlemleri
+    en: File operations
+- id: packages
+  label:
+    tr: Paketler
+    en: Packages
+- id: arch
+  label:
+    tr: Arch Linux
+    en: Arch Linux
+- id: shell-builtin
+  label:
+    tr: Kabuk yerleşikleri
+    en: Shell builtins
+- id: systemd
+  label:
+    tr: systemd
+    en: systemd
+  article: systemd
+- id: networking
+  label:
+    tr: Ağ ve bağlantı
+    en: Networking
+- id: dns
+  label:
+    tr: DNS
+    en: DNS
+- id: ssh
+  label:
+    tr: SSH
+    en: SSH
+- id: storage
+  label:
+    tr: Depolama ve disk
+    en: Storage and disks
+  article: storage
+- id: permissions
+  label:
+    tr: Kullanıcılar ve izinler
+    en: Users and permissions
+  article: permissions
+- id: containers
+  label:
+    tr: Konteynerler
+    en: Containers
+- id: terminal-basics
+  label:
+    tr: Terminal temelleri
+    en: Terminal basics
+  article: terminal-basics
+- id: shell-pipes-redirection
+  label:
+    tr: Borular ve yönlendirme
+    en: Pipes and redirection
+  article: shell-pipes-redirection
+- id: path
+  label:
+    tr: PATH
+    en: PATH
+  article: path
+- id: networking-basics
+  label:
+    tr: Ağ temelleri
+    en: Networking basics
+  article: networking-basics
+- id: package-managers
+  label:
+    tr: Paket yöneticileri
+    en: Package managers
+  article: package-managers
+- id: package-managers-comparison
+  label:
+    tr: Paket yöneticisi karşılaştırması
+    en: Package manager comparison
+  article: package-managers-comparison
+- id: nix-guix
+  label:
+    tr: Nix ve Guix
+    en: Nix and Guix
+  article: nix-guix
+- id: firewalls
+  label:
+    tr: Güvenlik duvarları
+    en: Firewalls
+  article: firewalls
+- id: json-data
+  label:
+    tr: JSON ve yapılandırılmış veri
+    en: JSON and structured data
+  article: json-data
+- id: debugging
+  label:
+    tr: Hata ayıklama
+    en: Debugging
+  article: debugging
+- id: kubernetes
+  label:
+    tr: Kubernetes
+    en: Kubernetes
+  article: kubernetes
+- id: virtualization
+  label:
+    tr: Sanallaştırma
+    en: Virtualization
+  article: virtualization
+- id: infrastructure-as-code
+  label:
+    tr: Altyapı kodu (IaC)
+    en: Infrastructure as code
+  article: infrastructure-as-code
+- id: reverse-proxy
+  label:
+    tr: Reverse proxy
+    en: Reverse proxy
+  article: reverse-proxy
+- id: backup
+  label:
+    tr: Yedekleme
+    en: Backup
+  article: backup
+- id: databases
+  label:
+    tr: Veritabanları
+    en: Databases
+  article: databases
+- id: cloud
+  label:
+    tr: Bulut
+    en: Cloud
+  article: cloud
+- id: server-security-checklist
+  label:
+    tr: Sunucu güvenlik kontrolü
+    en: Server security checklist
+  article: server-security-checklist
+- id: text-processing
+  label:
+    tr: Metin işleme
+    en: Text processing
+  article: text-processing
+- id: finding-files
+  label:
+    tr: Dosya arama
+    en: Finding files
+  article: finding-files
+- id: processes
+  label:
+    tr: Süreçler
+    en: Processes
+  article: processes
+- id: archives-compression
+  label:
+    tr: Arşiv ve sıkıştırma
+    en: Archives and compression
+  article: archives-compression
+- id: containers-basics
+  label:
+    tr: Konteyner temelleri
+    en: Container basics
+  article: containers-basics
+- id: monitoring-and-logs
+  label:
+    tr: İzleme ve günlükler
+    en: Monitoring and logs
+  article: monitoring-and-logs
+- id: hardware-inspection
+  label:
+    tr: Donanım inceleme
+    en: Hardware inspection
+  article: hardware-inspection
+- id: development-basics
+  label:
+    tr: Geliştirme temelleri
+    en: Development basics
+  article: development-basics
