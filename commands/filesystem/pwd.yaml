@@ -51,6 +51,7 @@ examples:
     tr: Bulunduğunuz dizini yazdırır.
     en: Prints your current directory.
   risk: safe
+  difficulty: beginner
 related:
 - cd
 - ls
@@ -67,10 +68,23 @@ verification:
   - man 1 pwd (GNU coreutils)
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-phase15
-  notes: No ambiguous flags; behavior matches coreutils pwd.
+  notes: No ambiguous flags; behavior matches coreutils pwd. NV-123 teachable fields (when/syntax/mistakes/topics).
 nova:
   favorite_eligible: true
   ui_priority: 70
   concepts:
   - files
   - terminal-basics
+when_to_use:
+  tr: Şu an hangi dizinde olduğunuzu doğrulamak.
+  en: Confirm which directory you are in right now.
+syntax: pwd [-L|-P]
+expected_effect:
+  tr: Çalışma dizininin yolunu tek satırda basar.
+  en: Prints the working directory path on one line.
+common_mistakes:
+- tr: Sembolik bağ (-L/-P) farkını yok saymak.
+  en: Ignoring symlink (-L/-P) differences.
+related_topics:
+- terminal-basics
+- path

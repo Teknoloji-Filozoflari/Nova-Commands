@@ -9,8 +9,8 @@ summary:
 description:
   tr: systemd birimlerini başlatır/durdurur/sorgular. Alpine/Gentoo OpenRC (`rc-service`/`rc-status`)
     ve Void runit (`sv`) ile **eşitlenmez** — yalnızca systemd host’larda birincil araçtır.
-  en: Starts/stops/queries systemd units. It is **not** equivalent to Alpine/Gentoo OpenRC
-    (rc-service/rc-status) or Void runit (sv) — primary only on systemd hosts.
+  en: Starts/stops/queries systemd units. It is **not** equivalent to Alpine/Gentoo OpenRC (rc-service/rc-status)
+    or Void runit (sv) — primary only on systemd hosts.
 tags:
 - system
 - systemd
@@ -48,12 +48,12 @@ package_refs:
   - opensuse-tumbleweed
   - sles
 install_notes:
-  tr: |-
-    systemd tabanlı distrolarda (Arch/Debian/Fedora/openSUSE/NixOS) taban gelir.
-    Alpine/Gentoo OpenRC ve Void runit varsayılanında birincil araç değildir.
-  en: |-
-    Ships as base on systemd distros (Arch/Debian/Fedora/openSUSE/NixOS).
-    Not the primary tool on Alpine/Gentoo OpenRC or Void runit defaults.
+  tr: 'systemd tabanlı distrolarda (Arch/Debian/Fedora/openSUSE/NixOS) taban gelir.
+
+    Alpine/Gentoo OpenRC ve Void runit varsayılanında birincil araç değildir.'
+  en: 'Ships as base on systemd distros (Arch/Debian/Fedora/openSUSE/NixOS).
+
+    Not the primary tool on Alpine/Gentoo OpenRC or Void runit defaults.'
 flags:
 - flag: status
   meaning:
@@ -171,6 +171,7 @@ verification:
   - man 1 systemctl
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-bootstrap
+  notes: NV-123 teachable fields (when/syntax/mistakes/topics).
 nova:
   concepts:
   - systemd
@@ -178,3 +179,16 @@ nova:
 purpose:
   tr: systemd birim durumu ve yaşam döngüsü — servis güvenliği kontrolünün omurgası.
   en: systemd unit status and lifecycle — backbone of service security checks.
+when_to_use:
+  tr: systemd birimlerinin durumunu görmek veya (dikkatle) yönetmek.
+  en: Inspect or (carefully) manage systemd units.
+syntax: systemctl [OPTIONS...] COMMAND [UNIT...]
+expected_effect:
+  tr: status/is-active okur; start/stop/enable servis durumunu değiştirir.
+  en: status/is-active read; start/stop/enable change service state.
+common_mistakes:
+- tr: Alpine/Void/Gentoo’da systemctl beklemek (OpenRC/runit).
+  en: Expecting systemctl on Alpine/Void/Gentoo (OpenRC/runit).
+related_topics:
+- systemd
+- monitoring-and-logs

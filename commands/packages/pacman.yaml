@@ -124,6 +124,7 @@ verification:
   - https://wiki.archlinux.org/title/Pacman
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-bootstrap
+  notes: NV-123 teachable fields (when/syntax/mistakes/topics).
 nova:
   favorite_eligible: true
   ui_priority: 95
@@ -136,3 +137,16 @@ nova:
 purpose:
   tr: Arch Linux birincil paket yöneticisi (Nova tercihi).
   en: Arch Linux primary package manager (Nova preference).
+when_to_use:
+  tr: Arch Linux (ve türevi) paket işlemleri.
+  en: Arch Linux (and derivatives) package operations.
+syntax: pacman <operation> [options] [targets]
+expected_effect:
+  tr: Arama/sorgu okur; -S/-R sistem paketlerini değiştirir.
+  en: Search/query reads; -S/-R change installed packages.
+common_mistakes:
+- tr: Diğer distrolarda pacman varsaymak (sessiz Arch yok).
+  en: Assuming pacman on other distros (no silent Arch).
+related_topics:
+- package-managers
+- package-managers-comparison

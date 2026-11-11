@@ -115,6 +115,22 @@ verification:
   - man 1 tar
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-bootstrap
+  notes: NV-123 teachable fields (when/syntax/mistakes/topics).
 nova:
   concepts:
   - files
+when_to_use:
+  tr: Dosyaları arşivlemek veya arşivden listelemek/çıkarmak.
+  en: Archive files or list/extract from an archive.
+syntax: tar [OPTIONS...] [FILE]...
+expected_effect:
+  tr: -c oluşturur, -t listeler, -x çıkarır; sıkıştırma eklentileri -z/-J ile gelir.
+  en: -c creates, -t lists, -x extracts; compression add-ons come via -z/-J.
+common_mistakes:
+- tr: Önce -t ile listelemeden çıkarmak.
+  en: Extracting without listing with -t first.
+- tr: Yanlış -C diziniyle dosyaları beklenmeyen yere yazmak.
+  en: Writing files to the wrong place with a mistaken -C directory.
+related_topics:
+- archives-compression
+- backup

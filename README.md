@@ -38,14 +38,14 @@ targets. Trust-audit follow-up may bump the digest when warnings/status honesty 
 | Metric | Value |
 |--------|------:|
 | Commands | **270** |
-| Concepts | **21** |
+| Concepts | **29** |
 | Tasks / profiles | **36** / **14** (all `draft`) |
-| Search entries | **341** |
+| Search entries | **349** |
 | OS / package-manager registry rows | **11** / **60** |
 | `schema_version` | **2** |
 | verification (commands) | verified **26** / reviewed **105** / draft **139** |
-| verification (concepts) | reviewed **1** / draft **20** (no fake `verified`) |
-| `content_sha256` | `1a64dd48ee49d7d026627944d4f0b97b3e57b951858d727cf7eb814ad12c254a` |
+| verification (concepts) | reviewed **1** / draft **28** (no fake `verified`) |
+| `content_sha256` | `eb15d7f851993865a70094a66d8d08df3f9f230738d24efcca5b4e86c9d31844` |
 
 ```mermaid
 pie title Command verification.status (270)

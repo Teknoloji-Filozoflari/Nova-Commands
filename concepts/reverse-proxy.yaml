@@ -8,53 +8,171 @@ summary:
   en: Roles of nginx and Caddy; TLS and config-test habits.
 difficulty: intermediate
 tags:
-  - nginx
-  - caddy
-  - proxy
-  - http
-  - tls
+- nginx
+- caddy
+- proxy
+- http
+- tls
 related_commands:
+- nginx
+- caddy
+- curl
+- openssl
+- ss
+- systemctl
+related_concepts:
+- networking
+- networking-basics
+- firewalls
+see_also:
+- https://nginx.org/en/docs/
+- https://caddyserver.com/docs/
+body:
+  tr: 'Bir **reverse proxy**, istemci isteklerini arka uç servislere iletir
+
+    (TLS sonlandırma, yük dengeleme, yol yönlendirme).
+
+
+    **nginx** olgun, yapılandırma dosyası odaklı bir web sunucu/proxy’dir.
+
+    Değişiklikten önce `nginx -t` ile sözdizimi testi alışkanlık olmalıdır.
+
+
+    **Caddy** otomatik ACME/HTTPS ile öne çıkar; `caddy validate` config’i
+
+    kontrol eder. Her iki araç da yanlış config ile hizmeti düşürebilir.
+
+
+    Firewall ve SELinux/AppArmor kuralları port 80/443 erişimini etkiler —
+
+    proxy kaydı firewall kaydı değildir. Örnekler `draft`.
+
+    '
+  en: 'A **reverse proxy** forwards client requests to upstream services
+
+    (TLS termination, load balancing, path routing).
+
+
+    **nginx** is a mature, config-file-centric web server/proxy. Habit: run
+
+    `nginx -t` before reloading.
+
+
+    **Caddy** emphasizes automatic ACME/HTTPS; `caddy validate` checks config.
+
+    Either tool can take a service down with a bad config.
+
+
+    Firewall and SELinux/AppArmor rules affect ports 80/443 — a proxy record is
+
+    not a firewall record. Examples stay `draft`.
+
+    '
+verification:
+  status: draft
+  sources:
+  - https://nginx.org/en/docs/
+  - https://caddyserver.com/docs/
+  notes: Agent-authored Faz 7 teaching draft; not human-verified. NV-123 topic-guide structure; agent-authored;
+    needs human review before verified.
+format: topic-guide
+categories:
+- network
+- security
+platforms:
+- linux
+- macos
+- bsd
+intro: &id001
+  tr: nginx/caddy reverse proxy okuma ve TLS notları; ACME/certbot henüz ince.
+  en: nginx/caddy reverse-proxy reading and TLS notes; ACME/certbot still thin.
+learning_path:
+- ref: nginx
+  kind: command
+- ref: caddy
+  kind: command
+- ref: curl
+  kind: command
+- ref: openssl
+  kind: command
+- ref: ss
+  kind: command
+- ref: systemctl
+  kind: command
+command_table:
+- id: nginx
+  purpose:
+    tr: HTTP reverse proxy / web sunucu.
+    en: HTTP reverse proxy / web server.
+  learning_level: intermediate
+- id: caddy
+  purpose:
+    tr: Otomatik TLS’li web sunucu.
+    en: Web server with automatic TLS.
+  learning_level: intermediate
+- id: curl
+  purpose:
+    tr: URL ile veri transferi yapar.
+    en: Transfer data from or to a server.
+  learning_level: beginner
+- id: openssl
+  purpose:
+    tr: TLS/SSL ve kriptografi araç kutusu.
+    en: TLS/SSL and cryptography toolkit.
+  learning_level: intermediate
+- id: ss
+  purpose:
+    tr: Soket istatistiklerini gösterir.
+    en: Investigate sockets.
+  learning_level: intermediate
+- id: systemctl
+  purpose:
+    tr: systemd birimlerini denetler.
+    en: Control the systemd system and service manager.
+  learning_level: intermediate
+subtopics:
+- id: overview
+  title:
+    tr: Genel bakış
+    en: Overview
+  summary: *id001
+  related_commands:
   - nginx
   - caddy
   - curl
   - openssl
   - ss
   - systemctl
-related_concepts:
-  - networking
-  - networking-basics
-  - firewalls
-see_also:
-  - "https://nginx.org/en/docs/"
-  - "https://caddyserver.com/docs/"
-body:
-  tr: |
-    Bir **reverse proxy**, istemci isteklerini arka uç servislere iletir
-    (TLS sonlandırma, yük dengeleme, yol yönlendirme).
-
-    **nginx** olgun, yapılandırma dosyası odaklı bir web sunucu/proxy’dir.
-    Değişiklikten önce `nginx -t` ile sözdizimi testi alışkanlık olmalıdır.
-
-    **Caddy** otomatik ACME/HTTPS ile öne çıkar; `caddy validate` config’i
-    kontrol eder. Her iki araç da yanlış config ile hizmeti düşürebilir.
-
-    Firewall ve SELinux/AppArmor kuralları port 80/443 erişimini etkiler —
-    proxy kaydı firewall kaydı değildir. Örnekler `draft`.
-  en: |
-    A **reverse proxy** forwards client requests to upstream services
-    (TLS termination, load balancing, path routing).
-
-    **nginx** is a mature, config-file-centric web server/proxy. Habit: run
-    `nginx -t` before reloading.
-
-    **Caddy** emphasizes automatic ACME/HTTPS; `caddy validate` checks config.
-    Either tool can take a service down with a bad config.
-
-    Firewall and SELinux/AppArmor rules affect ports 80/443 — a proxy record is
-    not a firewall record. Examples stay `draft`.
-verification:
-  status: draft
-  sources:
-    - "https://nginx.org/en/docs/"
-    - "https://caddyserver.com/docs/"
-  notes: "Agent-authored Faz 7 teaching draft; not human-verified."
+graded_examples:
+- title:
+    tr: Config test
+    en: Config test
+  command: nginx -t
+  explanation:
+    tr: Yapılandırma sözdizimini test eder (yazmaz).
+    en: Tests config syntax (does not write).
+  difficulty: beginner
+  risk: safe
+  related_commands:
+  - nginx
+callouts:
+- kind: note
+  text:
+    tr: Örnekler bank kayıtlarından gelir; man/--help ile doğrulanmadan verified yapılmaz.
+    en: Examples come from bank records; not verified without man/--help review.
+safe_exercises:
+- title:
+    tr: Salt okuma keşif
+    en: Read-only exploration
+  prompt:
+    tr: Bu konudaki bir safe/caution komutun beginner örneğini okuyun; çalıştırmadan önce risk rozetine
+      bakın.
+    en: Read a beginner example of a safe/caution command in this topic; check the risk badge before running.
+  risk: safe
+  related_commands:
+  - nginx
+  - caddy
+  - curl
+next_steps:
+- id: server-security-checklist
+- id: networking-basics

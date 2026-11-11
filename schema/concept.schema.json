@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://raw.githubusercontent.com/Teknoloji-Filozoflari/Nova-Commands/main/schema/concept.schema.json",
-  "title": "Nova-Commands concept article",
-  "description": "Learnable cross-cutting concept (TR/EN). Not a command entry; complements metadata/concepts.yaml labels.",
+  "title": "Nova-Commands concept / topic guide",
+  "description": "Learnable topic guide (TR/EN). Not a command entry. Prefer structured guide sections (intro, learning_path, subtopics, command_table, graded_examples, callouts, safe_exercises, next_steps) for Nova TUI; keep bilingual body as narrative fallback. Complements metadata/concepts.yaml labels.",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -25,12 +25,61 @@
       "type": "string",
       "const": "nova-commands-concept"
     },
+    "format": {
+      "type": "string",
+      "enum": ["topic-guide", "article"],
+      "description": "topic-guide = structured learning path for Nova TUI; article = freeform body-first. Omit → treat as article for back-compat."
+    },
     "title": { "$ref": "#/$defs/localizedShort" },
     "summary": { "$ref": "#/$defs/localizedShort" },
+    "intro": {
+      "$ref": "#/$defs/localizedLong",
+      "description": "Short topic introduction. Prefer over first paragraphs of body in TUI when present."
+    },
     "body": { "$ref": "#/$defs/localizedBody" },
     "difficulty": {
       "type": "string",
       "enum": ["beginner", "intermediate", "advanced"]
+    },
+    "categories": {
+      "type": "array",
+      "maxItems": 8,
+      "uniqueItems": true,
+      "description": "Optional command-category slugs this guide primarily teaches.",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9-]*$"
+      }
+    },
+    "platforms": {
+      "type": "array",
+      "maxItems": 12,
+      "uniqueItems": true,
+      "description": "Honest platform scope for the guide (omit empty). Do not invent OS variants.",
+      "items": {
+        "type": "string",
+        "enum": [
+          "linux",
+          "macos",
+          "bsd",
+          "windows",
+          "android",
+          "freebsd",
+          "openbsd",
+          "netbsd",
+          "dragonflybsd"
+        ]
+      }
+    },
+    "distributions": {
+      "type": "array",
+      "maxItems": 16,
+      "uniqueItems": true,
+      "description": "Optional distro-family ids from metadata/distributions.yaml when the guide is family-specific.",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9-]*$"
+      }
     },
     "tags": {
       "type": "array",
@@ -40,6 +89,48 @@
         "type": "string",
         "pattern": "^[a-z0-9][a-z0-9-]*$"
       }
+    },
+    "learning_path": {
+      "type": "array",
+      "maxItems": 24,
+      "description": "Ordered learning steps (commands and/or concepts). Omit when empty.",
+      "items": { "$ref": "#/$defs/learningStep" }
+    },
+    "subtopics": {
+      "type": "array",
+      "maxItems": 16,
+      "description": "Named subtopics inside the guide. Omit when empty.",
+      "items": { "$ref": "#/$defs/subtopic" }
+    },
+    "command_table": {
+      "type": "array",
+      "maxItems": 32,
+      "description": "Compact command table linking to bank ids. Prefer over dumping full command YAML into the guide.",
+      "items": { "$ref": "#/$defs/commandTableRow" }
+    },
+    "graded_examples": {
+      "type": "array",
+      "maxItems": 16,
+      "description": "Topic-level graded examples (beginner→advanced). Link bank commands; do not invent flags.",
+      "items": { "$ref": "#/$defs/gradedExample" }
+    },
+    "callouts": {
+      "type": "array",
+      "maxItems": 12,
+      "description": "Tip / warning / note callouts for TUI. Omit when empty.",
+      "items": { "$ref": "#/$defs/callout" }
+    },
+    "safe_exercises": {
+      "type": "array",
+      "maxItems": 12,
+      "description": "Safe practice prompts (read-only / reversible). risk must stay safe|caution.",
+      "items": { "$ref": "#/$defs/safeExercise" }
+    },
+    "next_steps": {
+      "type": "array",
+      "maxItems": 12,
+      "description": "Follow-on concept/topic ids (and optional notes).",
+      "items": { "$ref": "#/$defs/nextStep" }
     },
     "related_commands": {
       "type": "array",
@@ -108,6 +199,15 @@
         "en": { "type": "string", "minLength": 1, "maxLength": 160 }
       }
     },
+    "localizedLong": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tr", "en"],
+      "properties": {
+        "tr": { "type": "string", "minLength": 1, "maxLength": 2000 },
+        "en": { "type": "string", "minLength": 1, "maxLength": 2000 }
+      }
+    },
     "localizedBody": {
       "type": "object",
       "additionalProperties": false,
@@ -115,6 +215,165 @@
       "properties": {
         "tr": { "type": "string", "minLength": 80, "maxLength": 12000 },
         "en": { "type": "string", "minLength": 80, "maxLength": 12000 }
+      }
+    },
+    "learningStep": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ref", "kind"],
+      "properties": {
+        "ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "^[a-z0-9][a-z0-9+._-]*$"
+        },
+        "kind": {
+          "type": "string",
+          "enum": ["command", "concept", "subtopic"]
+        },
+        "note": { "$ref": "#/$defs/localizedShort" }
+      }
+    },
+    "subtopic": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title", "summary"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]*$",
+          "maxLength": 64
+        },
+        "title": { "$ref": "#/$defs/localizedShort" },
+        "summary": { "$ref": "#/$defs/localizedShort" },
+        "related_commands": {
+          "type": "array",
+          "maxItems": 16,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9+._-]*$"
+          }
+        }
+      }
+    },
+    "commandTableRow": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "purpose"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9+._-]*$",
+          "maxLength": 64
+        },
+        "purpose": { "$ref": "#/$defs/localizedShort" },
+        "learning_level": {
+          "type": "string",
+          "enum": ["beginner", "intermediate", "advanced", "unspecified"]
+        }
+      }
+    },
+    "gradedExample": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title", "command", "explanation", "difficulty", "risk"],
+      "properties": {
+        "title": { "$ref": "#/$defs/localizedShort" },
+        "command": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512
+        },
+        "explanation": { "$ref": "#/$defs/localizedLong" },
+        "difficulty": {
+          "type": "string",
+          "enum": ["beginner", "intermediate", "advanced"]
+        },
+        "risk": {
+          "type": "string",
+          "enum": ["safe", "caution", "dangerous", "destructive"]
+        },
+        "platforms": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": [
+              "linux",
+              "macos",
+              "bsd",
+              "windows",
+              "freebsd",
+              "openbsd",
+              "netbsd",
+              "dragonflybsd"
+            ]
+          }
+        },
+        "related_commands": {
+          "type": "array",
+          "maxItems": 8,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9+._-]*$"
+          }
+        },
+        "warnings": {
+          "type": "array",
+          "maxItems": 4,
+          "items": { "$ref": "#/$defs/localizedShort" }
+        }
+      }
+    },
+    "callout": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "text"],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": ["tip", "warning", "note", "caution"]
+        },
+        "text": { "$ref": "#/$defs/localizedLong" }
+      }
+    },
+    "safeExercise": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title", "prompt", "risk"],
+      "properties": {
+        "title": { "$ref": "#/$defs/localizedShort" },
+        "prompt": { "$ref": "#/$defs/localizedLong" },
+        "risk": {
+          "type": "string",
+          "enum": ["safe", "caution"],
+          "description": "Exercises must stay safe or caution — never dangerous/destructive practice prompts."
+        },
+        "related_commands": {
+          "type": "array",
+          "maxItems": 8,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9+._-]*$"
+          }
+        }
+      }
+    },
+    "nextStep": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]*$",
+          "maxLength": 64
+        },
+        "note": { "$ref": "#/$defs/localizedShort" }
       }
     }
   }

@@ -84,6 +84,7 @@ examples:
   risk: safe
   privilege: none
   requires_elevated: false
+  difficulty: beginner
 - title:
     tr: Rota
     en: Route
@@ -126,7 +127,8 @@ verification:
   - man 8 ip
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-bootstrap
-  notes: Flags marked unverified 2026-11-10; sourced from man 8 ip knowledge.
+  notes: Flags marked unverified 2026-11-10; sourced from man 8 ip knowledge. NV-123 teachable fields
+    (when/syntax/mistakes/topics).
 nova:
   concepts:
   - networking
@@ -134,3 +136,15 @@ nova:
 purpose:
   tr: 'Linux ağ yığınına bakış: adres, link, rota (iproute2).'
   en: 'Inspect the Linux network stack: address, link, route (iproute2).'
+when_to_use:
+  tr: Linux’ta arayüz, adres ve rota bilgisini okumak/yönetmek (öğrenmede önce okuma).
+  en: On Linux, read/manage interface, address, and route info (prefer reading while learning).
+syntax: ip [OPTIONS] OBJECT {COMMAND | help}
+expected_effect:
+  tr: ip addr/link/route altkomutları durum basar; değiştiren komutlar ağ bağlantısını bozabilir.
+  en: ip addr/link/route subcommands print state; mutating commands can break connectivity.
+common_mistakes:
+- tr: macOS/BSD’de ip bekleyip ifconfig yerine geçmesini sanmak.
+  en: Expecting ip on macOS/BSD as a drop-in for ifconfig.
+related_topics:
+- networking-basics

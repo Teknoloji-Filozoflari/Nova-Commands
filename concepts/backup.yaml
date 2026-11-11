@@ -8,51 +8,162 @@ summary:
   en: restic, Borg, and rclone — credential rules and risk.
 difficulty: intermediate
 tags:
-  - backup
-  - restic
-  - borg
-  - rclone
+- backup
+- restic
+- borg
+- rclone
 related_commands:
+- restic
+- borg
+- rclone
+- rsync
+- tar
+related_concepts:
+- storage
+- permissions
+see_also:
+- https://restic.readthedocs.io/
+- https://borgbackup.readthedocs.io/
+- https://rclone.org/docs/
+body:
+  tr: 'Sunucu yedekleri genelde **artımlı + doğrulanabilir** olmalıdır.
+
+
+    **restic** — şifreli, dedupe repo; parola ve backend secret’ları gizli.
+
+    **BorgBackup** — dedupe arşivler; `create` veri yazar.
+
+    **rclone** — bulut/uzak depolara kopyalama/senkron; config’te credential.
+
+
+    **rsync** klasik dosya senkronudur; tek başına şifreli yedek çözümü değildir.
+
+    Banka örneklerinde gerçek parola, API anahtarı veya `rclone.conf` içeriği
+
+    yoktur. `forget`/`prune`/`sync --delete` yıkıcı olabilir — risk etiketlerine
+
+    bakın. Hepsi `draft`.
+
+    '
+  en: 'Server backups should usually be **incremental and verifiable**.
+
+
+    **restic** — encrypted, deduplicated repos; keep passwords and backend
+
+    secrets private.
+
+    **BorgBackup** — deduplicated archives; `create` writes data.
+
+    **rclone** — copy/sync to cloud/remote storage; credentials live in config.
+
+
+    **rsync** is classic file sync — not by itself an encrypted backup solution.
+
+    Catalog examples never embed real passwords, API keys, or `rclone.conf`
+
+    bodies. `forget`/`prune`/`sync --delete` can be destructive — respect risk
+
+    labels. All stay `draft`.
+
+    '
+verification:
+  status: draft
+  sources:
+  - https://restic.readthedocs.io/
+  - https://borgbackup.readthedocs.io/
+  - https://rclone.org/docs/
+  notes: Agent-authored Faz 7 teaching draft; not human-verified. NV-123 topic-guide structure; agent-authored;
+    needs human review before verified.
+format: topic-guide
+categories:
+- backup
+- archives
+platforms:
+- linux
+- macos
+- bsd
+intro: &id001
+  tr: 'Yedekleme ve arşivleme: rsync/tar odaklı; geri yüklemeden önce doğrulama.'
+  en: 'Backup and archives: rsync/tar focused; verify before restore.'
+learning_path:
+- ref: restic
+  kind: command
+- ref: borg
+  kind: command
+- ref: rclone
+  kind: command
+- ref: rsync
+  kind: command
+- ref: tar
+  kind: command
+command_table:
+- id: restic
+  purpose:
+    tr: Şifreli artımlı yedekleme.
+    en: Encrypted incremental backups.
+  learning_level: intermediate
+- id: borg
+  purpose:
+    tr: BorgBackup dedupe yedekleme.
+    en: BorgBackup deduplicating backups.
+  learning_level: unspecified
+- id: rclone
+  purpose:
+    tr: Bulut depolama senkron aracı.
+    en: Cloud storage sync tool.
+  learning_level: unspecified
+- id: rsync
+  purpose:
+    tr: Dosyaları verimli eşitleyerek kopyalar.
+    en: Fast incremental file transfer.
+  learning_level: intermediate
+- id: tar
+  purpose:
+    tr: Tar arşivlerini oluşturur veya çıkarır.
+    en: Create or extract tape archives.
+  learning_level: beginner
+subtopics:
+- id: overview
+  title:
+    tr: Genel bakış
+    en: Overview
+  summary: *id001
+  related_commands:
   - restic
   - borg
   - rclone
   - rsync
   - tar
-related_concepts:
-  - storage
-  - permissions
-see_also:
-  - "https://restic.readthedocs.io/"
-  - "https://borgbackup.readthedocs.io/"
-  - "https://rclone.org/docs/"
-body:
-  tr: |
-    Sunucu yedekleri genelde **artımlı + doğrulanabilir** olmalıdır.
-
-    **restic** — şifreli, dedupe repo; parola ve backend secret’ları gizli.
-    **BorgBackup** — dedupe arşivler; `create` veri yazar.
-    **rclone** — bulut/uzak depolara kopyalama/senkron; config’te credential.
-
-    **rsync** klasik dosya senkronudur; tek başına şifreli yedek çözümü değildir.
-    Banka örneklerinde gerçek parola, API anahtarı veya `rclone.conf` içeriği
-    yoktur. `forget`/`prune`/`sync --delete` yıkıcı olabilir — risk etiketlerine
-    bakın. Hepsi `draft`.
-  en: |
-    Server backups should usually be **incremental and verifiable**.
-
-    **restic** — encrypted, deduplicated repos; keep passwords and backend
-    secrets private.
-    **BorgBackup** — deduplicated archives; `create` writes data.
-    **rclone** — copy/sync to cloud/remote storage; credentials live in config.
-
-    **rsync** is classic file sync — not by itself an encrypted backup solution.
-    Catalog examples never embed real passwords, API keys, or `rclone.conf`
-    bodies. `forget`/`prune`/`sync --delete` can be destructive — respect risk
-    labels. All stay `draft`.
-verification:
-  status: draft
-  sources:
-    - "https://restic.readthedocs.io/"
-    - "https://borgbackup.readthedocs.io/"
-    - "https://rclone.org/docs/"
-  notes: "Agent-authored Faz 7 teaching draft; not human-verified."
+graded_examples:
+- title:
+    tr: Sürüm
+    en: Version
+  command: restic version
+  explanation:
+    tr: restic sürümü.
+    en: restic version.
+  difficulty: beginner
+  risk: safe
+  related_commands:
+  - restic
+callouts:
+- kind: note
+  text:
+    tr: Örnekler bank kayıtlarından gelir; man/--help ile doğrulanmadan verified yapılmaz.
+    en: Examples come from bank records; not verified without man/--help review.
+safe_exercises:
+- title:
+    tr: Salt okuma keşif
+    en: Read-only exploration
+  prompt:
+    tr: Bu konudaki bir safe/caution komutun beginner örneğini okuyun; çalıştırmadan önce risk rozetine
+      bakın.
+    en: Read a beginner example of a safe/caution command in this topic; check the risk badge before running.
+  risk: safe
+  related_commands:
+  - restic
+  - borg
+  - rclone
+next_steps:
+- id: archives-compression
+- id: storage

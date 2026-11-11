@@ -8,78 +8,221 @@ summary:
   en: Interfaces, IP, DNS, connectivity checks, and common Linux network tools.
 difficulty: beginner
 tags:
-  - network
-  - dns
-  - ip
+- network
+- dns
+- ip
 related_commands:
-  - ip
-  - ss
-  - ping
-  - curl
-  - wget
-  - dig
-  - host
-  - resolvectl
-  - nmcli
-  - traceroute
-  - nc
-  - tcpdump
-  - nmap
-  - mtr
-  - ethtool
+- ip
+- ss
+- ping
+- curl
+- wget
+- dig
+- host
+- resolvectl
+- nmcli
+- traceroute
+- nc
+- tcpdump
+- nmap
+- mtr
+- ethtool
 related_concepts:
-  - dns
-  - ssh
-  - networking
-  - terminal-basics
+- dns
+- ssh
+- networking
+- terminal-basics
 see_also:
-  - "man ip"
-  - "man systemd-resolved"
-  - "Arch Wiki: Network configuration"
+- man ip
+- man systemd-resolved
+- 'Arch Wiki: Network configuration'
 body:
-  tr: |
-    Linux’ta modern arayüz/adres yönetimi çoğunlukla **iproute2** (`ip`) ile yapılır;
+  tr: 'Linux’ta modern arayüz/adres yönetimi çoğunlukla **iproute2** (`ip`) ile yapılır;
+
     dinleyen soketler için `ss` (eski `netstat` yerine) tercih edilir.
 
+
     **Katmanlar (pratik bakış):**
+
     - Arayüz: `ip link` / `ip addr` — bağlantı ve adresler.
+
     - Yol: `ip route` — varsayılan ağ geçidi ve rotalar.
+
     - Taşıma: `ss -tulpn` — dinleyen TCP/UDP portlar (root ile süreç adları daha dolu).
 
+
     **Bağlantı testi:** `ping` ICMP kullanır (engellenebilir). HTTP için `curl -I`
+
     veya `wget`. Yol izi: `traceroute` / `tracepath` (paket kurulumuna bağlı).
 
+
     **DNS:** İsim → IP çözümü. `dig` / `host` sorgular; systemd-resolved kullanan
+
     sistemlerde `resolvectl status` / `resolvectl query` yararlıdır. NetworkManager
+
     ile masaüstü/laptop’ta `nmcli` bağlantı profillerini yönetir.
 
+
     **Güvenlik notu:** `nc` (netcat) teşhis için güçlüdür ama yanlış kullanımda
+
     istenmeyen dinleyici açabilir — bankada `draft`/`caution` olabilir.
+
     Firewall araçları (`firewall-cmd`, nftables/iptables) ayrı dikkat ister;
+
     kuralları uydurmadan belgeleyin.
-  en: |
-    On modern Linux, interface/address management is mostly **iproute2** (`ip`);
+
+    '
+  en: 'On modern Linux, interface/address management is mostly **iproute2** (`ip`);
+
     use `ss` for sockets (prefer over legacy `netstat`).
 
+
     **Practical layers:**
+
     - Link/addr: `ip link` / `ip addr`.
+
     - Routing: `ip route` — default gateway and routes.
+
     - Transport: `ss -tulpn` — listening TCP/UDP (process names often need root).
 
+
     **Connectivity:** `ping` uses ICMP (may be blocked). For HTTP, `curl -I` or `wget`.
+
     Path tracing: `traceroute` / `tracepath` (package-dependent).
 
+
     **DNS:** Name → address. `dig` / `host` query resolvers; on systemd-resolved hosts,
+
     `resolvectl status` / `resolvectl query` help. Desktops often use NetworkManager
+
     via `nmcli`.
 
+
     **Safety:** `nc` (netcat) is powerful for diagnostics but can open unwanted
+
     listeners — catalog may mark it `draft`/`caution`. Firewall tooling needs care;
+
     never invent rules or flags.
+
+    '
 verification:
   status: draft
   sources:
-    - "man ip-address / man ss"
-    - "man systemd-resolved / resolvectl"
-    - "https://wiki.archlinux.org/title/Network_configuration"
-  notes: "Agent-authored teaching article; needs maintainer spot-check before verified."
+  - man ip-address / man ss
+  - man systemd-resolved / resolvectl
+  - https://wiki.archlinux.org/title/Network_configuration
+  notes: Agent-authored teaching article; needs maintainer spot-check before verified. NV-123 topic-guide
+    structure; agent-authored; needs human review before verified.
+format: topic-guide
+categories:
+- network
+platforms:
+- linux
+- macos
+- bsd
+- windows
+intro:
+  tr: Yerel IP, DNS, bağlantı testi ve yönlendirme — okuma odaklı ağ temelleri.
+  en: Local IP, DNS, connectivity checks, and routing — read-oriented networking basics.
+learning_path:
+- ref: ip
+  kind: command
+- ref: ping
+  kind: command
+- ref: dig
+  kind: command
+- ref: curl
+  kind: command
+- ref: ss
+  kind: command
+- ref: traceroute
+  kind: command
+subtopics:
+- id: addressing
+  title:
+    tr: Adresleme
+    en: Addressing
+  summary:
+    tr: ip/ifconfig veya Get-NetIPConfiguration ile arayüz adresleri.
+    en: Interface addresses via ip/ifconfig or Get-NetIPConfiguration.
+  related_commands:
+  - ip
+- id: dns-http
+  title:
+    tr: DNS ve HTTP
+    en: DNS and HTTP
+  summary:
+    tr: dig/nslookup çözümler; curl istek atar (yazma değil okuma örnekleri tercih).
+    en: dig/nslookup resolve; curl makes requests (prefer read examples).
+  related_commands:
+  - dig
+  - curl
+command_table:
+- id: ip
+  purpose:
+    tr: Ağ aygıtları, adresler ve rotaları yönetir.
+    en: Show and manipulate routing, devices, and tunnels.
+  learning_level: intermediate
+- id: ping
+  purpose:
+    tr: ICMP ile host erişimini dener.
+    en: Send ICMP ECHO_REQUEST to network hosts.
+  learning_level: beginner
+- id: dig
+  purpose:
+    tr: DNS sorgu aracı (BIND).
+    en: DNS lookup utility (BIND).
+  learning_level: intermediate
+- id: curl
+  purpose:
+    tr: URL ile veri transferi yapar.
+    en: Transfer data from or to a server.
+  learning_level: beginner
+- id: ss
+  purpose:
+    tr: Soket istatistiklerini gösterir.
+    en: Investigate sockets.
+  learning_level: intermediate
+- id: traceroute
+  purpose:
+    tr: Paketlerin rota hop’larını izler.
+    en: Print the route packets take to a host.
+  learning_level: intermediate
+graded_examples:
+- title:
+    tr: Ping (sınırlı)
+    en: Ping (bounded)
+  command: ping -c 3 1.1.1.1
+  explanation:
+    tr: 'Üç ICMP denemesi; -c Linux/BSD’de yaygın (Windows: -n).'
+    en: 'Three ICMP probes; -c common on Linux/BSD (Windows: -n).'
+  difficulty: beginner
+  risk: safe
+  platforms:
+  - linux
+  - macos
+  - bsd
+  related_commands:
+  - ping
+callouts:
+- kind: note
+  text:
+    tr: ip Linux’ta net-tools/ifconfig’tan farklıdır; macOS/BSD’de ifconfig hâlâ yaygındır.
+    en: ip on Linux differs from net-tools/ifconfig; macOS/BSD still often use ifconfig.
+- kind: warning
+  text:
+    tr: Ağ tarama / saldırı adımları bu rehberde yoktur.
+    en: Network scanning / attack steps are not part of this guide.
+safe_exercises:
+- title:
+    tr: Yerel arayüzleri okuyun
+    en: Read local interfaces
+  prompt:
+    tr: 'Linux: ip -br a; macOS/BSD: ifconfig -a (salt okuma).'
+    en: 'Linux: ip -br a; macOS/BSD: ifconfig -a (read-only).'
+  risk: safe
+  related_commands:
+  - ip
+next_steps:
+- id: firewalls
+- id: reverse-proxy

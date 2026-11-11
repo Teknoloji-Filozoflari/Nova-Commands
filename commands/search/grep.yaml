@@ -83,6 +83,7 @@ examples:
     tr: TODO geçen satırları numarayla gösterir.
     en: Shows TODO lines with numbers.
   risk: safe
+  difficulty: beginner
 - title:
     tr: Ağaçta ara
     en: Search tree
@@ -107,9 +108,25 @@ verification:
   - man 1 grep
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-bootstrap
+  notes: NV-123 teachable fields (when/syntax/mistakes/topics).
 nova:
   favorite_eligible: true
   ui_priority: 85
   concepts:
   - files
   - shell-pipes-redirection
+when_to_use:
+  tr: Dosya veya stdin içinde desen aramak.
+  en: Search for a pattern in files or stdin.
+syntax: grep [OPTION]... PATTERN [FILE]...
+expected_effect:
+  tr: Eşleşen satırları basar; eşleşme yoksa genelde çıkış kodu 1.
+  en: Prints matching lines; usually exit status 1 when nothing matches.
+common_mistakes:
+- tr: Regex özel karakterlerini escape etmemek.
+  en: Forgetting to escape regex metacharacters.
+- tr: Büyük/küçük harf için -i unutmak.
+  en: Forgetting -i for case-insensitive search.
+related_topics:
+- text-processing
+- shell-pipes-redirection

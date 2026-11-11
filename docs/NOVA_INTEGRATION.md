@@ -65,15 +65,17 @@ treat it as equivalent to a verified Release.
 | Bank field | UI use |
 |------------|--------|
 | `summary` / `description` / concept `body` | Locale from Nova settings (`tr` / `en`) |
+| Topic-guide `intro` / `learning_path` / `subtopics` / `command_table` / `graded_examples` / `callouts` / `safe_exercises` / `next_steps` | Prefer when `format: topic-guide`; fall back to `body` |
+| `when_to_use` / `syntax` / `expected_effect` / `common_mistakes` | Command detail teaching sections — **omit if empty** |
+| `related_topics` (+ `nova.concepts`) | Cross-links into topic guides / chips |
 | `risk` + example `risk` | Warning badges / confirm gates |
-| `learning_level` (+ example `difficulty`) | Pedagogy / learning filters — **independent of risk**; missing → `unspecified` |
+| `learning_level` (+ example `difficulty`) | Pedagogy / learning filters — **independent of risk**; missing → `unspecified`; never skip beginner copy |
 | `requires_elevated` | Sudo affordance |
-| `packages` + `install_notes` | Install hints — **Arch/pacman first** on Arch hosts (legacy keys kept) |
+| `packages` + `install_notes` | Install hints — prefer host family; **no silent Arch default** when Linux has no distro filter |
 | `package_refs` | Preferred PM-registry install mapping (`manager` + `package`) |
 | `kind` | Optional UI chrome (builtin vs executable vs package manager) |
-| `platforms` / `operating_systems` | Platform filters (schema allows `windows`) |
+| `platforms` / `operating_systems` / concept `distributions` | Platform / distro filters (schema allows `windows`) |
 | `intent` | Natural-language search phrases |
-| `nova.concepts` | Cross-links into concept articles / chips |
 | `verification.status` | Trust chrome |
 
 ## Distro preference

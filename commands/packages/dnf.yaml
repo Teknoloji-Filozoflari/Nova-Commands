@@ -88,6 +88,7 @@ verification:
   - man 8 dnf
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-bootstrap
+  notes: NV-123 teachable fields (when/syntax/mistakes/topics).
 nova:
   concepts:
   - packages
@@ -96,3 +97,15 @@ nova:
 purpose:
   tr: Fedora/RHEL ailesi paket yöneticisi.
   en: Fedora/RHEL-family package manager.
+when_to_use:
+  tr: Fedora/RHEL ailesi paket işlemleri.
+  en: Fedora/RHEL-family package operations.
+syntax: dnf [options] <command> [<args>...]
+expected_effect:
+  tr: search/info okur; install/upgrade paketleri değiştirir.
+  en: search/info read; install/upgrade change packages.
+common_mistakes:
+- tr: rpm-ostree sistemlerde klasik dnf varsaymak.
+  en: Assuming classic dnf on rpm-ostree systems.
+related_topics:
+- package-managers

@@ -63,6 +63,7 @@ examples:
     tr: Geniş süreç tablosu.
     en: Wide process table.
   risk: safe
+  difficulty: beginner
 - title:
     tr: İsme filtre
     en: Filter by name
@@ -88,8 +89,21 @@ verification:
   - man 1 ps
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-phase17
-  notes: Read-only process snapshot; aux/-ef flags already marked verified.
+  notes: Read-only process snapshot; aux/-ef flags already marked verified. NV-123 teachable fields (when/syntax/mistakes/topics).
 nova:
   concepts:
   - terminal-basics
   favorite_eligible: true
+when_to_use:
+  tr: Çalışan süreçlerin anlık listesini görmek.
+  en: See a snapshot of running processes.
+syntax: ps [OPTIONS]
+expected_effect:
+  tr: Süreç tablosundan satırlar basar; süreçleri değiştirmez.
+  en: Prints rows from the process table; does not change processes.
+common_mistakes:
+- tr: ps aux ile ps -ef sözdizimlerini karıştırmak.
+  en: Mixing ps aux and ps -ef syntax dialects.
+related_topics:
+- processes
+- debugging

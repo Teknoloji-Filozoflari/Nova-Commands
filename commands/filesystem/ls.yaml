@@ -49,14 +49,16 @@ package_refs:
   - fedora
   - rhel
 install_notes:
-  tr: |-
-    Arch: pacman -S coreutils (genelde taban sistemde vardır).
+  tr: 'Arch: pacman -S coreutils (genelde taban sistemde vardır).
+
     Debian/Ubuntu: apt install coreutils
-    Fedora: dnf install coreutils
-  en: |-
-    Arch: pacman -S coreutils (usually in base).
+
+    Fedora: dnf install coreutils'
+  en: 'Arch: pacman -S coreutils (usually in base).
+
     Debian/Ubuntu: apt install coreutils
-    Fedora: dnf install coreutils
+
+    Fedora: dnf install coreutils'
 flags:
 - flag: -a
   long: --all
@@ -98,6 +100,7 @@ examples:
     tr: Gizli dosyalar, insan okunur boyutlar, uzun biçim.
     en: Hidden files, human sizes, long format.
   risk: safe
+  difficulty: beginner
 - title:
     tr: Tek dizin
     en: One directory
@@ -130,9 +133,26 @@ verification:
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-phase15
   notes: Flags -a/-l/-h/-R and examples checked against GNU coreutils man/--help. Safe read-only listing.
+    NV-123 teachable fields (when/syntax/mistakes/topics).
 nova:
   favorite_eligible: true
   ui_priority: 90
   concepts:
   - files
   - terminal-basics
+when_to_use:
+  tr: Bir dizinde ne olduğunu hızlıca görmek; gizli dosyalar veya ayrıntılı izinler için bayrak ekleyin.
+  en: Quickly see what is in a directory; add flags for hidden files or detailed permissions.
+syntax: ls [OPTION]... [FILE]...
+expected_effect:
+  tr: Belirtilen yolların adlarını (ve -l ile meta veriyi) stdout’a yazar; dosya sistemini değiştirmez.
+  en: Writes names (and metadata with -l) for the given paths to stdout; does not change the filesystem.
+common_mistakes:
+- tr: ls yolunu yanlış yazıp “böyle bir dosya yok” sanmak — önce pwd.
+  en: Mistyping the path and assuming the file is missing — check pwd first.
+- tr: GNU -h/--color ile BSD ls bayraklarını karıştırmak.
+  en: Mixing GNU -h/--color assumptions with BSD ls flags.
+related_topics:
+- terminal-basics
+- finding-files
+- permissions

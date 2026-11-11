@@ -8,50 +8,148 @@ summary:
   en: Hypervisor layers and virsh/qemu-img — not container orchestration.
 difficulty: intermediate
 tags:
-  - virtualization
-  - kvm
-  - qemu
-  - libvirt
+- virtualization
+- kvm
+- qemu
+- libvirt
 related_commands:
+- virsh
+- qemu-img
+- systemctl
+- lsblk
+related_concepts:
+- storage
+- containers
+- networking
+see_also:
+- https://libvirt.org/docs.html
+- https://www.qemu.org/docs/master/
+body:
+  tr: '**KVM/QEMU** donanım sanallaştırması sağlar; **libvirt** çoğu Linux
+
+    dağıtımında yönetim API’si ve **virsh** CLI’sini sunar.
+
+
+    **Konteyner ≠ VM:** Podman/Docker süreç yalıtımı kullanır; virsh domain’leri
+
+    tam sanal makinelerdir. Kubernetes bir hipervizör değildir.
+
+
+    **Disk imajları:** `qemu-img` qcow2/raw gibi formatları sorgular/dönüştürür.
+
+    Yanlış `convert` veri kaybettirebilir — banka örnekleri `info` odaklıdır.
+
+
+    Proxmox gibi ürün CLI’leri vendor-specific’tir; genel libvirt kayıtlarıyla
+
+    karıştırılmamalıdır. Hepsi `draft` başlar.
+
+    '
+  en: '**KVM/QEMU** provide hardware virtualization; **libvirt** is the common
+
+    Linux management API with the **virsh** CLI.
+
+
+    **Containers ≠ VMs:** Podman/Docker isolate processes; virsh domains are
+
+    full VMs. Kubernetes is not a hypervisor.
+
+
+    **Disk images:** `qemu-img` queries/converts qcow2/raw formats. A bad
+
+    `convert` can lose data — catalog examples stay `info`-focused.
+
+
+    Product CLIs like Proxmox are vendor-specific and must not be equated with
+
+    generic libvirt records. Everything starts as `draft`.
+
+    '
+verification:
+  status: draft
+  sources:
+  - https://libvirt.org/docs.html
+  - https://www.qemu.org/docs/master/tools/qemu-img.html
+  notes: Agent-authored Faz 7 teaching draft; not human-verified. NV-123 topic-guide structure; agent-authored;
+    needs human review before verified.
+format: topic-guide
+categories:
+- virtualization
+platforms:
+- linux
+intro: &id001
+  tr: libvirt/virsh ve disk img araçlarına giriş; appliance CLI’ler kapsam dışı.
+  en: Intro to libvirt/virsh and disk image tools; appliance CLIs are out of scope.
+learning_path:
+- ref: virsh
+  kind: command
+- ref: qemu-img
+  kind: command
+- ref: systemctl
+  kind: command
+- ref: lsblk
+  kind: command
+command_table:
+- id: virsh
+  purpose:
+    tr: libvirt yönetim kabuğu.
+    en: libvirt management shell.
+  learning_level: unspecified
+- id: qemu-img
+  purpose:
+    tr: QEMU disk imajı aracı.
+    en: QEMU disk image utility.
+  learning_level: unspecified
+- id: systemctl
+  purpose:
+    tr: systemd birimlerini denetler.
+    en: Control the systemd system and service manager.
+  learning_level: intermediate
+- id: lsblk
+  purpose:
+    tr: Blok aygıtları ağaç olarak listeler.
+    en: List block devices.
+  learning_level: intermediate
+subtopics:
+- id: overview
+  title:
+    tr: Genel bakış
+    en: Overview
+  summary: *id001
+  related_commands:
   - virsh
   - qemu-img
   - systemctl
   - lsblk
-related_concepts:
-  - storage
-  - containers
-  - networking
-see_also:
-  - "https://libvirt.org/docs.html"
-  - "https://www.qemu.org/docs/master/"
-body:
-  tr: |
-    **KVM/QEMU** donanım sanallaştırması sağlar; **libvirt** çoğu Linux
-    dağıtımında yönetim API’si ve **virsh** CLI’sini sunar.
-
-    **Konteyner ≠ VM:** Podman/Docker süreç yalıtımı kullanır; virsh domain’leri
-    tam sanal makinelerdir. Kubernetes bir hipervizör değildir.
-
-    **Disk imajları:** `qemu-img` qcow2/raw gibi formatları sorgular/dönüştürür.
-    Yanlış `convert` veri kaybettirebilir — banka örnekleri `info` odaklıdır.
-
-    Proxmox gibi ürün CLI’leri vendor-specific’tir; genel libvirt kayıtlarıyla
-    karıştırılmamalıdır. Hepsi `draft` başlar.
-  en: |
-    **KVM/QEMU** provide hardware virtualization; **libvirt** is the common
-    Linux management API with the **virsh** CLI.
-
-    **Containers ≠ VMs:** Podman/Docker isolate processes; virsh domains are
-    full VMs. Kubernetes is not a hypervisor.
-
-    **Disk images:** `qemu-img` queries/converts qcow2/raw formats. A bad
-    `convert` can lose data — catalog examples stay `info`-focused.
-
-    Product CLIs like Proxmox are vendor-specific and must not be equated with
-    generic libvirt records. Everything starts as `draft`.
-verification:
-  status: draft
-  sources:
-    - "https://libvirt.org/docs.html"
-    - "https://www.qemu.org/docs/master/tools/qemu-img.html"
-  notes: "Agent-authored Faz 7 teaching draft; not human-verified."
+graded_examples:
+- title:
+    tr: Domain listesi
+    en: List domains
+  command: virsh list --all
+  explanation:
+    tr: Tüm sanal makineleri listeler (libvirt erişimi).
+    en: Lists all VMs (needs libvirt access).
+  difficulty: beginner
+  risk: safe
+  related_commands:
+  - virsh
+callouts:
+- kind: note
+  text:
+    tr: Örnekler bank kayıtlarından gelir; man/--help ile doğrulanmadan verified yapılmaz.
+    en: Examples come from bank records; not verified without man/--help review.
+safe_exercises:
+- title:
+    tr: Salt okuma keşif
+    en: Read-only exploration
+  prompt:
+    tr: Bu konudaki bir safe/caution komutun beginner örneğini okuyun; çalıştırmadan önce risk rozetine
+      bakın.
+    en: Read a beginner example of a safe/caution command in this topic; check the risk badge before running.
+  risk: safe
+  related_commands:
+  - virsh
+  - qemu-img
+  - systemctl
+next_steps:
+- id: containers-basics

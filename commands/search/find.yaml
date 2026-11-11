@@ -72,6 +72,7 @@ examples:
     tr: Ev dizininde PDF arar.
     en: Finds PDFs under home.
   risk: safe
+  difficulty: beginner
 - title:
     tr: Boş dizinler
     en: Empty dirs
@@ -96,7 +97,23 @@ verification:
   - man 1 find
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-bootstrap
+  notes: NV-123 teachable fields (when/syntax/mistakes/topics).
 nova:
   concepts:
   - files
   - shell-pipes-redirection
+when_to_use:
+  tr: Dizin ağacında isim/tür/zaman ölçütleriyle dosya bulmak.
+  en: Find files in a tree by name/type/time predicates.
+syntax: find [PATH]... [EXPRESSION]
+expected_effect:
+  tr: Eşleşen yolları listeler (varsayılan -print); -delete kullanmadıkça silmez.
+  en: Lists matching paths (default -print); does not delete unless -delete is used.
+common_mistakes:
+- tr: Kökten sınırsız find ile sistemi yormak.
+  en: Hammering the system with unbounded find from /.
+- tr: -name kalıbını tırnaksız verip kabuğun * genişletmesine izin vermek.
+  en: Leaving -name patterns unquoted so the shell expands *.
+related_topics:
+- finding-files
+- permissions

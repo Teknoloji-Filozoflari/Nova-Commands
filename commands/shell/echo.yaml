@@ -55,6 +55,7 @@ examples:
     tr: hello yazar.
     en: Prints hello.
   risk: safe
+  difficulty: beginner
 intent:
   tr:
   - ekrana yaz
@@ -68,10 +69,24 @@ verification:
   - man 1 echo (GNU coreutils)
   last_reviewed: '2026-11-02'
   reviewer: nova-commands-phase15
-  notes: Flag -n confirmed for /bin/echo; note shell builtin may differ slightly.
+  notes: Flag -n confirmed for /bin/echo; note shell builtin may differ slightly. NV-123 teachable fields
+    (when/syntax/mistakes/topics).
 nova:
   concepts:
   - shell-builtin
   - terminal-basics
   - path
   favorite_eligible: true
+when_to_use:
+  tr: Metin veya değişken değerlerini yazdırmak; boru/test için.
+  en: Print text or variable values; useful in pipes/tests.
+syntax: echo [SHORT-OPTION]... [STRING]...
+expected_effect:
+  tr: Argümanları stdout’a basar; dosya yazmaz (yönlendirme sizden).
+  en: Prints arguments to stdout; does not write files (redirection is yours).
+common_mistakes:
+- tr: echo ile printf kaçış davranışını aynı sanmak.
+  en: Assuming echo escape behavior matches printf.
+related_topics:
+- terminal-basics
+- shell-pipes-redirection

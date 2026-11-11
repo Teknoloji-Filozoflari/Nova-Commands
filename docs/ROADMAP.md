@@ -25,15 +25,15 @@ Do not treat registry rows or `draft` YAML as “full platform support.”
 | Metric | Value |
 |--------|------:|
 | Commands | 270 |
-| Concepts | 21 (reviewed **1** / draft **20**) |
+| Concepts | 29 (reviewed **1** / draft **28**) |
 | Tasks | 36 (`draft`) |
 | Profiles | 14 (`draft`) |
-| Search entries | 341 |
+| Search entries | 349 |
 | OS registry | 11 |
 | Package managers | 60 |
 | Catalog `schema_version` | 2 |
 | commands verified / reviewed / draft | 26 / 105 / 139 |
-| `content_sha256` | `1a64dd48ee49d7d026627944d4f0b97b3e57b951858d727cf7eb814ad12c254a` |
+| `content_sha256` | `eb15d7f851993865a70094a66d8d08df3f9f230738d24efcca5b4e86c9d31844` |
 
 ## Done (honest)
 
@@ -66,6 +66,7 @@ Do not treat registry rows or `draft` YAML as “full platform support.”
 4. First signed `catalog-v*` Release when secret is configured
 5. Optional deepen: appliance CLIs, additional cloud/IaC tools — as sourced drafts only
 6. Close remaining gaps listed in [COVERAGE_MATRIX.md](COVERAGE_MATRIX.md) (VPN/`wg`, certbot, macOS/Windows admin depth) without inventing flags
+7. NV-123 follow-up: mass teachable-field fill on remaining commands; PDF-informed narration when `Linux_Komutlari_Rehberi.pdf` is available; Nova NV-124 topic-guide TUI
 
 ## Docs map
 
@@ -78,6 +79,7 @@ Do not treat registry rows or `draft` YAML as “full platform support.”
 | [NOVA_INTEGRATION.md](NOVA_INTEGRATION.md) | Client consume contract |
 | [DATA_SCHEMA.md](DATA_SCHEMA.md) | Live schema policy |
 | [COVERAGE_MATRIX.md](COVERAGE_MATRIX.md) | Area×platform gaps (honest) |
+| [TEACHABLE_TOPICS.md](TEACHABLE_TOPICS.md) | Topic guides vs command records (NV-123) |
 | [SERVER_SECURITY_CHECKLIST.md](SERVER_SECURITY_CHECKLIST.md) | 10-stage Sunucu güvenlik kontrolü |
 
 ## Non-goals

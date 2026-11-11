@@ -1,4 +1,4 @@
-# Nova-Commands coverage matrix (NV-103 / NV-121)
+# Nova-Commands coverage matrix (NV-103 / NV-121 / NV-123)
 
 Last updated: 2026-11-11  
 Scope rule: common, useful, **source-cited** commands — not every binary on every OS.  
@@ -6,6 +6,7 @@ Bank ≠ Store catalog ≠ local PATH discovery.
 Counts below must match committed `metadata/search-index.json` / `manifest.json`
 (see `tests/test_doc_snapshot_counts.py`).
 NV-121 expands honest multi-distro task/command tags (no invented package names; draft stays draft).
+NV-123 separates **topic guides** from **command records** (`docs/TEACHABLE_TOPICS.md`).
 
 ## Legend
 
@@ -43,9 +44,9 @@ PowerShell cmdlets are not Linux aliases.
 | Commands | **270** | +OpenRC `rc-status`/`rc-service` + Void `sv` (NV-121) |
 | Tasks | **36** | includes sequential `security-check-*` stages |
 | Profiles | **14** | includes `server-security-checklist` |
-| Concepts | **21** | includes `server-security-checklist` |
-| Search entries | **341** | `metadata/search-index.json` `entry_count` |
-| `content_sha256` | `1a64dd48ee49d7d026627944d4f0b97b3e57b951858d727cf7eb814ad12c254a` | must match catalog/manifest/search-index |
+| Concepts | **29** | NV-123 topic guides (21 upgraded + 8 new category guides) |
+| Search entries | **349** | `metadata/search-index.json` `entry_count` |
+| `content_sha256` | `eb15d7f851993865a70094a66d8d08df3f9f230738d24efcca5b4e86c9d31844` | must match catalog/manifest/search-index |
 
 ### Historical (NV-103 teachable bank, before that merge)
 

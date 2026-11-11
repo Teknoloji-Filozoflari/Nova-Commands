@@ -1,0 +1,125 @@
+id: containers-basics
+kind: nova-commands-concept
+format: topic-guide
+title:
+  tr: Konteyner temelleri
+  en: Container basics
+summary:
+  tr: docker/podman ile durum, log ve inceleme; runtime ayrımları dürüst tutulur.
+  en: Status, logs, and inspect with docker/podman; keep runtime differences honest.
+intro:
+  tr: Konteyner runtime’ları benzer CLI sunar ama paket/ad/kurulum distroya göre değişir.
+  en: Container runtimes offer similar CLIs but packages/names/install differ by distro.
+body:
+  tr: '`docker ps` / `podman ps` çalışan konteynerleri listeler; `logs` ve `inspect` okuma yollarıdır.
+
+    NixOS/Void/Gentoo konteyner görevleri hâlâ ince olabilir — bank notlarına bakın.
+
+    helm/nerdctl paket adları çoğu distroda bilinçli olarak Arch-bilinen + dürüst nota bırakılmıştır.'
+  en: '`docker ps` / `podman ps` list running containers; `logs` and `inspect` are read paths.
+
+    NixOS/Void/Gentoo container tasks may still be thin — see bank notes.
+
+    helm/nerdctl package names stay Arch-known + honesty notes on many distros.'
+difficulty: intermediate
+categories:
+- containers
+platforms:
+- linux
+- macos
+- windows
+tags:
+- docker
+- podman
+- containers
+learning_path:
+- ref: docker
+  kind: command
+- ref: podman
+  kind: command
+- ref: kubectl
+  kind: command
+subtopics:
+- id: list-logs
+  title:
+    tr: Liste ve log
+    en: List and logs
+  summary:
+    tr: ps + logs salt okuma.
+    en: ps + logs read-only.
+  related_commands:
+  - docker
+  - podman
+- id: orchestrators
+  title:
+    tr: Orkestrasyon
+    en: Orchestration
+  summary:
+    tr: kubectl ayrı öğrenme yolu.
+    en: kubectl is a separate learning path.
+  related_commands:
+  - kubectl
+command_table:
+- id: docker
+  purpose:
+    tr: Docker konteyner CLI.
+    en: Docker container CLI.
+  learning_level: intermediate
+- id: podman
+  purpose:
+    tr: Demonssuz konteyner motoru.
+    en: Daemonless container engine.
+  learning_level: intermediate
+- id: kubectl
+  purpose:
+    tr: Kubernetes küme CLI.
+    en: Kubernetes cluster CLI.
+  learning_level: advanced
+graded_examples:
+- title:
+    tr: Çalışan konteynerler
+    en: Running containers
+  command: docker ps
+  explanation:
+    tr: Çalışan konteynerleri listeler (docker kuruluysa).
+    en: Lists running containers (if docker is installed).
+  difficulty: beginner
+  risk: safe
+  related_commands:
+  - docker
+callouts:
+- kind: note
+  text:
+    tr: podman kökless yolu docker ile birebir aynı değildir.
+    en: podman rootless is not identical to docker.
+safe_exercises:
+- title:
+    tr: ps okuma
+    en: Read ps
+  prompt:
+    tr: docker ps veya podman ps (kurulu olana) — oluşturmayın/silmeyin.
+    en: docker ps or podman ps (whichever is installed) — do not create/delete.
+  risk: safe
+  related_commands:
+  - docker
+  - podman
+next_steps:
+- id: kubernetes
+- id: monitoring-and-logs
+related_commands:
+- docker
+- podman
+- kubectl
+related_concepts:
+- kubernetes
+- package-managers
+- networking-basics
+see_also:
+- man docker
+- podman --help
+verification:
+  status: draft
+  sources:
+  - man docker
+  - podman --help
+  notes: NV-123 new topic guide from bank + man-oriented teaching; PDF not available in env; not human-verified.

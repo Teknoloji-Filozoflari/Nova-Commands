@@ -8,77 +8,222 @@ summary:
   en: nftables, iptables, firewalld, ufw, and BSD pfctl — when to use which, safe reads.
 difficulty: intermediate
 tags:
-  - firewall
-  - nftables
-  - security
-  - network
+- firewall
+- nftables
+- security
+- network
 related_commands:
+- nft
+- iptables
+- firewall-cmd
+- ufw
+- pfctl
+- ss
+- ip
+related_concepts:
+- networking
+- networking-basics
+- permissions
+- ssh
+see_also:
+- man nft
+- man firewall-cmd
+- 'Arch Wiki: Firewalls'
+body:
+  tr: 'Linux’ta paket süzme çoğunlukla **netfilter** üzerinde durur. Kullanıcı alanı araçları
+
+    farklı kuşaklardadır; hepsi aynı kernel kancalarına yazabilir.
+
+
+    **Araç haritası (kısa):**
+
+    - **nft** (`nftables`) — modern birincil arayüz; tablolar/zincirler/kurallar.
+
+    - **iptables** — eski IPv4 aracı; birçok sistemde `iptables-nft` uyumluluk katmanı.
+
+    - **firewall-cmd** (`firewalld`) — bölge/servis modeli (Fedora’da sık varsayılan).
+
+    - **ufw** — Ubuntu’da yaygın “basit” ön yüz.
+
+    - **pfctl** (BSD PF) — OpenBSD/FreeBSD; Linux netfilter araçları ile **eşitlenmez**.
+
+
+    **Güvenli alışkanlık:** Uzaktan oturumdayken önce **listele** (`nft list ruleset`,
+
+    `iptables -L -n`, `firewall-cmd --list-all`, `ufw status`, BSD’de `pfctl -s rules`).
+
+    Bu bankadaki örnekler bilerek yıkıcı `flush` / kör `deny` tarifleri vermez —
+
+    yanlış kural SSH’yi keser.
+
+
+    **Nova bankası:** `nft` / `iptables` / `ufw` girdileri `draft` veya dikkatli
+
+    `reviewed` olabilir; `verification.status: verified` insan onayı ister.
+
+    Risk etiketleri `dangerous` / `destructive` abartı değil — erişim kaybı gerçektir.
+
+
+    **Seçim ipucu:** Yeni otomasyon için distro varsayılanını izleyin (Arch/nft veya
+
+    firewalld; Ubuntu/ufw; Fedora/firewalld). İki yöneticinin aynı anda yazması
+
+    çakışma yaratır.
+
+    '
+  en: 'Linux packet filtering mostly sits on **netfilter**. Userland tools are different
+
+    generations; they can all write the same kernel hooks.
+
+
+    **Short map:**
+
+    - **nft** (`nftables`) — modern primary interface; tables/chains/rules.
+
+    - **iptables** — legacy IPv4 tool; many systems use an `iptables-nft` compat layer.
+
+    - **firewall-cmd** (`firewalld`) — zone/service model (often default on Fedora).
+
+    - **ufw** — “simple” frontend common on Ubuntu.
+
+    - **pfctl** (BSD PF) — OpenBSD/FreeBSD; **not** equivalent to Linux netfilter tools.
+
+
+    **Safe habit:** On remote sessions, **list first** (`nft list ruleset`,
+
+    `iptables -L -n`, `firewall-cmd --list-all`, `ufw status`, on BSD `pfctl -s rules`).
+
+    Catalog examples deliberately omit destructive flush / blind deny recipes — a bad
+
+    rule cuts SSH.
+
+
+    **Nova bank:** `nft` / `iptables` / `ufw` may be `draft` or carefully `reviewed`;
+
+    `verification.status: verified` needs a human. `dangerous` / `destructive` labels
+
+    are not theatrical — lockouts are real.
+
+
+    **Choosing:** Follow the distro default for new automation (Arch/nft or firewalld;
+
+    Ubuntu/ufw; Fedora/firewalld). Two managers writing at once causes fights.
+
+    '
+verification:
+  status: draft
+  sources:
+  - man 8 nft
+  - man 1 firewall-cmd
+  - https://wiki.archlinux.org/title/Firewalls
+  notes: Teaching overview; firewall CLIs stay draft/list-only in commands/. NV-123 topic-guide structure;
+    agent-authored; needs human review before verified.
+format: topic-guide
+categories:
+- security
+- network
+platforms:
+- linux
+- macos
+- bsd
+- windows
+intro: &id001
+  tr: Güvenlik duvarı okuma yolları (ufw/firewalld/nft/pf/netsh); yazma yolları dikkat ve draft.
+  en: Firewall read paths (ufw/firewalld/nft/pf/netsh); write paths stay cautious/draft.
+learning_path:
+- ref: nft
+  kind: command
+- ref: iptables
+  kind: command
+- ref: firewall-cmd
+  kind: command
+- ref: ufw
+  kind: command
+- ref: pfctl
+  kind: command
+- ref: ss
+  kind: command
+- ref: ip
+  kind: command
+command_table:
+- id: nft
+  purpose:
+    tr: nftables kural yönetimi.
+    en: nftables ruleset management.
+  learning_level: advanced
+- id: iptables
+  purpose:
+    tr: Eski nesil IPv4 netfilter aracı.
+    en: Legacy IPv4 netfilter administration.
+  learning_level: advanced
+- id: firewall-cmd
+  purpose:
+    tr: firewalld komut satırı.
+    en: firewalld command-line client.
+  learning_level: intermediate
+- id: ufw
+  purpose:
+    tr: Uncomplicated Firewall (iptables/nft ön yüz).
+    en: Uncomplicated Firewall (iptables/nft frontend).
+  learning_level: intermediate
+- id: pfctl
+  purpose:
+    tr: PF (Packet Filter) denetimi — OpenBSD/FreeBSD.
+    en: PF (Packet Filter) control — OpenBSD/FreeBSD.
+  learning_level: advanced
+- id: ss
+  purpose:
+    tr: Soket istatistiklerini gösterir.
+    en: Investigate sockets.
+  learning_level: intermediate
+- id: ip
+  purpose:
+    tr: Ağ aygıtları, adresler ve rotaları yönetir.
+    en: Show and manipulate routing, devices, and tunnels.
+  learning_level: intermediate
+subtopics:
+- id: overview
+  title:
+    tr: Genel bakış
+    en: Overview
+  summary: *id001
+  related_commands:
   - nft
   - iptables
   - firewall-cmd
   - ufw
   - pfctl
   - ss
-  - ip
-related_concepts:
-  - networking
-  - networking-basics
-  - permissions
-  - ssh
-see_also:
-  - "man nft"
-  - "man firewall-cmd"
-  - "Arch Wiki: Firewalls"
-body:
-  tr: |
-    Linux’ta paket süzme çoğunlukla **netfilter** üzerinde durur. Kullanıcı alanı araçları
-    farklı kuşaklardadır; hepsi aynı kernel kancalarına yazabilir.
-
-    **Araç haritası (kısa):**
-    - **nft** (`nftables`) — modern birincil arayüz; tablolar/zincirler/kurallar.
-    - **iptables** — eski IPv4 aracı; birçok sistemde `iptables-nft` uyumluluk katmanı.
-    - **firewall-cmd** (`firewalld`) — bölge/servis modeli (Fedora’da sık varsayılan).
-    - **ufw** — Ubuntu’da yaygın “basit” ön yüz.
-    - **pfctl** (BSD PF) — OpenBSD/FreeBSD; Linux netfilter araçları ile **eşitlenmez**.
-
-    **Güvenli alışkanlık:** Uzaktan oturumdayken önce **listele** (`nft list ruleset`,
-    `iptables -L -n`, `firewall-cmd --list-all`, `ufw status`, BSD’de `pfctl -s rules`).
-    Bu bankadaki örnekler bilerek yıkıcı `flush` / kör `deny` tarifleri vermez —
-    yanlış kural SSH’yi keser.
-
-    **Nova bankası:** `nft` / `iptables` / `ufw` girdileri `draft` veya dikkatli
-    `reviewed` olabilir; `verification.status: verified` insan onayı ister.
-    Risk etiketleri `dangerous` / `destructive` abartı değil — erişim kaybı gerçektir.
-
-    **Seçim ipucu:** Yeni otomasyon için distro varsayılanını izleyin (Arch/nft veya
-    firewalld; Ubuntu/ufw; Fedora/firewalld). İki yöneticinin aynı anda yazması
-    çakışma yaratır.
-  en: |
-    Linux packet filtering mostly sits on **netfilter**. Userland tools are different
-    generations; they can all write the same kernel hooks.
-
-    **Short map:**
-    - **nft** (`nftables`) — modern primary interface; tables/chains/rules.
-    - **iptables** — legacy IPv4 tool; many systems use an `iptables-nft` compat layer.
-    - **firewall-cmd** (`firewalld`) — zone/service model (often default on Fedora).
-    - **ufw** — “simple” frontend common on Ubuntu.
-    - **pfctl** (BSD PF) — OpenBSD/FreeBSD; **not** equivalent to Linux netfilter tools.
-
-    **Safe habit:** On remote sessions, **list first** (`nft list ruleset`,
-    `iptables -L -n`, `firewall-cmd --list-all`, `ufw status`, on BSD `pfctl -s rules`).
-    Catalog examples deliberately omit destructive flush / blind deny recipes — a bad
-    rule cuts SSH.
-
-    **Nova bank:** `nft` / `iptables` / `ufw` may be `draft` or carefully `reviewed`;
-    `verification.status: verified` needs a human. `dangerous` / `destructive` labels
-    are not theatrical — lockouts are real.
-
-    **Choosing:** Follow the distro default for new automation (Arch/nft or firewalld;
-    Ubuntu/ufw; Fedora/firewalld). Two managers writing at once causes fights.
-verification:
-  status: draft
-  sources:
-    - "man 8 nft"
-    - "man 1 firewall-cmd"
-    - "https://wiki.archlinux.org/title/Firewalls"
-  notes: "Teaching overview; firewall CLIs stay draft/list-only in commands/."
+graded_examples:
+- title:
+    tr: Kuralları listele
+    en: List ruleset
+  command: sudo nft list ruleset
+  explanation:
+    tr: Geçerli tüm kuralları basar (salt okuma).
+    en: Prints the current ruleset (read-only).
+  difficulty: beginner
+  risk: safe
+  related_commands:
+  - nft
+callouts:
+- kind: note
+  text:
+    tr: Örnekler bank kayıtlarından gelir; man/--help ile doğrulanmadan verified yapılmaz.
+    en: Examples come from bank records; not verified without man/--help review.
+safe_exercises:
+- title:
+    tr: Salt okuma keşif
+    en: Read-only exploration
+  prompt:
+    tr: Bu konudaki bir safe/caution komutun beginner örneğini okuyun; çalıştırmadan önce risk rozetine
+      bakın.
+    en: Read a beginner example of a safe/caution command in this topic; check the risk badge before running.
+  risk: safe
+  related_commands:
+  - nft
+  - iptables
+  - firewall-cmd
+next_steps:
+- id: server-security-checklist
+- id: networking-basics

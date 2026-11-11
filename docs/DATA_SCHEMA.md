@@ -31,10 +31,17 @@ See [SCHEMA_MIGRATION_V2.md](SCHEMA_MIGRATION_V2.md) for the field map and `migr
   `advanced` \| `unspecified`. Pedagogical complexity / prerequisites — **not**
   security risk. Omit when unclear; `build_catalog.py` normalizes missing →
   `unspecified`. Never derive from `risk` (e.g. `rm` can be `beginner` +
-  `destructive`).
+  `destructive`). Does **not** authorize skipping beginner explanation fields.
 - **`examples[].difficulty`** (optional): `beginner` \| `intermediate` \|
   `advanced` when examples span easy→advanced. Do **not** rank examples by
   `risk` when difficulty is missing.
+- **Teachable command fields** (optional; omit empty): `when_to_use`, `syntax`,
+  `expected_effect`, `common_mistakes[]`, `related_topics[]` (concept ids).
+- **Topic guides** (`concepts/*.yaml`): optional `format: topic-guide` plus
+  structured sections `intro`, `learning_path`, `subtopics`, `command_table`,
+  `graded_examples`, `callouts`, `safe_exercises`, `next_steps`,
+  `categories` / `platforms` / `distributions`. See
+  [TEACHABLE_TOPICS.md](TEACHABLE_TOPICS.md).
 
 ## Tasks vs commands
 

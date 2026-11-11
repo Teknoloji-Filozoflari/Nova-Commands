@@ -1,0 +1,123 @@
+id: hardware-inspection
+kind: nova-commands-concept
+format: topic-guide
+title:
+  tr: Donanım inceleme
+  en: Hardware inspection
+summary:
+  tr: lscpu, lsblk, lspci benzeri salt okuma donanım bilgisi.
+  en: Read-only hardware info via lscpu, lsblk, lspci, and peers.
+intro:
+  tr: Donanımı okumak; firmware/boot yazma yolları bu rehberde yok.
+  en: Read hardware; firmware/boot write paths are out of this guide.
+body:
+  tr: 'Linux’ta `lscpu`, `lsblk`, `lspci`, `lsusb` yaygın salt okuma araçlarıdır.
+
+    macOS/Windows karşılıkları farklıdır (`system_profiler`, Get-Disk, …) — ilgili bank kayıtlarına bakın.
+
+    Disk bölümleme/yazma (`fdisk`, `mkfs`) ayrı ve tehlikelidir.'
+  en: 'On Linux, `lscpu`, `lsblk`, `lspci`, and `lsusb` are common read-only tools.
+
+    macOS/Windows counterparts differ (`system_profiler`, Get-Disk, …) — see those bank records.
+
+    Partitioning/formatting (`fdisk`, `mkfs`) is separate and dangerous.'
+difficulty: beginner
+categories:
+- hardware
+- disks
+platforms:
+- linux
+tags:
+- hardware
+- lscpu
+- lsblk
+learning_path:
+- ref: lscpu
+  kind: command
+- ref: lsblk
+  kind: command
+- ref: lspci
+  kind: command
+- ref: lsusb
+  kind: command
+subtopics:
+- id: cpu-block
+  title:
+    tr: CPU ve blok
+    en: CPU and block
+  summary:
+    tr: lscpu + lsblk.
+    en: lscpu + lsblk.
+  related_commands:
+  - lscpu
+  - lsblk
+command_table:
+- id: lscpu
+  purpose:
+    tr: CPU mimarisi bilgisini gösterir.
+    en: Display CPU architecture information.
+  learning_level: intermediate
+- id: lsblk
+  purpose:
+    tr: Blok aygıtları ağaç olarak listeler.
+    en: List block devices.
+  learning_level: intermediate
+- id: lspci
+  purpose:
+    tr: PCI aygıtlarını listeler.
+    en: List PCI devices.
+  learning_level: intermediate
+- id: lsusb
+  purpose:
+    tr: USB aygıtlarını listeler.
+    en: List USB devices.
+  learning_level: intermediate
+graded_examples:
+- title:
+    tr: CPU özeti
+    en: CPU summary
+  command: lscpu
+  explanation:
+    tr: CPU mimarisi ve çekirdek bilgisini basar.
+    en: Prints CPU architecture and core info.
+  difficulty: beginner
+  risk: safe
+  platforms:
+  - linux
+  related_commands:
+  - lscpu
+callouts:
+- kind: tip
+  text:
+    tr: lsblk ağaç görünümü bağlama noktalarını da gösterir.
+    en: lsblk tree view also shows mount points.
+safe_exercises:
+- title:
+    tr: lsblk
+    en: lsblk
+  prompt:
+    tr: lsblk -f çıktısını okuyun; hiçbir cihazı biçimlendirmeyin.
+    en: Read lsblk -f; do not format any device.
+  risk: safe
+  related_commands:
+  - lsblk
+next_steps:
+- id: storage
+- id: monitoring-and-logs
+related_commands:
+- lscpu
+- lsblk
+- lspci
+- lsusb
+related_concepts:
+- storage
+- monitoring-and-logs
+see_also:
+- man lscpu
+- man lsblk
+verification:
+  status: draft
+  sources:
+  - man lscpu
+  - man lsblk
+  notes: NV-123 new topic guide from bank + man-oriented teaching; PDF not available in env; not human-verified.

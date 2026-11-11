@@ -69,14 +69,25 @@ CI must pass: validate → build → pytest → committed `content_sha256` match
    `tests/test_doc_snapshot_counts.py` fails when these drift.
 10. Open a pull request.
 
-## Add a concept article
+## Add a concept / topic guide
 
 1. Register the id in `metadata/concepts.yaml` (label tr/en; set `article:`).
 2. Create `concepts/<id>.yaml` with `kind: nova-commands-concept`, bilingual
    `title` / `summary` / `body`, `difficulty`, and honest `verification`.
-3. `related_commands` must reference existing command ids.
-4. Do **not** mark `verified` without human review of the teaching text.
-5. Rebuild metadata as above.
+3. Prefer `format: topic-guide` with structured sections (`intro`,
+   `learning_path`, `subtopics`, `command_table`, `graded_examples`,
+   `callouts`, `safe_exercises`, `next_steps`) — omit empty ones. See
+   [docs/TEACHABLE_TOPICS.md](docs/TEACHABLE_TOPICS.md).
+4. `related_commands` / table / path refs must reference existing command ids.
+   `safe_exercises.risk` must be `safe` or `caution` only.
+5. Do **not** mark `verified` without human review of the teaching text.
+6. Rebuild metadata as above.
+
+## Enrich a command for teaching
+
+Optional schema v2 fields (omit if empty): `when_to_use`, `syntax`,
+`expected_effect`, `common_mistakes`, `related_topics`. Keep
+`learning_level` independent of `risk`; still provide beginner explanation.
 
 ## Add a task or profile (Faz 8+)
 

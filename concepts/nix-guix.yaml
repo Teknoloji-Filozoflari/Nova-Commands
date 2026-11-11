@@ -8,115 +8,294 @@ summary:
   en: Declarative package/store model; modern Nix CLI vs legacy nix-env; Guix profiles.
 difficulty: intermediate
 tags:
-  - packages
-  - nix
-  - guix
-  - nixos
-  - declarative
+- packages
+- nix
+- guix
+- nixos
+- declarative
 related_commands:
+- nix
+- nix-shell
+- nix-env
+- nixos-rebuild
+- nix-collect-garbage
+- guix
+- pacman
+- emerge
+- rpm-ostree
+related_concepts:
+- package-managers
+- package-managers-comparison
+- packages
+see_also:
+- https://nixos.org/manual/nix/stable/
+- https://nixos.org/guides/how-nix-works/
+- https://guix.gnu.org/manual/en/html_node/
+- docs/package-managers-comparison.md
+body:
+  tr: '**Nix** yalnızca NixOS değildir: paket yöneticisi Linux ve macOS’ta da kurulabilir.
+
+    **NixOS** ayrıca deklaratif *sistem* yapılandırması (`nixos-rebuild`) sunar.
+
+    **GNU Guix** benzer store/profil modelini GNU ekosisteminde uygular; Guix System
+
+    ile kullanıcı profilleri aynı `guix` CLI altında buluşur.
+
+
+    ### Modern Nix (tercih edilen)
+
+
+    - Arama: `nix search nixpkgs …`
+
+    - Profil: `nix profile install nixpkgs#paket`
+
+    - Geçici: `nix shell` · geliştirme: `nix develop`
+
+    - Çalıştır: `nix run nixpkgs#paket`
+
+    - Flake: `nix flake …` / `nix build`
+
+    - NixOS sistem: `sudo nixos-rebuild switch` (gerekirse `--flake`)
+
+    - Temizlik: `nix-collect-garbage` (`-d` nesilleri de siler)
+
+
+    ### Eski / geçiş Nix (ayrı kayıtlar)
+
+
+    - `nix-env` — eski profil aracı; yeni işlerde `nix profile` kullanın.
+
+    - Klasik `nix-shell` — yeni işlerde `nix shell` / `nix develop`.
+
+    Bu bankada eski ve modern yollar **ayrı komut id’leri** ile tutulur; bayrakları
+
+    birbirine karıştırmayın.
+
+
+    ### Guix
+
+
+    - `guix install` / `guix remove` / `guix search`
+
+    - `guix shell` — geçici ortam
+
+    - `guix pull` — kanalları güncelle
+
+    - `guix time-machine` — geçmiş kanal durumuna git
+
+    - `guix system` — Guix System yönetimi
+
+    - `guix package` — klasik profil yönetimi
+
+
+    ### Klasik PM’lerle fark
+
+
+    pacman/apt/dnf sistem köküne yazar. Nix/Guix çoğunlukla **store + profil**
+
+    modeliyle çalışır; Arch host’ta sistem PM hâlâ **pacman** önceliklidir — Nix/Guix
+
+    yan yana kurulabilir. `rpm-ostree` de atomik görüntü modelidir; klasik dnf değildir.
+
+
+    Bu makale draft’tır; kaynaklar resmi manuel sayfalarına dayanır.
+
+    '
+  en: '**Nix** is not only NixOS: the package manager also installs on other Linux and
+
+    macOS. **NixOS** additionally provides declarative *system* configuration
+
+    (`nixos-rebuild`). **GNU Guix** applies a related store/profile model in the GNU
+
+    ecosystem; Guix System and user profiles share the `guix` CLI.
+
+
+    ### Modern Nix (preferred)
+
+
+    - Search: `nix search nixpkgs …`
+
+    - Profile: `nix profile install nixpkgs#pkg`
+
+    - Ephemeral: `nix shell` · development: `nix develop`
+
+    - Run: `nix run nixpkgs#pkg`
+
+    - Flakes: `nix flake …` / `nix build`
+
+    - NixOS system: `sudo nixos-rebuild switch` (optionally `--flake`)
+
+    - Cleanup: `nix-collect-garbage` (`-d` also drops generations)
+
+
+    ### Legacy / transition Nix (separate records)
+
+
+    - `nix-env` — legacy profile tool; prefer `nix profile` for new work.
+
+    - Classic `nix-shell` — prefer `nix shell` / `nix develop`.
+
+    This bank keeps legacy and modern paths as **separate command ids**; do not mix
+
+    their flags.
+
+
+    ### Guix
+
+
+    - `guix install` / `guix remove` / `guix search`
+
+    - `guix shell` — ephemeral environment
+
+    - `guix pull` — update channels
+
+    - `guix time-machine` — pin past channel state
+
+    - `guix system` — Guix System management
+
+    - `guix package` — classic profile management
+
+
+    ### Versus classic PMs
+
+
+    pacman/apt/dnf write into the system root. Nix/Guix mostly use a **store +
+
+    profile** model; on Arch hosts the system PM remains **pacman-first** — Nix/Guix
+
+    can coexist. `rpm-ostree` is also an atomic image model, not classic dnf.
+
+
+    This article is draft; sources are official manuals.
+
+    '
+verification:
+  status: draft
+  sources:
+  - https://nixos.org/manual/nix/stable/
+  - https://nixos.org/guides/how-nix-works/
+  - https://nixos.org/manual/nixos/stable/
+  - https://guix.gnu.org/manual/en/html_node/
+  - https://guix.gnu.org/manual/en/html_node/Package-Management.html
+  notes: Faz 4 teaching article; draft until human review. NV-123 topic-guide structure; agent-authored;
+    needs human review before verified.
+format: topic-guide
+categories:
+- packages
+platforms:
+- linux
+- macos
+distributions:
+- nixos
+intro: &id001
+  tr: Nix ve Guix deklaratif modeller; nix ≠ NixOS; nixos-rebuild ayrıdır.
+  en: Nix and Guix declarative models; nix ≠ NixOS; nixos-rebuild is distinct.
+learning_path:
+- ref: nix
+  kind: command
+- ref: nix-shell
+  kind: command
+- ref: nix-env
+  kind: command
+- ref: nixos-rebuild
+  kind: command
+- ref: nix-collect-garbage
+  kind: command
+- ref: guix
+  kind: command
+- ref: pacman
+  kind: command
+- ref: emerge
+  kind: command
+command_table:
+- id: nix
+  purpose:
+    tr: Nix paket yöneticisi (modern CLI).
+    en: Nix package manager (modern CLI).
+  learning_level: unspecified
+- id: nix-shell
+  purpose:
+    tr: Klasik Nix geçici kabuk (eski yol).
+    en: Classic Nix ephemeral shell (legacy path).
+  learning_level: unspecified
+- id: nix-env
+  purpose:
+    tr: Eski Nix profil aracı (geçiş / miras).
+    en: Legacy Nix profile tool (transition / heritage).
+  learning_level: unspecified
+- id: nixos-rebuild
+  purpose:
+    tr: NixOS sistem yapılandırmasını uygula.
+    en: Apply NixOS system configuration.
+  learning_level: unspecified
+- id: nix-collect-garbage
+  purpose:
+    tr: Nix store çöp toplama.
+    en: Nix store garbage collection.
+  learning_level: unspecified
+- id: guix
+  purpose:
+    tr: GNU Guix paket ve sistem yöneticisi.
+    en: GNU Guix package and system manager.
+  learning_level: unspecified
+- id: pacman
+  purpose:
+    tr: Arch Linux paket yöneticisi.
+    en: Arch Linux package manager.
+  learning_level: intermediate
+- id: emerge
+  purpose:
+    tr: Gentoo Portage paket kurucu (emerge).
+    en: Gentoo Portage package tool (emerge).
+  learning_level: unspecified
+- id: rpm-ostree
+  purpose:
+    tr: rpm-ostree atomik/ostree sistem yönetimi.
+    en: rpm-ostree atomic/ostree system management.
+  learning_level: unspecified
+subtopics:
+- id: overview
+  title:
+    tr: Genel bakış
+    en: Overview
+  summary: *id001
+  related_commands:
   - nix
   - nix-shell
   - nix-env
   - nixos-rebuild
   - nix-collect-garbage
   - guix
-  - pacman
-  - emerge
-  - rpm-ostree
-related_concepts:
-  - package-managers
-  - package-managers-comparison
-  - packages
-see_also:
-  - "https://nixos.org/manual/nix/stable/"
-  - "https://nixos.org/guides/how-nix-works/"
-  - "https://guix.gnu.org/manual/en/html_node/"
-  - "docs/package-managers-comparison.md"
-body:
-  tr: |
-    **Nix** yalnızca NixOS değildir: paket yöneticisi Linux ve macOS’ta da kurulabilir.
-    **NixOS** ayrıca deklaratif *sistem* yapılandırması (`nixos-rebuild`) sunar.
-    **GNU Guix** benzer store/profil modelini GNU ekosisteminde uygular; Guix System
-    ile kullanıcı profilleri aynı `guix` CLI altında buluşur.
-
-    ### Modern Nix (tercih edilen)
-
-    - Arama: `nix search nixpkgs …`
-    - Profil: `nix profile install nixpkgs#paket`
-    - Geçici: `nix shell` · geliştirme: `nix develop`
-    - Çalıştır: `nix run nixpkgs#paket`
-    - Flake: `nix flake …` / `nix build`
-    - NixOS sistem: `sudo nixos-rebuild switch` (gerekirse `--flake`)
-    - Temizlik: `nix-collect-garbage` (`-d` nesilleri de siler)
-
-    ### Eski / geçiş Nix (ayrı kayıtlar)
-
-    - `nix-env` — eski profil aracı; yeni işlerde `nix profile` kullanın.
-    - Klasik `nix-shell` — yeni işlerde `nix shell` / `nix develop`.
-    Bu bankada eski ve modern yollar **ayrı komut id’leri** ile tutulur; bayrakları
-    birbirine karıştırmayın.
-
-    ### Guix
-
-    - `guix install` / `guix remove` / `guix search`
-    - `guix shell` — geçici ortam
-    - `guix pull` — kanalları güncelle
-    - `guix time-machine` — geçmiş kanal durumuna git
-    - `guix system` — Guix System yönetimi
-    - `guix package` — klasik profil yönetimi
-
-    ### Klasik PM’lerle fark
-
-    pacman/apt/dnf sistem köküne yazar. Nix/Guix çoğunlukla **store + profil**
-    modeliyle çalışır; Arch host’ta sistem PM hâlâ **pacman** önceliklidir — Nix/Guix
-    yan yana kurulabilir. `rpm-ostree` de atomik görüntü modelidir; klasik dnf değildir.
-
-    Bu makale draft’tır; kaynaklar resmi manuel sayfalarına dayanır.
-  en: |
-    **Nix** is not only NixOS: the package manager also installs on other Linux and
-    macOS. **NixOS** additionally provides declarative *system* configuration
-    (`nixos-rebuild`). **GNU Guix** applies a related store/profile model in the GNU
-    ecosystem; Guix System and user profiles share the `guix` CLI.
-
-    ### Modern Nix (preferred)
-
-    - Search: `nix search nixpkgs …`
-    - Profile: `nix profile install nixpkgs#pkg`
-    - Ephemeral: `nix shell` · development: `nix develop`
-    - Run: `nix run nixpkgs#pkg`
-    - Flakes: `nix flake …` / `nix build`
-    - NixOS system: `sudo nixos-rebuild switch` (optionally `--flake`)
-    - Cleanup: `nix-collect-garbage` (`-d` also drops generations)
-
-    ### Legacy / transition Nix (separate records)
-
-    - `nix-env` — legacy profile tool; prefer `nix profile` for new work.
-    - Classic `nix-shell` — prefer `nix shell` / `nix develop`.
-    This bank keeps legacy and modern paths as **separate command ids**; do not mix
-    their flags.
-
-    ### Guix
-
-    - `guix install` / `guix remove` / `guix search`
-    - `guix shell` — ephemeral environment
-    - `guix pull` — update channels
-    - `guix time-machine` — pin past channel state
-    - `guix system` — Guix System management
-    - `guix package` — classic profile management
-
-    ### Versus classic PMs
-
-    pacman/apt/dnf write into the system root. Nix/Guix mostly use a **store +
-    profile** model; on Arch hosts the system PM remains **pacman-first** — Nix/Guix
-    can coexist. `rpm-ostree` is also an atomic image model, not classic dnf.
-
-    This article is draft; sources are official manuals.
-verification:
-  status: draft
-  sources:
-    - "https://nixos.org/manual/nix/stable/"
-    - "https://nixos.org/guides/how-nix-works/"
-    - "https://nixos.org/manual/nixos/stable/"
-    - "https://guix.gnu.org/manual/en/html_node/"
-    - "https://guix.gnu.org/manual/en/html_node/Package-Management.html"
-  notes: "Faz 4 teaching article; draft until human review."
+graded_examples:
+- title:
+    tr: Ara
+    en: Search
+  command: nix search nixpkgs ripgrep
+  explanation:
+    tr: nixpkgs içinde ripgrep arar.
+    en: Searches nixpkgs for ripgrep.
+  difficulty: beginner
+  risk: safe
+  related_commands:
+  - nix
+callouts:
+- kind: note
+  text:
+    tr: Örnekler bank kayıtlarından gelir; man/--help ile doğrulanmadan verified yapılmaz.
+    en: Examples come from bank records; not verified without man/--help review.
+safe_exercises:
+- title:
+    tr: Salt okuma keşif
+    en: Read-only exploration
+  prompt:
+    tr: Bu konudaki bir safe/caution komutun beginner örneğini okuyun; çalıştırmadan önce risk rozetine
+      bakın.
+    en: Read a beginner example of a safe/caution command in this topic; check the risk badge before running.
+  risk: safe
+  related_commands:
+  - nix
+  - nix-shell
+  - nix-env
+next_steps:
+- id: package-managers
+- id: package-managers-comparison
