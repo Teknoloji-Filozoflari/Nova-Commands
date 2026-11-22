@@ -1,0 +1,128 @@
+schema_version: 2
+id: uv
+name: uv
+kind: package_manager
+category: development
+summary:
+  tr: uv — hızlı Python paket/proje aracı.
+  en: uv — fast Python package/project tool.
+description:
+  tr: >-
+    Astral uv: pip uyumlu kurulum, venv, proje kilitleri. pip/poetry alternatif hız odaklı araç.
+  en: >-
+    Astral uv: pip-compatible installs, venvs, project locks. Speed-focused alternative to pip/poetry.
+purpose:
+  tr: Python bağımlılık ve proje yönetimini hızlandırmak.
+  en: Speed up Python dependency and project management.
+when_to_use:
+  tr: Yeni Python projelerinde veya hızlı sync için.
+  en: For new Python projects or fast sync.
+expected_effect:
+  tr: venv/lock/paket ağacını günceller.
+  en: Updates venv/lock/package tree.
+syntax: "uv <command>"
+tags:
+- software
+- backend
+- python
+- packages
+risk: caution
+learning_level: intermediate
+requires_elevated: false
+platforms:
+- linux
+- macos
+- windows
+package_refs:
+- manager: homebrew
+  package: uv
+- manager: pacman
+  package: uv
+  distributions:
+  - arch
+  notes:
+    tr: Arch community/extra’da olabilir; yoksa resmi installer.
+    en: May be in Arch community/extra; else official installer.
+install_notes:
+  tr: |-
+    Resmi: https://docs.astral.sh/uv/getting-started/installation/
+    macOS: brew install uv
+    Arch: pacman -S uv (varsa)
+  en: |-
+    Official: https://docs.astral.sh/uv/getting-started/installation/
+    macOS: brew install uv
+    Arch: pacman -S uv (if available)
+flags: []
+examples:
+- title:
+    tr: Sürüm
+    en: Version
+  command: uv --version
+  explanation:
+    tr: uv sürümü.
+    en: uv version.
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: Sync
+    en: Sync
+  command: uv sync
+  explanation:
+    tr: Proje ortamını senkronlar.
+    en: Syncs the project environment.
+  risk: caution
+  difficulty: beginner
+- title:
+    tr: Add
+    en: Add
+  command: uv add requests
+  explanation:
+    tr: Bağımlılık ekler.
+    en: Adds a dependency.
+  risk: caution
+  difficulty: beginner
+- title:
+    tr: Run
+    en: Run
+  command: uv run python -V
+  explanation:
+    tr: Ortamda komut çalıştırır.
+    en: Runs a command in the env.
+  risk: caution
+  difficulty: beginner
+- title:
+    tr: pip arayüz
+    en: pip interface
+  command: uv pip install requests
+  explanation:
+    tr: pip uyumlu kurulum.
+    en: pip-compatible install.
+  risk: caution
+  difficulty: intermediate
+related:
+- pip
+- pipx
+- poetry
+- python3
+related_topics:
+- software
+intent:
+  tr:
+  - uv kur
+  - uv sync
+  en:
+  - uv install
+  - uv sync
+documentation:
+- https://docs.astral.sh/uv/
+sources:
+- https://docs.astral.sh/uv/reference/cli/
+verification:
+  status: draft
+  sources:
+  - https://docs.astral.sh/uv/reference/cli/
+  notes: Software bank breadth draft — official docs oriented; not human-verified.
+nova:
+  concepts:
+  - software
+  ui_priority: 74

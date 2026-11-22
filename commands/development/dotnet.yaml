@@ -1,0 +1,196 @@
+schema_version: 2
+id: dotnet
+name: dotnet
+kind: executable
+category: development
+summary:
+  tr: .NET SDK CLI — new, build, run, test, tool.
+  en: .NET SDK CLI — new, build, run, test, tool.
+description:
+  tr: >-
+    .NET projeleri oluşturur, derler, çalıştırır ve test eder. `dotnet tool` ile
+    global/yerel araç kurulur. Runtime-only kurulumda SDK alt komutları eksik olabilir.
+  en: >-
+    Creates, builds, runs, and tests .NET projects. `dotnet tool` installs global/local
+    tools. Runtime-only installs may lack SDK subcommands.
+purpose:
+  tr: .NET uygulama ve kütüphane geliştirme iş akışı.
+  en: Development workflow for .NET apps and libraries.
+when_to_use:
+  tr: C#/F#/VB .NET projelerinde iskelet, derleme, çalıştırma veya test için.
+  en: For scaffolding, building, running, or testing C#/F#/VB .NET projects.
+syntax: 'dotnet [command] [options]'
+expected_effect:
+  tr: Proje üretir, derleme çıktısı yazar veya uygulamayı çalıştırır.
+  en: Scaffolds a project, writes build output, or runs the application.
+tags:
+- software
+- backend
+- dotnet
+- csharp
+risk: caution
+learning_level: intermediate
+requires_elevated: false
+platforms:
+- linux
+- macos
+- windows
+operating_systems:
+- linux
+- macos
+- windows
+packages:
+  arch: dotnet-sdk
+  fedora: dotnet-sdk
+package_refs:
+- manager: pacman
+  package: dotnet-sdk
+  distributions:
+  - arch
+- manager: dnf
+  package: dotnet-sdk
+  distributions:
+  - fedora
+- manager: homebrew
+  package: dotnet
+- manager: winget
+  package: Microsoft.DotNet.SDK.8
+  notes:
+    tr: Kanat sürüm numarası değişir (SDK.8 / SDK.9); winget search Microsoft.DotNet.SDK.
+    en: Winget id version suffix changes (SDK.8 / SDK.9); winget search Microsoft.DotNet.SDK.
+- manager: apt
+  package: dotnet-sdk-8.0
+  distributions:
+  - ubuntu
+  - debian
+  notes:
+    tr: Debian/Ubuntu paketleri sürümlüdür; Microsoft paketi veya distro backports gerekebilir.
+    en: Debian/Ubuntu packages are versioned; Microsoft packages or distro backports may be needed.
+install_notes:
+  tr: |-
+    Arch: pacman -S dotnet-sdk
+    Fedora: dnf install dotnet-sdk
+    Ubuntu/Debian: sürümlü paket (dotnet-sdk-8.0 …) veya Microsoft repo — sürümü doğrulayın
+    macOS: brew install dotnet
+    Windows: winget install Microsoft.DotNet.SDK.8  (güncel id’yi search ile kontrol)
+    Yalnızca runtime kuruluysa `dotnet new`/`build` eksik kalır — SDK gerekir.
+  en: |-
+    Arch: pacman -S dotnet-sdk
+    Fedora: dnf install dotnet-sdk
+    Ubuntu/Debian: versioned package (dotnet-sdk-8.0 …) or Microsoft repo — verify version
+    macOS: brew install dotnet
+    Windows: winget install Microsoft.DotNet.SDK.8 (confirm current id via search)
+    Runtime-only installs lack `dotnet new`/`build` — SDK required.
+flags: []
+examples:
+- title:
+    tr: Ortam bilgisi
+    en: Environment info
+  command: dotnet --info
+  explanation:
+    tr: SDK/runtime ve OS özetini yazar (teşhis).
+    en: Prints SDK/runtime and OS summary (diagnostics).
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: SDK listesi
+    en: List SDKs
+  command: dotnet --list-sdks
+  explanation:
+    tr: Kurulu SDK sürümlerini listeler.
+    en: Lists installed SDK versions.
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: Yeni konsol
+    en: New console
+  command: dotnet new console -n HelloCli
+  explanation:
+    tr: HelloCli adında konsol projesi oluşturur.
+    en: Creates a console project named HelloCli.
+  risk: caution
+  difficulty: beginner
+- title:
+    tr: Derle
+    en: Build
+  command: dotnet build
+  explanation:
+    tr: Geçerli projeyi/derlemeyi derler.
+    en: Builds the current project/solution.
+  risk: caution
+  difficulty: beginner
+- title:
+    tr: Çalıştır
+    en: Run
+  command: dotnet run
+  explanation:
+    tr: Projeyi derleyip çalıştırır.
+    en: Builds (if needed) and runs the project.
+  risk: caution
+  difficulty: beginner
+- title:
+    tr: Test
+    en: Test
+  command: dotnet test
+  explanation:
+    tr: Test projesini çalıştırır.
+    en: Runs the test project.
+  risk: caution
+  difficulty: intermediate
+- title:
+    tr: Paket ekle
+    en: Add package
+  command: dotnet add package Newtonsoft.Json
+  explanation:
+    tr: NuGet paketi referansı ekler.
+    en: Adds a NuGet package reference.
+  risk: caution
+  difficulty: intermediate
+- title:
+    tr: Tool listesi
+    en: List tools
+  command: dotnet tool list -g
+  explanation:
+    tr: Global dotnet tool’ları listeler.
+    en: Lists global dotnet tools.
+  risk: safe
+  difficulty: intermediate
+common_mistakes:
+- tr: Runtime kurup SDK komutlarının (`new`/`build`) çalışmasını beklemek.
+  en: Installing only the runtime and expecting SDK commands (`new`/`build`) to work.
+- tr: global.json ile pin’lenmiş SDK’nın makinede olmaması.
+  en: A global.json-pinned SDK missing on the machine.
+related:
+- code
+- git
+- docker
+- python3
+- cargo
+related_topics:
+- software
+- development-basics
+intent:
+  tr:
+  - dotnet derle
+  - csharp proje
+  - dotnet new
+  - nuget paket
+  en:
+  - build dotnet
+  - csharp project
+  - dotnet new
+  - nuget package
+documentation:
+- https://learn.microsoft.com/dotnet/core/tools/
+sources:
+- https://learn.microsoft.com/dotnet/core/tools/
+verification:
+  status: draft
+  sources:
+  - https://learn.microsoft.com/dotnet/core/tools/
+  - https://learn.microsoft.com/dotnet/core/tools/dotnet
+  notes: Software bank draft — .NET SDK CLI; versioned distro packages noted; not human-verified.
+nova:
+  concepts:
+  - software
+  ui_priority: 80

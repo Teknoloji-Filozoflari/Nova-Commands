@@ -1,0 +1,117 @@
+schema_version: 2
+id: packer
+name: packer
+kind: executable
+category: devops
+summary:
+  tr: HashiCorp Packer — imaj build.
+  en: HashiCorp Packer — image build.
+description:
+  tr: >-
+    Makine imajları oluşturur (AMI/qcow2/…). build ağı ve bulut kimliği kullanabilir.
+  en: >-
+    Builds machine images (AMI/qcow2/…). build may use network and cloud credentials.
+purpose:
+  tr: Tekrarlanabilir makine imajları üretmek.
+  en: Produce repeatable machine images.
+when_to_use:
+  tr: Packer şablonlarıyla imaj CI’sinde.
+  en: In image CI with Packer templates.
+expected_effect:
+  tr: İmaj artefaktı üretir.
+  en: Produces an image artifact.
+syntax: "packer <command>"
+tags:
+- software
+- devops
+- cloud
+- tools
+risk: dangerous
+learning_level: advanced
+requires_elevated: false
+platforms:
+- linux
+- macos
+- windows
+packages:
+  arch: packer
+package_refs:
+- manager: pacman
+  package: packer
+  distributions:
+  - arch
+- manager: homebrew
+  package: packer
+install_notes:
+  tr: |-
+    Arch: pacman -S packer
+    macOS: brew install packer
+    https://developer.hashicorp.com/packer/install
+  en: |-
+    Arch: pacman -S packer
+    macOS: brew install packer
+    https://developer.hashicorp.com/packer/install
+flags: []
+examples:
+- title:
+    tr: Sürüm
+    en: Version
+  command: packer version
+  explanation:
+    tr: Sürüm.
+    en: Version.
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: Init
+    en: Init
+  command: packer init .
+  explanation:
+    tr: Plugin init.
+    en: Plugin init.
+  risk: caution
+  difficulty: intermediate
+- title:
+    tr: Validate
+    en: Validate
+  command: packer validate template.pkr.hcl
+  explanation:
+    tr: Şablon doğrula.
+    en: Validate template.
+  risk: safe
+  difficulty: intermediate
+- title:
+    tr: Build
+    en: Build
+  command: packer build template.pkr.hcl
+  explanation:
+    tr: İmaj build (maliyetli olabilir).
+    en: Image build (may incur cost).
+  risk: dangerous
+  difficulty: advanced
+related:
+- vagrant
+- terraform
+- aws
+related_topics:
+- software
+intent:
+  tr:
+  - packer build
+  - imaj oluştur
+  en:
+  - packer build
+  - build image
+documentation:
+- https://developer.hashicorp.com/packer/docs/commands
+sources:
+- https://developer.hashicorp.com/packer/docs/commands
+verification:
+  status: draft
+  sources:
+  - https://developer.hashicorp.com/packer/docs/commands
+  notes: Software bank breadth draft — official docs oriented; not human-verified.
+nova:
+  concepts:
+  - software
+  ui_priority: 60

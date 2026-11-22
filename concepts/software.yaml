@@ -1,0 +1,739 @@
+id: software
+kind: nova-commands-concept
+format: topic-guide
+title:
+  tr: Yazılım CLI’ları (Software)
+  en: Software CLIs
+summary:
+  tr: Kurulabilir dünya çapında yazılım araçları — diller, frontend/backend, veri, bulut, editörler, oyun.
+  en: World-scale installable software tooling — languages, frontend/backend, data, cloud, editors, games.
+intro:
+  tr: >-
+    Software, sistem paket yöneticilerinden (pacman/apt) ayrı düşünülen kurulabilir uygulama/dil/yığın
+    CLI’larının öğretici haritasıdır. Alanlar tags + subtopics ile ayrılır; tek bir “ecosystem” şema
+    alanı yoktur. command_table en fazla 32 satır — genişlik alt konuların related listelerinde.
+  en: >-
+    Software is the teachable map of installable app/language/stack CLIs, separate from system package
+    managers (pacman/apt). Domains use tags + subtopics; there is no ecosystem schema field.
+    command_table maxes at 32 rows — breadth lives in subtopic related lists.
+body:
+  tr: |
+    Bu rehber “baya geniş” bir Software yüzeyidir: Node örnekleri yalnızca başlangıçtı.
+
+    Diller/runtimes: node, deno, bun, python3, php, ruby, java, go, rustc/cargo, swift, dart, dotnet.
+    Dil paket yöneticileri: npm/yarn/pnpm, pip/uv/poetry, composer, gem/bundle, mvn/gradle.
+    Frontend: ng, vite, tsc, eslint, prettier + editörler (code/codium/nvim/…).
+    Backend/server: dil CLI’ları + docker/podman/kubectl/systemctl.
+    Veri: psql, mysql, redis-cli, sqlite3, mongosh.
+    Bulut/IaC: aws, gcloud, az, doctl, flyctl, terraform, tofu, pulumi, ansible.
+    Oyun: godot CLI; Unity Editor CLI ortam/lisans bağımlı olduğu için bankada yok.
+    Kütüphane vs CLI: pygame gibi paketler genelde CLI değildir — python3/pip/uv ile kurulur;
+    medya hatlarında ffmpeg gibi gerçek CLI’lar yer alır.
+
+    Öğrenmeye salt-okuma sürüm komutlarıyla başlayın. Mevcut kayıtları kopyalamayız; related ile bağlarız.
+  en: |
+    This guide is a deliberately broad Software surface: Node examples were only a starting point.
+
+    Languages/runtimes: node, deno, bun, python3, php, ruby, java, go, rustc/cargo, swift, dart, dotnet.
+    Language package managers: npm/yarn/pnpm, pip/uv/poetry, composer, gem/bundle, mvn/gradle.
+    Frontend: ng, vite, tsc, eslint, prettier + editors (code/codium/nvim/…).
+    Backend/server: language CLIs + docker/podman/kubectl/systemctl.
+    Data: psql, mysql, redis-cli, sqlite3, mongosh.
+    Cloud/IaC: aws, gcloud, az, doctl, flyctl, terraform, tofu, pulumi, ansible.
+    Games: godot CLI; Unity Editor CLI omitted (environment/license dependent).
+    Library vs CLI: packages like pygame are usually not CLIs — install via python3/pip/uv;
+    real CLIs such as ffmpeg appear in media pipelines.
+
+    Start with read-only version commands. We link existing records rather than duplicating them.
+difficulty: beginner
+categories:
+- development
+- containers
+- cloud
+- devops
+- databases
+platforms:
+- linux
+- macos
+- windows
+- bsd
+tags:
+- software
+- frontend
+- backend
+- server
+- data
+- cloud
+- editors
+- gamedev
+- language
+learning_path:
+- ref: git
+  kind: command
+  note:
+    tr: VCS temeli — zaten bankada; Software buradan bağlar.
+    en: VCS foundation — already in bank; Software links it.
+- ref: languages-runtimes
+  kind: subtopic
+- ref: python-ecosystem
+  kind: subtopic
+- ref: frontend
+  kind: subtopic
+- ref: backend
+  kind: subtopic
+- ref: jvm
+  kind: subtopic
+- ref: systems-lang
+  kind: subtopic
+- ref: data
+  kind: subtopic
+- ref: cloud
+  kind: subtopic
+- ref: devops-iac
+  kind: subtopic
+- ref: containers-orch
+  kind: subtopic
+- ref: server-ops
+  kind: subtopic
+- ref: editors
+  kind: subtopic
+- ref: mobile-game
+  kind: subtopic
+- ref: media-tools
+  kind: subtopic
+- ref: lang-packages
+  kind: subtopic
+- ref: vcs-build
+  kind: subtopic
+- ref: node
+  kind: command
+- ref: python3
+  kind: command
+- ref: docker
+  kind: command
+- ref: code
+  kind: command
+- ref: kubectl
+  kind: command
+subtopics:
+- id: languages-runtimes
+  title:
+    tr: Diller ve runtimelar
+    en: Languages and runtimes
+  summary:
+    tr: JS/Python/JVM/Go/Rust/Swift/Dart/.NET giriş CLI’ları.
+    en: Entry CLIs for JS/Python/JVM/Go/Rust/Swift/Dart/.NET.
+  related_commands:
+  - node
+  - deno
+  - bun
+  - python3
+  - php
+  - ruby
+  - java
+  - go
+  - rustc
+  - swift
+  - dart
+  - dotnet
+- id: python-ecosystem
+  title:
+    tr: Python ekosistemi
+    en: Python ecosystem
+  summary:
+    tr: Runtime + pip/uv/poetry/pipx; kütüphaneler CLI değildir.
+    en: Runtime + pip/uv/poetry/pipx; libraries are not CLIs.
+  related_commands:
+  - python3
+  - pip
+  - pipx
+  - uv
+  - poetry
+- id: frontend
+  title:
+    tr: Frontend
+    en: Frontend
+  summary:
+    tr: Node araçları, Angular, Vite, lint/format, TS.
+    en: Node tooling, Angular, Vite, lint/format, TS.
+  related_commands:
+  - node
+  - npm
+  - npx
+  - yarn
+  - pnpm
+  - bun
+  - ng
+  - vite
+  - tsc
+  - eslint
+  - prettier
+  - deno
+- id: backend
+  title:
+    tr: Backend
+    en: Backend
+  summary:
+    tr: Sunucu taraflı diller ve SDK CLI’ları.
+    en: Server-side languages and SDK CLIs.
+  related_commands:
+  - python3
+  - dotnet
+  - go
+  - php
+  - ruby
+  - java
+  - node
+  - cargo
+- id: jvm
+  title:
+    tr: JVM
+    en: JVM
+  summary:
+    tr: java/javac + Maven/Gradle.
+    en: java/javac + Maven/Gradle.
+  related_commands:
+  - java
+  - javac
+  - mvn
+  - gradle
+- id: systems-lang
+  title:
+    tr: Sistem dilleri
+    en: Systems languages
+  summary:
+    tr: Go, Rust toolchain, C araçları.
+    en: Go, Rust toolchain, C tooling.
+  related_commands:
+  - go
+  - rustc
+  - rustup
+  - cargo
+  - gcc
+  - make
+  - cmake
+- id: data
+  title:
+    tr: Veri / DB istemcileri
+    en: Data / DB clients
+  summary:
+    tr: SQL/NoSQL istemci CLI’ları (sunucu kurulumu değil).
+    en: SQL/NoSQL client CLIs (not server installs).
+  related_commands:
+  - psql
+  - mysql
+  - redis-cli
+  - sqlite3
+  - mongosh
+- id: cloud
+  title:
+    tr: Bulut CLI
+    en: Cloud CLIs
+  summary:
+    tr: Büyük bulut sağlayıcı ve PaaS CLI’ları.
+    en: Major cloud provider and PaaS CLIs.
+  related_commands:
+  - aws
+  - gcloud
+  - az
+  - doctl
+  - flyctl
+- id: devops-iac
+  title:
+    tr: DevOps / IaC
+    en: DevOps / IaC
+  summary:
+    tr: Terraform/OpenTofu/Pulumi/Ansible/Packer/Vagrant.
+    en: Terraform/OpenTofu/Pulumi/Ansible/Packer/Vagrant.
+  related_commands:
+  - terraform
+  - tofu
+  - pulumi
+  - ansible
+  - packer
+  - vagrant
+  - gh
+- id: containers-orch
+  title:
+    tr: Konteyner / orkestrasyon
+    en: Containers / orchestration
+  summary:
+    tr: docker/podman + kubectl/helm/kind/minikube.
+    en: docker/podman + kubectl/helm/kind/minikube.
+  related_commands:
+  - docker
+  - podman
+  - kubectl
+  - helm
+  - kind
+  - minikube
+- id: server-ops
+  title:
+    tr: Sunucu / ops
+    en: Server / ops
+  summary:
+    tr: Servis kontrolü ve konteyner köprüsü.
+    en: Service control and container bridge.
+  related_commands:
+  - systemctl
+  - docker
+  - kubectl
+- id: editors
+  title:
+    tr: Editörler
+    en: Editors
+  summary:
+    tr: IDE/editör CLI’ları.
+    en: IDE/editor CLIs.
+  related_commands:
+  - code
+  - codium
+  - nvim
+  - vim
+  - emacs
+  - helix
+- id: mobile-game
+  title:
+    tr: Mobil ve oyun
+    en: Mobile and games
+  summary:
+    tr: Flutter/Dart + Godot; Unity bankada yok.
+    en: Flutter/Dart + Godot; Unity not in bank.
+  related_commands:
+  - flutter
+  - dart
+  - godot
+- id: media-tools
+  title:
+    tr: Medya araçları
+    en: Media tools
+  summary:
+    tr: Gerçek medya CLI’ları (kütüphane ≠ CLI).
+    en: Real media CLIs (library ≠ CLI).
+  related_commands:
+  - ffmpeg
+  - godot
+- id: lang-packages
+  title:
+    tr: Dil paket yöneticileri
+    en: Language package managers
+  summary:
+    tr: Proje kapsamlı PM’ler (sistem PM değil).
+    en: Project-scoped PMs (not system PMs).
+  related_commands:
+  - npm
+  - yarn
+  - pnpm
+  - pip
+  - uv
+  - poetry
+  - composer
+  - gem
+  - bundle
+  - mvn
+  - gradle
+  - cargo
+- id: vcs-build
+  title:
+    tr: VCS ve build
+    en: VCS and build
+  summary:
+    tr: git + klasik build araçları.
+    en: git + classic build tools.
+  related_commands:
+  - git
+  - gh
+  - make
+  - cmake
+  - gcc
+command_table:
+- id: git
+  purpose:
+    tr: Dağıtık sürüm kontrolü (Software VCS temeli).
+    en: Distributed version control (Software VCS base).
+  learning_level: intermediate
+- id: node
+  purpose:
+    tr: Node.js runtime.
+    en: Node.js runtime.
+  learning_level: beginner
+- id: npm
+  purpose:
+    tr: Node paket yöneticisi.
+    en: Node package manager.
+  learning_level: beginner
+- id: python3
+  purpose:
+    tr: Python 3 runtime.
+    en: Python 3 runtime.
+  learning_level: intermediate
+- id: pip
+  purpose:
+    tr: Python paket kurucu.
+    en: Python package installer.
+  learning_level: beginner
+- id: uv
+  purpose:
+    tr: Hızlı Python proje/paket aracı.
+    en: Fast Python project/package tool.
+  learning_level: intermediate
+- id: go
+  purpose:
+    tr: Go toolchain.
+    en: Go toolchain.
+  learning_level: intermediate
+- id: cargo
+  purpose:
+    tr: Rust paket/derleme.
+    en: Rust package/build.
+  learning_level: intermediate
+- id: java
+  purpose:
+    tr: JVM başlatıcı.
+    en: JVM launcher.
+  learning_level: intermediate
+- id: mvn
+  purpose:
+    tr: Maven build.
+    en: Maven build.
+  learning_level: intermediate
+- id: dotnet
+  purpose:
+    tr: .NET SDK CLI.
+    en: .NET SDK CLI.
+  learning_level: intermediate
+- id: php
+  purpose:
+    tr: PHP CLI.
+    en: PHP CLI.
+  learning_level: intermediate
+- id: composer
+  purpose:
+    tr: PHP bağımlılık yöneticisi.
+    en: PHP dependency manager.
+  learning_level: intermediate
+- id: ruby
+  purpose:
+    tr: Ruby yorumlayıcısı.
+    en: Ruby interpreter.
+  learning_level: intermediate
+- id: flutter
+  purpose:
+    tr: Flutter SDK CLI.
+    en: Flutter SDK CLI.
+  learning_level: intermediate
+- id: ng
+  purpose:
+    tr: Angular CLI.
+    en: Angular CLI.
+  learning_level: intermediate
+- id: vite
+  purpose:
+    tr: Vite dev/build.
+    en: Vite dev/build.
+  learning_level: intermediate
+- id: code
+  purpose:
+    tr: VS Code CLI.
+    en: VS Code CLI.
+  learning_level: beginner
+- id: nvim
+  purpose:
+    tr: Neovim editör.
+    en: Neovim editor.
+  learning_level: intermediate
+- id: docker
+  purpose:
+    tr: Konteyner CLI.
+    en: Container CLI.
+  learning_level: intermediate
+- id: kubectl
+  purpose:
+    tr: Kubernetes CLI.
+    en: Kubernetes CLI.
+  learning_level: advanced
+- id: terraform
+  purpose:
+    tr: Terraform IaC.
+    en: Terraform IaC.
+  learning_level: advanced
+- id: aws
+  purpose:
+    tr: AWS CLI.
+    en: AWS CLI.
+  learning_level: intermediate
+- id: psql
+  purpose:
+    tr: PostgreSQL istemci.
+    en: PostgreSQL client.
+  learning_level: intermediate
+- id: mysql
+  purpose:
+    tr: MySQL/MariaDB istemci.
+    en: MySQL/MariaDB client.
+  learning_level: intermediate
+- id: mongosh
+  purpose:
+    tr: MongoDB shell.
+    en: MongoDB shell.
+  learning_level: intermediate
+- id: redis-cli
+  purpose:
+    tr: Redis istemci.
+    en: Redis client.
+  learning_level: intermediate
+- id: godot
+  purpose:
+    tr: Godot Engine CLI.
+    en: Godot Engine CLI.
+  learning_level: advanced
+- id: ffmpeg
+  purpose:
+    tr: Medya dönüştürücü.
+    en: Media converter.
+  learning_level: intermediate
+- id: deno
+  purpose:
+    tr: Deno runtime.
+    en: Deno runtime.
+  learning_level: intermediate
+- id: kind
+  purpose:
+    tr: Kubernetes in Docker.
+    en: Kubernetes in Docker.
+  learning_level: advanced
+- id: pulumi
+  purpose:
+    tr: Pulumi IaC CLI.
+    en: Pulumi IaC CLI.
+  learning_level: advanced
+graded_examples:
+- title:
+    tr: git durum
+    en: git status
+  command: git status
+  explanation:
+    tr: Software iş akışının VCS başlangıcı (salt okuma).
+    en: VCS starting point for Software workflows (read-only).
+  difficulty: beginner
+  risk: safe
+  related_commands:
+  - git
+- title:
+    tr: Çoklu runtime sürümleri
+    en: Multi-runtime versions
+  command: node -v && python3 -V && go version && java -version
+  explanation:
+    tr: Yaygın runtimeları salt okuma doğrular (kurulu olanlar).
+    en: Read-only checks for common runtimes (whichever are installed).
+  difficulty: beginner
+  risk: safe
+  related_commands:
+  - node
+  - python3
+  - go
+  - java
+- title:
+    tr: uv sync
+    en: uv sync
+  command: uv sync
+  explanation:
+    tr: Python proje ortamını kilit/deps ile senkronlar.
+    en: Syncs a Python project env from lock/deps.
+  difficulty: intermediate
+  risk: caution
+  related_commands:
+  - uv
+  - python3
+- title:
+    tr: docker ps
+    en: docker ps
+  command: docker ps
+  explanation:
+    tr: Server/containers alt konusuna köprü (mevcut kayıt).
+    en: Bridge into server/containers (existing record).
+  difficulty: beginner
+  risk: safe
+  related_commands:
+  - docker
+- title:
+    tr: kubectl get nodes
+    en: kubectl get nodes
+  command: kubectl get nodes
+  explanation:
+    tr: Küme düğümlerini listeler (kubeconfig gerekir).
+    en: Lists cluster nodes (kubeconfig required).
+  difficulty: intermediate
+  risk: caution
+  related_commands:
+  - kubectl
+- title:
+    tr: flutter doctor
+    en: flutter doctor
+  command: flutter doctor
+  explanation:
+    tr: Mobil/oyun yolunda ortam teşhisi.
+    en: Environment diagnostics on the mobile/game path.
+  difficulty: intermediate
+  risk: safe
+  related_commands:
+  - flutter
+- title:
+    tr: godot sürüm
+    en: godot version
+  command: godot --version
+  explanation:
+    tr: Oyun motoru CLI’sinin varlığını doğrular.
+    en: Confirms the game-engine CLI is present.
+  difficulty: intermediate
+  risk: safe
+  related_commands:
+  - godot
+callouts:
+- kind: tip
+  text:
+    tr: >-
+      command_table en fazla 32 satırdır; tüm Software komutları için subtopics.related_commands
+      ve tags (software + alan) ile gezin.
+    en: >-
+      command_table is capped at 32 rows; browse the full Software surface via
+      subtopics.related_commands and tags (software + domain).
+- kind: note
+  text:
+    tr: >-
+      pygame/numpy gibi kütüphaneler CLI değildir. Onları kuran araçlar python3/pip/uv’dir;
+      oyun motoru CLI örneği godot’tur. Unity Editor CLI bu bankada yok.
+    en: >-
+      Libraries like pygame/numpy are not CLIs. Tools that install them are python3/pip/uv;
+      godot is the game-engine CLI example. Unity Editor CLI is not in this bank.
+- kind: warning
+  text:
+    tr: >-
+      Bulut/IaC komutları (aws apply benzeri, terraform/tofu apply, pulumi up, packer build)
+      maliyetli veya yıkıcı olabilir — önce plan/preview/read-only.
+    en: >-
+      Cloud/IaC commands (aws mutating calls, terraform/tofu apply, pulumi up, packer build)
+      can be costly or destructive — prefer plan/preview/read-only first.
+- kind: caution
+  text:
+    tr: Sistem PM (pacman/apt) ile dil PM (npm/pip) karıştırılmamalı; Software ikincisine odaklanır.
+    en: Do not confuse system PMs (pacman/apt) with language PMs (npm/pip); Software focuses on the latter.
+safe_exercises:
+- title:
+    tr: Runtime envanteri
+    en: Runtime inventory
+  prompt:
+    tr: >-
+      Kurulu olanlar için sürüm okuyun: git --version, node -v, python3 -V, go version,
+      java -version, rustc --version, php -v, ruby -v, docker --version, code --version.
+    en: >-
+      Read versions for whatever is installed: git --version, node -v, python3 -V, go version,
+      java -version, rustc --version, php -v, ruby -v, docker --version, code --version.
+  risk: safe
+  related_commands:
+  - git
+  - node
+  - python3
+  - go
+  - java
+- title:
+    tr: DB istemci yardım
+    en: DB client help
+  prompt:
+    tr: psql --help, mysql --help, redis-cli --help, mongosh --help çıktılarına bakın (bağlanmayın).
+    en: Skim psql --help, mysql --help, redis-cli --help, mongosh --help (do not connect).
+  risk: safe
+  related_commands:
+  - psql
+  - mysql
+  - redis-cli
+  - mongosh
+- title:
+    tr: Editör CLI
+    en: Editor CLI
+  prompt:
+    tr: code --version veya codium --version veya nvim --version okuyun.
+    en: Read code --version or codium --version or nvim --version.
+  risk: safe
+  related_commands:
+  - code
+  - codium
+  - nvim
+next_steps:
+- id: development-basics
+  note:
+    tr: git/make temelleri.
+    en: git/make basics.
+- id: package-managers
+  note:
+    tr: Sistem PM’leri.
+    en: System PMs.
+- id: containers-basics
+- id: databases
+- id: cloud
+- id: infrastructure-as-code
+- id: kubernetes
+- id: json-data
+related_commands:
+- git
+- node
+- npm
+- python3
+- pip
+- uv
+- go
+- cargo
+- java
+- mvn
+- dotnet
+- php
+- composer
+- flutter
+- code
+- nvim
+- docker
+- kubectl
+- terraform
+- aws
+- psql
+- mysql
+- mongosh
+- redis-cli
+- godot
+- ffmpeg
+- deno
+- vite
+- kind
+- pulumi
+- ansible
+- systemctl
+related_concepts:
+- development-basics
+- package-managers
+- containers-basics
+- databases
+- cloud
+- infrastructure-as-code
+- kubernetes
+- json-data
+- terminal-basics
+see_also:
+- https://nodejs.org/docs/latest/api/cli.html
+- https://go.dev/doc/
+- https://docs.python.org/3/using/cmdline.html
+- https://learn.microsoft.com/dotnet/core/tools/
+- https://docs.flutter.dev/reference/flutter-cli
+- https://docs.godotengine.org/en/stable/tutorials/editor/command_line_tutorial.html
+verification:
+  status: draft
+  sources:
+  - https://nodejs.org/docs/latest/api/cli.html
+  - https://go.dev/doc/
+  - https://pip.pypa.io/en/stable/
+  - https://docs.astral.sh/uv/
+  - https://docs.flutter.dev/reference/flutter-cli
+  - https://docs.godotengine.org/en/stable/tutorials/editor/command_line_tutorial.html
+  - https://ffmpeg.org/ffmpeg.html
+  notes: >-
+    Broad Software topic — domains via tags/subtopics; command_table capped at 32;
+    library≠CLI called out for game libs. Agent draft; not human-verified.

@@ -1,0 +1,133 @@
+schema_version: 2
+id: vagrant
+name: vagrant
+kind: executable
+category: devops
+summary:
+  tr: Vagrant — geliştirme VM yöneticisi.
+  en: Vagrant — development VM manager.
+description:
+  tr: >-
+    Vagrantfile ile yerel VM/ortam. Provider (VirtualBox/libvirt) ayrıca gerekir.
+  en: >-
+    Local VM/env via Vagrantfile. Provider (VirtualBox/libvirt) required separately.
+purpose:
+  tr: Tekrarlanabilir geliştirme VM’leri.
+  en: Repeatable development VMs.
+when_to_use:
+  tr: Vagrantfile olan projelerde up/ssh için.
+  en: For up/ssh in Vagrantfile projects.
+expected_effect:
+  tr: VM oluşturur/başlatır veya SSH açar.
+  en: Creates/starts a VM or opens SSH.
+syntax: "vagrant <command>"
+tags:
+- software
+- devops
+- virtualization
+- tools
+risk: caution
+learning_level: intermediate
+requires_elevated: false
+platforms:
+- linux
+- macos
+- windows
+packages:
+  arch: vagrant
+  debian: vagrant
+  ubuntu: vagrant
+package_refs:
+- manager: pacman
+  package: vagrant
+  distributions:
+  - arch
+- manager: apt
+  package: vagrant
+  distributions:
+  - debian
+  - ubuntu
+- manager: homebrew
+  package: vagrant
+install_notes:
+  tr: |-
+    Arch: pacman -S vagrant
+    Provider ayrıca (virtualbox/libvirt)
+    macOS: brew install vagrant
+  en: |-
+    Arch: pacman -S vagrant
+    Provider separate (virtualbox/libvirt)
+    macOS: brew install vagrant
+flags: []
+examples:
+- title:
+    tr: Sürüm
+    en: Version
+  command: vagrant version
+  explanation:
+    tr: Sürüm.
+    en: Version.
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: Status
+    en: Status
+  command: vagrant status
+  explanation:
+    tr: VM durumu.
+    en: VM status.
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: Up
+    en: Up
+  command: vagrant up
+  explanation:
+    tr: VM başlatır.
+    en: Starts the VM.
+  risk: caution
+  difficulty: intermediate
+- title:
+    tr: SSH
+    en: SSH
+  command: vagrant ssh
+  explanation:
+    tr: VM’ye SSH.
+    en: SSH into the VM.
+  risk: caution
+  difficulty: intermediate
+- title:
+    tr: Halt
+    en: Halt
+  command: vagrant halt
+  explanation:
+    tr: VM durdurur.
+    en: Stops the VM.
+  risk: caution
+  difficulty: beginner
+related:
+- docker
+- packer
+- terraform
+related_topics:
+- software
+intent:
+  tr:
+  - vagrant up
+  - vagrant ssh
+  en:
+  - vagrant up
+  - vagrant ssh
+documentation:
+- https://developer.hashicorp.com/vagrant/docs/cli
+sources:
+- https://developer.hashicorp.com/vagrant/docs/cli
+verification:
+  status: draft
+  sources:
+  - https://developer.hashicorp.com/vagrant/docs/cli
+  notes: Software bank breadth draft — official docs oriented; not human-verified.
+nova:
+  concepts:
+  - software
+  ui_priority: 60

@@ -1,0 +1,118 @@
+schema_version: 2
+id: tofu
+name: tofu
+kind: executable
+category: devops
+summary:
+  tr: OpenTofu — açık IaC (Terraform uyumlu).
+  en: OpenTofu — open IaC (Terraform-compatible).
+description:
+  tr: >-
+    Terraform çatalı. plan/apply altyapıyı değiştirir. terraform kaydıyla related.
+  en: >-
+    Terraform fork. plan/apply change infrastructure. Related to terraform record.
+purpose:
+  tr: Bildirimsel altyapı yönetmek.
+  en: Manage declarative infrastructure.
+when_to_use:
+  tr: OpenTofu kullanan IaC repolarında.
+  en: In IaC repos using OpenTofu.
+expected_effect:
+  tr: Plan üretir veya kaynakları değiştirir.
+  en: Produces a plan or changes resources.
+syntax: "tofu <command>"
+tags:
+- software
+- devops
+- iac
+- server
+risk: dangerous
+learning_level: advanced
+requires_elevated: false
+platforms:
+- linux
+- macos
+- windows
+package_refs:
+- manager: homebrew
+  package: opentofu
+- manager: pacman
+  package: opentofu
+  distributions:
+  - arch
+  notes:
+    tr: Paket adı opentofu olabilir.
+    en: Package name may be opentofu.
+install_notes:
+  tr: |-
+    https://opentofu.org/docs/intro/install/
+    macOS: brew install opentofu
+    Binary: tofu
+  en: |-
+    https://opentofu.org/docs/intro/install/
+    macOS: brew install opentofu
+    Binary: tofu
+flags: []
+examples:
+- title:
+    tr: Sürüm
+    en: Version
+  command: tofu version
+  explanation:
+    tr: Sürüm.
+    en: Version.
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: Init
+    en: Init
+  command: tofu init
+  explanation:
+    tr: Backend/provider init.
+    en: Backend/provider init.
+  risk: caution
+  difficulty: intermediate
+- title:
+    tr: Plan
+    en: Plan
+  command: tofu plan
+  explanation:
+    tr: Değişiklik planı.
+    en: Change plan.
+  risk: caution
+  difficulty: intermediate
+- title:
+    tr: Validate
+    en: Validate
+  command: tofu validate
+  explanation:
+    tr: Yapılandırma doğrulama.
+    en: Config validation.
+  risk: safe
+  difficulty: beginner
+related:
+- terraform
+- ansible
+- pulumi
+related_topics:
+- software
+intent:
+  tr:
+  - opentofu
+  - tofu plan
+  en:
+  - opentofu
+  - tofu plan
+documentation:
+- https://opentofu.org/docs/cli/
+sources:
+- https://opentofu.org/docs/cli/
+verification:
+  status: draft
+  sources:
+  - https://opentofu.org/docs/cli/
+  notes: Software bank breadth draft — official docs oriented; not human-verified.
+nova:
+  concepts:
+  - software
+  ui_priority: 60

@@ -1,0 +1,113 @@
+schema_version: 2
+id: tsc
+name: tsc
+kind: executable
+category: development
+summary:
+  tr: TypeScript derleyicisi (tsc).
+  en: TypeScript compiler (tsc).
+description:
+  tr: >-
+    typescript npm paketinin CLI’si. Proje-yerel npx tsc yaygındır.
+  en: >-
+    CLI from the typescript npm package. Project-local npx tsc is common.
+purpose:
+  tr: TS kaynaklarını JS’e derlemek.
+  en: Compile TS sources to JS.
+when_to_use:
+  tr: tsconfig.json olan projelerde typecheck/emit için.
+  en: For typecheck/emit in tsconfig.json projects.
+expected_effect:
+  tr: JS çıktısı üretir veya yalnızca tip denetler.
+  en: Emits JS or typechecks only.
+syntax: "tsc [options]"
+tags:
+- software
+- frontend
+- typescript
+- build
+risk: caution
+learning_level: intermediate
+requires_elevated: false
+platforms:
+- linux
+- macos
+- windows
+package_refs:
+- manager: npm
+  package: typescript
+  notes:
+    tr: Binary adı tsc; proje-yerel kurulum tercih.
+    en: Binary name tsc; prefer project-local install.
+install_notes:
+  tr: |-
+    npm install -D typescript  sonra npx tsc
+    Global: npm install -g typescript
+  en: |-
+    npm install -D typescript then npx tsc
+    Global: npm install -g typescript
+flags: []
+examples:
+- title:
+    tr: Sürüm
+    en: Version
+  command: tsc -v
+  explanation:
+    tr: tsc sürümü.
+    en: tsc version.
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: Derle
+    en: Build
+  command: tsc
+  explanation:
+    tr: tsconfig’e göre derler.
+    en: Compiles per tsconfig.
+  risk: caution
+  difficulty: beginner
+- title:
+    tr: No emit
+    en: No emit
+  command: tsc --noEmit
+  explanation:
+    tr: Yalnız tip denetimi.
+    en: Typecheck only.
+  risk: safe
+  difficulty: intermediate
+- title:
+    tr: Init
+    en: Init
+  command: tsc --init
+  explanation:
+    tr: tsconfig.json oluşturur.
+    en: Creates tsconfig.json.
+  risk: caution
+  difficulty: beginner
+related:
+- node
+- npm
+- npx
+- eslint
+related_topics:
+- software
+intent:
+  tr:
+  - typescript derle
+  - tsc
+  en:
+  - compile typescript
+  - tsc
+documentation:
+- https://www.typescriptlang.org/docs/handbook/compiler-options.html
+sources:
+- https://www.typescriptlang.org/docs/handbook/compiler-options.html
+verification:
+  status: draft
+  sources:
+  - https://www.typescriptlang.org/docs/handbook/compiler-options.html
+  notes: Software bank breadth draft — official docs oriented; not human-verified.
+nova:
+  concepts:
+  - software
+  ui_priority: 60

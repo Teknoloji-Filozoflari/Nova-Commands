@@ -1,0 +1,165 @@
+schema_version: 2
+id: code
+name: code
+kind: vendor_cli
+category: development
+summary:
+  tr: Visual Studio Code komut satırı (`code`).
+  en: Visual Studio Code command line (`code`).
+description:
+  tr: >-
+    Editörü dosya/klasörle açar, fark gösterir, uzantı kurar/listeler.
+    Shell komutu VS Code içinden “Shell Command: Install 'code'” ile PATH’e eklenir.
+    Linux’ta Code - OSS (`code`) ile Microsoft build ayrılabilir.
+  en: >-
+    Opens the editor on files/folders, diffs, and lists/installs extensions.
+    The shell command is added to PATH via VS Code “Shell Command: Install 'code'”.
+    On Linux, Code - OSS (`code`) may differ from the Microsoft build.
+purpose:
+  tr: Terminalden VS Code oturumu ve uzantı yönetimi.
+  en: Launch VS Code sessions and manage extensions from the terminal.
+when_to_use:
+  tr: Projeyi editörde açmak, diff bakmak veya uzantı CLI’si kullanmak için.
+  en: To open a project in the editor, view diffs, or use the extensions CLI.
+syntax: 'code [options] [paths...]'
+expected_effect:
+  tr: Editör penceresi açar veya uzantı/CLI bilgisini yazar; derleme yapmaz.
+  en: Opens an editor window or prints extension/CLI info; does not build code.
+tags:
+- software
+- tools
+- frontend
+- editor
+- vscode
+risk: caution
+learning_level: beginner
+requires_elevated: false
+platforms:
+- linux
+- macos
+- windows
+operating_systems:
+- linux
+- macos
+- windows
+packages:
+  arch: code
+package_refs:
+- manager: pacman
+  package: code
+  distributions:
+  - arch
+  notes:
+    tr: Arch community `code` genelde Code - OSS’tur; Microsoft build AUR’da olabilir.
+    en: Arch community `code` is typically Code - OSS; Microsoft build may be AUR.
+- manager: homebrew
+  package: visual-studio-code
+  notes:
+    tr: Genelde cask; `brew install --cask visual-studio-code`.
+    en: Usually a cask; `brew install --cask visual-studio-code`.
+- manager: winget
+  package: Microsoft.VisualStudioCode
+install_notes:
+  tr: |-
+    Windows: winget install Microsoft.VisualStudioCode — sonra PATH’te code
+    macOS: brew install --cask visual-studio-code; Command Palette → Install 'code' command
+    Arch: pacman -S code  (OSS) veya Microsoft .deb/AUR — binary adı aynı olabilir
+    Linux Microsoft .deb/rpm: https://code.visualstudio.com/docs/setup/linux
+  en: |-
+    Windows: winget install Microsoft.VisualStudioCode — then ensure code on PATH
+    macOS: brew install --cask visual-studio-code; Command Palette → Install 'code' command
+    Arch: pacman -S code (OSS) or Microsoft .deb/AUR — binary name may match
+    Linux Microsoft .deb/rpm: https://code.visualstudio.com/docs/setup/linux
+flags: []
+examples:
+- title:
+    tr: Sürüm
+    en: Version
+  command: code --version
+  explanation:
+    tr: VS Code sürüm bilgisini yazar.
+    en: Prints VS Code version info.
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: Klasör aç
+    en: Open folder
+  command: code .
+  explanation:
+    tr: Geçerli dizini editörde açar.
+    en: Opens the current directory in the editor.
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: Dosya aç
+    en: Open file
+  command: code README.md
+  explanation:
+    tr: Belirtilen dosyayı açar.
+    en: Opens the given file.
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: Diff
+    en: Diff
+  command: code --diff a.txt b.txt
+  explanation:
+    tr: İki dosyayı yan yana karşılaştırır.
+    en: Compares two files side by side.
+  risk: safe
+  difficulty: intermediate
+- title:
+    tr: Uzantı listesi
+    en: List extensions
+  command: code --list-extensions
+  explanation:
+    tr: Kurulu uzantı kimliklerini listeler.
+    en: Lists installed extension ids.
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: Uzantı kur
+    en: Install extension
+  command: code --install-extension ms-python.python
+  explanation:
+    tr: Uzantıyı marketplace’ten kurar (ağ).
+    en: Installs an extension from the marketplace (network).
+  risk: caution
+  difficulty: intermediate
+common_mistakes:
+- tr: Editör kurulu iken shell `code` komutunun PATH’e eklenmemiş olması.
+  en: Having the editor installed but not adding the `code` shell command to PATH.
+- tr: Code - OSS ile Microsoft build uzantı kaynaklarını karıştırmak.
+  en: Mixing Code - OSS and Microsoft build extension sources.
+related:
+- git
+- ng
+- node
+- dotnet
+related_topics:
+- software
+- development-basics
+intent:
+  tr:
+  - vscode aç
+  - code .
+  - uzantı kur
+  - vs code cli
+  en:
+  - open vscode
+  - code .
+  - install extension
+  - vs code cli
+documentation:
+- https://code.visualstudio.com/docs/editor/command-line
+sources:
+- https://code.visualstudio.com/docs/editor/command-line
+verification:
+  status: draft
+  sources:
+  - https://code.visualstudio.com/docs/editor/command-line
+  notes: Software bank draft — VS Code CLI; OSS vs Microsoft noted; not human-verified.
+nova:
+  concepts:
+  - software
+  ui_priority: 76

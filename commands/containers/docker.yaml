@@ -13,6 +13,8 @@ description:
     on Arch use pacman -S docker.
 tags:
 - containers
+- software
+- server
 risk: dangerous
 learning_level: intermediate
 requires_elevated: false
@@ -151,6 +153,7 @@ verification:
 nova:
   concepts:
   - containers
+  - software
 purpose:
   tr: Konteyner/imaj gözlemi ve yönetimi; güvenlik kontrolünde ps/images/inspect salt okunur.
   en: Container/image observation and management; security checks prefer read-only ps/images/inspect.
@@ -196,3 +199,4 @@ common_mistakes:
   en: Assuming flags are identical to podman.
 related_topics:
 - containers-basics
+- software

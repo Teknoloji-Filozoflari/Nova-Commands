@@ -15,6 +15,7 @@ tags:
 - cloud
 - aws
 - devops
+- software
 risk: dangerous
 requires_elevated: false
 platforms:
@@ -43,6 +44,9 @@ examples:
     tr: Yapılandırılmış kimliğin ARN/Account bilgisini gösterir (secret yazdırmaz).
     en: Shows ARN/Account for configured identity (does not print secrets).
   risk: caution
+related_topics:
+- software
+
 intent:
   tr:
   - aws cli
@@ -79,5 +83,6 @@ nova:
   favorite_eligible: true
   ui_priority: 60
   concepts:
+  - software
   - cloud
   - infrastructure-as-code

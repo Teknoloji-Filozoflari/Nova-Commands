@@ -1,0 +1,158 @@
+schema_version: 2
+id: go
+name: go
+kind: executable
+category: development
+summary:
+  tr: Go derleyici ve araç zinciri CLI.
+  en: Go compiler and toolchain CLI.
+description:
+  tr: >-
+    go komutu derler, test eder, modülleri yönetir ve araçları çalıştırır. gofmt ayrı kayıttır değil; go fmt alt komutudur.
+  en: >-
+    The go command builds, tests, manages modules, and runs tools. Formatting is via go fmt (subcommand), not a separate bank id here.
+purpose:
+  tr: "Go projelerini derlemek, test etmek ve modül yönetmek."
+  en: "Build, test, and manage Go modules."
+when_to_use:
+  tr: Go kaynaklı servis/CLI geliştirirken.
+  en: When developing Go services or CLIs.
+syntax: "go <command> [arguments]"
+expected_effect:
+  tr: "Derleme çıktısı üretir, test çalıştırır veya modül dosyalarını günceller."
+  en: "Produces build output, runs tests, or updates module files."
+tags:
+- software
+- backend
+- go
+- language
+risk: caution
+learning_level: intermediate
+requires_elevated: false
+platforms:
+- linux
+- macos
+- windows
+packages:
+  arch: go
+  debian: golang-go
+  ubuntu: golang-go
+  fedora: golang
+package_refs:
+- manager: pacman
+  package: go
+  distributions:
+  - arch
+- manager: apt
+  package: golang-go
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: golang
+  distributions:
+  - fedora
+- manager: homebrew
+  package: go
+- manager: winget
+  package: GoLang.Go
+install_notes:
+  tr: |-
+    Arch: pacman -S go
+    Debian/Ubuntu: apt install golang-go
+    Fedora: dnf install golang
+    macOS: brew install go
+    Windows: winget install GoLang.Go
+  en: |-
+    Arch: pacman -S go
+    Debian/Ubuntu: apt install golang-go
+    Fedora: dnf install golang
+    macOS: brew install go
+    Windows: winget install GoLang.Go
+flags: []
+examples:
+- title:
+    tr: Sürüm
+    en: Version
+  command: go version
+  explanation:
+    tr: Kurulu Go sürümü.
+    en: Installed Go version.
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: Env
+    en: Env
+  command: go env GOPATH
+  explanation:
+    tr: GOPATH değerini yazar.
+    en: Prints GOPATH.
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: Modül init
+    en: Module init
+  command: go mod init example.com/hello
+  explanation:
+    tr: Yeni modül oluşturur.
+    en: Creates a new module.
+  risk: caution
+  difficulty: beginner
+- title:
+    tr: Derle
+    en: Build
+  command: go build
+  explanation:
+    tr: Paketi derler.
+    en: Builds the package.
+  risk: caution
+  difficulty: beginner
+- title:
+    tr: Test
+    en: Test
+  command: go test ./...
+  explanation:
+    tr: Paket testlerini çalıştırır.
+    en: Runs package tests.
+  risk: caution
+  difficulty: intermediate
+- title:
+    tr: Format
+    en: Format
+  command: go fmt ./...
+  explanation:
+    tr: Kaynakları formatlar.
+    en: Formats sources.
+  risk: caution
+  difficulty: beginner
+related:
+- git
+- make
+- docker
+- rustc
+related_topics:
+- software
+intent:
+  tr:
+  - go derle
+  - go test
+  - golang
+  en:
+  - go build
+  - go test
+  - golang
+documentation:
+- https://go.dev/doc/
+sources:
+- https://pkg.go.dev/cmd/go
+- https://go.dev/doc/
+verification:
+  status: draft
+  sources:
+  - https://pkg.go.dev/cmd/go
+  - https://go.dev/doc/
+  notes: Software bank breadth draft — official docs oriented; not human-verified.
+nova:
+  concepts:
+  - software
+  ui_priority: 75

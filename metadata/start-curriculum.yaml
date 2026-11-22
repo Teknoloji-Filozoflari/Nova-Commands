@@ -29,6 +29,7 @@ concept_order:
 - systemd
 - monitoring-and-logs
 - development-basics
+- software
 - containers-basics
 - debugging
 risk_filter:

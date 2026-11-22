@@ -107,6 +107,11 @@ related:
 - jq
 - make
 - git
+- dotnet
+- node
+related_topics:
+- software
+- development-basics
 intent:
   tr:
   - python çalıştır
@@ -125,5 +130,6 @@ nova:
   concepts:
   - path
   - terminal-basics
+  - software
   ui_priority: 85
   favorite_eligible: true

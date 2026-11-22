@@ -1,0 +1,117 @@
+schema_version: 2
+id: dart
+name: dart
+kind: executable
+category: development
+summary:
+  tr: Dart SDK CLI.
+  en: Dart SDK CLI.
+description:
+  tr: >-
+    Dart dil araçları (run, test, pub). Flutter SDK ile birlikte de gelir.
+  en: >-
+    Dart language tools (run, test, pub). Also ships with the Flutter SDK.
+purpose:
+  tr: Dart betik/paket işlemleri.
+  en: Dart script/package operations.
+when_to_use:
+  tr: Dart veya Flutter projelerinde SDK araçları için.
+  en: For SDK tools in Dart or Flutter projects.
+expected_effect:
+  tr: Betik çalıştırır veya pub işlemi yapar.
+  en: Runs a script or performs pub work.
+syntax: "dart <command>"
+tags:
+- software
+- frontend
+- mobile
+- language
+- dart
+risk: caution
+learning_level: intermediate
+requires_elevated: false
+platforms:
+- linux
+- macos
+- windows
+package_refs:
+- manager: homebrew
+  package: dart
+- manager: pacman
+  package: dart
+  distributions:
+  - arch
+  notes:
+    tr: AUR/community olabilir; Flutter ile de gelir.
+    en: May be AUR/community; also ships with Flutter.
+install_notes:
+  tr: |-
+    macOS: brew install dart
+    veya Flutter SDK içinden
+    https://dart.dev/get-dart
+  en: |-
+    macOS: brew install dart
+    or via Flutter SDK
+    https://dart.dev/get-dart
+flags: []
+examples:
+- title:
+    tr: Sürüm
+    en: Version
+  command: dart --version
+  explanation:
+    tr: Dart sürümü.
+    en: Dart version.
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: Run
+    en: Run
+  command: dart run
+  explanation:
+    tr: Proje girişini çalıştırır.
+    en: Runs the project entrypoint.
+  risk: caution
+  difficulty: beginner
+- title:
+    tr: Test
+    en: Test
+  command: dart test
+  explanation:
+    tr: Testleri çalıştırır.
+    en: Runs tests.
+  risk: caution
+  difficulty: intermediate
+- title:
+    tr: Pub get
+    en: Pub get
+  command: dart pub get
+  explanation:
+    tr: Bağımlılıkları alır.
+    en: Fetches dependencies.
+  risk: caution
+  difficulty: beginner
+related:
+- flutter
+related_topics:
+- software
+intent:
+  tr:
+  - dart çalıştır
+  - dart pub
+  en:
+  - dart run
+  - dart pub
+documentation:
+- https://dart.dev/tools/dart-tool
+sources:
+- https://dart.dev/tools/dart-tool
+verification:
+  status: draft
+  sources:
+  - https://dart.dev/tools/dart-tool
+  notes: Software bank breadth draft — official docs oriented; not human-verified.
+nova:
+  concepts:
+  - software
+  ui_priority: 60

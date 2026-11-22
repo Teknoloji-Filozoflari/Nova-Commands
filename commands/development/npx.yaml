@@ -1,0 +1,124 @@
+schema_version: 2
+id: npx
+name: npx
+kind: executable
+category: development
+summary:
+  tr: npm paket yürütücüsü (tek seferlik CLI).
+  en: npm package runner (one-shot CLIs).
+description:
+  tr: >-
+    Yerel veya registry’den paketi indirip çalıştırır; kalıcı global kurulum istemeden
+    create-* iskeletleri ve araç CLI’ları için yaygındır. npm ile birlikte gelir.
+  en: >-
+    Downloads/runs a package locally or from the registry without requiring a
+    permanent global install — common for create-* scaffolds and tool CLIs. Ships with npm.
+purpose:
+  tr: Geçici veya proje-yerel CLI araçlarını çalıştırmak.
+  en: Run temporary or project-local CLI tools.
+when_to_use:
+  tr: Global kurmadan bir npm CLI çalıştırmak veya create-* iskeleti başlatmak için.
+  en: To run an npm CLI or start a create-* scaffold without a global install.
+syntax: 'npx [options] <command>[@version] [args]'
+expected_effect:
+  tr: Paketi çözümler/indirir ve komutu çalıştırır; isteğe bağlı önbellek kullanır.
+  en: Resolves/downloads a package and runs the command; may use a cache.
+tags:
+- software
+- frontend
+- tools
+- node
+- npm
+risk: caution
+learning_level: beginner
+requires_elevated: false
+platforms:
+- linux
+- macos
+- windows
+- bsd
+operating_systems:
+- linux
+- macos
+- windows
+package_refs:
+- manager: npm
+  package: npm
+  notes:
+    tr: npx, npm CLI ile birlikte gelir.
+    en: npx ships with the npm CLI.
+install_notes:
+  tr: |-
+    npm ile gelir (nodejs/npm kurulumundan sonra). Ayrı sistem paketi gerekmez.
+  en: |-
+    Ships with npm (after nodejs/npm install). No separate system package required.
+flags: []
+examples:
+- title:
+    tr: Yardım
+    en: Help
+  command: npx --help
+  explanation:
+    tr: npx kullanım özetini gösterir.
+    en: Shows npx usage summary.
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: Tek seferlik paket
+    en: One-shot package
+  command: npx --yes cowsay 'hello'
+  explanation:
+    tr: Onay istemeden paketi çalıştırır (--yes); ağ indirir.
+    en: Runs the package without prompting (--yes); downloads over the network.
+  risk: caution
+  difficulty: beginner
+- title:
+    tr: Yerel binary
+    en: Local binary
+  command: npx eslint .
+  explanation:
+    tr: Proje node_modules içindeki eslint’i çalıştırır (kuruluysa).
+    en: Runs project-local eslint from node_modules when installed.
+  risk: caution
+  difficulty: intermediate
+- title:
+    tr: Sürüm pin
+    en: Version pin
+  command: npx --package=typescript@5.4 tsc --version
+  explanation:
+    tr: Belirli paket sürümünden binary çalıştırır.
+    en: Runs a binary from a pinned package version.
+  risk: caution
+  difficulty: intermediate
+common_mistakes:
+- tr: --yes ile tanınmayan paketleri körü körüne çalıştırmak.
+  en: Blindly running unknown packages with --yes.
+related:
+- npm
+- node
+- bun
+- ng
+related_topics:
+- software
+intent:
+  tr:
+  - npx çalıştır
+  - tek seferlik cli
+  - create vite
+  en:
+  - run npx
+  - one shot cli
+  - create scaffold
+documentation:
+- https://docs.npmjs.com/cli/commands/npx
+sources:
+- https://docs.npmjs.com/cli/commands/npx
+verification:
+  status: draft
+  sources:
+  - https://docs.npmjs.com/cli/commands/npx
+  notes: Software bank draft; not human-verified.
+nova:
+  concepts:
+  - software
+  ui_priority: 78

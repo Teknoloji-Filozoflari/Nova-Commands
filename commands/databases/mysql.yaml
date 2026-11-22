@@ -16,6 +16,8 @@ tags:
 - mysql
 - mariadb
 - server
+- software
+- data
 risk: caution
 requires_elevated: false
 platforms:
@@ -44,6 +46,9 @@ examples:
     tr: Bayrak özeti (bağlantı açmaz).
     en: Flag summary (does not open a connection).
   risk: safe
+related_topics:
+- software
+
 intent:
   tr:
   - mysql istemci
@@ -79,4 +84,5 @@ nova:
   favorite_eligible: true
   ui_priority: 60
   concepts:
+  - software
   - databases

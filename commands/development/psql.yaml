@@ -15,6 +15,9 @@ tags:
 - sql
 - database
 - postgresql
+- software
+- data
+- backend
 risk: caution
 learning_level: intermediate
 requires_elevated: false
@@ -108,6 +111,9 @@ examples:
 related:
 - sqlite3
 - jq
+related_topics:
+- software
+
 intent:
   tr:
   - postgres bağlan
@@ -122,5 +128,6 @@ verification:
   notes: Client package names vary; flag details need maintainer spot-check.
 nova:
   concepts:
+  - software
   - json-data
   - permissions

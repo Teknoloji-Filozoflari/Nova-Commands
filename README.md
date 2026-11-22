@@ -37,21 +37,21 @@ targets. Trust-audit follow-up may bump the digest when warnings/status honesty 
 
 | Metric | Value |
 |--------|------:|
-| Commands | **270** |
-| Concepts | **30** |
+| Commands | **319** |
+| Concepts | **31** |
 | Tasks / profiles | **36** / **14** (all `draft`) |
-| Search entries | **350** |
+| Search entries | **400** |
 | OS / package-manager registry rows | **11** / **60** |
 | `schema_version` | **2** |
-| verification (commands) | verified **26** / reviewed **105** / draft **139** |
-| verification (concepts) | reviewed **1** / draft **28** (no fake `verified`) |
-| `content_sha256` | `e6466b7f777fe49019c2cc7d6d4bcf279857d76a209e7ca68b7292f5f945ec06` |
+| verification (commands) | verified **26** / reviewed **105** / draft **188** |
+| verification (concepts) | reviewed **1** / draft **30** (no fake `verified`) |
+| `content_sha256` | `aad2fb79aad8f4954e25a5538811163c4efc18d5551eabdcddc4f233f938da2f` |
 
 ```mermaid
-pie title Command verification.status (270)
+pie title Command verification.status (319)
   "verified" : 26
   "reviewed" : 105
-  "draft" : 139
+  "draft" : 188
 ```
 
 Registry presence ≠ every command verified on that OS. Roadmap:

@@ -71,7 +71,10 @@ names. Prefer explicit “not on this family” notes over silent substitutes.
 ## Curriculum
 
 `metadata/start-curriculum.yaml` `concept_order` lists the Start-tab learning
-path (safe/caution filtered on the Nova side).
+path (safe/caution filtered on the Nova side). Includes broad `software`
+(languages, frontend/backend, data, cloud, editors, mobile/game, media tools)
+after `development-basics`. Domain nesting is via **tags + up to 16 subtopics**;
+`command_table` is capped at 32 rows — there is no `ecosystem` schema field.
 
 ## Client notes (Nova NV-124)
 

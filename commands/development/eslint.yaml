@@ -1,0 +1,101 @@
+schema_version: 2
+id: eslint
+name: eslint
+kind: executable
+category: development
+summary:
+  tr: ESLint — JS/TS lint aracı.
+  en: ESLint — JS/TS linter.
+description:
+  tr: >-
+    Kod stili/hata kurallarını denetler. Proje-yerel kurulum + npx eslint yaygındır.
+  en: >-
+    Checks code style/error rules. Project-local install + npx eslint is common.
+purpose:
+  tr: JS/TS kaynaklarını lintlemek.
+  en: Lint JS/TS sources.
+when_to_use:
+  tr: PR öncesi veya CI lint adımında.
+  en: Before PRs or in CI lint steps.
+expected_effect:
+  tr: Uyarı/hata raporu yazar; --fix ile düzeltebilir.
+  en: Reports warnings/errors; may fix with --fix.
+syntax: "eslint [options] [file|dir]"
+tags:
+- software
+- frontend
+- tools
+- javascript
+risk: caution
+learning_level: intermediate
+requires_elevated: false
+platforms:
+- linux
+- macos
+- windows
+package_refs:
+- manager: npm
+  package: eslint
+install_notes:
+  tr: |-
+    npm install -D eslint  sonra npx eslint .
+    Yapılandırma eslint.config.* veya .eslintrc*
+  en: |-
+    npm install -D eslint then npx eslint .
+    Config via eslint.config.* or .eslintrc*
+flags: []
+examples:
+- title:
+    tr: Sürüm
+    en: Version
+  command: eslint -v
+  explanation:
+    tr: ESLint sürümü.
+    en: ESLint version.
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: Lint dir
+    en: Lint dir
+  command: eslint .
+  explanation:
+    tr: Dizini lintler.
+    en: Lints the directory.
+  risk: caution
+  difficulty: beginner
+- title:
+    tr: Fix
+    en: Fix
+  command: eslint . --fix
+  explanation:
+    tr: Otomatik düzeltilebilir sorunları giderir.
+    en: Fixes auto-fixable issues.
+  risk: caution
+  difficulty: intermediate
+related:
+- prettier
+- tsc
+- npm
+- npx
+related_topics:
+- software
+intent:
+  tr:
+  - eslint lint
+  - js lint
+  en:
+  - eslint lint
+  - js lint
+documentation:
+- https://eslint.org/docs/latest/use/command-line-interface
+sources:
+- https://eslint.org/docs/latest/use/command-line-interface
+verification:
+  status: draft
+  sources:
+  - https://eslint.org/docs/latest/use/command-line-interface
+  notes: Software bank breadth draft — official docs oriented; not human-verified.
+nova:
+  concepts:
+  - software
+  ui_priority: 60

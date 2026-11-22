@@ -1,0 +1,129 @@
+schema_version: 2
+id: deno
+name: deno
+kind: executable
+category: development
+summary:
+  tr: Deno — güvenli JS/TS runtime.
+  en: Deno — secure JS/TS runtime.
+description:
+  tr: >-
+    Node alternatifi runtime; izin bayrakları ve yerleşik toolchain ile. npm uyumluluğu sürüme göre değişir.
+  en: >-
+    Node-alternative runtime with permission flags and built-in toolchain. npm compat varies by version.
+purpose:
+  tr: JS/TS betiklerini Deno ile çalıştırmak.
+  en: Run JS/TS scripts with Deno.
+when_to_use:
+  tr: Deno projelerinde veya tek dosya TS betiklerinde.
+  en: In Deno projects or single-file TS scripts.
+expected_effect:
+  tr: Betik çalıştırır veya araç görevini yapar.
+  en: Runs a script or tool task.
+syntax: "deno <command>"
+tags:
+- software
+- frontend
+- backend
+- javascript
+- language
+risk: caution
+learning_level: intermediate
+requires_elevated: false
+platforms:
+- linux
+- macos
+- windows
+package_refs:
+- manager: pacman
+  package: deno
+  distributions:
+  - arch
+- manager: homebrew
+  package: deno
+- manager: winget
+  package: DenoLand.Deno
+install_notes:
+  tr: |-
+    Arch: pacman -S deno
+    macOS: brew install deno
+    Windows: winget install DenoLand.Deno
+    Resmi installer: deno.com
+  en: |-
+    Arch: pacman -S deno
+    macOS: brew install deno
+    Windows: winget install DenoLand.Deno
+    Official installer: deno.com
+flags: []
+examples:
+- title:
+    tr: Sürüm
+    en: Version
+  command: deno --version
+  explanation:
+    tr: Deno sürümü.
+    en: Deno version.
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: Run
+    en: Run
+  command: deno run hello.ts
+  explanation:
+    tr: Betik çalıştırır (izin isteyebilir).
+    en: Runs a script (may prompt for permissions).
+  risk: caution
+  difficulty: beginner
+- title:
+    tr: İzinli run
+    en: Permissive run
+  command: deno run --allow-net server.ts
+  explanation:
+    tr: Ağ izniyle çalıştırır.
+    en: Runs with network permission.
+  risk: caution
+  difficulty: intermediate
+- title:
+    tr: Fmt
+    en: Fmt
+  command: deno fmt
+  explanation:
+    tr: Kod formatlar.
+    en: Formats code.
+  risk: caution
+  difficulty: beginner
+- title:
+    tr: Test
+    en: Test
+  command: deno test
+  explanation:
+    tr: Testleri çalıştırır.
+    en: Runs tests.
+  risk: caution
+  difficulty: intermediate
+related:
+- node
+- bun
+- npm
+related_topics:
+- software
+intent:
+  tr:
+  - deno çalıştır
+  - deno test
+  en:
+  - deno run
+  - deno test
+documentation:
+- https://docs.deno.com/runtime/reference/cli/
+sources:
+- https://docs.deno.com/runtime/reference/cli/
+verification:
+  status: draft
+  sources:
+  - https://docs.deno.com/runtime/reference/cli/
+  notes: Software bank breadth draft — official docs oriented; not human-verified.
+nova:
+  concepts:
+  - software
+  ui_priority: 60

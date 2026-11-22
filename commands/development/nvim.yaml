@@ -1,0 +1,118 @@
+schema_version: 2
+id: nvim
+name: nvim
+kind: executable
+category: development
+summary:
+  tr: Neovim metin editörü.
+  en: Neovim text editor.
+description:
+  tr: >-
+    Vim tabanlı modern editör. Terminal veya GUI; yazılım geliştirmede yaygın.
+  en: >-
+    Modern Vim-based editor. Terminal or GUI; common in software development.
+purpose:
+  tr: Kod ve yapılandırma düzenlemek.
+  en: Edit code and configuration.
+when_to_use:
+  tr: Terminal-odaklı düzenleme için.
+  en: For terminal-centric editing.
+expected_effect:
+  tr: Editör oturumu açar.
+  en: Opens an editor session.
+syntax: "nvim [options] [file ...]"
+tags:
+- software
+- editors
+- tools
+risk: caution
+learning_level: intermediate
+requires_elevated: false
+platforms:
+- linux
+- macos
+- windows
+packages:
+  arch: neovim
+  debian: neovim
+  ubuntu: neovim
+  fedora: neovim
+package_refs:
+- manager: pacman
+  package: neovim
+  distributions:
+  - arch
+- manager: apt
+  package: neovim
+  distributions:
+  - debian
+  - ubuntu
+- manager: homebrew
+  package: neovim
+- manager: winget
+  package: Neovim.Neovim
+install_notes:
+  tr: |-
+    Arch: pacman -S neovim
+    Debian/Ubuntu: apt install neovim
+    macOS: brew install neovim
+  en: |-
+    Arch: pacman -S neovim
+    Debian/Ubuntu: apt install neovim
+    macOS: brew install neovim
+flags: []
+examples:
+- title:
+    tr: Sürüm
+    en: Version
+  command: nvim --version
+  explanation:
+    tr: Neovim sürümü.
+    en: Neovim version.
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: Dosya aç
+    en: Open file
+  command: nvim README.md
+  explanation:
+    tr: Dosyayı açar.
+    en: Opens a file.
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: Checkhealth
+    en: Checkhealth
+  command: nvim +checkhealth
+  explanation:
+    tr: Ortam sağlığı.
+    en: Environment health.
+  risk: safe
+  difficulty: intermediate
+related:
+- vim
+- code
+- helix
+- emacs
+related_topics:
+- software
+intent:
+  tr:
+  - neovim aç
+  - nvim
+  en:
+  - open neovim
+  - nvim
+documentation:
+- https://neovim.io/doc/user/
+sources:
+- https://neovim.io/doc/user/starting.html
+verification:
+  status: draft
+  sources:
+  - https://neovim.io/doc/user/starting.html
+  notes: Software bank breadth draft — official docs oriented; not human-verified.
+nova:
+  concepts:
+  - software
+  ui_priority: 60

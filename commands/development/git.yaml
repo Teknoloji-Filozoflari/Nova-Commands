@@ -14,6 +14,8 @@ description:
 tags:
 - git
 - vcs
+- software
+- tools
 risk: caution
 learning_level: intermediate
 requires_elevated: false
@@ -167,6 +169,7 @@ nova:
   favorite_eligible: true
   ui_priority: 92
   concepts:
+  - software
   - terminal-basics
 purpose:
   tr: Kaynak geçmişi, dal ve uzaktan eşitleme; günlük geliştirici iş akışı.
@@ -186,4 +189,5 @@ common_mistakes:
 - tr: force push’u paylaşılmış dallarda “düzeltme” sanmak.
   en: Treating force-push as a fix on shared branches.
 related_topics:
+- software
 - development-basics

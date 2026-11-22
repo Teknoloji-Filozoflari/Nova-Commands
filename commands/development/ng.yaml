@@ -1,0 +1,150 @@
+schema_version: 2
+id: ng
+name: ng
+kind: vendor_cli
+category: development
+summary:
+  tr: Angular CLI (`ng`) — iskelet, serve, build.
+  en: Angular CLI (`ng`) — scaffold, serve, build.
+description:
+  tr: >-
+    Angular projeleri oluşturur, geliştirme sunucusu açar, bileşen üretir ve üretir.
+    Genelde `@angular/cli` npm paketi ile kurulur; sistem paket adı nadirdir.
+  en: >-
+    Scaffolds Angular projects, serves a dev server, generates components, and builds.
+    Usually installed via the `@angular/cli` npm package; system packages are uncommon.
+purpose:
+  tr: Angular uygulama geliştirme iş akışı CLI’si.
+  en: CLI workflow for Angular application development.
+when_to_use:
+  tr: Angular workspace oluştururken, serve/build/test veya generate sırasında.
+  en: When creating an Angular workspace or during serve/build/test/generate.
+syntax: 'ng <command> [options]'
+expected_effect:
+  tr: Proje dosyaları yazar, dev sunucu açar veya üretim derlemesi üretir.
+  en: Writes project files, opens a dev server, or produces a production build.
+tags:
+- software
+- frontend
+- angular
+- node
+- tools
+risk: caution
+learning_level: intermediate
+requires_elevated: false
+platforms:
+- linux
+- macos
+- windows
+operating_systems:
+- linux
+- macos
+- windows
+package_refs:
+- manager: npm
+  package: angular-cli
+  notes:
+    tr: npm’de gerçek paket adı @angular/cli (scoped); şema package alanı @ ile başlayamaz — install_notes’a bakın.
+    en: Real npm package id is scoped @angular/cli; schema package field cannot start with @ — see install_notes.
+install_notes:
+  tr: |-
+    Proje-yerel (öneri): npm install -D @angular/cli  sonra npx ng ...
+    Global: npm install -g @angular/cli
+    npx: npx -p @angular/cli ng version
+    Sistem distro paketi olarak nadiren bulunur — npm kaynağı kullanın.
+  en: |-
+    Project-local (preferred): npm install -D @angular/cli then npx ng ...
+    Global: npm install -g @angular/cli
+    npx: npx -p @angular/cli ng version
+    Rarely a distro system package — use the npm source.
+flags: []
+examples:
+- title:
+    tr: Sürüm
+    en: Version
+  command: ng version
+  explanation:
+    tr: CLI ve (workspace içinde) paket sürümlerini gösterir.
+    en: Shows CLI and (inside a workspace) package versions.
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: Yeni uygulama
+    en: New app
+  command: ng new my-app
+  explanation:
+    tr: Etkileşimli sihirbazla yeni Angular workspace oluşturur (disk yazar).
+    en: Creates a new Angular workspace via interactive wizard (writes disk).
+  risk: caution
+  difficulty: intermediate
+- title:
+    tr: Dev sunucu
+    en: Dev server
+  command: ng serve
+  explanation:
+    tr: Yerel geliştirme sunucusunu başlatır (ağ portu açar).
+    en: Starts the local development server (opens a network port).
+  risk: caution
+  difficulty: beginner
+- title:
+    tr: Generate component
+    en: Generate component
+  command: ng generate component hello
+  explanation:
+    tr: "Bileşen dosyalarını üretir (kısa: ng g c hello)."
+    en: "Generates component files (short: ng g c hello)."
+  risk: caution
+  difficulty: intermediate
+- title:
+    tr: Production build
+    en: Production build
+  command: ng build
+  explanation:
+    tr: Üretim demeti oluşturur (dist/ çıktısı).
+    en: Creates a production bundle (dist/ output).
+  risk: caution
+  difficulty: intermediate
+- title:
+    tr: Test
+    en: Test
+  command: ng test
+  explanation:
+    tr: Birim testlerini çalıştırır (yapılandırmaya bağlı).
+    en: Runs unit tests (depends on project config).
+  risk: caution
+  difficulty: intermediate
+common_mistakes:
+- tr: Global eski `@angular/cli` ile yeni workspace major sürümünü karıştırmak.
+  en: Mixing a stale global `@angular/cli` with a newer workspace major.
+related:
+- npm
+- npx
+- node
+- code
+related_topics:
+- software
+intent:
+  tr:
+  - angular cli
+  - ng serve
+  - ng new
+  - angular oluştur
+  en:
+  - angular cli
+  - ng serve
+  - ng new
+  - generate angular
+documentation:
+- https://angular.dev/tools/cli
+sources:
+- https://angular.dev/tools/cli
+- https://angular.dev/cli
+verification:
+  status: draft
+  sources:
+  - https://angular.dev/tools/cli
+  notes: Software bank draft — Angular CLI subcommands; not human-verified.
+nova:
+  concepts:
+  - software
+  ui_priority: 74

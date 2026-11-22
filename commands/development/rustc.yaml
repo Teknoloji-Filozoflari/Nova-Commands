@@ -1,0 +1,111 @@
+schema_version: 2
+id: rustc
+name: rustc
+kind: executable
+category: development
+summary:
+  tr: Rust derleyicisi (rustc).
+  en: Rust compiler (rustc).
+description:
+  tr: >-
+    Tek dosya/crate derler. Günlük projelerde cargo tercih edilir; rustc toolchain bileşenidir.
+  en: >-
+    Compiles single files/crates. Prefer cargo for daily projects; rustc is a toolchain component.
+purpose:
+  tr: Rust kaynaklarını doğrudan derlemek.
+  en: Compile Rust sources directly.
+when_to_use:
+  tr: cargo olmadan tek dosya derlerken veya toolchain teşhisinde.
+  en: "Compiling a single file without cargo, or toolchain diagnostics."
+syntax: "rustc [OPTIONS] INPUT"
+expected_effect:
+  tr: Binary veya kütüphane üretir.
+  en: Produces a binary or library.
+tags:
+- software
+- backend
+- rust
+- language
+risk: caution
+learning_level: intermediate
+requires_elevated: false
+platforms:
+- linux
+- macos
+- windows
+packages:
+  arch: rust
+  debian: rustc
+  ubuntu: rustc
+  fedora: rust
+package_refs:
+- manager: pacman
+  package: rust
+  distributions:
+  - arch
+- manager: apt
+  package: rustc
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: rust
+  distributions:
+  - fedora
+- manager: homebrew
+  package: rust
+install_notes:
+  tr: |-
+    Arch: pacman -S rust
+    Debian/Ubuntu: apt install rustc cargo
+    Öneri (toolchain): rustup (ayrı kayıt)
+  en: |-
+    Arch: pacman -S rust
+    Debian/Ubuntu: apt install rustc cargo
+    Preferred toolchain: rustup (separate record)
+flags: []
+examples:
+- title:
+    tr: Sürüm
+    en: Version
+  command: rustc --version
+  explanation:
+    tr: rustc sürümü.
+    en: rustc version.
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: Derle
+    en: Compile
+  command: rustc main.rs
+  explanation:
+    tr: main.rs dosyasını derler.
+    en: Compiles main.rs.
+  risk: caution
+  difficulty: beginner
+related:
+- cargo
+- rustup
+- git
+related_topics:
+- software
+intent:
+  tr:
+  - rust derle
+  - rustc
+  en:
+  - compile rust
+  - rustc
+documentation:
+- https://doc.rust-lang.org/rustc/
+sources:
+- https://doc.rust-lang.org/rustc/
+verification:
+  status: draft
+  sources:
+  - https://doc.rust-lang.org/rustc/
+  notes: Software bank breadth draft — official docs oriented; not human-verified.
+nova:
+  concepts:
+  - software
+  ui_priority: 60

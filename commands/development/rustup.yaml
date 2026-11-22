@@ -1,0 +1,110 @@
+schema_version: 2
+id: rustup
+name: rustup
+kind: executable
+category: development
+summary:
+  tr: Rust toolchain kurucu/yöneticisi (rustup).
+  en: Rust toolchain installer/manager (rustup).
+description:
+  tr: >-
+    rustc/cargo kanallarını kurar ve yönetir. Distro rust paketinden ayrı resmi yol.
+  en: >-
+    Installs and manages rustc/cargo channels. Official path separate from distro rust packages.
+purpose:
+  tr: Rust SDK sürümlerini yönetmek.
+  en: Manage Rust SDK versions.
+when_to_use:
+  tr: Yeni Rust kurulumu veya toolchain güncellemesi için.
+  en: For new Rust installs or toolchain updates.
+syntax: "rustup <command>"
+expected_effect:
+  tr: Toolchain kurar/günceller; PATH bileşenlerini değiştirir.
+  en: Installs/updates toolchains; changes PATH components.
+tags:
+- software
+- backend
+- rust
+- tools
+risk: caution
+learning_level: intermediate
+requires_elevated: false
+platforms:
+- linux
+- macos
+- windows
+package_refs:
+- manager: homebrew
+  package: rustup
+install_notes:
+  tr: |-
+    Resmi: https://rustup.rs (curl script)
+    macOS: brew install rustup
+    Distro rust ile birlikte kurulumu karıştırmayın.
+  en: |-
+    Official: https://rustup.rs (curl script)
+    macOS: brew install rustup
+    Do not mix blindly with distro rust packages.
+flags: []
+examples:
+- title:
+    tr: Sürüm
+    en: Version
+  command: rustup --version
+  explanation:
+    tr: rustup sürümü.
+    en: rustup version.
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: Show
+    en: Show
+  command: rustup show
+  explanation:
+    tr: Aktif toolchain özeti.
+    en: Active toolchain summary.
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: Update
+    en: Update
+  command: rustup update
+  explanation:
+    tr: Kurulu toolchain’leri günceller.
+    en: Updates installed toolchains.
+  risk: caution
+  difficulty: intermediate
+- title:
+    tr: Default
+    en: Default
+  command: rustup default stable
+  explanation:
+    tr: Varsayılan kanalı stable yapar.
+    en: Sets default channel to stable.
+  risk: caution
+  difficulty: intermediate
+related:
+- rustc
+- cargo
+related_topics:
+- software
+intent:
+  tr:
+  - rustup kur
+  - rust toolchain
+  en:
+  - rustup install
+  - rust toolchain
+documentation:
+- https://rust-lang.github.io/rustup/
+sources:
+- https://rust-lang.github.io/rustup/
+verification:
+  status: draft
+  sources:
+  - https://rust-lang.github.io/rustup/
+  notes: Software bank breadth draft — official docs oriented; not human-verified.
+nova:
+  concepts:
+  - software
+  ui_priority: 60

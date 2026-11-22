@@ -13,6 +13,7 @@ tags:
 - sql
 - database
 - data
+- software
 risk: caution
 learning_level: intermediate
 requires_elevated: false
@@ -102,6 +103,9 @@ examples:
 related:
 - jq
 - python3
+related_topics:
+- software
+
 intent:
   tr:
   - sqlite sorgula
@@ -120,5 +124,6 @@ nova:
   favorite_eligible: true
   ui_priority: 80
   concepts:
+  - software
   - json-data
   - terminal-basics

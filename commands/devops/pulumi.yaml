@@ -1,0 +1,113 @@
+schema_version: 2
+id: pulumi
+name: pulumi
+kind: executable
+category: devops
+summary:
+  tr: Pulumi — programatik IaC CLI.
+  en: Pulumi — programmatic IaC CLI.
+description:
+  tr: >-
+    Genel bulut kaynaklarını kodla yönetir. Stack up/destroy tehlikeli olabilir. Secret yok.
+  en: >-
+    Manages cloud resources as code. Stack up/destroy can be dangerous. No secrets.
+purpose:
+  tr: Pulumi stack’lerini yönetmek.
+  en: Manage Pulumi stacks.
+when_to_use:
+  tr: Pulumi projelerinde preview/up için.
+  en: For preview/up in Pulumi projects.
+expected_effect:
+  tr: Stack durumu okur veya kaynak değiştirir.
+  en: Reads stack state or changes resources.
+syntax: "pulumi <command>"
+tags:
+- software
+- devops
+- iac
+- cloud
+risk: dangerous
+learning_level: advanced
+requires_elevated: false
+platforms:
+- linux
+- macos
+- windows
+package_refs:
+- manager: homebrew
+  package: pulumi
+- manager: winget
+  package: Pulumi.Pulumi
+install_notes:
+  tr: |-
+    https://www.pulumi.com/docs/install/
+    macOS: brew install pulumi
+    Windows: winget install Pulumi.Pulumi
+  en: |-
+    https://www.pulumi.com/docs/install/
+    macOS: brew install pulumi
+    Windows: winget install Pulumi.Pulumi
+flags: []
+examples:
+- title:
+    tr: Sürüm
+    en: Version
+  command: pulumi version
+  explanation:
+    tr: Sürüm.
+    en: Version.
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: Whoami
+    en: Whoami
+  command: pulumi whoami
+  explanation:
+    tr: Oturum kullanıcı.
+    en: Logged-in user.
+  risk: caution
+  difficulty: beginner
+- title:
+    tr: Preview
+    en: Preview
+  command: pulumi preview
+  explanation:
+    tr: Değişiklik önizleme.
+    en: Change preview.
+  risk: caution
+  difficulty: intermediate
+- title:
+    tr: Stack ls
+    en: Stack ls
+  command: pulumi stack ls
+  explanation:
+    tr: Stack listesi.
+    en: Lists stacks.
+  risk: caution
+  difficulty: intermediate
+related:
+- terraform
+- tofu
+- aws
+related_topics:
+- software
+intent:
+  tr:
+  - pulumi preview
+  - pulumi up
+  en:
+  - pulumi preview
+  - pulumi up
+documentation:
+- https://www.pulumi.com/docs/cli/
+sources:
+- https://www.pulumi.com/docs/cli/commands/
+verification:
+  status: draft
+  sources:
+  - https://www.pulumi.com/docs/cli/commands/
+  notes: Software bank breadth draft — official docs oriented; not human-verified.
+nova:
+  concepts:
+  - software
+  ui_priority: 60

@@ -1,0 +1,99 @@
+schema_version: 2
+id: prettier
+name: prettier
+kind: executable
+category: development
+summary:
+  tr: Prettier — kod formatlayıcı.
+  en: Prettier — code formatter.
+description:
+  tr: >-
+    Çok dilli opinionated formatter. Proje-yerel npx prettier yaygındır.
+  en: >-
+    Multi-language opinionated formatter. Project-local npx prettier is common.
+purpose:
+  tr: Kaynak dosyalarını tutarlı formatlamak.
+  en: Format source files consistently.
+when_to_use:
+  tr: Commit öncesi format veya CI check’te.
+  en: Before commits or in CI format checks.
+expected_effect:
+  tr: Dosyaları yeniden yazar veya check modunda çıkar.
+  en: Rewrites files or exits in check mode.
+syntax: "prettier [options] [file/dir]"
+tags:
+- software
+- frontend
+- tools
+risk: caution
+learning_level: beginner
+requires_elevated: false
+platforms:
+- linux
+- macos
+- windows
+package_refs:
+- manager: npm
+  package: prettier
+install_notes:
+  tr: |-
+    npm install -D prettier
+    npx prettier --write .
+  en: |-
+    npm install -D prettier
+    npx prettier --write .
+flags: []
+examples:
+- title:
+    tr: Sürüm
+    en: Version
+  command: prettier -v
+  explanation:
+    tr: Prettier sürümü.
+    en: Prettier version.
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: Check
+    en: Check
+  command: prettier --check .
+  explanation:
+    tr: Format uyumunu kontrol eder.
+    en: Checks formatting.
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: Write
+    en: Write
+  command: prettier --write .
+  explanation:
+    tr: Dosyaları formatlar.
+    en: Formats files.
+  risk: caution
+  difficulty: beginner
+related:
+- eslint
+- npm
+- npx
+related_topics:
+- software
+intent:
+  tr:
+  - prettier format
+  - kod formatla
+  en:
+  - prettier format
+  - format code
+documentation:
+- https://prettier.io/docs/en/cli.html
+sources:
+- https://prettier.io/docs/en/cli.html
+verification:
+  status: draft
+  sources:
+  - https://prettier.io/docs/en/cli.html
+  notes: Software bank breadth draft — official docs oriented; not human-verified.
+nova:
+  concepts:
+  - software
+  ui_priority: 60

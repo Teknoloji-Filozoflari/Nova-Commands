@@ -1,0 +1,122 @@
+schema_version: 2
+id: swift
+name: swift
+kind: executable
+category: development
+summary:
+  tr: Swift derleyici/araç zinciri CLI.
+  en: Swift compiler/toolchain CLI.
+description:
+  tr: >-
+    swift komutu çalıştırır, paket yönetir (SwiftPM). Apple platformlarında Xcode ile; Linux’ta resmi toolchain.
+  en: >-
+    swift runs code and manages packages (SwiftPM). With Xcode on Apple platforms; official toolchain on Linux.
+purpose:
+  tr: Swift paketleri derlemek/çalıştırmak.
+  en: Build/run Swift packages.
+when_to_use:
+  tr: SwiftPM projelerinde veya swift scripts’te.
+  en: In SwiftPM projects or swift scripts.
+expected_effect:
+  tr: Paket derler veya REPL/script çalıştırır.
+  en: Builds a package or runs REPL/script.
+syntax: "swift <command>"
+tags:
+- software
+- language
+- backend
+- mobile
+risk: caution
+learning_level: intermediate
+requires_elevated: false
+platforms:
+- macos
+- linux
+package_refs:
+- manager: homebrew
+  package: swift
+- manager: apt
+  package: swiftlang
+  notes:
+    tr: Linux’ta resmi Apple repo gerekebilir; paket adı değişebilir.
+    en: Linux may need official Apple repo; package name may vary.
+install_notes:
+  tr: |-
+    macOS: Xcode / Xcode CLT veya brew install swift
+    Linux: https://www.swift.org/install/
+  en: |-
+    macOS: Xcode / Xcode CLT or brew install swift
+    Linux: https://www.swift.org/install/
+flags: []
+examples:
+- title:
+    tr: Sürüm
+    en: Version
+  command: swift --version
+  explanation:
+    tr: Swift sürümü.
+    en: Swift version.
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: REPL
+    en: REPL
+  command: swift
+  explanation:
+    tr: Etkileşimli REPL.
+    en: Interactive REPL.
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: Build
+    en: Build
+  command: swift build
+  explanation:
+    tr: Paketi derler.
+    en: Builds the package.
+  risk: caution
+  difficulty: beginner
+- title:
+    tr: Test
+    en: Test
+  command: swift test
+  explanation:
+    tr: Testleri çalıştırır.
+    en: Runs tests.
+  risk: caution
+  difficulty: intermediate
+- title:
+    tr: Run
+    en: Run
+  command: swift run
+  explanation:
+    tr: Paketi çalıştırır.
+    en: Runs the package.
+  risk: caution
+  difficulty: beginner
+related:
+- xcode-select
+- xcrun
+- git
+related_topics:
+- software
+intent:
+  tr:
+  - swift derle
+  - swiftpm
+  en:
+  - swift build
+  - swiftpm
+documentation:
+- https://www.swift.org/documentation/
+sources:
+- https://www.swift.org/getting-started/
+verification:
+  status: draft
+  sources:
+  - https://www.swift.org/getting-started/
+  notes: Software bank breadth draft — official docs oriented; not human-verified.
+nova:
+  concepts:
+  - software
+  ui_priority: 60

@@ -1,0 +1,141 @@
+schema_version: 2
+id: bun
+name: bun
+kind: executable
+category: development
+summary:
+  tr: Bun — JS runtime, paket yöneticisi ve test runner.
+  en: Bun — JS runtime, package manager, and test runner.
+description:
+  tr: >-
+    Node uyumlu runtime + `bun install` paket yöneticisi + `bunx` yürütücü.
+    npm lockfile’larıyla çalışabilir; kurulum resmi binary veya paket yöneticisi ile.
+  en: >-
+    Node-compatible runtime plus `bun install` package manager and `bunx` runner.
+    Can work with npm lockfiles; install via official binary or package managers.
+purpose:
+  tr: "Hızlı JS geliştirme: kur, çalıştır, test et."
+  en: "Fast JS development: install, run, and test."
+when_to_use:
+  tr: Bun runtime veya bun paket yöneticisini tercih eden projelerde.
+  en: In projects that prefer the Bun runtime or Bun package manager.
+syntax: 'bun <command> [args]'
+expected_effect:
+  tr: Betik/runtime çalıştırır veya bağımlılık kurar.
+  en: Runs scripts/runtime work or installs dependencies.
+tags:
+- software
+- frontend
+- backend
+- tools
+- bun
+- node
+risk: caution
+learning_level: intermediate
+requires_elevated: false
+platforms:
+- linux
+- macos
+- windows
+package_refs:
+- manager: homebrew
+  package: oven-sh/bun/bun
+  notes:
+    tr: Homebrew tap/formül adı sürümle değişebilir — brew info ile doğrulayın.
+    en: Homebrew tap/formula name may change — verify with brew info.
+- manager: npm
+  package: bun
+  notes:
+    tr: Resmi kurulum çoğu zaman curl script veya platform paketi iledir.
+    en: Official install is often via curl script or platform packages.
+install_notes:
+  tr: |-
+    Resmi: https://bun.sh/docs/installation (curl script / paket)
+    macOS (Homebrew): brew install oven-sh/bun/bun  — formülü doğrulayın
+    Arch: AUR (bun-bin) sık kullanılır; resmi pacman deposunda olmayabilir
+  en: |-
+    Official: https://bun.sh/docs/installation (curl script / packages)
+    macOS (Homebrew): brew install oven-sh/bun/bun — verify formula
+    Arch: often AUR (bun-bin); may be absent from official pacman repos
+flags: []
+examples:
+- title:
+    tr: Sürüm
+    en: Version
+  command: bun -v
+  explanation:
+    tr: Bun sürümünü yazar.
+    en: Prints the Bun version.
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: Kur
+    en: Install
+  command: bun install
+  explanation:
+    tr: Bağımlılıkları kurar (lockfile varsa ona uyum).
+    en: Installs dependencies (honors lockfile when present).
+  risk: caution
+  difficulty: beginner
+- title:
+    tr: Script/betik
+    en: Run script
+  command: bun run index.ts
+  explanation:
+    tr: TS/JS dosyasını Bun ile çalıştırır.
+    en: Runs a TS/JS file with Bun.
+  risk: caution
+  difficulty: beginner
+- title:
+    tr: bunx
+    en: bunx
+  command: bunx cowsay 'hello'
+  explanation:
+    tr: npx benzeri tek seferlik paket çalıştırır.
+    en: Runs a one-shot package (npx-like).
+  risk: caution
+  difficulty: intermediate
+- title:
+    tr: Test
+    en: Test
+  command: bun test
+  explanation:
+    tr: Yerleşik test runner’ı çalıştırır.
+    en: Runs the built-in test runner.
+  risk: caution
+  difficulty: intermediate
+common_mistakes:
+- tr: Node-only native eklentilerin Bun’da birebir çalışacağını varsaymak.
+  en: Assuming Node-only native addons behave identically under Bun.
+related:
+- node
+- npm
+- npx
+- yarn
+- pnpm
+related_topics:
+- software
+intent:
+  tr:
+  - bun kur
+  - bun çalıştır
+  - bunx
+  en:
+  - bun install
+  - bun run
+  - bunx
+documentation:
+- https://bun.sh/docs/cli/run
+sources:
+- https://bun.sh/docs/cli/install
+- https://bun.sh/docs/cli/run
+verification:
+  status: draft
+  sources:
+  - https://bun.sh/docs/cli/install
+  - https://bun.sh/docs/cli/run
+  notes: Software bank draft; install paths vary by platform — honesty notes included.
+nova:
+  concepts:
+  - software
+  ui_priority: 68

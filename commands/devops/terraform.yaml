@@ -16,6 +16,7 @@ tags:
 - terraform
 - devops
 - cloud
+- software
 risk: dangerous
 learning_level: advanced
 requires_elevated: false
@@ -56,6 +57,9 @@ examples:
     en: Change plan (does not apply). Needs provider credentials.
   risk: caution
   difficulty: intermediate
+related_topics:
+- software
+
 intent:
   tr:
   - terraform
@@ -95,5 +99,6 @@ nova:
   favorite_eligible: true
   ui_priority: 60
   concepts:
+  - software
   - infrastructure-as-code
   - cloud

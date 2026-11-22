@@ -13,6 +13,7 @@ tags:
 - cloud
 - azure
 - devops
+- software
 risk: dangerous
 requires_elevated: false
 platforms:
@@ -41,6 +42,9 @@ examples:
     tr: Aktif abonelik özeti (oturum açıkken).
     en: Active subscription summary (when logged in).
   risk: caution
+related_topics:
+- software
+
 intent:
   tr:
   - azure cli
@@ -62,5 +66,6 @@ nova:
   favorite_eligible: true
   ui_priority: 60
   concepts:
+  - software
   - cloud
   - infrastructure-as-code

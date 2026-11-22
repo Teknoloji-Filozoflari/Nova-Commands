@@ -1,0 +1,120 @@
+schema_version: 2
+id: kind
+name: kind
+kind: executable
+category: containers
+summary:
+  tr: kind — Kubernetes in Docker.
+  en: kind — Kubernetes in Docker.
+description:
+  tr: >-
+    Docker içinde yerel Kubernetes kümeleri. kubectl ile birlikte kullanılır.
+  en: >-
+    Local Kubernetes clusters in Docker. Used with kubectl.
+purpose:
+  tr: Yerel K8s geliştirme kümeleri.
+  en: Local K8s development clusters.
+when_to_use:
+  tr: CI veya laptop’ta hızlı cluster için.
+  en: For quick clusters in CI or on a laptop.
+expected_effect:
+  tr: Docker konteynerlerinde küme oluşturur/siler.
+  en: Creates/deletes clusters in Docker containers.
+syntax: "kind <command>"
+tags:
+- software
+- server
+- containers
+- kubernetes
+risk: caution
+learning_level: advanced
+requires_elevated: false
+platforms:
+- linux
+- macos
+- windows
+packages:
+  arch: kind
+package_refs:
+- manager: pacman
+  package: kind
+  distributions:
+  - arch
+- manager: homebrew
+  package: kind
+- manager: winget
+  package: Kubernetes.kind
+install_notes:
+  tr: |-
+    Arch: pacman -S kind
+    macOS: brew install kind
+    Docker/Podman gerekir.
+  en: |-
+    Arch: pacman -S kind
+    macOS: brew install kind
+    Docker/Podman required.
+flags: []
+examples:
+- title:
+    tr: Sürüm
+    en: Version
+  command: kind version
+  explanation:
+    tr: Sürüm.
+    en: Version.
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: Create
+    en: Create
+  command: kind create cluster
+  explanation:
+    tr: Küme oluşturur.
+    en: Creates a cluster.
+  risk: caution
+  difficulty: intermediate
+- title:
+    tr: Get clusters
+    en: Get clusters
+  command: kind get clusters
+  explanation:
+    tr: Küme listesi.
+    en: Lists clusters.
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: Delete
+    en: Delete
+  command: kind delete cluster
+  explanation:
+    tr: Küme siler.
+    en: Deletes a cluster.
+  risk: caution
+  difficulty: intermediate
+related:
+- kubectl
+- docker
+- minikube
+- helm
+related_topics:
+- software
+intent:
+  tr:
+  - kind cluster
+  - kubernetes local
+  en:
+  - kind cluster
+  - local kubernetes
+documentation:
+- https://kind.sigs.k8s.io/docs/user/quick-start/
+sources:
+- https://kind.sigs.k8s.io/docs/user/quick-start/
+verification:
+  status: draft
+  sources:
+  - https://kind.sigs.k8s.io/docs/user/quick-start/
+  notes: Software bank breadth draft — official docs oriented; not human-verified.
+nova:
+  concepts:
+  - software
+  ui_priority: 60

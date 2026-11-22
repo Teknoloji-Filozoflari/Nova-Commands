@@ -16,6 +16,8 @@ tags:
 - automation
 - devops
 - iac
+- software
+- server
 risk: dangerous
 learning_level: intermediate
 requires_elevated: false
@@ -43,6 +45,9 @@ examples:
     tr: Yapılandırılmış envanteri JSON olarak listeler.
     en: Lists configured inventory as JSON.
   risk: safe
+related_topics:
+- software
+
 intent:
   tr:
   - ansible
@@ -85,4 +90,5 @@ nova:
   favorite_eligible: true
   ui_priority: 60
   concepts:
+  - software
   - infrastructure-as-code

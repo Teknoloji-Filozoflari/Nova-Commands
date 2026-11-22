@@ -1,0 +1,119 @@
+schema_version: 2
+id: php
+name: php
+kind: executable
+category: development
+summary:
+  tr: PHP yorumlayıcısı CLI.
+  en: PHP interpreter CLI.
+description:
+  tr: >-
+    Betik çalıştırır, yerleşik sunucu açar, sürüm gösterir. Web SAPI ayrıdır.
+  en: >-
+    Runs scripts, starts the built-in server, shows version. Web SAPI is separate.
+purpose:
+  tr: PHP betiklerini ve yerel sunucuyu çalıştırmak.
+  en: Run PHP scripts and the local server.
+when_to_use:
+  tr: PHP CLI betikleri veya php -S geliştirme sunucusu için.
+  en: For PHP CLI scripts or the php -S dev server.
+expected_effect:
+  tr: Betik çalıştırır veya yerleşik sunucu dinler.
+  en: Runs a script or listens with the built-in server.
+syntax: "php [options] [-f] <file> [args...]"
+tags:
+- software
+- backend
+- php
+- language
+risk: caution
+learning_level: intermediate
+requires_elevated: false
+platforms:
+- linux
+- macos
+- windows
+packages:
+  arch: php
+  debian: php-cli
+  ubuntu: php-cli
+  fedora: php-cli
+package_refs:
+- manager: pacman
+  package: php
+  distributions:
+  - arch
+- manager: apt
+  package: php-cli
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: php-cli
+  distributions:
+  - fedora
+- manager: homebrew
+  package: php
+install_notes:
+  tr: |-
+    Arch: pacman -S php
+    Debian/Ubuntu: apt install php-cli
+    Composer ayrı pakettir.
+  en: |-
+    Arch: pacman -S php
+    Debian/Ubuntu: apt install php-cli
+    Composer is a separate package.
+flags: []
+examples:
+- title:
+    tr: Sürüm
+    en: Version
+  command: php -v
+  explanation:
+    tr: PHP sürümü.
+    en: PHP version.
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: Betik
+    en: Script
+  command: php script.php
+  explanation:
+    tr: Betik çalıştırır.
+    en: Runs a script.
+  risk: caution
+  difficulty: beginner
+- title:
+    tr: Dev sunucu
+    en: Dev server
+  command: "php -S 127.0.0.1:8000"
+  explanation:
+    tr: Yerleşik HTTP sunucu.
+    en: Built-in HTTP server.
+  risk: caution
+  difficulty: intermediate
+related:
+- composer
+- nginx
+related_topics:
+- software
+intent:
+  tr:
+  - php çalıştır
+  - php sunucu
+  en:
+  - run php
+  - php server
+documentation:
+- https://www.php.net/manual/en/features.commandline.php
+sources:
+- https://www.php.net/manual/en/features.commandline.php
+verification:
+  status: draft
+  sources:
+  - https://www.php.net/manual/en/features.commandline.php
+  notes: Software bank breadth draft — official docs oriented; not human-verified.
+nova:
+  concepts:
+  - software
+  ui_priority: 60
