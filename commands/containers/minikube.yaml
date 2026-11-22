@@ -1,0 +1,129 @@
+schema_version: 2
+id: minikube
+name: minikube
+kind: executable
+category: containers
+summary:
+  tr: minikube — yerel Kubernetes.
+  en: minikube — local Kubernetes.
+description:
+  tr: >-
+    Tek düğümlü yerel K8s. Driver (docker/kvm2/…) gerekir.
+  en: >-
+    Single-node local K8s. Driver (docker/kvm2/…) required.
+purpose:
+  tr: Yerel Kubernetes öğrenme/geliştirme.
+  en: Local Kubernetes learning/development.
+when_to_use:
+  tr: Laptop’ta K8s denemek için.
+  en: To try K8s on a laptop.
+expected_effect:
+  tr: Yerel küme başlatır/durdurur.
+  en: Starts/stops a local cluster.
+syntax: "minikube <command>"
+tags:
+- software
+- server
+- containers
+- kubernetes
+risk: caution
+learning_level: advanced
+requires_elevated: false
+platforms:
+- linux
+- macos
+- windows
+packages:
+  arch: minikube
+package_refs:
+- manager: pacman
+  package: minikube
+  distributions:
+  - arch
+- manager: homebrew
+  package: minikube
+- manager: winget
+  package: Kubernetes.minikube
+install_notes:
+  tr: |-
+    Arch: pacman -S minikube
+    macOS: brew install minikube
+    kubectl ayrıca gerekebilir.
+  en: |-
+    Arch: pacman -S minikube
+    macOS: brew install minikube
+    kubectl may also be required.
+flags: []
+examples:
+- title:
+    tr: Sürüm
+    en: Version
+  command: minikube version
+  explanation:
+    tr: Sürüm.
+    en: Version.
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: Status
+    en: Status
+  command: minikube status
+  explanation:
+    tr: Küme durumu.
+    en: Cluster status.
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: Start
+    en: Start
+  command: minikube start
+  explanation:
+    tr: Küme başlatır.
+    en: Starts the cluster.
+  risk: caution
+  difficulty: intermediate
+- title:
+    tr: Stop
+    en: Stop
+  command: minikube stop
+  explanation:
+    tr: Küme durdurur.
+    en: Stops the cluster.
+  risk: caution
+  difficulty: beginner
+- title:
+    tr: Dashboard
+    en: Dashboard
+  command: minikube dashboard
+  explanation:
+    tr: Web UI (proxy).
+    en: Web UI (proxy).
+  risk: caution
+  difficulty: intermediate
+related:
+- kubectl
+- kind
+- docker
+- helm
+related_topics:
+- software
+intent:
+  tr:
+  - minikube start
+  - yerel kubernetes
+  en:
+  - minikube start
+  - local kubernetes
+documentation:
+- https://minikube.sigs.k8s.io/docs/commands/
+sources:
+- https://minikube.sigs.k8s.io/docs/commands/
+verification:
+  status: draft
+  sources:
+  - https://minikube.sigs.k8s.io/docs/commands/
+  notes: Software bank breadth draft — official docs oriented; not human-verified.
+nova:
+  concepts:
+  - software
+  ui_priority: 60

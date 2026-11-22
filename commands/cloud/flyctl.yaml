@@ -1,0 +1,108 @@
+schema_version: 2
+id: flyctl
+name: fly
+kind: remote_cli
+category: cloud
+summary:
+  tr: Fly.io CLI (flyctl / fly).
+  en: Fly.io CLI (flyctl / fly).
+description:
+  tr: >-
+    Fly.io uygulama dağıtım CLI. Binary fly veya flyctl olabilir. Secret örnek yok.
+  en: >-
+    Fly.io app deployment CLI. Binary may be fly or flyctl. No secret examples.
+purpose:
+  tr: Fly.io uygulamalarını yönetmek.
+  en: Manage Fly.io applications.
+when_to_use:
+  tr: Fly.io üzerinde deploy/status için.
+  en: For deploy/status on Fly.io.
+expected_effect:
+  tr: Uzak uygulama durumunu okur veya değiştirir.
+  en: Reads or changes remote app state.
+syntax: "fly <command>"
+tags:
+- software
+- cloud
+- devops
+risk: dangerous
+learning_level: intermediate
+requires_elevated: false
+platforms:
+- linux
+- macos
+- windows
+package_refs:
+- manager: homebrew
+  package: flyctl
+- manager: pacman
+  package: flyctl
+  distributions:
+  - arch
+  notes:
+    tr: AUR olabilir.
+    en: May be AUR.
+install_notes:
+  tr: |-
+    Resmi: https://fly.io/docs/hands-on/install-flyctl/
+    macOS: brew install flyctl
+    Binary: fly veya flyctl
+  en: |-
+    Official: https://fly.io/docs/hands-on/install-flyctl/
+    macOS: brew install flyctl
+    Binary: fly or flyctl
+flags: []
+examples:
+- title:
+    tr: Sürüm
+    en: Version
+  command: fly version
+  explanation:
+    tr: Sürüm.
+    en: Version.
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: Status
+    en: Status
+  command: fly status
+  explanation:
+    tr: Uygulama durumu (auth).
+    en: App status (auth).
+  risk: caution
+  difficulty: intermediate
+- title:
+    tr: Apps
+    en: Apps
+  command: fly apps list
+  explanation:
+    tr: Uygulama listesi.
+    en: Lists apps.
+  risk: caution
+  difficulty: intermediate
+related:
+- docker
+- aws
+- doctl
+related_topics:
+- software
+intent:
+  tr:
+  - fly.io
+  - flyctl deploy
+  en:
+  - fly.io
+  - flyctl deploy
+documentation:
+- https://fly.io/docs/flyctl/
+sources:
+- https://fly.io/docs/flyctl/
+verification:
+  status: draft
+  sources:
+  - https://fly.io/docs/flyctl/
+  notes: Software bank breadth draft — official docs oriented; not human-verified.
+nova:
+  concepts:
+  - software
+  ui_priority: 60

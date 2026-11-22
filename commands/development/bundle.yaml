@@ -1,0 +1,122 @@
+schema_version: 2
+id: bundle
+name: bundle
+kind: package_manager
+category: development
+summary:
+  tr: Bundler (bundle) — Ruby proje bağımlılıkları.
+  en: Bundler (bundle) — Ruby project dependencies.
+description:
+  tr: >-
+    Gemfile ile tutarlı gem kurulumları. rails projelerinde standarttır.
+  en: >-
+    Consistent gem installs via Gemfile. Standard in Rails projects.
+purpose:
+  tr: Ruby proje gem’lerini kilitleyip kurmak.
+  en: Lock and install Ruby project gems.
+when_to_use:
+  tr: Gemfile olan Ruby/Rails projelerinde.
+  en: In Ruby/Rails projects with a Gemfile.
+expected_effect:
+  tr: vendor/bundle veya sistem gem yolunu günceller.
+  en: Updates vendor/bundle or gem paths.
+syntax: "bundle <command>"
+tags:
+- software
+- backend
+- ruby
+- packages
+risk: caution
+learning_level: intermediate
+requires_elevated: false
+platforms:
+- linux
+- macos
+- windows
+packages:
+  arch: ruby-bundler
+  debian: ruby-bundler
+  ubuntu: ruby-bundler
+  fedora: rubygem-bundler
+package_refs:
+- manager: pacman
+  package: ruby-bundler
+  distributions:
+  - arch
+- manager: apt
+  package: ruby-bundler
+  distributions:
+  - debian
+  - ubuntu
+- manager: homebrew
+  package: bundler
+install_notes:
+  tr: |-
+    Arch: pacman -S ruby-bundler
+    veya gem install bundler
+  en: |-
+    Arch: pacman -S ruby-bundler
+    or gem install bundler
+flags: []
+examples:
+- title:
+    tr: Sürüm
+    en: Version
+  command: bundle -v
+  explanation:
+    tr: Bundler sürümü.
+    en: Bundler version.
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: Install
+    en: Install
+  command: bundle install
+  explanation:
+    tr: Gemfile’dan kurar.
+    en: Installs from Gemfile.
+  risk: caution
+  difficulty: beginner
+- title:
+    tr: Exec
+    en: Exec
+  command: bundle exec rspec
+  explanation:
+    tr: Gem set ile komut.
+    en: Command with gem set.
+  risk: caution
+  difficulty: intermediate
+- title:
+    tr: Update
+    en: Update
+  command: bundle update
+  explanation:
+    tr: Gem’leri günceller.
+    en: Updates gems.
+  risk: caution
+  difficulty: intermediate
+related:
+- ruby
+- gem
+related_topics:
+- software
+intent:
+  tr:
+  - bundle install
+  - bundler
+  en:
+  - bundle install
+  - bundler
+documentation:
+- https://bundler.io/man/bundle.1.html
+sources:
+- https://bundler.io/docs.html
+verification:
+  status: draft
+  sources:
+  - https://bundler.io/docs.html
+  notes: Software bank breadth draft — official docs oriented; not human-verified.
+nova:
+  concepts:
+  - software
+  ui_priority: 60

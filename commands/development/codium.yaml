@@ -1,0 +1,109 @@
+schema_version: 2
+id: codium
+name: codium
+kind: vendor_cli
+category: development
+summary:
+  tr: VSCodium komut satırı (codium).
+  en: VSCodium command line (codium).
+description:
+  tr: >-
+    Telemetry’siz VS Code OSS build CLI. code kaydına benzer; uzantı marketplace farkları vardır.
+  en: >-
+    Telemetry-free VS Code OSS build CLI. Similar to code; extension marketplace differs.
+purpose:
+  tr: VSCodium’u terminalden açmak.
+  en: Launch VSCodium from the terminal.
+when_to_use:
+  tr: VSCodium kullanan ortamlarda.
+  en: In environments using VSCodium.
+expected_effect:
+  tr: Editör penceresi açar.
+  en: Opens an editor window.
+syntax: "codium [options] [paths...]"
+tags:
+- software
+- editors
+- tools
+risk: caution
+learning_level: beginner
+requires_elevated: false
+platforms:
+- linux
+- macos
+- windows
+packages:
+  arch: vscodium
+package_refs:
+- manager: pacman
+  package: vscodium
+  distributions:
+  - arch
+  notes:
+    tr: AUR/community olabilir.
+    en: May be AUR/community.
+- manager: homebrew
+  package: vscodium
+install_notes:
+  tr: |-
+    https://vscodium.com/
+    Arch AUR: vscodium-bin
+    macOS: brew install --cask vscodium
+  en: |-
+    https://vscodium.com/
+    Arch AUR: vscodium-bin
+    macOS: brew install --cask vscodium
+flags: []
+examples:
+- title:
+    tr: Sürüm
+    en: Version
+  command: codium --version
+  explanation:
+    tr: Sürüm.
+    en: Version.
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: Aç
+    en: Open
+  command: codium .
+  explanation:
+    tr: Klasör açar.
+    en: Opens folder.
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: Uzantılar
+    en: Extensions
+  command: codium --list-extensions
+  explanation:
+    tr: Uzantı listesi.
+    en: Extension list.
+  risk: safe
+  difficulty: beginner
+related:
+- code
+- nvim
+related_topics:
+- software
+intent:
+  tr:
+  - codium aç
+  - vscodium
+  en:
+  - open codium
+  - vscodium
+documentation:
+- https://github.com/VSCodium/vscodium
+sources:
+- https://github.com/VSCodium/vscodium#install
+verification:
+  status: draft
+  sources:
+  - https://github.com/VSCodium/vscodium#install
+  notes: Software bank breadth draft — official docs oriented; not human-verified.
+nova:
+  concepts:
+  - software
+  ui_priority: 60

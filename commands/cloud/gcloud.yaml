@@ -13,6 +13,7 @@ tags:
 - cloud
 - gcp
 - devops
+- software
 risk: dangerous
 requires_elevated: false
 platforms:
@@ -41,6 +42,9 @@ examples:
     tr: Aktif proje/bölge ayarları (secret değil).
     en: Active project/region settings (not secrets).
   risk: caution
+related_topics:
+- software
+
 intent:
   tr:
   - gcloud
@@ -64,5 +68,6 @@ nova:
   favorite_eligible: true
   ui_priority: 60
   concepts:
+  - software
   - cloud
   - infrastructure-as-code

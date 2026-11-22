@@ -1,0 +1,114 @@
+schema_version: 2
+id: pipx
+name: pipx
+kind: package_manager
+category: development
+summary:
+  tr: pipx — izole Python CLI uygulamaları.
+  en: pipx — isolated Python CLI apps.
+description:
+  tr: >-
+    CLI araçlarını ayrı venv’lerde kurar (poetry, black, …). Kütüphane bağımlılığı için pip/uv kullanın.
+  en: >-
+    Installs CLI tools in isolated venvs (poetry, black, …). Use pip/uv for library deps.
+purpose:
+  tr: Global Python CLI araçlarını güvenli kurmak.
+  en: Safely install global Python CLI tools.
+when_to_use:
+  tr: Bir Python aracını PATH’e CLI olarak eklerken.
+  en: When adding a Python tool onto PATH as a CLI.
+expected_effect:
+  tr: İzole venv + PATH shim oluşturur.
+  en: Creates an isolated venv + PATH shim.
+syntax: "pipx <command>"
+tags:
+- software
+- tools
+- python
+- packages
+risk: caution
+learning_level: intermediate
+requires_elevated: false
+platforms:
+- linux
+- macos
+- windows
+packages:
+  arch: python-pipx
+  debian: pipx
+  ubuntu: pipx
+  fedora: pipx
+package_refs:
+- manager: pacman
+  package: python-pipx
+  distributions:
+  - arch
+- manager: apt
+  package: pipx
+  distributions:
+  - debian
+  - ubuntu
+- manager: homebrew
+  package: pipx
+install_notes:
+  tr: |-
+    Arch: pacman -S python-pipx
+    Debian/Ubuntu: apt install pipx && pipx ensurepath
+  en: |-
+    Arch: pacman -S python-pipx
+    Debian/Ubuntu: apt install pipx && pipx ensurepath
+flags: []
+examples:
+- title:
+    tr: Liste
+    en: List
+  command: pipx list
+  explanation:
+    tr: Kurulu uygulamalar.
+    en: Installed apps.
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: Kur
+    en: Install
+  command: pipx install cowsay
+  explanation:
+    tr: CLI uygulamasını izole kurar.
+    en: Installs a CLI app isolated.
+  risk: caution
+  difficulty: beginner
+- title:
+    tr: Çalıştır
+    en: Run
+  command: pipx run cowsay hello
+  explanation:
+    tr: Geçici çalıştırır.
+    en: Runs temporarily.
+  risk: caution
+  difficulty: intermediate
+related:
+- pip
+- uv
+- python3
+related_topics:
+- software
+intent:
+  tr:
+  - pipx kur
+  - python cli araç
+  en:
+  - pipx install
+  - python cli tool
+documentation:
+- https://pipx.pypa.io/stable/
+sources:
+- https://pipx.pypa.io/stable/docs/
+verification:
+  status: draft
+  sources:
+  - https://pipx.pypa.io/stable/docs/
+  notes: Software bank breadth draft — official docs oriented; not human-verified.
+nova:
+  concepts:
+  - software
+  ui_priority: 60

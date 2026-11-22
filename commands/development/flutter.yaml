@@ -1,0 +1,124 @@
+schema_version: 2
+id: flutter
+name: flutter
+kind: executable
+category: development
+summary:
+  tr: Flutter SDK CLI.
+  en: Flutter SDK CLI.
+description:
+  tr: >-
+    Çok platformlu UI framework CLI: create, run, build, doctor. Dart SDK’yı içerir/ister.
+  en: >-
+    Cross-platform UI framework CLI: create, run, build, doctor. Includes/requires Dart SDK.
+purpose:
+  tr: Flutter uygulama geliştirme iş akışı.
+  en: Flutter app development workflow.
+when_to_use:
+  tr: Mobil/masaüstü/web Flutter projelerinde.
+  en: In mobile/desktop/web Flutter projects.
+expected_effect:
+  tr: Cihaz/emülatörde çalıştırır veya artefakt üretir.
+  en: Runs on device/emulator or produces artifacts.
+syntax: "flutter <command>"
+tags:
+- software
+- frontend
+- mobile
+- tools
+risk: caution
+learning_level: intermediate
+requires_elevated: false
+platforms:
+- linux
+- macos
+- windows
+package_refs:
+- manager: homebrew
+  package: flutter
+- manager: snap
+  package: flutter
+  notes:
+    tr: Snap kanalı resmi olabilir; dokümantasyonu doğrulayın.
+    en: Snap channel may be official; verify docs.
+install_notes:
+  tr: |-
+    Resmi: https://docs.flutter.dev/get-started/install
+    macOS: brew install --cask flutter
+    Android SDK/Xcode ayrıca gerekir.
+  en: |-
+    Official: https://docs.flutter.dev/get-started/install
+    macOS: brew install --cask flutter
+    Android SDK/Xcode also required.
+flags: []
+examples:
+- title:
+    tr: Doctor
+    en: Doctor
+  command: flutter doctor
+  explanation:
+    tr: Ortam teşhisi.
+    en: Environment diagnostics.
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: Devices
+    en: Devices
+  command: flutter devices
+  explanation:
+    tr: Bağlı cihazlar.
+    en: Connected devices.
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: Create
+    en: Create
+  command: flutter create my_app
+  explanation:
+    tr: Yeni proje.
+    en: New project.
+  risk: caution
+  difficulty: beginner
+- title:
+    tr: Run
+    en: Run
+  command: flutter run
+  explanation:
+    tr: Debug çalıştırma.
+    en: Debug run.
+  risk: caution
+  difficulty: intermediate
+- title:
+    tr: Build apk
+    en: Build apk
+  command: flutter build apk
+  explanation:
+    tr: Android APK üretir.
+    en: Builds Android APK.
+  risk: caution
+  difficulty: advanced
+related:
+- dart
+- code
+related_topics:
+- software
+intent:
+  tr:
+  - flutter çalıştır
+  - flutter doctor
+  en:
+  - flutter run
+  - flutter doctor
+documentation:
+- https://docs.flutter.dev/reference/flutter-cli
+sources:
+- https://docs.flutter.dev/reference/flutter-cli
+verification:
+  status: draft
+  sources:
+  - https://docs.flutter.dev/reference/flutter-cli
+  notes: Software bank breadth draft — official docs oriented; not human-verified.
+nova:
+  concepts:
+  - software
+  ui_priority: 70

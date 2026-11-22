@@ -24,16 +24,16 @@ Do not treat registry rows or `draft` YAML as “full platform support.”
 
 | Metric | Value |
 |--------|------:|
-| Commands | 279 |
+| Commands | 319 |
 | Concepts | 31 (reviewed **1** / draft **30**) |
 | Tasks | 36 (`draft`) |
 | Profiles | 14 (`draft`) |
-| Search entries | 360 |
+| Search entries | 400 |
 | OS registry | 11 |
 | Package managers | 60 |
 | Catalog `schema_version` | 2 |
-| commands verified / reviewed / draft | 26 / 105 / 148 |
-| `content_sha256` | `d094b818acd538820358c69a9a0851d2c6f867e3e7f1db32e28d6ce87c049c1f` |
+| commands verified / reviewed / draft | 26 / 105 / 188 |
+| `content_sha256` | `aad2fb79aad8f4954e25a5538811163c4efc18d5551eabdcddc4f233f938da2f` |
 
 ## Done (honest)
 

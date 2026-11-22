@@ -1,0 +1,123 @@
+schema_version: 2
+id: composer
+name: composer
+kind: package_manager
+category: development
+summary:
+  tr: Composer — PHP bağımlılık yöneticisi.
+  en: Composer — PHP dependency manager.
+description:
+  tr: >-
+    composer.json ile paket kurar. Global composer.phar veya distro paketi.
+  en: >-
+    Installs packages via composer.json. Global composer.phar or distro package.
+purpose:
+  tr: PHP proje bağımlılıklarını yönetmek.
+  en: Manage PHP project dependencies.
+when_to_use:
+  tr: composer.json olan PHP projelerinde.
+  en: In PHP projects with composer.json.
+expected_effect:
+  tr: vendor/ ve lockfile günceller.
+  en: Updates vendor/ and lockfile.
+syntax: "composer <command>"
+tags:
+- software
+- backend
+- php
+- packages
+risk: caution
+learning_level: intermediate
+requires_elevated: false
+platforms:
+- linux
+- macos
+- windows
+packages:
+  arch: composer
+  debian: composer
+  ubuntu: composer
+  fedora: composer
+package_refs:
+- manager: pacman
+  package: composer
+  distributions:
+  - arch
+- manager: apt
+  package: composer
+  distributions:
+  - debian
+  - ubuntu
+- manager: homebrew
+  package: composer
+install_notes:
+  tr: |-
+    Arch: pacman -S composer
+    Debian/Ubuntu: apt install composer
+    Resmi: getcomposer.org installer
+  en: |-
+    Arch: pacman -S composer
+    Debian/Ubuntu: apt install composer
+    Official: getcomposer.org installer
+flags: []
+examples:
+- title:
+    tr: Sürüm
+    en: Version
+  command: composer --version
+  explanation:
+    tr: Composer sürümü.
+    en: Composer version.
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: Install
+    en: Install
+  command: composer install
+  explanation:
+    tr: Lock’a göre kurar.
+    en: Installs from the lock.
+  risk: caution
+  difficulty: beginner
+- title:
+    tr: Require
+    en: Require
+  command: composer require monolog/monolog
+  explanation:
+    tr: Paket ekler.
+    en: Adds a package.
+  risk: caution
+  difficulty: beginner
+- title:
+    tr: Update
+    en: Update
+  command: composer update
+  explanation:
+    tr: Bağımlılıkları günceller.
+    en: Updates dependencies.
+  risk: caution
+  difficulty: intermediate
+related:
+- php
+related_topics:
+- software
+intent:
+  tr:
+  - composer kur
+  - php paket
+  en:
+  - composer install
+  - php package
+documentation:
+- https://getcomposer.org/doc/03-cli.md
+sources:
+- https://getcomposer.org/doc/03-cli.md
+verification:
+  status: draft
+  sources:
+  - https://getcomposer.org/doc/03-cli.md
+  notes: Software bank breadth draft — official docs oriented; not human-verified.
+nova:
+  concepts:
+  - software
+  ui_priority: 60

@@ -184,6 +184,6 @@ concepts:
   article: development-basics
 - id: software
   label:
-    tr: Yazılım yığınları (Software)
-    en: Software stacks
+    tr: Yazılım CLI’ları (Software)
+    en: Software CLIs
   article: software

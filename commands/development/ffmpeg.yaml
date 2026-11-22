@@ -1,0 +1,125 @@
+schema_version: 2
+id: ffmpeg
+name: ffmpeg
+kind: executable
+category: development
+summary:
+  tr: FFmpeg — medya dönüştürücü CLI.
+  en: FFmpeg — media conversion CLI.
+description:
+  tr: >-
+    Ses/video dönüştürme ve inceleme. Oyun/medya hatlarında sık araç; pygame gibi kütüphaneler CLI değildir — runtime/pip ile kurulur.
+  en: >-
+    Audio/video convert and inspect. Common in game/media pipelines; libraries like pygame are not CLIs — install via runtime/pip.
+purpose:
+  tr: Medya dosyalarını dönüştürmek/incelemek.
+  en: Convert/inspect media files.
+when_to_use:
+  tr: "Encode, mux veya ffprobe benzeri incelemede (ffprobe ayrı binary olabilir)."
+  en: "For encode, mux, or ffprobe-like inspection (ffprobe may be a separate binary)."
+expected_effect:
+  tr: Çıktı medya dosyası yazar veya bilgi basar.
+  en: Writes an output media file or prints info.
+syntax: "ffmpeg [options] [-i input] output"
+tags:
+- software
+- tools
+- media
+- gamedev
+risk: caution
+learning_level: intermediate
+requires_elevated: false
+platforms:
+- linux
+- macos
+- windows
+packages:
+  arch: ffmpeg
+  debian: ffmpeg
+  ubuntu: ffmpeg
+  fedora: ffmpeg
+package_refs:
+- manager: pacman
+  package: ffmpeg
+  distributions:
+  - arch
+- manager: apt
+  package: ffmpeg
+  distributions:
+  - debian
+  - ubuntu
+- manager: homebrew
+  package: ffmpeg
+- manager: winget
+  package: Gyan.FFmpeg
+install_notes:
+  tr: |-
+    Arch: pacman -S ffmpeg
+    Debian/Ubuntu: apt install ffmpeg
+    macOS: brew install ffmpeg
+  en: |-
+    Arch: pacman -S ffmpeg
+    Debian/Ubuntu: apt install ffmpeg
+    macOS: brew install ffmpeg
+flags: []
+examples:
+- title:
+    tr: Sürüm
+    en: Version
+  command: ffmpeg -version
+  explanation:
+    tr: Sürüm/yapılandırma.
+    en: Version/build config.
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: Help
+    en: Help
+  command: ffmpeg -h
+  explanation:
+    tr: Kısa yardım.
+    en: Short help.
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: Convert
+    en: Convert
+  command: "ffmpeg -i input.mp4 -c:v libx264 -c:a aac output.mp4"
+  explanation:
+    tr: Yeniden kodlar.
+    en: Re-encodes.
+  risk: caution
+  difficulty: intermediate
+- title:
+    tr: Extract audio
+    en: Extract audio
+  command: "ffmpeg -i input.mp4 -vn -c:a copy out.m4a"
+  explanation:
+    tr: Ses demux.
+    en: Demux audio.
+  risk: caution
+  difficulty: intermediate
+related:
+- godot
+related_topics:
+- software
+intent:
+  tr:
+  - ffmpeg dönüştür
+  - video encode
+  en:
+  - ffmpeg convert
+  - encode video
+documentation:
+- https://ffmpeg.org/ffmpeg.html
+sources:
+- https://ffmpeg.org/ffmpeg.html
+verification:
+  status: draft
+  sources:
+  - https://ffmpeg.org/ffmpeg.html
+  notes: Software bank breadth draft — official docs oriented; not human-verified.
+nova:
+  concepts:
+  - software
+  ui_priority: 60

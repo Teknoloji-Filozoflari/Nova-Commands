@@ -1,0 +1,108 @@
+schema_version: 2
+id: gem
+name: gem
+kind: package_manager
+category: development
+summary:
+  tr: gem — RubyGems paket CLI.
+  en: gem — RubyGems package CLI.
+description:
+  tr: >-
+    Ruby gem’lerini kurar/listeler. Proje bağımlılığı için bundle tercih edilir.
+  en: >-
+    Installs/lists Ruby gems. Prefer bundle for project dependencies.
+purpose:
+  tr: Ruby gem’lerini yönetmek.
+  en: Manage Ruby gems.
+when_to_use:
+  tr: Tek gem veya RubyGems işlemlerinde.
+  en: For single-gem or RubyGems operations.
+expected_effect:
+  tr: Gem kurar veya listeler.
+  en: Installs or lists gems.
+syntax: "gem <command>"
+tags:
+- software
+- backend
+- ruby
+- packages
+risk: caution
+learning_level: intermediate
+requires_elevated: false
+platforms:
+- linux
+- macos
+- windows
+packages:
+  arch: rubygems
+  debian: ruby-rubygems
+  ubuntu: ruby-rubygems
+package_refs:
+- manager: pacman
+  package: rubygems
+  distributions:
+  - arch
+- manager: apt
+  package: ruby-rubygems
+  distributions:
+  - debian
+  - ubuntu
+install_notes:
+  tr: |-
+    Çoğu Ruby kurulumuyla gelir. Arch: pacman -S rubygems
+  en: |-
+    Ships with most Ruby installs. Arch: pacman -S rubygems
+flags: []
+examples:
+- title:
+    tr: Liste
+    en: List
+  command: gem list
+  explanation:
+    tr: Kurulu gem’ler.
+    en: Installed gems.
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: Kur
+    en: Install
+  command: gem install rake
+  explanation:
+    tr: Gem kurar.
+    en: Installs a gem.
+  risk: caution
+  difficulty: beginner
+- title:
+    tr: Env
+    en: Env
+  command: gem env
+  explanation:
+    tr: RubyGems ortamı.
+    en: RubyGems environment.
+  risk: safe
+  difficulty: beginner
+related:
+- ruby
+- bundle
+related_topics:
+- software
+intent:
+  tr:
+  - gem kur
+  - rubygems
+  en:
+  - gem install
+  - rubygems
+documentation:
+- https://guides.rubygems.org/command-reference/
+sources:
+- https://guides.rubygems.org/command-reference/
+verification:
+  status: draft
+  sources:
+  - https://guides.rubygems.org/command-reference/
+  notes: Software bank breadth draft — official docs oriented; not human-verified.
+nova:
+  concepts:
+  - software
+  ui_priority: 60

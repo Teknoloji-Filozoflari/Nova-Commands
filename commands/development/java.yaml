@@ -1,0 +1,119 @@
+schema_version: 2
+id: java
+name: java
+kind: executable
+category: development
+summary:
+  tr: Java uygulama başlatıcı (java).
+  en: Java application launcher (java).
+description:
+  tr: >-
+    JVM üzerinde sınıf/JAR çalıştırır. Derleme javac ile; paket/build genelde mvn/gradle.
+  en: >-
+    Runs classes/JARs on the JVM. Compile with javac; builds usually via mvn/gradle.
+purpose:
+  tr: Derlenmiş Java uygulamalarını çalıştırmak.
+  en: Run compiled Java applications.
+when_to_use:
+  tr: JAR veya ana sınıf çalıştırırken; sürüm kontrolünde.
+  en: When running a JAR or main class; version checks.
+syntax: "java [options] <mainclass> | -jar <jarfile>"
+expected_effect:
+  tr: JVM süreci başlatır.
+  en: Starts a JVM process.
+tags:
+- software
+- backend
+- java
+- jvm
+- language
+risk: caution
+learning_level: intermediate
+requires_elevated: false
+platforms:
+- linux
+- macos
+- windows
+packages:
+  arch: jdk-openjdk
+  debian: openjdk-17-jre
+  ubuntu: openjdk-17-jre
+  fedora: java-17-openjdk
+package_refs:
+- manager: pacman
+  package: jdk-openjdk
+  distributions:
+  - arch
+- manager: apt
+  package: openjdk-17-jre
+  distributions:
+  - debian
+  - ubuntu
+  notes:
+    tr: Sürümlü OpenJDK paketleri distroya göre değişir.
+    en: Versioned OpenJDK packages vary by distro.
+- manager: dnf
+  package: java-17-openjdk
+  distributions:
+  - fedora
+- manager: homebrew
+  package: openjdk
+- manager: winget
+  package: Microsoft.OpenJDK.17
+install_notes:
+  tr: |-
+    Arch: pacman -S jdk-openjdk
+    Debian/Ubuntu: apt install openjdk-17-jdk (sürümü doğrulayın)
+    Fedora: dnf install java-17-openjdk-devel
+    macOS: brew install openjdk
+  en: |-
+    Arch: pacman -S jdk-openjdk
+    Debian/Ubuntu: apt install openjdk-17-jdk (verify version)
+    Fedora: dnf install java-17-openjdk-devel
+    macOS: brew install openjdk
+flags: []
+examples:
+- title:
+    tr: Sürüm
+    en: Version
+  command: java -version
+  explanation:
+    tr: JVM sürüm bilgisini stderr’e yazar.
+    en: Prints JVM version info to stderr.
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: JAR çalıştır
+    en: Run JAR
+  command: java -jar app.jar
+  explanation:
+    tr: Executable JAR çalıştırır.
+    en: Runs an executable JAR.
+  risk: caution
+  difficulty: beginner
+related:
+- javac
+- mvn
+- gradle
+related_topics:
+- software
+intent:
+  tr:
+  - java çalıştır
+  - jvm sürüm
+  en:
+  - run java
+  - jvm version
+documentation:
+- https://docs.oracle.com/en/java/javase/
+sources:
+- https://docs.oracle.com/en/java/javase/21/docs/specs/man/java.html
+verification:
+  status: draft
+  sources:
+  - https://docs.oracle.com/en/java/javase/21/docs/specs/man/java.html
+  notes: Software bank breadth draft — official docs oriented; not human-verified.
+nova:
+  concepts:
+  - software
+  ui_priority: 60

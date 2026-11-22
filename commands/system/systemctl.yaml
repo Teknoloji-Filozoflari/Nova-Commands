@@ -15,6 +15,8 @@ tags:
 - system
 - systemd
 - service
+- software
+- server
 risk: dangerous
 learning_level: intermediate
 requires_elevated: true
@@ -174,6 +176,7 @@ verification:
   notes: NV-123 teachable fields (when/syntax/mistakes/topics).
 nova:
   concepts:
+  - software
   - systemd
   - terminal-basics
 purpose:
@@ -190,5 +193,6 @@ common_mistakes:
 - tr: Alpine/Void/Gentoo’da systemctl beklemek (OpenRC/runit).
   en: Expecting systemctl on Alpine/Void/Gentoo (OpenRC/runit).
 related_topics:
+- software
 - systemd
 - monitoring-and-logs

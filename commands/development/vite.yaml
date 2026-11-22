@@ -1,0 +1,111 @@
+schema_version: 2
+id: vite
+name: vite
+kind: executable
+category: development
+summary:
+  tr: Vite — frontend build/dev sunucu.
+  en: Vite — frontend build/dev server.
+description:
+  tr: >-
+    Hızlı ESM dev sunucusu ve üretim demeti. Çoğu kurulum npx vite / npm create vite ile.
+  en: >-
+    Fast ESM dev server and production bundling. Often via npx vite / npm create vite.
+purpose:
+  tr: Modern frontend geliştirme sunucusu ve build.
+  en: Modern frontend dev server and build.
+when_to_use:
+  tr: Vite tabanlı SPA/SSR projelerinde.
+  en: In Vite-based SPA/SSR projects.
+expected_effect:
+  tr: Dev sunucu açar veya dist/ üretir.
+  en: Opens a dev server or writes dist/.
+syntax: "vite [command]"
+tags:
+- software
+- frontend
+- build
+risk: caution
+learning_level: intermediate
+requires_elevated: false
+platforms:
+- linux
+- macos
+- windows
+package_refs:
+- manager: npm
+  package: vite
+install_notes:
+  tr: |-
+    Proje: npm create vite@latest
+    Dev: npm install && npx vite
+    Global şart değil.
+  en: |-
+    Project: npm create vite@latest
+    Dev: npm install && npx vite
+    Global not required.
+flags: []
+examples:
+- title:
+    tr: Sürüm
+    en: Version
+  command: vite --version
+  explanation:
+    tr: Vite sürümü.
+    en: Vite version.
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: Dev
+    en: Dev
+  command: vite
+  explanation:
+    tr: Geliştirme sunucusunu başlatır.
+    en: Starts the dev server.
+  risk: caution
+  difficulty: beginner
+- title:
+    tr: Build
+    en: Build
+  command: vite build
+  explanation:
+    tr: Üretim demeti.
+    en: Production bundle.
+  risk: caution
+  difficulty: beginner
+- title:
+    tr: Preview
+    en: Preview
+  command: vite preview
+  explanation:
+    tr: Build önizleme sunucusu.
+    en: Preview server for the build.
+  risk: caution
+  difficulty: intermediate
+related:
+- npm
+- npx
+- node
+- ng
+related_topics:
+- software
+intent:
+  tr:
+  - vite sunucu
+  - vite build
+  en:
+  - vite server
+  - vite build
+documentation:
+- https://vite.dev/guide/cli.html
+sources:
+- https://vite.dev/guide/cli.html
+verification:
+  status: draft
+  sources:
+  - https://vite.dev/guide/cli.html
+  notes: Software bank breadth draft — official docs oriented; not human-verified.
+nova:
+  concepts:
+  - software
+  ui_priority: 60

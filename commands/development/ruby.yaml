@@ -1,0 +1,115 @@
+schema_version: 2
+id: ruby
+name: ruby
+kind: executable
+category: development
+summary:
+  tr: Ruby yorumlayıcısı.
+  en: Ruby interpreter.
+description:
+  tr: >-
+    Ruby betiklerini çalıştırır. Gem’ler gem/bundle ile yönetilir.
+  en: >-
+    Runs Ruby scripts. Gems are managed with gem/bundle.
+purpose:
+  tr: Ruby betik ve uygulamalarını çalıştırmak.
+  en: Run Ruby scripts and apps.
+when_to_use:
+  tr: Ruby runtime gerektiğinde.
+  en: When a Ruby runtime is required.
+expected_effect:
+  tr: Betik çalıştırır veya sürüm yazar.
+  en: Runs a script or prints version.
+syntax: "ruby [options] [--] [programfile] [arguments]"
+tags:
+- software
+- backend
+- ruby
+- language
+risk: caution
+learning_level: intermediate
+requires_elevated: false
+platforms:
+- linux
+- macos
+- windows
+packages:
+  arch: ruby
+  debian: ruby
+  ubuntu: ruby
+  fedora: ruby
+package_refs:
+- manager: pacman
+  package: ruby
+  distributions:
+  - arch
+- manager: apt
+  package: ruby
+  distributions:
+  - debian
+  - ubuntu
+- manager: homebrew
+  package: ruby
+install_notes:
+  tr: |-
+    Arch: pacman -S ruby
+    Debian/Ubuntu: apt install ruby ruby-rubygems
+    macOS: brew install ruby
+  en: |-
+    Arch: pacman -S ruby
+    Debian/Ubuntu: apt install ruby ruby-rubygems
+    macOS: brew install ruby
+flags: []
+examples:
+- title:
+    tr: Sürüm
+    en: Version
+  command: ruby -v
+  explanation:
+    tr: Ruby sürümü.
+    en: Ruby version.
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: Tek satır
+    en: One-liner
+  command: "ruby -e \"puts 2+2\""
+  explanation:
+    tr: Kısa ifade.
+    en: Short expression.
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: Betik
+    en: Script
+  command: ruby app.rb
+  explanation:
+    tr: Betik çalıştırır.
+    en: Runs a script.
+  risk: caution
+  difficulty: beginner
+related:
+- gem
+- bundle
+related_topics:
+- software
+intent:
+  tr:
+  - ruby çalıştır
+  - ruby sürüm
+  en:
+  - run ruby
+  - ruby version
+documentation:
+- https://www.ruby-lang.org/en/documentation/
+sources:
+- https://docs.ruby-lang.org/en/master/
+verification:
+  status: draft
+  sources:
+  - https://docs.ruby-lang.org/en/master/
+  notes: Software bank breadth draft — official docs oriented; not human-verified.
+nova:
+  concepts:
+  - software
+  ui_priority: 60

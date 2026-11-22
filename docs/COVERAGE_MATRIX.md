@@ -41,12 +41,12 @@ PowerShell cmdlets are not Linux aliases.
 
 | Kind | Count | Notes |
 |------|------:|-------|
-| Commands | **279** | +Software stack CLIs (node/npm/npx/yarn/pnpm/bun/ng/code/dotnet) |
+| Commands | **319** | +broad Software CLIs (+40: languages, PMs, cloud/IaC, editors, Flutter/Godot, …) |
 | Tasks | **36** | includes sequential `security-check-*` stages |
 | Profiles | **14** | includes `server-security-checklist` |
-| Concepts | **31** | +`software` topic guide (frontend/backend/server/tools subtopics) |
-| Search entries | **360** | `metadata/search-index.json` `entry_count` |
-| `content_sha256` | `d094b818acd538820358c69a9a0851d2c6f867e3e7f1db32e28d6ce87c049c1f` | must match catalog/manifest/search-index |
+| Concepts | **31** | `software` topic guide expanded (16 domain subtopics) |
+| Search entries | **400** | `metadata/search-index.json` `entry_count` |
+| `content_sha256` | `aad2fb79aad8f4954e25a5538811163c4efc18d5551eabdcddc4f233f938da2f` | must match catalog/manifest/search-index |
 
 ### Historical (NV-103 teachable bank, before that merge)
 

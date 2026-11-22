@@ -11,6 +11,8 @@ description:
   en: Manages OCI containers; Docker-like CLI.
 tags:
 - containers
+- software
+- server
 risk: dangerous
 learning_level: intermediate
 requires_elevated: false
@@ -83,6 +85,9 @@ related:
 - docker
 - docker-compose
 - nerdctl
+related_topics:
+- software
+
 intent:
   tr:
   - konteyner listele
@@ -99,4 +104,5 @@ nova:
   favorite_eligible: true
   ui_priority: 70
   concepts:
+  - software
   - containers

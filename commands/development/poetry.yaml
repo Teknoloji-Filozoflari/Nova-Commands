@@ -1,0 +1,125 @@
+schema_version: 2
+id: poetry
+name: poetry
+kind: package_manager
+category: development
+summary:
+  tr: Poetry — Python bağımlılık ve paketleme.
+  en: Poetry — Python dependency and packaging.
+description:
+  tr: >-
+    pyproject.toml ile bağımlılık, venv ve yayınlama. pipx ile kurulumu yaygındır.
+  en: >-
+    Dependencies, venvs, and publishing via pyproject.toml. Commonly installed via pipx.
+purpose:
+  tr: Python uygulama/kütüphane projelerini yönetmek.
+  en: Manage Python app/library projects.
+when_to_use:
+  tr: Poetry kullanan pyproject.toml projelerinde.
+  en: In Poetry-based pyproject.toml projects.
+expected_effect:
+  tr: Lock/venv günceller; script çalıştırır.
+  en: Updates lock/venv; runs scripts.
+syntax: "poetry <command>"
+tags:
+- software
+- backend
+- python
+- packages
+risk: caution
+learning_level: intermediate
+requires_elevated: false
+platforms:
+- linux
+- macos
+- windows
+package_refs:
+- manager: pacman
+  package: python-poetry
+  distributions:
+  - arch
+- manager: homebrew
+  package: poetry
+install_notes:
+  tr: |-
+    Öneri: pipx install poetry
+    Arch: pacman -S python-poetry
+    macOS: brew install poetry
+  en: |-
+    Prefer: pipx install poetry
+    Arch: pacman -S python-poetry
+    macOS: brew install poetry
+flags: []
+examples:
+- title:
+    tr: Sürüm
+    en: Version
+  command: poetry --version
+  explanation:
+    tr: Poetry sürümü.
+    en: Poetry version.
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: Kur
+    en: Install
+  command: poetry install
+  explanation:
+    tr: Lock’a göre kurar.
+    en: Installs from the lock.
+  risk: caution
+  difficulty: beginner
+- title:
+    tr: Add
+    en: Add
+  command: poetry add requests
+  explanation:
+    tr: Bağımlılık ekler.
+    en: Adds a dependency.
+  risk: caution
+  difficulty: beginner
+- title:
+    tr: Run
+    en: Run
+  command: poetry run python -V
+  explanation:
+    tr: Venv içinde çalıştırır.
+    en: Runs inside the venv.
+  risk: caution
+  difficulty: beginner
+- title:
+    tr: Shell
+    en: Shell
+  command: poetry shell
+  explanation:
+    tr: Venv kabuğu (plugin/sürüme bağlı).
+    en: Venv shell (plugin/version dependent).
+  risk: caution
+  difficulty: intermediate
+related:
+- pip
+- uv
+- python3
+- pipx
+related_topics:
+- software
+intent:
+  tr:
+  - poetry kur
+  - poetry add
+  en:
+  - poetry install
+  - poetry add
+documentation:
+- https://python-poetry.org/docs/cli/
+sources:
+- https://python-poetry.org/docs/cli/
+verification:
+  status: draft
+  sources:
+  - https://python-poetry.org/docs/cli/
+  notes: Software bank breadth draft — official docs oriented; not human-verified.
+nova:
+  concepts:
+  - software
+  ui_priority: 60

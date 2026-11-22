@@ -1,0 +1,137 @@
+schema_version: 2
+id: pip
+name: pip
+kind: package_manager
+category: development
+summary:
+  tr: pip — Python paket kurucu.
+  en: pip — Python package installer.
+description:
+  tr: >-
+    PyPI’den paket kurar. venv içinde kullanın; sistem Python’una sudo pip önermeyiz.
+  en: >-
+    Installs packages from PyPI. Use inside a venv; avoid sudo pip into system Python.
+purpose:
+  tr: Python bağımlılıklarını kurmak/güncellemek.
+  en: Install/upgrade Python dependencies.
+when_to_use:
+  tr: requirements.txt veya tek paket kurulumunda (venv içinde).
+  en: Installing from requirements.txt or a single package (inside a venv).
+expected_effect:
+  tr: site-packages’e paket yazar; sistem PM değildir.
+  en: Writes packages into site-packages; not a system PM.
+syntax: "pip <command> [options]"
+tags:
+- software
+- backend
+- python
+- packages
+risk: caution
+learning_level: beginner
+requires_elevated: false
+platforms:
+- linux
+- macos
+- windows
+packages:
+  arch: python-pip
+  debian: python3-pip
+  ubuntu: python3-pip
+  fedora: python3-pip
+package_refs:
+- manager: pacman
+  package: python-pip
+  distributions:
+  - arch
+- manager: apt
+  package: python3-pip
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: python3-pip
+  distributions:
+  - fedora
+install_notes:
+  tr: |-
+    Arch: pacman -S python-pip
+    Debian/Ubuntu: apt install python3-pip
+    Komut adı çoğu yerde pip3 olabilir.
+  en: |-
+    Arch: pacman -S python-pip
+    Debian/Ubuntu: apt install python3-pip
+    Binary may be pip3 on some distros.
+flags: []
+examples:
+- title:
+    tr: Sürüm
+    en: Version
+  command: pip --version
+  explanation:
+    tr: pip sürümü.
+    en: pip version.
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: Kur
+    en: Install
+  command: pip install requests
+  explanation:
+    tr: Paketi venv’e kurar.
+    en: Installs package into the venv.
+  risk: caution
+  difficulty: beginner
+- title:
+    tr: Requirements
+    en: Requirements
+  command: pip install -r requirements.txt
+  explanation:
+    tr: Dosyadan toplu kurar.
+    en: Bulk install from a file.
+  risk: caution
+  difficulty: beginner
+- title:
+    tr: Liste
+    en: List
+  command: pip list
+  explanation:
+    tr: Kurulu paketleri listeler.
+    en: Lists installed packages.
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: Freeze
+    en: Freeze
+  command: pip freeze
+  explanation:
+    tr: Pin listesi üretir.
+    en: Produces a pinned list.
+  risk: safe
+  difficulty: beginner
+related:
+- python3
+- pipx
+- uv
+- poetry
+related_topics:
+- software
+intent:
+  tr:
+  - pip kur
+  - python paket
+  en:
+  - pip install
+  - python package
+documentation:
+- https://pip.pypa.io/en/stable/
+sources:
+- https://pip.pypa.io/en/stable/cli/pip/
+verification:
+  status: draft
+  sources:
+  - https://pip.pypa.io/en/stable/cli/pip/
+  notes: Software bank breadth draft — official docs oriented; not human-verified.
+nova:
+  concepts:
+  - software
+  ui_priority: 78

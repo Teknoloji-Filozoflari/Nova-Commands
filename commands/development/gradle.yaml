@@ -1,0 +1,129 @@
+schema_version: 2
+id: gradle
+name: gradle
+kind: executable
+category: development
+summary:
+  tr: Gradle build aracı.
+  en: Gradle build tool.
+description:
+  tr: >-
+    Groovy/Kotlin DSL ile JVM (ve Android) projelerini derler. Wrapper (./gradlew) sık kullanılır.
+  en: >-
+    Builds JVM (and Android) projects with Groovy/Kotlin DSL. Wrapper (./gradlew) is common.
+purpose:
+  tr: Gradle projelerinde görev çalıştırmak.
+  en: Run tasks in Gradle projects.
+when_to_use:
+  tr: build.gradle(.kts) veya gradlew olan repolarda.
+  en: In repos with build.gradle(.kts) or gradlew.
+syntax: "gradle [task...]"
+expected_effect:
+  tr: İstenen görevleri çalıştırır; build çıktısı yazar.
+  en: Runs requested tasks; writes build outputs.
+tags:
+- software
+- backend
+- java
+- jvm
+- build
+- android
+risk: caution
+learning_level: intermediate
+requires_elevated: false
+platforms:
+- linux
+- macos
+- windows
+packages:
+  arch: gradle
+  debian: gradle
+  ubuntu: gradle
+  fedora: gradle
+package_refs:
+- manager: pacman
+  package: gradle
+  distributions:
+  - arch
+- manager: apt
+  package: gradle
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: gradle
+  distributions:
+  - fedora
+- manager: homebrew
+  package: gradle
+install_notes:
+  tr: |-
+    Arch: pacman -S gradle
+    Çoğu proje ./gradlew wrapper kullanır — global gradle şart değil.
+  en: |-
+    Arch: pacman -S gradle
+    Most projects use ./gradlew — global gradle optional.
+flags: []
+examples:
+- title:
+    tr: Sürüm
+    en: Version
+  command: gradle -v
+  explanation:
+    tr: Gradle sürümü.
+    en: Gradle version.
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: Görevler
+    en: Tasks
+  command: gradle tasks
+  explanation:
+    tr: Kullanılabilir görevleri listeler.
+    en: Lists available tasks.
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: Build
+    en: Build
+  command: gradle build
+  explanation:
+    tr: Derle+test+paket.
+    en: Build+test+package.
+  risk: caution
+  difficulty: beginner
+- title:
+    tr: Wrapper build
+    en: Wrapper build
+  command: ./gradlew build
+  explanation:
+    tr: Proje wrapper ile build.
+    en: Build via project wrapper.
+  risk: caution
+  difficulty: beginner
+related:
+- mvn
+- java
+- javac
+related_topics:
+- software
+intent:
+  tr:
+  - gradle build
+  - gradlew
+  en:
+  - gradle build
+  - gradlew
+documentation:
+- https://docs.gradle.org/current/userguide/command_line_interface.html
+sources:
+- https://docs.gradle.org/current/userguide/command_line_interface.html
+verification:
+  status: draft
+  sources:
+  - https://docs.gradle.org/current/userguide/command_line_interface.html
+  notes: Software bank breadth draft — official docs oriented; not human-verified.
+nova:
+  concepts:
+  - software
+  ui_priority: 60

@@ -1,0 +1,105 @@
+schema_version: 2
+id: javac
+name: javac
+kind: executable
+category: development
+summary:
+  tr: Java derleyicisi (javac).
+  en: Java compiler (javac).
+description:
+  tr: >-
+    Kaynak .java dosyalarını bytecode’a derler. Çok modüllü projelerde mvn/gradle tercih edilir.
+  en: >-
+    Compiles .java sources to bytecode. Prefer mvn/gradle for multi-module projects.
+purpose:
+  tr: Java kaynaklarını derlemek.
+  en: Compile Java sources.
+when_to_use:
+  tr: Küçük örneklerde veya JDK teşhisinde.
+  en: For small samples or JDK diagnostics.
+syntax: "javac [options] <source files>"
+expected_effect:
+  tr: .class dosyaları üretir.
+  en: Produces .class files.
+tags:
+- software
+- backend
+- java
+- jvm
+risk: caution
+learning_level: intermediate
+requires_elevated: false
+platforms:
+- linux
+- macos
+- windows
+packages:
+  arch: jdk-openjdk
+  debian: openjdk-17-jdk
+  ubuntu: openjdk-17-jdk
+  fedora: java-17-openjdk-devel
+package_refs:
+- manager: pacman
+  package: jdk-openjdk
+  distributions:
+  - arch
+- manager: apt
+  package: openjdk-17-jdk
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: java-17-openjdk-devel
+  distributions:
+  - fedora
+install_notes:
+  tr: |-
+    JDK gerekir (JRE yetmez). Arch: pacman -S jdk-openjdk
+  en: |-
+    JDK required (JRE is not enough). Arch: pacman -S jdk-openjdk
+flags: []
+examples:
+- title:
+    tr: Sürüm
+    en: Version
+  command: javac -version
+  explanation:
+    tr: javac sürümü.
+    en: javac version.
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: Derle
+    en: Compile
+  command: javac Hello.java
+  explanation:
+    tr: Hello.java derler.
+    en: Compiles Hello.java.
+  risk: caution
+  difficulty: beginner
+related:
+- java
+- mvn
+- gradle
+related_topics:
+- software
+intent:
+  tr:
+  - javac derle
+  - java derle
+  en:
+  - javac compile
+  - compile java
+documentation:
+- https://docs.oracle.com/en/java/javase/21/docs/specs/man/javac.html
+sources:
+- https://docs.oracle.com/en/java/javase/21/docs/specs/man/javac.html
+verification:
+  status: draft
+  sources:
+  - https://docs.oracle.com/en/java/javase/21/docs/specs/man/javac.html
+  notes: Software bank breadth draft — official docs oriented; not human-verified.
+nova:
+  concepts:
+  - software
+  ui_priority: 60

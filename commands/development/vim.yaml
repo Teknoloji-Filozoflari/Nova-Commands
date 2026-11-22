@@ -1,0 +1,112 @@
+schema_version: 2
+id: vim
+name: vim
+kind: executable
+category: development
+summary:
+  tr: Vim metin editörü.
+  en: Vim text editor.
+description:
+  tr: >-
+    Klasik vi iyileştirmesi. Çoğu Unix’te vardır; Neovim ayrı kayıttır.
+  en: >-
+    Classic improved vi. Present on many Unixes; Neovim is a separate record.
+purpose:
+  tr: Terminalde metin/kod düzenlemek.
+  en: Edit text/code in a terminal.
+when_to_use:
+  tr: Hızlı uzak düzenleme veya vi alışkanlığında.
+  en: For quick remote edits or vi muscle memory.
+expected_effect:
+  tr: Editör oturumu açar.
+  en: Opens an editor session.
+syntax: "vim [options] [file ...]"
+tags:
+- software
+- editors
+- tools
+risk: caution
+learning_level: intermediate
+requires_elevated: false
+platforms:
+- linux
+- macos
+- windows
+packages:
+  arch: vim
+  debian: vim
+  ubuntu: vim
+  fedora: vim
+package_refs:
+- manager: pacman
+  package: vim
+  distributions:
+  - arch
+- manager: apt
+  package: vim
+  distributions:
+  - debian
+  - ubuntu
+- manager: homebrew
+  package: vim
+install_notes:
+  tr: |-
+    Arch: pacman -S vim
+    Debian/Ubuntu: apt install vim
+  en: |-
+    Arch: pacman -S vim
+    Debian/Ubuntu: apt install vim
+flags: []
+examples:
+- title:
+    tr: Sürüm
+    en: Version
+  command: vim --version
+  explanation:
+    tr: Vim sürümü.
+    en: Vim version.
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: Dosya
+    en: File
+  command: vim file.txt
+  explanation:
+    tr: Dosya açar.
+    en: Opens a file.
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: Ex mode
+    en: Ex mode
+  command: "vim -c \"q\" "
+  explanation:
+    tr: Komutla aç/kapat (smoke).
+    en: Open/quit via command (smoke).
+  risk: safe
+  difficulty: advanced
+related:
+- nvim
+- code
+related_topics:
+- software
+intent:
+  tr:
+  - vim aç
+  - vi düzenle
+  en:
+  - open vim
+  - edit with vi
+documentation:
+- https://www.vim.org/docs.php
+sources:
+- https://vimhelp.org/
+verification:
+  status: draft
+  sources:
+  - https://vimhelp.org/
+  notes: Software bank breadth draft — official docs oriented; not human-verified.
+nova:
+  concepts:
+  - software
+  ui_priority: 60

@@ -14,6 +14,8 @@ tags:
 - redis
 - cache
 - server
+- software
+- data
 risk: caution
 requires_elevated: false
 platforms:
@@ -42,6 +44,9 @@ examples:
     tr: Sunucu INFO bölümü (bağlantı gerekir).
     en: Server INFO section (needs connection).
   risk: caution
+related_topics:
+- software
+
 intent:
   tr:
   - redis-cli
@@ -77,4 +82,5 @@ nova:
   favorite_eligible: true
   ui_priority: 60
   concepts:
+  - software
   - databases

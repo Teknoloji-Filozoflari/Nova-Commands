@@ -1,0 +1,115 @@
+schema_version: 2
+id: emacs
+name: emacs
+kind: executable
+category: development
+summary:
+  tr: GNU Emacs editörü.
+  en: GNU Emacs editor.
+description:
+  tr: >-
+    Genişletilebilir editör/IDE. Terminalde emacs -nw; GUI ayrı.
+  en: >-
+    Extensible editor/IDE. Terminal via emacs -nw; GUI separate.
+purpose:
+  tr: Kod ve org-mode düzenleme.
+  en: Edit code and org-mode.
+when_to_use:
+  tr: Emacs iş akışında veya batch --batch scriptlerinde.
+  en: In Emacs workflows or --batch scripts.
+expected_effect:
+  tr: Editör süreci başlatır.
+  en: Starts an editor process.
+syntax: "emacs [options] [file ...]"
+tags:
+- software
+- editors
+- tools
+risk: caution
+learning_level: intermediate
+requires_elevated: false
+platforms:
+- linux
+- macos
+- windows
+packages:
+  arch: emacs
+  debian: emacs
+  ubuntu: emacs
+  fedora: emacs
+package_refs:
+- manager: pacman
+  package: emacs
+  distributions:
+  - arch
+- manager: apt
+  package: emacs
+  distributions:
+  - debian
+  - ubuntu
+- manager: homebrew
+  package: emacs
+install_notes:
+  tr: |-
+    Arch: pacman -S emacs
+    Debian/Ubuntu: apt install emacs
+    macOS: brew install emacs
+  en: |-
+    Arch: pacman -S emacs
+    Debian/Ubuntu: apt install emacs
+    macOS: brew install emacs
+flags: []
+examples:
+- title:
+    tr: Sürüm
+    en: Version
+  command: emacs --version
+  explanation:
+    tr: Emacs sürümü.
+    en: Emacs version.
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: Terminal
+    en: Terminal
+  command: emacs -nw README.md
+  explanation:
+    tr: TTY modunda açar.
+    en: Opens in TTY mode.
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: Batch
+    en: Batch
+  command: emacs --batch --version
+  explanation:
+    tr: Batch modunda sürüm yazar ve çıkar.
+    en: Prints version in batch mode and exits.
+  risk: safe
+  difficulty: intermediate
+related:
+- nvim
+- vim
+- code
+related_topics:
+- software
+intent:
+  tr:
+  - emacs aç
+  - emacs düzenle
+  en:
+  - open emacs
+  - edit with emacs
+documentation:
+- https://www.gnu.org/software/emacs/manual/
+sources:
+- https://www.gnu.org/software/emacs/manual/html_node/emacs/Command-Line-Arguments-for-Emacs-Invocation.html
+verification:
+  status: draft
+  sources:
+  - https://www.gnu.org/software/emacs/manual/html_node/emacs/Command-Line-Arguments-for-Emacs-Invocation.html
+  notes: Software bank breadth draft — official docs oriented; not human-verified.
+nova:
+  concepts:
+  - software
+  ui_priority: 60

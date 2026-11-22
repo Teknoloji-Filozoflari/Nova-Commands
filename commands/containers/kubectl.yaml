@@ -16,6 +16,8 @@ tags:
 - containers
 - devops
 - orchestration
+- software
+- server
 risk: dangerous
 learning_level: advanced
 requires_elevated: false
@@ -71,6 +73,9 @@ examples:
     en: Lists kubeconfig contexts.
   risk: safe
   difficulty: beginner
+related_topics:
+- software
+
 intent:
   tr:
   - kubectl
@@ -123,5 +128,6 @@ nova:
   favorite_eligible: true
   ui_priority: 60
   concepts:
+  - software
   - containers
   - kubernetes

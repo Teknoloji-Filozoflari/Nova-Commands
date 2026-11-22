@@ -1,0 +1,104 @@
+schema_version: 2
+id: mongosh
+name: mongosh
+kind: executable
+category: databases
+summary:
+  tr: MongoDB Shell (mongosh).
+  en: MongoDB Shell (mongosh).
+description:
+  tr: >-
+    Modern MongoDB etkileşimli kabuğu. Eski mongo shell ayrı/retired. Parola argv’ye yazılmaz.
+  en: >-
+    Modern MongoDB interactive shell. Legacy mongo shell is separate/retired. Do not put passwords on argv.
+purpose:
+  tr: MongoDB sorguları ve yönetimi.
+  en: MongoDB queries and administration.
+when_to_use:
+  tr: MongoDB kümelerine bağlanırken.
+  en: When connecting to MongoDB clusters.
+expected_effect:
+  tr: Kabuk oturumu açar veya komut çalıştırır.
+  en: Opens a shell session or runs a command.
+syntax: "mongosh [options] [connection string]"
+tags:
+- software
+- data
+- database
+- backend
+risk: caution
+learning_level: intermediate
+requires_elevated: false
+platforms:
+- linux
+- macos
+- windows
+package_refs:
+- manager: homebrew
+  package: mongosh
+- manager: winget
+  package: MongoDB.Shell
+install_notes:
+  tr: |-
+    Resmi: https://www.mongodb.com/docs/mongodb-shell/install/
+    macOS: brew install mongosh
+    Distro paketleri sınırlı olabilir.
+  en: |-
+    Official: https://www.mongodb.com/docs/mongodb-shell/install/
+    macOS: brew install mongosh
+    Distro packages may be limited.
+flags: []
+examples:
+- title:
+    tr: Sürüm
+    en: Version
+  command: mongosh --version
+  explanation:
+    tr: Sürüm.
+    en: Version.
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: Help
+    en: Help
+  command: mongosh --help
+  explanation:
+    tr: Yardım.
+    en: Help.
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: Eval
+    en: Eval
+  command: "mongosh --quiet --eval \"db.runCommand({ ping: 1 })\""
+  explanation:
+    tr: Ping komutu (URI gerekir).
+    en: Ping command (URI required).
+  risk: caution
+  difficulty: intermediate
+related:
+- mysql
+- psql
+- redis-cli
+related_topics:
+- software
+intent:
+  tr:
+  - mongosh
+  - mongodb shell
+  en:
+  - mongosh
+  - mongodb shell
+documentation:
+- https://www.mongodb.com/docs/mongodb-shell/
+sources:
+- https://www.mongodb.com/docs/mongodb-shell/
+verification:
+  status: draft
+  sources:
+  - https://www.mongodb.com/docs/mongodb-shell/
+  notes: Software bank breadth draft — official docs oriented; not human-verified.
+nova:
+  concepts:
+  - software
+  ui_priority: 60

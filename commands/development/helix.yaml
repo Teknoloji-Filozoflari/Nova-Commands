@@ -1,0 +1,106 @@
+schema_version: 2
+id: helix
+name: hx
+kind: executable
+category: development
+summary:
+  tr: Helix modal editör.
+  en: Helix modal editor.
+description:
+  tr: >-
+    Kakoune/Vim etkilenmiş modern modal editör; LSP yerleşik yaklaşımı.
+  en: >-
+    Modern modal editor influenced by Kakoune/Vim; built-in LSP oriented.
+purpose:
+  tr: Terminalde modal kod düzenleme.
+  en: Modal code editing in the terminal.
+when_to_use:
+  tr: Helix tercih eden geliştiricilerde.
+  en: When preferring Helix.
+expected_effect:
+  tr: Editör oturumu açar (binary hx).
+  en: Opens an editor session (binary hx).
+syntax: "hx [files...]"
+tags:
+- software
+- editors
+- tools
+risk: caution
+learning_level: intermediate
+requires_elevated: false
+platforms:
+- linux
+- macos
+- windows
+packages:
+  arch: helix
+  fedora: helix
+package_refs:
+- manager: pacman
+  package: helix
+  distributions:
+  - arch
+- manager: homebrew
+  package: helix
+install_notes:
+  tr: |-
+    Arch: pacman -S helix  (binary: hx)
+    macOS: brew install helix
+  en: |-
+    Arch: pacman -S helix  (binary: hx)
+    macOS: brew install helix
+flags: []
+examples:
+- title:
+    tr: Sürüm
+    en: Version
+  command: hx --version
+  explanation:
+    tr: Helix sürümü.
+    en: Helix version.
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: Aç
+    en: Open
+  command: hx README.md
+  explanation:
+    tr: Dosya açar.
+    en: Opens a file.
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: Health
+    en: Health
+  command: hx --health
+  explanation:
+    tr: Sağlık kontrolü.
+    en: Health check.
+  risk: safe
+  difficulty: intermediate
+related:
+- nvim
+- vim
+- code
+related_topics:
+- software
+intent:
+  tr:
+  - helix aç
+  - hx editör
+  en:
+  - open helix
+  - hx editor
+documentation:
+- https://docs.helix-editor.com/
+sources:
+- https://docs.helix-editor.com/
+verification:
+  status: draft
+  sources:
+  - https://docs.helix-editor.com/
+  notes: Software bank breadth draft — official docs oriented; not human-verified.
+nova:
+  concepts:
+  - software
+  ui_priority: 60

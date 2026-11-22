@@ -1,0 +1,141 @@
+schema_version: 2
+id: mvn
+name: mvn
+kind: executable
+category: development
+summary:
+  tr: Apache Maven build aracı.
+  en: Apache Maven build tool.
+description:
+  tr: >-
+    pom.xml ile Java projelerini derler, test eder, paketler. Gradle alternatiftir.
+  en: >-
+    Builds, tests, and packages Java projects via pom.xml. Gradle is an alternative.
+purpose:
+  tr: Maven tabanlı JVM projelerini yönetmek.
+  en: Manage Maven-based JVM projects.
+when_to_use:
+  tr: pom.xml olan projelerde lifecycle hedefleri için.
+  en: For lifecycle goals in pom.xml projects.
+syntax: "mvn [options] [<goal(s)>] [<phase(s)>]"
+expected_effect:
+  tr: Hedef lifecycle fazını çalıştırır; target/ yazar.
+  en: Runs lifecycle phases; writes target/.
+tags:
+- software
+- backend
+- java
+- jvm
+- build
+risk: caution
+learning_level: intermediate
+requires_elevated: false
+platforms:
+- linux
+- macos
+- windows
+packages:
+  arch: maven
+  debian: maven
+  ubuntu: maven
+  fedora: maven
+package_refs:
+- manager: pacman
+  package: maven
+  distributions:
+  - arch
+- manager: apt
+  package: maven
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: maven
+  distributions:
+  - fedora
+- manager: homebrew
+  package: maven
+- manager: winget
+  package: Apache.Maven
+install_notes:
+  tr: |-
+    Arch: pacman -S maven
+    Debian/Ubuntu: apt install maven
+    JDK ayrıca gerekir.
+  en: |-
+    Arch: pacman -S maven
+    Debian/Ubuntu: apt install maven
+    JDK also required.
+flags: []
+examples:
+- title:
+    tr: Sürüm
+    en: Version
+  command: mvn -v
+  explanation:
+    tr: Maven/Java sürümleri.
+    en: Maven/Java versions.
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: Derle
+    en: Compile
+  command: mvn compile
+  explanation:
+    tr: Kaynakları derler.
+    en: Compiles sources.
+  risk: caution
+  difficulty: beginner
+- title:
+    tr: Test
+    en: Test
+  command: mvn test
+  explanation:
+    tr: Birim testlerini çalıştırır.
+    en: Runs unit tests.
+  risk: caution
+  difficulty: beginner
+- title:
+    tr: Paketle
+    en: Package
+  command: mvn package
+  explanation:
+    tr: JAR/WAR üretir.
+    en: Produces JAR/WAR.
+  risk: caution
+  difficulty: intermediate
+- title:
+    tr: Temizle
+    en: Clean
+  command: mvn clean
+  explanation:
+    tr: target/ temizler.
+    en: Cleans target/.
+  risk: caution
+  difficulty: beginner
+related:
+- gradle
+- java
+- javac
+related_topics:
+- software
+intent:
+  tr:
+  - maven derle
+  - mvn test
+  en:
+  - maven build
+  - mvn test
+documentation:
+- https://maven.apache.org/guides/
+sources:
+- https://maven.apache.org/guides/getting-started/
+verification:
+  status: draft
+  sources:
+  - https://maven.apache.org/guides/getting-started/
+  notes: Software bank breadth draft — official docs oriented; not human-verified.
+nova:
+  concepts:
+  - software
+  ui_priority: 60

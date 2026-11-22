@@ -1,0 +1,115 @@
+schema_version: 2
+id: godot
+name: godot
+kind: executable
+category: development
+summary:
+  tr: Godot Engine CLI.
+  en: Godot Engine CLI.
+description:
+  tr: >-
+    Açık kaynak oyun motoru. Headless export/script için CLI; editör GUI ayrı açılır. Unity burada yok — resmi Unity Editor CLI ortam/lisans bağımlı.
+  en: >-
+    Open-source game engine. CLI for headless export/script; editor GUI is separate. Unity omitted here — official Unity Editor CLI is environment/license dependent.
+purpose:
+  tr: Godot projelerini headless çalıştırmak/export etmek.
+  en: Run/export Godot projects headlessly.
+when_to_use:
+  tr: CI export veya --script otomasyonunda.
+  en: For CI export or --script automation.
+expected_effect:
+  tr: Editör/oyun süreci başlatır veya export üretir.
+  en: Starts editor/game process or produces exports.
+syntax: "godot [options]"
+tags:
+- software
+- tools
+- gamedev
+risk: caution
+learning_level: advanced
+requires_elevated: false
+platforms:
+- linux
+- macos
+- windows
+packages:
+  arch: godot
+package_refs:
+- manager: pacman
+  package: godot
+  distributions:
+  - arch
+- manager: homebrew
+  package: godot
+install_notes:
+  tr: |-
+    Arch: pacman -S godot
+    macOS: brew install godot
+    Binary adı sürüme göre godot4 olabilir — which godot
+  en: |-
+    Arch: pacman -S godot
+    macOS: brew install godot
+    Binary may be godot4 by version — which godot
+flags: []
+examples:
+- title:
+    tr: Sürüm
+    en: Version
+  command: godot --version
+  explanation:
+    tr: Godot sürümü.
+    en: Godot version.
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: Help
+    en: Help
+  command: godot --help
+  explanation:
+    tr: CLI özeti.
+    en: CLI summary.
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: Headless script
+    en: Headless script
+  command: "godot --headless --script res://tool.gd"
+  explanation:
+    tr: Betik çalıştırır.
+    en: Runs a script.
+  risk: caution
+  difficulty: advanced
+- title:
+    tr: Export
+    en: Export
+  command: "godot --headless --export-release \"Linux\" build/game.x86_64"
+  explanation:
+    tr: Release export (preset gerekir).
+    en: Release export (preset required).
+  risk: caution
+  difficulty: advanced
+related:
+- git
+- ffmpeg
+related_topics:
+- software
+intent:
+  tr:
+  - godot cli
+  - godot export
+  en:
+  - godot cli
+  - godot export
+documentation:
+- https://docs.godotengine.org/en/stable/tutorials/editor/command_line_tutorial.html
+sources:
+- https://docs.godotengine.org/en/stable/tutorials/editor/command_line_tutorial.html
+verification:
+  status: draft
+  sources:
+  - https://docs.godotengine.org/en/stable/tutorials/editor/command_line_tutorial.html
+  notes: Software bank breadth draft — official docs oriented; not human-verified.
+nova:
+  concepts:
+  - software
+  ui_priority: 60

@@ -1,0 +1,109 @@
+schema_version: 2
+id: doctl
+name: doctl
+kind: remote_cli
+category: cloud
+summary:
+  tr: DigitalOcean CLI (doctl).
+  en: DigitalOcean CLI (doctl).
+description:
+  tr: >-
+    DigitalOcean API istemcisi. Örneklerde token/secret yok.
+  en: >-
+    DigitalOcean API client. No tokens/secrets in examples.
+purpose:
+  tr: DO kaynaklarını yönetmek.
+  en: Manage DO resources.
+when_to_use:
+  tr: DigitalOcean hesap/droplet işlemlerinde.
+  en: For DigitalOcean account/droplet operations.
+expected_effect:
+  tr: API çağrısı yapar; kaynak değiştirebilir.
+  en: Calls the API; may change resources.
+syntax: "doctl <command>"
+tags:
+- software
+- cloud
+- devops
+risk: dangerous
+learning_level: intermediate
+requires_elevated: false
+platforms:
+- linux
+- macos
+- windows
+packages:
+  arch: doctl
+package_refs:
+- manager: pacman
+  package: doctl
+  distributions:
+  - arch
+- manager: homebrew
+  package: doctl
+- manager: winget
+  package: DigitalOcean.Doctl
+install_notes:
+  tr: |-
+    Arch: pacman -S doctl
+    macOS: brew install doctl
+    Auth: doctl auth init (token etkileşimli)
+  en: |-
+    Arch: pacman -S doctl
+    macOS: brew install doctl
+    Auth: doctl auth init (interactive token)
+flags: []
+examples:
+- title:
+    tr: Sürüm
+    en: Version
+  command: doctl version
+  explanation:
+    tr: Sürüm.
+    en: Version.
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: Account
+    en: Account
+  command: doctl account get
+  explanation:
+    tr: Hesap özeti (auth gerekir).
+    en: Account summary (auth required).
+  risk: caution
+  difficulty: intermediate
+- title:
+    tr: Droplet list
+    en: Droplet list
+  command: doctl compute droplet list
+  explanation:
+    tr: Droplet listesi.
+    en: Lists droplets.
+  risk: caution
+  difficulty: intermediate
+related:
+- aws
+- gcloud
+- az
+related_topics:
+- software
+intent:
+  tr:
+  - digitalocean cli
+  - doctl
+  en:
+  - digitalocean cli
+  - doctl
+documentation:
+- https://docs.digitalocean.com/reference/doctl/
+sources:
+- https://docs.digitalocean.com/reference/doctl/reference/
+verification:
+  status: draft
+  sources:
+  - https://docs.digitalocean.com/reference/doctl/reference/
+  notes: Software bank breadth draft — official docs oriented; not human-verified.
+nova:
+  concepts:
+  - software
+  ui_priority: 60
