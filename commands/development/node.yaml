@@ -1,0 +1,167 @@
+schema_version: 2
+id: node
+name: node
+kind: executable
+category: development
+summary:
+  tr: Node.js JavaScript runtime CLI.
+  en: Node.js JavaScript runtime CLI.
+description:
+  tr: >-
+    JavaScript/TypeScript toolchain’inin runtime’ı. Betik çalıştırır, REPL açar,
+    sürüm ve bayrak denetimi sağlar. Proje paketleri npm/yarn/pnpm/bun ile gelir;
+    sistem paketi çoğu distroda nodejs adındadır.
+  en: >-
+    Runtime for the JavaScript/TypeScript toolchain. Runs scripts, opens a REPL,
+    and reports version/flags. Project packages come via npm/yarn/pnpm/bun;
+    the system package is often named nodejs.
+purpose:
+  tr: JS uygulamalarını ve CLI araçlarını çalıştırmak; sürüm doğrulamak.
+  en: Run JS apps and CLI tools; verify the installed runtime version.
+when_to_use:
+  tr: Node tabanlı frontend/backend betikleri veya yerel sunucular çalıştırırken.
+  en: When running Node-based frontend/backend scripts or local servers.
+syntax: 'node [options] [script.js] [arguments]'
+expected_effect:
+  tr: Betiği çalıştırır veya sürüm/REPL çıktısı verir; paket kurmaz.
+  en: Runs a script or prints version/REPL output; does not install packages.
+tags:
+- software
+- frontend
+- backend
+- node
+- javascript
+risk: caution
+learning_level: beginner
+requires_elevated: false
+platforms:
+- linux
+- macos
+- windows
+- bsd
+operating_systems:
+- linux
+- macos
+- windows
+packages:
+  arch: nodejs
+  debian: nodejs
+  ubuntu: nodejs
+  fedora: nodejs
+package_refs:
+- manager: pacman
+  package: nodejs
+  distributions:
+  - arch
+- manager: apt
+  package: nodejs
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: nodejs
+  distributions:
+  - fedora
+- manager: homebrew
+  package: node
+- manager: winget
+  package: OpenJS.NodeJS.LTS
+install_notes:
+  tr: |-
+    Arch: pacman -S nodejs npm
+    Debian/Ubuntu: apt install nodejs npm  (sürümler distroya göre eski olabilir; nvm/fnm alternatif)
+    Fedora: dnf install nodejs npm
+    macOS: brew install node
+    Windows: winget install OpenJS.NodeJS.LTS
+  en: |-
+    Arch: pacman -S nodejs npm
+    Debian/Ubuntu: apt install nodejs npm  (distro versions may lag; nvm/fnm are alternatives)
+    Fedora: dnf install nodejs npm
+    macOS: brew install node
+    Windows: winget install OpenJS.NodeJS.LTS
+flags: []
+examples:
+- title:
+    tr: Sürüm
+    en: Version
+  command: node -v
+  explanation:
+    tr: Kurulu Node sürümünü yazar.
+    en: Prints the installed Node version.
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: Tek satır çalıştır
+    en: Evaluate one-liner
+  command: node -e "console.log(2+2)"
+  explanation:
+    tr: Kısa JS ifadesini çalıştırır.
+    en: Runs a short JS expression.
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: Betik çalıştır
+    en: Run script
+  command: node app.js
+  explanation:
+    tr: Yerel app.js dosyasını çalıştırır.
+    en: Runs the local app.js file.
+  risk: caution
+  difficulty: beginner
+- title:
+    tr: Sözdizimi denetimi
+    en: Syntax check
+  command: node --check app.js
+  explanation:
+    tr: Betiği çalıştırmadan sözdizimini kontrol eder.
+    en: Checks script syntax without executing it.
+  risk: safe
+  difficulty: intermediate
+- title:
+    tr: REPL
+    en: REPL
+  command: node
+  explanation:
+    tr: "Etkileşimli Node kabuğu açar (çıkış: .exit veya Ctrl-D)."
+    en: "Opens an interactive Node shell (exit with .exit or Ctrl-D)."
+  risk: safe
+  difficulty: beginner
+common_mistakes:
+- tr: nodejs paketini kurup `node` komutunun PATH’te olmadığını sanmak (distro alternatifleri).
+  en: Installing the nodejs package but missing `node` on PATH (distro alternatives).
+- tr: Global araçları Node ile karıştırıp npm/npx kullanmamak.
+  en: Confusing global tooling with Node itself and skipping npm/npx.
+related:
+- npm
+- npx
+- yarn
+- pnpm
+- bun
+- ng
+related_topics:
+- software
+- development-basics
+intent:
+  tr:
+  - node sürüm
+  - javascript çalıştır
+  - node betik
+  - nodejs
+  en:
+  - node version
+  - run javascript
+  - node script
+  - nodejs
+documentation:
+- https://nodejs.org/docs/latest/api/cli.html
+sources:
+- https://nodejs.org/docs/latest/api/cli.html
+verification:
+  status: draft
+  sources:
+  - https://nodejs.org/docs/latest/api/cli.html
+  notes: Software bank draft — examples from official Node CLI docs; not human-verified.
+nova:
+  concepts:
+  - software
+  ui_priority: 80

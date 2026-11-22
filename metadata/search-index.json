@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "kind": "nova-commands-search-index",
-  "entry_count": 350,
+  "entry_count": 360,
   "entries": [
     {
       "type": "command",
@@ -459,6 +459,48 @@
     },
     {
       "type": "command",
+      "id": "bun",
+      "name": "bun",
+      "category": "development",
+      "kind": "executable",
+      "risk": "caution",
+      "learning_level": "intermediate",
+      "platforms": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "verification": "draft",
+      "tags": [
+        "software",
+        "frontend",
+        "backend",
+        "tools",
+        "bun",
+        "node"
+      ],
+      "summary": {
+        "tr": "Bun — JS runtime, paket yöneticisi ve test runner.",
+        "en": "Bun — JS runtime, package manager, and test runner."
+      },
+      "intent": {
+        "tr": [
+          "bun kur",
+          "bun çalıştır",
+          "bunx"
+        ],
+        "en": [
+          "bun install",
+          "bun run",
+          "bunx"
+        ]
+      },
+      "concepts": [
+        "software"
+      ]
+    },
+    {
+      "type": "command",
       "id": "caddy",
       "name": "caddy",
       "category": "system",
@@ -533,7 +575,9 @@
       },
       "concepts": [
         "package-managers",
-        "terminal-basics"
+        "terminal-basics",
+        "software",
+        "development-basics"
       ]
     },
     {
@@ -789,6 +833,50 @@
       },
       "concepts": [
         "terminal-basics"
+      ]
+    },
+    {
+      "type": "command",
+      "id": "code",
+      "name": "code",
+      "category": "development",
+      "kind": "vendor_cli",
+      "risk": "caution",
+      "learning_level": "beginner",
+      "platforms": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "verification": "draft",
+      "tags": [
+        "software",
+        "tools",
+        "frontend",
+        "editor",
+        "vscode"
+      ],
+      "summary": {
+        "tr": "Visual Studio Code komut satırı (`code`).",
+        "en": "Visual Studio Code command line (`code`)."
+      },
+      "intent": {
+        "tr": [
+          "vscode aç",
+          "code .",
+          "uzantı kur",
+          "vs code cli"
+        ],
+        "en": [
+          "open vscode",
+          "code .",
+          "install extension",
+          "vs code cli"
+        ]
+      },
+      "concepts": [
+        "software",
+        "development-basics"
       ]
     },
     {
@@ -1390,7 +1478,9 @@
       ],
       "verification": "draft",
       "tags": [
-        "containers"
+        "containers",
+        "software",
+        "server"
       ],
       "summary": {
         "tr": "Docker konteyner CLI.",
@@ -1412,6 +1502,7 @@
       },
       "concepts": [
         "containers",
+        "software",
         "containers-basics"
       ]
     },
@@ -1447,6 +1538,49 @@
       },
       "concepts": [
         "containers"
+      ]
+    },
+    {
+      "type": "command",
+      "id": "dotnet",
+      "name": "dotnet",
+      "category": "development",
+      "kind": "executable",
+      "risk": "caution",
+      "learning_level": "intermediate",
+      "platforms": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "verification": "draft",
+      "tags": [
+        "software",
+        "backend",
+        "dotnet",
+        "csharp"
+      ],
+      "summary": {
+        "tr": ".NET SDK CLI — new, build, run, test, tool.",
+        "en": ".NET SDK CLI — new, build, run, test, tool."
+      },
+      "intent": {
+        "tr": [
+          "dotnet derle",
+          "csharp proje",
+          "dotnet new",
+          "nuget paket"
+        ],
+        "en": [
+          "build dotnet",
+          "csharp project",
+          "dotnet new",
+          "nuget package"
+        ]
+      },
+      "concepts": [
+        "software",
+        "development-basics"
       ]
     },
     {
@@ -5048,6 +5182,49 @@
     },
     {
       "type": "command",
+      "id": "ng",
+      "name": "ng",
+      "category": "development",
+      "kind": "vendor_cli",
+      "risk": "caution",
+      "learning_level": "intermediate",
+      "platforms": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "verification": "draft",
+      "tags": [
+        "software",
+        "frontend",
+        "angular",
+        "node",
+        "tools"
+      ],
+      "summary": {
+        "tr": "Angular CLI (`ng`) — iskelet, serve, build.",
+        "en": "Angular CLI (`ng`) — scaffold, serve, build."
+      },
+      "intent": {
+        "tr": [
+          "angular cli",
+          "ng serve",
+          "ng new",
+          "angular oluştur"
+        ],
+        "en": [
+          "angular cli",
+          "ng serve",
+          "ng new",
+          "generate angular"
+        ]
+      },
+      "concepts": [
+        "software"
+      ]
+    },
+    {
+      "type": "command",
       "id": "nginx",
       "name": "nginx",
       "category": "system",
@@ -5400,6 +5577,139 @@
       "concepts": [
         "networking",
         "networking-basics"
+      ]
+    },
+    {
+      "type": "command",
+      "id": "node",
+      "name": "node",
+      "category": "development",
+      "kind": "executable",
+      "risk": "caution",
+      "learning_level": "beginner",
+      "platforms": [
+        "linux",
+        "macos",
+        "windows",
+        "bsd"
+      ],
+      "verification": "draft",
+      "tags": [
+        "software",
+        "frontend",
+        "backend",
+        "node",
+        "javascript"
+      ],
+      "summary": {
+        "tr": "Node.js JavaScript runtime CLI.",
+        "en": "Node.js JavaScript runtime CLI."
+      },
+      "intent": {
+        "tr": [
+          "node sürüm",
+          "javascript çalıştır",
+          "node betik",
+          "nodejs"
+        ],
+        "en": [
+          "node version",
+          "run javascript",
+          "node script",
+          "nodejs"
+        ]
+      },
+      "concepts": [
+        "software",
+        "development-basics"
+      ]
+    },
+    {
+      "type": "command",
+      "id": "npm",
+      "name": "npm",
+      "category": "development",
+      "kind": "package_manager",
+      "risk": "caution",
+      "learning_level": "beginner",
+      "platforms": [
+        "linux",
+        "macos",
+        "windows",
+        "bsd"
+      ],
+      "verification": "draft",
+      "tags": [
+        "software",
+        "frontend",
+        "backend",
+        "node",
+        "npm",
+        "packages"
+      ],
+      "summary": {
+        "tr": "Node.js paket yöneticisi (npm CLI).",
+        "en": "Node.js package manager (npm CLI)."
+      },
+      "intent": {
+        "tr": [
+          "npm kur",
+          "npm install",
+          "npm script",
+          "paket kur node"
+        ],
+        "en": [
+          "npm install",
+          "npm scripts",
+          "node packages",
+          "install dependency"
+        ]
+      },
+      "concepts": [
+        "software",
+        "package-managers"
+      ]
+    },
+    {
+      "type": "command",
+      "id": "npx",
+      "name": "npx",
+      "category": "development",
+      "kind": "executable",
+      "risk": "caution",
+      "learning_level": "beginner",
+      "platforms": [
+        "linux",
+        "macos",
+        "windows",
+        "bsd"
+      ],
+      "verification": "draft",
+      "tags": [
+        "software",
+        "frontend",
+        "tools",
+        "node",
+        "npm"
+      ],
+      "summary": {
+        "tr": "npm paket yürütücüsü (tek seferlik CLI).",
+        "en": "npm package runner (one-shot CLIs)."
+      },
+      "intent": {
+        "tr": [
+          "npx çalıştır",
+          "tek seferlik cli",
+          "create vite"
+        ],
+        "en": [
+          "run npx",
+          "one shot cli",
+          "create scaffold"
+        ]
+      },
+      "concepts": [
+        "software"
       ]
     },
     {
@@ -6050,6 +6360,48 @@
     },
     {
       "type": "command",
+      "id": "pnpm",
+      "name": "pnpm",
+      "category": "development",
+      "kind": "package_manager",
+      "risk": "caution",
+      "learning_level": "intermediate",
+      "platforms": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "verification": "draft",
+      "tags": [
+        "software",
+        "frontend",
+        "node",
+        "pnpm",
+        "packages"
+      ],
+      "summary": {
+        "tr": "pnpm — içerik adresli Node paket yöneticisi.",
+        "en": "pnpm — content-addressed Node package manager."
+      },
+      "intent": {
+        "tr": [
+          "pnpm kur",
+          "pnpm add",
+          "monorepo paket"
+        ],
+        "en": [
+          "pnpm install",
+          "pnpm add",
+          "monorepo packages"
+        ]
+      },
+      "concepts": [
+        "software",
+        "package-managers"
+      ]
+    },
+    {
+      "type": "command",
       "id": "podman",
       "name": "podman",
       "category": "containers",
@@ -6340,7 +6692,9 @@
       },
       "concepts": [
         "path",
-        "terminal-basics"
+        "terminal-basics",
+        "software",
+        "development-basics"
       ]
     },
     {
@@ -9814,6 +10168,48 @@
     },
     {
       "type": "command",
+      "id": "yarn",
+      "name": "yarn",
+      "category": "development",
+      "kind": "package_manager",
+      "risk": "caution",
+      "learning_level": "intermediate",
+      "platforms": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "verification": "draft",
+      "tags": [
+        "software",
+        "frontend",
+        "node",
+        "yarn",
+        "packages"
+      ],
+      "summary": {
+        "tr": "Yarn — alternatif Node paket yöneticisi.",
+        "en": "Yarn — alternative Node package manager."
+      },
+      "intent": {
+        "tr": [
+          "yarn kur",
+          "yarn add",
+          "yarn script"
+        ],
+        "en": [
+          "yarn install",
+          "yarn add",
+          "yarn scripts"
+        ]
+      },
+      "concepts": [
+        "software",
+        "package-managers"
+      ]
+    },
+    {
+      "type": "command",
       "id": "zfs",
       "name": "zfs",
       "category": "disks",
@@ -10249,7 +10645,9 @@
         "gcc",
         "python3",
         "diff",
-        "patch"
+        "patch",
+        "node",
+        "dotnet"
       ]
     },
     {
@@ -10993,6 +11391,55 @@
         "tail",
         "cut",
         "xargs"
+      ]
+    },
+    {
+      "type": "concept",
+      "id": "software",
+      "difficulty": "beginner",
+      "format": "topic-guide",
+      "categories": [
+        "development",
+        "containers"
+      ],
+      "platforms": [
+        "linux",
+        "macos",
+        "windows",
+        "bsd"
+      ],
+      "tags": [
+        "software",
+        "frontend",
+        "backend",
+        "server",
+        "tools",
+        "node",
+        "dotnet"
+      ],
+      "title": {
+        "tr": "Yazılım yığınları (Software)",
+        "en": "Software stacks"
+      },
+      "summary": {
+        "tr": "Kurulabilir yazılım CLI’ları — frontend, backend, sunucu ve araçlar; komut + alt komutlar.",
+        "en": "Installable software CLIs — frontend, backend, server, and tools; commands plus key subcommands."
+      },
+      "related_commands": [
+        "node",
+        "npm",
+        "npx",
+        "yarn",
+        "pnpm",
+        "bun",
+        "ng",
+        "code",
+        "dotnet",
+        "python3",
+        "cargo",
+        "docker",
+        "systemctl",
+        "git"
       ]
     },
     {
@@ -13521,10 +13968,10 @@
       ]
     }
   ],
-  "content_sha256": "e6466b7f777fe49019c2cc7d6d4bcf279857d76a209e7ca68b7292f5f945ec06",
-  "generated_at": "2026-11-11T20:13:35Z",
-  "command_count": 270,
-  "concept_count": 30,
+  "content_sha256": "d094b818acd538820358c69a9a0851d2c6f867e3e7f1db32e28d6ce87c049c1f",
+  "generated_at": "2026-11-22T09:55:20Z",
+  "command_count": 279,
+  "concept_count": 31,
   "task_count": 36,
   "profile_count": 14
 }

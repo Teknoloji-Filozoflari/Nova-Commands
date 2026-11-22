@@ -1,0 +1,136 @@
+schema_version: 2
+id: yarn
+name: yarn
+kind: package_manager
+category: development
+summary:
+  tr: Yarn — alternatif Node paket yöneticisi.
+  en: Yarn — alternative Node package manager.
+description:
+  tr: >-
+    npm uyumlu ekosistemde bağımlılık ve script yönetimi. Classic (v1) ile Berry (v2+)
+    komutları/kurulum modeli farklıdır; örnekler yaygın kesişimdir. Sistem PM değildir.
+  en: >-
+    Dependency and script management in the npm-compatible ecosystem. Classic (v1) and
+    Berry (v2+) differ in commands/install model; examples cover the common intersection.
+    Not a system PM.
+purpose:
+  tr: Node projelerinde yarn ile kurulum ve script çalıştırma.
+  en: Install and run scripts in Node projects with Yarn.
+when_to_use:
+  tr: Proje yarn.lock / Yarn kullanımını tercih ettiğinde.
+  en: When the project standardizes on yarn.lock / Yarn.
+syntax: 'yarn <command> [args]'
+expected_effect:
+  tr: Bağımlılık ağacını ve lockfile’ı yönetir; script çalıştırır.
+  en: Manages the dependency tree and lockfile; runs scripts.
+tags:
+- software
+- frontend
+- node
+- yarn
+- packages
+risk: caution
+learning_level: intermediate
+requires_elevated: false
+platforms:
+- linux
+- macos
+- windows
+package_refs:
+- manager: pacman
+  package: yarn
+  distributions:
+  - arch
+- manager: npm
+  package: yarn
+  notes:
+    tr: Corepack veya npm ile de kurulabilir; distro paket adı değişebilir.
+    en: Also installable via Corepack or npm; distro package names vary.
+- manager: homebrew
+  package: yarn
+- manager: winget
+  package: Yarn.Yarn
+install_notes:
+  tr: |-
+    Arch: pacman -S yarn
+    Alternatif: corepack enable && corepack prepare yarn@stable --activate
+    npm: npm install -g yarn  (eski yol; Corepack tercih)
+    Debian’ta paket adı yarnpkg olabilir — binary’yi kontrol edin.
+  en: |-
+    Arch: pacman -S yarn
+    Alternative: corepack enable && corepack prepare yarn@stable --activate
+    npm: npm install -g yarn  (legacy path; prefer Corepack)
+    On Debian the package may be yarnpkg — verify the binary name.
+flags: []
+examples:
+- title:
+    tr: Sürüm
+    en: Version
+  command: yarn -v
+  explanation:
+    tr: Yarn sürümünü yazar.
+    en: Prints the Yarn version.
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: Kur
+    en: Install
+  command: yarn install
+  explanation:
+    tr: Lockfile’a göre bağımlılıkları kurar.
+    en: Installs dependencies according to the lockfile.
+  risk: caution
+  difficulty: beginner
+- title:
+    tr: Paket ekle
+    en: Add package
+  command: yarn add lodash
+  explanation:
+    tr: Bağımlılık ekler.
+    en: Adds a dependency.
+  risk: caution
+  difficulty: beginner
+- title:
+    tr: Script
+    en: Run script
+  command: yarn run build
+  explanation:
+    tr: "package.json script’ini çalıştırır (kısa: yarn build)."
+    en: "Runs a package.json script (short form: yarn build)."
+  risk: caution
+  difficulty: beginner
+common_mistakes:
+- tr: Aynı repoda npm ve yarn’ı karışık kullanmak.
+  en: Mixing npm and Yarn in the same repo.
+related:
+- npm
+- pnpm
+- bun
+- node
+- npx
+related_topics:
+- software
+- package-managers
+intent:
+  tr:
+  - yarn kur
+  - yarn add
+  - yarn script
+  en:
+  - yarn install
+  - yarn add
+  - yarn scripts
+documentation:
+- https://yarnpkg.com/cli
+sources:
+- https://yarnpkg.com/cli
+verification:
+  status: draft
+  sources:
+  - https://yarnpkg.com/cli
+  notes: Software bank draft — Classic/Berry intersection examples; not human-verified.
+nova:
+  concepts:
+  - software
+  ui_priority: 70

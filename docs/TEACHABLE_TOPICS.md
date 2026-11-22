@@ -71,7 +71,10 @@ names. Prefer explicit “not on this family” notes over silent substitutes.
 ## Curriculum
 
 `metadata/start-curriculum.yaml` `concept_order` lists the Start-tab learning
-path (safe/caution filtered on the Nova side).
+path (safe/caution filtered on the Nova side). Includes `software` (installable
+stack CLIs: Node/.NET/Angular/VS Code) after `development-basics`. Frontend /
+backend / server / tools nesting is via **tags + topic-guide subtopics** — there
+is no separate `ecosystem` schema field.
 
 ## Client notes (Nova NV-124)
 

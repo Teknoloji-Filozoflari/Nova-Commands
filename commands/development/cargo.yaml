@@ -83,6 +83,10 @@ related:
 - git
 - make
 - cmake
+- dotnet
+related_topics:
+- software
+- development-basics
 intent:
   tr:
   - rust derle
@@ -101,4 +105,5 @@ nova:
   concepts:
   - package-managers
   - terminal-basics
+  - software
   ui_priority: 72

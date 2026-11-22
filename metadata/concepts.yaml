@@ -182,3 +182,8 @@ concepts:
     tr: Geliştirme temelleri
     en: Development basics
   article: development-basics
+- id: software
+  label:
+    tr: Yazılım yığınları (Software)
+    en: Software stacks
+  article: software

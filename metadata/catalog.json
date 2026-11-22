@@ -1,10 +1,10 @@
 {
   "schema_version": 2,
   "kind": "nova-commands-bank",
-  "generated_at": "2026-11-11T20:13:35Z",
-  "content_sha256": "e6466b7f777fe49019c2cc7d6d4bcf279857d76a209e7ca68b7292f5f945ec06",
-  "command_count": 270,
-  "concept_count": 30,
+  "generated_at": "2026-11-22T09:55:20Z",
+  "content_sha256": "d094b818acd538820358c69a9a0851d2c6f867e3e7f1db32e28d6ce87c049c1f",
+  "command_count": 279,
+  "concept_count": 31,
   "task_count": 36,
   "profile_count": 14,
   "commands": [
@@ -1690,6 +1690,189 @@
     },
     {
       "schema_version": 2,
+      "id": "bun",
+      "name": "bun",
+      "kind": "executable",
+      "category": "development",
+      "summary": {
+        "tr": "Bun — JS runtime, paket yöneticisi ve test runner.",
+        "en": "Bun — JS runtime, package manager, and test runner."
+      },
+      "description": {
+        "tr": "Node uyumlu runtime + `bun install` paket yöneticisi + `bunx` yürütücü. npm lockfile’larıyla çalışabilir; kurulum resmi binary veya paket yöneticisi ile.",
+        "en": "Node-compatible runtime plus `bun install` package manager and `bunx` runner. Can work with npm lockfiles; install via official binary or package managers."
+      },
+      "purpose": {
+        "tr": "Hızlı JS geliştirme: kur, çalıştır, test et.",
+        "en": "Fast JS development: install, run, and test."
+      },
+      "when_to_use": {
+        "tr": "Bun runtime veya bun paket yöneticisini tercih eden projelerde.",
+        "en": "In projects that prefer the Bun runtime or Bun package manager."
+      },
+      "syntax": "bun <command> [args]",
+      "expected_effect": {
+        "tr": "Betik/runtime çalıştırır veya bağımlılık kurar.",
+        "en": "Runs scripts/runtime work or installs dependencies."
+      },
+      "tags": [
+        "software",
+        "frontend",
+        "backend",
+        "tools",
+        "bun",
+        "node"
+      ],
+      "risk": "caution",
+      "learning_level": "intermediate",
+      "requires_elevated": false,
+      "platforms": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "package_refs": [
+        {
+          "manager": "homebrew",
+          "package": "oven-sh/bun/bun",
+          "notes": {
+            "tr": "Homebrew tap/formül adı sürümle değişebilir — brew info ile doğrulayın.",
+            "en": "Homebrew tap/formula name may change — verify with brew info."
+          }
+        },
+        {
+          "manager": "npm",
+          "package": "bun",
+          "notes": {
+            "tr": "Resmi kurulum çoğu zaman curl script veya platform paketi iledir.",
+            "en": "Official install is often via curl script or platform packages."
+          }
+        }
+      ],
+      "install_notes": {
+        "tr": "Resmi: https://bun.sh/docs/installation (curl script / paket)\nmacOS (Homebrew): brew install oven-sh/bun/bun  — formülü doğrulayın\nArch: AUR (bun-bin) sık kullanılır; resmi pacman deposunda olmayabilir",
+        "en": "Official: https://bun.sh/docs/installation (curl script / packages)\nmacOS (Homebrew): brew install oven-sh/bun/bun — verify formula\nArch: often AUR (bun-bin); may be absent from official pacman repos"
+      },
+      "flags": [],
+      "examples": [
+        {
+          "title": {
+            "tr": "Sürüm",
+            "en": "Version"
+          },
+          "command": "bun -v",
+          "explanation": {
+            "tr": "Bun sürümünü yazar.",
+            "en": "Prints the Bun version."
+          },
+          "risk": "safe",
+          "difficulty": "beginner"
+        },
+        {
+          "title": {
+            "tr": "Kur",
+            "en": "Install"
+          },
+          "command": "bun install",
+          "explanation": {
+            "tr": "Bağımlılıkları kurar (lockfile varsa ona uyum).",
+            "en": "Installs dependencies (honors lockfile when present)."
+          },
+          "risk": "caution",
+          "difficulty": "beginner"
+        },
+        {
+          "title": {
+            "tr": "Script/betik",
+            "en": "Run script"
+          },
+          "command": "bun run index.ts",
+          "explanation": {
+            "tr": "TS/JS dosyasını Bun ile çalıştırır.",
+            "en": "Runs a TS/JS file with Bun."
+          },
+          "risk": "caution",
+          "difficulty": "beginner"
+        },
+        {
+          "title": {
+            "tr": "bunx",
+            "en": "bunx"
+          },
+          "command": "bunx cowsay 'hello'",
+          "explanation": {
+            "tr": "npx benzeri tek seferlik paket çalıştırır.",
+            "en": "Runs a one-shot package (npx-like)."
+          },
+          "risk": "caution",
+          "difficulty": "intermediate"
+        },
+        {
+          "title": {
+            "tr": "Test",
+            "en": "Test"
+          },
+          "command": "bun test",
+          "explanation": {
+            "tr": "Yerleşik test runner’ı çalıştırır.",
+            "en": "Runs the built-in test runner."
+          },
+          "risk": "caution",
+          "difficulty": "intermediate"
+        }
+      ],
+      "common_mistakes": [
+        {
+          "tr": "Node-only native eklentilerin Bun’da birebir çalışacağını varsaymak.",
+          "en": "Assuming Node-only native addons behave identically under Bun."
+        }
+      ],
+      "related": [
+        "node",
+        "npm",
+        "npx",
+        "yarn",
+        "pnpm"
+      ],
+      "related_topics": [
+        "software"
+      ],
+      "intent": {
+        "tr": [
+          "bun kur",
+          "bun çalıştır",
+          "bunx"
+        ],
+        "en": [
+          "bun install",
+          "bun run",
+          "bunx"
+        ]
+      },
+      "documentation": [
+        "https://bun.sh/docs/cli/run"
+      ],
+      "sources": [
+        "https://bun.sh/docs/cli/install",
+        "https://bun.sh/docs/cli/run"
+      ],
+      "verification": {
+        "status": "draft",
+        "sources": [
+          "https://bun.sh/docs/cli/install",
+          "https://bun.sh/docs/cli/run"
+        ],
+        "notes": "Software bank draft; install paths vary by platform — honesty notes included."
+      },
+      "nova": {
+        "concepts": [
+          "software"
+        ],
+        "ui_priority": 68
+      }
+    },
+    {
+      "schema_version": 2,
       "id": "caddy",
       "name": "caddy",
       "kind": "administrative_tool",
@@ -1905,7 +2088,12 @@
       "related": [
         "git",
         "make",
-        "cmake"
+        "cmake",
+        "dotnet"
+      ],
+      "related_topics": [
+        "software",
+        "development-basics"
       ],
       "intent": {
         "tr": [
@@ -1929,7 +2117,8 @@
       "nova": {
         "concepts": [
           "package-managers",
-          "terminal-basics"
+          "terminal-basics",
+          "software"
         ],
         "ui_priority": 72
       }
@@ -2907,6 +3096,220 @@
           "terminal-basics"
         ],
         "ui_priority": 70
+      }
+    },
+    {
+      "schema_version": 2,
+      "id": "code",
+      "name": "code",
+      "kind": "vendor_cli",
+      "category": "development",
+      "summary": {
+        "tr": "Visual Studio Code komut satırı (`code`).",
+        "en": "Visual Studio Code command line (`code`)."
+      },
+      "description": {
+        "tr": "Editörü dosya/klasörle açar, fark gösterir, uzantı kurar/listeler. Shell komutu VS Code içinden “Shell Command: Install 'code'” ile PATH’e eklenir. Linux’ta Code - OSS (`code`) ile Microsoft build ayrılabilir.",
+        "en": "Opens the editor on files/folders, diffs, and lists/installs extensions. The shell command is added to PATH via VS Code “Shell Command: Install 'code'”. On Linux, Code - OSS (`code`) may differ from the Microsoft build."
+      },
+      "purpose": {
+        "tr": "Terminalden VS Code oturumu ve uzantı yönetimi.",
+        "en": "Launch VS Code sessions and manage extensions from the terminal."
+      },
+      "when_to_use": {
+        "tr": "Projeyi editörde açmak, diff bakmak veya uzantı CLI’si kullanmak için.",
+        "en": "To open a project in the editor, view diffs, or use the extensions CLI."
+      },
+      "syntax": "code [options] [paths...]",
+      "expected_effect": {
+        "tr": "Editör penceresi açar veya uzantı/CLI bilgisini yazar; derleme yapmaz.",
+        "en": "Opens an editor window or prints extension/CLI info; does not build code."
+      },
+      "tags": [
+        "software",
+        "tools",
+        "frontend",
+        "editor",
+        "vscode"
+      ],
+      "risk": "caution",
+      "learning_level": "beginner",
+      "requires_elevated": false,
+      "platforms": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "operating_systems": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "packages": {
+        "arch": "code"
+      },
+      "package_refs": [
+        {
+          "manager": "pacman",
+          "package": "code",
+          "distributions": [
+            "arch"
+          ],
+          "notes": {
+            "tr": "Arch community `code` genelde Code - OSS’tur; Microsoft build AUR’da olabilir.",
+            "en": "Arch community `code` is typically Code - OSS; Microsoft build may be AUR."
+          }
+        },
+        {
+          "manager": "homebrew",
+          "package": "visual-studio-code",
+          "notes": {
+            "tr": "Genelde cask; `brew install --cask visual-studio-code`.",
+            "en": "Usually a cask; `brew install --cask visual-studio-code`."
+          }
+        },
+        {
+          "manager": "winget",
+          "package": "Microsoft.VisualStudioCode"
+        }
+      ],
+      "install_notes": {
+        "tr": "Windows: winget install Microsoft.VisualStudioCode — sonra PATH’te code\nmacOS: brew install --cask visual-studio-code; Command Palette → Install 'code' command\nArch: pacman -S code  (OSS) veya Microsoft .deb/AUR — binary adı aynı olabilir\nLinux Microsoft .deb/rpm: https://code.visualstudio.com/docs/setup/linux",
+        "en": "Windows: winget install Microsoft.VisualStudioCode — then ensure code on PATH\nmacOS: brew install --cask visual-studio-code; Command Palette → Install 'code' command\nArch: pacman -S code (OSS) or Microsoft .deb/AUR — binary name may match\nLinux Microsoft .deb/rpm: https://code.visualstudio.com/docs/setup/linux"
+      },
+      "flags": [],
+      "examples": [
+        {
+          "title": {
+            "tr": "Sürüm",
+            "en": "Version"
+          },
+          "command": "code --version",
+          "explanation": {
+            "tr": "VS Code sürüm bilgisini yazar.",
+            "en": "Prints VS Code version info."
+          },
+          "risk": "safe",
+          "difficulty": "beginner"
+        },
+        {
+          "title": {
+            "tr": "Klasör aç",
+            "en": "Open folder"
+          },
+          "command": "code .",
+          "explanation": {
+            "tr": "Geçerli dizini editörde açar.",
+            "en": "Opens the current directory in the editor."
+          },
+          "risk": "safe",
+          "difficulty": "beginner"
+        },
+        {
+          "title": {
+            "tr": "Dosya aç",
+            "en": "Open file"
+          },
+          "command": "code README.md",
+          "explanation": {
+            "tr": "Belirtilen dosyayı açar.",
+            "en": "Opens the given file."
+          },
+          "risk": "safe",
+          "difficulty": "beginner"
+        },
+        {
+          "title": {
+            "tr": "Diff",
+            "en": "Diff"
+          },
+          "command": "code --diff a.txt b.txt",
+          "explanation": {
+            "tr": "İki dosyayı yan yana karşılaştırır.",
+            "en": "Compares two files side by side."
+          },
+          "risk": "safe",
+          "difficulty": "intermediate"
+        },
+        {
+          "title": {
+            "tr": "Uzantı listesi",
+            "en": "List extensions"
+          },
+          "command": "code --list-extensions",
+          "explanation": {
+            "tr": "Kurulu uzantı kimliklerini listeler.",
+            "en": "Lists installed extension ids."
+          },
+          "risk": "safe",
+          "difficulty": "beginner"
+        },
+        {
+          "title": {
+            "tr": "Uzantı kur",
+            "en": "Install extension"
+          },
+          "command": "code --install-extension ms-python.python",
+          "explanation": {
+            "tr": "Uzantıyı marketplace’ten kurar (ağ).",
+            "en": "Installs an extension from the marketplace (network)."
+          },
+          "risk": "caution",
+          "difficulty": "intermediate"
+        }
+      ],
+      "common_mistakes": [
+        {
+          "tr": "Editör kurulu iken shell `code` komutunun PATH’e eklenmemiş olması.",
+          "en": "Having the editor installed but not adding the `code` shell command to PATH."
+        },
+        {
+          "tr": "Code - OSS ile Microsoft build uzantı kaynaklarını karıştırmak.",
+          "en": "Mixing Code - OSS and Microsoft build extension sources."
+        }
+      ],
+      "related": [
+        "git",
+        "ng",
+        "node",
+        "dotnet"
+      ],
+      "related_topics": [
+        "software",
+        "development-basics"
+      ],
+      "intent": {
+        "tr": [
+          "vscode aç",
+          "code .",
+          "uzantı kur",
+          "vs code cli"
+        ],
+        "en": [
+          "open vscode",
+          "code .",
+          "install extension",
+          "vs code cli"
+        ]
+      },
+      "documentation": [
+        "https://code.visualstudio.com/docs/editor/command-line"
+      ],
+      "sources": [
+        "https://code.visualstudio.com/docs/editor/command-line"
+      ],
+      "verification": {
+        "status": "draft",
+        "sources": [
+          "https://code.visualstudio.com/docs/editor/command-line"
+        ],
+        "notes": "Software bank draft — VS Code CLI; OSS vs Microsoft noted; not human-verified."
+      },
+      "nova": {
+        "concepts": [
+          "software"
+        ],
+        "ui_priority": 76
       }
     },
     {
@@ -4911,7 +5314,9 @@
         "en": "Docker Engine CLI. Membership in the docker group is near-root power. Package names vary by distro; on Arch use pacman -S docker."
       },
       "tags": [
-        "containers"
+        "containers",
+        "software",
+        "server"
       ],
       "risk": "dangerous",
       "learning_level": "intermediate",
@@ -5085,7 +5490,8 @@
       },
       "nova": {
         "concepts": [
-          "containers"
+          "containers",
+          "software"
         ]
       },
       "purpose": {
@@ -5156,7 +5562,8 @@
         }
       ],
       "related_topics": [
-        "containers-basics"
+        "containers-basics",
+        "software"
       ]
     },
     {
@@ -5295,6 +5702,263 @@
         "concepts": [
           "containers"
         ]
+      }
+    },
+    {
+      "schema_version": 2,
+      "id": "dotnet",
+      "name": "dotnet",
+      "kind": "executable",
+      "category": "development",
+      "summary": {
+        "tr": ".NET SDK CLI — new, build, run, test, tool.",
+        "en": ".NET SDK CLI — new, build, run, test, tool."
+      },
+      "description": {
+        "tr": ".NET projeleri oluşturur, derler, çalıştırır ve test eder. `dotnet tool` ile global/yerel araç kurulur. Runtime-only kurulumda SDK alt komutları eksik olabilir.",
+        "en": "Creates, builds, runs, and tests .NET projects. `dotnet tool` installs global/local tools. Runtime-only installs may lack SDK subcommands."
+      },
+      "purpose": {
+        "tr": ".NET uygulama ve kütüphane geliştirme iş akışı.",
+        "en": "Development workflow for .NET apps and libraries."
+      },
+      "when_to_use": {
+        "tr": "C#/F#/VB .NET projelerinde iskelet, derleme, çalıştırma veya test için.",
+        "en": "For scaffolding, building, running, or testing C#/F#/VB .NET projects."
+      },
+      "syntax": "dotnet [command] [options]",
+      "expected_effect": {
+        "tr": "Proje üretir, derleme çıktısı yazar veya uygulamayı çalıştırır.",
+        "en": "Scaffolds a project, writes build output, or runs the application."
+      },
+      "tags": [
+        "software",
+        "backend",
+        "dotnet",
+        "csharp"
+      ],
+      "risk": "caution",
+      "learning_level": "intermediate",
+      "requires_elevated": false,
+      "platforms": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "operating_systems": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "packages": {
+        "arch": "dotnet-sdk",
+        "fedora": "dotnet-sdk"
+      },
+      "package_refs": [
+        {
+          "manager": "pacman",
+          "package": "dotnet-sdk",
+          "distributions": [
+            "arch"
+          ]
+        },
+        {
+          "manager": "dnf",
+          "package": "dotnet-sdk",
+          "distributions": [
+            "fedora"
+          ]
+        },
+        {
+          "manager": "homebrew",
+          "package": "dotnet"
+        },
+        {
+          "manager": "winget",
+          "package": "Microsoft.DotNet.SDK.8",
+          "notes": {
+            "tr": "Kanat sürüm numarası değişir (SDK.8 / SDK.9); winget search Microsoft.DotNet.SDK.",
+            "en": "Winget id version suffix changes (SDK.8 / SDK.9); winget search Microsoft.DotNet.SDK."
+          }
+        },
+        {
+          "manager": "apt",
+          "package": "dotnet-sdk-8.0",
+          "distributions": [
+            "ubuntu",
+            "debian"
+          ],
+          "notes": {
+            "tr": "Debian/Ubuntu paketleri sürümlüdür; Microsoft paketi veya distro backports gerekebilir.",
+            "en": "Debian/Ubuntu packages are versioned; Microsoft packages or distro backports may be needed."
+          }
+        }
+      ],
+      "install_notes": {
+        "tr": "Arch: pacman -S dotnet-sdk\nFedora: dnf install dotnet-sdk\nUbuntu/Debian: sürümlü paket (dotnet-sdk-8.0 …) veya Microsoft repo — sürümü doğrulayın\nmacOS: brew install dotnet\nWindows: winget install Microsoft.DotNet.SDK.8  (güncel id’yi search ile kontrol)\nYalnızca runtime kuruluysa `dotnet new`/`build` eksik kalır — SDK gerekir.",
+        "en": "Arch: pacman -S dotnet-sdk\nFedora: dnf install dotnet-sdk\nUbuntu/Debian: versioned package (dotnet-sdk-8.0 …) or Microsoft repo — verify version\nmacOS: brew install dotnet\nWindows: winget install Microsoft.DotNet.SDK.8 (confirm current id via search)\nRuntime-only installs lack `dotnet new`/`build` — SDK required."
+      },
+      "flags": [],
+      "examples": [
+        {
+          "title": {
+            "tr": "Ortam bilgisi",
+            "en": "Environment info"
+          },
+          "command": "dotnet --info",
+          "explanation": {
+            "tr": "SDK/runtime ve OS özetini yazar (teşhis).",
+            "en": "Prints SDK/runtime and OS summary (diagnostics)."
+          },
+          "risk": "safe",
+          "difficulty": "beginner"
+        },
+        {
+          "title": {
+            "tr": "SDK listesi",
+            "en": "List SDKs"
+          },
+          "command": "dotnet --list-sdks",
+          "explanation": {
+            "tr": "Kurulu SDK sürümlerini listeler.",
+            "en": "Lists installed SDK versions."
+          },
+          "risk": "safe",
+          "difficulty": "beginner"
+        },
+        {
+          "title": {
+            "tr": "Yeni konsol",
+            "en": "New console"
+          },
+          "command": "dotnet new console -n HelloCli",
+          "explanation": {
+            "tr": "HelloCli adında konsol projesi oluşturur.",
+            "en": "Creates a console project named HelloCli."
+          },
+          "risk": "caution",
+          "difficulty": "beginner"
+        },
+        {
+          "title": {
+            "tr": "Derle",
+            "en": "Build"
+          },
+          "command": "dotnet build",
+          "explanation": {
+            "tr": "Geçerli projeyi/derlemeyi derler.",
+            "en": "Builds the current project/solution."
+          },
+          "risk": "caution",
+          "difficulty": "beginner"
+        },
+        {
+          "title": {
+            "tr": "Çalıştır",
+            "en": "Run"
+          },
+          "command": "dotnet run",
+          "explanation": {
+            "tr": "Projeyi derleyip çalıştırır.",
+            "en": "Builds (if needed) and runs the project."
+          },
+          "risk": "caution",
+          "difficulty": "beginner"
+        },
+        {
+          "title": {
+            "tr": "Test",
+            "en": "Test"
+          },
+          "command": "dotnet test",
+          "explanation": {
+            "tr": "Test projesini çalıştırır.",
+            "en": "Runs the test project."
+          },
+          "risk": "caution",
+          "difficulty": "intermediate"
+        },
+        {
+          "title": {
+            "tr": "Paket ekle",
+            "en": "Add package"
+          },
+          "command": "dotnet add package Newtonsoft.Json",
+          "explanation": {
+            "tr": "NuGet paketi referansı ekler.",
+            "en": "Adds a NuGet package reference."
+          },
+          "risk": "caution",
+          "difficulty": "intermediate"
+        },
+        {
+          "title": {
+            "tr": "Tool listesi",
+            "en": "List tools"
+          },
+          "command": "dotnet tool list -g",
+          "explanation": {
+            "tr": "Global dotnet tool’ları listeler.",
+            "en": "Lists global dotnet tools."
+          },
+          "risk": "safe",
+          "difficulty": "intermediate"
+        }
+      ],
+      "common_mistakes": [
+        {
+          "tr": "Runtime kurup SDK komutlarının (`new`/`build`) çalışmasını beklemek.",
+          "en": "Installing only the runtime and expecting SDK commands (`new`/`build`) to work."
+        },
+        {
+          "tr": "global.json ile pin’lenmiş SDK’nın makinede olmaması.",
+          "en": "A global.json-pinned SDK missing on the machine."
+        }
+      ],
+      "related": [
+        "code",
+        "git",
+        "docker",
+        "python3",
+        "cargo"
+      ],
+      "related_topics": [
+        "software",
+        "development-basics"
+      ],
+      "intent": {
+        "tr": [
+          "dotnet derle",
+          "csharp proje",
+          "dotnet new",
+          "nuget paket"
+        ],
+        "en": [
+          "build dotnet",
+          "csharp project",
+          "dotnet new",
+          "nuget package"
+        ]
+      },
+      "documentation": [
+        "https://learn.microsoft.com/dotnet/core/tools/"
+      ],
+      "sources": [
+        "https://learn.microsoft.com/dotnet/core/tools/"
+      ],
+      "verification": {
+        "status": "draft",
+        "sources": [
+          "https://learn.microsoft.com/dotnet/core/tools/",
+          "https://learn.microsoft.com/dotnet/core/tools/dotnet"
+        ],
+        "notes": "Software bank draft — .NET SDK CLI; versioned distro packages noted; not human-verified."
+      },
+      "nova": {
+        "concepts": [
+          "software"
+        ],
+        "ui_priority": 80
       }
     },
     {
@@ -17967,6 +18631,198 @@
     },
     {
       "schema_version": 2,
+      "id": "ng",
+      "name": "ng",
+      "kind": "vendor_cli",
+      "category": "development",
+      "summary": {
+        "tr": "Angular CLI (`ng`) — iskelet, serve, build.",
+        "en": "Angular CLI (`ng`) — scaffold, serve, build."
+      },
+      "description": {
+        "tr": "Angular projeleri oluşturur, geliştirme sunucusu açar, bileşen üretir ve üretir. Genelde `@angular/cli` npm paketi ile kurulur; sistem paket adı nadirdir.",
+        "en": "Scaffolds Angular projects, serves a dev server, generates components, and builds. Usually installed via the `@angular/cli` npm package; system packages are uncommon."
+      },
+      "purpose": {
+        "tr": "Angular uygulama geliştirme iş akışı CLI’si.",
+        "en": "CLI workflow for Angular application development."
+      },
+      "when_to_use": {
+        "tr": "Angular workspace oluştururken, serve/build/test veya generate sırasında.",
+        "en": "When creating an Angular workspace or during serve/build/test/generate."
+      },
+      "syntax": "ng <command> [options]",
+      "expected_effect": {
+        "tr": "Proje dosyaları yazar, dev sunucu açar veya üretim derlemesi üretir.",
+        "en": "Writes project files, opens a dev server, or produces a production build."
+      },
+      "tags": [
+        "software",
+        "frontend",
+        "angular",
+        "node",
+        "tools"
+      ],
+      "risk": "caution",
+      "learning_level": "intermediate",
+      "requires_elevated": false,
+      "platforms": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "operating_systems": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "package_refs": [
+        {
+          "manager": "npm",
+          "package": "angular-cli",
+          "notes": {
+            "tr": "npm’de gerçek paket adı @angular/cli (scoped); şema package alanı @ ile başlayamaz — install_notes’a bakın.",
+            "en": "Real npm package id is scoped @angular/cli; schema package field cannot start with @ — see install_notes."
+          }
+        }
+      ],
+      "install_notes": {
+        "tr": "Proje-yerel (öneri): npm install -D @angular/cli  sonra npx ng ...\nGlobal: npm install -g @angular/cli\nnpx: npx -p @angular/cli ng version\nSistem distro paketi olarak nadiren bulunur — npm kaynağı kullanın.",
+        "en": "Project-local (preferred): npm install -D @angular/cli then npx ng ...\nGlobal: npm install -g @angular/cli\nnpx: npx -p @angular/cli ng version\nRarely a distro system package — use the npm source."
+      },
+      "flags": [],
+      "examples": [
+        {
+          "title": {
+            "tr": "Sürüm",
+            "en": "Version"
+          },
+          "command": "ng version",
+          "explanation": {
+            "tr": "CLI ve (workspace içinde) paket sürümlerini gösterir.",
+            "en": "Shows CLI and (inside a workspace) package versions."
+          },
+          "risk": "safe",
+          "difficulty": "beginner"
+        },
+        {
+          "title": {
+            "tr": "Yeni uygulama",
+            "en": "New app"
+          },
+          "command": "ng new my-app",
+          "explanation": {
+            "tr": "Etkileşimli sihirbazla yeni Angular workspace oluşturur (disk yazar).",
+            "en": "Creates a new Angular workspace via interactive wizard (writes disk)."
+          },
+          "risk": "caution",
+          "difficulty": "intermediate"
+        },
+        {
+          "title": {
+            "tr": "Dev sunucu",
+            "en": "Dev server"
+          },
+          "command": "ng serve",
+          "explanation": {
+            "tr": "Yerel geliştirme sunucusunu başlatır (ağ portu açar).",
+            "en": "Starts the local development server (opens a network port)."
+          },
+          "risk": "caution",
+          "difficulty": "beginner"
+        },
+        {
+          "title": {
+            "tr": "Generate component",
+            "en": "Generate component"
+          },
+          "command": "ng generate component hello",
+          "explanation": {
+            "tr": "Bileşen dosyalarını üretir (kısa: ng g c hello).",
+            "en": "Generates component files (short: ng g c hello)."
+          },
+          "risk": "caution",
+          "difficulty": "intermediate"
+        },
+        {
+          "title": {
+            "tr": "Production build",
+            "en": "Production build"
+          },
+          "command": "ng build",
+          "explanation": {
+            "tr": "Üretim demeti oluşturur (dist/ çıktısı).",
+            "en": "Creates a production bundle (dist/ output)."
+          },
+          "risk": "caution",
+          "difficulty": "intermediate"
+        },
+        {
+          "title": {
+            "tr": "Test",
+            "en": "Test"
+          },
+          "command": "ng test",
+          "explanation": {
+            "tr": "Birim testlerini çalıştırır (yapılandırmaya bağlı).",
+            "en": "Runs unit tests (depends on project config)."
+          },
+          "risk": "caution",
+          "difficulty": "intermediate"
+        }
+      ],
+      "common_mistakes": [
+        {
+          "tr": "Global eski `@angular/cli` ile yeni workspace major sürümünü karıştırmak.",
+          "en": "Mixing a stale global `@angular/cli` with a newer workspace major."
+        }
+      ],
+      "related": [
+        "npm",
+        "npx",
+        "node",
+        "code"
+      ],
+      "related_topics": [
+        "software"
+      ],
+      "intent": {
+        "tr": [
+          "angular cli",
+          "ng serve",
+          "ng new",
+          "angular oluştur"
+        ],
+        "en": [
+          "angular cli",
+          "ng serve",
+          "ng new",
+          "generate angular"
+        ]
+      },
+      "documentation": [
+        "https://angular.dev/tools/cli"
+      ],
+      "sources": [
+        "https://angular.dev/tools/cli",
+        "https://angular.dev/cli"
+      ],
+      "verification": {
+        "status": "draft",
+        "sources": [
+          "https://angular.dev/tools/cli"
+        ],
+        "notes": "Software bank draft — Angular CLI subcommands; not human-verified."
+      },
+      "nova": {
+        "concepts": [
+          "software"
+        ],
+        "ui_priority": 74
+      }
+    },
+    {
+      "schema_version": 2,
       "id": "nginx",
       "name": "nginx",
       "kind": "administrative_tool",
@@ -19277,6 +20133,638 @@
           "networking-basics"
         ],
         "ui_priority": 65
+      }
+    },
+    {
+      "schema_version": 2,
+      "id": "node",
+      "name": "node",
+      "kind": "executable",
+      "category": "development",
+      "summary": {
+        "tr": "Node.js JavaScript runtime CLI.",
+        "en": "Node.js JavaScript runtime CLI."
+      },
+      "description": {
+        "tr": "JavaScript/TypeScript toolchain’inin runtime’ı. Betik çalıştırır, REPL açar, sürüm ve bayrak denetimi sağlar. Proje paketleri npm/yarn/pnpm/bun ile gelir; sistem paketi çoğu distroda nodejs adındadır.",
+        "en": "Runtime for the JavaScript/TypeScript toolchain. Runs scripts, opens a REPL, and reports version/flags. Project packages come via npm/yarn/pnpm/bun; the system package is often named nodejs."
+      },
+      "purpose": {
+        "tr": "JS uygulamalarını ve CLI araçlarını çalıştırmak; sürüm doğrulamak.",
+        "en": "Run JS apps and CLI tools; verify the installed runtime version."
+      },
+      "when_to_use": {
+        "tr": "Node tabanlı frontend/backend betikleri veya yerel sunucular çalıştırırken.",
+        "en": "When running Node-based frontend/backend scripts or local servers."
+      },
+      "syntax": "node [options] [script.js] [arguments]",
+      "expected_effect": {
+        "tr": "Betiği çalıştırır veya sürüm/REPL çıktısı verir; paket kurmaz.",
+        "en": "Runs a script or prints version/REPL output; does not install packages."
+      },
+      "tags": [
+        "software",
+        "frontend",
+        "backend",
+        "node",
+        "javascript"
+      ],
+      "risk": "caution",
+      "learning_level": "beginner",
+      "requires_elevated": false,
+      "platforms": [
+        "linux",
+        "macos",
+        "windows",
+        "bsd"
+      ],
+      "operating_systems": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "packages": {
+        "arch": "nodejs",
+        "debian": "nodejs",
+        "ubuntu": "nodejs",
+        "fedora": "nodejs"
+      },
+      "package_refs": [
+        {
+          "manager": "pacman",
+          "package": "nodejs",
+          "distributions": [
+            "arch"
+          ]
+        },
+        {
+          "manager": "apt",
+          "package": "nodejs",
+          "distributions": [
+            "debian",
+            "ubuntu"
+          ]
+        },
+        {
+          "manager": "dnf",
+          "package": "nodejs",
+          "distributions": [
+            "fedora"
+          ]
+        },
+        {
+          "manager": "homebrew",
+          "package": "node"
+        },
+        {
+          "manager": "winget",
+          "package": "OpenJS.NodeJS.LTS"
+        }
+      ],
+      "install_notes": {
+        "tr": "Arch: pacman -S nodejs npm\nDebian/Ubuntu: apt install nodejs npm  (sürümler distroya göre eski olabilir; nvm/fnm alternatif)\nFedora: dnf install nodejs npm\nmacOS: brew install node\nWindows: winget install OpenJS.NodeJS.LTS",
+        "en": "Arch: pacman -S nodejs npm\nDebian/Ubuntu: apt install nodejs npm  (distro versions may lag; nvm/fnm are alternatives)\nFedora: dnf install nodejs npm\nmacOS: brew install node\nWindows: winget install OpenJS.NodeJS.LTS"
+      },
+      "flags": [],
+      "examples": [
+        {
+          "title": {
+            "tr": "Sürüm",
+            "en": "Version"
+          },
+          "command": "node -v",
+          "explanation": {
+            "tr": "Kurulu Node sürümünü yazar.",
+            "en": "Prints the installed Node version."
+          },
+          "risk": "safe",
+          "difficulty": "beginner"
+        },
+        {
+          "title": {
+            "tr": "Tek satır çalıştır",
+            "en": "Evaluate one-liner"
+          },
+          "command": "node -e \"console.log(2+2)\"",
+          "explanation": {
+            "tr": "Kısa JS ifadesini çalıştırır.",
+            "en": "Runs a short JS expression."
+          },
+          "risk": "safe",
+          "difficulty": "beginner"
+        },
+        {
+          "title": {
+            "tr": "Betik çalıştır",
+            "en": "Run script"
+          },
+          "command": "node app.js",
+          "explanation": {
+            "tr": "Yerel app.js dosyasını çalıştırır.",
+            "en": "Runs the local app.js file."
+          },
+          "risk": "caution",
+          "difficulty": "beginner"
+        },
+        {
+          "title": {
+            "tr": "Sözdizimi denetimi",
+            "en": "Syntax check"
+          },
+          "command": "node --check app.js",
+          "explanation": {
+            "tr": "Betiği çalıştırmadan sözdizimini kontrol eder.",
+            "en": "Checks script syntax without executing it."
+          },
+          "risk": "safe",
+          "difficulty": "intermediate"
+        },
+        {
+          "title": {
+            "tr": "REPL",
+            "en": "REPL"
+          },
+          "command": "node",
+          "explanation": {
+            "tr": "Etkileşimli Node kabuğu açar (çıkış: .exit veya Ctrl-D).",
+            "en": "Opens an interactive Node shell (exit with .exit or Ctrl-D)."
+          },
+          "risk": "safe",
+          "difficulty": "beginner"
+        }
+      ],
+      "common_mistakes": [
+        {
+          "tr": "nodejs paketini kurup `node` komutunun PATH’te olmadığını sanmak (distro alternatifleri).",
+          "en": "Installing the nodejs package but missing `node` on PATH (distro alternatives)."
+        },
+        {
+          "tr": "Global araçları Node ile karıştırıp npm/npx kullanmamak.",
+          "en": "Confusing global tooling with Node itself and skipping npm/npx."
+        }
+      ],
+      "related": [
+        "npm",
+        "npx",
+        "yarn",
+        "pnpm",
+        "bun",
+        "ng"
+      ],
+      "related_topics": [
+        "software",
+        "development-basics"
+      ],
+      "intent": {
+        "tr": [
+          "node sürüm",
+          "javascript çalıştır",
+          "node betik",
+          "nodejs"
+        ],
+        "en": [
+          "node version",
+          "run javascript",
+          "node script",
+          "nodejs"
+        ]
+      },
+      "documentation": [
+        "https://nodejs.org/docs/latest/api/cli.html"
+      ],
+      "sources": [
+        "https://nodejs.org/docs/latest/api/cli.html"
+      ],
+      "verification": {
+        "status": "draft",
+        "sources": [
+          "https://nodejs.org/docs/latest/api/cli.html"
+        ],
+        "notes": "Software bank draft — examples from official Node CLI docs; not human-verified."
+      },
+      "nova": {
+        "concepts": [
+          "software"
+        ],
+        "ui_priority": 80
+      }
+    },
+    {
+      "schema_version": 2,
+      "id": "npm",
+      "name": "npm",
+      "kind": "package_manager",
+      "category": "development",
+      "summary": {
+        "tr": "Node.js paket yöneticisi (npm CLI).",
+        "en": "Node.js package manager (npm CLI)."
+      },
+      "description": {
+        "tr": "package.json bağımlılıklarını kurar, script çalıştırır ve registry ile konuşur. npx ayrı kayıttır. Sistem PM (pacman/apt) değildir — dil/proje kapsamındadır.",
+        "en": "Installs package.json dependencies, runs scripts, and talks to the registry. npx is a separate record. Not a system PM (pacman/apt) — language/project scope."
+      },
+      "purpose": {
+        "tr": "Node projelerinde bağımlılık ve script yönetimi.",
+        "en": "Dependency and script management in Node projects."
+      },
+      "when_to_use": {
+        "tr": "package.json olan bir projede kurulum, script veya paket ekleme/çıkarma için.",
+        "en": "To install, run scripts, or add/remove packages in a package.json project."
+      },
+      "syntax": "npm <command> [args]",
+      "expected_effect": {
+        "tr": "node_modules / lockfile günceller veya script çalıştırır; sistem paketlerini değiştirmez.",
+        "en": "Updates node_modules/lockfile or runs scripts; does not change system packages."
+      },
+      "tags": [
+        "software",
+        "frontend",
+        "backend",
+        "node",
+        "npm",
+        "packages"
+      ],
+      "risk": "caution",
+      "learning_level": "beginner",
+      "requires_elevated": false,
+      "platforms": [
+        "linux",
+        "macos",
+        "windows",
+        "bsd"
+      ],
+      "operating_systems": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "packages": {
+        "arch": "npm",
+        "debian": "npm",
+        "ubuntu": "npm",
+        "fedora": "npm"
+      },
+      "package_refs": [
+        {
+          "manager": "pacman",
+          "package": "npm",
+          "distributions": [
+            "arch"
+          ]
+        },
+        {
+          "manager": "apt",
+          "package": "npm",
+          "distributions": [
+            "debian",
+            "ubuntu"
+          ]
+        },
+        {
+          "manager": "dnf",
+          "package": "npm",
+          "distributions": [
+            "fedora"
+          ]
+        },
+        {
+          "manager": "npm",
+          "package": "npm",
+          "notes": {
+            "tr": "Node ile birlikte gelir; güncelleme npm install -g npm ile de yapılabilir.",
+            "en": "Ships with Node; can also self-update via npm install -g npm."
+          }
+        }
+      ],
+      "install_notes": {
+        "tr": "Genelde nodejs ile birlikte: Arch pacman -S nodejs npm; Debian/Ubuntu apt install npm.\nAlternatif paket yöneticileri: yarn, pnpm, bun (ayrı bank kayıtları).",
+        "en": "Usually with Node: Arch pacman -S nodejs npm; Debian/Ubuntu apt install npm.\nAlternative package managers: yarn, pnpm, bun (separate bank records)."
+      },
+      "flags": [],
+      "examples": [
+        {
+          "title": {
+            "tr": "Sürüm",
+            "en": "Version"
+          },
+          "command": "npm -v",
+          "explanation": {
+            "tr": "npm CLI sürümünü yazar.",
+            "en": "Prints the npm CLI version."
+          },
+          "risk": "safe",
+          "difficulty": "beginner"
+        },
+        {
+          "title": {
+            "tr": "Bağımlılıkları kur",
+            "en": "Install dependencies"
+          },
+          "command": "npm install",
+          "explanation": {
+            "tr": "package.json’dan bağımlılıkları kurar (ağ + disk yazar).",
+            "en": "Installs dependencies from package.json (network + disk writes)."
+          },
+          "risk": "caution",
+          "difficulty": "beginner"
+        },
+        {
+          "title": {
+            "tr": "Paket ekle",
+            "en": "Add package"
+          },
+          "command": "npm install lodash",
+          "explanation": {
+            "tr": "Üretim bağımlılığı olarak paket ekler ve package.json günceller.",
+            "en": "Adds a package as a production dependency and updates package.json."
+          },
+          "risk": "caution",
+          "difficulty": "beginner"
+        },
+        {
+          "title": {
+            "tr": "Geliştirme bağımlılığı",
+            "en": "Dev dependency"
+          },
+          "command": "npm install -D typescript",
+          "explanation": {
+            "tr": "devDependencies’e ekler.",
+            "en": "Adds to devDependencies."
+          },
+          "risk": "caution",
+          "difficulty": "beginner"
+        },
+        {
+          "title": {
+            "tr": "Script çalıştır",
+            "en": "Run script"
+          },
+          "command": "npm run build",
+          "explanation": {
+            "tr": "package.json scripts.build hedefini çalıştırır.",
+            "en": "Runs the scripts.build target from package.json."
+          },
+          "risk": "caution",
+          "difficulty": "beginner"
+        },
+        {
+          "title": {
+            "tr": "Script listesi",
+            "en": "List scripts"
+          },
+          "command": "npm run",
+          "explanation": {
+            "tr": "Argsız çalışınca tanımlı script’leri listeler.",
+            "en": "With no args, lists defined scripts."
+          },
+          "risk": "safe",
+          "difficulty": "beginner"
+        },
+        {
+          "title": {
+            "tr": "Güncel olmayan paketler",
+            "en": "Outdated packages"
+          },
+          "command": "npm outdated",
+          "explanation": {
+            "tr": "Güncellenebilir bağımlılıkları gösterir (kurmaz).",
+            "en": "Shows upgradable dependencies (does not install)."
+          },
+          "risk": "safe",
+          "difficulty": "intermediate"
+        },
+        {
+          "title": {
+            "tr": "Global paket listesi",
+            "en": "List global packages"
+          },
+          "command": "npm list -g --depth=0",
+          "explanation": {
+            "tr": "Global kurulu paketleri sığ listeler.",
+            "en": "Shallow-lists globally installed packages."
+          },
+          "risk": "safe",
+          "difficulty": "intermediate"
+        }
+      ],
+      "common_mistakes": [
+        {
+          "tr": "sudo npm install -g alışkanlığı — izin ve güvenlik sorunlarına yol açar.",
+          "en": "Habitual sudo npm install -g — causes permission and security problems."
+        },
+        {
+          "tr": "yarn.lock varken npm install ile lockfile çakıştırmak.",
+          "en": "Running npm install when yarn.lock already owns the lockfile."
+        }
+      ],
+      "related": [
+        "node",
+        "npx",
+        "yarn",
+        "pnpm",
+        "bun",
+        "ng"
+      ],
+      "related_topics": [
+        "software",
+        "package-managers"
+      ],
+      "intent": {
+        "tr": [
+          "npm kur",
+          "npm install",
+          "npm script",
+          "paket kur node"
+        ],
+        "en": [
+          "npm install",
+          "npm scripts",
+          "node packages",
+          "install dependency"
+        ]
+      },
+      "documentation": [
+        "https://docs.npmjs.com/cli"
+      ],
+      "sources": [
+        "https://docs.npmjs.com/cli"
+      ],
+      "verification": {
+        "status": "draft",
+        "sources": [
+          "https://docs.npmjs.com/cli"
+        ],
+        "notes": "Software bank draft — common npm subcommands; not human-verified."
+      },
+      "nova": {
+        "concepts": [
+          "software"
+        ],
+        "ui_priority": 82
+      }
+    },
+    {
+      "schema_version": 2,
+      "id": "npx",
+      "name": "npx",
+      "kind": "executable",
+      "category": "development",
+      "summary": {
+        "tr": "npm paket yürütücüsü (tek seferlik CLI).",
+        "en": "npm package runner (one-shot CLIs)."
+      },
+      "description": {
+        "tr": "Yerel veya registry’den paketi indirip çalıştırır; kalıcı global kurulum istemeden create-* iskeletleri ve araç CLI’ları için yaygındır. npm ile birlikte gelir.",
+        "en": "Downloads/runs a package locally or from the registry without requiring a permanent global install — common for create-* scaffolds and tool CLIs. Ships with npm."
+      },
+      "purpose": {
+        "tr": "Geçici veya proje-yerel CLI araçlarını çalıştırmak.",
+        "en": "Run temporary or project-local CLI tools."
+      },
+      "when_to_use": {
+        "tr": "Global kurmadan bir npm CLI çalıştırmak veya create-* iskeleti başlatmak için.",
+        "en": "To run an npm CLI or start a create-* scaffold without a global install."
+      },
+      "syntax": "npx [options] <command>[@version] [args]",
+      "expected_effect": {
+        "tr": "Paketi çözümler/indirir ve komutu çalıştırır; isteğe bağlı önbellek kullanır.",
+        "en": "Resolves/downloads a package and runs the command; may use a cache."
+      },
+      "tags": [
+        "software",
+        "frontend",
+        "tools",
+        "node",
+        "npm"
+      ],
+      "risk": "caution",
+      "learning_level": "beginner",
+      "requires_elevated": false,
+      "platforms": [
+        "linux",
+        "macos",
+        "windows",
+        "bsd"
+      ],
+      "operating_systems": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "package_refs": [
+        {
+          "manager": "npm",
+          "package": "npm",
+          "notes": {
+            "tr": "npx, npm CLI ile birlikte gelir.",
+            "en": "npx ships with the npm CLI."
+          }
+        }
+      ],
+      "install_notes": {
+        "tr": "npm ile gelir (nodejs/npm kurulumundan sonra). Ayrı sistem paketi gerekmez.",
+        "en": "Ships with npm (after nodejs/npm install). No separate system package required."
+      },
+      "flags": [],
+      "examples": [
+        {
+          "title": {
+            "tr": "Yardım",
+            "en": "Help"
+          },
+          "command": "npx --help",
+          "explanation": {
+            "tr": "npx kullanım özetini gösterir.",
+            "en": "Shows npx usage summary."
+          },
+          "risk": "safe",
+          "difficulty": "beginner"
+        },
+        {
+          "title": {
+            "tr": "Tek seferlik paket",
+            "en": "One-shot package"
+          },
+          "command": "npx --yes cowsay 'hello'",
+          "explanation": {
+            "tr": "Onay istemeden paketi çalıştırır (--yes); ağ indirir.",
+            "en": "Runs the package without prompting (--yes); downloads over the network."
+          },
+          "risk": "caution",
+          "difficulty": "beginner"
+        },
+        {
+          "title": {
+            "tr": "Yerel binary",
+            "en": "Local binary"
+          },
+          "command": "npx eslint .",
+          "explanation": {
+            "tr": "Proje node_modules içindeki eslint’i çalıştırır (kuruluysa).",
+            "en": "Runs project-local eslint from node_modules when installed."
+          },
+          "risk": "caution",
+          "difficulty": "intermediate"
+        },
+        {
+          "title": {
+            "tr": "Sürüm pin",
+            "en": "Version pin"
+          },
+          "command": "npx --package=typescript@5.4 tsc --version",
+          "explanation": {
+            "tr": "Belirli paket sürümünden binary çalıştırır.",
+            "en": "Runs a binary from a pinned package version."
+          },
+          "risk": "caution",
+          "difficulty": "intermediate"
+        }
+      ],
+      "common_mistakes": [
+        {
+          "tr": "--yes ile tanınmayan paketleri körü körüne çalıştırmak.",
+          "en": "Blindly running unknown packages with --yes."
+        }
+      ],
+      "related": [
+        "npm",
+        "node",
+        "bun",
+        "ng"
+      ],
+      "related_topics": [
+        "software"
+      ],
+      "intent": {
+        "tr": [
+          "npx çalıştır",
+          "tek seferlik cli",
+          "create vite"
+        ],
+        "en": [
+          "run npx",
+          "one shot cli",
+          "create scaffold"
+        ]
+      },
+      "documentation": [
+        "https://docs.npmjs.com/cli/commands/npx"
+      ],
+      "sources": [
+        "https://docs.npmjs.com/cli/commands/npx"
+      ],
+      "verification": {
+        "status": "draft",
+        "sources": [
+          "https://docs.npmjs.com/cli/commands/npx"
+        ],
+        "notes": "Software bank draft; not human-verified."
+      },
+      "nova": {
+        "concepts": [
+          "software"
+        ],
+        "ui_priority": 78
       }
     },
     {
@@ -21707,6 +23195,188 @@
     },
     {
       "schema_version": 2,
+      "id": "pnpm",
+      "name": "pnpm",
+      "kind": "package_manager",
+      "category": "development",
+      "summary": {
+        "tr": "pnpm — içerik adresli Node paket yöneticisi.",
+        "en": "pnpm — content-addressed Node package manager."
+      },
+      "description": {
+        "tr": "Disk paylaşımlı store ile hızlı/tekrarlanabilir kurulum. Monorepo (pnpm-workspace) için yaygındır. npm/yarn alternatifidir; sistem PM değildir.",
+        "en": "Fast, reproducible installs via a content-addressed store. Common for monorepos (pnpm-workspace). Alternative to npm/Yarn; not a system PM."
+      },
+      "purpose": {
+        "tr": "Node monorepo ve projelerde verimli bağımlılık yönetimi.",
+        "en": "Efficient dependency management for Node projects and monorepos."
+      },
+      "when_to_use": {
+        "tr": "Proje pnpm-lock.yaml veya pnpm workspace kullanıyorsa.",
+        "en": "When the project uses pnpm-lock.yaml or a pnpm workspace."
+      },
+      "syntax": "pnpm <command> [args]",
+      "expected_effect": {
+        "tr": "Store + node_modules bağları günceller; script/exec çalıştırır.",
+        "en": "Updates store + node_modules links; runs scripts/exec."
+      },
+      "tags": [
+        "software",
+        "frontend",
+        "node",
+        "pnpm",
+        "packages"
+      ],
+      "risk": "caution",
+      "learning_level": "intermediate",
+      "requires_elevated": false,
+      "platforms": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "package_refs": [
+        {
+          "manager": "npm",
+          "package": "pnpm",
+          "notes": {
+            "tr": "Corepack veya npm ile kurulabilir.",
+            "en": "Installable via Corepack or npm."
+          }
+        },
+        {
+          "manager": "homebrew",
+          "package": "pnpm"
+        },
+        {
+          "manager": "winget",
+          "package": "pnpm.pnpm"
+        }
+      ],
+      "install_notes": {
+        "tr": "Öneri: corepack enable && corepack prepare pnpm@latest --activate\nveya npm install -g pnpm\nmacOS: brew install pnpm",
+        "en": "Prefer: corepack enable && corepack prepare pnpm@latest --activate\nor npm install -g pnpm\nmacOS: brew install pnpm"
+      },
+      "flags": [],
+      "examples": [
+        {
+          "title": {
+            "tr": "Sürüm",
+            "en": "Version"
+          },
+          "command": "pnpm -v",
+          "explanation": {
+            "tr": "pnpm sürümünü yazar.",
+            "en": "Prints the pnpm version."
+          },
+          "risk": "safe",
+          "difficulty": "beginner"
+        },
+        {
+          "title": {
+            "tr": "Kur",
+            "en": "Install"
+          },
+          "command": "pnpm install",
+          "explanation": {
+            "tr": "Lockfile’a göre kurar.",
+            "en": "Installs according to the lockfile."
+          },
+          "risk": "caution",
+          "difficulty": "beginner"
+        },
+        {
+          "title": {
+            "tr": "Paket ekle",
+            "en": "Add package"
+          },
+          "command": "pnpm add lodash",
+          "explanation": {
+            "tr": "Bağımlılık ekler.",
+            "en": "Adds a dependency."
+          },
+          "risk": "caution",
+          "difficulty": "beginner"
+        },
+        {
+          "title": {
+            "tr": "Exec",
+            "en": "Exec"
+          },
+          "command": "pnpm exec tsc --version",
+          "explanation": {
+            "tr": "Proje-yerel binary çalıştırır (npx benzeri).",
+            "en": "Runs a project-local binary (npx-like)."
+          },
+          "risk": "caution",
+          "difficulty": "intermediate"
+        },
+        {
+          "title": {
+            "tr": "Script",
+            "en": "Run script"
+          },
+          "command": "pnpm run build",
+          "explanation": {
+            "tr": "package.json script’ini çalıştırır.",
+            "en": "Runs a package.json script."
+          },
+          "risk": "caution",
+          "difficulty": "beginner"
+        }
+      ],
+      "common_mistakes": [
+        {
+          "tr": "npm ile kurulmuş node_modules üzerinde pnpm beklemek.",
+          "en": "Expecting pnpm semantics on an npm-created node_modules tree."
+        }
+      ],
+      "related": [
+        "npm",
+        "yarn",
+        "bun",
+        "node",
+        "npx"
+      ],
+      "related_topics": [
+        "software",
+        "package-managers"
+      ],
+      "intent": {
+        "tr": [
+          "pnpm kur",
+          "pnpm add",
+          "monorepo paket"
+        ],
+        "en": [
+          "pnpm install",
+          "pnpm add",
+          "monorepo packages"
+        ]
+      },
+      "documentation": [
+        "https://pnpm.io/cli/install"
+      ],
+      "sources": [
+        "https://pnpm.io/cli/install"
+      ],
+      "verification": {
+        "status": "draft",
+        "sources": [
+          "https://pnpm.io/cli/install",
+          "https://pnpm.io/cli/add"
+        ],
+        "notes": "Software bank draft; not human-verified."
+      },
+      "nova": {
+        "concepts": [
+          "software"
+        ],
+        "ui_priority": 72
+      }
+    },
+    {
+      "schema_version": 2,
       "id": "podman",
       "name": "podman",
       "kind": "executable",
@@ -22730,7 +24400,13 @@
       "related": [
         "jq",
         "make",
-        "git"
+        "git",
+        "dotnet",
+        "node"
+      ],
+      "related_topics": [
+        "software",
+        "development-basics"
       ],
       "intent": {
         "tr": [
@@ -22754,7 +24430,8 @@
       "nova": {
         "concepts": [
           "path",
-          "terminal-basics"
+          "terminal-basics",
+          "software"
         ],
         "ui_priority": 85,
         "favorite_eligible": true
@@ -35295,6 +36972,181 @@
     },
     {
       "schema_version": 2,
+      "id": "yarn",
+      "name": "yarn",
+      "kind": "package_manager",
+      "category": "development",
+      "summary": {
+        "tr": "Yarn — alternatif Node paket yöneticisi.",
+        "en": "Yarn — alternative Node package manager."
+      },
+      "description": {
+        "tr": "npm uyumlu ekosistemde bağımlılık ve script yönetimi. Classic (v1) ile Berry (v2+) komutları/kurulum modeli farklıdır; örnekler yaygın kesişimdir. Sistem PM değildir.",
+        "en": "Dependency and script management in the npm-compatible ecosystem. Classic (v1) and Berry (v2+) differ in commands/install model; examples cover the common intersection. Not a system PM."
+      },
+      "purpose": {
+        "tr": "Node projelerinde yarn ile kurulum ve script çalıştırma.",
+        "en": "Install and run scripts in Node projects with Yarn."
+      },
+      "when_to_use": {
+        "tr": "Proje yarn.lock / Yarn kullanımını tercih ettiğinde.",
+        "en": "When the project standardizes on yarn.lock / Yarn."
+      },
+      "syntax": "yarn <command> [args]",
+      "expected_effect": {
+        "tr": "Bağımlılık ağacını ve lockfile’ı yönetir; script çalıştırır.",
+        "en": "Manages the dependency tree and lockfile; runs scripts."
+      },
+      "tags": [
+        "software",
+        "frontend",
+        "node",
+        "yarn",
+        "packages"
+      ],
+      "risk": "caution",
+      "learning_level": "intermediate",
+      "requires_elevated": false,
+      "platforms": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "package_refs": [
+        {
+          "manager": "pacman",
+          "package": "yarn",
+          "distributions": [
+            "arch"
+          ]
+        },
+        {
+          "manager": "npm",
+          "package": "yarn",
+          "notes": {
+            "tr": "Corepack veya npm ile de kurulabilir; distro paket adı değişebilir.",
+            "en": "Also installable via Corepack or npm; distro package names vary."
+          }
+        },
+        {
+          "manager": "homebrew",
+          "package": "yarn"
+        },
+        {
+          "manager": "winget",
+          "package": "Yarn.Yarn"
+        }
+      ],
+      "install_notes": {
+        "tr": "Arch: pacman -S yarn\nAlternatif: corepack enable && corepack prepare yarn@stable --activate\nnpm: npm install -g yarn  (eski yol; Corepack tercih)\nDebian’ta paket adı yarnpkg olabilir — binary’yi kontrol edin.",
+        "en": "Arch: pacman -S yarn\nAlternative: corepack enable && corepack prepare yarn@stable --activate\nnpm: npm install -g yarn  (legacy path; prefer Corepack)\nOn Debian the package may be yarnpkg — verify the binary name."
+      },
+      "flags": [],
+      "examples": [
+        {
+          "title": {
+            "tr": "Sürüm",
+            "en": "Version"
+          },
+          "command": "yarn -v",
+          "explanation": {
+            "tr": "Yarn sürümünü yazar.",
+            "en": "Prints the Yarn version."
+          },
+          "risk": "safe",
+          "difficulty": "beginner"
+        },
+        {
+          "title": {
+            "tr": "Kur",
+            "en": "Install"
+          },
+          "command": "yarn install",
+          "explanation": {
+            "tr": "Lockfile’a göre bağımlılıkları kurar.",
+            "en": "Installs dependencies according to the lockfile."
+          },
+          "risk": "caution",
+          "difficulty": "beginner"
+        },
+        {
+          "title": {
+            "tr": "Paket ekle",
+            "en": "Add package"
+          },
+          "command": "yarn add lodash",
+          "explanation": {
+            "tr": "Bağımlılık ekler.",
+            "en": "Adds a dependency."
+          },
+          "risk": "caution",
+          "difficulty": "beginner"
+        },
+        {
+          "title": {
+            "tr": "Script",
+            "en": "Run script"
+          },
+          "command": "yarn run build",
+          "explanation": {
+            "tr": "package.json script’ini çalıştırır (kısa: yarn build).",
+            "en": "Runs a package.json script (short form: yarn build)."
+          },
+          "risk": "caution",
+          "difficulty": "beginner"
+        }
+      ],
+      "common_mistakes": [
+        {
+          "tr": "Aynı repoda npm ve yarn’ı karışık kullanmak.",
+          "en": "Mixing npm and Yarn in the same repo."
+        }
+      ],
+      "related": [
+        "npm",
+        "pnpm",
+        "bun",
+        "node",
+        "npx"
+      ],
+      "related_topics": [
+        "software",
+        "package-managers"
+      ],
+      "intent": {
+        "tr": [
+          "yarn kur",
+          "yarn add",
+          "yarn script"
+        ],
+        "en": [
+          "yarn install",
+          "yarn add",
+          "yarn scripts"
+        ]
+      },
+      "documentation": [
+        "https://yarnpkg.com/cli"
+      ],
+      "sources": [
+        "https://yarnpkg.com/cli"
+      ],
+      "verification": {
+        "status": "draft",
+        "sources": [
+          "https://yarnpkg.com/cli"
+        ],
+        "notes": "Software bank draft — Classic/Berry intersection examples; not human-verified."
+      },
+      "nova": {
+        "concepts": [
+          "software"
+        ],
+        "ui_priority": 70
+      }
+    },
+    {
+      "schema_version": 2,
       "id": "zfs",
       "name": "zfs",
       "kind": "administrative_tool",
@@ -37435,6 +39287,13 @@
       ],
       "next_steps": [
         {
+          "id": "software",
+          "note": {
+            "tr": "Node/.NET/Angular/VS Code yığın CLI’ları.",
+            "en": "Node/.NET/Angular/VS Code stack CLIs."
+          }
+        },
+        {
           "id": "debugging"
         },
         {
@@ -37447,9 +39306,12 @@
         "gcc",
         "python3",
         "diff",
-        "patch"
+        "patch",
+        "node",
+        "dotnet"
       ],
       "related_concepts": [
+        "software",
         "debugging",
         "json-data",
         "text-processing"
@@ -43097,6 +44959,587 @@
           "id": "finding-files"
         }
       ]
+    },
+    {
+      "id": "software",
+      "kind": "nova-commands-concept",
+      "format": "topic-guide",
+      "title": {
+        "tr": "Yazılım yığınları (Software)",
+        "en": "Software stacks"
+      },
+      "summary": {
+        "tr": "Kurulabilir yazılım CLI’ları — frontend, backend, sunucu ve araçlar; komut + alt komutlar.",
+        "en": "Installable software CLIs — frontend, backend, server, and tools; commands plus key subcommands."
+      },
+      "intro": {
+        "tr": "Bu rehber Node/.NET/Angular/VS Code gibi yığın CLI’larını öğretir. Kategori development kalır; ayrım tags + alt konularladır (frontend / backend / server / tools). Docker/systemctl buraya bağlanır, kopyalanmaz.",
+        "en": "This guide teaches stack CLIs such as Node/.NET/Angular/VS Code. Category stays development; frontend / backend / server / tools are tags and subtopics. Docker/systemctl are linked, not duplicated."
+      },
+      "body": {
+        "tr": "Software, kurulabilir uygulama ve dil yığınlarının CLI yüzüdür. Sistem paket yöneticilerinden\n(pacman/apt) ayrı düşünün: çoğu proje `npm`/`dotnet` ile kendi bağımlılığını yönetir.\n\nFrontend yolu: `node` → `npm`/`npx` → isteğe `yarn`/`pnpm`/`bun` → `ng` (Angular) → `code`.\nBackend yolu: `dotnet` (ve bankadaki `python3`/`cargo`) ile derle, test et, çalıştır.\nServer/ops: mevcut `docker` ve `systemctl` kayıtlarına related ile gidin; burada tekrar etmeyin.\n\nÖğrenme sırası salt-okuma sürüm komutlarıyla başlar (`node -v`, `dotnet --info`, `code --version`).\nKurulum/yayınlama örnekleri caution’dır; production publish/deploy bu rehberin dışında tutulur.\n",
+        "en": "Software is the CLI surface of installable app and language stacks. Treat it separately from\nsystem package managers (pacman/apt): many projects manage deps with `npm`/`dotnet`.\n\nFrontend path: `node` → `npm`/`npx` → optional `yarn`/`pnpm`/`bun` → `ng` (Angular) → `code`.\nBackend path: build/test/run with `dotnet` (and bank `python3`/`cargo`).\nServer/ops: follow related links to existing `docker` and `systemctl` records; do not duplicate.\n\nStart with read-only version commands (`node -v`, `dotnet --info`, `code --version`).\nInstall/publish examples stay caution; production publish/deploy is out of scope here.\n"
+      },
+      "difficulty": "beginner",
+      "categories": [
+        "development",
+        "containers"
+      ],
+      "platforms": [
+        "linux",
+        "macos",
+        "windows",
+        "bsd"
+      ],
+      "tags": [
+        "software",
+        "frontend",
+        "backend",
+        "server",
+        "tools",
+        "node",
+        "dotnet"
+      ],
+      "learning_path": [
+        {
+          "ref": "node",
+          "kind": "command",
+          "note": {
+            "tr": "Runtime sürümü ve betik çalıştırma.",
+            "en": "Runtime version and running scripts."
+          }
+        },
+        {
+          "ref": "npm",
+          "kind": "command",
+          "note": {
+            "tr": "Proje bağımlılıkları ve script’ler.",
+            "en": "Project dependencies and scripts."
+          }
+        },
+        {
+          "ref": "npx",
+          "kind": "command",
+          "note": {
+            "tr": "Tek seferlik paket/CLI çalıştırma.",
+            "en": "One-shot package/CLI execution."
+          }
+        },
+        {
+          "ref": "yarn",
+          "kind": "command"
+        },
+        {
+          "ref": "pnpm",
+          "kind": "command"
+        },
+        {
+          "ref": "bun",
+          "kind": "command"
+        },
+        {
+          "ref": "ng",
+          "kind": "command",
+          "note": {
+            "tr": "Angular CLI iskelet ve serve.",
+            "en": "Angular CLI scaffold and serve."
+          }
+        },
+        {
+          "ref": "code",
+          "kind": "command",
+          "note": {
+            "tr": "VS Code editör CLI.",
+            "en": "VS Code editor CLI."
+          }
+        },
+        {
+          "ref": "dotnet",
+          "kind": "command",
+          "note": {
+            "tr": ".NET SDK — new/build/run/test.",
+            "en": ".NET SDK — new/build/run/test."
+          }
+        },
+        {
+          "ref": "python3",
+          "kind": "command"
+        },
+        {
+          "ref": "cargo",
+          "kind": "command"
+        },
+        {
+          "ref": "docker",
+          "kind": "command",
+          "note": {
+            "tr": "Sunucu/ops — mevcut containers kaydı.",
+            "en": "Server/ops — existing containers record."
+          }
+        },
+        {
+          "ref": "systemctl",
+          "kind": "command"
+        },
+        {
+          "ref": "frontend",
+          "kind": "subtopic"
+        },
+        {
+          "ref": "backend",
+          "kind": "subtopic"
+        },
+        {
+          "ref": "server",
+          "kind": "subtopic"
+        },
+        {
+          "ref": "tools",
+          "kind": "subtopic"
+        }
+      ],
+      "subtopics": [
+        {
+          "id": "frontend",
+          "title": {
+            "tr": "Frontend",
+            "en": "Frontend"
+          },
+          "summary": {
+            "tr": "Node ekosistemi, paket yöneticileri, Angular ve editör CLI.",
+            "en": "Node ecosystem, package managers, Angular, and editor CLI."
+          },
+          "related_commands": [
+            "node",
+            "npm",
+            "npx",
+            "yarn",
+            "pnpm",
+            "bun",
+            "ng",
+            "code"
+          ]
+        },
+        {
+          "id": "backend",
+          "title": {
+            "tr": "Backend",
+            "en": "Backend"
+          },
+          "summary": {
+            "tr": ".NET SDK ve bankadaki dil araçları (python3, cargo).",
+            "en": ".NET SDK and bank language tools (python3, cargo)."
+          },
+          "related_commands": [
+            "dotnet",
+            "python3",
+            "cargo",
+            "node"
+          ]
+        },
+        {
+          "id": "server",
+          "title": {
+            "tr": "Sunucu / ops",
+            "en": "Server / ops"
+          },
+          "summary": {
+            "tr": "Konteyner ve servis CLI’larına köprü; kopya kayıt yok.",
+            "en": "Bridge to container and service CLIs; no duplicate records."
+          },
+          "related_commands": [
+            "docker",
+            "systemctl",
+            "kubectl"
+          ]
+        },
+        {
+          "id": "tools",
+          "title": {
+            "tr": "Araçlar",
+            "en": "Tools"
+          },
+          "summary": {
+            "tr": "Editör CLI ve yardımcı çalıştırıcılar (code, npx, bun).",
+            "en": "Editor CLI and helper runners (code, npx, bun)."
+          },
+          "related_commands": [
+            "code",
+            "npx",
+            "bun",
+            "git"
+          ]
+        }
+      ],
+      "command_table": [
+        {
+          "id": "node",
+          "purpose": {
+            "tr": "Node.js JavaScript runtime.",
+            "en": "Node.js JavaScript runtime."
+          },
+          "learning_level": "beginner"
+        },
+        {
+          "id": "npm",
+          "purpose": {
+            "tr": "Node paket yöneticisi (varsayılan).",
+            "en": "Default Node package manager."
+          },
+          "learning_level": "beginner"
+        },
+        {
+          "id": "npx",
+          "purpose": {
+            "tr": "npm paketlerini yerinde çalıştırır.",
+            "en": "Runs npm packages in place."
+          },
+          "learning_level": "beginner"
+        },
+        {
+          "id": "yarn",
+          "purpose": {
+            "tr": "Alternatif Node paket yöneticisi.",
+            "en": "Alternative Node package manager."
+          },
+          "learning_level": "intermediate"
+        },
+        {
+          "id": "pnpm",
+          "purpose": {
+            "tr": "İçerik adresli hızlı Node paket yöneticisi.",
+            "en": "Content-addressed fast Node package manager."
+          },
+          "learning_level": "intermediate"
+        },
+        {
+          "id": "bun",
+          "purpose": {
+            "tr": "JS runtime + paket yöneticisi + runner.",
+            "en": "JS runtime + package manager + runner."
+          },
+          "learning_level": "intermediate"
+        },
+        {
+          "id": "ng",
+          "purpose": {
+            "tr": "Angular CLI (iskelet, serve, build).",
+            "en": "Angular CLI (scaffold, serve, build)."
+          },
+          "learning_level": "intermediate"
+        },
+        {
+          "id": "code",
+          "purpose": {
+            "tr": "Visual Studio Code komut satırı.",
+            "en": "Visual Studio Code command line."
+          },
+          "learning_level": "beginner"
+        },
+        {
+          "id": "dotnet",
+          "purpose": {
+            "tr": ".NET SDK CLI (new/build/run/test).",
+            "en": ".NET SDK CLI (new/build/run/test)."
+          },
+          "learning_level": "intermediate"
+        },
+        {
+          "id": "python3",
+          "purpose": {
+            "tr": "Python 3 yorumlayıcısı (backend köprüsü).",
+            "en": "Python 3 interpreter (backend bridge)."
+          },
+          "learning_level": "intermediate"
+        },
+        {
+          "id": "cargo",
+          "purpose": {
+            "tr": "Rust paket ve derleme aracı (backend köprüsü).",
+            "en": "Rust package/build tool (backend bridge)."
+          },
+          "learning_level": "intermediate"
+        },
+        {
+          "id": "docker",
+          "purpose": {
+            "tr": "Konteyner CLI (server; mevcut kayıt).",
+            "en": "Container CLI (server; existing record)."
+          },
+          "learning_level": "intermediate"
+        },
+        {
+          "id": "systemctl",
+          "purpose": {
+            "tr": "systemd servis kontrolü (server; mevcut).",
+            "en": "systemd service control (server; existing)."
+          },
+          "learning_level": "intermediate"
+        }
+      ],
+      "graded_examples": [
+        {
+          "title": {
+            "tr": "Node sürümü",
+            "en": "Node version"
+          },
+          "command": "node -v",
+          "explanation": {
+            "tr": "Kurulu Node.js sürümünü yazar; kurulum doğrulama için güvenli ilk adım.",
+            "en": "Prints installed Node.js version; safe first check after install."
+          },
+          "difficulty": "beginner",
+          "risk": "safe",
+          "related_commands": [
+            "node"
+          ]
+        },
+        {
+          "title": {
+            "tr": "npm bağımlılık kur",
+            "en": "npm install deps"
+          },
+          "command": "npm install",
+          "explanation": {
+            "tr": "package.json’dan bağımlılıkları kurar; node_modules yazar (ağ + disk).",
+            "en": "Installs dependencies from package.json; writes node_modules (network + disk)."
+          },
+          "difficulty": "beginner",
+          "risk": "caution",
+          "related_commands": [
+            "npm"
+          ]
+        },
+        {
+          "title": {
+            "tr": "npx ile tek seferlik CLI",
+            "en": "One-shot CLI via npx"
+          },
+          "command": "npx --yes cowsay 'hello'",
+          "explanation": {
+            "tr": "Paketi geçici indirip çalıştırır; kalıcı global kurulum istemez.",
+            "en": "Downloads/runs a package temporarily; avoids permanent global install."
+          },
+          "difficulty": "beginner",
+          "risk": "caution",
+          "related_commands": [
+            "npx"
+          ]
+        },
+        {
+          "title": {
+            "tr": "Angular sürüm",
+            "en": "Angular version"
+          },
+          "command": "ng version",
+          "explanation": {
+            "tr": "Angular CLI ve workspace sürüm bilgisini gösterir.",
+            "en": "Shows Angular CLI and workspace version info."
+          },
+          "difficulty": "intermediate",
+          "risk": "safe",
+          "related_commands": [
+            "ng"
+          ]
+        },
+        {
+          "title": {
+            "tr": "VS Code ile dizin aç",
+            "en": "Open folder in VS Code"
+          },
+          "command": "code .",
+          "explanation": {
+            "tr": "Geçerli dizini VS Code’da açar (PATH’te `code` shell komutu gerekir).",
+            "en": "Opens the current directory in VS Code (`code` shell command must be on PATH)."
+          },
+          "difficulty": "beginner",
+          "risk": "safe",
+          "related_commands": [
+            "code"
+          ]
+        },
+        {
+          "title": {
+            "tr": "dotnet bilgi",
+            "en": "dotnet info"
+          },
+          "command": "dotnet --info",
+          "explanation": {
+            "tr": "SDK/runtime ortam özetini yazar; kurulum teşhisi için salt okuma.",
+            "en": "Prints SDK/runtime environment summary; read-only install diagnostics."
+          },
+          "difficulty": "beginner",
+          "risk": "safe",
+          "related_commands": [
+            "dotnet"
+          ]
+        },
+        {
+          "title": {
+            "tr": "dotnet new + run",
+            "en": "dotnet new + run"
+          },
+          "command": "dotnet new console -n HelloCli && cd HelloCli && dotnet run",
+          "explanation": {
+            "tr": "Konsol projesi oluşturur ve çalıştırır; çalışma dizininde dosya yazar.",
+            "en": "Creates and runs a console project; writes files in the working directory."
+          },
+          "difficulty": "intermediate",
+          "risk": "caution",
+          "related_commands": [
+            "dotnet"
+          ]
+        }
+      ],
+      "callouts": [
+        {
+          "kind": "tip",
+          "text": {
+            "tr": "Önce `-v` / `--version` / `--info` ile runtime’ı doğrulayın; sonra paket kurun.",
+            "en": "Verify the runtime with `-v` / `--version` / `--info` before installing packages."
+          }
+        },
+        {
+          "kind": "note",
+          "text": {
+            "tr": "Frontend/backend/server ayrımı şema alanı değil; tags + subtopics ile browse/filter edilir.",
+            "en": "Frontend/backend/server is not a schema field; browse/filter via tags + subtopics."
+          }
+        },
+        {
+          "kind": "warning",
+          "text": {
+            "tr": "npm publish, production dotnet deploy ve Docker grup yetkisi bu rehberin caution/danger sınırındadır — örnekleri kopyalamadan ortamı bilin.",
+            "en": "npm publish, production dotnet deploy, and Docker group power sit at this guide's caution/danger edge — know your environment before copying examples."
+          }
+        },
+        {
+          "kind": "caution",
+          "text": {
+            "tr": "Global `npm install -g` host PATH’ini değiştirir; proje-yerel kurulum çoğu zaman yeterlidir.",
+            "en": "Global `npm install -g` changes host PATH; project-local installs are usually enough."
+          }
+        }
+      ],
+      "safe_exercises": [
+        {
+          "title": {
+            "tr": "Runtime sürümleri",
+            "en": "Runtime versions"
+          },
+          "prompt": {
+            "tr": "node -v, npm -v, dotnet --info (varsa) ve code --version (varsa) çıktılarını okuyun.",
+            "en": "Read output of node -v, npm -v, dotnet --info (if present), and code --version (if present)."
+          },
+          "risk": "safe",
+          "related_commands": [
+            "node",
+            "npm",
+            "dotnet",
+            "code"
+          ]
+        },
+        {
+          "title": {
+            "tr": "npm script listesi",
+            "en": "List npm scripts"
+          },
+          "prompt": {
+            "tr": "Bir Node projesinde npm run (argsız) ile tanımlı script'leri listeleyin; bir şey çalıştırmayın.",
+            "en": "In a Node project, list scripts with bare npm run; do not execute any."
+          },
+          "risk": "safe",
+          "related_commands": [
+            "npm"
+          ]
+        },
+        {
+          "title": {
+            "tr": "VS Code uzantı listesi",
+            "en": "List VS Code extensions"
+          },
+          "prompt": {
+            "tr": "code --list-extensions ile kurulu uzantıları okuyun (kurulum yapmayın).",
+            "en": "Read installed extensions with code --list-extensions (do not install)."
+          },
+          "risk": "safe",
+          "related_commands": [
+            "code"
+          ]
+        }
+      ],
+      "next_steps": [
+        {
+          "id": "development-basics",
+          "note": {
+            "tr": "git/make/python temelleri.",
+            "en": "git/make/python basics."
+          }
+        },
+        {
+          "id": "package-managers",
+          "note": {
+            "tr": "Sistem PM’leri (pacman/apt) ile dil PM ayrımı.",
+            "en": "System PMs (pacman/apt) vs language PMs."
+          }
+        },
+        {
+          "id": "containers-basics",
+          "note": {
+            "tr": "docker/podman server yolu.",
+            "en": "docker/podman server path."
+          }
+        },
+        {
+          "id": "json-data",
+          "note": {
+            "tr": "package.json / proje config okuma.",
+            "en": "Reading package.json / project config."
+          }
+        }
+      ],
+      "related_commands": [
+        "node",
+        "npm",
+        "npx",
+        "yarn",
+        "pnpm",
+        "bun",
+        "ng",
+        "code",
+        "dotnet",
+        "python3",
+        "cargo",
+        "docker",
+        "systemctl",
+        "git"
+      ],
+      "related_concepts": [
+        "development-basics",
+        "package-managers",
+        "containers-basics",
+        "json-data",
+        "terminal-basics"
+      ],
+      "see_also": [
+        "https://nodejs.org/docs/latest/api/cli.html",
+        "https://docs.npmjs.com/cli",
+        "https://angular.dev/tools/cli",
+        "https://code.visualstudio.com/docs/editor/command-line",
+        "https://learn.microsoft.com/dotnet/core/tools/"
+      ],
+      "verification": {
+        "status": "draft",
+        "sources": [
+          "https://nodejs.org/docs/latest/api/cli.html",
+          "https://docs.npmjs.com/cli",
+          "https://angular.dev/tools/cli",
+          "https://code.visualstudio.com/docs/editor/command-line",
+          "https://learn.microsoft.com/dotnet/core/tools/",
+          "man node"
+        ],
+        "notes": "Software topic guide — tags/subtopics for frontend|backend|server|tools; no new ecosystem schema field. Agent-authored draft; not human-verified."
+      }
     },
     {
       "id": "storage",

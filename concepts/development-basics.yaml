@@ -126,6 +126,10 @@ safe_exercises:
   related_commands:
   - git
 next_steps:
+- id: software
+  note:
+    tr: Node/.NET/Angular/VS Code yığın CLI’ları.
+    en: Node/.NET/Angular/VS Code stack CLIs.
 - id: debugging
 - id: infrastructure-as-code
 related_commands:
@@ -135,7 +139,10 @@ related_commands:
 - python3
 - diff
 - patch
+- node
+- dotnet
 related_concepts:
+- software
 - debugging
 - json-data
 - text-processing

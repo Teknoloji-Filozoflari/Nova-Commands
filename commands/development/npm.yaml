@@ -1,0 +1,188 @@
+schema_version: 2
+id: npm
+name: npm
+kind: package_manager
+category: development
+summary:
+  tr: Node.js paket yöneticisi (npm CLI).
+  en: Node.js package manager (npm CLI).
+description:
+  tr: >-
+    package.json bağımlılıklarını kurar, script çalıştırır ve registry ile konuşur.
+    npx ayrı kayıttır. Sistem PM (pacman/apt) değildir — dil/proje kapsamındadır.
+  en: >-
+    Installs package.json dependencies, runs scripts, and talks to the registry.
+    npx is a separate record. Not a system PM (pacman/apt) — language/project scope.
+purpose:
+  tr: Node projelerinde bağımlılık ve script yönetimi.
+  en: Dependency and script management in Node projects.
+when_to_use:
+  tr: package.json olan bir projede kurulum, script veya paket ekleme/çıkarma için.
+  en: To install, run scripts, or add/remove packages in a package.json project.
+syntax: 'npm <command> [args]'
+expected_effect:
+  tr: node_modules / lockfile günceller veya script çalıştırır; sistem paketlerini değiştirmez.
+  en: Updates node_modules/lockfile or runs scripts; does not change system packages.
+tags:
+- software
+- frontend
+- backend
+- node
+- npm
+- packages
+risk: caution
+learning_level: beginner
+requires_elevated: false
+platforms:
+- linux
+- macos
+- windows
+- bsd
+operating_systems:
+- linux
+- macos
+- windows
+packages:
+  arch: npm
+  debian: npm
+  ubuntu: npm
+  fedora: npm
+package_refs:
+- manager: pacman
+  package: npm
+  distributions:
+  - arch
+- manager: apt
+  package: npm
+  distributions:
+  - debian
+  - ubuntu
+- manager: dnf
+  package: npm
+  distributions:
+  - fedora
+- manager: npm
+  package: npm
+  notes:
+    tr: Node ile birlikte gelir; güncelleme npm install -g npm ile de yapılabilir.
+    en: Ships with Node; can also self-update via npm install -g npm.
+install_notes:
+  tr: |-
+    Genelde nodejs ile birlikte: Arch pacman -S nodejs npm; Debian/Ubuntu apt install npm.
+    Alternatif paket yöneticileri: yarn, pnpm, bun (ayrı bank kayıtları).
+  en: |-
+    Usually with Node: Arch pacman -S nodejs npm; Debian/Ubuntu apt install npm.
+    Alternative package managers: yarn, pnpm, bun (separate bank records).
+flags: []
+examples:
+- title:
+    tr: Sürüm
+    en: Version
+  command: npm -v
+  explanation:
+    tr: npm CLI sürümünü yazar.
+    en: Prints the npm CLI version.
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: Bağımlılıkları kur
+    en: Install dependencies
+  command: npm install
+  explanation:
+    tr: package.json’dan bağımlılıkları kurar (ağ + disk yazar).
+    en: Installs dependencies from package.json (network + disk writes).
+  risk: caution
+  difficulty: beginner
+- title:
+    tr: Paket ekle
+    en: Add package
+  command: npm install lodash
+  explanation:
+    tr: Üretim bağımlılığı olarak paket ekler ve package.json günceller.
+    en: Adds a package as a production dependency and updates package.json.
+  risk: caution
+  difficulty: beginner
+- title:
+    tr: Geliştirme bağımlılığı
+    en: Dev dependency
+  command: npm install -D typescript
+  explanation:
+    tr: devDependencies’e ekler.
+    en: Adds to devDependencies.
+  risk: caution
+  difficulty: beginner
+- title:
+    tr: Script çalıştır
+    en: Run script
+  command: npm run build
+  explanation:
+    tr: package.json scripts.build hedefini çalıştırır.
+    en: Runs the scripts.build target from package.json.
+  risk: caution
+  difficulty: beginner
+- title:
+    tr: Script listesi
+    en: List scripts
+  command: npm run
+  explanation:
+    tr: Argsız çalışınca tanımlı script’leri listeler.
+    en: With no args, lists defined scripts.
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: Güncel olmayan paketler
+    en: Outdated packages
+  command: npm outdated
+  explanation:
+    tr: Güncellenebilir bağımlılıkları gösterir (kurmaz).
+    en: Shows upgradable dependencies (does not install).
+  risk: safe
+  difficulty: intermediate
+- title:
+    tr: Global paket listesi
+    en: List global packages
+  command: npm list -g --depth=0
+  explanation:
+    tr: Global kurulu paketleri sığ listeler.
+    en: Shallow-lists globally installed packages.
+  risk: safe
+  difficulty: intermediate
+common_mistakes:
+- tr: sudo npm install -g alışkanlığı — izin ve güvenlik sorunlarına yol açar.
+  en: Habitual sudo npm install -g — causes permission and security problems.
+- tr: yarn.lock varken npm install ile lockfile çakıştırmak.
+  en: Running npm install when yarn.lock already owns the lockfile.
+related:
+- node
+- npx
+- yarn
+- pnpm
+- bun
+- ng
+related_topics:
+- software
+- package-managers
+intent:
+  tr:
+  - npm kur
+  - npm install
+  - npm script
+  - paket kur node
+  en:
+  - npm install
+  - npm scripts
+  - node packages
+  - install dependency
+documentation:
+- https://docs.npmjs.com/cli
+sources:
+- https://docs.npmjs.com/cli
+verification:
+  status: draft
+  sources:
+  - https://docs.npmjs.com/cli
+  notes: Software bank draft — common npm subcommands; not human-verified.
+nova:
+  concepts:
+  - software
+  ui_priority: 82

@@ -1,0 +1,139 @@
+schema_version: 2
+id: pnpm
+name: pnpm
+kind: package_manager
+category: development
+summary:
+  tr: pnpm — içerik adresli Node paket yöneticisi.
+  en: pnpm — content-addressed Node package manager.
+description:
+  tr: >-
+    Disk paylaşımlı store ile hızlı/tekrarlanabilir kurulum. Monorepo (pnpm-workspace)
+    için yaygındır. npm/yarn alternatifidir; sistem PM değildir.
+  en: >-
+    Fast, reproducible installs via a content-addressed store. Common for monorepos
+    (pnpm-workspace). Alternative to npm/Yarn; not a system PM.
+purpose:
+  tr: Node monorepo ve projelerde verimli bağımlılık yönetimi.
+  en: Efficient dependency management for Node projects and monorepos.
+when_to_use:
+  tr: Proje pnpm-lock.yaml veya pnpm workspace kullanıyorsa.
+  en: When the project uses pnpm-lock.yaml or a pnpm workspace.
+syntax: 'pnpm <command> [args]'
+expected_effect:
+  tr: Store + node_modules bağları günceller; script/exec çalıştırır.
+  en: Updates store + node_modules links; runs scripts/exec.
+tags:
+- software
+- frontend
+- node
+- pnpm
+- packages
+risk: caution
+learning_level: intermediate
+requires_elevated: false
+platforms:
+- linux
+- macos
+- windows
+package_refs:
+- manager: npm
+  package: pnpm
+  notes:
+    tr: Corepack veya npm ile kurulabilir.
+    en: Installable via Corepack or npm.
+- manager: homebrew
+  package: pnpm
+- manager: winget
+  package: pnpm.pnpm
+install_notes:
+  tr: |-
+    Öneri: corepack enable && corepack prepare pnpm@latest --activate
+    veya npm install -g pnpm
+    macOS: brew install pnpm
+  en: |-
+    Prefer: corepack enable && corepack prepare pnpm@latest --activate
+    or npm install -g pnpm
+    macOS: brew install pnpm
+flags: []
+examples:
+- title:
+    tr: Sürüm
+    en: Version
+  command: pnpm -v
+  explanation:
+    tr: pnpm sürümünü yazar.
+    en: Prints the pnpm version.
+  risk: safe
+  difficulty: beginner
+- title:
+    tr: Kur
+    en: Install
+  command: pnpm install
+  explanation:
+    tr: Lockfile’a göre kurar.
+    en: Installs according to the lockfile.
+  risk: caution
+  difficulty: beginner
+- title:
+    tr: Paket ekle
+    en: Add package
+  command: pnpm add lodash
+  explanation:
+    tr: Bağımlılık ekler.
+    en: Adds a dependency.
+  risk: caution
+  difficulty: beginner
+- title:
+    tr: Exec
+    en: Exec
+  command: pnpm exec tsc --version
+  explanation:
+    tr: Proje-yerel binary çalıştırır (npx benzeri).
+    en: Runs a project-local binary (npx-like).
+  risk: caution
+  difficulty: intermediate
+- title:
+    tr: Script
+    en: Run script
+  command: pnpm run build
+  explanation:
+    tr: package.json script’ini çalıştırır.
+    en: Runs a package.json script.
+  risk: caution
+  difficulty: beginner
+common_mistakes:
+- tr: npm ile kurulmuş node_modules üzerinde pnpm beklemek.
+  en: Expecting pnpm semantics on an npm-created node_modules tree.
+related:
+- npm
+- yarn
+- bun
+- node
+- npx
+related_topics:
+- software
+- package-managers
+intent:
+  tr:
+  - pnpm kur
+  - pnpm add
+  - monorepo paket
+  en:
+  - pnpm install
+  - pnpm add
+  - monorepo packages
+documentation:
+- https://pnpm.io/cli/install
+sources:
+- https://pnpm.io/cli/install
+verification:
+  status: draft
+  sources:
+  - https://pnpm.io/cli/install
+  - https://pnpm.io/cli/add
+  notes: Software bank draft; not human-verified.
+nova:
+  concepts:
+  - software
+  ui_priority: 72
