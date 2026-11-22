@@ -94,7 +94,7 @@ minisign -Vm catalog.json -p keys/minisign.pub -x catalog.json.minisig
 - If the secret is **absent**, [`.github/workflows/publish-catalog.yml`](.github/workflows/publish-catalog.yml)
   **dry-runs**: builds artifacts and skips signed Release publish (private keys
   are never invented or committed by CI)
-- Recommended before first production signed Release: `minisign -G -W`, commit
-  the new `keys/minisign.pub`, set `MINISIGN_SECRET_KEY`, shred the local secret,
-  then tag `catalog-v*`
+- **First signed Release checklist:** [docs/first-release.md](docs/first-release.md)
+  (`minisign -G -W`, commit `keys/minisign.pub`, set secret, shred local key,
+  dry-run, tag `catalog-v*`)
 - Rotate pubkey + any Nova pin together if a secret may have leaked

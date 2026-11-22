@@ -37,6 +37,10 @@ verification material is committed under `keys/`. Do not rotate
 
 ## One-time key generation (maintainer laptop)
 
+**Full checklist for the first production signed Release:**
+[first-release.md](./first-release.md) (secret setup, dry-run, `catalog-v*` tag,
+local verify, Nova pin coordination).
+
 ```bash
 # Prefer a fresh keypair before the first production signed release.
 # -W = no passphrase (CI cannot prompt). Store the secret only in the
